@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!--gradient android:startColor="#2700EB" android:endColor="#2700EB" android:angle="90"/-->
+    <corners
+        android:radius="19dp"/>
+    <solid
+        android:color="#fffb6655"/>
+</shape>

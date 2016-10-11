@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/left_slide_guide_root_rl"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_alpha_percent_50">
+
+    <TextView
+        android:id="@+id/left_slide_guide_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="252dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/tip_left_slide_to_clear"
+        android:textSize="@dimen/text_size_title_h1"
+        android:textColor="@color/text_white"/>
+
+    <ImageView
+        android:id="@+id/left_slide_guide_arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/left_slide_guide_title_tv"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/left_arrow_anim"/>
+
+    <ImageView
+        android:id="@+id/left_slide_guide_finger_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/left_slide_guide_arrow_iv"
+        android:layout_alignTop="@id/left_slide_guide_arrow_iv"
+        android:src="@drawable/wantch_icon_slide_finger"/>
+</RelativeLayout>

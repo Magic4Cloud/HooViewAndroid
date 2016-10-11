@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/money_amount"
+        android:textSize="18sp"
+        android:textColor="@color/text_common"
+        android:layout_centerVertical="true"
+        android:layout_margin="18dp"
+        android:layout_alignParentLeft="true"/>
+
+    <TextView
+        android:id="@+id/pay_currency_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unit_e_coin"
+        android:textSize="18sp"
+        android:textColor="@color/text_common"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_alignParentRight="true"/>
+
+    <EditText
+        android:id="@+id/pay_amount_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/fill_in_send_red_number"
+        android:layout_toLeftOf="@id/pay_currency_tv"
+        android:layout_marginRight="6dp"
+        android:layout_centerVertical="true"
+        android:textColorHint="@color/text_common_alpha_60"
+        android:background="@android:color/transparent"
+        android:gravity="left"
+        android:inputType="number"
+        android:textSize="16sp"
+        android:maxLength="8"
+        android:textCursorDrawable="@drawable/color_cursor_shape"/>
+</RelativeLayout>

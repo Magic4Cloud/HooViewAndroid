@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray">
+    <include
+        android:id="@+id/common_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_layout"/>
+
+    <com.easyvaas.common.recycler.PullToLoadView
+        android:id="@+id/pull_load_view"
+        android:layout_below="@+id/common_title_tv"
+        style="@style/common_list"
+        android:listSelector="@android:color/transparent"
+        android:divider="@android:color/transparent"/>
+
+</RelativeLayout>

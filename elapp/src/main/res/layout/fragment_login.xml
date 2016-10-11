@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray">
+    <include
+        android:id="@+id/common_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_layout"/>
+
+    <include
+        android:id="@+id/country_code_rl"
+        android:layout_height="@dimen/avatar_big_second_size"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/common_title_tv"
+        android:layout_marginTop="10dp"
+        layout="@layout/include_country_code_item"/>
+    <ImageView
+        android:layout_above="@id/phone_number_rl"
+        style="@style/default_horizontal_line_style"/>
+    <RelativeLayout
+        android:id="@+id/phone_number_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/country_code_rl">
+        <EditText
+            android:id="@+id/register_phone_et"
+            style="@style/register_input_style"
+            android:layout_centerHorizontal="true"
+            android:inputType="phone"
+            android:textColorHint="@color/login_text_color"
+            android:textColor="@color/login_text_color_3"
+            android:maxLength="11"
+            android:imeOptions="actionNext"
+            android:hint="@string/prompt_phone_hint"/>
+
+        <ImageView
+            android:id="@+id/clear_phone_number_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/register_phone_et"
+            android:padding="15dp"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:src="@drawable/login_icon_edit_clear"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/password_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_number_rl"
+        android:layout_centerHorizontal="true">
+        <EditText
+            android:id="@+id/password_et"
+            android:layout_centerHorizontal="true"
+            android:maxLength="16"
+            android:hint="@string/prompt_password_input"
+            android:textColorHint="@color/login_text_color"
+            android:textColor="@color/login_text_color_3"
+            style="@style/register_input_style"
+            android:imeOptions="actionGo"
+            android:inputType="textPassword"/>
+
+        <ImageView
+            android:id="@+id/clear_password_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/password_et"
+            android:layout_centerVertical="true"
+            android:padding="18dp"
+            android:visibility="gone"
+            android:src="@drawable/login_icon_edit_clear"/>
+        <ImageView
+            android:layout_below="@id/clear_password_iv"
+            style="@style/default_horizontal_line_style"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="335dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/password_rl"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_title_h1"
+        android:layout_centerHorizontal="true"
+        android:text="@string/next_step"
+        android:background="@drawable/common_fill_round_three_btn_blue_selector"
+        style="?android:buttonBarButtonStyle"/>
+    <TextView
+        android:id="@+id/forget_password_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/login_btn"
+        android:layout_centerHorizontal="true"
+        android:text="@string/recovery_title"
+        android:textColor="@color/login_text_color"
+        android:textSize="@dimen/text_size_title_h2"/>
+
+</RelativeLayout>

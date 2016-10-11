@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<resources>
+    <declare-styleable name="BubbleView">
+        <attr name="border_width"/>
+        <attr name="border_color"/>
+        <attr name="duration" format="integer" />
+        <!-- drawable resource -->
+        <attr name="src" format="reference|color" />
+        <attr name="shape_color" format="color" />
+        <!-- the single child size -->
+        <attr name="shape_radius" format="dimension" />
+        <!--  child shape -->
+        <attr name="shape_type" format="enum">
+            <enum name="circle" value="0"/>
+            <enum name="star" value="1"/>
+            <enum name="triangle" value="2"/>
+            <enum name="heart" value="3"/>
+        </attr>
+        <attr name="singleColors" format="reference"/>
+    </declare-styleable>
+</resources>

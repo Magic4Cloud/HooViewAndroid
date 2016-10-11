@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<resources>
+    <string-array name="genders">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
+    <array name="shape_colors">
+        <item>@color/bubble_shape_color_1</item>
+        <item>@color/bubble_shape_color_2</item>
+        <item>@color/bubble_shape_color_3</item>
+        <item>@color/bubble_shape_color_4</item>
+    </array>
+    <array name="like_heart_drawable">
+        <item>@drawable/heart0</item>
+        <item>@drawable/heart1</item>
+        <item>@drawable/heart2</item>
+        <item>@drawable/heart3</item>
+        <item>@drawable/heart4</item>
+        <item>@drawable/heart5</item>
+    </array>
+    <string-array name="report_reason_video">
+        <item>@string/report_reason_porn</item>
+        <item>@string/report_reason_advertisement</item>
+        <item>@string/report_reason_illegal</item>
+        <item>@string/report_reason_bilk</item>
+        <item>@string/report_reason_attacks</item>
+        <item>@string/report_reason_other</item>
+    </string-array>
+    <string-array name="report_reason_group">
+        <item>@string/report_reason_porn</item>
+        <item>@string/report_reason_bilk</item>
+        <item>@string/report_reason_illegal</item>
+        <item>@string/report_reason_other</item>
+    </string-array>
+    <string-array name="server_array">
+        <item>@string/server_debug</item>
+        <item>@string/server_release</item>
+    </string-array>
+    <string-array name="video_permission">
+        <item>@string/video_permission_public</item>
+        <item>@string/video_permission_password</item>
+        <item>@string/video_permission_pay</item>
+        <item>@string/video_permission_private</item>
+    </string-array>
+</resources>

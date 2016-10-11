@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/common_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_verify_code_from_phone"
+            android:textColor="@color/text_color_secondary_level"
+            android:textSize="@dimen/text_size_13"/>
+        <TextView
+            android:id="@+id/vp_phone_number_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/btn_color_main"
+            android:textSize="@dimen/text_size_live_end_title"
+            android:text=""/>
+    </LinearLayout>
+    <ImageView
+        style="@style/default_horizontal_line_style"/>
+    <LinearLayout
+        style="@style/item_bind_account"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/vp_verification_et"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/account_icon_password"
+            android:hint="@string/prompt_verification_input"
+            android:background="@null"
+            android:drawablePadding="10dp"
+            android:maxLength="4"
+            android:inputType="number"
+            android:textSize="13sp"/>
+        <com.easyvaas.common.widget.TimeButton
+            android:id="@+id/vp_time_btn"
+            style="@style/auth_verify_phone"
+            android:text="@string/get_verification"
+            app:countdown_length="60000"
+            app:text_running="@string/get_verification_count_down"
+            android:textSize="12sp"/>
+    </LinearLayout>
+    <ImageView
+        style="@style/default_horizontal_line_style"/>
+    <TextView
+        android:id="@+id/vp_phone_error_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="14dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/msg_phone_number_error"
+        android:textSize="@dimen/text_size_17"/>
+</LinearLayout>

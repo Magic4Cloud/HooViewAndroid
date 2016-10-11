@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    tools:ignore="RtlHardcoded,ContentDescription">
+
+    <LinearLayout
+        android:id="@+id/ll_boat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="200dp"
+        android:layout_marginRight="-200dp"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/view_gift_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp" />
+
+        <FrameLayout
+            android:id="@+id/fl_boat"
+            android:layout_width="174dp"
+            android:layout_height="115dp">
+
+            <ImageView
+                android:id="@+id/iv_flag"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/iv_boat"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_water"
+        android:layout_width="695dp"
+        android:layout_height="271dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="left|bottom"
+        android:scaleType="centerCrop" />
+</RelativeLayout>

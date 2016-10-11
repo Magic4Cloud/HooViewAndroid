@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/country_code_rl"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginLeft="21dip"
+    android:layout_marginRight="21dip"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/select_country_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/login_text_color_3"
+        android:textSize="@dimen/text_size_title_h1"
+        android:text="@string/default_country_name"/>
+    <TextView
+        android:id="@+id/select_code_txv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/select_country_tv"
+        android:textSize="@dimen/text_size_title_h1"
+        android:textColor="@color/login_text_color_3"
+        android:layout_marginLeft="9dip"
+        android:text="@string/default_country_code_number"/>
+    <TextView
+        android:id="@+id/select_code_msg_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/text_size_title_h2"
+        android:textColor="@color/text_brown"
+        android:drawablePadding="8dip"
+        android:drawableRight="@drawable/home_icon_next"/>
+</RelativeLayout>
+

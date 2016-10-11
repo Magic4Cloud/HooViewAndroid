@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <shape >
+            <stroke
+                android:width="1dp"
+                android:color="@color/text_gray"/>
+            <corners
+                android:radius="6dp"/>
+        </shape>
+    </item>
+    <item android:state_selected="true">
+        <shape>
+            <stroke
+                android:width="1dp"
+                android:color="@color/btn_color_main"/>
+            <solid
+                android:color="@color/base_color_btn_stoke_blue_focused"/>
+            <corners
+                android:radius="6dp"/>
+        </shape>
+    </item>
+    <item android:state_selected="false" android:state_pressed="true">
+        <shape>
+            <stroke
+                android:width="1dp"
+                android:color="@color/btn_color_main"/>
+            <solid
+                android:color="@color/base_color_btn_stoke_blue_focused"/>
+            <corners
+                android:radius="6dp"/>
+        </shape>
+    </item>
+    <item android:state_selected="false" android:state_pressed="false">
+        <shape>
+            <solid android:color="@android:color/white"/>
+            <stroke
+                android:width="1dp"
+                android:color="@color/btn_color_main"/>
+            <corners
+                android:radius="6dp"/>
+        </shape>
+    </item>
+</selector>

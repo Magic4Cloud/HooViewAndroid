@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_share" android:title="@string/share"/>
+    <item android:id="@+id/menu_remove" android:title="@string/delete"/>
+    <item android:id="@+id/menu_cancel" android:title="@string/cancel"/>
+</menu>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/edit_text_light_round_border" android:state_pressed="true"/>
+    <item android:drawable="@drawable/edit_text_light_round_border" android:state_enabled="true"/>
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@android:color/transparent"/>
+            <corners android:radius="3dp"/>
+            <stroke android:color="@color/btn_color_three_level" android:width="1dp"/>
+        </shape>
+    </item>
+</selector>

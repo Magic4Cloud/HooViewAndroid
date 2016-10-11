@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray">
+
+    <com.easyvaas.common.recycler.PullToLoadView
+        android:id="@+id/pull_load_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/chat_bottom_bar_ll"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:background="@color/text_color_main">
+        <LinearLayout
+            android:id="@+id/follow_ll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/follow_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="3dp"
+                android:drawableLeft="@drawable/personal_icon_add"
+                android:text="@string/follow"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_title_h1"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <ImageView
+            style="@style/default_vertical_line_style"
+            android:layout_gravity="left"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
+        <LinearLayout
+            android:id="@+id/chat_ll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/chat_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="3dp"
+                android:drawableLeft="@drawable/prsonal_icon_message"
+                android:text="@string/chat"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_title_h1"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <ImageView
+            style="@style/default_vertical_line_style"
+            android:layout_gravity="left"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
+        <LinearLayout
+            android:id="@+id/block_ll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/block_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="3dp"
+                android:drawableLeft="@drawable/personal_icon_add"
+                android:text="@string/pull_black"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_title_h1"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/tap_top_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="54dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="6dp"
+        android:visibility="gone"
+        android:src="@drawable/home_top_rocket"/>
+</FrameLayout>
+
+

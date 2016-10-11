@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/setting_page_background_color">
+    <include
+        android:id="@+id/common_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_layout"/>
+    <RelativeLayout
+        android:id="@+id/phone_number_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="9dp"
+        android:layout_below="@id/common_title_tv">
+        <EditText
+            android:id="@+id/register_phone_et"
+            style="@style/register_input_style"
+            android:layout_centerHorizontal="true"
+            android:textColorHint="@color/login_text_color"
+            android:textColor="@color/login_text_color_3"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:hint="@string/nickname"/>
+
+        <ImageView
+            android:id="@+id/clear_phone_number_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/register_phone_et"
+            android:padding="18dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/login_icon_edit_clear"/>
+    </RelativeLayout>
+</RelativeLayout>

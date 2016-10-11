@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_select_thumb_by_camera"
+        android:title="@string/choose_from_camera"/>
+    <item
+        android:id="@+id/menu_select_thumb_by_gallery"
+        android:title="@string/choose_from_album"/>
+    <item
+        android:id="@+id/menu_cancel"
+        android:title="@string/cancel"/>
+</menu>

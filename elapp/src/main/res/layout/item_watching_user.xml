@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <com.easyvaas.common.widget.MyUserPhoto
+        android:id="@+id/watching_user_logo_iv"
+        android:layout_width="@dimen/avatar_watcher_size"
+        android:layout_height="@dimen/avatar_watcher_size"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="5dp"
+        android:scaleType="fitCenter"
+        app:border_color="@color/black_alpha_percent_10"
+        app:border_width="0dip"
+        app:is_vip="no_vip"/>
+</RelativeLayout>

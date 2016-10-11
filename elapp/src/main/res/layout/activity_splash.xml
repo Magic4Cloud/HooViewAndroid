@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/splash_dynamic_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/background_white">
+        <ImageView
+            android:id="@+id/splash_screen_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="120dp"/>
+
+        <TextView
+            android:id="@+id/splash_timer_tv"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="5dp"
+            android:gravity="top"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textColor="@color/white_alpha_percent_80"
+            android:textSize="@dimen/text_size_12"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/splash_screen_hop_links"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/splash_jump_over_tv"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:layout_width="60dp"
+            android:layout_height="24dp"
+            android:background="@drawable/round_btn_gray_selector"
+            android:textColor="@color/black_alpha_percent_70"
+            android:textSize="@dimen/text_size_12"
+            android:text="@string/splash_next_step"/>
+    </RelativeLayout>
+</RelativeLayout>

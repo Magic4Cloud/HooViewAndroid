@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_selector">
+    <RelativeLayout
+        android:id="@+id/user_image_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/ranking_number_tv_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold|italic"
+            android:textColor="@color/text_brown"/>
+        <com.easyvaas.common.widget.MyUserPhoto
+            android:id="@+id/ranking_user_photo_top"
+            android:layout_width="@dimen/avatar_big_big_size"
+            android:layout_height="@dimen/avatar_big_big_size"
+            android:scaleType="fitCenter"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            app:src="@drawable/somebody"
+            app:is_vip="vip"
+            app:small_height="9dp"
+            app:small_width="9dp"
+            app:border_color="@color/pure_white"
+            app:border_width="2dp"/>
+        <ImageView
+            android:id="@+id/ranking_user_photo_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/list_icon_no_one"/>
+    </RelativeLayout>
+    <include
+        android:id="@+id/user_info_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        layout="@layout/include_base_user_info_layout"
+        android:layout_below="@+id/user_image_ll_top"/>
+
+    <TextView
+        android:id="@+id/ranking_user_rank_tv_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_info_ll"
+        android:layout_centerHorizontal="true"
+        android:text="@string/empty_value"
+        android:textColor="@color/text_color_secondary_level"
+        android:textSize="@dimen/text_size_13"/>
+    <ImageView
+        android:layout_below="@id/ranking_user_rank_tv_top"
+        android:layout_marginTop="9dp"
+        style="@style/default_horizontal_line_style"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

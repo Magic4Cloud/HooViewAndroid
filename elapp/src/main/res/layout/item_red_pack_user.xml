@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_video_limit_height"
+    android:background="@drawable/list_item_selector">
+    <com.easyvaas.common.widget.MyUserPhoto
+        android:id="@+id/red_pack_user_photo"
+        android:layout_width="@dimen/avatar_big_size"
+        android:layout_height="@dimen/avatar_big_size"
+        android:layout_marginLeft="9dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitCenter"
+        app:src="@drawable/somebody"
+        app:is_vip="no_vip"
+        app:small_height="9dp"
+        app:small_width="9dp"
+        app:border_color="@color/pure_white"
+        app:border_width="2dp"/>
+    <TextView
+        android:id="@+id/red_pack_nickname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/red_pack_user_photo"
+        android:layout_marginLeft="6dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_size_11"
+        android:text="@string/empty_value"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:gravity="right"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/red_pack_amount_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_common"
+            android:text="@string/e_coin_count_rear"
+            android:textSize="@dimen/text_size_11"/>
+        <TextView
+            android:id="@+id/red_pack_best_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="3dp"
+            android:drawableLeft="@drawable/living_red_pack_icon_best"
+            android:text="@string/red_pack_best_luck"
+            android:textColor="@color/text_yellow"
+            android:textSize="@dimen/text_size_11"/>
+    </LinearLayout>
+    <ImageView
+        style="@style/default_horizontal_line_style"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

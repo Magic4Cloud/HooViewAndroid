@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:id="@+id/item_home_topic_rl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/list_item_selector">
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/topic_icon_new_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/default_image"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/topic_name_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_13"/>
+    <TextView
+        android:id="@+id/topic_video_number_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/topic_select_iv"
+        android:visibility="gone"
+        android:textSize="@dimen/text_size_13"/>
+    <ImageView
+        android:id="@+id/topic_select_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/topic_name_tv"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:visibility="gone"/>
+    <ImageView
+        style="@style/default_horizontal_line_style"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+</RelativeLayout>

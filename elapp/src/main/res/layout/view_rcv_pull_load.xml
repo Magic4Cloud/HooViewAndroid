@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    android:id="@+id/rootContainer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.easyvaas.common.widget.SwipRefreshLayout.SwipeRefreshLayoutEx
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_above="@+id/bottomTipLl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.easyvaas.common.widget.SwipRefreshLayout.SwipeRefreshLayoutEx>
+
+    <com.easyvaas.common.widget.EmptyView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/bottomTipLl"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white_alpha_percent_45"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/loading_more_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDuration="2000"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tipNoMoreTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/text_size_title_h2"
+            android:textColor="@color/text_brown"
+            android:visibility="gone"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/black_alpha_percent_80"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/tab_title_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tab_gift_tv"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/text_btn_tab_expression_selector"
+                android:text="@string/gift"/>
+            <ImageView
+                android:id="@+id/tab_gift_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:src="@drawable/tab_indicate_line"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/gift_content_view_pager"
+        android:layout_below="@id/tab_title_ll"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"/>
+    <com.easyvaas.common.gift.view.PageIndicateView
+        android:id="@+id/page_indicate_view"
+        android:gravity="center"
+        android:layout_below="@id/gift_content_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-5dp"/>
+
+    <RelativeLayout
+        android:id="@+id/my_asset_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gift_content_view_pager"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/cash_in_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/cash_in"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/btn_color_main"/>
+        <TextView
+            android:id="@+id/e_coin_account_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/e_coin_count"
+            android:layout_toRightOf="@id/cash_in_tv"
+            android:layout_alignBottom="@id/cash_in_tv"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/text_white"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/send_gift_btn"
+        android:layout_width="60dp"
+        android:layout_height="25dp"
+        android:enabled="false"
+        android:clickable="false"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="13dp"
+        android:layout_below="@id/gift_content_view_pager"
+        android:textSize="@dimen/text_size_12"
+        android:background="@drawable/round_btn_send_gift_selector"/>
+</RelativeLayout>
+

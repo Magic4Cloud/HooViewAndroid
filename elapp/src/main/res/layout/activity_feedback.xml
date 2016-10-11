@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/feedback_section_id"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/feedback_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:text="@string/feedback"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_size_12"/>
+    <EditText
+        android:id="@+id/feedback_content_et"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_below="@id/feedback_title_tv"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:gravity="start"
+        android:textSize="@dimen/text_size_13"
+        android:textColorHint="@color/text_hint_1"
+        android:hint="@string/feedback_hint_str"
+        android:background="@color/text_white"/>
+
+    <RelativeLayout
+        android:id="@+id/linear"
+        android:layout_below="@id/feedback_content_et"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/empty_btn"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14dp"
+            android:background="@null"
+            android:src="@drawable/login_icon_edit_clear"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="14dp"
+            android:layout_below="@id/empty_btn"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/text_length"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/text_size_12"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/feedback_prompt_id"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@id/linear"
+        android:paddingLeft="14dp"
+        android:gravity="center_vertical"
+        android:text="@string/feedback_prompt_str"
+        android:textColor="@color/text_common"
+        android:textSize="@dimen/text_size_12"/>
+
+    <EditText
+        android:id="@+id/contact_info_et"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@id/feedback_prompt_id"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:gravity="left|center_vertical"
+        android:hint="@string/commit_contact_info"
+        android:textSize="@dimen/text_size_13"
+        android:textColorHint="@color/text_hint_1"
+        android:background="@color/background_white"
+        android:inputType="text"/>
+
+</RelativeLayout>

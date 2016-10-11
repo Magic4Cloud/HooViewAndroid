@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+    <LinearLayout
+        android:id="@+id/app_update_frame"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/app_update_dialog_bg"
+        android:paddingBottom="24dp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/update_floating_pic"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:background="#008bea"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="29dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/app_update_version_name_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:text="@string/app_new_version_name"
+                    android:textColor="@color/text_brown"/>
+                <TextView
+                    android:id="@+id/app_size_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:text="@string/app_new_version_size"
+                    android:textColor="@color/text_brown"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/app_update_content_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:focusable="true"
+                    android:textColor="@color/text_brown"/>
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="10dp">
+            <Button
+                android:id="@+id/app_update_id_ok"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/app_update_button_ok_bg_selector"
+                android:gravity="center"
+                android:text="@string/down_load_soft"
+                android:focusable="true"
+                android:textColor="#FFFFFF"/>
+            <Button
+                android:id="@+id/app_update_id_cancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/app_update_button_cancel_bg_selector"
+                android:gravity="center"
+                android:text="@string/wait_later"
+                android:focusable="true"
+                android:textColor="#aaaaaa"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

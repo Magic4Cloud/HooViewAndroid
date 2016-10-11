@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/live_bg_white"/>
+    <item android:drawable="@drawable/load_logo_icon_small_living" android:width="40dp" android:height="40dp" android:gravity="center"/>
+</layer-list>

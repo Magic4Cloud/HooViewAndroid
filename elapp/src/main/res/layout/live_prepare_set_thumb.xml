@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/live_prepare_set_thumb_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/live_ready_front_cover_mask">
+    <ImageView
+        android:id="@+id/live_ready_set_thumb_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="23dp"
+        android:layout_marginTop="4dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/icon_close_play"/>
+    <ImageView
+        android:id="@+id/live_ready_cover_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/live_pre_take_photo_top"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/live_ready_icon_cover"/>
+    <TextView
+        android:id="@+id/live_ready_cover_tip_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/live_ready_cover_iv"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="13dp"
+        android:text="@string/live_set_thumb_tip"
+        android:textSize="@dimen/text_size_12"
+        android:textColor="@color/text_btn_reverse_selector"/>
+    <Button
+        android:id="@+id/live_ready_shoot_thumb_btn"
+        android:layout_width="@dimen/player_pre_start_button_width"
+        android:layout_height="@dimen/button_common_height"
+        android:layout_marginBottom="42dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="@drawable/round_btn_live_selector"
+        android:button="@null"
+        android:text="@string/live_shoot_thumb"
+        android:textColor="@color/text_btn_reverse_selector"
+        android:textSize="@dimen/text_size_16"/>
+    <CheckBox
+        android:id="@+id/live_set_thumb_camera_cb"
+        style="@style/live_set_checkbox_style"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/live_ready_shoot_thumb_btn"
+        android:layout_marginBottom="15dp"
+        android:gravity="center_vertical"
+        android:drawableLeft="@drawable/ic_live_front_camera"
+        android:text="@string/live_switch_camera"/>
+</RelativeLayout>

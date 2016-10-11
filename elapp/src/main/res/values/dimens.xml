@@ -1,0 +1,89 @@
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="tab_bar_height">48dp</dimen>
+
+    <dimen name="divider_height">0.5dp</dimen>
+    <dimen name="divider_width">0.3dp</dimen>
+
+    <dimen name="icon_text_padding">3dp</dimen>
+    <dimen name="avatar_watcher_size">30dp</dimen>
+    <dimen name="avatar_big_big_size">44dp</dimen>
+    <dimen name="avatar_big_first_size">50dp</dimen>
+    <dimen name="avatar_big_second_size">60dp</dimen>
+    <dimen name="avatar_big_third_size">80dp</dimen>
+    <dimen name="avatar_big_first_bg_size">63dp</dimen>
+    <dimen name="avatar_big_second_bg_size">75dp</dimen>
+    <dimen name="avatar_big_third_bg_size">110dp</dimen>
+    <dimen name="avatar_red_pack_size">66dp</dimen>
+    <dimen name="avatar_user_center_size">60dp</dimen>
+    <dimen name="hot_image_slider_height">106dp</dimen>
+
+    <dimen name="button_common_height">38dp</dimen>
+    <dimen name="button_common_small_height">30dp</dimen>
+    <dimen name="avatar_border_width">1dp</dimen>
+    <dimen name="common_drawable_padding">3dp</dimen>
+    <dimen name="common_user_list_item_height">69dp</dimen>
+    <dimen name="list_item_video_limit_height">51dp</dimen>
+
+    <dimen name="status_bar_height">24dp</dimen>
+
+    <dimen name="text_size_maximum">19sp</dimen>
+    <dimen name="text_size_live_end_title">24sp</dimen>
+    <dimen name="text_size_30">30sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_title_h1">15sp</dimen>
+    <dimen name="text_size_title_h2">14sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_7">7sp</dimen>
+
+    <dimen name="action_bar_height">54dp</dimen>
+    <dimen name="follow_tip_bar_height">40dp</dimen>
+    <dimen name="action_bar_status_bar_height">78dp</dimen>
+    <dimen name="action_bar_title_text_size">18sp</dimen>
+    <dimen name="action_bar_title_indicator_text_size">@dimen/text_size_16</dimen>
+    <dimen name="action_bar_menu_text_size">16sp</dimen>
+
+    <dimen name="chat_user_logo_border_width">0.6dp</dimen>
+    <dimen name="chat_avatar_size">38dp</dimen>
+
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="padding_search_bar">5dp</dimen>
+    <dimen name="emoji_size_small">16dp</dimen>
+    <dimen name="context_menu_item_height">48dp</dimen>
+
+    <dimen name="player_pre_start_button_width">226dp</dimen>
+    <dimen name="gift_show_margin_left">10dp</dimen>
+    <dimen name="user_center_empty_view_margin_top">360dp</dimen>
+
+
+    <dimen name="zip_animation_car2_imageview1_width">40dp</dimen>
+
+    <integer name="text_common_shadow_dx">1</integer>
+    <integer name="text_common_shadow_dy">1</integer>
+    <integer name="text_common_shadow_shadowRadius">3</integer>
+
+    <dimen name="live_pre_take_photo_top">90dp</dimen>
+    <dimen name="live_gift_pipe_bottom">266dp</dimen>
+
+
+    <dimen name="avatar_big_size">45dp</dimen>
+    <dimen name="avatar_middle_size">35dp</dimen>
+    <dimen name="item_common_height">40dp</dimen>
+
+    <dimen name="my_profit_cash_count_text_size">34sp</dimen>
+</resources>

@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/delete_conversation"
+        android:title="@string/delete_conversation"/>
+</menu>

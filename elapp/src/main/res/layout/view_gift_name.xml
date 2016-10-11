@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="7dp"
+        android:layout_height="7dp"
+        android:background="@drawable/text_dot" />
+
+    <TextView
+        android:id="@+id/sender_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/user_join_text_color"
+        android:textSize="@dimen/text_size_17"
+        tools:text="米修米修米修" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_17"
+        android:text="@string/gift_view_give" />
+
+    <TextView
+        android:id="@+id/gift_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_17"
+        tools:text="保时捷" />
+
+</LinearLayout>

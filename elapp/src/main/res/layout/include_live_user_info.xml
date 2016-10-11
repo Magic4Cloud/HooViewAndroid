@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/user_count_info_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="14dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/user_video_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/text_color_secondary_level"/>
+        <TextView
+            android:id="@+id/user_fans_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/text_color_secondary_level"/>
+        <TextView
+            android:id="@+id/user_follower_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/text_color_secondary_level"/>
+    </LinearLayout>
+
+    <ImageView
+        style="@style/default_horizontal_line_style"/>
+
+    <LinearLayout
+        android:id="@+id/player_user_operation_ll"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/user_follow_status_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_title_h2"
+            android:textColor="@color/btn_color_main"
+            android:text="@string/follow_plus"
+            android:background="@drawable/list_item_selector"/>
+
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            style="@style/default_vertical_line_style"/>
+        <TextView
+            android:id="@+id/user_private_chat_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_title_h2"
+            android:textColor="@color/btn_color_main"
+            android:text="@string/chat"
+            android:background="@drawable/list_item_selector"/>
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            style="@style/default_vertical_line_style"/>
+        <TextView
+            android:id="@+id/user_post_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_title_h2"
+            android:textColor="@color/btn_color_main"
+            android:text="@string/at_ta"
+            android:background="@drawable/list_item_selector"/>
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            style="@style/default_vertical_line_style"/>
+        <TextView
+            android:id="@+id/home_page_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_title_h2"
+            android:textColor="@color/btn_color_main"
+            android:text="@string/home"
+            android:background="@drawable/list_item_selector"/>
+    </LinearLayout>
+</LinearLayout>

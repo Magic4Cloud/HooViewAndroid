@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="line">
+            <stroke
+                android:color="@color/btn_color_secondary_level" android:width="2dp"/>
+            <size android:height="3dp"/>
+        </shape>
+    </item>
+    <item android:state_selected="false">
+        <shape android:shape="line">
+            <stroke
+                android:color="@android:color/transparent" android:width="2dp"/>
+            <size android:height="3dp"/>
+        </shape>
+    </item>
+</selector>

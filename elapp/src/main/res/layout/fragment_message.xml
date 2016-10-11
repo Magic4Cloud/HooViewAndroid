@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray">
+    <RelativeLayout
+        android:id="@+id/message_top_title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/pure_white">
+        <TextView
+            android:id="@+id/custom_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/tab_title_message"
+            android:textSize="@dimen/action_bar_title_text_size"
+            android:textColor="@color/action_bar_home_title_color"/>
+        <TextView
+            android:id="@+id/create_group_tv"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@string/create_group"
+            android:textSize="@dimen/text_size_12"/>
+    </RelativeLayout>
+
+    <com.easyvaas.common.recycler.PullToLoadView
+        android:id="@+id/pull_load_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/message_top_title_rl"/>
+</RelativeLayout>

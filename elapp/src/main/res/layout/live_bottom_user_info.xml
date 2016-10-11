@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/user_info_popup_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:background="@drawable/round_bg_live_bottom_user_info">
+
+    <RelativeLayout
+        android:id="@+id/user_info_action_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentRight="true">
+        <ImageView
+            android:id="@+id/user_info_close_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/icon_close_live"/>
+        <TextView
+            android:id="@+id/shut_up_tv"
+            android:layout_width="45dp"
+            android:layout_height="21dp"
+            android:layout_toRightOf="@+id/report_tv"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/shut_up"
+            android:textSize="@dimen/text_size_13"
+            android:background="@drawable/btn_round_user_report_bg"
+            android:textColor="@color/text_color_secondary_level"/>
+        <TextView
+            android:id="@+id/report_tv"
+            android:layout_width="45dp"
+            android:layout_height="21dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:text="@string/report"
+            android:textSize="@dimen/text_size_13"
+            android:background="@drawable/btn_round_user_report_bg"
+            android:textColor="@color/text_color_secondary_level"/>
+    </RelativeLayout>
+    <com.easyvaas.common.widget.MyUserPhoto
+        android:id="@+id/live_user_portrait"
+        android:layout_width="@dimen/avatar_big_first_size"
+        android:layout_height="@dimen/avatar_big_first_size"
+        android:scaleType="fitCenter"
+        app:src="@drawable/somebody"
+        android:layout_centerHorizontal="true"
+        app:is_vip="no_vip"
+        app:small_height="10dp"
+        app:small_width="10dp"
+        app:border_color="@color/pure_white"
+        android:layout_marginTop="4dp"
+        app:border_width="@dimen/avatar_border_width"
+        android:layout_below="@id/user_info_action_rl"/>
+
+    <LinearLayout
+        android:id="@+id/user_info_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/live_user_portrait"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/text_color_main"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/user_id_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/text_color_secondary_level"/>
+        <TextView
+            android:id="@+id/video_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/text_color_secondary_level"/>
+    </LinearLayout>
+
+    <include
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/user_info_ll"
+        layout="@layout/include_live_user_info"/>
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray">
+    <include
+        android:id="@+id/common_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_layout"/>
+    <LinearLayout
+        android:id="@+id/amount_total_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:orientation="vertical">
+        <ImageView
+            style="@style/default_horizontal_line_style"/>
+        <LinearLayout
+            style="@style/item_my_setting"
+            android:paddingLeft="15dp">
+            <TextView
+                android:id="@+id/total_amount_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/avatar_big_second_size"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size_title_h1"
+                android:textColor="@color/text_color_main"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/line_bottom_iv"
+        style="@style/default_horizontal_line_style"/>
+    <include
+        layout="@layout/activity_common_recycler"/>
+</LinearLayout>

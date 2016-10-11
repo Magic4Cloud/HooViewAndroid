@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/avatar_big_size">
+    <TextView
+        android:id="@+id/ranking_more_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/avatar_big_size"
+        android:gravity="center"
+        android:text="@string/view_more"
+        android:textSize="@dimen/text_size_13"
+        android:textColor="@color/text_color_secondary_level"
+        android:background="@drawable/list_item_selector"/>
+</LinearLayout>

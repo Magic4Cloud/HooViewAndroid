@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray">
+    <include
+        layout="@layout/item_header_user_info"
+        android:id="@+id/header_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_user_info">
+        <include
+                layout="@layout/include_user_mine_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </ScrollView>
+</RelativeLayout>

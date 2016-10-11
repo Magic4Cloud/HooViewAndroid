@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_white_btn_bg"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tips_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_16"
+        android:text="@string/dl_network_traffic"/>
+    <TextView
+        android:id="@+id/net_tips_iv"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_13"
+        android:text="@string/dl_msg_network_traffic_4G"/>
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        style="@style/default_horizontal_line_style"/>
+    <TextView
+        android:id="@+id/net_i_know_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="@color/material_blue_grey_950"
+        android:text="@string/dl_msg_network_i_know"/>
+    <LinearLayout
+        android:id="@+id/net_continue_ll"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:columnCount="2"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/dialog_continue_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/material_blue_grey_950"
+                android:textSize="@dimen/text_size_title_h1"
+                android:text="@string/dl_msg_network_continue_use"/>
+        </LinearLayout>
+        <ImageView
+            style="@style/default_vertical_line_style"
+            android:layout_gravity="left"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
+        <LinearLayout
+            android:id="@+id/dialog_cancel_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_title_h1"
+                android:textColor="@color/material_blue_grey_950"
+                android:text="@string/cancel"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

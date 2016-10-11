@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/comment_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:paddingRight="5dp"
+        android:gravity="bottom"
+        style="@style/text_with_shadow"
+        android:shadowColor="@color/text_black_shadow_color"
+        android:maxLines="8"
+        android:ellipsize="end"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_size_title_h1"/>
+
+</RelativeLayout>

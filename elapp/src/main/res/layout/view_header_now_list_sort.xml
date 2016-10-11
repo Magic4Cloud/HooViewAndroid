@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageView
+        style="@style/default_horizontal_line_style"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/now_left_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_common_height"
+                android:gravity="center"
+                android:text="@string/timeline_item_title_now_accompany"
+                android:textColor="@color/text_follow_tab_selector"
+                android:textSize="@dimen/text_size_11"/>
+            <ImageView
+                android:id="@+id/tab_left_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:src="@drawable/tab_line_selector"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/now_middle_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_common_height"
+                android:gravity="center"
+                android:text="@string/timeline_item_title_now_hot"
+                android:textColor="@color/text_follow_tab_selector"
+                android:textSize="@dimen/text_size_11"/>
+            <ImageView
+                android:id="@+id/tab_middle_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:src="@drawable/tab_line_selector"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/now_right_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_common_height"
+                android:gravity="center"
+                android:text="@string/timeline_item_title_now_nearby"
+                android:textColor="@color/text_follow_tab_selector"
+                android:textSize="@dimen/text_size_11"/>
+            <ImageView
+                android:id="@+id/tab_right_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:src="@drawable/tab_line_selector"/>
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        style="@style/default_horizontal_line_style"
+        android:layout_alignParentBottom="true"/>
+</LinearLayout>

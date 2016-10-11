@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/text_white"
+    android:layout_height="280dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <include
+            android:id="@+id/user_info_ll"
+            layout="@layout/include_user_info_view"/>
+        <include
+            layout="@layout/include_user_summary_info"
+            android:id="@+id/user_summary_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_below="@id/user_info_ll"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/operation_action_rl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/user_info_back"
+            android:layout_width="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:src="@drawable/home_icon_back"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/operation_action_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:src="@drawable/personal_icon_share"/>
+    </RelativeLayout>
+</RelativeLayout>

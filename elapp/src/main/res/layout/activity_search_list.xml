@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray">
+
+    <RelativeLayout
+        android:id="@+id/global_search_action_bar_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:background="@color/action_bar_bg"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tab_bar_keyword_et"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginLeft="14dp"
+            android:layout_toLeftOf="@+id/tab_bar_cancel_tv"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="30dp"
+            android:paddingRight="14dp"
+            android:singleLine="true"
+            android:maxLength="10"
+            android:imeOptions="actionSearch"
+            android:hint="@string/search_text_box_hint"
+            android:textColorHint="@color/text_gray"
+            android:layout_centerVertical="true"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/btn_color_secondary_level"
+            android:background="@drawable/round_white_btn_bg"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tab_bar_keyword_et"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/search_icon"/>
+        <ImageView
+            android:id="@+id/clear_keyword_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/tab_bar_keyword_et"
+            android:padding="8dp"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:src="@drawable/login_icon_edit_clear"/>
+
+        <TextView
+            android:id="@+id/tab_bar_cancel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="14dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/cancel"
+            android:textColor="@color/btn_color_secondary_level"
+            android:textSize="@dimen/text_size_title_h2"
+            android:background="@android:color/transparent"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_below="@+id/global_search_action_bar_rl"
+        style="@style/default_horizontal_line_style"/>
+    <LinearLayout
+        android:id="@+id/search_history_ll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/global_search_action_bar_rl"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/history_label_tv"
+                android:text="@string/search_history"
+                android:drawableLeft="@drawable/home_icon_search_time"
+                style="@style/search_label_text_view_style"/>
+            <TextView
+                android:id="@+id/clear_history_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/clear_history"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/btn_color_main"
+                android:textSize="@dimen/text_size_title_h1"/>
+        </RelativeLayout>
+
+        <com.easyvaas.common.widget.flowlayout.TagFlowLayout
+            android:id="@+id/history_tfl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="6dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="6dp"
+            android:layout_marginTop="15dp"
+            app:max_select="1"/>
+
+    </LinearLayout>
+
+    <com.easyvaas.common.recycler.PullToLoadView
+        android:id="@+id/pull_load_view"
+        android:layout_below="@id/search_history_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/tap_top_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp"
+        android:visibility="gone"
+        android:src="@drawable/home_top_rocket"/>
+</RelativeLayout>

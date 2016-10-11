@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<resources>
+    <color name="base_red">#fffb6655</color>
+    <color name="base_purple">#ff5b0bf7</color>
+    <color name="base_yellow">#fff7d80b</color>
+    <color name="base_brown">#ff314075</color>
+    <color name="base_white">#fffdf7ed</color>
+    <color name="base_black">#ff000000</color>
+
+    <color name="base_text_white">#ffffffff</color>
+
+    <color name="background_white">@color/base_white</color>
+    <color name="background_content">@color/white_alpha_percent_80</color>
+
+    <color name="pure_white">@android:color/white</color>
+    <color name="default_line_color">#e6e6e6</color>
+    <color name="red_tip_bg">#fff24444</color>
+
+    <color name="text_red">@color/base_red</color>
+    <color name="text_white">@color/pure_white</color>
+    <color name="text_common">@color/base_brown</color>
+    <color name="text_yellow">@color/base_yellow</color>
+    <color name="text_hint_1">#ffd7d7d7</color>
+    <color name="text_user_edit">@color/text_brown</color>
+    <color name="text_login">#ff515151</color>
+    <color name="text_user_info">#ff666666</color>
+    <color name="text_subtitle">#ff666666</color>
+    <color name="text_mine_item">@color/text_brown</color>
+    <color name="text_sub_gray">#ffbababa</color>
+    <color name="text_common_alpha_60">#99403b37</color>
+    <color name="text_comment_yellow_color">@color/base_yellow</color>
+    <color name="text_gray_shadow_color">#aba9a7</color>
+    <color name="text_black_shadow_color">@color/black_alpha_percent_60</color>
+
+    <color name="create_red_pack_bg">#fff4f4f4</color>
+    <color name="item_divider_1">#fff0f0f0</color>
+
+    <color name="red_pack_color_yellow">#f7c35b</color>
+
+    <color name="red_alpha_percent_50">#7bfb6655</color>
+    <color name="white_alpha_percent_90">#e6ffffff</color>
+    <color name="white_alpha_percent_80">#b4ffffff</color>
+    <color name="white_alpha_percent_60">#99ffffff</color>
+    <color name="white_alpha_percent_45">#73ffffff</color>
+    <color name="white_alpha_percent_25">#40ffffff</color>
+    <color name="black_alpha_percent_80">#cc000000</color>
+    <color name="black_alpha_percent_70">#b3000000</color>
+    <color name="black_alpha_percent_60">#7f000000</color>
+    <color name="black_alpha_percent_50">#7f000000</color>
+    <color name="black_alpha_percent_30">#4d000000</color>
+    <color name="black_alpha_percent_20">#33000000</color>
+    <color name="black_alpha_percent_10">#19000000</color>
+
+    <color name="list_item_focus">#ccf0f0f0</color>
+    <color name="list_item_white_bg">@color/white_alpha_percent_45</color>
+    <color name="alpha_living_bg_percent_50">#7faa3333</color>
+
+    <color name="round_border">#ffd7d7d7</color>
+
+    <color name="action_bar_bg">@color/white_alpha_percent_45</color>
+    <color name="action_bar_bg_stacked">@color/white_alpha_percent_45</color>
+    <color name="action_bar_home_title_color">@color/text_common</color>
+    <color name="action_bar_title_color">@color/text_common</color>
+    <color name="action_menu_text_color">@color/text_common</color>
+    <color name="action_bar_tab_text_color">@color/text_common</color>
+    <color name="action_bar_tab_bg">@color/white_alpha_percent_45</color>
+
+    <color name="bubble_internal">#80669999</color>
+    <color name="bubble_border">#2d669999</color>
+    <color name="bubble_shape_color_1">#ff55cf6c</color>
+    <color name="bubble_shape_color_2">#ff48b1e8</color>
+    <color name="bubble_shape_color_3">#ffeb5757</color>
+    <color name="bubble_shape_color_4">#ff076bff</color>
+    <color name="province_line_border">#D0D0D0</color>
+
+    <color name="top_bar_normal_bg">#00acff</color>
+    <color name="btn_gray_normal">#c0c0c0</color>
+    <color name="btn_gray_pressed_status">#b5b5b6</color>
+    <color name="voip_interface_text_color">#bababa</color>
+
+    <color name="user_join_text_color">#FFED3F</color>
+    <color name="live_topic_item_text_color">#403b37</color>
+
+
+    <!--easylive_base-->
+    <color name="text_color_main">#262626</color>
+    <color name="text_color_secondary_level">#858585</color>
+    <color name="text_color_three_level">#ACACAC</color>
+    <color name="text_gray">#d4d4d4</color>
+    <color name="live_bg_white">#F0F7FF</color>
+    <color name="base_color_btn_fill_blue_focused">#73ADEE</color>
+    <color name="base_color_btn_stoke_blue_focused">#EBF5FF</color>
+    <color name="base_color_btn_fill_red_focused">#EE728F</color>
+    <color name="base_color_btn_fill_red">@color/btn_color_three_level</color>
+
+
+    <color name="btn_color_main">#9AC9FF</color>
+    <color name="btn_color_secondary_level">#314075</color>
+    <color name="btn_color_three_level">#FF8DA8</color>
+    <color name="btn_color_four_level">#FF809E</color>
+
+
+    <color name="btn_remind_color_violet">#AF86FF</color>
+    <color name="background_color_gray">#F4F4F4</color>
+    <color name="remind_color_red">#FF4A75</color>
+    <!--home-->
+    <color name="border_color_default">@color/btn_color_main</color>
+    <color name="text_brown">@color/btn_color_secondary_level</color>
+    <color name="text_watch_count_color_red">@color/btn_color_three_level</color>
+    <color name="text_user_name_color_black">@color/text_color_main</color>
+    <color name="btn_live_status_fill_color_gray">#19262626</color>
+
+    <!--login-->
+    <color name="login_btn_color">@color/btn_color_main</color>
+    <color name="login_text_color">@color/text_color_three_level</color>
+    <color name="login_text_color_2">@color/btn_color_secondary_level</color>
+    <color name="login_text_color_3">@color/text_color_main</color>
+    <color name="login_text_color_4">@color/btn_color_three_level</color>
+    <color name="login_text_color_5">@color/text_color_secondary_level</color>
+    <color name="login_text_color_6">#2B2C3A</color>
+    <color name="setting_page_background_color">@color/background_color_gray</color>
+
+    <color name="base_bg_pink_color_20">#33FF8DA8</color>
+    <color name="base_bg_blue_color_20">#339AC9FF</color>
+    <color name="base_bg_btn_color_blue">#8DA8FF</color>
+    <color name="base_bg_btn_color_blue_20">#338DA8FF</color>
+</resources>

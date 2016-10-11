@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/avatar_big_second_bg_size"
+    android:paddingRight="7dp"
+    android:paddingLeft="20dp"
+    android:background="@drawable/list_item_selector">
+
+    <TextView
+        android:id="@+id/ranking_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_size_16"
+        android:textColor="@color/text_common"/>
+
+    <com.easyvaas.common.widget.MyUserPhoto
+        android:id="@+id/contribute_photo"
+        android:layout_width="@dimen/avatar_big_second_size"
+        android:layout_height="@dimen/avatar_big_second_size"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/ranking_tv"
+        android:layout_marginLeft="15dp"
+        android:scaleType="fitCenter"
+        app:border_color="@color/round_border"
+        app:border_width="@dimen/avatar_border_width"
+        android:src="@drawable/somebody"
+        app:is_vip="no_vip"
+        app:small_height="9dp"
+        app:small_width="9dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/contribute_photo"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/contributor_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLength="10"
+            android:ellipsize="end"
+            android:maxWidth="150dp"
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/text_color_main"/>
+        <LinearLayout
+            android:id="@+id/user_info_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/user_gender_tv"
+                android:layout_width="28dp"
+                android:layout_height="12dp"
+                android:textSize="@dimen/text_size_10"
+                android:drawablePadding="1dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                    android:id="@+id/user_constellation_tv"
+                    android:layout_width="28dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/base_bg_btn_color_blue"
+                    android:visibility="gone"
+                    android:paddingRight="4dp"
+                    android:paddingLeft="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/personal_icon_constellation_bg"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_13"
+            android:textColor="@color/text_color_secondary_level"
+            android:text="@string/contributor"/>
+        <TextView
+            android:id="@+id/contribute_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_13"
+            android:textColor="@color/text_color_secondary_level"
+            android:layout_marginTop="9dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        style="@style/default_horizontal_line_style"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

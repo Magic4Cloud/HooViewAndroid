@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<resources>
+    <string name="app_name">易视云</string>
+    <string name="splash_next_step">跳过</string>
+    <string name="splash_time_countdown">倒计时：%1$s秒</string>
+
+    <string name="empty_value">--</string>
+    <string name="search">搜索</string>
+    <string name="complete">完成</string>
+    <string name="video">视频</string>
+    <string name="live">直播</string>
+    <string name="fans">粉丝</string>
+    <string name="shield">屏蔽</string>
+    <string name="mute">静音</string>
+    <string name="subscribe">订阅</string>
+    <string name="follow">关注</string>
+    <string name="follow_cancel">取消关注</string>
+    <string name="follow_each_other">互相关注</string>
+    <string name="follow_plus">+关注</string>
+    <string name="followed">已关注</string>
+    <string name="home">ta的主页</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="commit">提交</string>
+    <string name="delete">删除</string>
+    <string name="share">分享</string>
+    <string name="send">发送</string>
+    <string name="chat">私信</string>
+    <string name="user">用户</string>
+    <string name="notice">通知</string>
+    <string name="rice_roll">饭票</string>
+    <string name="cash_in">充值</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="unknown">未知</string>
+    <string name="accompany">陪伴</string>
+    <string name="detail">详情</string>
+    <string name="faq">常见问题</string>
+    <string name="before_minute">%1$s 分钟前</string>
+    <string name="before_hour">%1$s 小时前</string>
+    <string name="before_day">%1$s 天前</string>
+    <string name="before_week">%1$s 周前</string>
+    <string name="before_month">%1$s 月前</string>
+    <string name="before_year">%1$s 年前</string>
+    <string name="just_now">刚刚</string>
+    <string name="unit_100k">%1$1.1f万</string>
+    <string name="unit_person">%1$s人</string>
+    <string name="unit_m">%1$1.1fm</string>
+    <string name="unit_km">%1$1.1fkm</string>
+    <string name="unit_10k_km">%1$1.1fw km</string>
+
+    <string name="duration_format_short" translatable="false">%2$d:%5$02d</string>
+    <string name="duration_format_long" translatable="false">%1$d:%3$02d:%5$02d</string>
+
+    <string name="sharing">正在分享</string>
+    <string name="share_user_title">%s的个人主页</string>
+    <string name="share_user_content">这是%s的易视云个人主页，非常赞，推荐你关注。</string>
+
+    <string name="tab_title_subject">话题</string>
+    <string name="login_by_sns">其他登录方式</string>
+
+    <string name="title_phone_login">手&#160;&#160;机&#160;&#160;登&#160;&#160;录</string>
+    <string name="title_verification">输&#160;&#160;入&#160;&#160;验&#160;&#160;证&#160;&#160;码</string>
+    <string name="title_password">设&#160;&#160;置&#160;&#160;登&#160;&#160;录&#160;&#160;密&#160;&#160;码</string>
+    <string name="recovery_title"><u>忘记密码</u>
+    </string>
+    <string name="prompt_password_input">请输入密码</string>
+    <string name="prompt_password_input_again">再次输入新密码</string>
+    <string name="prompt_set_password_input">6-20位数字和字符</string>
+    <string name="prompt_verification_input">请输入验证码</string>
+    <string name="prompt_phone_hint">手机号码</string>
+    <string name="prompt_input_phone_hint">输入手机号</string>
+    <string name="prompt_new_phone_hint">输入新的手机号码</string>
+    <string name="new_password">新密码</string>
+    <string name="old_password">旧密码</string>
+    <string name="new_password_confirm">确认密码</string>
+    <string name="verification_code_input">验证码</string>
+    <string name="get_verification">获取验证码</string>
+    <string name="get_verification_count_down">秒后重发</string>
+
+    <string name="e_coin_give_count_rear">赠送&#160;%1$d&#160;云币</string>
+    <string name="e_coin_count_rear">%1$d&#160;云币</string>
+    <string name="cash_count">￥&#160;%1$.2f</string>
+    <string name="cash_count_simple">￥&#160;%1$d</string>
+    <string name="my_e_coin">我的云币</string>
+    <string name="my_profit">我的收益</string>
+    <string name="faq_assert">资产相关说明</string>
+
+    <string name="chat_send">私信</string>
+    <string name="create_group">建群</string>
+    <string name="settings">设置</string>
+    <string name="my_settings">我的设置</string>
+    <string name="logout">退出登录</string>
+    <string name="about_us">关于</string>
+    <string name="about_us_app">关于易视云</string>
+    <string name="feedback">意见反馈</string>
+    <string name="contact_us">联系我们</string>
+    <string name="seizure_account">封号处理准则</string>
+    <string name="copyright">版权说明</string>
+    <string name="score_detail">消费详情</string>
+    <string name="msg_no_score_record">没有消费记录数据</string>
+    <string name="check_update">检查更新</string>
+
+    <string name="user_info_set">个人设置</string>
+    <string name="nickname">昵称</string>
+    <string name="yb_id">易播号</string>
+    <string name="sex">性别</string>
+    <string name="birthday">生日</string>
+    <string name="constellation">星座</string>
+    <string name="area">地区</string>
+    <string name="signature">个性签名</string>
+    <string name="hint_signature">这里的签名空荡荡</string>
+    <string name="next_step">下一步</string>
+    <string name="default_user_birthday">1990&#8211;6&#8211;15</string>
+    <string name="default_user_constellation">双子座</string>
+
+    <string name="msg_verify_code_from_phone">通过以下手机接收验证码信息</string>
+    <string name="msg_phone_number_error">该手机号码无法正常使用?</string>
+
+    <string name="msg_phone_number_invalid">手机号码格式错误</string>
+    <string name="msg_phone_number_empty">手机号码不能为空</string>
+    <string name="msg_phone_registered">手机号已注册</string>
+    <string name="msg_phone_have_bound">该手机号已被其它帐绑定,请使用未绑定过的手机号</string>
+    <string name="msg_phone_not_registered">手机号未注册</string>
+    <string name="msg_phone_need_verify">请重新获取验证码并验证</string>
+    <string name="msg_sns_account_have_bind">您的帐号已被其它帐号绑定</string>
+    <string name="msg_network_bad_check_retry">网络异常，请检查网络后重试</string>
+    <string name="msg_network_bad_check_click_retry">网络不给力\n请点击重新加载</string>
+    <string name="msg_network_invalid">网络不可用</string>
+    <string name="msg_verify_failed">验证失败,请检查您的验证码</string>
+    <string name="msg_verify_code_empty">验证码不能为空</string>
+    <string name="msg_verify_code_invalid">请输入正确的验证码</string>
+    <string name="msg_old_password_empty">旧密码不能为空</string>
+    <string name="msg_new_password_empty">新密码不能为空</string>
+    <string name="msg_new_password_again_empty">请再次输入新密码</string>
+    <string name="msg_inconsistent_password">两次密码输入不一致</string>
+    <string name="msg_update_password_success">密码修改成功</string>
+    <string name="msg_password_empty">密码不能为空</string>
+    <string name="msg_password_invalid">密码格式错误</string>
+    <string name="msg_password_space">密码不能纯中文</string>
+    <string name="msg_password_chinese">密码不能包含空格</string>
+    <string name="msg_password_asterisk">密码不能包含星号</string>
+    <string name="msg_password_length">密码不能少于六位</string>
+    <string name="msg_nickname_empty">昵称不能为空</string>
+    <string name="msg_sign_empty">签名不能为空</string>
+    <string name="msg_birthday_empty">请选择您的出生日期</string>
+    <string name="msg_password_old_wrong">原密码错误</string>
+    <string name="msg_registered_success">注册成功</string>
+    <string name="msg_registered_error">注册失败</string>
+    <string name="msg_login_failed">登陆失败</string>
+    <string name="msg_reset_password_success">重置密码成功</string>
+    <string name="msg_reset_password_failed">重置密码失败</string>
+    <string name="msg_account_bind_change_phone_success">更换手机号成功</string>
+    <string name="msg_account_bind_success">绑定成功</string>
+    <string name="msg_account_bind_failed">绑定失败</string>
+    <string name="msg_video_url_null">视频不存在</string>
+    <string name="msg_play_error">抱歉，播放异常</string>
+    <string name="msg_error">出错了!</string>
+    <string name="msg_error_auth_conflicts">您的帐号已被其它易视云帐号绑定过，无法完成绑定。</string>
+    <string name="msg_session_invalid">你的易视云帐号已在其它地方登录，请确认帐号安全。</string>
+    <string name="msg_contact_info_error">邮箱有误，请核对</string>
+    <string name="msg_follow_failed">关注失败</string>
+    <string name="msg_follow_success">关注成功</string>
+    <string name="msg_unfollow_success">取消关注成功</string>
+    <string name="msg_remove_success">删除成功</string>
+    <string name="msg_remove_failed">删除失败</string>
+    <string name="msg_live_is_sharing">主播正在分享</string>
+    <string name="msg_get_sms_duration_too_short">获取短信频繁，请稍候再试</string>
+    <string name="msg_server_exception_retry">服务器异常，请稍候重试</string>
+    <string name="msg_keyword_is_empty">请输入关键字</string>
+    <string name="msg_report_success">举报成功</string>
+    <string name="msg_unbind_success">解除绑定成功</string>
+    <string name="msg_sns_auth_failed">%1$s认证失败</string>
+    <string name="msg_version_is_the_latest">您的应用已经是最新版本</string>
+    <string name="msg_click_again_to_exit">再按一次退出易视云</string>
+    <string name="msg_should_reply_self">自己不能回复自己</string>
+    <string name="msg_alert_no_sd_card">未找到存储卡，无法存储照片！</string>
+    <string name="msg_no_permission_read_contacts">已被禁示权限：读取联系人。可在权限管理重新授权。</string>
+    <string name="msg_no_permission_open_camera">已被禁止权限：拍照和录像。可在权限管理重新授权。</string>
+    <string name="msg_set_remarks_success">设置备注成功</string>
+    <string name="msg_need_app_market">需要先安装应用市场</string>
+    <string name="msg_no_photos_browser_tip">您的系统没有文件管理器和相册支持,请先安装！</string>
+    <string name="msg_copy_to_clipboard_success">复制成功</string>
+    <string name="msg_cash_in_success">充值成功</string>
+    <string name="msg_cash_in_confirmation">支付结果确认中</string>
+    <string name="msg_pay_failed">支付失败</string>
+    <string name="msg_pay_cancel">支付取消</string>
+    <string name="msg_cash_in_need_select_amount">请选择充值金额</string>
+    <string name="msg_cash_out_min_limit">提现金额不能少于2元</string>
+    <string name="msg_cash_out_too_little">可提现金额少于2元无法提现</string>
+    <string name="msg_cash_out_too_much">您金额超出今天最大可提现金额</string>
+    <string name="msg_cash_out_success">提现成功</string>
+    <string name="msg_cash_out_failed">提现失败</string>
+    <string name="msg_cash_out_success_remind">请于24小时内在微信领取提现红包，过期未领取将不予处理</string>
+    <string name="msg_need_bind_weixin_first">请先绑定微信</string>
+    <string name="msg_gift_buy_failed_e_coin_not_enough">云币不足</string>
+    <string name="msg_have_shut_up">您已被禁言</string>
+
+    <string name="dl_network_traffic">流量提醒</string>
+    <string name="dl_msg_network_traffic_4G">正在使用移动网络，继续使用可能产生流量费用</string>
+    <string name="dl_msg_network_i_know">我知道了</string>
+    <string name="dl_msg_network_continue_use">继续使用</string>
+    <string name="dl_content_live_gag_tips">禁止直播色情政治暴力赌博等内容，一经发现永久封号。主播可点击评论区昵称禁言，维护健康绿色的直播环境，人人有责！</string>
+
+    <string name="tip_live_end_recommend_to_square">直播结束了，是不是意犹未尽？\n给主播发个私信聊聊吧!</string>
+
+    <string name="report_reason_porn">低俗色情</string>
+    <string name="report_reason_advertisement">垃圾广告</string>
+    <string name="report_reason_illegal">违法信息</string>
+    <string name="report_reason_bilk">欺诈骗钱</string>
+    <string name="report_reason_attacks">人身攻击</string>
+    <string name="report_reason_other">其他问题</string>
+
+    <string name="not_video_dialog">该视频已经删了</string>
+    <string name="no_network_dialog">当前网络不给力，请稍后重试</string>
+    <string name="title_audio_record_error">无法打开音频设备，请重试</string>
+    <string name="title_audio_encode_error">音频编码设备初始化失败，请重试</string>
+    <string name="title_call_camera_error">无法打开相机，请重试</string>
+    <string name="title_version_not_supported">当前系统版本太低，暂不支持该功能</string>
+    <string name="title_continue_to_record">很抱歉，上次直播异常中断，是否断续上次直播开始</string>
+
+    <string name="live_share_to">直播分享到%1$s</string>
+    <string name="live_cover_photo">封面</string>
+    <string name="live_switch_camera">切换镜头</string>
+    <string name="live_switch_camera_front">前置镜头</string>
+    <string name="live_switch_camera_rear">后置镜头</string>
+    <string name="live_shoot_thumb">拍摄封面</string>
+    <string name="live_set_title_hint">给你的直播起个名字~</string>
+    <string name="live_set_thumb_tip">拍摄一张漂亮帅气的封面</string>
+    <string name="live_title_default">%1$s正在直播，赶紧进来看</string>
+    <string name="share_live_content">%1$s正在直播中，快来围观点赞。</string>
+    <string name="share_video_content">%1$s的直播已经错过啦，不要错过回放哦。</string>
+    <string name="share_mine_live_content">%1$s的直播开始了，快来围观点赞。</string>
+    <string name="share_mine_video_content">%1$s的直播已经错过啦，不要错过回放哦。</string>
+    <string name="live_check_network">正在检测网络状况</string>
+    <string name="live_prepare_to_start">开始直播</string>
+    <string name="live_prepare_load_failed">网络加载失败请重试</string>
+    <string name="loading_live_net_speed_tips">当前直播网速 %1$s</string>
+    <string name="loading_video_net_speed_tips">当前播放网速 %1$s</string>
+    <string name="loading_video_connect">连接中...</string>
+    <string name="loading_video_reconnect">网络开小差中，马上回来...</string>
+    <string name="camera_open_error">无法打开相机，请检查权限设置</string>
+    <string name="red_pack_default_title">恭喜发财</string>
+    <string name="red_pack_send_tip">给你发了一个红包</string>
+    <string name="red_pack_not_get_amount">您已经抢过红包</string>
+    <string name="red_pack_view_others">看看大家的手气</string>
+    <string name="red_pack_top_rank">手气榜</string>
+    <string name="red_pack_best_luck">手气最佳</string>
+    <string name="red_pack_opening">正在拆红包</string>
+    <string name="red_pack_open_failed">红包已经抢完了</string>
+    <string name="red_pack">红包</string>
+
+    <string name="phone">手机号</string>
+    <string name="qq">QQ</string>
+    <string name="weixin">微信</string>
+    <string name="weixin_circle">朋友圈</string>
+    <string name="weibo">微博</string>
+    <string name="report">举报</string>
+    <string name="shut_up">禁言</string>
+    <string name="shut_up_cancel">解禁</string>
+
+    <string name="weixin_number">微信号</string>
+    <string name="qq_number">QQ号</string>
+    <string name="sina_number">新浪微博号</string>
+
+    <string name="request_failed">请求失败</string>
+
+    <string name="change_phone_number">更换手机号</string>
+    <string name="bind_phone_number">绑定手机号</string>
+    <string name="bind_social_account">社交帐号绑定</string>
+    <string name="update_password">修改密码</string>
+    <string name="verify_appeals_phone_error">申诉说明</string>
+    <string name="to_appeal">我要申诉</string>
+    <string name="no_email_applications_installed">没有安装可以发送邮件的程序</string>
+    <string name="title_change_phone_number">更换新手机号码</string>
+    <string name="bind_phone_number_ok">已绑定 %1$s **** %2$s</string>
+    <string name="binding">绑定</string>
+    <string name="unbind">解绑</string>
+    <string name="unbound">未绑定</string>
+    <string name="bound">已绑定</string>
+    <string name="account_bind">帐号管理</string>
+    <string name="bind_phone">手机绑定</string>
+    <string name="verify_phone">手机验证</string>
+    <string name="cloud_icon_cash_in">云币充值</string>
+
+    <string name="invite_friend">邀请好友</string>
+    <string name="public_my_location">公开我的地理位置</string>
+    <string name="push_message_notice">关闭某个人的消息提醒，不再收到TA的消息提醒</string>
+    <string name="push_message_do_not_bother">夜间免打扰</string>
+    <string name="push_message_notice_me_when_follow">有人关注我时提醒</string>
+    <string name="push_message_new_chat_message">新私信提醒</string>
+    <string name="push_message_notice_live">直播消息提醒</string>
+    <string name="push_message_do_not_bother_tips">晚上11点至早上8点不会接受提醒</string>
+    <string name="message_followed_you">已经关注了你</string>
+    <string name="clear_cache_memory">清理缓存空间</string>
+
+    <string name="rice_roll_number">个饭票</string>
+    <string name="watch">人看过</string>
+    <string name="like_count">个赞</string>
+    <string name="save_video">保存视频</string>
+    <string name="live_over_tip">直播已结束</string>
+    <string name="not_live_tip">未开播</string>
+    <string name="taped_watching_over_tip">录播已结束\r\n谢谢观看</string>
+    <string name="live_watching_over_tip">直播已结束\r\n谢谢观看</string>
+
+    <string name="loading_data">正在加载数据…</string>
+    <string name="no_more_data">没有更多</string>
+    <string name="submit_data">正在提交数据</string>
+    <string name="content_confirm_exit">您确认要离开吗？</string>
+
+    <string name="is_living">直播中</string>
+    <string name="is_playback">回放中</string>
+    <string name="video_reviewing">视频审核中</string>
+    <string name="audio_reviewing">音频审核中</string>
+    <string name="watch_info_count">%1$s 看过 · %2$s 观看中 · %3$s 个赞</string>
+    <string name="no_fans_tips">还没有粉丝哦~</string>
+    <string name="this_is_self">这是自已</string>
+    <string name="at_ta">\&#064;&#160;ta</string>
+
+    <string name="title_report_video">举报视频</string>
+    <string name="title_report_user">举报用户</string>
+    <string name="title_report_group">举报群组</string>
+    <string name="title_bind_phone">手机绑定</string>
+    <string name="title_confirm_stop_live">确定停止当前直播吗？</string>
+    <string name="person_item_title_rank">排行</string>
+    <string name="person_item_title_friend">关注</string>
+    <string name="title_un_follow_friend">+关注</string>
+    <string name="person_item_title_cooperation">@string/hot_channel</string>
+    <string name="timeline_item_title_playback">回放</string>
+    <string name="timeline_item_title_now">热门</string>
+    <string name="timeline_item_title_now_accompany">@string/accompany</string>
+    <string name="timeline_item_title_now_hot">@string/tab_title_subject</string>
+    <string name="timeline_item_title_now_nearby">附近</string>
+    <string name="search_text_box_hint">搜索用户名／直播／录播</string>
+    <string name="view_more">查看更多</string>
+    <string name="share_yzb_title">欢迎推荐易视云给身边的朋友</string>
+    <string name="share_yzb_content">我在使用@易视云软件，非常不错推荐给大家，免费下载地址 http://download.yizhibo.tv</string>
+    <string name="share_yzb_scan_tip">也可以扫描二维码直接下载安装</string>
+    <string name="share_yzb_by_app">使用以下应用完成分享</string>
+
+    <string name="live_start">开始直播</string>
+    <string name="video_schedule_countdown">离开播还有：%1$s</string>
+    <string name="countdown_day">%1$d天</string>
+    <string name="countdown_hour">%1$d小时</string>
+    <string name="countdown_minute">%1$d分</string>
+    <string name="countdown_second">%1$d秒</string>
+    <string name="video_schedule_will_start_live">即将直播</string>
+    <string name="video_schedule_last_day">%1$d天后</string>
+    <string name="video_schedule_last_hour">%1$d小时后</string>
+    <string name="video_schedule_last_min">%1$d分后</string>
+
+    <string name="dialog_confirm_delete_video">确定要删除这个视频吗？</string>
+    <string name="dialog_title_live_stop">直播已停止</string>
+    <string name="dialog_title_bind_phone">请完善手机信息</string>
+
+    <string name="about_yizhibo_content">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;易视云是一款专注于移动视频直播的互联网4.0最前沿社交APP。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;实时的直播分享，时间没有上限，内容可共享至微信、微博、QQ等社交平台,
+        既可以公开给所有人，也可仅限你的好友们观看和互动。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;云端保存，既不占你的本地空间，又不会丢失你任何一刻的精彩。还可以一键即焚，播后也可不留痕迹。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;极低的流量消耗，
+        通过极限低码率的视频压缩，为流量环境下的直播和观看最大限度的省钱。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;不论你是想炫耀、猎奇、交友，赚钱，需要生活消费还是资讯获取，都可以来这个多屏互动的社交直播平台。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;在这里，所有人都公平的获得展现真实自我的机会，易视云，把你捧到世界面前。\n\n
+    </string>
+    <string name="yihzibo_copyright">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;易视云为深圳云聚汇数码有限公司旗下的一款移动直播分享的软件平台，在平台上会员或其发布的有关直播信息均由会员自行提供，会员依法对其提供的任何信息承担全部责任。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;任何单位或个人认为易视云平台的内容可能涉嫌侵犯其合法权益，应该及时书面通知本公司，并应对书面通知陈述之真实性负责。我们在收到相关信息后，将会依法尽快移除或限制相关涉嫌侵权的内容。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;易视云平台尊重合法版权，反对侵权盗版。转发及分享内容并不意味易视云赞同其部分文字或作品等侵害了您的权益，请您立即与易视云联系，易视云将尽快予以解决。\n\n</string>
+    <string name="submit_no_content">对不起，您没有填写反馈内容，请重试</string>
+    <string name="submit_error_str">对不起，提交失败，请稍候重试</string>
+    <string name="submit_ok">您的反馈已收到，感谢您的支持，我们会尽快解决您的问题！</string>
+    <string name="commit_contact_info">邮箱</string>
+    <string name="feedback_prompt_str">留下您的联系方式</string>
+    <string name="feedback_hint_str">为了更好的给您服务，请务必详细描述出问题的过程，多谢～</string>
+    <string name="submit_error">提交失败</string>
+    <string name="default_user_location">中国</string>
+    <string name="default_user_image">头像</string>
+    <string name="city_select">地区选择</string>
+    <string name="user_browse">体验一下</string>
+    <string name="choose_from_album">选择本地图片</string>
+    <string name="choose_from_camera">拍照</string>
+    <string name="no_friend">暂无好友</string>
+    <string name="empty_title">暂无数据</string>
+    <string name="empty_no_data_title">空空如也，啥也木有</string>
+    <string name="empty_no_amount">暂无充值记录</string>
+    <string name="empty_no_score">暂无消费记录</string>
+    <string name="empty_no_cash_out">暂无提现记录</string>
+    <string name="person_friend_btn_living">挑个直播看看</string>
+    <string name="common_share_message">:精彩生活，最易视云</string>
+    <string name="network_ok_message">直播已经恢复</string>
+    <string name="network_error_message">当前无网络</string>
+    <string name="network_invalid_try_reconnect">当前网络不给力，正在为您优化连线</string>
+
+    <string name="label_remarks">备注名:</string>
+    <string name="label_nickname">昵称:</string>
+    <string name="hint_remarks">请填写备注名</string>
+    <string name="title_remarks">备注信息</string>
+    <string name="set_remarks">添加备注</string>
+    <string name="edit_user_profile">编辑资料</string>
+    <string name="update_remarks">修改备注</string>
+
+    <string name="country_code">国际区号</string>
+    <string name="default_country_name">中国大陆</string>
+    <string name="default_country_code_number">+86</string>
+    <string name="title_privacy_service">用户注册协议</string>
+
+    <string name="server_debug">开发服务器</string>
+    <string name="server_release">线上服务器</string>
+
+    <string name="confirm_forward_to">确定转发到：%1$s ?</string>
+    <string name="tip_left_slide_to_clear">左滑清空屏幕</string>
+    <string name="watching_user_enter_comment">%1$s 进来了</string>
+    <string name="watching_user_send_gift">%1$s 送出礼物%2$s</string>
+    <string name="watching_user_send_expression">%1$s 送出表情%2$s</string>
+    <string name="concerned_msg">关注后可订阅对方动态</string>
+
+    <string name="user_e_coin_count">%1$s\n送出的云币</string>
+    <string name="user_follow_count">%1$s\n关注</string>
+    <string name="user_love_count">%1$s\n粉丝</string>
+
+    <string name="rise_cash">微信提现</string>
+    <string name="rise_cash_amount">提现金额</string>
+    <string name="actual_cash_amount">实际到帐金额</string>
+    <string name="wx_procedure_fee">微信收取手续费</string>
+    <string name="rise_cash_description">提现申请已经提交，请去微信查看。</string>
+    <string name="cash_in_record">充值记录</string>
+    <string name="cash_out_record">提现记录</string>
+    <string name="title_rise_cash_detail">提现详情</string>
+    <string name="rise_amount_cash">可提现金额(元)</string>
+    <string name="today_rise_amount_cash">今日可提现金额(元)</string>
+    <string name="cash_in_count_selector">请选择充值金额</string>
+    <string name="cash_in_mode_selector">请选择充值方式</string>
+    <string name="kindly_reminder">关于饭票、云币的解释请点击下方的资产相关说明查看。\n\r充值如有问题请关注公众号易视云联系在线客服</string>
+    <string name="cash_in_confirm">确认充值</string>
+    <string name="title_cash_out">提现</string>
+    <string name="money_amount_other">其它金额</string>
+    <string name="cash_out_money_amount_hint">可提现金额%1$.2f元</string>
+    <string name="cash_out_tip_bind">已绑定微信，提现金额将以红包形式发送到微信帐户</string>
+    <string name="cash_out_tip_no_bind">绑定微信后，提现金额将以红包形式发送到微信帐户</string>
+    <string name="cash_in_option_alipay">支付宝支付</string>
+    <string name="cash_in_option_weixin">微信支付</string>
+    <string name="cash_in_e_coin_balance">账户余额</string>
+    <string name="e_coin_count">云币&#160;&#160;%1$s</string>
+    <string name="cash_out_amount_total">总提现金额: %1$d元</string>
+    <string name="recharge_amount_total">总充值金额: %1$d元</string>
+    <string name="money_amount_other_input">请输入其它金额</string>
+    <string name="money_e_coin_value">1元人民币 ＝ 10云币</string>
+    <string name="money_amount_pay_text">支付金额（元）</string>
+    <string name="e_coin_amount_get">云币数量（枚）%1$s</string>
+    <string name="fill_in_send_red_number">填写数量</string>
+    <string name="money_amount">金额</string>
+
+    <string name="gift">礼物</string>
+    <string name="rice_roll_count">饭票</string>
+    <string name="receive_gift_tip">送出</string>
+    <string name="multiple">x%1$d</string>
+    <string name="rice_roll_contribute">饭票贡献榜</string>
+    <string name="contribute_value">贡献&#160;&#160;%1$d</string>
+    <string name="contributor">贡献</string>
+    <string name="search_history">历史搜索</string>
+    <string name="clear_history_success">清除历史搜索记录成功</string>
+    <string name="video_comment_new_count">%1$d条新消息</string>
+    <string name="contribute_e_coin_count">贡献云币</string>
+    <string name="get_rice_roll_count">获得饭票</string>
+    <string name="rich_man">任性榜</string>
+    <string name="rising_star">红人榜</string>
+    <string name="gift_exp_value">+%1$d点经验值</string>
+    <string name="official_certification">认证 %1$s</string>
+    <string name="live_back_to_home_page">返回到首页</string>
+    <string name="live_user_join_content">&#160;&#160;来了</string>
+    <string name="asset_rank_weekly">周榜</string>
+    <string name="asset_rank_month">月榜</string>
+    <string name="asset_rank_total">总榜</string>
+    <string name="send_red_pack">发红包</string>
+    <string name="red_pack_number">红包个数</string>
+    <string name="fill_in_red_number">填写个数</string>
+    <string name="send_red_pack_tip">一次最多可发50个红包</string>
+    <string name="send_e_coin_total">总共发</string>
+    <string name="unit_individual">个</string>
+    <string name="unit_e_coin">云币</string>
+    <string name="red_pack_fight_luck">拼手气红包，每人领取金额随机</string>
+    <string name="red_pack_message_default">恭喜发财，大吉大利！</string>
+    <string name="e_number_null">亲，你是要发红包给空气吗？</string>
+    <string name="e_number_require_not_accord">云币数量必须大于红包数量</string>
+    <string name="red_pack_send_success">红包发送成功</string>
+    <string name="red_pack_send_tip_not_enough">云币不足，请先充值</string>
+    <string name="red_pack_type_system">易视云红包</string>
+    <string name="red_pack_type_watcher">礼物红包</string>
+    <string name="red_pack_type_owner">主播红包</string>
+    <string name="msg_red_pack_wait_to_open">红包金额%1$d云币,等待对方领取</string>
+    <string name="msg_red_pack_have_open">您的红包已经被%1$s领取</string>
+    <string name="msg_red_pack_have_receive">您领取了%1$s的红包</string>
+    <string name="msg_red_pack_group_have_open">已领取%1$d/%2$d的红包，共%3$d云币被领取</string>
+    <string name="msg_red_pack_owner">%1$s的红包</string>
+
+    <string name="constellation_aries">白羊座</string>
+    <string name="constellation_taurus">金牛座</string>
+    <string name="constellation_gemini">双子座</string>
+    <string name="constellation_cancer">巨蟹座</string>
+    <string name="constellation_leo">狮子座</string>
+    <string name="constellation_virgo">处女座</string>
+    <string name="constellation_libra">天秤座</string>
+    <string name="constellation_scorpio">天蝎座</string>
+    <string name="constellation_sagittarius">射手座</string>
+    <string name="constellation_capricorn">摩羯座</string>
+    <string name="constellation_aquarius">水瓶座</string>
+    <string name="constellation_pisces">双鱼座</string>
+
+    <string name="gift_view_give">送了</string>
+
+    <string name="hot_channel">合作频道</string>
+    <string name="live_over_error_tip">时长较短、质量较差的直播不予保存</string>
+    <string name="network_signal_bad">当前网络太挫，请换个网络直播吧</string>
+    <string name="soft_update_tip">软件版本更新</string>
+    <string name="wait_later">以后再说</string>
+    <string name="down_load_soft">立即更新</string>
+    <string name="install_software">安装</string>
+    <string name="app_new_version_size">新版本大小：%1$.2fM</string>
+    <string name="app_new_version_name">最新版本：%1$s</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="msg_login_agreement">登陆即代表你同意用户协议</string>
+    <string name="msg_login_user_agreement">用户协议</string>
+    <string name="msg_login_set_password">设置密码</string>
+    <string name="msg_login_set_new_password">设置新密码</string>
+
+    <string name="gravity_left">left</string>
+    <string name="gravity_center">center</string>
+    <string name="gravity_right">right</string>
+    <string name="clear_history">清除</string>
+
+    <string name="bind_social_contact">社交账号绑定</string>
+    <string name="share_to">分享到</string>
+    <string name="delete_video_tip">删除视频</string>
+    <string name="home_rank_empty_tip">虚位以待</string>
+    <string name="password_identical_tip">新密码与原密码重复，无需修改</string>
+
+    <string name="share_to_sina">分享到微博</string>
+    <string name="share_to_weixin">分享到微信</string>
+    <string name="share_to_circle">分享到朋友圈</string>
+    <string name="share_to_qq">分享到qq</string>
+
+    <string name="msg_push_register_error">注册推流资源失败</string>
+    <string name="msg_sdk_init_error">SDK初始化失败</string>
+    <string name="msg_push_locate_error">请求推流调度出错,直播失败</string>
+    <string name="msg_push_redirect_error">获取推流地址出错,直播失败</string>
+    <string name="msg_play_complete">播放结束</string>
+    <string name="msg_get_vid_fail">获取视频vid失败</string>
+    <string name="msg_get_lid_fail">获取视频lid失败</string>
+
+    <string name="title_set_video_permission">设置直播权限</string>
+    <string name="permission_password">直播密码</string>
+    <string name="permission_password_desc">仅使用密码可见</string><string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="prompt_password_input_live">请输入4位数字密码</string>
+    <string name="video_permission_public">公开</string>
+    <string name="video_permission_password">密码</string>
+    <string name="video_permission_pay">付费</string>
+    <string name="video_permission_private">私有</string>
+
+    <string name="title_set_video_topic">设置直播分类</string>
+    <string name="title_set_video_price">设置付费金额</string>
+    <string name="title_video_topic">热门分类</string>
+    <string name="content_video_pay_info">付费直播\n\n需要支付<b>%1$d</b>云币才能观看</string>
+    <string name="delete_conversation">删除会话</string>
+    <string name="remove_black">解除</string>
+    <string name="pull_black">拉黑</string>
+</resources>
