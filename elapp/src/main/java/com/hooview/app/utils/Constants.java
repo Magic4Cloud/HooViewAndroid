@@ -30,8 +30,8 @@ public class Constants {
     public static final String HX_CHAT_APP_KEY = "1150160929178497#hooview";  //TODO Need to change yours
 
     //======================== SNS PLATFORM AUTH/SHARE ===========//
-    public static final String WEIXIN_APP_ID = "1105655287";    //TODO Need to change yours
-    public static final String WEIXIN_APP_SECRET = "AlcWUNjoMGfzd5ls";//TODO Need to change yours
+    public static final String WEIXIN_APP_ID = "wx89d62b0eec9c1d9c";    //TODO Need to change yours
+    public static final String WEIXIN_APP_SECRET = "ffb4c8f18145bbf1d19ddd99bef72749";//TODO Need to change yours
     public static final String QQ_APP_ID = "1105655287";        //TODO Need to change yours
     public static final String WEIBO_APP_ID = "3385195966";     //TODO Need to change yours
 
