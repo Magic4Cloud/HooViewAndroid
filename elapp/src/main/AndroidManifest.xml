@@ -63,7 +63,7 @@
         <meta-data android:name="UMENG_CHANNEL" android:value="${CHANNEL_VALUE}"/>
         <!-- //TODO Need to change yours -->
         <meta-data android:name="JPUSH_APPKEY" android:value="5058b51ad39a89832f8a65dd"/>
-        <meta-data android:name="JPUSH_CHANNEL" android:value="${CHANNEL_VALUE}"/>
+        <meta-data android:name="JPUSH_CHANNEL" android:value="16044c9bb9a39187c424f601"/>
 
         <activity
             android:name=".activity.SplashActivity"

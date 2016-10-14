@@ -27,7 +27,6 @@ import android.view.inputmethod.InputMethodManager;
 import com.easyvaas.common.emoji.utils.EmoticonsUtils;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.utils.DialogUtil;
-import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.Utils;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
@@ -67,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SingleToast.show(this,getClass().getName().substring(getClass().getName().lastIndexOf(".") + 1));
+        //SingleToast.show(this,getClass().getSimpleName());
         mStartShowTime = System.currentTimeMillis();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
