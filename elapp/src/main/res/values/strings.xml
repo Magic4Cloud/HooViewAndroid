@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -552,7 +551,8 @@
 
     <string name="title_set_video_permission">设置直播权限</string>
     <string name="permission_password">直播密码</string>
-    <string name="permission_password_desc">仅使用密码可见</string><string name="one">1</string>
+    <string name="permission_password_desc">仅使用密码可见</string>
+    <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>
     <string name="four">4</string>
@@ -575,4 +575,9 @@
     <string name="delete_conversation">删除会话</string>
     <string name="remove_black">解除</string>
     <string name="pull_black">拉黑</string>
+
+
+    <!--新版本的字符串-->
+    <string name="hooview">火眼财经</string>
+
 </resources>

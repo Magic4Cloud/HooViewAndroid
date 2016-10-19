@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -49,6 +48,7 @@
         <item name="android:paddingLeft">14dp</item>
         <item name="android:background">@color/list_item_white_bg</item>
     </style>
+
     <style name="auth_verify_btn_red">
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">@dimen/button_common_small_height</item>
@@ -64,9 +64,11 @@
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
+
     <style name="auth_verify_phone" parent="auth_verify_btn_red">
         <item name="android:layout_width">80dp</item>
     </style>
+
     <style name="auth_bind_btn">
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">@dimen/button_common_small_height</item>
@@ -82,6 +84,7 @@
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
+
     <style name="auth_change_phone" parent="auth_bind_btn">
         <item name="android:layout_width">80dp</item>
     </style>
@@ -172,7 +175,9 @@
     <style name="thin_progressBar">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/progress_horizontal</item>
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
         <item name="android:minHeight">1dip</item>
         <item name="android:maxHeight">1dip</item>
     </style>
@@ -180,17 +185,23 @@
     <style name="zoom_seekBar">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/seekbar_progress</item>
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
         <item name="android:minHeight">1dip</item>
         <item name="android:maxHeight">1dip</item>
     </style>
+
     <style name="init_player_progressBar">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/init_player_progress_horizontal</item>
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
         <item name="android:minHeight">1dip</item>
         <item name="android:maxHeight">1dip</item>
     </style>
+
     <style name="BottomSheet.StyleDialog" parent="BottomSheet.Dialog">
         <item name="android:backgroundDimAmount">0.5</item>
         <item name="android:windowAnimationStyle">@style/BottomSheet.Animation</item>
@@ -198,11 +209,13 @@
         <item name="bs_dividerColor">@android:color/transparent</item>
         <item name="bs_listStyle">@style/BottomSheet.StyleList</item>
     </style>
+
     <style name="loading_more_progressBar">
         <item name="android:indeterminateDrawable">@drawable/progress_loading</item>
         <item name="android:minHeight">20dip</item>
         <item name="android:maxHeight">20dip</item>
     </style>
+
     <style name="BottomSheet.StyleList" parent="BottomSheet.List">
         <item name="android:drawSelectorOnTop">false</item>
         <item name="android:paddingBottom">8dp</item>
@@ -210,7 +223,7 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style parent="@android:style/Widget.Spinner" name="SpinnerAsEditText">
+    <style name="SpinnerAsEditText" parent="@android:style/Widget.Spinner">
         <item name="android:background">@null</item>
     </style>
 
@@ -234,6 +247,7 @@
         <item name="android:textColor">@color/text_common</item>
         <item name="android:background">@drawable/circle_gray_ling_bg</item>
     </style>
+
     <style name="verification_password_set_edit_style" parent="password_set_edit_style">
         <item name="android:inputType">number</item>
         <item name="android:textColor">@color/pure_white</item>
@@ -249,6 +263,7 @@
         <item name="android:textSize">@dimen/text_size_title_h2</item>
         <item name="android:textColor">@color/text_btn_reverse_selector</item>
     </style>
+
     <style name="icon_count_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -259,6 +274,7 @@
         <item name="android:textColor">@color/text_color_three_level</item>
         <item name="android:textSize">@dimen/text_size_12</item>
     </style>
+
     <style name="register_input_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
@@ -268,12 +284,14 @@
         <item name="android:paddingRight">9dp</item>
         <item name="android:drawablePadding">12dp</item>
     </style>
+
     <style name="text_with_shadow">
         <item name="android:shadowDx">@integer/text_common_shadow_dx</item>
         <item name="android:shadowDy">@integer/text_common_shadow_dy</item>
         <item name="android:shadowRadius">@integer/text_common_shadow_shadowRadius</item>
         <item name="android:shadowColor">@color/text_gray_shadow_color</item>
     </style>
+
     <style name="search_label_text_view_style">
         <item name="android:textSize">@dimen/text_size_title_h1</item>
         <item name="android:textColor">@color/text_color_secondary_level</item>
@@ -293,5 +311,17 @@
         <item name="android:textSize">@dimen/text_size_title_h2</item>
         <item name="android:textColor">@color/text_gray</item>
         <item name="android:gravity">center</item>
+    </style>
+
+
+    <!--标准的Toolbar的style-->
+    <style name="Theme.Toolbar.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="style_RadioButton">
+        <item name="android:button">@null</item>
+        <item name="android:layout_weight">1</item>
+
     </style>
 </resources>

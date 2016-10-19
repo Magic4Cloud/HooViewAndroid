@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -130,4 +129,10 @@
     <color name="base_bg_blue_color_20">#339AC9FF</color>
     <color name="base_bg_btn_color_blue">#8DA8FF</color>
     <color name="base_bg_btn_color_blue_20">#338DA8FF</color>
+
+
+    <!--新版本的color标注-->
+    <color name="hv662d80">#662d80</color>
+    <color name="hv_toobar_shadow_start">#3d000000</color>
+    <color name="hv_toobar_shadow_end">#08000000</color>
 </resources>

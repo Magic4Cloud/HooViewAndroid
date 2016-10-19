@@ -1,51 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<TabHost
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_gray">
+    android:background="@color/background_color_gray"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="0dip"
-            android:layout_height="0dip"/>
+            android:layout_height="0dip" />
+
         <FrameLayout
             android:id="@+id/real_tab_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
+
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
         <LinearLayout
             android:id="@+id/tab_bar_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:orientation="horizontal"
-            android:background="@drawable/home_tab_background">
+            android:background="@drawable/home_tab_background"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/tab_timeline"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginBottom="12dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
                 android:paddingRight="30dp"
-                android:src="@drawable/btn_home_tab_timeline"/>
+                android:src="@drawable/btn_home_tab_timeline" />
 
             <ImageView
                 android:id="@+id/tab_message"
@@ -55,8 +59,14 @@
                 android:layout_marginBottom="12dp"
                 android:layout_weight="1"
                 android:paddingLeft="30dp"
-                android:src="@drawable/btn_home_tab_message"/>
+                android:src="@drawable/btn_home_tab_message" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/enterHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点我进入新的主页" />
 
         <FrameLayout
             android:id="@+id/live_start_ll"
@@ -65,12 +75,13 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="5dp"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/tab_live"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
-                android:src="@drawable/home_tab_icon_live"/>
+                android:src="@drawable/home_tab_icon_live" />
         </FrameLayout>
     </FrameLayout>
 </TabHost>

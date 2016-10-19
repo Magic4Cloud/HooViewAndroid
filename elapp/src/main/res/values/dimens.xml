@@ -86,4 +86,8 @@
     <dimen name="item_common_height">40dp</dimen>
 
     <dimen name="my_profit_cash_count_text_size">34sp</dimen>
+
+
+    <!--像素-->
+    <dimen name="actionbar_shadow_height">1dp</dimen>
 </resources>

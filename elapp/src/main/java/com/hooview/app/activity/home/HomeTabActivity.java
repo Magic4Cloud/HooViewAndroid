@@ -22,6 +22,7 @@ import com.easemob.chat.EMChatManager;
 import com.easyvaas.common.chat.ChatManager;
 
 import com.hooview.app.R;
+import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.activity.home.fragment.TabMessageFragment;
 import com.hooview.app.activity.home.fragment.TabMyFragment;
 import com.hooview.app.activity.home.fragment.TabTimelineMainFragment;
@@ -188,6 +189,13 @@ public class HomeTabActivity extends BaseFragmentActivity {
             mPref.putBoolean(Preferences.KEY_IS_HAVE_SHOW_UPDATE_DIALOG, false);
         }
         showTabByTag(TAB_TAG_TIMELINE);
+
+        findViewById(R.id.enterHome).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HooViewHomeActivity.launch(HomeTabActivity.this);
+            }
+        });
     }
 
     @Override
@@ -257,6 +265,7 @@ public class HomeTabActivity extends BaseFragmentActivity {
 
     /**
      * 切换Tag
+     *
      * @param tag
      */
     private void showTabByTag(String tag) {
