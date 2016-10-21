@@ -6,7 +6,9 @@
 
 package com.hooview.app.activity.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -29,9 +31,9 @@ import com.easyvaas.common.sharelogin.model.PlatformActionListener;
 import com.easyvaas.common.sharelogin.qq.QQLoginManager;
 import com.easyvaas.common.sharelogin.wechat.WechatLoginManager;
 import com.easyvaas.common.sharelogin.weibo.WeiboLoginManager;
-
 import com.hooview.app.BuildConfig;
-import com.hooview.app.activity.home.HomeTabActivity;
+import com.hooview.app.R;
+import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.activity.user.UserInfoSnsActivity;
 import com.hooview.app.base.BaseFragment;
 import com.hooview.app.bean.user.User;
@@ -47,24 +49,26 @@ import com.hooview.app.utils.UserUtil;
 
 public class UserLoginHomeFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "UserLoginHomeFragment";
+    private SharedPreferences sp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(com.hooview.app.R.layout.fragment_home_logins, container, false);
+        sp = getActivity().getSharedPreferences("config", Context.MODE_APPEND);
 
         view.findViewById(com.hooview.app.R.id.login_qq_iv).setOnClickListener(this);
         view.findViewById(com.hooview.app.R.id.login_weibo_iv).setOnClickListener(this);
         view.findViewById(com.hooview.app.R.id.login_weixin_iv).setOnClickListener(this);
         view.findViewById(com.hooview.app.R.id.go_login_btn).setOnClickListener(this);
         view.findViewById(com.hooview.app.R.id.go_register_btn).setOnClickListener(this);
-        view.findViewById(com.hooview.app.R.id.guest_login_tv).setOnClickListener(this);
+        //view.findViewById(com.hooview.app.R.id.guest_login_tv).setOnClickListener(this);
         initBottomTips((TextView) view.findViewById(com.hooview.app.R.id.login_bottom_tips_tv));
 
 
         if (BuildConfig.FLAVOR.equals("dev")) {
             final String[] servers = getResources().getStringArray(com.hooview.app.R.array.server_array);
             Spinner mServerSpinner = (Spinner) view.findViewById(com.hooview.app.R.id.server_choice_sp);
-            mServerSpinner.setVisibility(View.VISIBLE);
+            mServerSpinner.setVisibility(View.GONE);
             mServerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -89,6 +93,7 @@ public class UserLoginHomeFragment extends BaseFragment implements View.OnClickL
             Preferences.getInstance(getActivity()).remove(Preferences.KEY_SERVER_TYPE);
         }
 
+
         return view;
     }
 
@@ -112,17 +117,17 @@ public class UserLoginHomeFragment extends BaseFragment implements View.OnClickL
                     @Override
                     public void updateDrawState(TextPaint ds) {
                         super.updateDrawState(ds);
-                        ds.setColor(getResources().getColor(com.hooview.app.R.color.login_btn_color));
+                        ds.setColor(getResources().getColor(R.color.hv662d80));
                         ds.setUnderlineText(false);
                     }
-                }, content.length()-4, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }, content.length() - 4, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         v.setHighlightColor(getResources().getColor(android.R.color.transparent));
         v.setMovementMethod(LinkMovementMethod.getInstance());
         v.setText(info);
     }
 
     @Override
-        public void onResume() {
+    public void onResume() {
         super.onResume();
         dismissLoadingDialog();
     }
@@ -141,12 +146,12 @@ public class UserLoginHomeFragment extends BaseFragment implements View.OnClickL
             case com.hooview.app.R.id.go_register_btn:
                 getActivity().sendBroadcast(new Intent(Constants.ACTION_GO_REGISTER));
                 break;
-            case com.hooview.app.R.id.guest_login_tv:
-                intent = new Intent(getActivity(), HomeTabActivity.class);
-                intent.putExtra(Constants.EXTRA_KEY_TAB_ID, HomeTabActivity.TAB_ID_DISCOVER);
-                startActivity(intent);
-                getActivity().finish();
-                break;
+//            case com.hooview.app.R.id.guest_login_tv:
+//                intent = new Intent(getActivity(), HomeTabActivity.class);
+//                intent.putExtra(Constants.EXTRA_KEY_TAB_ID, HomeTabActivity.TAB_ID_DISCOVER);
+//                startActivity(intent);
+//                getActivity().finish();
+            //break;
             case com.hooview.app.R.id.go_login_btn:
                 getActivity().sendBroadcast(new Intent(Constants.ACTION_GO_LOGIN));
                 break;
@@ -248,8 +253,10 @@ public class UserLoginHomeFragment extends BaseFragment implements View.OnClickL
                     @Override
                     public void onSuccess(User user) {
                         dismissLoadingDialog();
+                        //TODO 替换之前的HomeTabActivity的入口
                         if (getActivity() != null) {
-                            startActivity(new Intent(getActivity(), HomeTabActivity.class));
+                            sp.edit().putBoolean("live", user.getJurisdiction() == 0 ? false : true).commit();
+                            startActivity(new Intent(getActivity(), HooViewHomeActivity.class));
                             getActivity().finish();
                             UserUtil.handleAfterLogin(getContext(), user, "LoginByAuth");
                         }
@@ -257,7 +264,7 @@ public class UserLoginHomeFragment extends BaseFragment implements View.OnClickL
 
                     @Override
                     public void onFailure(String msg) {
-                        if(!isAdded()) {
+                        if (!isAdded()) {
                             return;
                         }
                         RequestUtil.handleRequestFailed(msg);

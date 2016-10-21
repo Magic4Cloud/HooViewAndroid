@@ -13,6 +13,16 @@ class BaseUer {
     private String gender;
     private int vip;
 
+    private int jurisdiction;
+
+    public int getJurisdiction() {
+        return jurisdiction;
+    }
+
+    public void setJurisdiction(int jurisdiction) {
+        this.jurisdiction = jurisdiction;
+    }
+
     public String getName() {
         return name;
     }

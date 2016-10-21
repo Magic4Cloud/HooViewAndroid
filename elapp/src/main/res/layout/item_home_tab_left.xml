@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp">
+
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/circle_bg_white_shadow"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5.5dp"
+        />
+    <com.easyvaas.common.widget.RoundImageView
+        android:id="@+id/iv_header"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/rotundity_holder_view" />
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/test_new"
+        android:textColor="@color/hv1b1720"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_title"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginRight="100dp"
+        android:singleLine="true"
+        android:text="@string/about_us_app"
+        android:textColor="@color/hv676767"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tv_name"
+        android:layout_marginRight="10dp"
+        android:text="@string/about_us_app"
+        android:textColor="@color/hv989898"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_below="@+id/tv_time"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/hooview_awesome_list_item_shadow">
+
+        <com.hooview.app.view.RoundRectangleImageView
+            android:id="@+id/rectangle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/square_holder_view"
+            android:scaleType="centerCrop"
+            app:round_bottom_left_radius="2dp"
+            app:round_bottom_right_radius="2dp"
+            app:round_top_left_radius="2dp"
+            app:round_top_right_radius="2dp" />
+
+        <ImageButton
+            android:id="@+id/iv_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/selector_home_play"
+            android:background="@android:color/transparent"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

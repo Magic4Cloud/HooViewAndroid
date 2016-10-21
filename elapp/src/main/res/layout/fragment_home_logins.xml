@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:id="@+id/title_icon_ll">
         <ImageView
@@ -24,17 +24,17 @@
             android:layout_height="wrap_content"
             android:src="@drawable/login_icon_logo"/>
 
-        <TextView
-            android:id="@+id/guest_login_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginTop="24dp"
-            android:drawableRight="@drawable/login_icon_enter"
-            android:drawablePadding="4dp"
-            android:textColor="@color/text_white"
-            android:textSize="14sp"
-            android:text="@string/user_browse"/>
+        <!--<TextView-->
+            <!--android:id="@+id/guest_login_tv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_marginTop="24dp"-->
+            <!--android:drawableRight="@drawable/login_icon_enter"-->
+            <!--android:drawablePadding="4dp"-->
+            <!--android:textColor="@color/text_white"-->
+            <!--android:textSize="14sp"-->
+            <!--android:text="@string/user_browse"/>-->
     </LinearLayout>
 
 
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:textColor="@color/login_btn_color"
+            android:textColor="@color/hv662d80"
             android:textSize="16sp"
             android:text="@string/register"
             android:background="@drawable/register_stroke_round_six_btn_blue_selector"

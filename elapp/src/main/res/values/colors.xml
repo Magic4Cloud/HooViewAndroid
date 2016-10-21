@@ -135,4 +135,8 @@
     <color name="hv662d80">#662d80</color>
     <color name="hv_toobar_shadow_start">#3d000000</color>
     <color name="hv_toobar_shadow_end">#08000000</color>
+    <color name="hvaf99bc">#AF99BC</color>
+    <color name="hv1b1720">#1B1720</color>
+    <color name="hv676767">#676767</color>
+    <color name="hv989898">#989898</color>
 </resources>

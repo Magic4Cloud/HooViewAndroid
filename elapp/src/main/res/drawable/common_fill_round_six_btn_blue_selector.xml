@@ -9,7 +9,7 @@
     <item android:state_enabled="false">
         <shape>
             <solid
-                android:color="@color/text_gray"/>
+                android:color="@color/hv662d80"/>
             <corners
                 android:radius="6dp"/>
         </shape>
@@ -17,7 +17,7 @@
     <item android:state_selected="true">
         <shape>
             <solid
-                android:color="@color/base_color_btn_fill_blue_focused"/>
+                android:color="@color/hv662d80"/>
             <corners
                 android:radius="6dp"/>
         </shape>
@@ -25,7 +25,7 @@
     <item android:state_selected="false" android:state_pressed="true">
         <shape>
             <solid
-                android:color="@color/base_color_btn_fill_blue_focused"/>
+                android:color="@color/hv662d80"/>
             <corners
                 android:radius="6dp"/>
         </shape>
@@ -33,7 +33,7 @@
     <item android:state_selected="false" android:state_pressed="false">
         <shape>
             <solid
-                android:color="@color/btn_color_main"/>
+                android:color="@color/hv662d80"/>
             <corners
                 android:radius="6dp"/>
         </shape>

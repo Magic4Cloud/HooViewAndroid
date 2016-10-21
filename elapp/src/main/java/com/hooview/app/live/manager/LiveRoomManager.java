@@ -22,9 +22,8 @@ import android.widget.TextView;
 
 import com.easyvaas.common.chat.ChatManager;
 import com.easyvaas.common.widget.MyUserPhoto;
-
 import com.hooview.app.R;
-import com.hooview.app.activity.home.HomeTabActivity;
+import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.app.EVApplication;
 import com.hooview.app.bean.user.BaseUserEntity;
 import com.hooview.app.bean.user.User;
@@ -33,7 +32,6 @@ import com.hooview.app.db.Preferences;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.net.MyRequestCallBack;
 import com.hooview.app.net.RequestUtil;
-import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.DialogUtil;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.UserUtil;
@@ -332,9 +330,11 @@ public class LiveRoomManager {
             public void onClick(View view) {
                 if (isCurrentUserRecording) {
                 }
+
+                //TODO,替换之前的HomeTabActivity的入口
                 if (mActivity.getString(R.string.live_back_to_home_page).equals(saveVideoTv.getText())) {
-                    Intent intent = new Intent(mActivity, HomeTabActivity.class);
-                    intent.putExtra(Constants.EXTRA_KEY_TAB_ID, HomeTabActivity.TAB_ID_DISCOVER);
+                    Intent intent = new Intent(mActivity, HooViewHomeActivity.class);
+                    //intent.putExtra(Constants.EXTRA_KEY_TAB_ID, HomeTabActivity.TAB_ID_DISCOVER);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     mActivity.startActivity(intent);
                 }

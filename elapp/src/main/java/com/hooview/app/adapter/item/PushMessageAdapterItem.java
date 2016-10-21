@@ -15,14 +15,12 @@ import android.widget.TextView;
 
 import com.easyvaas.common.adapter.AdapterItem;
 import com.easyvaas.common.widget.MyUserPhoto;
-
-import com.hooview.app.activity.home.HomeTabActivity;
+import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.bean.user.UserEntity;
 import com.hooview.app.db.Preferences;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.net.MyRequestCallBack;
 import com.hooview.app.net.RequestUtil;
-import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.UserUtil;
 import com.hooview.app.utils.Utils;
@@ -98,12 +96,14 @@ public class PushMessageAdapterItem implements AdapterItem<UserEntity> {
                 attentionUser(context, model.getName(), model.getSubscribed(), location_toggle_tb);
             }
         });
+
+        //TODO 替换之前的HomeTabActivity的入口
         myUserPhoto.getRoundImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (model.getName().equals(Preferences.getInstance(context).getUserNumber())) {
-                    Intent intent = new Intent(context, HomeTabActivity.class);
-                    intent.putExtra(Constants.EXTRA_KEY_TAB_ID, HomeTabActivity.TAB_ID_MINE);
+                    Intent intent = new Intent(context, HooViewHomeActivity.class);
+                    //intent.putExtra(Constants.EXTRA_KEY_TAB_ID, HomeTabActivity.TAB_ID_MINE);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 } else {
@@ -114,7 +114,7 @@ public class PushMessageAdapterItem implements AdapterItem<UserEntity> {
     }
 
     private void attentionUser(final Context context, String name, final int subscribe,
-            final CheckBox checkBox) {
+                               final CheckBox checkBox) {
         String deviceId = Utils.getDeviceId(context);
         ApiHelper.getInstance().userSubscribe(
                 name, subscribe + "", deviceId, new MyRequestCallBack<String>() {

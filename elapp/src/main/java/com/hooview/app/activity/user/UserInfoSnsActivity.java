@@ -6,8 +6,6 @@
 
 package com.hooview.app.activity.user;
 
-import java.io.File;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -25,8 +23,7 @@ import android.widget.TextView;
 
 import com.easyvaas.common.bottomsheet.BottomSheet;
 import com.easyvaas.common.sharelogin.data.ShareConstants;
-
-import com.hooview.app.activity.home.HomeTabActivity;
+import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.user.User;
 import com.hooview.app.net.ApiConstant;
@@ -39,6 +36,8 @@ import com.hooview.app.utils.DateTimeUtil;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.UserUtil;
 import com.hooview.app.utils.Utils;
+
+import java.io.File;
 
 public class UserInfoSnsActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = UserInfoSnsActivity.class.getSimpleName();
@@ -303,7 +302,8 @@ public class UserInfoSnsActivity extends BaseActivity implements View.OnClickLis
                                                 BitmapFactory.decodeFile(sdcardTempPic.getAbsolutePath()));
                                         user.setLogourl(sdcardTempPic.getAbsolutePath());
                                     }
-                                    startActivity(new Intent(getApplicationContext(), HomeTabActivity.class));
+                                    //TODO 替换之前的HomeTabActivity的入口
+                                    startActivity(new Intent(getApplicationContext(), HooViewHomeActivity.class));
                                     finish();
                                     UserUtil.handleAfterLogin(getApplicationContext(), user,
                                             "RegisterByAuth");

@@ -6,8 +6,6 @@
 
 package com.hooview.app.activity.user;
 
-import java.io.File;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -32,8 +30,7 @@ import android.widget.TextView;
 
 import com.easyvaas.common.bottomsheet.BottomSheet;
 import com.easyvaas.common.sharelogin.data.ShareConstants;
-
-import com.hooview.app.activity.home.HomeTabActivity;
+import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.app.EVApplication;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.user.User;
@@ -48,6 +45,8 @@ import com.hooview.app.utils.DateTimeUtil;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.UserUtil;
 import com.hooview.app.utils.Utils;
+
+import java.io.File;
 
 public class UserInfoActivity extends BaseActivity implements View.OnClickListener {
     private static final int REQUEST_CODE_CITY = 0X10;
@@ -370,7 +369,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     uploadTask.execute(uploadUrl, BitmapFactory.decodeFile(mTempLogoPic.getAbsolutePath()));
                     user.setLogourl(mTempLogoPic.getAbsolutePath());
                 }
-                startActivity(new Intent(UserInfoActivity.this, HomeTabActivity.class));
+                //TODO 替换之前的HomeTabActivity的入口
+                startActivity(new Intent(UserInfoActivity.this, HooViewHomeActivity.class));
                 finish();
                 UserUtil.handleAfterLogin(getApplicationContext(), user, "RegisterByPhone");
             }

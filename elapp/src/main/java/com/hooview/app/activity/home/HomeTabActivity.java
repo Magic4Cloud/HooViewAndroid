@@ -18,11 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 
 import com.easemob.chat.EMChatManager;
-
 import com.easyvaas.common.chat.ChatManager;
-
 import com.hooview.app.R;
-import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.activity.home.fragment.TabMessageFragment;
 import com.hooview.app.activity.home.fragment.TabMyFragment;
 import com.hooview.app.activity.home.fragment.TabTimelineMainFragment;
@@ -190,12 +187,12 @@ public class HomeTabActivity extends BaseFragmentActivity {
         }
         showTabByTag(TAB_TAG_TIMELINE);
 
-        findViewById(R.id.enterHome).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HooViewHomeActivity.launch(HomeTabActivity.this);
-            }
-        });
+//        findViewById(R.id.enterHome).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                HooViewHomeActivity.launch(HomeTabActivity.this);
+//            }
+//        });
     }
 
     @Override
@@ -254,7 +251,9 @@ public class HomeTabActivity extends BaseFragmentActivity {
         }
     }
 
-    @Override
+
+
+    //TODO
     protected void onDestroy() {
         super.onDestroy();
         if (mReceiver != null) {

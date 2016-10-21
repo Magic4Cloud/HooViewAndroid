@@ -6,13 +6,6 @@
 
 package com.hooview.app.live.activity;
 
-import java.io.File;
-import java.lang.ref.SoftReference;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import android.animation.AnimatorInflater;
 import android.animation.LayoutTransition;
 import android.app.Dialog;
@@ -45,37 +38,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import rx.functions.Action1;
-
-import com.hooview.app.activity.home.HomeTabActivity;
-import com.hooview.app.adapter.WatchingUserAdapter;
-import com.hooview.app.adapter.item.CommentAdapterItem;
-import com.hooview.app.adapter.recycler.CommentRcvAdapter;
-import com.hooview.app.base.BasePlayerActivity;
-import com.hooview.app.bean.chat.ChatBarrage;
-import com.hooview.app.bean.chat.ChatComment;
-import com.hooview.app.bean.chat.ChatRedPackInfo;
-import com.hooview.app.bean.pay.MyAssetEntity;
-import com.hooview.app.bean.video.VideoEntity;
-import com.hooview.app.db.Preferences;
-import com.hooview.app.live.chat.ChatHelper;
-import com.hooview.app.live.chat.IChatHelper;
-import com.hooview.app.live.manager.LiveRoomManager;
-import com.hooview.app.net.ApiHelper;
-import com.hooview.app.net.MyRequestCallBack;
-import com.hooview.app.net.RequestUtil;
-import com.hooview.app.utils.Constants;
-import com.hooview.app.utils.DateTimeUtil;
-import com.hooview.app.utils.DialogUtil;
-import com.hooview.app.utils.FileUtil;
-import com.hooview.app.utils.NetworkUtil;
-import com.hooview.app.utils.Utils;
-import com.hooview.app.utils.ViewUtil;
-import com.hooview.app.utils.blur.StackBlurManager;
-import com.hooview.app.view.BarrageAnimationView;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
 import com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar;
 import com.easyvaas.common.emoji.utils.EmoticonsUtils;
 import com.easyvaas.common.gift.GiftManager;
@@ -88,16 +50,52 @@ import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
 import com.easyvaas.common.widget.MyRecyclerView;
 import com.easyvaas.common.widget.MyUserPhoto;
-
+import com.hooview.app.activity.HooViewHomeActivity;
+import com.hooview.app.activity.pay.CashInActivity;
+import com.hooview.app.adapter.WatchingUserAdapter;
+import com.hooview.app.adapter.item.CommentAdapterItem;
+import com.hooview.app.adapter.recycler.CommentRcvAdapter;
 import com.hooview.app.app.EVApplication;
+import com.hooview.app.base.BasePlayerActivity;
+import com.hooview.app.bean.chat.ChatBarrage;
+import com.hooview.app.bean.chat.ChatComment;
+import com.hooview.app.bean.chat.ChatRedPackInfo;
 import com.hooview.app.bean.chat.ChatUser;
 import com.hooview.app.bean.chat.ChatVideoInfo;
+import com.hooview.app.bean.pay.MyAssetEntity;
 import com.hooview.app.bean.user.User;
+import com.hooview.app.bean.video.VideoEntity;
+import com.hooview.app.db.Preferences;
+import com.hooview.app.live.chat.ChatHelper;
+import com.hooview.app.live.chat.IChatHelper;
+import com.hooview.app.live.manager.LiveRoomManager;
 import com.hooview.app.live.manager.LiveRoomShutUpUtil;
-import com.hooview.app.activity.pay.CashInActivity;
+import com.hooview.app.net.ApiHelper;
+import com.hooview.app.net.MyRequestCallBack;
+import com.hooview.app.net.RequestUtil;
+import com.hooview.app.utils.Constants;
+import com.hooview.app.utils.DateTimeUtil;
+import com.hooview.app.utils.DialogUtil;
+import com.hooview.app.utils.FileUtil;
+import com.hooview.app.utils.NetworkUtil;
 import com.hooview.app.utils.ShareHelper;
 import com.hooview.app.utils.SingleToast;
+import com.hooview.app.utils.Utils;
+import com.hooview.app.utils.ViewUtil;
+import com.hooview.app.utils.blur.StackBlurManager;
+import com.hooview.app.view.BarrageAnimationView;
 import com.hooview.app.view.bubble.BubbleView;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.File;
+import java.lang.ref.SoftReference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import rx.functions.Action1;
 
 class LiveRoomBaseActivity extends BasePlayerActivity
         implements View.OnClickListener, IChatHelper.ChatCallback {
@@ -983,7 +981,8 @@ class LiveRoomBaseActivity extends BasePlayerActivity
         if ((getIntent().getBooleanExtra(Constants.EXTRA_KEY_IS_FROM_SPLASH, false)
                 || getIntent().getBooleanExtra(Constants.EXTRA_KEY_IS_FROM_PUSH, false))
                 && !EVApplication.getApp().isHaveLaunchedHome()) {
-            Intent intent = new Intent(this, HomeTabActivity.class);
+            //TODO 替换之前的HomeTabActivity的入口
+            Intent intent = new Intent(this, HooViewHomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }

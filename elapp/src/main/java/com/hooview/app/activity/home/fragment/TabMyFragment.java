@@ -6,14 +6,19 @@
 
 package com.hooview.app.activity.home.fragment;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.bottomsheet.BottomSheet;
@@ -22,7 +27,9 @@ import com.easyvaas.common.sharelogin.data.ShareConstants;
 import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
 import com.easyvaas.common.widget.MyUserPhoto;
-
+import com.hooview.app.R;
+import com.hooview.app.activity.pay.CashInActivity;
+import com.hooview.app.activity.pay.MyProfitActivity;
 import com.hooview.app.activity.user.FansListActivity;
 import com.hooview.app.activity.user.FollowersListActivity;
 import com.hooview.app.activity.user.SettingActivity;
@@ -32,11 +39,10 @@ import com.hooview.app.app.EVApplication;
 import com.hooview.app.base.BaseFragment;
 import com.hooview.app.bean.user.User;
 import com.hooview.app.db.Preferences;
+import com.hooview.app.live.activity.LivePrepareActivity;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.net.MyRequestCallBack;
 import com.hooview.app.net.RequestUtil;
-import com.hooview.app.activity.pay.CashInActivity;
-import com.hooview.app.activity.pay.MyProfitActivity;
 import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.Logger;
 import com.hooview.app.utils.ShareHelper;
@@ -63,6 +69,10 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
     protected int mShareType;
     protected static final int SHARE_TYPE_COPY = com.hooview.app.R.id.menu_share_copy_url;
 
+    //控制是否可以进行直播
+    private boolean canLive;
+    private RelativeLayout rl_live;
+    private SharedPreferences sp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,7 +137,17 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
         mView.findViewById(com.hooview.app.R.id.item_cash_in_rl).setOnClickListener(this);
         mView.findViewById(com.hooview.app.R.id.item_message_notice_rl).setOnClickListener(this);
         mView.findViewById(com.hooview.app.R.id.item_my_profit_rl).setOnClickListener(this);
+        rl_live = (RelativeLayout) mView.findViewById(R.id.item_live_rl);
+        rl_live.setOnClickListener(this);
 
+
+        //设置直播功能是否可见
+        sp = getActivity().getSharedPreferences("config", Context.MODE_PRIVATE);
+        if (sp.getBoolean("live", false)) {
+            rl_live.setVisibility(View.VISIBLE);
+        } else {
+            rl_live.setVisibility(View.GONE);
+        }
     }
 
     private void initUserInfo(final User user) {
@@ -158,7 +178,7 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
             mVideoCountTv.setText(user.getVideo_count() + "");
             mFansCountTv.setText(user.getFans_count() + "");
             mFollowerCountTv.setText(user.getFollow_count() + "");
-            Button editUserProfile= (Button) mView.findViewById(com.hooview.app.R.id.mine_set_remarks_tv);
+            Button editUserProfile = (Button) mView.findViewById(com.hooview.app.R.id.mine_set_remarks_tv);
             editUserProfile.setText(getString(com.hooview.app.R.string.edit_user_profile));
             editUserProfile.setVisibility(View.VISIBLE);
             editUserProfile.setOnClickListener(this);
@@ -202,6 +222,9 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
             case com.hooview.app.R.id.operation_action_iv:
                 showShareUserInfoPanel();
                 break;
+            case R.id.item_live_rl:
+                showIsLiveDialog();
+                break;
             case com.hooview.app.R.id.item_cash_in_rl:
                 startActivity(new Intent(getActivity(), CashInActivity.class));
                 break;
@@ -231,6 +254,15 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onSuccess(User result) {
                 EVApplication.setUser(result);
+
+                //是否可以进行直播
+                canLive = result.getJurisdiction() == 1 ? true : false;
+                if (canLive) {
+                    rl_live.setVisibility(View.VISIBLE);
+                } else {
+                    rl_live.setVisibility(View.GONE);
+                }
+
                 initUserInfo(result);
             }
 
@@ -245,5 +277,33 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
                 RequestUtil.handleRequestFailed(msg);
             }
         });
+    }
+
+    //弹出是否进行直播的提示框
+    private void showIsLiveDialog() {
+        final Dialog dialog = new AlertDialog.Builder(getActivity()).create();
+        View view = View.inflate(getActivity(), R.layout.dialog_is_start_live, null);
+        dialog.show();
+        dialog.getWindow().setContentView(view);
+
+        view.findViewById(R.id.dialog_sure_live).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startToLive();
+                dialog.dismiss();
+            }
+        });
+        view.findViewById(R.id.dialog_cancel_live).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+    private void startToLive() {
+        startActivity(new Intent(getActivity().getApplicationContext(), LivePrepareActivity.class));
+        //mStartRecordCount++;
     }
 }

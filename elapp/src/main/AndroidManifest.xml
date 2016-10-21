@@ -113,7 +113,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.home.HomeTabActivity" />
+                android:value=".activity.HooViewHomeActivity" />
         </activity>
         <activity
             android:name=".activity.user.UserInfoEditActivity"
@@ -129,7 +129,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.home.HomeTabActivity" />
+                android:value=".activity.HooViewHomeActivity" />
         </activity>
         <activity
             android:name=".activity.setting.BindPhoneActivity"
@@ -164,7 +164,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.home.HomeTabActivity" />
+                android:value=".activity.HooViewHomeActivity" />
         </activity>
         <activity
             android:name=".activity.setting.AboutYishiyunActivity"
@@ -206,7 +206,7 @@
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activity.home.MessageListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -293,7 +293,7 @@
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <!-- Required SDK核心功能 -->
         <activity
@@ -312,7 +312,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
@@ -397,7 +397,7 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <service android:name="com.easyvaas.sdk.live.base.streamer.StreamerService" />
         <service android:name="com.easyvaas.sdk.core.service.ResourceMonitorService" />
@@ -408,10 +408,16 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".activity.HooViewHomeActivity"
+        <activity
+            android:name=".activity.HooViewHomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+            android:launchMode="singleTask"
+            />
+        <activity
+            android:name=".activity.account.AccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

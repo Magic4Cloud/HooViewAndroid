@@ -21,7 +21,6 @@ import com.easyvaas.common.emoji.utils.EmoticonsUtils;
 import com.easyvaas.common.sharelogin.ShareBlock;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hooview.app.activity.home.HomeTabActivity;
 import com.hooview.app.activity.login.LoginMainActivity;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.UpdateInfoEntity;
@@ -99,7 +98,9 @@ public class SplashActivity extends BaseActivity {
                     }
                     activity.finish();
                     if (activity.mIsLogin) {
-                        Intent intent = new Intent(activity, HomeTabActivity.class);
+
+                        //TODO 替换之前的HomeTabActivity的入口
+                        Intent intent = new Intent(activity, HooViewHomeActivity.class);
                         intent.putExtra(Constants.EXTRA_KEY_IS_FROM_SPLASH, true);
                         Uri uri = activity.getIntent().getData();
                         if (uri != null) {

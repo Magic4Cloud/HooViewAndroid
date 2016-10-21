@@ -6,21 +6,17 @@
 
 package com.hooview.app.adapter.item;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.google.gson.Gson;
-
 import com.easyvaas.common.adapter.AdapterItem;
 import com.easyvaas.common.imageslider.SliderLayout;
 import com.easyvaas.common.imageslider.SliderTypes.BaseSliderView;
 import com.easyvaas.common.imageslider.SliderTypes.TextSliderView;
-
+import com.google.gson.Gson;
 import com.hooview.app.activity.WebViewActivity;
 import com.hooview.app.bean.CarouselInfoEntity;
 import com.hooview.app.bean.CarouselInfoEntityArray;
@@ -29,6 +25,8 @@ import com.hooview.app.net.ApiHelper;
 import com.hooview.app.net.MyRequestCallBack;
 import com.hooview.app.net.RequestUtil;
 import com.hooview.app.utils.Constants;
+
+import java.util.List;
 
 public class HeaderSliderAdapterItem implements AdapterItem {
     private static final String EXTRA_TYPE = "extra_type";
@@ -93,6 +91,7 @@ public class HeaderSliderAdapterItem implements AdapterItem {
 
     }
 
+    //banner的数据
     private void loadCarouseInfo() {
         ApiHelper.getInstance().getCarouseInfo(new MyRequestCallBack<CarouselInfoEntityArray>() {
             @Override

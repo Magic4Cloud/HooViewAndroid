@@ -5,7 +5,7 @@
   -->
 
 <resources>
-    <string name="app_name">易视云</string>
+    <string name="app_name">火眼财经</string>
     <string name="splash_next_step">跳过</string>
     <string name="splash_time_countdown">倒计时：%1$s秒</string>
 
@@ -99,7 +99,7 @@
     <string name="my_settings">我的设置</string>
     <string name="logout">退出登录</string>
     <string name="about_us">关于</string>
-    <string name="about_us_app">关于易视云</string>
+    <string name="about_us_app">关于火眼财经</string>
     <string name="feedback">意见反馈</string>
     <string name="contact_us">联系我们</string>
     <string name="seizure_account">封号处理准则</string>
@@ -179,7 +179,7 @@
     <string name="msg_unbind_success">解除绑定成功</string>
     <string name="msg_sns_auth_failed">%1$s认证失败</string>
     <string name="msg_version_is_the_latest">您的应用已经是最新版本</string>
-    <string name="msg_click_again_to_exit">再按一次退出易视云</string>
+    <string name="msg_click_again_to_exit">再按一次退出火眼财经</string>
     <string name="msg_should_reply_self">自己不能回复自己</string>
     <string name="msg_alert_no_sd_card">未找到存储卡，无法存储照片！</string>
     <string name="msg_no_permission_read_contacts">已被禁示权限：读取联系人。可在权限管理重新授权。</string>
@@ -579,5 +579,8 @@
 
     <!--新版本的字符串-->
     <string name="hooview">火眼财经</string>
+
+    <string name="test_new">测试测试测试测试测试测试测试测试是测试测试测试测试测试测试测试测试测试测试测试测试是测试测试测试测试</string>
+    <string name="my_live">我的直播</string>
 
 </resources>

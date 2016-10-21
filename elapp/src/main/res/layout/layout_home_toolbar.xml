@@ -9,22 +9,25 @@
         android:layout_height="56dp"
         android:background="@color/hv662d80">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/iv_account"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="18dp"
             android:background="@drawable/selector_home_account" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="60dp"
+            android:gravity="center_vertical"
             android:text="@string/hooview"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:gravity="center_vertical"
-            />
-        <ImageView
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/iv_search"
             android:layout_width="26dp"
             android:layout_height="26dp"
             android:layout_alignParentRight="true"

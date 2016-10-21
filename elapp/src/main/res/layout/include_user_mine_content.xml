@@ -1,117 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
-    <ImageView
-        style="@style/default_horizontal_line_style"/>
+        android:layout_height="10dp" />
+
+    <ImageView style="@style/default_horizontal_line_style" />
+
     <ImageView
         style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp" />
+
+    <RelativeLayout
+        android:id="@+id/item_live_rl"
+        style="@style/item_my_setting">
+
+        <ImageView
+            android:id="@+id/share_live_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/account_start_live" />
+
+        <TextView
+            android:id="@+id/share_live_title_tv"
+            style="@style/item_my_setting_title"
+            android:layout_toRightOf="@id/share_live_iv"
+            android:text="@string/my_live" />
+
+        <ImageView
+            android:id="@+id/share_live_arrow_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right_personal_more" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/item_share_live_divider_iv"
+        style="@style/default_horizontal_line_style"
+        android:layout_marginLeft="15dp" />
+
     <RelativeLayout
         android:id="@+id/item_cash_in_rl"
         style="@style/item_my_setting">
+
         <ImageView
             android:id="@+id/share_yzb_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_recharge"/>
+            android:src="@drawable/personal_icon_recharge" />
+
         <TextView
             android:id="@+id/share_yzb_title_tv"
-            android:layout_toRightOf="@id/share_yzb_iv"
             style="@style/item_my_setting_title"
-            android:text="@string/cloud_icon_cash_in"/>
+            android:layout_toRightOf="@id/share_yzb_iv"
+            android:text="@string/cloud_icon_cash_in" />
+
         <ImageView
             android:id="@+id/share_yzb_arrow_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_personal_more"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right_personal_more" />
     </RelativeLayout>
+
     <ImageView
         android:id="@+id/item_share_yzb_divider_iv"
         style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp" />
+
     <RelativeLayout
         android:id="@+id/item_my_profit_rl"
         style="@style/item_my_setting">
+
         <ImageView
             android:id="@+id/my_profit_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_money"/>
+            android:src="@drawable/personal_icon_money" />
+
         <TextView
             android:id="@+id/my_profit_title_tv"
-            android:layout_toRightOf="@id/my_profit_iv"
             style="@style/item_my_setting_title"
-            android:text="@string/my_profit"/>
+            android:layout_toRightOf="@id/my_profit_iv"
+            android:text="@string/my_profit" />
+
         <ImageView
             android:id="@+id/my_profit_arrow_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_personal_more"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right_personal_more" />
     </RelativeLayout>
-    <ImageView
-        style="@style/default_horizontal_line_style"/>
+
+    <ImageView style="@style/default_horizontal_line_style" />
+
     <RelativeLayout
         android:id="@+id/item_message_notice_rl"
         style="@style/item_my_setting">
+
         <ImageView
             android:id="@+id/push_message_notice_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_setting"/>
+            android:src="@drawable/personal_icon_setting" />
+
         <TextView
             android:id="@+id/push_message_notice_tv"
             style="@style/item_my_setting_title"
             android:layout_toRightOf="@id/push_message_notice_iv"
-            android:text="@string/settings"/>
+            android:text="@string/settings" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_personal_more"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right_personal_more" />
     </RelativeLayout>
-    <ImageView
-        style="@style/default_horizontal_line_style"/>
+
+    <ImageView style="@style/default_horizontal_line_style" />
 
     <RelativeLayout
         android:id="@+id/item_location_set_rl"
-        android:visibility="gone"
-        style="@style/item_my_setting">
+        style="@style/item_my_setting"
+        android:visibility="gone">
+
         <ImageView
             android:id="@+id/location_toggle_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_gps"/>
+            android:src="@drawable/personal_icon_gps" />
+
         <TextView
             android:id="@+id/location_toggle_tv"
             style="@style/item_my_setting_title"
             android:layout_toRightOf="@id/location_toggle_iv"
-            android:text="@string/public_my_location"/>
+            android:text="@string/public_my_location" />
+
         <ToggleButton
             android:id="@+id/location_toggle_tb"
+            style="@style/toggle_button"
             android:layout_alignParentRight="true"
-            android:checked="true"
-            style="@style/toggle_button"/>
+            android:checked="true" />
     </RelativeLayout>
 </LinearLayout>

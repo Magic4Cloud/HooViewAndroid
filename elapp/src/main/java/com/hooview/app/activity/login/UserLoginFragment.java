@@ -6,7 +6,9 @@
 
 package com.hooview.app.activity.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -20,7 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hooview.app.activity.home.HomeTabActivity;
+import com.hooview.app.activity.HooViewHomeActivity;
 import com.hooview.app.activity.setting.CountryCodeListActivity;
 import com.hooview.app.base.BaseFragment;
 import com.hooview.app.bean.user.User;
@@ -43,9 +45,12 @@ public class UserLoginFragment extends BaseFragment implements View.OnClickListe
     private TextView mCountryNameTv;
     private TextView mCountryCodeTv;
 
+    private SharedPreferences sp;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(com.hooview.app.R.layout.fragment_login, container, false);
+        sp = getActivity().getSharedPreferences("config", Context.MODE_APPEND);
 
         final ImageView clearPhoneNumberIv = (ImageView) view.findViewById(com.hooview.app.R.id.clear_phone_number_iv);
         final ImageView clearPasswordIv = (ImageView) view.findViewById(com.hooview.app.R.id.clear_password_iv);
@@ -191,13 +196,22 @@ public class UserLoginFragment extends BaseFragment implements View.OnClickListe
         loginByPhone(phone, password);
     }
 
+    /**
+     * 请求数据
+     *
+     * @param phone    电话号码
+     * @param password 密码
+     */
     private void loginByPhone(String phone, String password) {
         ApiHelper.getInstance().loginByPhone(phone, password, new MyRequestCallBack<User>() {
             @Override
             public void onSuccess(User user) {
                 dismissLoadingDialog();
+
+                //TODO 替换之前的HomeTabActivity的入口
                 if (getActivity() != null) {
-                    startActivity(new Intent(getActivity(), HomeTabActivity.class));
+                    sp.edit().putBoolean("live", user.getJurisdiction() == 0 ? false : true).commit();
+                    startActivity(new Intent(getActivity(), HooViewHomeActivity.class));
                     getActivity().finish();
                     UserUtil.handleAfterLogin(getActivity(), user, "LoginByPhone");
                 }

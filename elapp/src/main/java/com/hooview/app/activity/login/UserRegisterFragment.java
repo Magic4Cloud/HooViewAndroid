@@ -6,8 +6,6 @@
 
 package com.hooview.app.activity.login;
 
-import java.security.NoSuchAlgorithmException;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.TimeButton;
-
 import com.hooview.app.activity.setting.CountryCodeListActivity;
 import com.hooview.app.activity.user.UserInfoActivity;
 import com.hooview.app.base.BaseFragment;
@@ -47,6 +44,8 @@ import com.hooview.app.utils.NetworkUtil;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.Utils;
 import com.hooview.app.utils.ValidateParam;
+
+import java.security.NoSuchAlgorithmException;
 
 public class UserRegisterFragment extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "UserRegisterFragment";
@@ -235,7 +234,7 @@ public class UserRegisterFragment extends BaseFragment implements View.OnClickLi
                     @Override
                     public void updateDrawState(TextPaint ds) {
                         super.updateDrawState(ds);
-                        ds.setColor(getResources().getColor(com.hooview.app.R.color.login_btn_color));
+                        ds.setColor(getResources().getColor(com.hooview.app.R.color.hv662d80));
                         ds.setUnderlineText(false);
                     }
                 }, content.length()-4, content.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
