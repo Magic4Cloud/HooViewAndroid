@@ -17,7 +17,6 @@ public class HomeMessageTabFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         TextView tv = new TextView(getActivity());
-        tv.setText("HomeMesssage");
         return tv;
     }
 }

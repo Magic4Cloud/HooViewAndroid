@@ -45,7 +45,6 @@ public class HooViewHomeActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         EVApplication.getApp().setHaveLaunchedHome(true);
 
-        setContentView(R.layout.activity_home);
         setContentView(R.layout.activity_hoo_view_home);
         ButterKnife.bind(this);
         init();

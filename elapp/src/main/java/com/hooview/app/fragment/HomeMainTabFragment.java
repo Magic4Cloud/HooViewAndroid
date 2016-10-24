@@ -215,8 +215,7 @@ public class HomeMainTabFragment extends BaseFragment {
                 return new HomeHeaderSliderHolder();
             }
         }, array.getObjects())    //设置需要切换的View
-                .setPointViewVisible(true)    //设置指示器是否可见
-                .startTurning(5000).setOnItemClickListener(new OnItemClickListener() {
+                .setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
 
@@ -239,7 +238,13 @@ public class HomeMainTabFragment extends BaseFragment {
                 }
             }
         });
-
+        if(array.getCount() < 2) {
+            convenientBanner.setCanLoop(false);
+            convenientBanner.setPointViewVisible(false);
+        } else {
+            convenientBanner.setPointViewVisible(true)    //设置指示器是否可见
+                    .startTurning(5000);
+        }
 
         convenientBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

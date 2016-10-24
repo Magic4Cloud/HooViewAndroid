@@ -33,6 +33,9 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.lang.ref.SoftReference;
 
+/**
+ * activity的基类
+ */
 public abstract class BaseActivity extends AppCompatActivity {
     private SystemBarTintManager mTintManager;
     private Dialog mLoadingDialog;
