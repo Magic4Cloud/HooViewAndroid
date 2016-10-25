@@ -31,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -711,10 +710,10 @@ class LiveRoomBaseActivity extends BasePlayerActivity
             if (motionEvent.getX() - motionEvent1.getX() > 120) {
                 if (mViewSize < 1) {
                     mViewSize++;
-                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
-                            com.hooview.app.R.anim.pannel_right_in));
-                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
-                            com.hooview.app.R.anim.pannel_left_out));
+//                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+//                            com.hooview.app.R.anim.pannel_right_in));
+//                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+//                            com.hooview.app.R.anim.pannel_left_out));
                     mViewFlipper.showNext();
                     mBubbleView.setEnabled(false);
                 }
@@ -722,10 +721,10 @@ class LiveRoomBaseActivity extends BasePlayerActivity
             } else if (motionEvent.getX() - motionEvent1.getX() < -120) {
                 if (mViewSize > 0) {
                     mViewSize--;
-                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
-                            com.hooview.app.R.anim.pannel_left_in));
-                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
-                            com.hooview.app.R.anim.pannel_right_out));
+//                    mViewFlipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+//                            com.hooview.app.R.anim.pannel_left_in));
+//                    mViewFlipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(),
+//                            com.hooview.app.R.anim.pannel_right_out));
                     mViewFlipper.showPrevious();
                     if (mCurrentVideo != null && !mCurrentVideo.getName()
                             .equals(Preferences.getInstance(getApplicationContext()).getUserNumber())) {

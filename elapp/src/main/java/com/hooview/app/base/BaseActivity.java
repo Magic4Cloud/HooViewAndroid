@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.easyvaas.common.emoji.utils.EmoticonsUtils;
+import com.hooview.app.R;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.utils.DialogUtil;
 import com.hooview.app.utils.Utils;
@@ -88,6 +89,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                 // mTintManager.setStatusBarTintResource(R.color.action_bar_bg);
             }
         }
+        //设置转场动画
+        overridePendingTransition(R.anim.pannel_right_in,R.anim.pannel_left_out);
     }
 
     protected void showActionBar(boolean isShow, View rootView) {
