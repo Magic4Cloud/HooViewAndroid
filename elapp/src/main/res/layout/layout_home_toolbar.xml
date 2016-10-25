@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/hv662d80">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/hv662d80">
+        android:layout_height="?attr/actionBarSize" />
 
-        <ImageButton
-            android:id="@+id/iv_account"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="18dp"
-            android:background="@drawable/selector_home_account" />
+    <ImageButton
+        android:id="@+id/iv_account"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="18dp"
+        android:background="@drawable/selector_home_account" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="60dp"
-            android:gravity="center_vertical"
-            android:text="@string/hooview"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="60dp"
+        android:gravity="center_vertical"
+        android:text="@string/hooview"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-        <ImageButton
-            android:id="@+id/iv_search"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="18dp"
-            android:background="@drawable/selector_home_search" />
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/iv_search"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/selector_home_search" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/actionbar_shadow_height"
+        android:layout_marginTop="?attr/actionBarSize"
         android:background="@drawable/shape_toolbar_shadow" />
+</RelativeLayout>
 
-</LinearLayout>

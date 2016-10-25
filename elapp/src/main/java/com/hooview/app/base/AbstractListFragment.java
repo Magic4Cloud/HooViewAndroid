@@ -6,26 +6,29 @@
 
 package com.hooview.app.base;
 
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.easyvaas.common.widget.EmptyView;
-
 import com.hooview.app.bean.user.UserEntity;
 import com.hooview.app.bean.video.VideoEntity;
 import com.hooview.app.net.ApiConstant;
 import com.hooview.app.utils.Constants;
+
+import java.util.List;
 
 public abstract class AbstractListFragment extends BaseFragment {
 
     protected EmptyView mEmptyView;
     protected View mTapTopView;
     protected boolean mIsUserTapTopView;
+
+    //下一页index
     protected int mNextPageIndex;
+
+    //是否加载更多
     protected boolean mIsLoadingMore;
 
     protected View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
@@ -120,7 +123,7 @@ public abstract class AbstractListFragment extends BaseFragment {
 
     protected abstract void initListView();
 
-    protected void loadData(boolean isLoadMore){
+    protected void loadData(boolean isLoadMore) {
         if (mIsLoadingMore) {
             return;
         }

@@ -6,12 +6,16 @@
 
 package com.hooview.app.net;
 
-import java.lang.reflect.Type;
-
 import com.google.gson.Gson;
-
 import com.hooview.app.utils.Logger;
 
+import java.lang.reflect.Type;
+
+/**
+ * 请求回调,GSON解析json
+ *
+ * @param <T> entity类
+ */
 public abstract class MyRequestCallBack<T> {
     private static final String TAG = "RequestCallBack";
 
@@ -40,7 +44,7 @@ public abstract class MyRequestCallBack<T> {
     }
 
     protected void parseGson(String json, Type type) {
-        onSuccess((T)(new Gson().fromJson(json, type)));
+        onSuccess((T) (new Gson().fromJson(json, type)));
     }
 
     public abstract void onSuccess(T result);

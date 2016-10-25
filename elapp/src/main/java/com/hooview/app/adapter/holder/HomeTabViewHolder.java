@@ -5,12 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hooview.app.R;
 import com.hooview.app.bean.video.VideoEntity;
+import com.hooview.app.utils.DateTimeUtil;
 import com.hooview.app.utils.PicassoUtil;
 import com.hooview.app.utils.Utils;
+import com.hooview.app.utils.ViewUtil;
 import com.hooview.app.view.RoundRectangleImageView;
 
 /**
@@ -41,11 +44,11 @@ public class HomeTabViewHolder extends RecyclerView.ViewHolder {
         ivHeader = (ImageView) itemView.findViewById(R.id.iv_header);
 
         //动态设置封面的高度
-        //RelativeLayout.LayoutParams layoutParams = rectangleView.
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)rectangleView.getLayoutParams();
         //layoutParams.width = ScreenUtil.getLiveInUgcItemWidth(context, recyclerViewWidth);
-//        layoutParams.width = (int) ViewUtil.getScreenWidth(context);
-//        layoutParams.height = layoutParams.width;
-//        itemView.setLayoutParams(layoutParams);
+        layoutParams.width = (int) ViewUtil.getScreenWidth(context);
+        layoutParams.height = layoutParams.width + 100;
+        itemView.setLayoutParams(layoutParams);
     }
 
     //绑定数据
@@ -57,7 +60,7 @@ public class HomeTabViewHolder extends RecyclerView.ViewHolder {
             tvName.setText(entity.getNickname());
         }
         if (entity.getLive_start_time() != null) {
-            tvTime.setText(entity.getLive_start_time());
+            tvTime.setText(DateTimeUtil.getSimpleTime(context,entity.getLive_start_time_span()));
         }
         if (entity.getThumb() != null) {
             PicassoUtil.loadPlaceholder(context, entity.getThumb(), R.drawable.square_holder_view).into(rectangleView);

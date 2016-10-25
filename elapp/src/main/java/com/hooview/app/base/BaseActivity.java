@@ -40,6 +40,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private SystemBarTintManager mTintManager;
     private Dialog mLoadingDialog;
     private long mStartShowTime;
+
+    //用于友盟分析
     protected boolean mIsFragmentActivity;
     protected boolean mIsCancelRequestAfterDestroy = true;
     protected boolean mIsActionBarColorStatusBar = false;

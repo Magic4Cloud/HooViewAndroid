@@ -216,29 +216,29 @@ public class HomeMainTabFragment extends BaseFragment {
             }
         }, array.getObjects())    //设置需要切换的View
                 .setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
+                    @Override
+                    public void onItemClick(int position) {
 
-                Bundle bundle = new Bundle();
-                //int type = bundle.getInt(EXTRA_TYPE, -1);
-                String keyValue = bundle.getString(EXTRA_KEY);
-                Intent intent = null;
-                int type = array.getObjects().get(position).getContent().getType();
-                String title = array.getObjects().get(position).getContent().getData().getTitle();
-                String url = array.getObjects().get(position).getContent().getData().getWeb_url();
-                if (type == CarouselInfoEntity.TYPE_WEB) {
-                    intent = new Intent(getActivity(), WebViewActivity.class);
-                    intent.putExtra(WebViewActivity.EXTRA_KEY_TYPE, WebViewActivity.TYPE_ACTIVITY);
-                    intent.putExtra(WebViewActivity.EXTRA_KEY_URL, url);
-                    intent.putExtra(Constants.EXTRA_KEY_TITLE, title);
-                }
-                if (intent != null) {
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getActivity().startActivity(intent);
-                }
-            }
-        });
-        if(array.getCount() < 2) {
+                        Bundle bundle = new Bundle();
+                        //int type = bundle.getInt(EXTRA_TYPE, -1);
+                        String keyValue = bundle.getString(EXTRA_KEY);
+                        Intent intent = null;
+                        int type = array.getObjects().get(position).getContent().getType();
+                        String title = array.getObjects().get(position).getContent().getData().getTitle();
+                        String url = array.getObjects().get(position).getContent().getData().getWeb_url();
+                        if (type == CarouselInfoEntity.TYPE_WEB) {
+                            intent = new Intent(getActivity(), WebViewActivity.class);
+                            intent.putExtra(WebViewActivity.EXTRA_KEY_TYPE, WebViewActivity.TYPE_ACTIVITY);
+                            intent.putExtra(WebViewActivity.EXTRA_KEY_URL, url);
+                            intent.putExtra(Constants.EXTRA_KEY_TITLE, title);
+                        }
+                        if (intent != null) {
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            getActivity().startActivity(intent);
+                        }
+                    }
+                });
+        if (array.getCount() < 2) {
             convenientBanner.setCanLoop(false);
             convenientBanner.setPointViewVisible(false);
         } else {
