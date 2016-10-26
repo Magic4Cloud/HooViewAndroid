@@ -161,12 +161,12 @@ public class HomeMessageTabFragment extends BaseRvcFragment {
         mAdapter.setOnCreateContextMenuListener(this);
         mChatMessageReceiver = new ChatMessageReceiver();
 
-//        view.findViewById(com.hooview.app.R.id.create_group_tv).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                gotoChatGroupList(true);
-//            }
-//        });
+        view.findViewById(com.hooview.app.R.id.create_group_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               gotoChatGroupList(true);
+            }
+        });
 
         mPullToLoadRcvView.getSwipeRefreshLayout().setColorSchemeResources(R.color.hv662d80, R.color.hv662d80, R.color.hv662d80);
         return view;

@@ -6,13 +6,6 @@
 
 package com.hooview.app.activity.user;
 
-import java.io.File;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,12 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.easyvaas.common.chat.ChatManager;
 import com.easyvaas.common.feedback.FeedbackHelper;
-
 import com.hooview.app.activity.WebViewActivity;
 import com.hooview.app.activity.login.LoginMainActivity;
 import com.hooview.app.activity.setting.AboutActivity;
@@ -51,6 +40,16 @@ import com.hooview.app.utils.DialogUtil;
 import com.hooview.app.utils.FileUtil;
 import com.hooview.app.utils.StringUtil;
 import com.hooview.app.utils.UpdateManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
     private final int REQUEST_CODE_LIVE_PUSH_STATE = 1;

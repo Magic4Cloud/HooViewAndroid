@@ -20,19 +20,25 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    private HomeMainTabFragment mMainFragment = new HomeMainTabFragment();
+
+    private HomeMessageTabFragment mMessageFragment = new HomeMessageTabFragment();
+
     @Override
     public Fragment getItem(int position) {
-        Fragment mFragment = null;
         if (position == 0) {
-            mFragment = new HomeMainTabFragment();
+            return mMainFragment;
         } else {
-            mFragment = new HomeMessageTabFragment();
+            return mMessageFragment;
         }
-        return mFragment;
     }
 
     @Override
     public int getCount() {
         return PAGER_COUNT;
+    }
+
+    public HomeMainTabFragment getMainFragment() {
+        return mMainFragment;
     }
 }

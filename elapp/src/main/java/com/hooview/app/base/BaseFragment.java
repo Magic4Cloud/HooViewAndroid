@@ -65,4 +65,8 @@ public class BaseFragment extends Fragment {
             mLoadingDialog.dismiss();
         }
     }
+
+    public boolean isFragmentActive() {
+        return getActivity() != null && !isDetached() && isAdded();
+    }
 }

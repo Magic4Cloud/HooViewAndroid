@@ -9,7 +9,7 @@
     <item android:state_enabled="false">
         <shape>
             <solid
-                android:color="@color/hv662d80"/>
+                android:color="@color/color_main_pressed"/>
             <corners
                 android:radius="3dp"/>
         </shape>
@@ -17,7 +17,7 @@
     <item android:state_selected="true">
         <shape>
             <solid
-                android:color="@color/hv662d80"/>
+                android:color="@color/color_main_pressed"/>
             <corners
                 android:radius="3dp"/>
         </shape>
@@ -25,7 +25,7 @@
     <item android:state_selected="false" android:state_pressed="true">
         <shape>
             <solid
-                android:color="@color/hv662d80"/>
+                android:color="@color/color_main_pressed"/>
             <corners
                 android:radius="3dp"/>
         </shape>
@@ -33,7 +33,7 @@
     <item android:state_selected="false" android:state_pressed="false">
         <shape>
             <solid
-                android:color="@color/hv662d80"/>
+                android:color="@color/color_main"/>
             <corners
                 android:radius="3dp"/>
         </shape>

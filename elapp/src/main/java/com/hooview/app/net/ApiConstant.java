@@ -13,8 +13,8 @@ import com.hooview.app.app.EVApplication;
 import com.hooview.app.db.Preferences;
 
 public class ApiConstant {
-    private static final String RELEASE_HOST = "http://hooview.evapp.easyvaas.com/easyvaas/appgw/";  //TODO Need to change you server
-    private static final String DEBUG_HOST = "http://hooview.evapp.easyvaas.com/easyvaas/appgw/";    //TODO Need to change you server
+    private static final String RELEASE_HOST = "http://appgw.hooview.com/easyvaas/appgw/";  //TODO Need to change you server
+    private static final String DEBUG_HOST = "http://appgw.hooview.com/easyvaas/appgw/";    //TODO Need to change you server
     private static final boolean IS_SUPPORT_SSL = false;
 
     private static String HOST = DEBUG_HOST;

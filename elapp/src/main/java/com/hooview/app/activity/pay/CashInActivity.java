@@ -6,10 +6,6 @@
 
 package com.hooview.app.activity.pay;
 
-import java.lang.ref.SoftReference;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,8 +32,8 @@ import android.widget.TextView;
 import com.easyvaas.common.gift.GiftManager;
 import com.easyvaas.common.sharelogin.model.PlatformActionListener;
 import com.easyvaas.common.sharelogin.wechat.WechatPayManager;
-
 import com.hooview.app.activity.WebViewActivity;
+import com.hooview.app.adapter.CashInAmountAdapter;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.pay.CashInOptionEntity;
 import com.hooview.app.bean.pay.CashInOptionEntityArray;
@@ -49,10 +45,16 @@ import com.hooview.app.net.MyRequestCallBack;
 import com.hooview.app.net.RequestUtil;
 import com.hooview.app.pay.AlipayHelper;
 import com.hooview.app.pay.PayResult;
-import com.hooview.app.adapter.CashInAmountAdapter;
 import com.hooview.app.utils.Logger;
 import com.hooview.app.utils.SingleToast;
 
+import java.lang.ref.SoftReference;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 云币充值页面
+ */
 public class CashInActivity extends BaseActivity {
     private static final String TAG = "CashInActivity";
 

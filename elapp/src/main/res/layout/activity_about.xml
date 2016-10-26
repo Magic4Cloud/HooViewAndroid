@@ -33,15 +33,15 @@
             android:src="@drawable/login_icon_logo"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"/>
-        <TextView
-            android:id="@+id/version_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="@dimen/text_size_title_h1"
-            android:textColor="@color/btn_color_secondary_level"/>
+        <!--<TextView-->
+            <!--android:id="@+id/version_name_tv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:gravity="center"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="@dimen/text_size_title_h1"-->
+            <!--android:textColor="@color/btn_color_secondary_level"/>-->
     </LinearLayout>
 
     <ImageView
@@ -82,52 +82,52 @@
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_arrow_right_personal_more"/>
     </RelativeLayout>
-    <ImageView
-        style="@style/default_horizontal_line_style"/>
-    <RelativeLayout
-        android:id="@+id/seizure_account_rl"
-        style="@style/item_my_setting">
-        <TextView
-            android:text="@string/seizure_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/text_size_title_h1"
-            android:textColor="@color/text_color_main"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_personal_more"/>
-    </RelativeLayout>
+    <!--<ImageView-->
+        <!--style="@style/default_horizontal_line_style"/>-->
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/seizure_account_rl"-->
+        <!--style="@style/item_my_setting">-->
+        <!--<TextView-->
+            <!--android:text="@string/seizure_account"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:textSize="@dimen/text_size_title_h1"-->
+            <!--android:textColor="@color/text_color_main"/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:src="@drawable/ic_arrow_right_personal_more"/>-->
+    <!--</RelativeLayout>-->
 
-    <ImageView
-        style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="18dp"/>
-    <RelativeLayout
-        android:id="@+id/manual_check_update_rl"
-        style="@style/item_about_us">
-        <TextView
-            android:text="@string/check_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/text_size_title_h1"
-            android:textColor="@color/text_color_main"/>
-        <ImageView
-            android:id="@+id/manual_check_update_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_arrow_right_personal_more"/>
-        <TextView
-            android:id="@+id/manual_check_update_remind_tv"
-            style="@style/red_digital_remind"
-            android:layout_toLeftOf="@id/manual_check_update_iv"
-            android:layout_marginRight="12dp"
-            android:layout_centerVertical="true"
-            android:visibility="gone"/>
-    </RelativeLayout>
+    <!--<ImageView-->
+        <!--style="@style/default_horizontal_line_style"-->
+        <!--android:layout_marginLeft="18dp"/>-->
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/manual_check_update_rl"-->
+        <!--style="@style/item_about_us">-->
+        <!--<TextView-->
+            <!--android:text="@string/check_update"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:textSize="@dimen/text_size_title_h1"-->
+            <!--android:textColor="@color/text_color_main"/>-->
+        <!--<ImageView-->
+            <!--android:id="@+id/manual_check_update_iv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:src="@drawable/ic_arrow_right_personal_more"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/manual_check_update_remind_tv"-->
+            <!--style="@style/red_digital_remind"-->
+            <!--android:layout_toLeftOf="@id/manual_check_update_iv"-->
+            <!--android:layout_marginRight="12dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:visibility="gone"/>-->
+    <!--</RelativeLayout>-->
 </LinearLayout>

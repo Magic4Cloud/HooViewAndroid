@@ -18,6 +18,7 @@ public class VideoEntity {
     public static final int IS_PINNED_HEADER = 2;
     public static final int IS_RECOMMEND = 1;
 
+
     private String vid;
     private String title;
     private String thumb;
@@ -63,7 +64,15 @@ public class VideoEntity {
     private int recommend;
     private String extra;
     private long sentTimeLength;
+    private String start_time;
 
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
     public String getUri() {
         return uri;
     }
@@ -96,9 +105,13 @@ public class VideoEntity {
         this.imuser = imuser;
     }
 
-    public int getDuration() {return duration;}
+    public int getDuration() {
+        return duration;
+    }
 
-    public void setDuration(int duration) {this.duration = duration;}
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     public String getShare_url() {
         return share_url;

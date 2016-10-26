@@ -12,6 +12,7 @@ import com.hooview.app.R;
 import com.hooview.app.bean.video.VideoEntity;
 import com.hooview.app.utils.DateTimeUtil;
 import com.hooview.app.utils.PicassoUtil;
+import com.hooview.app.utils.UserUtil;
 import com.hooview.app.utils.Utils;
 import com.hooview.app.utils.ViewUtil;
 import com.hooview.app.view.RoundRectangleImageView;
@@ -59,8 +60,8 @@ public class HomeTabViewHolder extends RecyclerView.ViewHolder {
         if (entity.getNickname() != null) {
             tvName.setText(entity.getNickname());
         }
-        if (entity.getLive_start_time() != null) {
-            tvTime.setText(DateTimeUtil.getSimpleTime(context,entity.getLive_start_time_span()));
+        if (entity.getStart_time() != null) {
+            tvTime.setText(DateTimeUtil.getSimpleTime(context,entity.getStart_time()));
         }
         if (entity.getThumb() != null) {
             PicassoUtil.loadPlaceholder(context, entity.getThumb(), R.drawable.square_holder_view).into(rectangleView);
@@ -69,6 +70,13 @@ public class HomeTabViewHolder extends RecyclerView.ViewHolder {
         if (entity.getLogourl() != null) {
             PicassoUtil.loadPlaceholder(context, entity.getLogourl(), R.drawable.rotundity_holder_view).into(ivHeader);
         }
+
+        ivHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserUtil.showUserInfo(context, entity.getName());
+            }
+        });
 
         ivPlay.setOnClickListener(new View.OnClickListener() {
             @Override

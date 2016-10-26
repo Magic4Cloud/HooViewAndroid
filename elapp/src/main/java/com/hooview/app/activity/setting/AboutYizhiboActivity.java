@@ -19,7 +19,7 @@ public class AboutYizhiboActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.hooview.app.R.layout.activity_copyright);
+        setContentView(com.hooview.app.R.layout.activity_about_hooview);
 
         setTitle(com.hooview.app.R.string.about_us);
 

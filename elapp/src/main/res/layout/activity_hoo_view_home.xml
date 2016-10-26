@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/normal_gray_bg"
     tools:context="com.hooview.app.activity.HooViewHomeActivity">
 
     <!--<com.bigkoo.convenientbanner.ConvenientBanner-->
@@ -50,14 +50,13 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/home_radiogroup"
-        android:layout_marginTop="57dp" />
+        android:layout_above="@+id/home_radiogroup"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_above="@+id/home_radiogroup"
         android:background="@drawable/shape_toolbar_shadow_reverse"
         />
-    <include layout="@layout/layout_home_toolbar" />
+
 
 </RelativeLayout>

@@ -167,7 +167,8 @@
                 android:value=".activity.HooViewHomeActivity" />
         </activity>
         <activity
-            android:name=".activity.setting.AboutYishiyunActivity"
+            android:name=".activity.setting.AboutHooViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -175,6 +176,7 @@
         </activity>
         <activity
             android:name=".activity.setting.CopyrightActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -210,7 +212,10 @@
         <activity
             android:name=".activity.home.MessageListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.WebViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".activity.user.UserInfoSnsActivity"
             android:screenOrientation="portrait"

@@ -246,7 +246,7 @@
                 android:layout_toLeftOf="@+id/clean_cached_iv"
                 android:layout_marginRight="12dp"
                 android:layout_centerVertical="true"
-                android:textColor="@color/btn_color_main"
+                android:textColor="@color/color_main"
                 android:textSize="15dp"
                 android:text="--"/>
             <ImageView

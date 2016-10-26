@@ -38,7 +38,7 @@
             android:layout_centerVertical="true"
             android:gravity="left|center_vertical"
             android:textSize="@dimen/text_size_title_h1"
-            android:textColor="@color/btn_color_secondary_level"
+            android:textColor="@color/color_main"
             android:background="@drawable/round_white_btn_bg"/>
         <ImageView
             android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="@string/cancel"
-            android:textColor="@color/btn_color_secondary_level"
+            android:textColor="@color/color_main"
             android:textSize="@dimen/text_size_title_h2"
             android:background="@android:color/transparent"/>
     </RelativeLayout>
@@ -99,7 +99,7 @@
                 android:text="@string/clear_history"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"
-                android:textColor="@color/btn_color_main"
+                android:textColor="@color/color_main"
                 android:textSize="@dimen/text_size_title_h1"/>
         </RelativeLayout>
 
