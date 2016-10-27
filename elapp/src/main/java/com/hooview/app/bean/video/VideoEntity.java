@@ -25,6 +25,8 @@ public class VideoEntity {
     private String name;
     private String nickname;
     private String logourl;
+
+    //live 0--->录播 ，，，，，1---->直播
     private int living;
     private String location;
     private int watch_count;//watch
@@ -73,6 +75,7 @@ public class VideoEntity {
     public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
+
     public String getUri() {
         return uri;
     }

@@ -583,4 +583,7 @@
 
     <string name="copy_right">v1.0.1 Copyright©2016</string>
     <string name="compony_name">四川火眼财讯科技有限公司</string>
+    <string name="video_new">视频</string>
+    <string name="start_group_chat">发起群聊</string>
+    <string name="set_pw_6to12">设置新密码，输入6~20位密码</string>
 </resources>

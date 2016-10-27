@@ -157,7 +157,7 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
         if (user != null) {
             UserUtil.showUserPhoto(getActivity(), user.getLogourl(), mMyUserPhoto);
             mUserId.setText("ID:" + user.getName());
-            mUserNameTv.setText(user.getNickname());
+            mUserNameTv.setText(getContext().getResources().getString(R.string.nickname) + ":" + user.getNickname());
             UserUtil.setGender(mGenderTv, user.getGender(), user.getBirthday());
             UserUtil.setConstellation(mConstellationTv, user.getBirthday());
             mMyUserPhoto.setIsVip(user.getVip());

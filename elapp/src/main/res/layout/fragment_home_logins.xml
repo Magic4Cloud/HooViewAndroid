@@ -119,6 +119,12 @@
         android:layout_marginBottom="20dp"
         android:orientation="horizontal">
         <ImageView
+            android:id="@+id/login_weibo_iv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/login_icon_share_weibo"/>
+        <ImageView
             android:id="@+id/login_weixin_iv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -130,12 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/login_icon_share_qq"/>
-        <ImageView
-            android:id="@+id/login_weibo_iv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/login_icon_share_weibo"/>
+
     </LinearLayout>
 
     <LinearLayout

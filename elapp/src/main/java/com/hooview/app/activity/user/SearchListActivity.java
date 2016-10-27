@@ -6,9 +6,6 @@
 
 package com.hooview.app.activity.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +27,6 @@ import com.easyvaas.common.adapter.CommonRcvAdapter;
 import com.easyvaas.common.widget.flowlayout.FlowLayout;
 import com.easyvaas.common.widget.flowlayout.TagAdapter;
 import com.easyvaas.common.widget.flowlayout.TagFlowLayout;
-
 import com.hooview.app.adapter.recycler.SearchAdapter;
 import com.hooview.app.base.BaseRvcActivity;
 import com.hooview.app.bean.SearchInfoEntity;
@@ -45,6 +41,9 @@ import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.UserUtil;
 import com.hooview.app.utils.Utils;
 import com.hooview.app.utils.ViewUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchListActivity extends BaseRvcActivity implements View.OnClickListener {
     public static final String EXTRA_KEY_TYPE = "extra_key_type";
@@ -236,12 +235,12 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
     private void setHistoryVisibility() {
         if (mHistoryKeywords.isEmpty()) {
             mClearHistoryBtn.setVisibility(View.GONE);
-            mHistoryLabelTV.setVisibility(View.GONE);
+            //mHistoryLabelTV.setVisibility(View.GONE);
             mHistoryFlowLayout.setVisibility(View.GONE);
         } else {
             mSearchKeywordsLl.setVisibility(View.VISIBLE);
             mClearHistoryBtn.setVisibility(View.VISIBLE);
-            mHistoryLabelTV.setVisibility(View.VISIBLE);
+            //mHistoryLabelTV.setVisibility(View.VISIBLE);
             mHistoryFlowLayout.setVisibility(View.VISIBLE);
         }
     }

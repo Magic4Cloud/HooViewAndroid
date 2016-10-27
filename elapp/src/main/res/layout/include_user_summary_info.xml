@@ -43,33 +43,6 @@
             style="@style/default_vertical_line_style"
             android:layout_height="36dp"/>
         <LinearLayout
-            android:id="@+id/fans_ll"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/list_item_selector">
-            <TextView
-                android:id="@+id/fans_count_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/empty_value"
-                android:textSize="@dimen/text_size_title_h1"
-                android:textColor="@color/login_text_color_3"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/fans"
-                android:textColor="@color/login_text_color"
-                android:textSize="@dimen/text_size_13"/>
-        </LinearLayout>
-        <ImageView
-            style="@style/default_vertical_line_style"
-            android:layout_height="36dp"/>
-        <LinearLayout
             android:id="@+id/follower_ll"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -90,6 +63,34 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/follow"
+                android:textColor="@color/login_text_color"
+                android:textSize="@dimen/text_size_13"/>
+        </LinearLayout>
+        <ImageView
+            style="@style/default_vertical_line_style"
+            android:layout_height="36dp"/>
+
+        <LinearLayout
+            android:id="@+id/fans_ll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/list_item_selector">
+            <TextView
+                android:id="@+id/fans_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/empty_value"
+                android:textSize="@dimen/text_size_title_h1"
+                android:textColor="@color/login_text_color_3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/fans"
                 android:textColor="@color/login_text_color"
                 android:textSize="@dimen/text_size_13"/>
         </LinearLayout>

@@ -6,9 +6,6 @@
 
 package com.hooview.app.activity;
 
-import java.io.File;
-import java.util.Map;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,10 +18,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
-
+import com.hooview.app.R;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.db.Preferences;
 import com.hooview.app.net.ApiConstant;
@@ -33,6 +31,9 @@ import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.FileUtil;
 import com.hooview.app.utils.ShareHelper;
 import com.hooview.app.utils.Utils;
+
+import java.io.File;
+import java.util.Map;
 
 public class WebViewActivity extends BaseActivity {
     public static final int TYPE_ACTIVITY = 14;
@@ -95,6 +96,16 @@ public class WebViewActivity extends BaseActivity {
 
         String shareImage = getFilesDir() + File.separator + FileUtil.LOGO_FILE_NAME;
         mShareContent = new ShareContentWebpage(title, description, url, shareImage);
+
+        TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
+        //tv.setText(R.string.contact_us);
+        findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
+        });
     }
 
     @Override

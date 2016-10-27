@@ -88,8 +88,15 @@ public class LiveRoomManager {
         final View closeIv = popupView.findViewById(R.id.user_info_close_iv);
         final View homeBtn = popupView.findViewById(R.id.home_page_tv);
         final View chatBtn = popupView.findViewById(R.id.user_private_chat_tv);
+
+        //@Ta
         final View commentBtn = popupView.findViewById(R.id.user_post_tv);
 
+        if (mCurrentVideo.getLiving() == 0) {//录播
+            commentBtn.setVisibility(View.GONE);
+        } else {//直播
+            commentBtn.setVisibility(View.VISIBLE);
+        }
         if (closeIv != null) {
             closeIv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,6 +123,8 @@ public class LiveRoomManager {
                             mActivity.getString(R.string.hint_signature) : user.getSignature());
                 }
                 userNumber.setText("ID:" + user.getName());
+
+
                 setSpecialText(((TextView) popupView.findViewById(R.id.user_video_tv)),
                         mActivity.getString(R.string.user_e_coin_count, user.getCostecoin() + ""),
                         user.getFans_count() + "");
@@ -206,7 +215,7 @@ public class LiveRoomManager {
     }
 
     private void setUserInfoPopupViewFollow(final BaseUserEntity user, final View popupView,
-            final String vid) {
+                                            final String vid) {
         final TextView followTv = (TextView) popupView.findViewById(R.id.user_follow_status_tv);
         final TextView reportTv = (TextView) popupView.findViewById(R.id.player_report_btn);
         View followView;

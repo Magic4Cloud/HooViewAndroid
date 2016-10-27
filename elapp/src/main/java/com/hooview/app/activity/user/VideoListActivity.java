@@ -6,20 +6,18 @@
 
 package com.hooview.app.activity.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.easyvaas.common.adapter.CommonRcvAdapter;
-
 import com.easyvaas.common.bottomsheet.BottomSheet;
 import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
+import com.hooview.app.R;
 import com.hooview.app.adapter.item.VideoMineAdapterItem;
 import com.hooview.app.adapter.recycler.VideoSmallRcvAdapter;
 import com.hooview.app.app.EVApplication;
@@ -38,6 +36,9 @@ import com.hooview.app.utils.Logger;
 import com.hooview.app.utils.ShareHelper;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VideoListActivity extends BaseRvcActivity {
     public static final String TYPE_MY_VIDEO_LIST = "my_video_list";
@@ -94,6 +95,15 @@ public class VideoListActivity extends BaseRvcActivity {
         mPullToLoadRcvView.getRecyclerView().setAdapter(mVideoAdapter);
         mPullToLoadRcvView.initLoad();
 
+        TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
+        tv.setText(R.string.video_new);
+        findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
+        });
         loadData(false);
     }
 

@@ -124,7 +124,7 @@
             android:id="@+id/push_message_notice_tv"
             style="@style/item_my_setting_title"
             android:layout_toRightOf="@id/push_message_notice_iv"
-            android:text="@string/settings" />
+            android:text="@string/my_settings" />
 
         <ImageView
             android:layout_width="wrap_content"

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.easemob.EMCallBack;
 import com.easemob.EMValueCallBack;
@@ -26,7 +27,9 @@ import com.easyvaas.common.chat.bean.BaseUser;
 import com.easyvaas.common.chat.db.InviteMessageDao;
 import com.easyvaas.common.chat.utils.ChatConstants;
 import com.easyvaas.common.recycler.PullToLoadView;
+import com.google.gson.Gson;
 import com.hooview.app.R;
+import com.hooview.app.activity.account.AccountActivity;
 import com.hooview.app.activity.home.MessageListActivity;
 import com.hooview.app.adapter.recycler.MessageGroupAdapter;
 import com.hooview.app.base.BaseRvcFragment;
@@ -34,10 +37,12 @@ import com.hooview.app.bean.message.MessageGroupEntity;
 import com.hooview.app.bean.message.MessageGroupEntityArray;
 import com.hooview.app.bean.user.UserEntity;
 import com.hooview.app.bean.user.UserEntityArray;
+import com.hooview.app.db.Preferences;
 import com.hooview.app.net.ApiConstant;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.net.MyRequestCallBack;
 import com.hooview.app.utils.Constants;
+import com.hooview.app.utils.PicassoUtil;
 import com.hooview.app.utils.SingleToast;
 
 import java.lang.ref.SoftReference;
@@ -63,6 +68,8 @@ public class HomeMessageTabFragment extends BaseRvcFragment {
     private ChatMessageReceiver mChatMessageReceiver;
     private MyHandler mHandler;
     private int mGroupUnReadMsgNumber;
+
+    private Bundle bundle = new Bundle();
 
     private class ChatMessageReceiver extends BroadcastReceiver {
         @Override
@@ -161,14 +168,43 @@ public class HomeMessageTabFragment extends BaseRvcFragment {
         mAdapter.setOnCreateContextMenuListener(this);
         mChatMessageReceiver = new ChatMessageReceiver();
 
+
+        //发起群聊
         view.findViewById(com.hooview.app.R.id.create_group_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               gotoChatGroupList(true);
+                gotoChatGroupList(true);
             }
         });
 
+
+//        mMyUserPhoto.getRoundImageView().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url = ;
+//                Intent showImage = new Intent(getActivity(), ShowBigImageActivity.class);
+//                showImage.putExtra(ShowBigImageActivity.REMOTE_IMAGE_URL, url);
+//                startActivity(showImage);
+//            }
+//        });
+
+        //设置头像
+        ImageView iv = (ImageView) view.findViewById(R.id.iv_header);
+        String json = Preferences.getInstance(getActivity())
+                .getString(Preferences.KEY_CACHED_USER_INFO_JSON);
+        UserEntity entity = new Gson().fromJson(json, UserEntity.class);
+        String url = entity.getLogourl();
+        PicassoUtil.loadPlaceholder(getContext(), url,R.drawable.home_icon_person).into(iv);
+
         mPullToLoadRcvView.getSwipeRefreshLayout().setColorSchemeResources(R.color.hv662d80, R.color.hv662d80, R.color.hv662d80);
+
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), AccountActivity.class));
+            }
+        });
+
         return view;
     }
 

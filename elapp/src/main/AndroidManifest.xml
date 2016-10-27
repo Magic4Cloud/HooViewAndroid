@@ -196,7 +196,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.user.VideoListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".live.activity.PlayerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -222,9 +224,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.login.TextActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".activity.setting.CountryCodeListActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.user.SearchListActivity"

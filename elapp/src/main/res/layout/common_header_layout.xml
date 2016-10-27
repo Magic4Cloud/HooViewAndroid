@@ -24,7 +24,8 @@
         android:id="@+id/common_custom_title_tv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_height"
-        android:gravity="center"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="60dp"
         android:textSize="@dimen/action_bar_menu_text_size"
         android:textColor="@color/color_titlebar_textcolor"/>
     <LinearLayout

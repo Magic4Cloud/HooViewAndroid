@@ -6,10 +6,6 @@
 
 package com.hooview.app.activity.setting;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +13,7 @@ import android.widget.TextView;
 
 import com.easyvaas.common.widget.LetterSideBar;
 import com.easyvaas.common.widget.stickylistview.StickyListHeadersListView;
-
+import com.hooview.app.R;
 import com.hooview.app.adapter.CountryCodeAdapter;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.CountryCodeEntity;
@@ -25,6 +21,10 @@ import com.hooview.app.db.Preferences;
 import com.hooview.app.utils.CharacterParser;
 import com.hooview.app.utils.Logger;
 import com.hooview.app.utils.PinyinComparatorCountry;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CountryCodeListActivity extends BaseActivity implements
         StickyListHeadersListView.OnHeaderClickListener, AdapterView.OnItemClickListener
@@ -39,6 +39,9 @@ public class CountryCodeListActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(com.hooview.app.R.string.country_code);
+        setTitleColor(getResources().getColor(android.R.color.white));
+        TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
+        tv.setText(R.string.country_code);
         setContentView(com.hooview.app.R.layout.activity_city_select);
         initView();
     }

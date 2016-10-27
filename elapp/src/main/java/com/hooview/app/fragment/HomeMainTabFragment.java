@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 
 import com.google.gson.Gson;
 import com.hooview.app.R;
@@ -19,7 +18,6 @@ import com.hooview.app.activity.user.SearchListActivity;
 import com.hooview.app.adapter.HomeTabListAdapter;
 import com.hooview.app.base.BaseFragment;
 import com.hooview.app.bean.CarouselInfoEntityArray;
-import com.hooview.app.bean.video.VideoEntity;
 import com.hooview.app.bean.video.VideoEntityArray;
 import com.hooview.app.db.Preferences;
 import com.hooview.app.listener.OnLoadMoreListener;
@@ -38,15 +36,15 @@ import butterknife.ButterKnife;
  * Description:
  * CreateDate:     2016/10/19
  */
-public class HomeMainTabFragment extends BaseFragment implements View.OnClickListener{
+public class HomeMainTabFragment extends BaseFragment implements View.OnClickListener {
 
     private RecyclerView mRecyclerView;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
+    //首页的数据
+    private List mHomeLists;
 
-    private ScrollView homeContentScrollView;
-    private List<VideoEntity> mVideoLists;
     private HomeTabListAdapter mListAdapter;
 
     //初始化页码是第0页
@@ -60,7 +58,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
 
     private int dateCount = 0;
 
-    private List<CarouselInfoEntityArray> bannerLists;
+    private CarouselInfoEntityArray bannerEntity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,30 +80,30 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
 
-        mVideoLists = new ArrayList<>();
-        bannerLists = new ArrayList<>();
+        mHomeLists = new ArrayList<>();
 
-        mListAdapter = new HomeTabListAdapter(getActivity(), mVideoLists,bannerLists);
+        mListAdapter = new HomeTabListAdapter(getActivity(), mHomeLists);
 
         //加载更多的逻辑判断
-//        mLoadMoreListener = new OnLoadMoreListener(manager, 0) {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState, int lastPosition) {
-//                mLoadMoreListener.setLoading(true);
-//                loadHotVideoList(false);
-//            }
-//
-//            @Override
-//            public void onLoadMore(int current_page) {
-//
-//            }
-//
-//            @Override
-//            public void onItemSwitch(int lastPosition, int scrollType) {
-//
-//            }
-//        };
-//        mRecyclerView.addOnScrollListener(mLoadMoreListener);
+        mLoadMoreListener = new OnLoadMoreListener(manager, 0) {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState, int lastPosition) {
+
+            }
+
+            @Override
+            public void onLoadMore(int current_page) {
+
+                mLoadMoreListener.setLoading(true);
+                loadHotVideoList(false);
+            }
+
+            @Override
+            public void onItemSwitch(int lastPosition, int scrollType) {
+
+            }
+        };
+        mRecyclerView.addOnScrollListener(mLoadMoreListener);
         mRecyclerView.setAdapter(mListAdapter);
 
         initBanner();
@@ -123,6 +121,8 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onRefresh() {
                 currentPageIndex = 0;
+                dateCount = 0;
+                loadCarouseInfo();
                 loadHotVideoList(false);
             }
         });
@@ -139,21 +139,19 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
                     public void onSuccess(VideoEntityArray result) {
 
 
-
                         if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
 //
-//                        mLoadMoreListener.resetState();
-//                        mLoadMoreListener.setLoading(false);
+                        mLoadMoreListener.resetState();
+                        mLoadMoreListener.setLoading(false);
 
                         if (currentPageIndex == 1) {
-                            mVideoLists.clear();
+                            mHomeLists.clear();
                         }
-
-                        mVideoLists.addAll(result.getVideos());
-                        dateCount ++;
-                        refreshListAdapter(dateCount);
+                        dateCount++;
+                        mHomeLists.addAll(result.getVideos());
+                        checkRefresh();
                     }
 
                     @Override
@@ -162,7 +160,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
                         if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
-                        //mLoadMoreListener.setLoading(false);
+                        mLoadMoreListener.setLoading(false);
                     }
 
                     @Override
@@ -171,23 +169,25 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
                         if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }
-                        //mLoadMoreListener.setLoading(false);
+                        mLoadMoreListener.setLoading(false);
                     }
                 });
 
     }
 
     //初始化Banner
-    private void  initBanner() {
+    private void initBanner() {
         //从缓存获取Banner的数据，如果为空，则再次请求获取
         String json = Preferences.getInstance(getActivity())
                 .getString(Preferences.KEY_CACHED_CAROUSEL_INFO_JSON);
         if (TextUtils.isEmpty(json)) {
             loadCarouseInfo();
         } else {
-            bannerLists.add(new Gson().fromJson(json, CarouselInfoEntityArray.class));
-            dateCount ++;
-            refreshListAdapter(dateCount);
+            if (mListAdapter != null) {
+                mHomeLists.add(new Gson().fromJson(json, CarouselInfoEntityArray.class));
+                dateCount++;
+                checkRefresh();
+            }
         }
     }
 
@@ -198,9 +198,11 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onSuccess(CarouselInfoEntityArray result) {
                 if (result != null && result.getCount() > 0) {
-                    bannerLists.add(result);
-                    dateCount ++;
-                    refreshListAdapter(dateCount);
+                    if (mListAdapter != null) {
+                        mHomeLists.add(result);
+                        dateCount++;
+                        checkRefresh();
+                    }
                 } else {
 
                 }
@@ -219,8 +221,6 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
     }
 
 
-
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_account) {
@@ -230,10 +230,11 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
         }
     }
 
-    private void refreshListAdapter(int dateCount) {
-        if(dateCount > 1) {
-            mListAdapter.notifyDataSetChanged();
+    private void checkRefresh() {
+        if (dateCount > 1) {
+            if (mListAdapter != null) {
+                mListAdapter.notifyDataSetChanged();
+            }
         }
     }
-
 }

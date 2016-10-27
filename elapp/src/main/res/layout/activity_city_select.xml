@@ -11,8 +11,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <include
+        android:id="@+id/common_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_layout"/>
     <EditText
+        android:layout_below="@+id/common_title_tv"
         android:id="@+id/cs_search_et"
         android:layout_width="match_parent"
         android:layout_height="34dp"

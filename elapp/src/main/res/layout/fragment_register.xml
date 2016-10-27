@@ -42,7 +42,7 @@
             android:textColor="@color/login_text_color_3"
             android:textSize="@dimen/text_size_title_h1"
             android:textColorHint="@color/text_color_three_level"
-            android:hint="@string/prompt_input_phone_hint"/>
+            android:hint="@string/prompt_phone_hint"/>
         <ImageView
             android:id="@+id/clear_phone_number_iv"
             android:layout_width="wrap_content"
@@ -110,7 +110,7 @@
             android:textColor="@color/login_text_color_3"
             android:textSize="@dimen/text_size_title_h1"
             android:textColorHint="@color/text_color_three_level"
-            android:hint="@string/msg_login_set_password"/>
+            android:hint="@string/set_pw_6to12"/>
         <ImageView
             android:id="@+id/clear_set_password_iv"
             android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_title_h1"
         android:layout_centerHorizontal="true"
-        android:text="@string/next_step"
+        android:text="@string/confirm"
         android:background="@drawable/common_fill_round_three_btn_blue_selector"
         style="?android:buttonBarButtonStyle"/>
     <LinearLayout
