@@ -6,8 +6,6 @@
 
 package com.hooview.app.live.activity;
 
-import java.util.Stack;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,9 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hooview.app.R;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.SingleToast;
+
+import java.util.Stack;
 
 public class SetPasswordActivity extends BaseActivity {
     public static final String EXTRA_KEY_PASSWORD = "extra_key_password";
@@ -68,6 +69,7 @@ public class SetPasswordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mIsCancelRequestAfterDestroy = false;
         setContentView(com.hooview.app.R.layout.activity_set_password);
+
         setTitle(com.hooview.app.R.string.permission_password);
         mVid = getIntent().getStringExtra(Constants.EXTRA_KEY_VIDEO_ID);
 
@@ -90,6 +92,16 @@ public class SetPasswordActivity extends BaseActivity {
         mPasswordTv4 = (TextView) findViewById(com.hooview.app.R.id.password_4_tv);
 
         mStack = new Stack<String>();
+
+        TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
+        tv.setText(R.string.msg_login_set_password);
+        findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
+        });
     }
 
     @Override

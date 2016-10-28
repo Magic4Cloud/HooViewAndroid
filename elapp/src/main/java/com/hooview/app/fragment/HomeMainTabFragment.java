@@ -94,8 +94,8 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onLoadMore(int current_page) {
 
-                mLoadMoreListener.setLoading(true);
-                loadHotVideoList(false);
+//                mLoadMoreListener.setLoading(true);
+//                loadHotVideoList(false);
             }
 
             @Override

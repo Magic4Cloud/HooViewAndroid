@@ -16,10 +16,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TabHost;
 
 import com.easyvaas.common.sharelogin.weibo.WeiboLoginManager;
-
 import com.hooview.app.base.BaseFragmentActivity;
 import com.hooview.app.base.TabManager;
 import com.hooview.app.utils.Constants;
+import com.hooview.app.utils.SingleToast;
 
 public class LoginMainActivity extends BaseFragmentActivity {
     private static final String TAG = "LoginMainActivity";
@@ -54,7 +54,7 @@ public class LoginMainActivity extends BaseFragmentActivity {
         mIsCancelRequestAfterDestroy = false;
         super.onCreate(savedInstanceState);
         setContentView(com.hooview.app.R.layout.activity_login_main);
-
+        SingleToast.show(this,"login");
         mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup();

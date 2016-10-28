@@ -50,62 +50,62 @@
         style="@style/default_horizontal_line_style"
         android:layout_marginLeft="15dp" />
 
-    <RelativeLayout
-        android:id="@+id/item_cash_in_rl"
-        style="@style/item_my_setting">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/item_cash_in_rl"-->
+        <!--style="@style/item_my_setting">-->
 
-        <ImageView
-            android:id="@+id/share_yzb_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_recharge" />
+        <!--<ImageView-->
+            <!--android:id="@+id/share_yzb_iv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/personal_icon_recharge" />-->
 
-        <TextView
-            android:id="@+id/share_yzb_title_tv"
-            style="@style/item_my_setting_title"
-            android:layout_toRightOf="@id/share_yzb_iv"
-            android:text="@string/cloud_icon_cash_in" />
+        <!--<TextView-->
+            <!--android:id="@+id/share_yzb_title_tv"-->
+            <!--style="@style/item_my_setting_title"-->
+            <!--android:layout_toRightOf="@id/share_yzb_iv"-->
+            <!--android:text="@string/cloud_icon_cash_in" />-->
 
-        <ImageView
-            android:id="@+id/share_yzb_arrow_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right_personal_more" />
-    </RelativeLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/share_yzb_arrow_iv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/ic_arrow_right_personal_more" />-->
+    <!--</RelativeLayout>-->
 
-    <ImageView
-        android:id="@+id/item_share_yzb_divider_iv"
-        style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="15dp" />
+    <!--<ImageView-->
+        <!--android:id="@+id/item_share_yzb_divider_iv"-->
+        <!--style="@style/default_horizontal_line_style"-->
+        <!--android:layout_marginLeft="15dp" />-->
 
-    <RelativeLayout
-        android:id="@+id/item_my_profit_rl"
-        style="@style/item_my_setting">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/item_my_profit_rl"-->
+        <!--style="@style/item_my_setting">-->
 
-        <ImageView
-            android:id="@+id/my_profit_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_money" />
+        <!--<ImageView-->
+            <!--android:id="@+id/my_profit_iv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/personal_icon_money" />-->
 
-        <TextView
-            android:id="@+id/my_profit_title_tv"
-            style="@style/item_my_setting_title"
-            android:layout_toRightOf="@id/my_profit_iv"
-            android:text="@string/my_profit" />
+        <!--<TextView-->
+            <!--android:id="@+id/my_profit_title_tv"-->
+            <!--style="@style/item_my_setting_title"-->
+            <!--android:layout_toRightOf="@id/my_profit_iv"-->
+            <!--android:text="@string/my_profit" />-->
 
-        <ImageView
-            android:id="@+id/my_profit_arrow_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right_personal_more" />
-    </RelativeLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/my_profit_arrow_iv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/ic_arrow_right_personal_more" />-->
+    <!--</RelativeLayout>-->
 
     <ImageView style="@style/default_horizontal_line_style" />
 

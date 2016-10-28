@@ -34,6 +34,7 @@ public class HeaderFriendsInfoAdapterItem implements AdapterItem<User> {
     private Context mContext;
 
     private FriendsUserInfoAdapter.OnClickUserItemViewListener mOnClickUserItemViewListener;
+
     public HeaderFriendsInfoAdapterItem(Context context) {
         mContext = context;
     }
@@ -58,6 +59,9 @@ public class HeaderFriendsInfoAdapterItem implements AdapterItem<User> {
                 mOnClickUserItemViewListener.onUserInfoBackClick();
             }
         });
+
+        //隐藏分享功能
+        mOperationIconCb.setVisibility(View.GONE);
 
         mVideoCountTv = (TextView) root.findViewById(com.hooview.app.R.id.video_count_tv);
         mVideoCountTv.setTextColor(mContext.getResources().getColor(com.hooview.app.R.color.btn_color_main));
@@ -99,9 +103,10 @@ public class HeaderFriendsInfoAdapterItem implements AdapterItem<User> {
                 mOnClickUserItemViewListener.onUserPhotoClick();
             }
         });
-        mOperationIconCb.setOnClickListener(new View.OnClickListener(){
+        mOperationIconCb.setOnClickListener(new View.OnClickListener() {
 
-            @Override public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 mOnClickUserItemViewListener.onShareItemClick();
             }
         });

@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.TimeButton;
-
+import com.hooview.app.R;
 import com.hooview.app.app.EVApplication;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.user.User;
@@ -91,13 +91,23 @@ public class BindPhoneActivity extends BaseActivity implements OnClickListener {
             }
         });
 
+        TextView tv1 = (TextView) findViewById(R.id.common_custom_title_tv);
+
+
         if (mIsChangeBindPhone) {
-            setTitle(com.hooview.app.R.string.title_change_phone_number);
+            tv1.setText(R.string.title_change_phone_number);
             mPhoneNumberEt.setHint(com.hooview.app.R.string.prompt_new_phone_hint);
             findViewById(com.hooview.app.R.id.set_password_rl).setVisibility(View.GONE);
         } else {
-            setTitle(com.hooview.app.R.string.bind_phone);
+            tv1.setText(R.string.bind_phone);
         }
+        findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
+        });
     }
 
     @Override
@@ -133,7 +143,7 @@ public class BindPhoneActivity extends BaseActivity implements OnClickListener {
                     SingleToast.show(this, getString(com.hooview.app.R.string.msg_phone_number_empty));
                 } else if (mIsChangeBindPhone) {
                     changeBindPhone();
-                } else if (validatePassword()){
+                } else if (validatePassword()) {
                     bindingPhone();
                 }
                 break;

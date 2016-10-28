@@ -6,10 +6,6 @@
 
 package com.hooview.app.activity.user;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,13 +18,17 @@ import android.widget.TextView;
 
 import com.easyvaas.common.widget.LetterSideBar;
 import com.easyvaas.common.widget.stickylistview.StickyListHeadersListView;
-
+import com.hooview.app.R;
 import com.hooview.app.adapter.CityLetterSortAdapter;
 import com.hooview.app.bean.CountryCodeEntity;
 import com.hooview.app.utils.CharacterParser;
 import com.hooview.app.utils.Logger;
 import com.hooview.app.utils.PinyinComparatorCountry;
 import com.hooview.app.utils.SingleToast;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CitySelectListActivity extends Activity implements
         StickyListHeadersListView.OnHeaderClickListener, AdapterView.OnItemClickListener
@@ -107,6 +107,16 @@ public class CitySelectListActivity extends Activity implements
             public void afterTextChanged(Editable editable) {
 
             }
+        });
+
+        TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
+        tv.setText(R.string.city_selected);
+        findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
         });
     }
 

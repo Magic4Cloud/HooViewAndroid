@@ -133,6 +133,7 @@
         </activity>
         <activity
             android:name=".activity.setting.BindPhoneActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -263,12 +264,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.user.CitySelectListActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.home.AssetsRankListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".live.activity.SetPasswordActivity" />
+        <activity android:name=".live.activity.SetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity android:name=".activity.home.HomeTopicListActivity" />
 
         <!-- Third part activity Start -->

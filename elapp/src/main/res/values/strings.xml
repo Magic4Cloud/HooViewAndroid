@@ -586,4 +586,5 @@
     <string name="video_new">视频</string>
     <string name="start_group_chat">发起群聊</string>
     <string name="set_pw_6to12">设置新密码，输入6~20位密码</string>
+    <string name="city_selected">城市选择</string>
 </resources>

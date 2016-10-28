@@ -16,14 +16,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
 
-import tv.danmaku.ijk.media.player.IMediaPlayer;
-
 import com.easyvaas.sdk.player.EVPlayer;
 import com.easyvaas.sdk.player.PlayerConstants;
 import com.easyvaas.sdk.player.base.EVPlayerBase;
 import com.easyvaas.sdk.player.base.EVPlayerParameter;
 import com.easyvaas.sdk.player.base.EVVideoView;
-
 import com.hooview.app.bean.video.VideoEntity;
 import com.hooview.app.live.chat.IChatHelper;
 import com.hooview.app.net.ApiConstant;
@@ -37,6 +34,8 @@ import com.hooview.app.utils.NetworkUtil;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.UserUtil;
 import com.hooview.app.view.MediaController;
+
+import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 public class PlayerActivity extends LiveRoomBaseActivity {
     private static final String TAG = "PlayerActivity";
@@ -154,7 +153,11 @@ public class PlayerActivity extends LiveRoomBaseActivity {
             mDurationTv.setText(com.hooview.app.R.string.is_playback);
             findViewById(com.hooview.app.R.id.player_bottom_comment_btn).setVisibility(View.GONE);
         }
-        findViewById(com.hooview.app.R.id.live_gift_iv).setVisibility(View.VISIBLE);
+
+        //Gone
+        findViewById(com.hooview.app.R.id.live_gift_iv).setVisibility(View.INVISIBLE);
+        findViewById(com.hooview.app.R.id.live_gift_iv).setEnabled(false);
+
         if (result.getName().equals(currentUserId)) {
             mBubbleView.setEnabled(false);
         }

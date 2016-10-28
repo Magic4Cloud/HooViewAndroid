@@ -60,7 +60,7 @@ public class LiveRoomManager {
     public void showUserInfoPopView(final String userId, View anchorInfoView) {
         View userInfoView = null;
         if (mPref.getUserNumber().equals(userId)) {
-            SingleToast.show(mActivity, R.string.this_is_self);
+            //SingleToast.show(mActivity, R.string.this_is_self);
             return;
         }
 

@@ -430,7 +430,7 @@ class LiveRoomBaseActivity extends BasePlayerActivity
             mLikeCount = chatVideoInfo.getLike_count();
             mWatchingCount = chatVideoInfo.getWatching_count();
             mRiceRollCount = chatVideoInfo.getRiceRoll_count();
-            mRiceRollCountTv.setText(mRiceRollCount + "");
+            //mRiceRollCountTv.setText(mRiceRollCount + "");
             updateWatchLikeCounts(mWatchingCount);
             if (mLiveRoomManager != null) {
                 mLiveRoomManager.updateRoomInfo(mCommentCount, mLikeCount, mWatchingCount);
@@ -515,14 +515,14 @@ class LiveRoomBaseActivity extends BasePlayerActivity
                 hideUserPopupView();
                 DialogUtil.showReportVideoDialog(this, mCurrentVideo.getName());
                 break;
-            case com.hooview.app.R.id.rice_ticket_ll:
-                if (mRiceRollCount > 0) {
-                    Intent contributorIntent = new Intent(this, RiceRollContributorListActivity.class);
-                    contributorIntent.putExtra(RiceRollContributorListActivity.RICE_ROLL_USER_NAME,
-                            mCurrentVideo.getName());
-                    startActivity(contributorIntent);
-                }
-                break;
+//            case com.hooview.app.R.id.rice_ticket_ll:
+//                if (mRiceRollCount > 0) {
+//                    Intent contributorIntent = new Intent(this, RiceRollContributorListActivity.class);
+//                    contributorIntent.putExtra(RiceRollContributorListActivity.RICE_ROLL_USER_NAME,
+//                            mCurrentVideo.getName());
+//                    startActivity(contributorIntent);
+//                }
+//                break;
             case com.hooview.app.R.id.comment_new_count_tv:
                 showNewComment();
                 break;
@@ -915,6 +915,11 @@ class LiveRoomBaseActivity extends BasePlayerActivity
         mRiceRollCountTv.setText("0");
         mRiceTicketLL = view.findViewById(com.hooview.app.R.id.rice_ticket_ll);
         mRiceTicketLL.setOnClickListener(this);
+
+        //TODO 隐藏
+        mRiceTicketLL.setVisibility(View.GONE);
+        view.findViewById(com.hooview.app.R.id.live_gift_iv).setVisibility(View.GONE);
+
         mGiftManager = new GiftManager((ViewGroup) view.findViewById(com.hooview.app.R.id.container_fl),
                 mOnGiftNotification);
         mGiftBurstIb = (ImageButton) view.findViewById(com.hooview.app.R.id.burst_iv);
@@ -1117,7 +1122,7 @@ class LiveRoomBaseActivity extends BasePlayerActivity
                     return "";
                 }
                 if (mPref.getUserNickname().equals(nickname)) {
-                    SingleToast.show(getApplicationContext(), com.hooview.app.R.string.msg_should_reply_self);
+                    //SingleToast.show(getApplicationContext(), com.hooview.app.R.string.msg_should_reply_self);
                     return "";
                 } else {
                     mReplyCommentEntity = new ChatComment();

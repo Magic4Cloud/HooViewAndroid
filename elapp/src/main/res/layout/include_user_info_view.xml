@@ -66,14 +66,14 @@
                     android:layout_height="12dp"
                     android:gravity="center"
                     android:textSize="@dimen/text_size_10"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/color_main"/>
                 <TextView
                     android:id="@+id/user_constellation_tv"
                     android:layout_width="28dp"
                     android:layout_height="12dp"
                     android:gravity="center"
                     android:textSize="@dimen/text_size_10"
-                    android:textColor="@color/base_bg_btn_color_blue"
+                    android:textColor="@color/color_main"
                     android:layout_marginLeft="4dp"
                     android:background="@drawable/personal_icon_constellation_bg"/>
             </LinearLayout>

@@ -190,7 +190,7 @@ public class RecorderActivity extends LiveRoomBaseActivity {
 
                     break;
                 case com.hooview.app.R.id.live_send_red_pack_iv:
-                    DialogUtil.showCreateRedPackDialog(RecorderActivity.this, mVid);
+                    //DialogUtil.showCreateRedPackDialog(RecorderActivity.this, mVid);
                     break;
             }
         }
@@ -351,6 +351,7 @@ public class RecorderActivity extends LiveRoomBaseActivity {
         } else {
             recorderView.findViewById(com.hooview.app.R.id.live_send_red_pack_iv).setVisibility(View.INVISIBLE);
         }
+        recorderView.findViewById(com.hooview.app.R.id.live_send_red_pack_iv).setVisibility(View.INVISIBLE);
 
         showLivingInfo();
     }

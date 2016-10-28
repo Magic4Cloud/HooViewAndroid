@@ -50,6 +50,8 @@ public class HomeTabViewHolder extends RecyclerView.ViewHolder {
         layoutParams.width = (int) ViewUtil.getScreenWidth(context);
         layoutParams.height = layoutParams.width + 100;
         itemView.setLayoutParams(layoutParams);
+
+        tvTime.setVisibility(View.INVISIBLE);
     }
 
     //绑定数据

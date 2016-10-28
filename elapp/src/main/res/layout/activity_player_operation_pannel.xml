@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
                     android:layout_alignParentRight="true"
+                    android:visibility="gone"
                     android:src="@drawable/home_living_icon_gift_expression"/>
                 <ImageView
                     android:id="@+id/live_like_count_tv"

@@ -98,7 +98,7 @@ public class WebViewActivity extends BaseActivity {
         mShareContent = new ShareContentWebpage(title, description, url, shareImage);
 
         TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
-        //tv.setText(R.string.contact_us);
+        tv.setText(title);
         findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

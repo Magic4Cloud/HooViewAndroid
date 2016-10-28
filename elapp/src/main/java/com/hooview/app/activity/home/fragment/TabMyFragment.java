@@ -28,8 +28,6 @@ import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
 import com.easyvaas.common.widget.MyUserPhoto;
 import com.hooview.app.R;
-import com.hooview.app.activity.pay.CashInActivity;
-import com.hooview.app.activity.pay.MyProfitActivity;
 import com.hooview.app.activity.user.FansListActivity;
 import com.hooview.app.activity.user.FollowersListActivity;
 import com.hooview.app.activity.user.SettingActivity;
@@ -91,6 +89,11 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
         ImageView shareIcon = (ImageView) mView.findViewById(com.hooview.app.R.id.operation_action_iv);
         shareIcon.setImageResource(com.hooview.app.R.drawable.personal_icon_share);
         shareIcon.setOnClickListener(this);
+
+        //隐藏分享按钮
+        shareIcon.setVisibility(View.GONE);
+
+
         mUserId = (TextView) mView.findViewById(com.hooview.app.R.id.mine_id_tv);
         mUserNameTv = (TextView) mView.findViewById(com.hooview.app.R.id.mine_user_name_tv);
         mGenderTv = (TextView) mView.findViewById(com.hooview.app.R.id.user_gender_tv);
@@ -134,9 +137,9 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
         mFansCountTv = (TextView) summaryInfo.findViewById(com.hooview.app.R.id.fans_count_tv);
         mFollowerCountTv = (TextView) summaryInfo.findViewById(com.hooview.app.R.id.follow_count_tv);
 
-        mView.findViewById(com.hooview.app.R.id.item_cash_in_rl).setOnClickListener(this);
+        //mView.findViewById(com.hooview.app.R.id.item_cash_in_rl).setOnClickListener(this);
         mView.findViewById(com.hooview.app.R.id.item_message_notice_rl).setOnClickListener(this);
-        mView.findViewById(com.hooview.app.R.id.item_my_profit_rl).setOnClickListener(this);
+        //mView.findViewById(com.hooview.app.R.id.item_my_profit_rl).setOnClickListener(this);
         rl_live = (RelativeLayout) mView.findViewById(R.id.item_live_rl);
         rl_live.setOnClickListener(this);
 
@@ -199,9 +202,9 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case com.hooview.app.R.id.item_location_set_rl:
                 break;
-            case com.hooview.app.R.id.item_my_profit_rl:
-                startActivity(new Intent(getActivity(), MyProfitActivity.class));
-                break;
+//            case com.hooview.app.R.id.item_my_profit_rl:
+//                startActivity(new Intent(getActivity(), MyProfitActivity.class));
+//                break;
             case com.hooview.app.R.id.item_message_notice_rl:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
@@ -225,9 +228,9 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
             case R.id.item_live_rl:
                 showIsLiveDialog();
                 break;
-            case com.hooview.app.R.id.item_cash_in_rl:
-                startActivity(new Intent(getActivity(), CashInActivity.class));
-                break;
+//            case com.hooview.app.R.id.item_cash_in_rl:
+//                startActivity(new Intent(getActivity(), CashInActivity.class));
+//                break;
             case com.hooview.app.R.id.mine_set_remarks_tv:
                 Intent intent = new Intent(getActivity(), UserInfoActivity.class);
                 intent.putExtra(Constants.EXTRA_KEY_IS_REGISTER, false);
