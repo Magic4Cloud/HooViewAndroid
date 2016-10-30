@@ -97,6 +97,8 @@ public class SplashActivity extends BaseActivity {
                         return;
                     }
                     activity.finish();
+
+                    //进入主页面
                     if (activity.mIsLogin) {
 
                         //TODO 替换之前的HomeTabActivity的入口
@@ -121,6 +123,8 @@ public class SplashActivity extends BaseActivity {
                         }
                         activity.startActivity(intent);
                     } else {
+
+                        //进入登录页面
                         Intent intent = new Intent(activity, LoginMainActivity.class);
                         activity.startActivity(intent);
                     }
@@ -349,7 +353,7 @@ public class SplashActivity extends BaseActivity {
                 if (isFinishing()) {
                     return;
                 }
-                if (ApiConstant.E_PARAM.equals(errorInfo)) {
+                if (ApiConstant.E_SESSION.equals(errorInfo)) {
                     mIsLogin = false;
                 }
                 delayExitAfterVerify(startVerifyTime);

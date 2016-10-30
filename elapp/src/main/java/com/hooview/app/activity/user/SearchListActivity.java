@@ -27,6 +27,7 @@ import com.easyvaas.common.adapter.CommonRcvAdapter;
 import com.easyvaas.common.widget.flowlayout.FlowLayout;
 import com.easyvaas.common.widget.flowlayout.TagAdapter;
 import com.easyvaas.common.widget.flowlayout.TagFlowLayout;
+import com.hooview.app.R;
 import com.hooview.app.adapter.recycler.SearchAdapter;
 import com.hooview.app.base.BaseRvcActivity;
 import com.hooview.app.bean.SearchInfoEntity;
@@ -138,15 +139,15 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
         mKeywordEt.requestFocus();
 
         mOperationTv = (TextView) findViewById(com.hooview.app.R.id.tab_bar_cancel_tv);
-        mOperationTv.setText(com.hooview.app.R.string.search);
+        mOperationTv.setText(getResources().getString(R.string.cancel));
         mOperationTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mKeywordEt.getText().length() > 0) {
-                    startSearch(mKeywordEt.getText().toString());
-                } else {
-                    finish();
-                }
+//                if (mKeywordEt.getText().length() > 0) {
+//                    startSearch(mKeywordEt.getText().toString());
+//                } else {
+                finish();
+                //}
             }
         });
         initSearchKeyword();
@@ -160,12 +161,12 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
             public void onItemClick(View view, int position) {
                 Object object = mSearchResults.get(position);
                 if (object instanceof VideoEntity) {
-                    if (TextUtils.isEmpty(((VideoEntity)object).getVid())) {
+                    if (TextUtils.isEmpty(((VideoEntity) object).getVid())) {
                         return;
                     }
                     Utils.watchVideo(getApplicationContext(), (VideoEntity) object);
                 } else if (object instanceof UserEntity) {
-                    if (TextUtils.isEmpty(((UserEntity)object).getName())) {
+                    if (TextUtils.isEmpty(((UserEntity) object).getName())) {
                         return;
                     }
                     UserEntity userEntity = (UserEntity) object;
@@ -174,7 +175,7 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
                         intent.putExtra(SearchListActivity.EXTRA_KEY_TYPE, ApiConstant.VALUE_SEARCH_TYPE_USER);
                         startActivity(intent);
                     } else {
-                        UserUtil.showUserInfo(getApplicationContext(),userEntity.getName());
+                        UserUtil.showUserInfo(getApplicationContext(), userEntity.getName());
                     }
                 }
             }
@@ -192,10 +193,10 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
         mClearHistoryBtn = (TextView) findViewById(com.hooview.app.R.id.clear_history_btn);
         mClearHistoryBtn.setOnClickListener(this);
         String history = mPref.getString(Preferences.KEY_SEARCH_HISTORY_KEYWORD);
-        if (!TextUtils.isEmpty(history)){
+        if (!TextUtils.isEmpty(history)) {
             List<String> list = new ArrayList<String>();
-            for(Object o : history.split(",")) {
-                list.add((String)o);
+            for (Object o : history.split(",")) {
+                list.add((String) o);
             }
             mHistoryKeywords = list;
         }
@@ -243,6 +244,7 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
             //mHistoryLabelTV.setVisibility(View.VISIBLE);
             mHistoryFlowLayout.setVisibility(View.VISIBLE);
         }
+        mHistoryLabelTV.setVisibility(View.VISIBLE);
     }
 
     private void startSearch(String keyword) {
@@ -262,7 +264,7 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
         String oldText = mPref.getString(Preferences.KEY_SEARCH_HISTORY_KEYWORD);
         if (!TextUtils.isEmpty(text) && !oldText.contains(text)) {
             mPref.putString(Preferences.KEY_SEARCH_HISTORY_KEYWORD, text + "," + oldText);
-            mHistoryKeywords.add(0,text);
+            mHistoryKeywords.add(0, text);
         }
         mHistoryTagAdapter.notifyDataChanged();
     }
@@ -271,7 +273,7 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
         mPref.remove(Preferences.KEY_SEARCH_HISTORY_KEYWORD);
         mHistoryKeywords.clear();
         mHistoryTagAdapter.notifyDataChanged();
-        mHistoryLabelTV.setVisibility(View.GONE);
+        mHistoryLabelTV.setVisibility(View.VISIBLE);
         mHistoryFlowLayout.setVisibility(View.GONE);
         mClearHistoryBtn.setVisibility(View.GONE);
         SingleToast.show(this, getString(com.hooview.app.R.string.clear_history_success), Toast.LENGTH_SHORT);

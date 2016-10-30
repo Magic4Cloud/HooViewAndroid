@@ -800,6 +800,7 @@ public class ApiHelper {
         sRequestHelper.getAsString(ApiConstant.USER_AUTH_PHONE_CHANGE, map, callBack);
     }
 
+    //检查用户的sessionId是不是过期了
     public void userSessionCheck(MyRequestCallBack<String> callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("sessionid", mPref.getSessionId());
