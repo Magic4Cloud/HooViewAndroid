@@ -28,6 +28,7 @@ import com.easemob.chat.EMGroup;
 import com.easyvaas.common.adapter.CommonRcvAdapter;
 import com.easyvaas.common.chat.ChatHXSDKHelper;
 import com.easyvaas.common.chat.ChatManager;
+import com.easyvaas.common.chat.activity.FriendsSelectorListActivity;
 import com.easyvaas.common.chat.activity.MyGroupListActivity;
 import com.easyvaas.common.chat.bean.BaseUser;
 import com.easyvaas.common.chat.db.InviteMessageDao;
@@ -165,7 +166,8 @@ public class TabMessageFragment extends BaseRvcFragment {
         view.findViewById(com.hooview.app.R.id.create_group_tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoChatGroupList(true);
+                //gotoChatGroupList(true);
+                enterSelectedFriend();
             }
         });
         return view;
@@ -335,6 +337,9 @@ public class TabMessageFragment extends BaseRvcFragment {
     private boolean mIsLoadingFriends;
 
     private void gotoChatGroupList(boolean createGroup) {
+
+
+
         if (mIsLoadingFriends) {
             return;
         }
@@ -369,5 +374,11 @@ public class TabMessageFragment extends BaseRvcFragment {
                 mIsLoadingFriends = false;
             }
         });
+    }
+
+    private void enterSelectedFriend(){
+        //进入建群
+        Intent intent = new Intent(getActivity(), FriendsSelectorListActivity.class);
+        startActivity(intent);
     }
 }

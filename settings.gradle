@@ -1,1 +1,1 @@
-include ':elapp'
+include ':elapp',':EasyChat'

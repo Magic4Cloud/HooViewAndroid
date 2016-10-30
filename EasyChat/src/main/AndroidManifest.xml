@@ -1,0 +1,64 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.easyvaas.common.chat">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name">
+        <activity
+            android:name="com.easyvaas.common.chat.activity.AlertDialogActivity"
+            android:theme="@style/AppBaseTheme.Dialog" />
+        <activity
+            android:name="com.easyvaas.common.chat.activity.ContextMenuActivity"
+            android:theme="@style/AppBaseTheme.Dialog" />
+
+        <!--聊天页面-->
+        <activity
+            android:name="com.easyvaas.common.chat.activity.ChatActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <activity android:name="com.easyvaas.common.chat.activity.ForwardMessageActivity" />
+        <activity
+            android:name="com.easyvaas.common.chat.activity.ShowBigImageActivity"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity android:name="com.easyvaas.common.chat.activity.ShowNormalFileActivity" />
+        <activity android:name="com.easyvaas.common.chat.activity.ShowVideoActivity" />
+
+        <!--是dialog-->
+        <activity
+            android:name="com.easyvaas.common.chat.activity.UserProfileActivity"
+            android:theme="@style/AppBaseTheme.Dialog" />
+
+        <!--通话页面-->
+        <activity
+            android:name="com.easyvaas.common.chat.activity.VideoCallActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.easyvaas.common.chat.activity.VoiceCallActivity"
+            android:launchMode="singleTask" />
+
+        <!--选择联系人列表-->
+        <activity
+            android:name="com.easyvaas.common.chat.activity.FriendsSelectorListActivity"
+            android:theme="@style/my_actionbar_style" />
+
+        <!--我的群组-->
+        <activity
+            android:name="com.easyvaas.common.chat.activity.MyGroupListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!--群信息-->
+        <activity
+            android:name=".activity.GroupInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <!--更改群名-->
+        <activity
+            android:name=".activity.GroupNameChangedActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+    </application>
+</manifest>

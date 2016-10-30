@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.TimeButton;
-
 import com.hooview.app.activity.setting.BindPhoneActivity;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.user.User;
@@ -26,7 +25,6 @@ import com.hooview.app.net.ApiConstant;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.net.JsonParserUtil;
 import com.hooview.app.net.MyRequestCallBack;
-import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.SingleToast;
 import com.hooview.app.utils.ValidateParam;
 
@@ -58,7 +56,7 @@ public class BindOrChangePhoneActivity extends BaseActivity implements OnClickLi
         mVerifyCodeEt = (EditText) findViewById(com.hooview.app.R.id.vp_verification_et);
         mTimeButton = (TimeButton) findViewById(com.hooview.app.R.id.vp_time_btn);
         mTimeButton.setOnClickListener(this);
-        findViewById(com.hooview.app.R.id.vp_phone_error_tv).setOnClickListener(this);
+        //findViewById(com.hooview.app.R.id.vp_phone_error_tv).setOnClickListener(this);
         mCommitTv = (TextView) findViewById(com.hooview.app.R.id.add_option_iv);
         mCenterContentTv = (TextView) findViewById(com.hooview.app.R.id.common_custom_title_tv);
         mCommitLl = (LinearLayout) findViewById(com.hooview.app.R.id.add_option_view);
@@ -119,13 +117,13 @@ public class BindOrChangePhoneActivity extends BaseActivity implements OnClickLi
                     SingleToast.show(this, com.hooview.app.R.string.msg_phone_number_empty);
                 }
                 break;
-            case com.hooview.app.R.id.vp_phone_error_tv:
-                Intent serviceIntent = new Intent(this, TextActivity.class);
-                serviceIntent.putExtra(TextActivity.EXTRA_TYPE, TextActivity.TYPE_PHONE_BIND_ISSUE);
-                serviceIntent
-                        .putExtra(Constants.EXTRA_KEY_TITLE, getString(com.hooview.app.R.string.verify_appeals_phone_error));
-                startActivity(serviceIntent);
-                break;
+//            case com.hooview.app.R.id.vp_phone_error_tv:
+//                Intent serviceIntent = new Intent(this, TextActivity.class);
+//                serviceIntent.putExtra(TextActivity.EXTRA_TYPE, TextActivity.TYPE_PHONE_BIND_ISSUE);
+//                serviceIntent
+//                        .putExtra(Constants.EXTRA_KEY_TITLE, getString(com.hooview.app.R.string.verify_appeals_phone_error));
+//                startActivity(serviceIntent);
+//                break;
             case com.hooview.app.R.id.add_option_view:
                 mSmsCode = mVerifyCodeEt.getText().toString();
                 if (mSmsCode.length() < 4) {

@@ -121,9 +121,9 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':EasyChat')
     compile(name: 'BottomSheet', ext: 'aar')
     compile(name: 'CustomView', ext: 'aar')
-    compile(name: 'EasyChat', ext: 'aar')
     compile(name: 'EmojiKeyboard', ext: 'aar')
     compile(name: 'Feedback', ext: 'aar')
     compile(name: 'feedbackSdk', ext: 'aar')

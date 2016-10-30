@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="border_width" format="dimension" />
+    <attr name="border_color" format="color" />
+
+    <declare-styleable name="RoundImageView">
+        <attr name="border_width"/>
+        <attr name="border_color"/>
+        <attr name="border_radius" format="dimension"/>
+        <attr name="type" format="enum">
+            <enum name="circle" value="0" />
+            <enum name="round" value="1" />
+        </attr>
+        <attr name="overlay" format="color"/>
+    </declare-styleable>
+</resources>

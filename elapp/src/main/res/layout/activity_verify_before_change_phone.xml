@@ -67,14 +67,14 @@
     </LinearLayout>
     <ImageView
         style="@style/default_horizontal_line_style"/>
-    <TextView
-        android:id="@+id/vp_phone_error_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="14dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="@string/msg_phone_number_error"
-        android:textSize="@dimen/text_size_17"/>
+    <!--<TextView-->
+        <!--android:id="@+id/vp_phone_error_tv"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:text="@string/msg_phone_number_error"-->
+        <!--android:textSize="@dimen/text_size_17"/>-->
 </LinearLayout>

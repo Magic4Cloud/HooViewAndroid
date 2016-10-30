@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="tab_bar_height">48dp</dimen>
+
+    <dimen name="divider_height">0.5dp</dimen>
+
+    <dimen name="button_common_height">38dp</dimen>
+    <dimen name="avatar_border_width">1dp</dimen>
+    <dimen name="common_user_list_item_height">69dp</dimen>
+    <dimen name="list_item_video_limit_height">51dp</dimen>
+
+    <dimen name="text_size_title_h1">15sp</dimen>
+    <dimen name="text_size_title_h2">14sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_size_10">10sp</dimen>
+
+    <dimen name="action_bar_height">54dp</dimen>
+    <dimen name="follow_tip_bar_height">40dp</dimen>
+    <dimen name="action_bar_title_text_size">18sp</dimen>
+    <dimen name="action_bar_menu_text_size">16sp</dimen>
+
+    <dimen name="chat_user_logo_border_width">0.6dp</dimen>
+    <dimen name="chat_avatar_size">38dp</dimen>
+
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="padding_search_bar">5dp</dimen>
+    <dimen name="emoji_size_small">16dp</dimen>
+    <dimen name="context_menu_item_height">48dp</dimen>
+
+
+    <dimen name="avatar_big_size">45dp</dimen>
+
+</resources>

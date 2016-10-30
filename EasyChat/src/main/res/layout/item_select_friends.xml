@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <com.easyvaas.common.widget.MyUserPhoto
+        android:id="@+id/group_member_photo"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:scaleType="fitCenter"
+        app:src="@drawable/somebody"
+        app:is_vip="no_vip"
+        android:layout_marginRight="5dp"
+        app:small_height="8dp"
+        app:small_width="8dp"
+        app:border_color="@color/round_border"
+        app:border_width="@dimen/avatar_border_width"/>
+</LinearLayout>

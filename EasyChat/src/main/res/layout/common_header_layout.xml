@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message_top_title_rl"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/action_bar_height"
+    android:background="@color/color_main">
+
+    <ImageView
+        android:id="@+id/close_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:padding="10dp"
+        android:src="@drawable/home_icon_back" />
+
+    <TextView
+        android:id="@+id/common_custom_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="40dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/color_titlebar_textcolor"
+        android:textSize="@dimen/action_bar_menu_text_size" />
+
+    <LinearLayout
+        android:id="@+id/add_option_view"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/add_option_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/commit"
+            android:textColor="@color/color_titlebar_textcolor"
+            android:textSize="@dimen/text_size_title_h1"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/add_option_tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="@string/action_settings"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_title_h1"
+            android:visibility="gone" />
+    </LinearLayout>
+</RelativeLayout>
