@@ -17,12 +17,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
+    <View
+        android:id="@+id/common_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_shadow_height"
+        android:layout_below="@+id/common_title_tv"
+        android:background="@drawable/shape_toolbar_shadow" />
     <LinearLayout
         android:id="@+id/top_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/common_title_tv"
+        android:layout_below="@+id/common_shadow"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:background="@color/white">

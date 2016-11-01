@@ -36,4 +36,8 @@
 
     <dimen name="avatar_big_size">45dp</dimen>
 
+    <dimen name="toolbar_height_no_shadow">56dp</dimen>
+    <dimen name="toolbar_height_with_shadow">57dp</dimen>
+    <dimen name="toolbar_shadow">1dp</dimen>
+
 </resources>

@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hooview.app.BuildConfig;
+import com.hooview.app.R;
 import com.hooview.app.base.BaseActivity;
-import com.hooview.app.db.Preferences;
 import com.hooview.app.utils.ChannelUtil;
 import com.hooview.app.utils.SingleToast;
 
@@ -23,6 +23,9 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     private long mClickTime;
     private ImageView mCloseIv;
     private TextView mCenterContentTv;
+
+    //版本号
+    private TextView tv_version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +40,21 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         findViewById(com.hooview.app.R.id.about_us_rl).setOnClickListener(this);
         //findViewById(com.hooview.app.R.id.seizure_account_rl).setOnClickListener(this);
         findViewById(com.hooview.app.R.id.copyright_rl).setOnClickListener(this);
+        tv_version = (TextView) findViewById(R.id.tv_version_code);
         //findViewById(com.hooview.app.R.id.manual_check_update_rl).setOnClickListener(this);
 //        if (ChannelUtil.isGoogleChannel(this)) {
 //            findViewById(com.hooview.app.R.id.manual_check_update_rl).setVisibility(View.GONE);
 //        }
 
+        tv_version.setText("v" + BuildConfig.VERSION_NAME);
 
-        String version = "V" + BuildConfig.VERSION_NAME;
-        if (!BuildConfig.BUILD_TYPE.equals("release") || BuildConfig.FLAVOR.startsWith("inner")) {
-            version = version + " " + Preferences.getInstance(this).getString(Preferences.KEY_SERVER_TYPE)
-                    + "\nbuild time: " + getString(com.hooview.app.R.string.build_time);
-        }
-//        ((TextView) findViewById(com.hooview.app.R.id.version_name_tv)).setText(version);
+
+        //String version = "V" + BuildConfig.VERSION_NAME;
+//        if (!BuildConfig.BUILD_TYPE.equals("release") || BuildConfig.FLAVOR.startsWith("inner")) {
+//            version = version + " " + Preferences.getInstance(this).getString(Preferences.KEY_SERVER_TYPE)
+//                    + "\nbuild time: " + getString(com.hooview.app.R.string.build_time);
+//        }
+////        ((TextView) findViewById(com.hooview.app.R.id.version_name_tv)).setText(version);
     }
 
     @Override

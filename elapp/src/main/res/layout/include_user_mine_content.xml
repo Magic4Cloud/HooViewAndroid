@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/account_start_live" />
+            android:src="@drawable/personal_icon_play" />
 
         <TextView
             android:id="@+id/share_live_title_tv"

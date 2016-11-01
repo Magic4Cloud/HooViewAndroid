@@ -71,4 +71,6 @@
     <color name="color_main">#662d80</color>
     <color name="color_main_pressed">#55662d80</color>
     <color name="color_titlebar_textcolor">#ffffff</color>
+    <color name="hv_toobar_shadow_start">#3d000000</color>
+    <color name="hv_toobar_shadow_end">#08000000</color>
 </resources>

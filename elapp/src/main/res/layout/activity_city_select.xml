@@ -1,56 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fitsSystemWindows="true"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
     <include
         android:id="@+id/common_title_tv"
+        layout="@layout/common_header_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/common_header_layout"/>
-    <EditText
+        android:layout_alignParentTop="true" />
+
+    <View
+        android:id="@+id/commin_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_shadow_height"
         android:layout_below="@+id/common_title_tv"
+        android:background="@drawable/shape_toolbar_shadow" />
+
+    <EditText
         android:id="@+id/cs_search_et"
         android:layout_width="match_parent"
         android:layout_height="34dp"
+        android:layout_below="@+id/commin_shadow"
+        android:layout_gravity="center_vertical"
         android:layout_margin="10dp"
+        android:background="@drawable/search_box_shape"
+        android:drawableLeft="@drawable/icon_search"
+        android:hint="@string/city_select"
+        android:imeOptions="actionSearch"
         android:paddingLeft="5dp"
         android:singleLine="true"
-        android:imeOptions="actionSearch"
-        android:layout_gravity="center_vertical"
-        android:hint="@string/city_select"
-        android:visibility="gone"
-        android:drawableLeft="@drawable/icon_search"
         android:textSize="12sp"
-        android:background="@drawable/search_box_shape"/>
+        android:visibility="gone" />
+
     <com.easyvaas.common.widget.stickylistview.StickyListHeadersListView
         android:id="@+id/stickyList"
         android:layout_width="match_parent"
-        android:layout_below="@id/cs_search_et"
         android:layout_height="wrap_content"
+        android:layout_below="@id/cs_search_et"
         android:cacheColorHint="@android:color/transparent"
-        android:listSelector="@drawable/list_item_selector"/>
+        android:listSelector="@drawable/list_item_selector" />
+
     <com.easyvaas.common.widget.LetterSideBar
         android:id="@+id/cs_letter_sb"
         android:layout_width="20dp"
         android:layout_height="match_parent"
-        android:layout_below="@id/cs_search_et"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/cs_search_et" />
 
     <TextView
         android:id="@+id/cs_selected_letter_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="60sp"
-        android:textColor="@color/text_gray"/>
+        android:textColor="@color/text_gray"
+        android:textSize="60sp" />
 </RelativeLayout>

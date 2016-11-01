@@ -2,17 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <include
         android:id="@+id/common_title_tv"
+        layout="@layout/common_header_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/common_header_layout"/>
+        android:layout_alignParentTop="true" />
+    <View
+        android:id="@+id/common_shadow"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/common_title_tv"
+        android:layout_height="@dimen/toolbar_shadow"
+        android:background="@drawable/shape_toolbar_shadow" />
+
     <com.easyvaas.common.recycler.PullToLoadView
         android:id="@+id/pull_load_view"
-        android:layout_marginTop="54dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/toolbar_height_with_shadow" />
 
     <ImageView
         android:id="@+id/tap_top_iv"

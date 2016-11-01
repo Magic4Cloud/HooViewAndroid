@@ -44,6 +44,12 @@ public class CountryCodeListActivity extends BaseActivity implements
         setContentView(com.hooview.app.R.layout.activity_city_select);
         TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
         tv.setText(R.string.country_code);
+        findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         initView();
     }
 
@@ -105,7 +111,7 @@ public class CountryCodeListActivity extends BaseActivity implements
 
     @Override
     public void onHeaderClick(StickyListHeadersListView l, View header, int itemPosition,
-            long headerId, boolean currentlySticky) {
+                              long headerId, boolean currentlySticky) {
 
     }
 

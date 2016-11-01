@@ -17,10 +17,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.chat.ChatManager;
 import com.easyvaas.common.feedback.FeedbackHelper;
+import com.hooview.app.R;
 import com.hooview.app.activity.WebViewActivity;
 import com.hooview.app.activity.login.LoginMainActivity;
 import com.hooview.app.activity.setting.AboutActivity;
@@ -126,7 +128,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         findViewById(com.hooview.app.R.id.item_about_us_rl).setOnClickListener(this);
         findViewById(com.hooview.app.R.id.contact_us_rl).setOnClickListener(this);
         findViewById(com.hooview.app.R.id.logout_btn).setOnClickListener(this);
-        findViewById(com.hooview.app.R.id.feedback_rl).setOnClickListener(this);
+        //findViewById(com.hooview.app.R.id.feedback_rl).setOnClickListener(this);
+
+        RelativeLayout rl_feedback = (RelativeLayout) findViewById(R.id.feedback_rl);
+        rl_feedback.setOnClickListener(this);
+        rl_feedback.setVisibility(View.GONE);
 
         if (UpdateManager.getInstance(this).isHaveUpdate()) {
             findViewById(com.hooview.app.R.id.about_us_remind_tv).setVisibility(View.VISIBLE);

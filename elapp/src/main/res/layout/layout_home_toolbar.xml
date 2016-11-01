@@ -36,10 +36,5 @@
         android:layout_marginRight="18dp"
         android:background="@drawable/selector_home_search" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/shape_toolbar_shadow" />
 </RelativeLayout>
 

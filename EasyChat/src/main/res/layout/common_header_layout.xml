@@ -7,7 +7,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/message_top_title_rl"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/action_bar_height"
+    android:layout_height="@dimen/toolbar_height_no_shadow"
     android:background="@color/color_main">
 
     <ImageView
@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/common_custom_title_tv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/action_bar_height"
+        android:layout_height="@dimen/toolbar_height_no_shadow"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="40dp"
         android:ellipsize="end"

@@ -6,18 +6,6 @@
 
 package com.hooview.app.utils;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -47,12 +35,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
-import com.squareup.picasso.Target;
-
 import com.easyvaas.common.bottomsheet.BottomSheet;
-
 import com.hooview.app.app.EVApplication;
 import com.hooview.app.bean.video.VideoEntity;
 import com.hooview.app.db.Preferences;
@@ -60,6 +43,21 @@ import com.hooview.app.live.activity.PlayerActivity;
 import com.hooview.app.live.activity.SetPasswordActivity;
 import com.hooview.app.net.ApiConstant;
 import com.hooview.app.net.RequestHelper;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+import com.squareup.picasso.Target;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
@@ -703,4 +701,6 @@ public class Utils {
         }
         context.startActivity(intent);
     }
+
+
 }

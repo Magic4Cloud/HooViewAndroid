@@ -21,6 +21,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             layout="@layout/common_header_layout"/>
+        <View
+            android:id="@+id/common_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_shadow_height"
+            android:background="@drawable/shape_toolbar_shadow" />
 
         <TextView
             android:layout_width="match_parent"
@@ -200,8 +205,8 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_arrow_right_personal_more"/>
         </RelativeLayout>
-        <ImageView
-            style="@style/default_horizontal_line_style"/>
+        <!--<ImageView-->
+            <!--style="@style/default_horizontal_line_style"/>-->
         <RelativeLayout
             android:id="@+id/feedback_rl"
             style="@style/item_my_setting">

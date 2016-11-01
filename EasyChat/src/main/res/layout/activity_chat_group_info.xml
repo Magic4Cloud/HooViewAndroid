@@ -11,6 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
+    <View
+        android:id="@+id/common_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_shadow"
+        android:background="@drawable/shape_toolbar_shadow" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

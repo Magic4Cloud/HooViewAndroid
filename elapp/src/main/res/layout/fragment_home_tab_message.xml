@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <RelativeLayout
         android:id="@+id/message_top_title_rl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/action_bar_height"
+        android:layout_height="@dimen/toolbar_height_no_shadow"
         android:layout_alignParentTop="true"
         android:background="@color/color_main">
 
@@ -40,10 +39,15 @@
             android:textSize="@dimen/text_size_title_h2" />
     </RelativeLayout>
 
+    <View
+        android:id="@+id/shadow_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/shape_toolbar_shadow" />
+
     <com.easyvaas.common.recycler.PullToLoadView
         android:id="@+id/pull_load_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/message_top_title_rl"
         android:layout_marginTop="10dp" />
 </LinearLayout>

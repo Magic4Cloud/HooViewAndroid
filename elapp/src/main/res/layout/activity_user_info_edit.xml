@@ -16,13 +16,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
+    <View
+        android:id="@+id/common_shadow"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/common_title_tv"
+        android:layout_height="@dimen/actionbar_shadow_height"
+        android:background="@drawable/shape_toolbar_shadow" />
     <RelativeLayout
         android:id="@+id/phone_number_rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="9dp"
-        android:layout_below="@id/common_title_tv">
+        android:layout_below="@id/common_shadow">
         <EditText
             android:id="@+id/register_phone_et"
             style="@style/register_input_style"

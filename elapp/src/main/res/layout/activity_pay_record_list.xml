@@ -17,6 +17,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
+    <View
+        android:id="@+id/commin_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_shadow_height"
+        android:background="@drawable/shape_toolbar_shadow" />
     <LinearLayout
         android:id="@+id/amount_total_ll"
         android:layout_width="match_parent"

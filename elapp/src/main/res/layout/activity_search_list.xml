@@ -15,7 +15,7 @@
     <RelativeLayout
         android:id="@+id/global_search_action_bar_rl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/action_bar_height"
+        android:layout_height="@dimen/toolbar_height_no_shadow"
         android:background="@color/hv622d80"
         android:orientation="horizontal">
 
@@ -73,15 +73,18 @@
             android:textSize="@dimen/text_size_title_h2" />
     </RelativeLayout>
 
-    <ImageView
-        style="@style/default_horizontal_line_style"
-        android:layout_below="@+id/global_search_action_bar_rl" />
+    <View
+        android:id="@+id/commin_shadow"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/global_search_action_bar_rl"
+        android:layout_height="@dimen/actionbar_shadow_height"
+        android:background="@drawable/shape_toolbar_shadow" />
 
     <LinearLayout
         android:id="@+id/search_history_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/global_search_action_bar_rl"
+        android:layout_below="@+id/commin_shadow"
         android:orientation="vertical"
         android:visibility="visible">
 

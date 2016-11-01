@@ -21,10 +21,17 @@
             app:navigationIcon="@drawable/home_icon_back"
             app:titleTextAppearance="@style/Toolbar.TitleText" />
 
+        <View
+            android:id="@+id/common_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_shadow"
+            android:background="@drawable/shape_toolbar_shadow" />
+
         <include
             android:id="@+id/search_bar"
             layout="@layout/include_search_bar" />
     </LinearLayout>
+
 
     <com.easyvaas.common.recycler.PullToLoadView
         android:id="@+id/pull_load_view"

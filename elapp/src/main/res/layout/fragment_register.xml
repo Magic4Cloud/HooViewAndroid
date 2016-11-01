@@ -18,12 +18,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
+    <View
+        android:id="@+id/shadow_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/common_title_tv"
+        android:background="@drawable/shape_toolbar_shadow" />
     <include
         android:id="@+id/country_code_rl"
         android:layout_width="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_height="@dimen/avatar_big_second_size"
-        android:layout_below="@id/common_title_tv"
+        android:layout_below="@id/shadow_view"
         android:layout_marginTop="10dp"
         layout="@layout/include_country_code_item"/>
 
@@ -134,7 +140,7 @@
         android:textSize="@dimen/text_size_title_h1"
         android:layout_centerHorizontal="true"
         android:text="@string/confirm"
-        android:background="@drawable/common_fill_round_three_btn_blue_selector"
+        android:background="@drawable/selector_btn_load"
         style="?android:buttonBarButtonStyle"/>
     <LinearLayout
         android:id="@+id/login_bottom_tips_ll"

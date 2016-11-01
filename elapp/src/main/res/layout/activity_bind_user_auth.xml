@@ -18,6 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_shadow_height"
+        android:background="@drawable/shape_toolbar_shadow" />
 
     <ImageView
         android:layout_width="match_parent"

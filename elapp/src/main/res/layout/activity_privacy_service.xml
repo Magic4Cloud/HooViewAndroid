@@ -21,6 +21,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true" />
+        <View
+            android:id="@+id/commin_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbar_shadow_height"
+            android:background="@drawable/shape_toolbar_shadow" />
 
         <TextView
             android:id="@+id/title_tv"

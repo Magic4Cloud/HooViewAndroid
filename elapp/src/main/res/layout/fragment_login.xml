@@ -17,13 +17,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
+    <View
+        android:id="@+id/shadow_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/common_title_tv"
+        android:background="@drawable/shape_toolbar_shadow" />
 
     <include
         android:id="@+id/country_code_rl"
         android:layout_height="@dimen/avatar_big_second_size"
         android:layout_width="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/common_title_tv"
+        android:layout_below="@id/shadow_view"
         android:layout_marginTop="10dp"
         layout="@layout/include_country_code_item"/>
     <ImageView
