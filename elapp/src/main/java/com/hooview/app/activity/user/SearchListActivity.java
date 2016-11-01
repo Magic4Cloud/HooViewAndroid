@@ -143,11 +143,11 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
         mOperationTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (mKeywordEt.getText().length() > 0) {
-//                    startSearch(mKeywordEt.getText().toString());
-//                } else {
-                finish();
-                //}
+                if (mKeywordEt.getText().length() > 0) {
+                    startSearch(mKeywordEt.getText().toString());
+                } else {
+                    finish();
+                }
             }
         });
         initSearchKeyword();
@@ -191,6 +191,7 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
         mSearchKeywordsLl = (LinearLayout) findViewById(com.hooview.app.R.id.search_history_ll);
         mHistoryLabelTV = (TextView) findViewById(com.hooview.app.R.id.history_label_tv);
         mClearHistoryBtn = (TextView) findViewById(com.hooview.app.R.id.clear_history_btn);
+        mHistoryFlowLayout = (TagFlowLayout) findViewById(com.hooview.app.R.id.history_tfl);
         mClearHistoryBtn.setOnClickListener(this);
         String history = mPref.getString(Preferences.KEY_SEARCH_HISTORY_KEYWORD);
         if (!TextUtils.isEmpty(history)) {
@@ -203,7 +204,9 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
         if (mHistoryKeywords.size() > 0) {
             mSearchKeywordsLl.setVisibility(View.VISIBLE);
         } else {
-            mSearchKeywordsLl.setVisibility(View.GONE);
+            mSearchKeywordsLl.setVisibility(View.VISIBLE);
+            mHistoryFlowLayout.setVisibility(View.INVISIBLE);
+            mClearHistoryBtn.setVisibility(View.INVISIBLE);
         }
         mHistoryTagAdapter = new TagAdapter<String>(mHistoryKeywords) {
             int margin = (int) ViewUtil.dp2Px(getApplicationContext(), 4);
@@ -221,7 +224,7 @@ public class SearchListActivity extends BaseRvcActivity implements View.OnClickL
                 return textView;
             }
         };
-        mHistoryFlowLayout = (TagFlowLayout) findViewById(com.hooview.app.R.id.history_tfl);
+
         mHistoryFlowLayout.setMaxSelectCount(1);
         mHistoryFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override

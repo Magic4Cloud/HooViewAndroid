@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="default_horizontal_line_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/divider_height</item>
@@ -14,6 +15,7 @@
         <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:listSelector">@android:color/transparent</item>
     </style>
+
     <style name="loading_more_progressBar">
         <item name="android:indeterminateDrawable">@drawable/progress_loading</item>
         <item name="android:minHeight">20dip</item>
@@ -67,13 +69,13 @@
     </style>
 
     <style name="group_toggle_button">
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:button">@null</item>
-    <item name="android:textOff">""</item>
-    <item name="android:textOn">""</item>
-    <item name="android:background">@drawable/group_toggle_btn</item>
-</style>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:textOff">""</item>
+        <item name="android:textOn">""</item>
+        <item name="android:background">@drawable/group_toggle_btn</item>
+    </style>
 
     <style name="red_digital_remind">
         <item name="android:layout_width">wrap_content</item>
@@ -86,12 +88,37 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/color_main</item>
+    <!--actionbar的-->
+    <style name="actionbar_style" parent="@style/Theme.AppCompat.Light">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:actionBarStyle">@style/my_actionbar_style</item>
     </style>
+
+    <style name="my_actionbar_style" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@drawable/shape_actionbar_bg</item>
+        <item name="background">@drawable/shape_actionbar_bg</item>
+        <!-- 更换actionbar文字颜色 -->
+        <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
+    </style>
+
     <style name="AcBar_titleStyle">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+
+    <!--Toolbar的使用-->
+
+    <style name="HooView_Theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/color_main</item> <!--浅蓝色-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

@@ -46,19 +46,19 @@ public class MyGroupListActivity extends BaseRvcActivity {
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-                loadData(false);
+            loadData(false);
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mMyHandler =  new MyHandler<>(this);
+        mMyHandler = new MyHandler<>(this);
         setContentView(R.layout.activcity_list_group);
         setTitle(R.string.message_my_group);
 
         //ImageView iv  = (ImageView) findViewById(R.id.ivqwe);
-        SingleToast.show(this,"hehehe");
+        SingleToast.show(this, "hehehe");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mPullToLoadRcvView.getRecyclerView().setLayoutManager(linearLayoutManager);
@@ -93,7 +93,19 @@ public class MyGroupListActivity extends BaseRvcActivity {
 
         });
 
-
+        /**
+         * 建群
+         */
+        tv_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入建群
+                Intent createPGroup = new Intent(MyGroupListActivity.this, FriendsSelectorListActivity.class);
+                createPGroup.putExtra(FriendsSelectorListActivity.EXTRA_MESSAGE_SELECT_CONTACT_TYPE,
+                        FriendsSelectorListActivity.SELECT_CONTACT_TYPE_CREATE_GROUP);
+                startActivityForResult(createPGroup, REQUEST_CODE_CREATE_GROUP);
+            }
+        });
     }
 
     @Override
@@ -168,19 +180,19 @@ public class MyGroupListActivity extends BaseRvcActivity {
                 ArrayList<Pair<Long, EMGroup>> sortList = GroupUtil
                         .loadGroupWithRecentChat(MyGroupListActivity.this, groups,
                                 new MyRequestCallBack<UserArray>() {
-                    @Override
-                    public void onSuccess(UserArray result) {
-                        if (isFinishing()) {
-                            return;
-                        }
-                        mMyGroupAdapter.notifyDataSetChanged();
-                    }
+                                    @Override
+                                    public void onSuccess(UserArray result) {
+                                        if (isFinishing()) {
+                                            return;
+                                        }
+                                        mMyGroupAdapter.notifyDataSetChanged();
+                                    }
 
-                    @Override
-                    public void onFailure(String msg) {
+                                    @Override
+                                    public void onFailure(String msg) {
 
-                    }
-                });
+                                    }
+                                });
                 mMyGroupList.clear();
                 for (Pair<Long, EMGroup> sortItem : sortList) {
                     mMyGroupList.add(sortItem.second);

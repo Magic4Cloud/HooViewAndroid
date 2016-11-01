@@ -175,6 +175,8 @@ public class HomeMessageTabFragment extends BaseRvcFragment {
             @Override
             public void onClick(View v) {
                 //gotoChatGroupList(true);
+
+                //逻辑
                 enterSelectedFriend();
             }
         });
@@ -196,7 +198,7 @@ public class HomeMessageTabFragment extends BaseRvcFragment {
                 .getString(Preferences.KEY_CACHED_USER_INFO_JSON);
         UserEntity entity = new Gson().fromJson(json, UserEntity.class);
         String url = entity.getLogourl();
-        PicassoUtil.loadPlaceholder(getContext(), url,R.drawable.home_icon_person).into(iv);
+        PicassoUtil.loadPlaceholder(getContext(), url, R.drawable.home_icon_person).into(iv);
 
         mPullToLoadRcvView.getSwipeRefreshLayout().setColorSchemeResources(R.color.hv662d80, R.color.hv662d80, R.color.hv662d80);
 
@@ -409,9 +411,16 @@ public class HomeMessageTabFragment extends BaseRvcFragment {
                     }
                 });
     }
-    private void enterSelectedFriend(){
-        //进入建群
-        Intent intent = new Intent(getActivity(), FriendsSelectorListActivity.class);
-        startActivity(intent);
+
+    //群聊
+    private void enterSelectedFriend() {
+//        Intent intent = new Intent(getActivity(), FriendsSelectorListActivity.class);
+//        intent.putExtra(FriendsSelectorListActivity.EXTRA_MESSAGE_SELECT_CONTACT_TYPE,
+//                FriendsSelectorListActivity.SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT);
+//        startActivity(intent);
+        Intent createPGroup = new Intent(getActivity(), FriendsSelectorListActivity.class);
+        createPGroup.putExtra(FriendsSelectorListActivity.EXTRA_MESSAGE_SELECT_CONTACT_TYPE,
+                    FriendsSelectorListActivity.SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT);
+        startActivityForResult(createPGroup, REQUEST_CODE_CREATE_GROUP);
     }
 }

@@ -15,9 +15,9 @@
 
     <ImageView style="@style/default_horizontal_line_style" />
 
-    <ImageView
-        style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="15dp" />
+    <!--<ImageView-->
+        <!--style="@style/default_horizontal_line_style"-->
+        <!--android:layout_marginLeft="15dp" />-->
 
     <RelativeLayout
         android:id="@+id/item_live_rl"
@@ -45,10 +45,10 @@
             android:src="@drawable/ic_arrow_right_personal_more" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/item_share_live_divider_iv"
-        style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="15dp" />
+    <!--<ImageView-->
+        <!--android:id="@+id/item_share_live_divider_iv"-->
+        <!--style="@style/default_horizontal_line_style"-->
+        <!--android:layout_marginLeft="15dp" />-->
 
     <!--<RelativeLayout-->
         <!--android:id="@+id/item_cash_in_rl"-->

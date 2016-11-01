@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.hooview.app.R;
+import com.hooview.app.adapter.holder.HomeFooterViewHolder;
 import com.hooview.app.adapter.holder.HomeHeaderViewHolder;
 import com.hooview.app.adapter.holder.HomeTabViewHolder;
 import com.hooview.app.bean.CarouselInfoEntityArray;
@@ -36,6 +37,7 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private static final int HEADER = 0;
     private static final int BODY = 1;
+    private static final int FOOTER = 2;
 
     //构造方法传递数据
     public HomeTabListAdapter(Context context, List mLists) {
@@ -49,8 +51,10 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == HEADER) {
             return new HomeHeaderViewHolder(inflater.inflate(R.layout.layout_home_tab_banner, parent, false), context);
-        } else {
+        } else if (viewType == BODY) {
             return new HomeTabViewHolder(inflater.inflate(R.layout.item_home_tab_left, parent, false), context);
+        } else {
+            return new HomeFooterViewHolder(inflater.inflate(R.layout.item_not_more, parent, false));
         }
 
     }
@@ -59,6 +63,8 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int getItemViewType(int position) {
         if (position == 0) {
             return HEADER;
+        } else if (position == totalLists.size() - 1) {
+            return FOOTER;
         } else {
             return BODY;
         }
@@ -72,7 +78,7 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 ((HomeHeaderViewHolder) holder).bindData(bannerEntity);
             }
         } else {
-            if (mVideoLists != null && mVideoLists.size() > 0) {
+            if (mVideoLists != null && mVideoLists.size() > 0 && position != totalLists.size() - 1) {
                 ((HomeTabViewHolder) holder).bindData(mVideoLists.get(position));
             }
         }
@@ -86,13 +92,13 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     //对传递过来的list进行分类
     private void checkData() {
-        if(totalLists.size() - 1 < mVideoLists.size()) {
+        if (totalLists.size() - 1 < mVideoLists.size()) {
             return;
         }
         for (int i = 0; i < totalLists.size(); i++) {
             if (totalLists.get(i) instanceof VideoEntity) {
                 mVideoLists.add((VideoEntity) totalLists.get(i));
-            } else {
+            } else if (totalLists.get(i) instanceof CarouselInfoEntityArray) {
                 bannerEntity = (CarouselInfoEntityArray) totalLists.get(i);
             }
         }

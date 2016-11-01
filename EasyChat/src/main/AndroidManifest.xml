@@ -41,7 +41,8 @@
         <!--选择联系人列表-->
         <activity
             android:name="com.easyvaas.common.chat.activity.FriendsSelectorListActivity"
-            android:theme="@style/my_actionbar_style" />
+            android:theme="@style/HooView_Theme"
+            />
 
         <!--我的群组-->
         <activity

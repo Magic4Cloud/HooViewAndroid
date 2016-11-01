@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-    <include
-        android:id="@+id/common_title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/common_header_layout"/>
-    <include
-        android:id="@+id/search_bar"
-        layout="@layout/include_search_bar"/>
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/home_icon_back"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+        <include
+            android:id="@+id/search_bar"
+            layout="@layout/include_search_bar" />
     </LinearLayout>
 
     <com.easyvaas.common.recycler.PullToLoadView
         android:id="@+id/pull_load_view"
-        android:layout_below="@id/ll_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_top" />
 
     <com.easyvaas.common.widget.LetterSideBar
         android:id="@+id/letter_sidebar"
         android:layout_width="18dp"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_top"
         android:layout_alignParentRight="true"
-        android:layout_gravity="right"/>
+        android:layout_below="@id/ll_top"
+        android:layout_gravity="right" />
 
     <TextView
         android:id="@+id/letter_selected_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_centerInParent="true"
-        android:textSize="60sp"
-        android:textColor="@color/text_gray"/>
+        android:layout_gravity="center"
+        android:textColor="@color/text_gray"
+        android:textSize="60sp" />
 </RelativeLayout>

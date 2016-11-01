@@ -40,9 +40,10 @@ public class CountryCodeListActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setTitle(com.hooview.app.R.string.country_code);
         setTitleColor(getResources().getColor(android.R.color.white));
+
+        setContentView(com.hooview.app.R.layout.activity_city_select);
         TextView tv = (TextView) findViewById(R.id.common_custom_title_tv);
         tv.setText(R.string.country_code);
-        setContentView(com.hooview.app.R.layout.activity_city_select);
         initView();
     }
 

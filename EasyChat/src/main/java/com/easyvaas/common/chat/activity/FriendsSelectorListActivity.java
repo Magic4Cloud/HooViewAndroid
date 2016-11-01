@@ -3,6 +3,7 @@ package com.easyvaas.common.chat.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -34,17 +35,29 @@ import com.easyvaas.common.widget.LetterSideBar;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 选择聊天对象界面
+ */
 public class FriendsSelectorListActivity extends BaseRvcActivity {
     private static final String TAG = "FriendsSelectorListActivity";
 
     public static final String EXTRA_MESSAGE_SELECT_CONTACT_TYPE = "extra_message_select_contact_type";
 
-    public static final int SELECT_CONTACT_TYPE_CREATE_GROUP = 8;
-    public static final int SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT = 9;
-    public static final int SELECT_CONTACT_TYPE_ADD_MEMBER = 10;
 
+    //选择联系人的多个Intent,8---->创建群组(在我的群组右侧label建群处)
+    public static final int SELECT_CONTACT_TYPE_CREATE_GROUP = 8;
+
+    //发起群聊
+    public static final int SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT = 9;
+
+    //添加成员,删除成员
+    public static final int SELECT_CONTACT_TYPE_ADD_MEMBER = 10;
     public static final int SELECT_CONTACT_TYPE_DELETE_MEMBER = 11;
+
+    //群成员
     public static final int SELECT_CONTACT_TYPE_VIEW_MEMBER = 12;
+
+    //选择聊天对象
     public static final int SELECT_CONTACT_TYPE_ONLY_AT_MEMBER = 13;
 
     public static final int ACTIVITY_RESULT_SELECT_GROUP_REQUEST_CODE = 1;
@@ -61,15 +74,19 @@ public class FriendsSelectorListActivity extends BaseRvcActivity {
 
     private List<UserEntity> mUserList = new ArrayList<>();
 
-    private TextView tv_title;
-    private TextView tv_right;
-    private TextView tv_left;
+//    private TextView tv_title;
+//    private TextView tv_right;
+//    private TextView tv_left;
+
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_selector_list);
+        initToolBar();
 
+        //toolbar.setBackgroundColor(getResources().getColor(R.color.color_main));
 
         mSelectType = getIntent().getIntExtra(EXTRA_MESSAGE_SELECT_CONTACT_TYPE, 0);
         mGroupMembers = getIntent().getStringArrayListExtra(ChatConstants.EXTRA_MESSAGE_SELECT_GROUP_MEMBER);
@@ -84,34 +101,35 @@ public class FriendsSelectorListActivity extends BaseRvcActivity {
         mListAdapter = new FriendLetterSortAdapter(this, mUserList);
         if (mSelectType == SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT) {
             addGroupItemView();
-            tv_title.setText(R.string.select_contacts);
+            //tv_title.setText();
+            setTitle(R.string.select_contacts);
             mListAdapter.setChoiceList(true);
             mListAdapter.setListSelectType(SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT);
         } else if (mSelectType == SELECT_CONTACT_TYPE_CREATE_GROUP) {
             addGroupItemView();
-            tv_title.setText(R.string.select_contacts);
+            setTitle(R.string.select_contacts);
             mListAdapter.setChoiceList(true);
             mListAdapter.setListSelectType(SELECT_CONTACT_TYPE_CREATE_GROUP);
         } else if (mSelectType == SELECT_CONTACT_TYPE_ADD_MEMBER) {
             mListAdapter.setChoiceList(true);
             mListAdapter.setListSelectType(SELECT_CONTACT_TYPE_ADD_MEMBER);
-            tv_title.setText(R.string.add_group_member);
+            setTitle(R.string.add_group_member);
         } else if (mSelectType == SELECT_CONTACT_TYPE_DELETE_MEMBER) {
             mListAdapter.setChoiceList(true);
             mListAdapter.setListSelectType(SELECT_CONTACT_TYPE_DELETE_MEMBER);
-            tv_title.setText(R.string.remove_group_member);
+            setTitle(R.string.remove_group_member);
         } else if (mSelectType == SELECT_CONTACT_TYPE_VIEW_MEMBER) {
             mListAdapter.setChoiceList(false);
             mListAdapter.setListSelectType(SELECT_CONTACT_TYPE_VIEW_MEMBER);
-            tv_title.setText(R.string.group_member);
+            setTitle(R.string.group_member);
         } else if (mSelectType == SELECT_CONTACT_TYPE_ONLY_AT_MEMBER) {
             mListAdapter.setChoiceList(true);
             mListAdapter.setListSelectType(SELECT_CONTACT_TYPE_ONLY_AT_MEMBER);
-            tv_title.setText(R.string.chat_select_forward_user);
+            setTitle(R.string.chat_select_forward_user);
         } else {
             addGroupItemView();
             mListAdapter.setChoiceList(false);
-            tv_title.setText(R.string.chat_select_forward_user);
+            setTitle(R.string.chat_select_forward_user);
         }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -223,6 +241,16 @@ public class FriendsSelectorListActivity extends BaseRvcActivity {
 
 
         loadData(false);
+    }
+
+    //初始化Toolbar
+    private void initToolBar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            if (getSupportActionBar() != null)
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     //初始化Titlebar
@@ -470,8 +498,8 @@ public class FriendsSelectorListActivity extends BaseRvcActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == ACTIVITY_RESULT_SELECT_GROUP_REQUEST_CODE) {
                 if (data != null) {
-                    if (mSelectType == SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT
-                            || mSelectType == SELECT_CONTACT_TYPE_CREATE_GROUP) {
+                    if (mSelectType == SELECT_CONTACT_TYPE_GROUP_CHAT_SELECT//选择联系人
+                            || mSelectType == SELECT_CONTACT_TYPE_CREATE_GROUP) {//建群
                         Intent intent = new Intent(this, ChatActivity.class);
                         intent.putExtra(ChatActivity.EXTRA_IM_CHAT_TYPE, ChatActivity.CHAT_TYPE_GROUP);
                         intent.putExtra(ChatActivity.EXTRA_IM_CHAT_GROUP_ID,

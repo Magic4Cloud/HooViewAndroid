@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.TimeButton;
+import com.hooview.app.R;
 import com.hooview.app.activity.setting.CountryCodeListActivity;
 import com.hooview.app.activity.user.UserInfoActivity;
 import com.hooview.app.base.BaseFragment;
@@ -130,7 +131,7 @@ public class UserRegisterFragment extends BaseFragment implements View.OnClickLi
         mCommitBtn = (Button) mRootView.findViewById(com.hooview.app.R.id.commit_btn);
         mCommitBtn.setOnClickListener(this);
         mCommitBtn.setEnabled(false);
-        mRegisterTv.setText(getString(com.hooview.app.R.string.register));
+        mRegisterTv.setText(getString(R.string.register_account));
         mPhoneNumberEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -250,7 +251,7 @@ public class UserRegisterFragment extends BaseFragment implements View.OnClickLi
 
     private void setupResetPasswordView() {
         mRegisterTv.setText(getString(com.hooview.app.R.string.recovery_title));
-        mSetPasswordEt.setHint(getString(com.hooview.app.R.string.msg_login_set_new_password));
+        mSetPasswordEt.setHint(getString(R.string.set_pw_6to12));
     }
 
     private void setupBindPhoneView() {
