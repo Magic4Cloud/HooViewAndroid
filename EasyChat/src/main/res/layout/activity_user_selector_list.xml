@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             app:navigationIcon="@drawable/home_icon_back"
+            app:popupTheme="@style/ToolbarPopupTheme"
             app:titleTextAppearance="@style/Toolbar.TitleText" />
 
         <View

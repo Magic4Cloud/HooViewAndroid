@@ -589,4 +589,6 @@
     <string name="city_selected">城市选择</string>
     <string name="not_more">没有更多了～</string>
     <string name="register_account">注册账户</string>
+    <string name="main_home">主页</string>
+    <string name="plus_focus">+关注</string>
 </resources>

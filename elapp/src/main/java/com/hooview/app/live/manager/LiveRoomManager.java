@@ -220,9 +220,9 @@ public class LiveRoomManager {
         final TextView reportTv = (TextView) popupView.findViewById(R.id.player_report_btn);
         View followView;
         if (user.getFollowed() == User.FOLLOWED) {
-            followTv.setText(mActivity.getString(R.string.followed));
+            followTv.setText(mActivity.getString(R.string.follow_cancel));
         } else {
-            followTv.setText(mActivity.getString(R.string.follow_plus));
+            followTv.setText(mActivity.getString(R.string.follow));
         }
         followView = followTv;
         if (mPref.getUserNumber().equals(user.getName())) {

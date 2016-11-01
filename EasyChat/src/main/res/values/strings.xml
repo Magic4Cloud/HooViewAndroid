@@ -167,4 +167,7 @@
     <string name="The_other_party_did_not_answer_new">对方未接听</string>
     <string name="Is_download_voice_click_later">正在下载语音，稍后点击</string>
     <string name="concerned_msg">关注后可订阅对方动态</string>
+
+    <!--确定-->
+    <string name="select_number_confirm">确定(%1$d)</string>
 </resources>

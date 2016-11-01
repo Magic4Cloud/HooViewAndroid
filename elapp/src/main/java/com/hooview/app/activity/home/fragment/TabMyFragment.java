@@ -179,6 +179,7 @@ public class TabMyFragment extends BaseFragment implements View.OnClickListener 
             bundle.putString(ShareConstants.BIRTHDAY, user.getBirthday());
             bundle.putBoolean(Constants.EXTRA_KEY_IS_REGISTER, false);
             mVideoCountTv.setText(user.getVideo_count() + "");
+            mVideoCountTv.setTextColor(getResources().getColor(R.color.login_text_color_3));
             mFansCountTv.setText(user.getFans_count() + "");
             mFollowerCountTv.setText(user.getFollow_count() + "");
             Button editUserProfile = (Button) mView.findViewById(com.hooview.app.R.id.mine_set_remarks_tv);

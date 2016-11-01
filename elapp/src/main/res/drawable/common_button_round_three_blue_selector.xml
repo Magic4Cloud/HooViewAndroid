@@ -12,31 +12,41 @@
     <item android:state_selected="true">
         <shape>
             <solid
-                android:color="@color/white_alpha_percent_45"/>
+                android:color="@color/color_main"/>
             <corners
                 android:radius="3dp"/>
-            <stroke android:color="@color/login_btn_color"
-                    android:width="1dp"/>
+            <!--<stroke android:color="@color/color_main"-->
+                    <!--android:width="1dp"/>-->
         </shape>
     </item>
     <item android:state_selected="false" android:state_pressed="true">
         <shape>
             <solid
-                android:color="@color/white_alpha_percent_45"/>
+                android:color="@color/color_main"/>
             <corners
                 android:radius="3dp"/>
-            <stroke android:color="@color/login_btn_color"
-                    android:width="1dp"/>
+            <!--<stroke android:color="@color/login_btn_color"-->
+                    <!--android:width="1dp"/>-->
         </shape>
     </item>
     <item android:state_selected="false" android:state_pressed="false">
         <shape>
             <solid
-                android:color="@color/white_alpha_percent_45"/>
+                android:color="@color/hvaf99bc"/>
             <corners
                 android:radius="3dp"/>
-            <stroke android:color="@color/login_btn_color"
-                    android:width="1dp"/>
+            <stroke android:color="@color/color_main"
+                android:width="1dp"/>
+        </shape>
+    </item>
+    <item android:state_selected="true" android:state_pressed="true">
+        <shape>
+            <solid
+                android:color="@color/color_main"/>
+            <corners
+                android:radius="3dp"/>
+            <!--<stroke android:color="@color/login_btn_color"-->
+            <!--android:width="1dp"/>-->
         </shape>
     </item>
 </selector>

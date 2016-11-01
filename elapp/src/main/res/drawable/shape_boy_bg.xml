@@ -10,6 +10,4 @@
     <solid android:color="@color/base_bg_blue_color_20"/>
     <corners
         android:radius="3dp"/>
-    <stroke android:color="@color/color_main"
-        android:width="1dp"/>
 </shape>

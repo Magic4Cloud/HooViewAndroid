@@ -6,8 +6,6 @@
 
 package com.hooview.app.utils;
 
-import java.io.File;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -16,15 +14,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.easyvaas.common.chat.ChatManager;
+import com.google.gson.Gson;
 import com.hooview.app.activity.user.FriendsUserInfoActivity;
+import com.hooview.app.app.EVApplication;
+import com.hooview.app.bean.user.User;
 import com.hooview.app.db.Preferences;
 import com.hooview.app.net.ApiUtil;
 import com.squareup.picasso.Picasso;
 
-import com.easyvaas.common.chat.ChatManager;
-
-import com.hooview.app.app.EVApplication;
-import com.hooview.app.bean.user.User;
+import java.io.File;
 
 public class UserUtil {
     public static final String BIRTHDAY_EMPTY = "0000-00-00";
@@ -115,8 +114,18 @@ public class UserUtil {
     }
 
     public static void handleAfterLoginBySession(Context context) {
-        handleAfterLogin(context, null, "LoginBySession");
+        String userJson = Preferences.getInstance(context)
+                .getString(Preferences.KEY_CACHED_USER_INFO_JSON);
+        User user = null;
+        if (!TextUtils.isEmpty(userJson)) {
+            user = new Gson().fromJson(userJson, User.class);
+        }
+        handleAfterLogin(context, user, "LoginBySession");
     }
+
+//    public static void handleAfterLoginBySession(Context context) {
+//        handleAfterLogin(context, null, "LoginBySession");
+//    }
 
     public static void handleAfterLogin(Context context, User user, String action) {
         if (user != null) {

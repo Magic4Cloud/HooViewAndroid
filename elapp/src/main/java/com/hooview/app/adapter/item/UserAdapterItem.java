@@ -110,27 +110,33 @@ public class UserAdapterItem implements AdapterItem<UserEntity> {
             setUserExtInfo(false, model);
         }
         if (model.getFollowed() != UserEntity.FOLLOWED) {
-                followCb.setText(mContext.getString(R.string.follow));
+                followCb.setText(mContext.getString(R.string.plus_focus));
+            followCb.setTextColor(mContext.getResources().getColor(R.color.white));
         } else {
             if(mIsFans){
                 followCb.setText(mContext.getString(R.string.followed));
+                followCb.setTextColor(mContext.getResources().getColor(R.color.color_main));
             }else{
                 followCb.setText(mContext.getString(R.string.follow_each_other));
+                followCb.setTextColor(mContext.getResources().getColor(R.color.color_main));
             }
         }
         followCb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (followCb.getText().toString().equals(mContext.getString(R.string.follow))) {
+                if (followCb.getText().toString().equals(mContext.getString(R.string.plus_focus))) {
                     model.setFollowed(UserEntity.FOLLOWED);
                     if(mIsFans){
                         followCb.setText(mContext.getString(R.string.followed));
+                        followCb.setTextColor(mContext.getResources().getColor(R.color.color_main));
                     }else{
                         followCb.setText(mContext.getString(R.string.follow_each_other));
+                        followCb.setTextColor(mContext.getResources().getColor(R.color.color_main));
                     }
                 } else {
                     model.setFollowed(UserEntity.UN_FOLLOWED);
-                    followCb.setText(mContext.getString(R.string.follow));
+                    followCb.setText(mContext.getString(R.string.plus_focus));
+                    followCb.setTextColor(mContext.getResources().getColor(R.color.white));
                 }
                 ApiUtil.userFollow(mContext, model.getName(), model.getFollowed() == UserEntity.FOLLOWED, v);
             }

@@ -73,7 +73,7 @@
                     android:gravity="center"
                     android:paddingLeft="6dp"
                     android:paddingRight="6dp"
-                    android:textColor="@color/color_main"
+                    android:textColor="@color/btn_color_main"
                     android:textSize="@dimen/text_size_10" />
 
                 <TextView
@@ -83,7 +83,7 @@
                     android:layout_marginLeft="4dp"
                     android:background="@drawable/personal_icon_constellation_bg"
                     android:gravity="center"
-                    android:textColor="@color/color_main"
+                    android:textColor="@color/btn_color_main"
                     android:textSize="@dimen/text_size_10" />
             </LinearLayout>
 

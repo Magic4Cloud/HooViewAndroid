@@ -374,7 +374,7 @@ public class FriendsSelectorListActivity extends BaseRvcActivity {
             case SELECT_CONTACT_TYPE_ADD_MEMBER:
                 menuItem = menu.findItem(R.id.menu_complete);
                 if (menuItem != null) {
-                    menuItem.setTitle(getString(R.string.select_member_number, mSelectUserList.size()));
+                    menuItem.setTitle(getString(R.string.select_number_confirm, mSelectUserList.size()));
                     menuItem.setEnabled(mSelectUserList.size() > 0);
                 }
                 break;
@@ -388,7 +388,7 @@ public class FriendsSelectorListActivity extends BaseRvcActivity {
             case SELECT_CONTACT_TYPE_ONLY_AT_MEMBER:
                 menuItem = menu.findItem(R.id.menu_complete);
                 if (menuItem != null) {
-                    menuItem.setTitle(getString(R.string.select_member_number, mSelectUserList.size()));
+                    menuItem.setTitle(getString(R.string.select_number_confirm, mSelectUserList.size()));
                     menuItem.setEnabled(mSelectUserList.size() > 0);
                 }
                 break;

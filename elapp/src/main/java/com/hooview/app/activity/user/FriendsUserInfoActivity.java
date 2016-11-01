@@ -6,9 +6,6 @@
 
 package com.hooview.app.activity.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,7 +20,6 @@ import com.easyvaas.common.chat.OnBlackListChangeListener;
 import com.easyvaas.common.chat.activity.ShowBigImageActivity;
 import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
-
 import com.hooview.app.adapter.recycler.FriendsUserInfoAdapter;
 import com.hooview.app.base.BaseRvcActivity;
 import com.hooview.app.bean.user.User;
@@ -39,6 +35,9 @@ import com.hooview.app.net.RequestUtil;
 import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.ShareHelper;
 import com.hooview.app.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FriendsUserInfoActivity extends BaseRvcActivity {
     private FriendsUserInfoAdapter mFriendsUserInfoAdapter;
@@ -312,12 +311,12 @@ public class FriendsUserInfoActivity extends BaseRvcActivity {
     private void updateViewByBlackState(boolean isInBlackList) {
         if (isInBlackList) {
             mPullBlackTv.setText(com.hooview.app.R.string.remove_black);
-            mPullBlackTv.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(
-                    com.hooview.app.R.drawable.personal_icon_added), null, null, null);
+//            mPullBlackTv.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(
+//                    com.hooview.app.R.drawable.personal_icon_added), null, null, null);
         } else {
             mPullBlackTv.setText(com.hooview.app.R.string.pull_black);
-            mPullBlackTv.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(
-                    com.hooview.app.R.drawable.personal_icon_add), null, null, null);
+//            mPullBlackTv.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(
+//                    com.hooview.app.R.drawable.personal_icon_add), null, null, null);
         }
     }
 }
