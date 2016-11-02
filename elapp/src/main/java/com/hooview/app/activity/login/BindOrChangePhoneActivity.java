@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.TimeButton;
+import com.hooview.app.R;
 import com.hooview.app.activity.setting.BindPhoneActivity;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.bean.user.User;
@@ -70,6 +71,12 @@ public class BindOrChangePhoneActivity extends BaseActivity implements OnClickLi
             }
         });
         mCommitLl.setOnClickListener(this);
+        findViewById(R.id.close_iv).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

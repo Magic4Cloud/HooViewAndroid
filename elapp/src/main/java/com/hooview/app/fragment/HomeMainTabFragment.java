@@ -58,7 +58,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
 
     private CarouselInfoEntityArray bannerEntity;
 
-    private boolean reLoad = false;
+    private int mPageIndex = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,8 +92,8 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
 
             @Override
             public void onLoadMore(int current_page) {
-
                 mLoadMoreListener.setLoading(true);
+                mPageIndex ++;
                 loadHotVideoList(false);
             }
 
@@ -119,7 +119,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                reLoad = true;
+                mPageIndex = 0;
                 mRecyclerView.addOnScrollListener(mLoadMoreListener);
                 loadCarouseInfo();
             }
@@ -131,7 +131,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
         // Live mark: Request live video first but need to request playback when last video is playback.
 
         //isLoadMore && mNextPageIndex > 0 ? mNextPageIndex : ApiConstant.DEFAULT_FIRST_PAGE_INDEX;
-        ApiHelper.getInstance().getHotVideoList(0,
+        ApiHelper.getInstance().getHotVideoList(mPageIndex,
                 ApiConstant.DEFAULT_PAGE_SIZE, new MyRequestCallBack<VideoEntityArray>() {
                     @Override
                     public void onSuccess(VideoEntityArray result) {
@@ -146,7 +146,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
 
 
                         //重新加载数据,清除之前的数据
-                        if (reLoad) {
+                        if (mPageIndex == 0) {
                             mHomeLists.clear();
                         }
 

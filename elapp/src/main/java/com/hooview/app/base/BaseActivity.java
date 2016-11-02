@@ -45,6 +45,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     //用于友盟分析
     protected boolean mIsFragmentActivity;
+
+    //OkHttp在activity销毁后是否取消请求
     protected boolean mIsCancelRequestAfterDestroy = true;
     protected boolean mIsActionBarColorStatusBar = false;
 
@@ -73,13 +75,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SingleToast.show(this,getClass().getSimpleName());
+        SingleToast.show(this, getClass().getSimpleName());
         mStartShowTime = System.currentTimeMillis();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        //在4.4以上添加状态栏的颜色，沉浸式体验
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             // setTranslucentStatus(true);
 
@@ -91,7 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         //设置转场动画
-        overridePendingTransition(R.anim.pannel_right_in,R.anim.hold);
+        overridePendingTransition(R.anim.pannel_right_in, R.anim.hold);
     }
 
     protected void showActionBar(boolean isShow, View rootView) {
@@ -196,7 +199,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             ApiHelper.getInstance().cancelRequest();
         }
         //设置转场动画
-        overridePendingTransition(R.anim.hold,R.anim.pannel_left_out);
+        overridePendingTransition(R.anim.hold, R.anim.pannel_left_out);
     }
 
     @Override

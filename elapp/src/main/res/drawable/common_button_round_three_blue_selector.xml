@@ -39,14 +39,14 @@
                 android:width="1dp"/>
         </shape>
     </item>
-    <item android:state_selected="true" android:state_pressed="true">
-        <shape>
-            <solid
-                android:color="@color/color_main"/>
-            <corners
-                android:radius="3dp"/>
-            <!--<stroke android:color="@color/login_btn_color"-->
-            <!--android:width="1dp"/>-->
-        </shape>
-    </item>
+    <!--<item android:state_selected="true" android:state_pressed="true">-->
+        <!--<shape>-->
+            <!--<solid-->
+                <!--android:color="@color/color_main"/>-->
+            <!--<corners-->
+                <!--android:radius="3dp"/>-->
+            <!--&lt;!&ndash;<stroke android:color="@color/login_btn_color"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:width="1dp"/>&ndash;&gt;-->
+        <!--</shape>-->
+    <!--</item>-->
 </selector>
