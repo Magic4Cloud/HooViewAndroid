@@ -43,7 +43,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
-    //首页的数据
+    //首页的总数据数据
     private List mHomeLists;
 
     private HomeTabListAdapter mListAdapter;
@@ -54,9 +54,8 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
     private ImageButton iv_search;
     private ImageButton iv_account;
 
-    private int dateCount = 0;
-
     private CarouselInfoEntityArray bannerEntity;
+
 
     private int mPageIndex = 0;
 
@@ -93,7 +92,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onLoadMore(int current_page) {
                 mLoadMoreListener.setLoading(true);
-                mPageIndex ++;
+                mPageIndex++;
                 loadHotVideoList(false);
             }
 
@@ -131,7 +130,7 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
         // Live mark: Request live video first but need to request playback when last video is playback.
 
         //isLoadMore && mNextPageIndex > 0 ? mNextPageIndex : ApiConstant.DEFAULT_FIRST_PAGE_INDEX;
-        ApiHelper.getInstance().getHotVideoList(mPageIndex,
+        ApiHelper.getInstance().getHotVideoList(mPageIndex * ApiConstant.DEFAULT_PAGE_SIZE,
                 ApiConstant.DEFAULT_PAGE_SIZE, new MyRequestCallBack<VideoEntityArray>() {
                     @Override
                     public void onSuccess(VideoEntityArray result) {
@@ -148,23 +147,31 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
                         //重新加载数据,清除之前的数据
                         if (mPageIndex == 0) {
                             mHomeLists.clear();
+                            if (bannerEntity != null) {
+                                mHomeLists.add(bannerEntity);
+                            }
                         }
 
                         List<VideoEntity> mResultlists = result.getVideos();
 
                         //添加数据
                         if (result != null && mResultlists.size() > 0) {
+                            //总数据
                             mHomeLists.addAll(mResultlists);
                         }
 
                         //已经是最后一页了
-                        if (mResultlists.size() <= ApiConstant.DEFAULT_PAGE_SIZE) {
+                        if (mResultlists.size() < ApiConstant.DEFAULT_PAGE_SIZE) {
                             mHomeLists.add("END");
+                            if (mListAdapter != null) {
+                                mListAdapter.setLast(true);
+                            }
                             //停止再次加载
                             mRecyclerView.clearOnScrollListeners();
                         }
 
                         if (mListAdapter != null) {
+
                             mListAdapter.notifyDataSetChanged();
                         }
                     }
@@ -202,7 +209,8 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
             loadCarouseInfo();
         } else {
             if (mListAdapter != null) {
-                mHomeLists.add(new Gson().fromJson(json, CarouselInfoEntityArray.class));
+                bannerEntity = new Gson().fromJson(json, CarouselInfoEntityArray.class);
+                mHomeLists.add(bannerEntity);
                 loadHotVideoList(false);
             }
         }
@@ -216,7 +224,8 @@ public class HomeMainTabFragment extends BaseFragment implements View.OnClickLis
             public void onSuccess(CarouselInfoEntityArray result) {
                 if (result != null && result.getCount() > 0) {
                     if (mListAdapter != null) {
-                        mHomeLists.add(result);
+                        bannerEntity = result;
+                        mHomeLists.add(bannerEntity);
                         loadHotVideoList(false);
                     }
                 } else {

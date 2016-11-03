@@ -180,6 +180,8 @@ public class RecorderActivity extends LiveRoomBaseActivity {
                 case com.hooview.app.R.id.live_comment_iv:
                     showCommentTextBox();
                     break;
+
+                //关闭直播
                 case com.hooview.app.R.id.live_close_iv:
                     showConfirmStopDialog();
                     break;

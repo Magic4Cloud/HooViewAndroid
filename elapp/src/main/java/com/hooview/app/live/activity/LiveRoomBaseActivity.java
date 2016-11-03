@@ -174,6 +174,9 @@ class LiveRoomBaseActivity extends BasePlayerActivity
     private GestureDetector mGestureDetector;
     private LiveRoomManager mLiveRoomManager;
 
+    /**
+     * Activity之间的交互,结束掉直播页面
+     */
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -185,6 +188,7 @@ class LiveRoomBaseActivity extends BasePlayerActivity
         }
     };
 
+    //开源表情包 ----->https://github.com/w446108264/XhsEmoticonsKeyboard
     private XhsEmoticonsKeyBoardBar.KeyBoardBarViewListener mKeyBoardBarViewListener
             = new XhsEmoticonsKeyBoardBar.KeyBoardBarViewListener() {
         @Override
@@ -804,6 +808,8 @@ class LiveRoomBaseActivity extends BasePlayerActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //SingleToast.show(this,getClass().getSimpleName());
         acquireWakeLock();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);

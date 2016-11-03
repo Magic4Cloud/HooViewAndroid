@@ -39,6 +39,8 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private static final int BODY = 1;
     private static final int FOOTER = 2;
 
+    private boolean isLast;
+
     //构造方法传递数据
     public HomeTabListAdapter(Context context, List mLists) {
         this.totalLists = mLists;
@@ -61,28 +63,32 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
-            return HEADER;
-        } else if (position == totalLists.size() - 1) {
-            return FOOTER;
+
+        if (!isLast) {
+            if (position == 0) {
+                return HEADER;
+            } else {
+                return BODY;
+            }
         } else {
-            return BODY;
+            if (position == 0) {
+                return HEADER;
+            } else if (position == totalLists.size() - 1) {
+                return FOOTER;
+            } else {
+                return BODY;
+            }
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        checkData();
-        if (position == 0) {
-            if (bannerEntity != null) {
-                ((HomeHeaderViewHolder) holder).bindData(bannerEntity);
-            }
-        } else {
-            if (mVideoLists != null && mVideoLists.size() > 0 && position != totalLists.size() - 1) {
-                ((HomeTabViewHolder) holder).bindData(mVideoLists.get(position));
-            }
-        }
 
+        if (holder instanceof HomeHeaderViewHolder) {
+            ((HomeHeaderViewHolder) holder).bindData((CarouselInfoEntityArray) totalLists.get(position));
+        } else if (holder instanceof HomeTabViewHolder) {
+            ((HomeTabViewHolder) holder).bindData((VideoEntity) totalLists.get(position));
+        }
     }
 
     @Override
@@ -90,17 +96,8 @@ public class HomeTabListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return totalLists.size();
     }
 
-    //对传递过来的list进行分类
-    private void checkData() {
-        if (totalLists.size() - 1 < mVideoLists.size()) {
-            return;
-        }
-        for (int i = 0; i < totalLists.size(); i++) {
-            if (totalLists.get(i) instanceof VideoEntity) {
-                mVideoLists.add((VideoEntity) totalLists.get(i));
-            } else if (totalLists.get(i) instanceof CarouselInfoEntityArray) {
-                bannerEntity = (CarouselInfoEntityArray) totalLists.get(i);
-            }
-        }
+
+    public void setLast(boolean last) {
+        isLast = last;
     }
 }
