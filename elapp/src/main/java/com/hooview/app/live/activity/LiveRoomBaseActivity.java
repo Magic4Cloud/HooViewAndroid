@@ -1352,7 +1352,7 @@ class LiveRoomBaseActivity extends BasePlayerActivity
 
                 @Override
                 public void onPrepareLoad(Drawable placeHolderDrawable) {
-                    loadingBgIv.setImageResource(com.hooview.app.R.drawable.video_loading_bg);
+                    //loadingBgIv.setImageResource(com.hooview.app.R.drawable.video_loading_bg);
                 }
             });
             findViewById(com.hooview.app.R.id.player_report_btn).setVisibility(View.VISIBLE);

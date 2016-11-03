@@ -23,8 +23,8 @@ import android.widget.TextView;
 import com.easyvaas.common.chat.ChatManager;
 import com.easyvaas.common.feedback.FeedbackHelper;
 import com.hooview.app.R;
-import com.hooview.app.activity.WebViewActivity;
 import com.hooview.app.activity.login.LoginMainActivity;
+import com.hooview.app.activity.login.TextActivity;
 import com.hooview.app.activity.setting.AboutActivity;
 import com.hooview.app.activity.setting.BindUserAuthActivity;
 import com.hooview.app.activity.setting.LiveMessageSetListActivity;
@@ -261,12 +261,18 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 //startActivity(FeedbackActivity.class);
                 FeedbackHelper.getInstance(this).showFeedbackUI();
                 break;
-            case com.hooview.app.R.id.contact_us_rl:
-                Intent contactIntent = new Intent(this, WebViewActivity.class);
-                contactIntent.putExtra(WebViewActivity.EXTRA_KEY_TITLE, getString(com.hooview.app.R.string.contact_us));
-                contactIntent.putExtra(WebViewActivity.EXTRA_KEY_URL,
-                        Preferences.getInstance(this).getString(Preferences.KEY_PARAM_CONTACT_US_URL));
+            case com.hooview.app.R.id.contact_us_rl://联系我们
+//                Intent contactIntent = new Intent(this, WebViewActivity.class);
+//                contactIntent.putExtra(WebViewActivity.EXTRA_KEY_TITLE, getString(com.hooview.app.R.string.contact_us));
+//                contactIntent.putExtra(WebViewActivity.EXTRA_KEY_URL,
+//                        Preferences.getInstance(this).getString(Preferences.KEY_PARAM_CONTACT_US_URL));
+//                startActivity(contactIntent);
+                Intent contactIntent = new Intent(this, TextActivity.class);
+                contactIntent.putExtra(TextActivity.EXTRA_TYPE, TextActivity.TYPE_CONTACT_US);
+                contactIntent
+                        .putExtra(Constants.EXTRA_KEY_TITLE, getString(R.string.contact_us));
                 startActivity(contactIntent);
+
                 break;
             case com.hooview.app.R.id.logout_btn:
                 showConfirmDialog();

@@ -20,11 +20,15 @@ import android.widget.Toast;
 import com.hooview.app.R;
 import com.hooview.app.base.BaseActivity;
 import com.hooview.app.utils.Constants;
+import com.hooview.app.utils.ViewUtil;
 
 public class TextActivity extends BaseActivity {
     public static final String EXTRA_TYPE = "extra_type";
     public static final int TYPE_AGREEMENT = 0;
     public static final int TYPE_PHONE_BIND_ISSUE = 1;
+
+    //联系我们
+    public static final int TYPE_CONTACT_US = 2;
 
     private String mAgreementText =
             "一、注册协议条款的确认与接受" +
@@ -88,6 +92,9 @@ public class TextActivity extends BaseActivity {
             + "三、如您完整提供上述材料，我们将会在10个工作日之内核实您的情况，通过后即刻帮您解除绑定的手机，\n"
             + "如未通过说明，您的资料提供的不完整，或者材料含有虚假成分，请您继续联系客服邮箱。";
 
+    private String mContactUS = "业务合作：BD@hooview.com\n\n" +
+            "官方客服：3553516553";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +121,11 @@ public class TextActivity extends BaseActivity {
         } else if (type == TYPE_AGREEMENT) {//用户协议
             textView.setText(mAgreementText);
             tv.setText(R.string.msg_login_user_agreement);
+        } else if (type == TYPE_CONTACT_US) {//联系我们
+            textView.setText(mContactUS);
+            textView.setTextSize(ViewUtil.dp2Px(this,6));
+            textView.setTextColor(getResources().getColor(R.color.text_color_main));
+            tv.setText(R.string.contact_us);
         }
         findViewById(R.id.close_iv).setOnClickListener(new View.OnClickListener() {
             @Override
