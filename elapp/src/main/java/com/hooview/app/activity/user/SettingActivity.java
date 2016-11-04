@@ -314,6 +314,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             }
         });
         Preferences.getInstance(EVApplication.getApp()).logout(true);
+
+        //退出app
+        BaseActivity.exitApp();
+
         startActivity(new Intent(this, LoginMainActivity.class));
         sendBroadcast(new Intent(Constants.ACTION_GO_LOGIN_OUT));
         finish();

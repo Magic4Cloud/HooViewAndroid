@@ -7,6 +7,7 @@
 package com.hooview.app.base;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
@@ -33,6 +34,8 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 
 import java.lang.ref.SoftReference;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * activity的基类
@@ -48,6 +51,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     //OkHttp在activity销毁后是否取消请求
     protected boolean mIsCancelRequestAfterDestroy = true;
     protected boolean mIsActionBarColorStatusBar = false;
+
+    public static List<Activity> mActivities = new ArrayList<>();
 
     protected static class MyHandler<T> extends Handler {
         private SoftReference<T> softReference;
@@ -74,6 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivities.add(this);
         //SingleToast.show(this, getClass().getSimpleName());
         mStartShowTime = System.currentTimeMillis();
         ActionBar actionBar = getSupportActionBar();
@@ -193,6 +199,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mActivities.remove(this);
         dismissLoadingDialog();
         if (mIsCancelRequestAfterDestroy) {
             ApiHelper.getInstance().cancelRequest();
@@ -268,6 +275,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         if (EmoticonsUtils.emojiMap.size() == 0) {
             EmoticonsUtils.initEmoticonsDB(this.getApplication(), false);
+        }
+    }
+
+    public static void exitApp() {
+        for (Activity mActivity : mActivities) {
+            if (!mActivity.isFinishing()) {
+                mActivity.finish();
+            }
         }
     }
 }

@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.hooview.app.R;
 import com.hooview.app.adapter.HomePagerAdapter;
 import com.hooview.app.app.EVApplication;
+import com.hooview.app.base.BaseActivity;
 import com.hooview.app.db.Preferences;
 import com.hooview.app.net.ApiUtil;
 import com.hooview.app.utils.SingleToast;
@@ -18,7 +18,7 @@ import com.hooview.app.utils.UpdateManager;
 
 import butterknife.ButterKnife;
 
-public class HooViewHomeActivity extends AppCompatActivity{
+public class HooViewHomeActivity extends BaseActivity{
 
     private RadioGroup mRadiogroup;//多选
     private ViewPager mViewpager;
