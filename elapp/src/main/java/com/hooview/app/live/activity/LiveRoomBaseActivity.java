@@ -985,7 +985,7 @@ class LiveRoomBaseActivity extends BasePlayerActivity
     protected void handleMessage(Message msg) {
     }
 
-    @Override
+    //销毁
     protected void onDestroy() {
         super.onDestroy();
         if ((getIntent().getBooleanExtra(Constants.EXTRA_KEY_IS_FROM_SPLASH, false)

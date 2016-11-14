@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 
 public class HooViewHomeActivity extends BaseActivity{
 
+
     private RadioGroup mRadiogroup;//多选
     private ViewPager mViewpager;
     private RadioButton mButtonHome;//底部标签（左）

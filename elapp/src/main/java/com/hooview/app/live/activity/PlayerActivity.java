@@ -37,6 +37,10 @@ import com.hooview.app.view.MediaController;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
+
+/**
+ * 播放直播
+ */
 public class PlayerActivity extends LiveRoomBaseActivity {
     private static final String TAG = "PlayerActivity";
 
@@ -62,6 +66,7 @@ public class PlayerActivity extends LiveRoomBaseActivity {
         showInitLoadingView();
     }
 
+    //加载VideoInfo信息
     private void loadVideoInfo() {
         ApiHelper.getInstance().getWatchVideo(mVideoId, mPassword,
                 new MyRequestCallBack<VideoEntity>() {
@@ -135,6 +140,8 @@ public class PlayerActivity extends LiveRoomBaseActivity {
         mPayInfoDialog.show();
     }
 
+
+    //在开始直播前的设置
     public void updateVideoInfo(VideoEntity result) {
         chatServerInit(true);
         String currentUserId = mPref.getUserNumber();
@@ -193,16 +200,27 @@ public class PlayerActivity extends LiveRoomBaseActivity {
 
         mEVPlayer = new EVPlayer(this);
         EVPlayerParameter.Builder builder = new EVPlayerParameter.Builder();
+
+        //当前是否是直播
         builder.setLive(mIsPlayLive);
+
+        //参数
         mEVPlayer.setParameter(builder.build());
+
+        //设置View
         mEVPlayer.setVideoView(mVideoView);
+
+        //设置准备。完成，信息，错误的监听
         mEVPlayer.setOnPreparedListener(mOnPreparedListener);
         mEVPlayer.setOnCompletionListener(mOnCompletionListener);
         mEVPlayer.setOnInfoListener(mOnInfoListener);
         mEVPlayer.setOnErrorListener(mOnErrorListener);
         mEVPlayer.onCreate();
+
         mMediaController = new MediaController(this);
         mMediaController.setAnchorView(mVideoView);
+
+        //给播放设置Player
         mEVPlayer.setMediaController(mMediaController);
     }
 
@@ -291,6 +309,8 @@ public class PlayerActivity extends LiveRoomBaseActivity {
         }
     };
 
+
+    //SDK初始化失败的弹框
     private void showToastOnUiThread(final int resId) {
         runOnUiThread(new Runnable() {
             @Override
@@ -310,7 +330,8 @@ public class PlayerActivity extends LiveRoomBaseActivity {
         return super.onTouchEvent(event);
     }
 
-    @Override
+
+    //初始化交互的View
     protected void initView() {
         findViewById(com.hooview.app.R.id.player_bottom_action_bar).setVisibility(View.VISIBLE);
     }
@@ -436,6 +457,7 @@ public class PlayerActivity extends LiveRoomBaseActivity {
         }
     }
 
+    //开始直播
     private void startWatchLive() {
         if (TextUtils.isEmpty(mVideoId)) {
             SingleToast.show(this, com.hooview.app.R.string.msg_video_url_null);
@@ -445,6 +467,7 @@ public class PlayerActivity extends LiveRoomBaseActivity {
 
     }
 
+    //停止直播的页面
     private synchronized void stopPlayerAndShowEndView() {
         //socket io callback living end and player callback completion
         if (isPlayEndViewShow()) {
@@ -462,6 +485,7 @@ public class PlayerActivity extends LiveRoomBaseActivity {
         chatServerDestroy();
     }
 
+    //网络开小车中的Message
     private void showInitLoadingView() {
         if (!mLoadingView.isShown()) {
             mLoadingView.setVisibility(View.VISIBLE);

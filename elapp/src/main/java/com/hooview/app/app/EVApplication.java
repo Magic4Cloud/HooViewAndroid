@@ -6,17 +6,18 @@
 
 package com.hooview.app.app;
 
-import java.io.File;
-
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
 
-import cn.jpush.android.api.JPushInterface;
-
+import com.easyvaas.common.chat.ChatManager;
+import com.easyvaas.common.chat.utils.ChatConstants;
+import com.easyvaas.common.feedback.FeedbackHelper;
+import com.easyvaas.common.sharelogin.weibo.AccessTokenKeeper;
 import com.easyvaas.sdk.core.EVSdk;
 import com.google.gson.Gson;
 import com.hooview.app.activity.login.LoginMainActivity;
+import com.hooview.app.bean.user.User;
 import com.hooview.app.db.Preferences;
 import com.hooview.app.net.ApiHelper;
 import com.hooview.app.net.MyRequestCallBack;
@@ -29,15 +30,12 @@ import com.hooview.app.utils.Constants;
 import com.hooview.app.utils.DateTimeUtil;
 import com.hooview.app.utils.FileUtil;
 import com.hooview.app.utils.Logger;
+import com.hooview.app.utils.SingleToast;
 import com.umeng.analytics.MobclickAgent;
 
-import com.easyvaas.common.chat.ChatManager;
-import com.easyvaas.common.chat.utils.ChatConstants;
-import com.easyvaas.common.feedback.FeedbackHelper;
-import com.easyvaas.common.sharelogin.weibo.AccessTokenKeeper;
+import java.io.File;
 
-import com.hooview.app.bean.user.User;
-import com.hooview.app.utils.SingleToast;
+import cn.jpush.android.api.JPushInterface;
 
 public class EVApplication extends android.support.multidex.MultiDexApplication {
     private static final String TAG = EVApplication.class.getSimpleName();
@@ -109,6 +107,7 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         EVApplication.mUser = user;
         EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
                 Constants.EV_SECRET_ID, mUser.getName());
+        EVSdk.enableDebugLog();
         if (user.getAuth() != null) {
             for (int i = 0, n = user.getAuth().size(); i < n; i++) {
                 User.AuthEntity authEntity = user.getAuth().get(i);
