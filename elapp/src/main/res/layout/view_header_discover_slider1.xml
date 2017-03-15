@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4.5dp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hot_image_slider_height"
+         android:src="@drawable/banner_default"/>
+    <com.easyvaas.common.imageslider.SliderLayout
+        android:id="@+id/recommend_header_slider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hot_image_slider_height"/>
+
+    <!--<com.easyvaas.common.imageslider.Indicators.PagerIndicator-->
+        <!--android:id="@+id/custom_indicator"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"/>-->
+
+    <!--<TextView
+        android:id="@+id/recommend_video_tip_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="9dp"
+        android:drawablePadding="8dp"
+        android:drawableLeft="@drawable/plaza_icon_recommend"
+        android:background="@color/background_content"
+        android:gravity="left|center_vertical"
+        android:text="@string/discover_recommend_live"
+        android:textSize="@dimen/text_size_13"
+        android:visibility="gone"
+        android:textColor="@color/text_common"/>-->
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_no_data_title">空空如也，啥也木有</string>
+    <string name="text_nearby_open_location_bt">开启定位</string>
+    <string name="gravity_left">left</string>
+    <string name="gravity_center">center</string>
+    <string name="gravity_right">right</string>
+    <string name="loading_data">正在加载数据…</string>
+    <string name="no_more_data">没有更多</string>
+</resources>

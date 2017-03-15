@@ -1,173 +1,196 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_gray"
+    android:background="@color/base_white"
     android:gravity="center_horizontal">
+
     <include
         android:id="@+id/common_title_tv"
+        layout="@layout/common_header_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/common_header_layout"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_shadow_height"
-        android:layout_below="@+id/common_title_tv"
-        android:background="@drawable/shape_toolbar_shadow" />
+        android:layout_alignParentTop="true" />
+
     <LinearLayout
         android:id="@+id/account_balance_ll"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/common_title_tv"
+        android:background="#5c2d7e"
         android:gravity="center"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/cash_in_e_coin_balance"
-            android:textSize="@dimen/text_size_title_h1"
-            android:textColor="@color/text_color_main"/>
+            android:layout_marginTop="23dp"
+            android:text="火眼豆"
+            android:textColor="@color/text_color_white"
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/e_coin_balance_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="2dp"
-            android:layout_marginTop="18dp"
             android:layout_marginBottom="12dp"
-            android:textSize="24sp"
-            android:textColor="@color/text_color_main"/>
+            android:layout_marginTop="2dp"
+            android:textColor="@color/text_color_white"
+            android:textSize="24sp" />
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/account_balance_ll"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
-        android:visibility="gone"
+        android:paddingTop="10dp"
+        android:text="@string/cash_in_count_selector"
         android:textColor="@color/text_color_secondary_level"
         android:textSize="@dimen/text_size_13"
-        android:text="@string/cash_in_count_selector"/>
-
-    <LinearLayout
-        android:id="@+id/cash_in_mode_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/account_balance_ll"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="10dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cash_in_mode_selector"
-            android:textSize="@dimen/text_size_12"
-            android:textColor="@color/text_common"/>
-        <RadioGroup
-            android:id="@+id/cash_in_option_rg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:weightSum="2"
-            android:padding="7dp">
-            <RadioButton
-                android:id="@+id/cash_in_option_weixin_rb"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_common_height"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:gravity="center"
-                android:button="@null"
-                android:checked="true"
-                android:text="@string/cash_in_option_weixin"
-                android:textColor="@color/text_pay_reverse_selector"
-                android:background="@drawable/pay_bg_selector"/>
-            <RadioButton
-                android:id="@+id/cash_in_option_alipay_rb"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_common_height"
-                android:gravity="center"
-                android:button="@null"
-                android:layout_weight="1"
-                android:visibility="gone"
-                android:padding="5dp"
-                android:layout_marginLeft="5dp"
-                android:text="@string/cash_in_option_alipay"
-                android:textColor="@color/text_pay_reverse_selector"
-                android:background="@drawable/pay_bg_selector"/>
-        </RadioGroup>
-    </LinearLayout>
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/cash_in_amount_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/cash_in_mode_ll"
-        android:layout_above="@+id/cash_in_confirm_btn"
-        android:visibility="gone"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="7dp"
-            android:visibility="gone"
-            android:text="@string/cash_in_count_selector"
-            android:textSize="@dimen/text_size_12"
-            android:textColor="@color/text_common"/>
-        <ImageView
-            style="@style/default_horizontal_line_style"/>
+        android:layout_above="@+id/cash_in_mode_ll"
+        android:layout_below="@+id/account_balance_ll"
+        android:visibility="visible">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/cash_in_amount_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:dividerHeight="3dp"
-            android:divider="@android:color/transparent"
-            android:scrollbars="vertical"
-            android:scrollingCache="@null"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="20dp"
             android:animationCache="false"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="20dp"
             android:fadingEdge="none"
             android:fadingEdgeLength="3dp"
-            android:cacheColorHint="@android:color/transparent"/>
+            android:scrollbars="vertical"
+            android:scrollingCache="@null" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cash_in_mode_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cash_in_confirm_btn"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cash_in_mode_selector"
+            android:textColor="@color/text_common"
+            android:textSize="@dimen/text_size_12"
+            android:visibility="gone" />
+
+        <RadioGroup
+            android:id="@+id/cash_in_option_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:padding="7dp"
+            android:weightSum="2">
+
+            <RadioButton
+                android:id="@+id/cash_in_option_weixin_rb"
+                android:layout_width="110dp"
+                android:layout_height="@dimen/button_common_height"
+                android:button="@null"
+                android:checked="true"
+                android:drawableBottom="@drawable/selector_pay_weichat_drawable_bottom"
+                android:drawableLeft="@drawable/selector_pay_weichat_drawable_left"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/cash_in_option_weixin"
+                android:textColor="#59b64c" />
+
+            <RadioButton
+                android:id="@+id/cash_in_option_alipay_rb"
+                android:layout_width="110dp"
+                android:layout_height="@dimen/button_common_height"
+                android:layout_marginLeft="25dp"
+                android:button="@null"
+                android:drawableBottom="@drawable/selector_pay_alipay_drawable_bottom"
+                android:drawableLeft="@drawable/selector_pay_alipay_drawable_left"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/cash_in_option_alipay"
+                android:textColor="#009fe8"
+                android:visibility="visible" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cash_in_mode_ll"
+
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_checked_btn"
+            android:checked="true"
+            android:text="@string/agree"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_user_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/user_cash_inprotocol"
+            android:textColor="@color/text_color_purplish" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/cash_in_explain_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/cash_in_tip_tv"
+        android:layout_marginBottom="9dp"
         android:paddingLeft="15dp"
         android:paddingRight="9dp"
         android:paddingTop="15dp"
-        android:layout_marginBottom="9dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_title_h2"
         android:textColor="@color/text_red"
-        android:visibility="gone"/>
+        android:textSize="@dimen/text_size_title_h2"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/cash_in_confirm_btn"
         android:layout_width="210dp"
         android:layout_height="@dimen/button_common_height"
-        android:layout_marginTop="9dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/cash_in_tip_tv"
-        android:background="@drawable/round_btn_selector"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/shape_common_btn_b"
         android:button="@null"
         android:text="@string/cash_in_confirm"
-        android:textColor="@color/text_btn_selector"
+        android:textColor="@color/text_color_white"
         android:textSize="@dimen/text_size_title_h2"
-        android:visibility="gone"/>
+        android:visibility="visible" />
 </RelativeLayout>

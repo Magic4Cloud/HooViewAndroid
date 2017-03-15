@@ -19,7 +19,7 @@
         <shape>
             <stroke
                 android:width="1dp"
-                android:color="@color/hv662d80"/>
+                android:color="@color/btn_color_main"/>
             <solid
                 android:color="@color/base_color_btn_stoke_blue_focused"/>
             <corners
@@ -30,7 +30,7 @@
         <shape>
             <stroke
                 android:width="1dp"
-                android:color="@color/hv662d80"/>
+                android:color="@color/btn_color_main"/>
             <solid
                 android:color="@color/base_color_btn_stoke_blue_focused"/>
             <corners
@@ -42,7 +42,7 @@
             <solid android:color="@android:color/white"/>
             <stroke
                 android:width="1dp"
-                android:color="@color/hv662d80"/>
+                android:color="@color/btn_color_main"/>
             <corners
                 android:radius="6dp"/>
         </shape>

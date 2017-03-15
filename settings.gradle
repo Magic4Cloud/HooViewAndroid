@@ -1,1 +1,19 @@
-include ':elapp',':EasyChat'
+include ':elapp'
+include ':BottomSheet'
+include ':EmojiKeyboard'
+include ':ImageSlider'
+include ':ShareLogin'
+include ':ViewPageIndicator'
+include ':Feedback'
+include ':CustomView'
+include ':Gift'
+include ':EasyChat'
+project(':Feedback').projectDir = new File('extras/Feedback')
+project(':BottomSheet').projectDir = new File('extras/BottomSheet')
+project(':EmojiKeyboard').projectDir = new File('extras/EmojiKeyboard')
+project(':ImageSlider').projectDir = new File('extras/ImageSlider')
+project(':ShareLogin').projectDir = new File('extras/ShareLogin')
+project(':ViewPageIndicator').projectDir = new File('extras/ViewPageIndicator')
+project(':CustomView').projectDir = new File('extras/CustomView')
+project(':Gift').projectDir = new File('extras/Gift')
+project(':EasyChat').projectDir = new File('extras/EasyChat')

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_gray"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/global_search_action_bar_rl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/base_white"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toLeftOf="@+id/tv_operation"
+            android:background="@drawable/search_edittext_b"
+            android:gravity="left|center_vertical"
+            android:hint="@string/search_text_box_hint_new"
+            android:imeOptions="actionSearch"
+            android:maxLength="10"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:singleLine="true"
+            android:textColor="@color/title_text_color"
+            android:textColorHint="@color/text_color_gray"
+            android:textSize="@dimen/text_size_title_h1" />
+
+        <!--<ImageView-->
+        <!--android:id="@+id/clear_keyword_iv"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignRight="@id/tab_bar_keyword_et"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:padding="8dp"-->
+        <!--android:src="@drawable/login_icon_edit_clear"-->
+        <!--android:visibility="gone" />-->
+
+        <TextView
+            android:id="@+id/tv_operation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:paddingBottom="14dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="14dp"
+            android:paddingTop="14dp"
+            android:text="@string/cancel"
+            android:textColor="@color/text_color_purplish"
+            android:textSize="@dimen/text_size_title_h2" />
+    </RelativeLayout>
+
+    <ImageView
+        style="@style/default_horizontal_line_style"
+        android:layout_below="@+id/global_search_action_bar_rl" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/global_search_action_bar_rl"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_common_tablayout" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+</RelativeLayout>

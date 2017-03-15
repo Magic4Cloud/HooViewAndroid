@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rg_navigation" />
+    <View
+        android:background="@color/split_line_color"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/rg_navigation"
+        android:layout_height="1dp"/>
+    <RadioGroup
+        android:id="@+id/rg_navigation"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_news"
+            style="@style/NavigationTabButtonStyle"
+            android:drawableTop="@drawable/selector_home_tab_news"
+            android:tag="news"
+            android:text="@string/navigation_title_news" />
+
+        <RadioButton
+            android:id="@+id/rb_live"
+            style="@style/NavigationTabButtonStyle"
+            android:drawableTop="@drawable/selector_home_tab_live"
+            android:tag="live"
+            android:text="@string/navigation_title_live" />
+
+        <RadioButton
+            android:id="@+id/rb_market"
+            style="@style/NavigationTabButtonStyle"
+            android:drawableTop="@drawable/selector_home_tab_market"
+            android:tag="market"
+            android:text="@string/navigation_title_market" />
+
+        <RadioButton
+            android:id="@+id/rb_user"
+            style="@style/NavigationTabButtonStyle"
+            android:drawableTop="@drawable/selector_home_tab_user"
+            android:tag="user"
+            android:text="@string/navigation_title_user" />
+
+    </RadioGroup>
+</RelativeLayout>

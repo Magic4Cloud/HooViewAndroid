@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -7,8 +6,8 @@
 
 <resources>
     <declare-styleable name="BubbleView">
-        <attr name="border_width"/>
-        <attr name="border_color"/>
+        <attr name="border_width" />
+        <attr name="border_color" />
         <attr name="duration" format="integer" />
         <!-- drawable resource -->
         <attr name="src" format="reference|color" />
@@ -17,11 +16,24 @@
         <attr name="shape_radius" format="dimension" />
         <!--  child shape -->
         <attr name="shape_type" format="enum">
-            <enum name="circle" value="0"/>
-            <enum name="star" value="1"/>
-            <enum name="triangle" value="2"/>
-            <enum name="heart" value="3"/>
+            <enum name="circle" value="0" />
+            <enum name="star" value="1" />
+            <enum name="triangle" value="2" />
+            <enum name="heart" value="3" />
         </attr>
-        <attr name="singleColors" format="reference"/>
+        <attr name="singleColors" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="CommonItemButton">
+        <attr name="drawableRight" format="reference" />
+        <attr name="drawableLeft" format="reference" />
+        <attr name="title1" format="reference" />
+        <attr name="prompt" format="reference" />
+        <attr name="titleMarginLeft" format="dimension" />
+        <attr name="promptMarginRight" format="dimension" />
+        <attr name="drawableRightMarginRight" format="dimension" />
+        <attr name="drawableLeftMarginLeft" format="dimension" />
+    </declare-styleable>
+
+
 </resources>

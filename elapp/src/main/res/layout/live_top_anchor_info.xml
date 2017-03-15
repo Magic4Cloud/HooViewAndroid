@@ -65,7 +65,7 @@
             android:textStyle="bold"
             android:text=""/>
         <TextView
-            android:id="@+id/player_report_btn"
+            android:id="@+id/report_tv"
             android:layout_width="45dp"
             android:layout_height="21dp"
             android:layout_marginLeft="9dp"

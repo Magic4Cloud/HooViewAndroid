@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_line"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/tv_title"
+        android:layout_marginLeft="16dp"
+        android:layout_alignTop="@+id/tv_time"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/news_lastest" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/lastest_news_line" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/ll_line"
+        android:text="8分钟前"
+        android:textColor="@color/selector_lastest_text_time_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_time"
+        android:layout_marginLeft="18dp"
+        android:paddingBottom="5dp"
+        android:layout_marginRight="21dp"
+        android:layout_toRightOf="@+id/ll_line"
+        android:text=""
+        android:textColor="@color/selector_lastest_text_color"
+        android:textSize="16sp" />
+</RelativeLayout>

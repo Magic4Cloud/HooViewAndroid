@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="@color/white"
+    tools:showIn="@layout/fragment_selected_stock_list">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/icon_smile"/>
+
+    <TextView
+        android:id="@+id/tv_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_icon"
+        android:layout_centerHorizontal="true"
+        android:text="@string/my_selected_stock_empty_prompt"
+        android:textColor="@color/text_warm_gray"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:layout_width="124dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/tv_prompt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_add_stock_btn_bg"
+        android:gravity="center"
+        android:text="@string/add_stock"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"/>
+</RelativeLayout>

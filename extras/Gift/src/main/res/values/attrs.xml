@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="border_width" format="dimension" />
+    <attr name="border_color" format="color" />
+    <declare-styleable name="MyUserPhoto">
+        <attr name="small_width" format="dimension"/>
+        <attr name="small_height" format="dimension"/>
+        <attr name="border_width"/>
+        <attr name="border_color"/>
+        <attr name="small_icon" format="reference"/>
+        <attr name="is_vip" format="enum">
+            <enum name="vip" value="1" />
+            <enum name="no_vip" value="0" />
+        </attr>
+    </declare-styleable>
+</resources>

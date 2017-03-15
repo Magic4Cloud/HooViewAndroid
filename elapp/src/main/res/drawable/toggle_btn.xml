@@ -9,13 +9,13 @@
     <item
         android:state_checked="true"
         android:state_enabled="true"
-        android:drawable="@drawable/personal_icon_open"/>
+        android:drawable="@drawable/btn_on_n"/>
     <item
         android:state_checked="false"
         android:state_enabled="true"
-        android:drawable="@drawable/personal_icon_close"/>
+        android:drawable="@drawable/btn_off_n"/>
     <item
         android:state_checked="true"
         android:state_enabled="false"
-        android:drawable="@drawable/personal_icon_open_forbidden"/>
+        android:drawable="@drawable/btn_on_n"/>
 </selector>

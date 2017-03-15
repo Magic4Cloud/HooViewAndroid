@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+    <ImageView
+        android:id="@+id/iv_pwd_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back" />
+
+    <TextView
+        android:id="@+id/tv_set_password_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/fl_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        android:text="@string/hint_password" />
+
+    <FrameLayout
+        android:id="@+id/fl_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp">
+
+        <EditText
+            android:id="@+id/et_password"
+            android:inputType="textPassword"
+            style="@style/LoginRegisterEditStyle"
+            android:digits="@string/pwd_digits"
+            android:maxLength="20"
+            android:paddingRight="30dp"
+            android:layout_width="256dp" />
+
+        <CheckBox
+            android:id="@+id/iv_pwd_visible"
+            android:layout_width="22dp"
+            android:button="@null"
+            android:layout_height="22dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/selector_pwd_visible" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="256dp"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@color/line_gray" />
+
+    </FrameLayout>
+
+    <Button
+
+        android:id="@+id/btn_finish"
+        style="@style/LoginRegisterBottonStyle"
+        android:layout_below="@+id/fl_pwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp"
+        android:text="@string/complete" />
+</RelativeLayout>

@@ -5,15 +5,12 @@
   -->
 
 <resources>
-    <string name="app_name">火眼财经</string>
     <string name="splash_next_step">跳过</string>
     <string name="splash_time_countdown">倒计时：%1$s秒</string>
 
     <string name="empty_value">--</string>
     <string name="search">搜索</string>
-    <string name="complete">完成</string>
     <string name="video">视频</string>
-    <string name="live">直播</string>
     <string name="fans">粉丝</string>
     <string name="shield">屏蔽</string>
     <string name="mute">静音</string>
@@ -24,15 +21,12 @@
     <string name="follow_plus">+关注</string>
     <string name="followed">已关注</string>
     <string name="home">ta的主页</string>
-    <string name="login">登录</string>
-    <string name="register">注册</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
     <string name="commit">提交</string>
     <string name="delete">删除</string>
-    <string name="share">分享</string>
     <string name="send">发送</string>
-    <string name="chat">私信</string>
+    <string name="chat">聊天</string>
     <string name="user">用户</string>
     <string name="notice">通知</string>
     <string name="rice_roll">饭票</string>
@@ -42,11 +36,13 @@
     <string name="unknown">未知</string>
     <string name="accompany">陪伴</string>
     <string name="detail">详情</string>
+    <string name="collect">收藏</string>
+    <string name="comment">评论</string>
     <string name="faq">常见问题</string>
-    <string name="before_minute">%1$s 分钟前</string>
-    <string name="before_hour">%1$s 小时前</string>
-    <string name="before_day">%1$s 天前</string>
-    <string name="before_week">%1$s 周前</string>
+    <string name="before_minute">%1$d 分钟前</string>
+    <string name="before_hour">%1$d 小时前</string>
+    <string name="before_day">%1$d 天前</string>
+    <string name="before_week">%1$d 周前</string>
     <string name="before_month">%1$s 月前</string>
     <string name="before_year">%1$s 年前</string>
     <string name="just_now">刚刚</string>
@@ -55,13 +51,14 @@
     <string name="unit_m">%1$1.1fm</string>
     <string name="unit_km">%1$1.1fkm</string>
     <string name="unit_10k_km">%1$1.1fw km</string>
+    <string name="today_time">今天 %1$s</string>
 
     <string name="duration_format_short" translatable="false">%2$d:%5$02d</string>
     <string name="duration_format_long" translatable="false">%1$d:%3$02d:%5$02d</string>
 
     <string name="sharing">正在分享</string>
     <string name="share_user_title">%s的个人主页</string>
-    <string name="share_user_content">这是%s的易视云个人主页，非常赞，推荐你关注。</string>
+    <string name="share_user_content">这是%s的火眼财经个人主页，非常赞，推荐你关注。</string>
 
     <string name="tab_title_subject">话题</string>
     <string name="login_by_sns">其他登录方式</string>
@@ -86,7 +83,7 @@
     <string name="get_verification_count_down">秒后重发</string>
 
     <string name="e_coin_give_count_rear">赠送&#160;%1$d&#160;云币</string>
-    <string name="e_coin_count_rear">%1$d&#160;云币</string>
+    <string name="e_coin_count_rear">%1$d&#160;豆</string>
     <string name="cash_count">￥&#160;%1$.2f</string>
     <string name="cash_count_simple">￥&#160;%1$d</string>
     <string name="my_e_coin">我的云币</string>
@@ -100,7 +97,6 @@
     <string name="logout">退出登录</string>
     <string name="about_us">关于</string>
     <string name="about_us_app">关于火眼财经</string>
-    <string name="feedback">意见反馈</string>
     <string name="contact_us">联系我们</string>
     <string name="seizure_account">封号处理准则</string>
     <string name="copyright">版权说明</string>
@@ -115,9 +111,8 @@
     <string name="birthday">生日</string>
     <string name="constellation">星座</string>
     <string name="area">地区</string>
-    <string name="signature">个性签名</string>
-    <string name="hint_signature">这里的签名空荡荡</string>
-    <string name="next_step">下一步</string>
+    <string name="signature">介绍自己</string>
+    <string name="hint_signature">火眼助你成为财经大师</string>
     <string name="default_user_birthday">1990&#8211;6&#8211;15</string>
     <string name="default_user_constellation">双子座</string>
 
@@ -127,6 +122,7 @@
     <string name="msg_phone_number_invalid">手机号码格式错误</string>
     <string name="msg_phone_number_empty">手机号码不能为空</string>
     <string name="msg_phone_registered">手机号已注册</string>
+    <string name="msg_phone_unregistered">手机号没有注册,请先注册</string>
     <string name="msg_phone_have_bound">该手机号已被其它帐绑定,请使用未绑定过的手机号</string>
     <string name="msg_phone_not_registered">手机号未注册</string>
     <string name="msg_phone_need_verify">请重新获取验证码并验证</string>
@@ -163,8 +159,8 @@
     <string name="msg_video_url_null">视频不存在</string>
     <string name="msg_play_error">抱歉，播放异常</string>
     <string name="msg_error">出错了!</string>
-    <string name="msg_error_auth_conflicts">您的帐号已被其它易视云帐号绑定过，无法完成绑定。</string>
-    <string name="msg_session_invalid">你的易视云帐号已在其它地方登录，请确认帐号安全。</string>
+    <string name="msg_error_auth_conflicts">您的帐号已被其它火眼财经帐号绑定过，无法完成绑定。</string>
+    <string name="msg_session_invalid">你的火眼财经帐号已在其它地方登录，请确认帐号安全。</string>
     <string name="msg_contact_info_error">邮箱有误，请核对</string>
     <string name="msg_follow_failed">关注失败</string>
     <string name="msg_follow_success">关注成功</string>
@@ -200,8 +196,11 @@
     <string name="msg_cash_out_failed">提现失败</string>
     <string name="msg_cash_out_success_remind">请于24小时内在微信领取提现红包，过期未领取将不予处理</string>
     <string name="msg_need_bind_weixin_first">请先绑定微信</string>
-    <string name="msg_gift_buy_failed_e_coin_not_enough">云币不足</string>
+    <string name="msg_gift_buy_failed_e_coin_not_enough">火眼豆不足</string>
     <string name="msg_have_shut_up">您已被禁言</string>
+    <string name="msg_no_v_call_request_user">没有人请求连麦</string>
+    <string name="msg_no_need_request_twice">您已经申请过申连麦了，无需重复申请</string>
+    <string name="msg_disconnect_video_call">结束当前连麦</string>
 
     <string name="dl_network_traffic">流量提醒</string>
     <string name="dl_msg_network_traffic_4G">正在使用移动网络，继续使用可能产生流量费用</string>
@@ -232,7 +231,6 @@
     <string name="live_switch_camera_front">前置镜头</string>
     <string name="live_switch_camera_rear">后置镜头</string>
     <string name="live_shoot_thumb">拍摄封面</string>
-    <string name="live_set_title_hint">给你的直播起个名字~</string>
     <string name="live_set_thumb_tip">拍摄一张漂亮帅气的封面</string>
     <string name="live_title_default">%1$s正在直播，赶紧进来看</string>
     <string name="share_live_content">%1$s正在直播中，快来围观点赞。</string>
@@ -265,6 +263,9 @@
     <string name="report">举报</string>
     <string name="shut_up">禁言</string>
     <string name="shut_up_cancel">解禁</string>
+    <string name="kick_user">踢人</string>
+    <string name="set_manager">设为管理</string>
+    <string name="set_manager_call">取消管理</string>
 
     <string name="weixin_number">微信号</string>
     <string name="qq_number">QQ号</string>
@@ -280,7 +281,7 @@
     <string name="to_appeal">我要申诉</string>
     <string name="no_email_applications_installed">没有安装可以发送邮件的程序</string>
     <string name="title_change_phone_number">更换新手机号码</string>
-    <string name="bind_phone_number_ok">已绑定 %1$s **** %2$s</string>
+    <string name="bind_phone_number_ok">%1$s **** %2$s</string>
     <string name="binding">绑定</string>
     <string name="unbind">解绑</string>
     <string name="unbound">未绑定</string>
@@ -299,7 +300,6 @@
     <string name="push_message_notice_live">直播消息提醒</string>
     <string name="push_message_do_not_bother_tips">晚上11点至早上8点不会接受提醒</string>
     <string name="message_followed_you">已经关注了你</string>
-    <string name="clear_cache_memory">清理缓存空间</string>
 
     <string name="rice_roll_number">个饭票</string>
     <string name="watch">人看过</string>
@@ -339,9 +339,10 @@
     <string name="timeline_item_title_now_hot">@string/tab_title_subject</string>
     <string name="timeline_item_title_now_nearby">附近</string>
     <string name="search_text_box_hint">搜索用户名／直播／录播</string>
+    <string name="search_text_box_hint_new">搜你想了解的</string>
     <string name="view_more">查看更多</string>
-    <string name="share_yzb_title">欢迎推荐易视云给身边的朋友</string>
-    <string name="share_yzb_content">我在使用@易视云软件，非常不错推荐给大家，免费下载地址 http://download.yizhibo.tv</string>
+    <string name="share_yzb_title">欢迎推荐火眼财经给身边的朋友</string>
+    <string name="share_yzb_content">我在使用@火眼财经软件，非常不错推荐给大家，免费下载地址 http://download.yizhibo.tv</string>
     <string name="share_yzb_scan_tip">也可以扫描二维码直接下载安装</string>
     <string name="share_yzb_by_app">使用以下应用完成分享</string>
 
@@ -360,9 +361,11 @@
     <string name="dialog_title_live_stop">直播已停止</string>
     <string name="dialog_title_bind_phone">请完善手机信息</string>
 
-    <string name="about_yizhibo_content">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;火眼财经为四川火眼财讯科技有限公司（简称“火眼财讯”）旗下产品。火眼财讯定位于泛财经领域第一垂直直播平台，是由四川星空奇迹科技有限公司（简称“星空奇迹”）和成都每日经济新闻报社有限公司（简称“每日经济新闻”）共同创办。火眼财讯依托于合作方星空奇迹在视频直播领域的丰富行业经验及背景资源，以及每日经济新闻强大的内容生产能力，专注于泛财经领域的视频直播。
+    <string name="about_yizhibo_content">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;火眼财经是一款专注于移动视频直播的互联网4.0最前沿社交APP。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;实时的直播分享，时间没有上限，内容可共享至微信、微博、QQ等社交平台,
+        既可以公开给所有人，也可仅限你的好友们观看和互动。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;云端保存，既不占你的本地空间，又不会丢失你任何一刻的精彩。还可以一键即焚，播后也可不留痕迹。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;极低的流量消耗，
+        通过极限低码率的视频压缩，为流量环境下的直播和观看最大限度的省钱。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;不论你是想炫耀、猎奇、交友，赚钱，需要生活消费还是资讯获取，都可以来这个多屏互动的社交直播平台。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;在这里，所有人都公平的获得展现真实自我的机会，火眼财经，把你捧到世界面前。\n\n
     </string>
-    <string name="yihzibo_copyright">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;火眼财经为火眼财讯科技有限公司旗下的一款基于移动端的直播分享软件平台，在平台上会员或其发布有关直播信息均由会员自行提供，会员依法对其提供的任何信息承担全部责任。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;任何单位或个人认为火眼财经平台的内容可能涉嫌侵合法权益，应该及时书面通知本公司，并应对书面通知陈述之真实性负责。我们在收到相关信息后，将会依法尽快移除或限制相关涉嫌侵权的内容。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; 火眼财经平台尊重合法版权，反对侵权盗版。转发及分容并不意味本平台赞同其部分文字或作品等侵害了您的权益，请您立即与我们联系，我们将尽快予以解决。</string>
+    <string name="yihzibo_copyright">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;火眼财经为深圳云聚汇数码有限公司旗下的一款移动直播分享的软件平台，在平台上会员或其发布的有关直播信息均由会员自行提供，会员依法对其提供的任何信息承担全部责任。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;任何单位或个人认为火眼财经平台的内容可能涉嫌侵犯其合法权益，应该及时书面通知本公司，并应对书面通知陈述之真实性负责。我们在收到相关信息后，将会依法尽快移除或限制相关涉嫌侵权的内容。\n\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;火眼财经平台尊重合法版权，反对侵权盗版。转发及分享内容并不意味火眼财经赞同其部分文字或作品等侵害了您的权益，请您立即与火眼财经联系，火眼财经将尽快予以解决。\n\n</string>
     <string name="submit_no_content">对不起，您没有填写反馈内容，请重试</string>
     <string name="submit_error_str">对不起，提交失败，请稍候重试</string>
     <string name="submit_ok">您的反馈已收到，感谢您的支持，我们会尽快解决您的问题！</string>
@@ -383,7 +386,7 @@
     <string name="empty_no_score">暂无消费记录</string>
     <string name="empty_no_cash_out">暂无提现记录</string>
     <string name="person_friend_btn_living">挑个直播看看</string>
-    <string name="common_share_message">:精彩生活，最易视云</string>
+    <string name="common_share_message">:精彩生活，最火眼财经</string>
     <string name="network_ok_message">直播已经恢复</string>
     <string name="network_error_message">当前无网络</string>
     <string name="network_invalid_try_reconnect">当前网络不给力，正在为您优化连线</string>
@@ -411,9 +414,9 @@
     <string name="watching_user_send_expression">%1$s 送出表情%2$s</string>
     <string name="concerned_msg">关注后可订阅对方动态</string>
 
-    <string name="user_e_coin_count">%1$s\n送出的云币</string>
-    <string name="user_follow_count">%1$s\n关注</string>
-    <string name="user_love_count">%1$s\n粉丝</string>
+    <string name="user_e_coin_count">%1$d\n送出的云币</string>
+    <string name="user_follow_count">%1$d\n关注</string>
+    <string name="user_love_count">%1$d\n粉丝</string>
 
     <string name="rise_cash">微信提现</string>
     <string name="rise_cash_amount">提现金额</string>
@@ -427,7 +430,7 @@
     <string name="today_rise_amount_cash">今日可提现金额(元)</string>
     <string name="cash_in_count_selector">请选择充值金额</string>
     <string name="cash_in_mode_selector">请选择充值方式</string>
-    <string name="kindly_reminder">关于饭票、云币的解释请点击下方的资产相关说明查看。\n\r充值如有问题请关注公众号易视云联系在线客服</string>
+    <string name="kindly_reminder">关于火眼豆的解释请点击下方的资产相关说明查看。</string>
     <string name="cash_in_confirm">确认充值</string>
     <string name="title_cash_out">提现</string>
     <string name="money_amount_other">其它金额</string>
@@ -437,7 +440,6 @@
     <string name="cash_in_option_alipay">支付宝支付</string>
     <string name="cash_in_option_weixin">微信支付</string>
     <string name="cash_in_e_coin_balance">账户余额</string>
-    <string name="e_coin_count">云币&#160;&#160;%1$s</string>
     <string name="cash_out_amount_total">总提现金额: %1$d元</string>
     <string name="recharge_amount_total">总充值金额: %1$d元</string>
     <string name="money_amount_other_input">请输入其它金额</string>
@@ -456,6 +458,8 @@
     <string name="contributor">贡献</string>
     <string name="search_history">历史搜索</string>
     <string name="clear_history_success">清除历史搜索记录成功</string>
+    <string name="watch_history">观看历史</string>
+    <string name="read_history">阅读历史</string>
     <string name="video_comment_new_count">%1$d条新消息</string>
     <string name="contribute_e_coin_count">贡献云币</string>
     <string name="get_rice_roll_count">获得饭票</string>
@@ -480,8 +484,8 @@
     <string name="e_number_null">亲，你是要发红包给空气吗？</string>
     <string name="e_number_require_not_accord">云币数量必须大于红包数量</string>
     <string name="red_pack_send_success">红包发送成功</string>
-    <string name="red_pack_send_tip_not_enough">云币不足，请先充值</string>
-    <string name="red_pack_type_system">易视云红包</string>
+    <string name="red_pack_send_tip_not_enough">火眼豆不足，请先充值</string>
+    <string name="red_pack_type_system">火眼财经红包</string>
     <string name="red_pack_type_watcher">礼物红包</string>
     <string name="red_pack_type_owner">主播红包</string>
     <string name="msg_red_pack_wait_to_open">红包金额%1$d云币,等待对方领取</string>
@@ -573,22 +577,188 @@
     <string name="delete_conversation">删除会话</string>
     <string name="remove_black">解除</string>
     <string name="pull_black">拉黑</string>
+    <string name="modify_video_thumb">修改封面</string>
+    <string name="modify_video_title">修改标题</string>
+    <string name="title_v_call_users_count">%1$d个人想与你连麦</string>
 
 
-    <!--新版本的字符串-->
-    <string name="hooview">火眼财经</string>
-
-    <string name="test_new">测试测试测试测试测试测试测试测试是测试测试测试测试测试测试测试测试测试测试测试测试是测试测试测试测试</string>
-    <string name="my_live">我的直播</string>
-
-    <string name="copy_right">Copyright©2016</string>
-    <string name="compony_name">四川火眼财讯科技有限公司</string>
-    <string name="video_new">视频</string>
-    <string name="start_group_chat">发起群聊</string>
-    <string name="set_pw_6to12">设置新密码，输入6~20位密码</string>
-    <string name="city_selected">城市选择</string>
-    <string name="not_more">没有更多了～</string>
-    <string name="register_account">注册账户</string>
-    <string name="main_home">主页</string>
-    <string name="plus_focus">+关注</string>
+    <!--New-->
+    <string name="app_name">火眼财经</string>
+    <string name="navigation_title_news">资讯</string>
+    <string name="navigation_title_live">直播</string>
+    <string name="navigation_title_market">行情</string>
+    <string name="navigation_title_user">个人</string>
+    <string name="user_title">个人中心</string>
+    <string name="user_msg_notification">消息提醒</string>
+    <string name="user_my_live_list">我的直播</string>
+    <string name="user_my_secrets">我的秘籍</string>
+    <string name="user_my_follow">我的关注</string>
+    <string name="user_my_fans">我的粉丝</string>
+    <string name="user_my_collection">我的收藏</string>
+    <string name="user_my_read_history">历史记录</string>
+    <string name="feedback">意见反馈</string>
+    <string name="hint_phone">请填写您的手机号</string>
+    <string name="hint_password">请输入6位以上密码</string>
+    <string name="reset_pwd_prompt">请输入新密码</string>
+    <string name="agree">同意</string>
+    <string name="user_protocol">用户协议</string>
+    <string name="user_cash_inprotocol">用户充值协议</string>
+    <string name="next_step">下一步</string>
+    <string name="promt_register">还没有账号</string>
+    <string name="login">登录</string>
+    <string name="complete">完成</string>
+    <string name="prompt_registered">您已注册,点击</string>
+    <string name="login_now">立即登录</string>
+    <string name="register">注册</string>
+    <string name="hooview_live">火眼直播</string>
+    <string name="video_live">视频直播</string>
+    <string name="image_text_live">图文直播</string>
+    <string name="good_live">精品视频</string>
+    <string name="hot_recommend">热门推荐</string>
+    <string name="hot_recommend_vip">热门大牛</string>
+    <string name="hot_">热门推荐</string>
+    <string name="live_list">直播列表</string>
+    <string name="vip_list">大牛列表</string>
+    <string name="live_chat">聊天</string>
+    <string name="live_data">数据</string>
+    <string name="good_book">秘籍</string>
+    <string name="market">市场</string>
+    <string name="my_stock">自选</string>
+    <string name="market_tabs_chinese">沪深</string>
+    <string name="market_tabs_hk">港股</string>
+    <string name="market_tabs_usa">美股</string>
+    <string name="market_tabs_global">全球</string>
+    <string name="edit">编辑</string>
+    <string name="global_content_manager">全球内容管理</string>
+    <string name="globa_edit_prompt">点击添加指数，再次点击取消添加</string>
+    <string name="stock_name">名称</string>
+    <string name="up_to_date_price">现价</string>
+    <string name="price_change_ratio">涨跌幅</string>
+    <string name="my_selected_stock_empty_prompt">您还没有添加自选噢</string>
+    <string name="global_content_manager_tabs_exponent">全球指数</string>
+    <string name="global_content_manager_tabs_goods">全球商品</string>
+    <string name="global_content_manager_tabs_exchange_rate">全球汇率</string>
+    <string name="add_stock">添加自选</string>
+    <string name="title_edit_stock">编辑自选股</string>
+    <string name="hooview_gold_eye">火眼金睛</string>
+    <string name="load_more">查看更多</string>
+    <string name="add_stock_btn">+自选</string>
+    <string name="news_tab_important">要闻</string>
+    <string name="news_tab_lastest">快讯</string>
+    <string name="news_tab_my_stock">自选</string>
+    <string name="share">分享</string>
+    <string name="all">全部</string>
+    <string name="refresh">刷新</string>
+    <string name="stock_detail_chat_hint">来一起讨论吧</string>
+    <string name="up_list_title">涨幅榜</string>
+    <string name="down_list_title">跌幅榜</string>
+    <string name="live_loading_prompt">直播加载中</string>
+    <string name="play_live_end_prompt">大v忙着诊股去看看其他直播吧</string>
+    <string name="play_live_video_end_prompt">视频已结束，可再次观看</string>
+    <string name="play_live_net_error_prompt">直播断开了请稍候</string>
+    <string name="exponent_percent">%1$.2f[%2$.2f%%]</string>
+    <string name="exponent_percent_up">+%1$.2f[+%2$.2f%%]</string>
+    <string name="forget_pwd">忘记密码？</string>
+    <string name="live_set_title_hint">好的标题会吸引更多的人噢</string>
+    <string name="share_prompt">分享到这里获得更高人气</string>
+    <string name="hooview_coin_tips">火眼豆 %s</string>
+    <string name="hooview_coin">火眼豆</string>
+    <string name="hooview_coin_tips2">火眼币 %s</string>
+    <string name="watch_count_tips">%s人观看</string>
+    <string name="feature_no_open_prompt">暂未开通，敬请期待</string>
+    <string name="user_join_tips">%s进入直播间了</string>
+    <string name="gift_tips">%1$s%2$s个</string>
+    <string name="live_tips">温馨提示：绿色直播。涉及色情，低俗，暴力等内容将被封停账号，文明直播，从我做起！</string>
+    <string name="net_error_tips">您的网络已断开，请重新连接</string>
+    <string name="retry_connect">重新连接</string>
+    <string name="save_error_tips">直播时间不足5分钟，将不会被保存</string>
+    <string name="live_duration">直播时长</string>
+    <string name="watch_count_title">观看人数</string>
+    <string name="follow_count">关注人数</string>
+    <string name="news_watch_count">阅 %s</string>
+    <string name="eye_news_watch_count">%s人已看</string>
+    <string name="search_hint">搜索您想了解的</string>
+    <string name="news">新闻</string>
+    <string name="stock">股票</string>
+    <string name="live">直播</string>
+    <string name="search_news_empty_prompt">搜索您想了解的新闻资讯</string>
+    <string name="search_news_empty_live_prompt">搜索您想了解的直播</string>
+    <string name="search_news_empty_stock_prompt">搜索您想了解的股票</string>
+    <string name="search_live_empty_prompt">很抱歉，没有相关信息</string>
+    <string name="search_stock_empty_prompt">很抱歉，没有相关信息</string>
+    <string name="search_empty_prompt">请输入搜索关键词！</string>
+    <string name="watch_count">%s人看</string>
+    <string name="living">直播中</string>
+    <string name="my_sum">我的余额</string>
+    <string name="my_message">消息提醒</string>
+    <string name="login_register">登录/注册</string>
+    <string name="setting">设置</string>
+    <string name="account_manager">账号管理</string>
+    <string name="clear_cache_memory">清理缓存</string>
+    <string name="clear_cache_memory_finish">缓存已清除</string>
+    <string name="update_version">版本更新</string>
+    <string name="about_hooview">关于火眼</string>
+    <string name="version_name">%s版本</string>
+    <string name="about_prompt">让赚钱变的更简单</string>
+    <string name="encourages_us">鼓励我们</string>
+    <string name="default_nickname">火眼财经%s</string>
+    <string name="default_location">中国</string>
+    <string name="default_singture">火眼助你成为财经大师</string>
+    <string name="follow_sccuess">关注成功</string>
+    <string name="cancel_follow_sccuess">取消关注成功</string>
+    <string name="live_chat_tips">温馨提示：涉及色情，低俗，暴力等聊天内容将被封停 账号。文明聊天，从我做起！</string>
+    <string name="input_prompt">加入评论吧</string>
+    <string name="gift_price">%d火眼豆</string>
+    <string name="e_coin_count">火眼豆&#160;&#160;%1$s</string>
+    <string name="empty_data">暂无数据</string>
+    <string name="send_success">发送成功</string>
+    <string name="error_search_stock">请您的输入有误，请重新输入!</string>
+    <string name="live_search_prompt">搜索你想了解的股票</string>
+    <string name="no_search_result">无搜索结果</string>
+    <string name="msg_comment_success">评论成功</string>
+    <string name="msg_feature_not_complete">暂不支持</string>
+    <string name="text_length_prompt">%d/140字</string>
+    <string name="logining">正在登录。。。</string>
+    <string name="pwd_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="protocol_prompt">请勾选用户协议</string>
+    <string name="send_sms_agin_countdown">再次发送（%d秒）</string>
+    <string name="send_sms_agin">再次发送</string>
+    <string name="price">%s元</string>
+    <string name="title_all_comments">全部评论</string>
+    <string name="unit_gift">个</string>
+    <string name="take_picture_again">重拍</string>
+    <string name="net_error">您的网络正在连接中</string>
+    <string name="user_protocol_detail">用户协议 尊敬的用户您好，请您仔细阅读以下条款，如果您对本协议的任何条款表示异议，您可以选择不使用；使用则意味着您将同意遵守本协议下全部规定，以及我们后续对使用协议随时所作的任何修改，并完全服从于我们的统一管理。 第一章 总则 第1条 火眼财经是火眼财经团队(以下统称“本团队”)向用户提供的一种更方便的进行视频直播和观看视频直播服务的平台。 第2条 火眼财经所有权、经营权、管理权均属本团队。 第3条 本协议最终解释权归属本团队。 第二章 用户说明 第4条 凡是下载、浏览和发布内容的用户均为火眼财经用户(以下统称“用户”)。 第5条 用户的个人信息受到保护，不接受任何个人或单位的查询。国家机关依法查询除外，用户的个人设置公开除外。 第6条 用户享有言论自由的权利。 第7条 用户的言行不得违反《计算机信息网络国际联网安全保护管理办法》、《互联网信息服务管理办法》、《互联网电子公告服务管理规定》、《维护互联网安全的决定》、《互联网新闻信息服务管理规定》等相关法律规定，不得在火眼财经上发布、传播或以其它方式传送含有下列内容之一的信息： 1.反对宪法所确定的基本原则的； 2.危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的； 3.损害国家荣誉和利益的； 4.煽动民族仇恨、民族歧视、破坏民族团结的； 5.破坏国家宗教政策，宣扬邪教和封建迷信的； 6.散布谣言，扰乱社会秩序，破坏社会稳定的； 7.散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的； 8.侮辱或者诽谤他人，侵害他人合法权利的； 9.煽动非法集会、结社、游行、示威、聚众扰乱社会秩序的； 10.以非法民间组织名义活动的； 11.含有虚假、有害、胁迫、侵害他人隐私、骚扰、侵害、中伤、粗俗、猥亵、或其它道德上令人反感的内容； 12.含有中国法律、法规、规章、条例以及任何具有法律效力之规范所限制或禁止的其它内容的。 第8条 用户不得在火眼财经内发布任何形式的广告。 第9条 用户应承担一切因其个人的行为而直接或间接导致的民事或刑事法律责任，因用户行为给本团队造成损失的，用户应负责赔偿。 第10条 本团队拥有对违反协议的用户进行处理的权力，直至禁止其在火眼财经内发布信息。 第11条 禁止任何使用非法软件进行刷内容、违规发布内容的行为。 第12条 任何用户发现火眼财经上有内容涉嫌侮辱或者诽谤他人、侵害他人合法权益的或违反本协议的，有权进行直接举报。 第13条 为了能够给广大用户提供一个优质的交流平台，同时使得火眼财经能够良性、健康的发展，将对涉及反动、色情和发布不良内容的用户，进行严厉处理。一经发现此类行为，将给予永久封禁并清空所有发言的处罚。 第14条 未满18岁用户如需充值，请在家长监督下进行。 第三章 权利声明 第1条 火眼财经发布的内容仅代表作者观点，与本团队无关。对于用户言论的真实性引发的全部责任，由用户自行承担，本团队不承担任何责任。 第2条 用户之间因使用火眼财经而产生或可能产生的任何纠纷和/或损失，由用户自行解决并承担相应的责任，与本团队无关。 第3条 用户在火眼财经上发布的内容，本团队有权转载或引用。 第4条 用户在任何时间段在火眼财经上发表的任何内容的著作财产权，用户许可本团队在全世界范围内免费地、永久性地、不可撤销地、可分许可地和非独家地使用的权利，包括但不限于：复制权、发行权、出租权、展览权、表演权、放映权、广播权、信息网络传播权、摄制权、改编权、翻译权、汇编权以及《著作权法》规定的由著作权人享有的其他著作财产权利。并且，用户许可本团队有权利就任何主体侵权而单独提起诉讼，并获得全部赔偿。 第四章 处罚规则 第18条 本团队郑重提醒用户，若出现下列情况任意一种或几种，将承担包括被关闭全部或者部分权限、被暂停或被禁止使用的后果，情节严重的，还将承担相应的法律责任。 1.使用不雅或不恰当昵称； 2.发布含有猥亵、色情、人身攻击和反政府言论等非法或侵权言论的； 3.从事非法商业活动； 4.假冒管理人员或破坏管理人员形象； 5.使用非法软件进行刷内容、违规发布内容的行为； 6.其他本团队认为不恰当的情况。 第19条 凡文章出现以下情况之一，本团队管理人员有权不提前通知作者直接删除，并依照有关规定作相应处罚。情节严重者，本团队管理人员有权对其做出关闭部分权限、暂停直至禁止使用。 1.发表含有本协议第7条禁止发布、传播内容的文章； 2.发表无意义的灌水内容； 3.同一内容多次出现的； 4.违反本协议第8条的规定，发布广告的； 5.内容包含有严重影响用户浏览的内容或格式的； 6.其他本团队认为不恰当的情况。 第五章 隐私保护 第20条 火眼财经不对外公开或向第三方提供单个用户的注册资料及用户在使用网络服务时存储在本网站的非公开内容，但下列情况除外： 1.事先获得用户的明确授权； 2.根据有关的法律法规要求； 3.按照相关政府主管部门的要求； 4.该第三方同意承担与火眼财经同等的保护用户隐私的责任； 在不透露单个用户隐私资料的前提下，火眼财经有权对整个用户数据库进行分析并对用户数据库进行商业上的利用。 本软件包含问题反馈功能，在您提交反馈问题和联系方式的同时我们还会收集您的IMEI号、手机型号等相关信息。 您在反馈意见中所填写的联系方式，只会用于我们的客服与您沟通与反馈，除征得用户明确同意和法律明确规定外， 火眼财经不会向任何第三方提供用户上传信息。您的信息不会被用于出售，出借或交换。 第六章 附则 第21条 关于打击网络谣言的司法解释：《最高人民法院、最高人民检察院关于办理利用信息网络实施诽谤等刑事案件适用法律若干问题的解释》已于2013年9月5日由最高人民法院审判委员会第1589次会议、2013年9月2日由最高人民检察院第十二届检察委员会第9次会议通过，现予公布，自2013年9月10日起施行。 第22条 所有用户发布的内容而引起的法律纠纷，与本团队无关。 第23条 火眼财经如因系统维护或升级等而需暂停服务时，将事先公告。若因硬件故障或其它不可抗力而导致暂停服务，于暂停服务期间造成的一切不便与损失，本团队不负任何责任。由于火眼财经的产品调整导致信息丢失和/或其他结果的，本团队不承担任何责任。 第24条 本协议未涉及的问题参见国家有关法律法规，当本协议与国家法律法规冲突时，以国家法律法规为准。</string>
+    <string name="update">更新</string>
+    <string name="my_collect">我的收藏</string>
+    <string name="my_news_empty">自选股当前没有相关新闻</string>
+    <string name="image_text_watch_count">%s人参与</string>
+    <string name="image_text_watch_count2">%s万人参与</string>
+    <string name="image_text_follow_count">%s人关注</string>
+    <string name="image_live_room_fans">%s人气</string>
+    <string name="my_image_text_room">我的直播间</string>
+    <string name="stick">顶</string>
+    <string name="me">我</string>
+    <string name="reply_content">回复%1$s:%2$s</string>
+    <string name="cant_find_pictures">找不到图片</string>
+    <string name="reply_somebody">回复%1$s:</string>
+    <string name="app_url">http://www.easylive.com</string>
+    <string name="image_date_pattern">MM年dd月</string>
+    <string name="who_room">的直播间</string>
+    <string name="go_cash_in">去充值</string>
+    <string name="cash_prompt">火眼豆不足，是否需要充值</string>
+    <string name="save_tips">直播时间不足2分钟，将不会被保存</string>
+    <string name="record_title_empty_tips">请先添加标题再进行直播</string>
+    <string name="cover_tips">请先添加封面</string>
+    <string name="common_user_live_tips">您还不是主播哟</string>
+    <string name="common_user_live_toast">暂未开放，敬请期待</string>
+    <string name="common_user_become_liver">成为主播</string>
+    <string name="vip_user_become_liver">您还没有直播哟</string>
+    <string name="vip_user_become_add">发起直播</string>
+    <string name="all_comments">全部评论</string>
+    <string name="has_no_data">暂无数据</string>
+    <string name="user_cash_in_protocol">用户充值协议</string>
+    <string name="default_sign">火眼助你成为财经大师</string>
+    <string name="certificate">执业证号</string>
+    <string name="certificate_hint">请完善您的证券执业资格号</string>
 </resources>

@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0";
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
+    compile 'com.netflix.rxjava:rxjava-core:0.20.7'
+    compile 'com.netflix.rxjava:rxjava-android:0.20.7'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+}
+
+configurations {
+    runtime.exclude group: "com.android.support", module: "appcompat"
+    runtime.exclude group: "com.squareup.okhtt3", module: "okhttp"
+    runtime.exclude group: "com.netflix.rxjava", module: "rxjava-core"
+    runtime.exclude group: "com.netflix.rxjava", module: "rxjava-android"
+}
+
+
+
+
+
+

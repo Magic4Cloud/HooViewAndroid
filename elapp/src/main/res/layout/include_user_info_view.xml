@@ -1,61 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/text_white"
-    android:orientation="vertical">
-
+    android:background="@color/text_white">
     <LinearLayout
         android:id="@+id/user_avatar_area_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
-
         <com.easyvaas.common.widget.MyUserPhoto
             android:id="@+id/my_user_photo"
             android:layout_width="@dimen/avatar_user_center_size"
             android:layout_height="@dimen/avatar_user_center_size"
             android:scaleType="fitCenter"
-            app:border_color="@color/pure_white"
-            app:border_width="0.5dp"
+            app:src="@drawable/somebody"
             app:is_vip="no_vip"
             app:small_height="15dp"
             app:small_width="15dp"
-            app:src="@drawable/somebody" />
-
+            app:border_color="@color/pure_white"
+            app:border_width="0.5dp"/>
         <LinearLayout
             android:id="@+id/user_info_rl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center">
-
                 <TextView
                     android:id="@+id/mine_user_name_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="8dp"
-                    android:drawablePadding="4dp"
-                    android:ellipsize="end"
                     android:gravity="center"
+                    android:layout_centerHorizontal="true"
                     android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginTop="8dp"
                     android:text="@string/empty_value"
-                    android:textColor="@color/login_text_color"
-                    android:textSize="@dimen/text_size_12" />
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/login_text_color_3"
+                    android:textSize="@dimen/text_size_16"/>
             </RelativeLayout>
-
             <LinearLayout
                 android:id="@+id/user_info_ll"
                 android:layout_width="match_parent"
@@ -64,35 +60,28 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/user_gender_tv"
-                    android:layout_width="34dp"
-                    android:layout_height="16dp"
-                    android:background="@drawable/personal_icon_constellation_bg"
+                    android:layout_width="28dp"
+                    android:layout_height="12dp"
                     android:gravity="center"
-                    android:paddingLeft="6dp"
-                    android:paddingRight="6dp"
-                    android:textColor="@color/btn_color_main"
-                    android:textSize="@dimen/text_size_10" />
-
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/white"/>
                 <TextView
                     android:id="@+id/user_constellation_tv"
-                    android:layout_width="34dp"
-                    android:layout_height="16dp"
-                    android:layout_marginLeft="4dp"
-                    android:background="@drawable/personal_icon_constellation_bg"
+                    android:layout_width="28dp"
+                    android:layout_height="12dp"
                     android:gravity="center"
-                    android:textColor="@color/btn_color_main"
-                    android:textSize="@dimen/text_size_10" />
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/base_bg_btn_color_blue"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/personal_icon_constellation_bg"/>
             </LinearLayout>
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center">
-
                 <TextView
                     android:id="@+id/mine_location_tv"
                     android:layout_width="wrap_content"
@@ -100,11 +89,10 @@
                     android:layout_marginTop="3dp"
                     android:drawableLeft="@drawable/plaza_icon_gps"
                     android:drawablePadding="3dp"
+                    android:visibility="gone"
                     android:text="@string/empty_value"
                     android:textColor="@color/login_text_color"
-                    android:textSize="@dimen/text_size_13"
-                    android:visibility="gone" />
-
+                    android:textSize="@dimen/text_size_13"/>
                 <TextView
                     android:id="@+id/mine_id_tv"
                     android:layout_width="match_parent"
@@ -112,38 +100,37 @@
                     android:gravity="center"
                     android:text="@string/empty_value"
                     android:textColor="@color/login_text_color"
-                    android:textSize="@dimen/text_size_13" />
+                    android:textSize="@dimen/text_size_13"/>
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/mine_signature_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/user_info_ll"
                 android:layout_below="@id/mine_location_tv"
+                android:layout_alignLeft="@id/user_info_ll"
                 android:layout_marginTop="8dp"
-                android:ellipsize="marquee"
                 android:gravity="center"
                 android:maxLength="20"
                 android:maxLines="1"
+                android:ellipsize="marquee"
                 android:text="@string/empty_value"
                 android:textColor="@color/login_text_color"
-                android:textSize="@dimen/text_size_13" />
-
+                android:textSize="@dimen/text_size_13"/>
             <Button
                 android:id="@+id/mine_set_remarks_tv"
-                style="?android:buttonBarButtonStyle"
                 android:layout_width="64dp"
                 android:layout_height="25dp"
                 android:layout_below="@id/password_rl"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/personal_center_blue_round_btn_selector"
-                android:text="@string/edit_user_profile"
                 android:textColor="@color/white"
+                android:visibility="gone"
                 android:textSize="@dimen/text_size_13"
-                android:visibility="gone" />
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:text="@string/edit_user_profile"
+                android:background="@drawable/personal_center_blue_round_btn_selector"
+                style="?android:buttonBarButtonStyle"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

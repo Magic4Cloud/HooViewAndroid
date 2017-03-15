@@ -1,0 +1,42 @@
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.easyvaas.common.chat">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name">
+        <activity
+            android:theme="@style/AppBaseTheme.Dialog"
+            android:name="com.easyvaas.common.chat.activity.AlertDialogActivity"/>
+        <activity
+            android:theme="@style/AppBaseTheme.Dialog"
+            android:name="com.easyvaas.common.chat.activity.ContextMenuActivity"/>
+        <activity
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait"
+            android:name="com.easyvaas.common.chat.activity.ChatActivity"/>
+        <activity android:name="com.easyvaas.common.chat.activity.ForwardMessageActivity"/>
+        <activity
+            android:theme="@style/AppTheme.FullScreen"
+            android:name="com.easyvaas.common.chat.activity.ShowBigImageActivity"/>
+        <activity android:name="com.easyvaas.common.chat.activity.ShowNormalFileActivity"/>
+        <activity android:name="com.easyvaas.common.chat.activity.ShowVideoActivity"/>
+        <activity
+            android:theme="@style/AppBaseTheme.Dialog"
+            android:name="com.easyvaas.common.chat.activity.UserProfileActivity"/>
+        <activity
+            android:launchMode="singleTask"
+            android:name="com.easyvaas.common.chat.activity.VideoCallActivity"/>
+        <activity
+            android:launchMode="singleTask"
+            android:name="com.easyvaas.common.chat.activity.VoiceCallActivity"/>
+        <activity
+            android:name="com.easyvaas.common.chat.activity.FriendsSelectorListActivity"/>
+        <activity
+            android:name="com.easyvaas.common.chat.activity.MyGroupListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GroupInfoActivity"/>
+        <activity android:name=".activity.GroupNameChangedActivity"/>
+    </application>
+</manifest>

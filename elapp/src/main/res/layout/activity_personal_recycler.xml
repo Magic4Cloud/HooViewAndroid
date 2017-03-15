@@ -18,16 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
-    <View
-        android:id="@+id/commin_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_shadow_height"
-        android:layout_below="@+id/common_title_tv"
-        android:background="@drawable/shape_toolbar_shadow" />
 
     <com.easyvaas.common.recycler.PullToLoadView
         android:id="@+id/pull_load_view"
-        android:layout_marginTop="@dimen/toolbar_height_with_shadow"
+        android:layout_marginTop="54dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ImageView

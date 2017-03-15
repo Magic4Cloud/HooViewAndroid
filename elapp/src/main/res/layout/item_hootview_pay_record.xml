@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/avatar_big_second_size"
+    android:gravity="center_vertical"
+    android:background="@color/white"
+    android:paddingTop="8dip"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/ll_date"
+        android:layout_marginLeft="25dp"
+        android:singleLine="true"
+        android:text="充值10火眼豆"
+        android:textSize="@dimen/text_size_title_h2"
+        android:textColor="@color/text_color_three_level"/>
+    <LinearLayout
+        android:id="@+id/ll_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11.13"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_13"
+            android:textColor="@color/text_color_three_level"/>
+        <TextView
+            android:id="@+id/time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="54:32"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_13"
+            android:textColor="@color/text_color_three_level"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_barley"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/barley_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/e_coin_count_rear"
+            android:textSize="@dimen/text_size_18"
+            android:textColor="@color/market_list_stock_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_title_h2"
+            android:textColor="@color/base_gray"
+            android:text="@string/hooview_coin"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_alignParentBottom="true"
+        style="@style/default_horizontal_line_style"/>
+</RelativeLayout>
+

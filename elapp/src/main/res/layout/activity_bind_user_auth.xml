@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -7,170 +6,101 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background_color_gray">
-    <include
-        android:id="@+id/common_title_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/common_header_layout"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_shadow_height"
-        android:background="@drawable/shape_toolbar_shadow" />
+    android:background="@color/list_divider_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_title_common"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="14dp"
         android:src="@android:color/transparent"/>
 
-    <ImageView
-        style="@style/default_horizontal_line_style"/>
-
-    <RelativeLayout
-        style="@style/item_bind_account">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/phone_text_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="12dp"
-                android:textSize="@dimen/text_size_16"
-                android:textColor="@color/text_mine_item"
-                android:text="@string/phone"/>
-            <TextView
-                android:id="@+id/phone_number_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_title_h2"
-                android:textColor="@color/login_text_color"
-                android:text="@string/unbound"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/bind_phone_tv"
-            style="@style/auth_change_phone"
-            android:layout_centerVertical="true"
-            android:text="@string/bind_phone_number"/>
-    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/update_password_rl"
         style="@style/item_bind_account"
         android:paddingLeft="0dp"
         android:paddingRight="0dp">
-        <ImageView
-            style="@style/default_horizontal_line_style"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="54dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
             android:layout_marginLeft="14dp"
+            android:gravity="center_vertical"
             android:text="@string/update_password"
-            android:textColor="@color/text_mine_item"
+            android:textColor="@color/text_color_gray"
             android:textSize="@dimen/text_size_16"/>
+
         <ImageView
             android:id="@+id/mine_update_password_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="18dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
             android:src="@drawable/ic_arrow_right_personal_more"/>
     </RelativeLayout>
 
     <ImageView
-        style="@style/default_horizontal_line_style"/>
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:src="@android:color/transparent"/>
 
     <TextView
         style="@style/item_my_setting"
         android:text="@string/bind_social_account"
         android:textColor="@color/text_mine_item"
-        android:visibility="gone"
-        android:textSize="@dimen/text_size_16"/>
+        android:textSize="@dimen/text_size_16"
+        android:visibility="gone"/>
 
-    <ImageView
-        style="@style/default_horizontal_line_style"
-        android:visibility="gone"
-        android:layout_marginLeft="54dp"/>
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:layout_marginLeft="14dp"
-    android:textColor="@color/login_text_color"
-    android:text="@string/bind_social_contact"/>
-    <RelativeLayout
-        style="@style/item_bind_account">
-        <ImageView
-            android:id="@+id/imageqq"
+    <RelativeLayout style="@style/item_bind_account">
+
+        <TextView
+            android:id="@+id/phone_text_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_qq"/>
+            android:drawableLeft="@drawable/ic_phonenumber"
+            android:drawablePadding="14dp"
+            android:text="@string/phone"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_16"/>
+
+
         <TextView
-            style="@style/item_find_friend"
+            android:id="@+id/bind_phone_tv"
+            style="@style/auth_change_phone"
+            android:layout_centerVertical="true"
+            android:text="@string/bind_phone_number"/>
+
+        <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/imageqq"
-            android:text="@string/qq_number"/>
-        <TextView
-            android:id="@+id/bind_qq_tv"
-            style="@style/auth_bind_btn"
-            android:layout_centerVertical="true"
-            android:text="@string/binding"/>
+            android:textSize="14sp"/>
     </RelativeLayout>
 
-    <ImageView
-        style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="54dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray"/>
 
-    <RelativeLayout
-        style="@style/item_bind_account">
-
-        <ImageView
-            android:id="@+id/imageweixin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_wechat"/>
-        <TextView
-            style="@style/item_find_friend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/imageweixin"
-            android:text="@string/weixin_number"/>
-        <TextView
-            android:id="@+id/bind_weixin_tv"
-            style="@style/auth_bind_btn"
-            android:layout_centerVertical="true"
-            android:text="@string/binding"/>
-    </RelativeLayout>
-
-    <ImageView
-        style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="54dp"/>
-
-    <RelativeLayout
-        style="@style/item_bind_account">
+    <RelativeLayout style="@style/item_bind_account">
 
         <ImageView
             android:id="@+id/imageweibo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/personal_icon_weibo"/>
+            android:src="@drawable/ic_weibo"/>
+
         <TextView
             style="@style/item_find_friend"
             android:layout_width="wrap_content"
@@ -178,6 +108,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/imageweibo"
             android:text="@string/sina_number"/>
+
         <TextView
             android:id="@+id/bind_weibo_tv"
             style="@style/auth_bind_btn"
@@ -185,7 +116,67 @@
             android:text="@string/binding"/>
     </RelativeLayout>
 
-    <ImageView
-        style="@style/default_horizontal_line_style"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray"/>
+
+    <RelativeLayout style="@style/item_bind_account">
+
+        <ImageView
+            android:id="@+id/imageweixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_wechat"/>
+
+        <TextView
+            style="@style/item_find_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/imageweixin"
+            android:text="@string/weixin_number"/>
+
+        <TextView
+            android:id="@+id/bind_weixin_tv"
+            style="@style/auth_bind_btn"
+            android:layout_centerVertical="true"
+            android:text="@string/binding"/>
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/line_gray"/>
+
+    <RelativeLayout style="@style/item_bind_account">
+
+        <ImageView
+            android:id="@+id/imageqq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_qq"/>
+
+        <TextView
+            style="@style/item_find_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/imageqq"
+            android:text="@string/qq_number"/>
+
+        <TextView
+            android:id="@+id/bind_qq_tv"
+            style="@style/auth_bind_btn"
+            android:layout_centerVertical="true"
+            android:text="@string/binding"/>
+    </RelativeLayout>
 
 </LinearLayout>

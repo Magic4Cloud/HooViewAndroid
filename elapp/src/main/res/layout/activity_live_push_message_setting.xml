@@ -18,12 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         layout="@layout/common_header_layout"/>
-    <View
-        android:id="@+id/commin_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_shadow_height"
-        android:layout_below="@+id/common_title_tv"
-        android:background="@drawable/shape_toolbar_shadow" />
+
     <RelativeLayout
         style="@style/item_my_setting"
         android:background="@color/background_content">

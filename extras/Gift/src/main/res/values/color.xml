@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="base_yellow">#fff7d80b</color>
+    <color name="text_comment_yellow_color">@color/base_yellow</color>
+    <color name="white_alpha_percent_60">#99ffffff</color>
+    <color name="black_alpha_percent_80">#cc000000</color>
+    <color name="white_alpha_percent_80">#b4ffffff</color>
+    <color name="pure_white">@android:color/white</color>
+    <color name="text_white">@color/pure_white</color>
+    <color name="black_alpha_percent_30">#4d000000</color>
+    <color name="base_red">#fffb6655</color>
+    <color name="text_red">@color/base_red</color>
+    <color name="btn_color_main">#9AC9FF</color>
+    <color name="user_join_text_color">#FFED3F</color>
+    <color name="black_alpha_percent_70">#b3000000</color>
+    <color name="btn_color_three_level">#FF8DA8</color>
+    <color name="white_alpha_percent_25">#40ffffff</color>
+    <color name="black_alpha_percent_10">#19000000</color>
+    <color name="round_border">#ffd7d7d7</color>
+    <color name="border_color_default">@color/btn_color_main</color>
+</resources>

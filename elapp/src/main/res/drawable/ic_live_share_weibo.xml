@@ -6,6 +6,6 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="false" android:drawable="@drawable/live_ready_icon_weibo_nor"/>
-    <item android:state_checked="true" android:drawable="@drawable/live_ready_icon_weibo_select"/>
+    <item android:state_checked="false" android:drawable="@drawable/btn_weibo_n"/>
+    <item android:state_checked="true" android:drawable="@drawable/btn_weibo_n"/>
 </selector>

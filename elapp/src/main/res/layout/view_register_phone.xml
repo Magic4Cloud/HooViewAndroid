@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_login_register_bg">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="110dp"
+        android:text="@string/hint_phone" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        style="@style/LoginRegisterEditStyle"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="142dp"
+        android:hint="@string/hint_phone"
+        android:inputType="phone"
+        android:maxLength="11" />
+
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="256dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/et_phone"
+        android:layout_marginLeft="52dp"
+        android:background="@color/line_gray" />
+
+    <LinearLayout
+        android:id="@+id/ll_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/et_phone"
+        android:layout_below="@+id/et_phone"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_checked_btn"
+            android:checked="true"
+            android:text="@string/agree"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_user_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/user_protocol"
+            android:textColor="@color/text_color_purplish" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next_step_phone"
+        style="@style/LoginRegisterBottonStyle"
+        android:layout_width="260dp"
+        android:layout_below="@+id/ll_protocol"
+        android:layout_marginTop="52dp"
+        android:text="@string/next_step" />
+
+    <LinearLayout
+        android:id="@+id/ll_login_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_next_step_phone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/prompt_registered"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_now"
+            android:textColor="@color/text_color_purplish"
+            android:visibility="visible" />
+    </LinearLayout>
+</RelativeLayout>

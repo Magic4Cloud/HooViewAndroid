@@ -8,9 +8,9 @@
 
     <style name="item_user_info">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:paddingLeft">15dp</item>
-        <item name="android:paddingRight">15dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
         <item name="android:background">@color/white</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -38,14 +38,14 @@
     <style name="item_find_friend" parent="item_user_info">
         <item name="android:paddingLeft">14dp</item>
         <item name="android:textSize">@dimen/text_size_title_h2</item>
-        <item name="android:textColor">@color/text_brown</item>
+        <item name="android:textColor">@color/text_color_gray</item>
         <item name="android:singleLine">true</item>
-        <item name="android:drawablePadding">12dp</item>
+        <item name="android:drawablePadding">16dp</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="item_bind_account" parent="item_user_info">
-        <item name="android:paddingLeft">14dp</item>
+        <item name="android:paddingLeft">16dp</item>
         <item name="android:background">@color/list_item_white_bg</item>
     </style>
 
@@ -71,18 +71,18 @@
 
     <style name="auth_bind_btn">
         <item name="android:layout_width">60dp</item>
-        <item name="android:layout_height">@dimen/button_common_small_height</item>
+        <item name="android:layout_height">25dp</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:background">@drawable/common_fill_round_three_btn_blue_selector</item>
+        <item name="android:background">@drawable/selector_bind_auth_btn</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
         <item name="android:layout_marginRight">12dp</item>
-        <item name="android:textColor">@color/text_white</item>
-        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/selector_bind_auth_color</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="auth_change_phone" parent="auth_bind_btn">
@@ -248,11 +248,6 @@
         <item name="android:background">@drawable/circle_gray_ling_bg</item>
     </style>
 
-    <style name="verification_password_set_edit_style" parent="password_set_edit_style">
-        <item name="android:inputType">number</item>
-        <item name="android:textColor">@color/pure_white</item>
-        <item name="android:background">@drawable/circle_write_ling_bg</item>
-    </style>
 
     <style name="live_set_checkbox_style">
         <item name="android:layout_width">wrap_content</item>
@@ -314,25 +309,213 @@
     </style>
 
 
-    <!--标准的Toolbar的style-->
-    <style name="Theme.Toolbar.Base" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textSize">20sp</item>
+    <style name="BaseUserDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/BaseUserDialog.Animation</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:textColor">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <style name="style_RadioButton">
-        <item name="android:button">@null</item>
+    <style name="BaseUserDialog.Animation">
+        <item name="android:windowEnterAnimation">@anim/dock_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/dock_bottom_exit</item>
+    </style>
+
+
+    <style name="NavigationTabButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
-
+        <item name="android:button">@null</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:paddingTop">7dp</item>
+        <item name="android:drawablePadding">1dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/selector_navigation_title_text_color</item>
     </style>
 
-    <!--<style name="Widget.HorizontalProgressBar" parent="android:Widget.ProgressBar.Horizontal">-->
-        <!--<item name="android:progressDrawable">-->
-            <!--@drawable/progress_horizontal_holo_light-->
-        <!--</item>-->
-        <!--<item name="android:indeterminateDrawable">-->
-            <!--@drawable/progress_indeterminate_horizontal_holo_light-->
-        <!--</item>-->
-        <!--<item name="android:minHeight">16dp</item>-->
-        <!--<item name="android:maxHeight">16dp</item>-->
-    <!--</style>-->
+    <style name="UserProfileTabStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/selector_navigation_title_text_color</item>
+    </style>
+
+    <style name="LiveEndViewInfoStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/selector_navigation_title_text_color</item>
+    </style>
+
+    <style name="UserCommonItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="LoginRegisterBottonStyle">
+        <item name="android:layout_width">260dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:background">@drawable/shape_login_register_btn_bg</item>
+    </style>
+
+    <style name="verification_password_set_edit_style" parent="password_set_edit_style">
+        <item name="android:inputType">number</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_color_purplish</item>
+        <item name="android:background">@drawable/circle_write_ling_bg</item>
+    </style>
+
+    <style name="MarketMainTabStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">11dp</item>
+        <item name="android:drawableBottom">@drawable/selector_market_tab_indicator</item>
+        <item name="android:textColor">@color/selector_market_tab_title_text_color</item>
+    </style>
+
+    <style name="CommonTabLayoutStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="com.hooview.app:tabIndicatorColor">@color/base_purplish</item>
+        <item name="com.hooview.app:tabIndicatorHeight">2dp</item>
+        <item name="com.hooview.app:tabSelectedTextColor">@color/text_color_purplish</item>
+        <item name="com.hooview.app:tabTextColor">@color/text_color_gray</item>
+    </style>
+
+    <style name="TextViewEditPromptStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:background">#505c2d7e</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="MarketDetailButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColor">@color/text_color_gray</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="DetailChatEditTextButton">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:paddingLeft">28dp</item>
+        <item name="android:textColorHint">@color/chat_hint</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="PlayerOperateBtnStyle">
+        <item name="android:scaleType">center</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/shape_player_operate_btn_bg</item>
+    </style>
+
+    <style name="CommentLevelStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">15dp</item>
+        <item name="android:background">@drawable/shape_comment_level_other</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:textColor">@color/text_color_white</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="RecorderTopButtonStyle">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">9dp</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="BaseMenuDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:textColor">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="MenuDialogRight" parent="BaseMenuDialog">
+        <item name="android:windowAnimationStyle">@style/MenuDialogRight.Animation</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="MenuDialogRight.Animation">
+        <item name="android:windowEnterAnimation">@anim/menu_right_enter</item>
+        <item name="android:windowExitAnimation">@anim/menu_right_exit</item>
+    </style>
+
+    <style name="RecorderShareButtonStyle">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_height">22dp</item>
+    </style>
+
+    <style name="UserTabLabelStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColor">@color/market_list_stock_name</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="UserCountPromptStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:textColor">@color/market_list_stock_name</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="LoginRegisterEditStyle">
+        <item name="android:layout_width">256dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColorHint">@color/text_color_gray</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/title_text_color</item>
+        <item name="android:shadowColor">@color/black_alpha_percent_50</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="LoginStyle" parent="@android:style/Theme.Translucent">
+        <item name="android:windowAnimationStyle">@style/BaseUserDialog.Animation</item>
+        <item name="android:activityOpenEnterAnimation">@anim/dock_bottom_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/dock_bottom_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/dock_bottom_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/dock_bottom_exit</item>
+    </style>
 </resources>

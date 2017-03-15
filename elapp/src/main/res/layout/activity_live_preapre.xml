@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,264 +12,219 @@
     <com.easyvaas.sdk.live.base.view.CameraPreview
         android:id="@+id/camera_preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         android:id="@+id/live_ready_setting_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black_alpha_percent_20">
+
         <RelativeLayout
             android:id="@+id/live_pre_action_top"
-            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/topic_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:padding="24dp"
-                android:textSize="@dimen/text_size_16"
-                android:textColor="@color/pure_white"
-                android:text="##"/>
-            <CheckBox
-                android:id="@+id/live_prepare_switch_camera_cb"
-                style="@style/live_set_checkbox_style"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/live_ready_close"
-                android:layout_marginRight="10dp"
-                android:drawableLeft="@drawable/ic_live_front_camera"/>
-            <CheckBox
-                android:id="@+id/live_pre_beauty_cb"
-                style="@style/live_set_checkbox_style"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/live_prepare_switch_camera_cb"
-                android:layout_marginRight="16dp"
-                android:checked="false"
-                android:drawableLeft="@drawable/ic_live_beauty"/>
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="17dp">
+
             <ImageView
-                android:id="@+id/live_ready_close"
+                android:id="@+id/iv_back"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/btn_return_n" />
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:padding="24dp"
-                android:src="@drawable/icon_close_play"/>
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:text="我的直播间"
+                android:textColor="@color/text_color_white"
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/live_cover_tip_ll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/live_pre_action_top"
-            android:layout_centerHorizontal="true">
+            android:layout_width="130dp"
+            android:layout_height="74dp"
+            android:layout_below="@+id/rl_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38dp">
+
             <LinearLayout
                 android:id="@+id/live_cover_ll"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/video_cover_bkg">
+                android:layout_width="130dp"
+                android:layout_height="74dp"
+                android:background="@drawable/video_cover_bkg"
+                android:gravity="center">
+
                 <TextView
                     android:id="@+id/live_cover_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableBottom="@drawable/live_pre_cover_setting"
                     android:drawablePadding="10dp"
-                    android:text="@string/live_cover_photo"
                     android:gravity="center"
-                    android:textSize="@dimen/text_size_13"
+                    android:text="@string/live_cover_photo"
                     android:textColor="@color/text_white"
-                    android:drawableTop="@drawable/live_pre_cover_setting"/>
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <com.easyvaas.common.widget.RoundImageView
                 android:id="@+id/live_pre_cover_rv"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="130dp"
+                android:layout_height="74dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_image"
+                android:visibility="gone"
                 app:border_color="@color/round_border"
                 app:border_radius="5dp"
-                app:type="round"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/default_image"/>
+                app:type="round" />
         </RelativeLayout>
 
-        <EditText
-            android:id="@+id/live_title_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/live_cover_tip_ll"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:layout_marginLeft="23dp"
-            android:layout_marginRight="23dp"
-            android:layout_marginTop="20dp"
-            android:maxLines="2"
-            android:maxLength="20"
-            android:imeOptions="actionDone"
-            android:hint="@string/live_set_title_hint"
-            android:textSize="@dimen/text_size_16"
-            android:textCursorDrawable="@null"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:shadowRadius="1"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowColor="@color/base_black"
-            android:background="@null"/>
 
-        <Button
-            android:id="@+id/live_start_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_common_height"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/share_btn_ll"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:enabled="false"
-            android:background="@drawable/common_stroke_round_six_btn_blue_selector"
-            android:textColor="@color/white"
-            android:button="@null"
-            android:text="@string/live_start"
-            android:textSize="@dimen/text_size_16"/>
         <ProgressBar
             android:id="@+id/live_prepare_pb"
             style="@style/init_player_progressBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_common_height"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"
             android:layout_below="@+id/share_btn_ll"
             android:layout_centerHorizontal="true"
-            android:progress="10"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:indeterminate="false"
             android:max="100"
-            android:indeterminate="false"/>
+            android:progress="10"
+            android:visibility="gone" />
+
         <TextView
-            android:id="@+id/live_tips_tv"
+            android:id="@+id/share_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/live_start_btn"
+            android:layout_below="@+id/live_cover_tip_ll"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/btn_color_main"
-            android:visibility="gone"
-            android:textSize="16sp"/>
-        <LinearLayout
-            android:id="@+id/share_tv_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/live_title_et"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="20dp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/share_qq_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:textSize="@dimen/text_size_10"
-                android:text="@string/share_to_qq"
-                android:visibility="invisible"
-                android:textColor="@color/text_brown"/>
-            <TextView
-                android:id="@+id/share_weixin_circle_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:textSize="@dimen/text_size_10"
-                android:text="@string/share_to_circle"
-                android:visibility="invisible"
-                android:textColor="@color/text_brown"/>
-            <TextView
-                android:id="@+id/share_weixin_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:textSize="@dimen/text_size_10"
-                android:text="@string/share_to_weixin"
-                android:visibility="invisible"
-                android:textColor="@color/text_brown"/>
-            <TextView
-                android:id="@+id/share_weibo_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="27dp"
-                android:textSize="@dimen/text_size_10"
-                android:text="@string/share_to_sina"
-                android:visibility="invisible"
-                android:textColor="@color/text_brown"/>
-        </LinearLayout>
+            android:layout_marginTop="74dp"
+            android:text="@string/share_prompt"
+            android:textColor="@color/text_color_white"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/live_start_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_common_height"
+            android:layout_below="@+id/share_btn_ll"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_start_live_btn_bg"
+            android:button="@null"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="@string/live_start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16" />
+
+
         <LinearLayout
             android:id="@+id/share_btn_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/live_title_et"
-            android:gravity="center"
-            android:layout_marginTop="80dp"
+            android:layout_below="@id/share_prompt"
             android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:orientation="horizontal">
+            android:paddingRight="24dp">
+
             <CheckBox
                 android:id="@+id/live_limit_cb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:textSize="@dimen/text_size_10"
-                android:textColor="@color/text_brown"
                 style="@style/text_with_shadow"
-                android:drawableBottom="@drawable/ic_live_permission"/>
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_white"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/text_size_title_h1"
-                android:visibility="gone"
-                android:text="@string/share_to"/>
+                android:background="@drawable/selector_prepare_live_share_weibo"
+                android:button="@null"
+                android:textColor="@color/text_brown"
+                android:textSize="@dimen/text_size_10"
+                android:visibility="gone" />
+
             <CheckBox
                 android:id="@+id/share_qq_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="21dp"
-                android:textSize="@dimen/text_size_10"
+                android:background="@drawable/selector_prepare_live_share_qq"
+                android:button="@null"
                 android:textColor="@color/text_brown"
-                android:button="@drawable/ic_live_share_qq"/>
+                android:textSize="@dimen/text_size_10" />
+
             <CheckBox
                 android:id="@+id/share_weixin_circle_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="21dp"
-                android:textSize="@dimen/text_size_10"
+                android:background="@drawable/selector_prepare_live_share_moments"
+                android:button="@null"
                 android:textColor="@color/text_brown"
-                android:button="@drawable/ic_live_share_weixin_circle"/>
+                android:textSize="@dimen/text_size_10" />
+
             <CheckBox
                 android:id="@+id/share_weixin_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="21dp"
-                android:textSize="@dimen/text_size_10"
+                android:background="@drawable/selector_prepare_live_share_weichat"
+                android:button="@null"
                 android:textColor="@color/text_brown"
-                android:button="@drawable/ic_live_share_weixin"/>
+                android:textSize="@dimen/text_size_10" />
+
             <CheckBox
                 android:id="@+id/share_weibo_cb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="21dp"
-                android:textSize="@dimen/text_size_10"
+                android:background="@drawable/selector_prepare_live_share_weibo"
+                android:button="@null"
                 android:textColor="@color/text_brown"
-                android:button="@drawable/ic_live_share_weibo"/>
+                android:textSize="@dimen/text_size_10" />
+
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/live_pre_action_top"
+            android:layout_marginTop="23dp"
+            android:background="@color/live_prepare_edit_bg">
+
+            <EditText
+                android:id="@+id/live_title_et"
+                android:layout_width="192dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="left"
+                android:hint="@string/live_set_title_hint"
+                android:imeOptions="actionDone"
+                android:maxLength="20"
+                android:maxLines="2"
+                android:textColor="@color/live_prepare_edit_text_color"
+                android:textColorHint="@color/live_prepare_edit_text_color"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/text_size_16" />
+        </FrameLayout>
     </RelativeLayout>
 
     <ViewStub
         android:id="@+id/live_prepare_set_thumb_view_stub"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/live_prepare_set_thumb"/>
+        android:layout="@layout/live_prepare_set_thumb" />
 </FrameLayout>

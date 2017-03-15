@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/text_size_title_h2"
-            android:textColor="@color/color_main"
+            android:textColor="@color/btn_color_main"
             android:text="@string/follow_plus"
             android:background="@drawable/list_item_selector"/>
 
@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/text_size_title_h2"
-            android:textColor="@color/color_main"
+            android:textColor="@color/btn_color_main"
             android:text="@string/chat"
             android:background="@drawable/list_item_selector"/>
         <ImageView
@@ -88,7 +88,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/text_size_title_h2"
-            android:textColor="@color/color_main"
+            android:textColor="@color/btn_color_main"
             android:text="@string/at_ta"
             android:background="@drawable/list_item_selector"/>
         <ImageView
@@ -102,8 +102,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="@dimen/text_size_title_h2"
-            android:textColor="@color/color_main"
-            android:text="@string/main_home"
+            android:textColor="@color/btn_color_main"
+            android:text="@string/home"
             android:background="@drawable/list_item_selector"/>
     </LinearLayout>
 </LinearLayout>

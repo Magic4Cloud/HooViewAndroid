@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="216dp"
+    android:gravity="left"
+    android:padding="10dp"
+    android:visibility="invisible"
+    tools:ignore="RtlSymmetry">
+
+    <com.common.gift.view.StrokeTextView
+        android:id="@+id/index_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/info_rl"
+        android:text="@string/multiple"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_size_maximum" />
+
+    <RelativeLayout
+        android:id="@+id/info_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/index_tv"
+        android:gravity="center_vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginLeft="18dp"
+            android:background="@drawable/show_gift_bg_shape"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="35dp"
+            android:paddingRight="4dp">
+
+            <LinearLayout
+                android:id="@+id/user_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="200dp"
+                    android:textColor="@color/btn_color_three_level"
+                    android:textSize="@dimen/text_size_title_h2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/receive_gift_tip"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_11" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/gift_iv"
+                android:layout_width="42dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/user_ll"
+                android:padding="3dp"
+                android:scaleType="fitXY"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <com.easyvaas.common.gift.view.MyUserPhoto
+            android:id="@+id/avatar_iv"
+            android:layout_width="@dimen/avatar_big_size"
+            android:layout_height="@dimen/avatar_big_size"
+            android:background="@drawable/icon_photo_shape_bg"
+            android:scaleType="fitCenter"
+            android:src="@drawable/somebody"
+            app:border_color="@color/round_border"
+            app:border_width="@dimen/avatar_border_width"
+            app:small_height="9dp"
+            app:small_width="9dp" />
+    </RelativeLayout>
+</RelativeLayout>

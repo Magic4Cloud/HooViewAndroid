@@ -13,7 +13,7 @@ import com.tencent.mm.sdk.modelbase.BaseResp;
 
 import com.easyvaas.common.sharelogin.wechat.WechatHandlerActivity;
 
-import com.hooview.app.utils.Logger;
+import com.easyvaas.elapp.utils.Logger;
 
 public class WXEntryActivity extends WechatHandlerActivity {
     private static final String TAG = WXEntryActivity.class.getSimpleName();

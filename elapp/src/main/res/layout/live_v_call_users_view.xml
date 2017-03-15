@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_alpha_percent_90"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/close_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="8dp"
+        android:src="@drawable/icon_close_live"/>
+
+    <TextView
+        android:id="@+id/v_call_user_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/close_iv"
+        android:textSize="@dimen/text_size_16"
+        android:text="@string/title_v_call_users_count"/>
+
+    <com.easyvaas.common.widget.MyRecyclerView
+        android:id="@+id/v_call_user_rv"
+        android:layout_width="match_parent"
+        android:layout_height="249dp"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/v_call_user_title_tv"
+        android:scrollbars="none"/>
+</RelativeLayout>

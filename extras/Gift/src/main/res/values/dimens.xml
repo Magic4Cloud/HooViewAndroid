@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_7">7sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
+    <dimen name="text_size_maximum">19sp</dimen>
+    <dimen name="text_size_title_h2">14sp</dimen>
+    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="avatar_big_size">45dp</dimen>
+    <dimen name="avatar_border_width">1dp</dimen>
+    <dimen name="live_gift_pipe_bottom">266dp</dimen>
+</resources>

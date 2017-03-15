@@ -35,7 +35,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:textColor="@android:color/white"
+        android:textColor="@color/login_btn_color"
         android:textSize="13sp"
         android:text="@string/follow"
         android:background="@drawable/common_button_round_three_blue_selector"/>

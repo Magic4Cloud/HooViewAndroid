@@ -9,7 +9,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/round_white_btn_bg"
+    android:background="@drawable/search_edittext_b"
     android:paddingRight="10dp"
     android:paddingLeft="10dp"
     android:orientation="vertical">

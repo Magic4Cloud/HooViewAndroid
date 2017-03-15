@@ -85,7 +85,7 @@
         <item name="actionMenuTextAppearance">@style/MyActionBarMenuText</item>
         <item name="homeAsUpIndicator">@drawable/ic_arrow_action_bar_back</item>
 
-        <item name="bottomSheetStyle">@style/BottomSheet.StyleDialog</item>
+        <item name="myBottomSheetStyle">@style/BottomSheet.StyleDialog</item>
     </style>
 
     <!-- ActionBar styles -->

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -7,50 +6,48 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:id="@+id/rl_root"
+    android:layout_width="100dp"
     android:layout_height="60dp"
-    android:background="@color/white"
+    android:background="@drawable/round_btn_selector"
     android:orientation="horizontal">
+
+    <!--<CheckBox-->
+        <!--android:id="@+id/cb_exchange_money_tv"-->
+        <!--style="?android:buttonBarButtonStyle"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:background="@drawable/round_btn_selector"-->
+        <!--android:button="@null"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/text_btn_selector"/>-->
+
     <TextView
         android:id="@+id/exchange_coins_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
         android:text="@string/e_coin_count_rear"
-        android:textSize="@dimen/text_size_title_h1"
-        android:textColor="@color/live_topic_item_text_color"/>
+        android:textColor="@color/live_topic_item_text_color"
+        android:textSize="@dimen/text_size_title_h1"/>
+
     <TextView
-        android:id="@+id/exchange_coins_give_tv"
+        android:id="@+id/exchange_money_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:paddingLeft="15dp"
-        android:layout_marginTop="4dp"
         android:layout_below="@+id/exchange_coins_tv"
-        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:singleLine="true"
+        android:text="@string/price"
+        android:textColor="@color/text_color_secondary_level"
         android:textSize="@dimen/text_size_13"
-        android:text="@string/e_coin_give_count_rear"
-        android:textColor="@color/text_color_secondary_level"/>
-    <CheckBox
-        android:id="@+id/exchange_money_tv"
-        android:layout_width="60dp"
-        android:layout_height="25dp"
-        android:layout_marginRight="15dp"
-        android:button="@null"
-        android:gravity="center"
-        android:textColor="@color/text_btn_selector"
-        android:layout_gravity="right"
-        android:layout_centerVertical="true"
-        android:textSize="@dimen/text_size_11"
-        android:text="@string/cash_count"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/round_btn_selector"
-        style="?android:buttonBarButtonStyle"/>
-    <ImageView
-        android:layout_alignParentBottom="true"
-        style="@style/default_horizontal_line_style"/>
+        android:visibility="visible"/>
+
+
 </RelativeLayout>
 

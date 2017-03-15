@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/home_tab_market_normal" android:state_checked="false" />
+    <item android:drawable="@drawable/home_tab_market_checked" android:state_checked="true" />
+</selector>

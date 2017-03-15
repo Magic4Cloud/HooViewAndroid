@@ -172,7 +172,7 @@
 -keepclassmembers class **.R$* {
     public static <fields>;
 }
--keep public class com.easyvaas.elapp.R$*{
+-keep public class com.hooview.app.R$*{
     public static final int *;
 }
 -keepattributes Signature
@@ -211,4 +211,9 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 -keep class com.easyvaas.elapp.bean.** {*;}
+-keep class com.easyvaas.elapp.chat.** {*;}
 -keep class com.easyvaas.common.chat.utils.UserUtils {*;}
+-keep class com.easyvaas.elapp.ui.common.WebDetailActivity{*;}
+
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**

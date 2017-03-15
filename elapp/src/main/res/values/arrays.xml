@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -47,5 +46,64 @@
         <item>@string/video_permission_password</item>
         <item>@string/video_permission_pay</item>
         <item>@string/video_permission_private</item>
+    </string-array>
+    <string-array name="live_tabs">
+        <item>@string/video_live</item>
+        <item>@string/image_text_live</item>
+        <item>@string/good_live</item>
+    </string-array>
+    <string-array name="history_tabs">
+        <item>@string/watch_history</item>
+        <item>@string/read_history</item>
+    </string-array>
+    <string-array name="market_tabs">
+        <item>@string/market_tabs_chinese</item>
+        <item>@string/market_tabs_hk</item>
+        <item>@string/market_tabs_usa</item>
+        <item>@string/market_tabs_global</item>
+    </string-array>
+    <string-array name="global_content_manager_tabs">
+        <item>@string/global_content_manager_tabs_exponent</item>
+        <item>@string/global_content_manager_tabs_goods</item>
+        <item>@string/global_content_manager_tabs_exchange_rate</item>
+    </string-array>
+
+    <string-array name="news_tab">
+        <item>@string/news_tab_important</item>
+        <item>@string/news_tab_lastest</item>
+        <item>@string/news_tab_my_stock</item>
+    </string-array>
+    <string-array name="my_stock_tab">
+        <item>@string/all</item>
+        <item>@string/market_tabs_chinese</item>
+        <item>@string/market_tabs_hk</item>
+        <item>@string/market_tabs_usa</item>
+    </string-array>
+    <string-array name="search_tab">
+        <item>@string/news</item>
+        <item>@string/live</item>
+        <item>@string/stock</item>
+    </string-array>
+    <string-array name="play_tab">
+        <item>@string/chat</item>
+        <item>@string/live_data</item>
+        <item>@string/good_book</item>
+    </string-array>
+    <string-array name="play_tab_good_video">
+        <item>@string/comment</item>
+        <item>@string/live_data</item>
+        <item>@string/good_book</item>
+    </string-array>
+
+    <string-array name="image_text_live">
+        <item>@string/live</item>
+        <item>@string/live_data</item>
+        <item>@string/live_chat</item>
+        <item>@string/good_book</item>
+    </string-array>
+    <string-array name="vip_center">
+        <item>@string/live</item>
+        <item>@string/good_book</item>
+        <item>@string/fans</item>
     </string-array>
 </resources>

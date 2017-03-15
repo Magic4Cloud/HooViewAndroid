@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="text_gray">#999999</color>
+    <color name="btn_color_three_level">#FF8DA8</color>
+    <color name="text_white">@android:color/white</color>
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="black_alpha_percent_10">#19000000</color>
+    <color name="white_alpha_percent_45">#73ffffff</color>
+    <color name="base_red">#fffb6655</color>
+    <color name="base_purple">#ff5b0bf7</color>
+    <color name="base_yellow">#fff7d80b</color>
+    <color name="btn_color_secondary_level">#314075</color>
+    <color name="text_brown">@color/btn_color_secondary_level</color>
+    <color name="pure_white">@android:color/white</color>
+    <color name="black_alpha_percent_30">#4d000000</color>
+    <color name="base_brown">#ff314075</color>
+    <color name="text_common">@color/base_brown</color>
+    <color name="btn_color_main">#9AC9FF</color>
+    <color name="border_color_default">@color/btn_color_main</color>
+</resources>

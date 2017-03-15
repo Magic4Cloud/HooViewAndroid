@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="12dp"
+    tools:showIn="@layout/activity_recorder">
+    <com.easyvaas.elapp.view.PlayerStateView
+        android:id="@+id/playerStateView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/iv_close"
+        style="@style/RecorderTopButtonStyle"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/btn_end_live" />
+
+
+    <TextView
+        android:id="@+id/tv_assets"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_watch_count_bg"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/hooview_coin_tips2"
+        android:textColor="@color/text_color_white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_watch_count"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/tv_assets"
+        android:layout_centerHorizontal="true"
+        android:text="@string/watch_count_tips"
+        android:textColor="@color/text_color_white"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/ib_mute"
+        style="@style/RecorderTopButtonStyle"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/ib_camera_switch"
+        android:background="@drawable/selector_live_mute"
+        android:gravity="center"
+        android:padding="9dp"
+        android:textSize="0sp" />
+
+    <CheckBox
+        android:id="@+id/ib_camera_switch"
+        style="@style/RecorderTopButtonStyle"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/iv_share"
+        android:background="@drawable/selector_live_front_camera"
+        android:gravity="center"
+        android:padding="9dp"
+        android:textSize="0sp" />
+
+    <ImageView
+        android:id="@+id/iv_share"
+        style="@style/RecorderTopButtonStyle"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/btn_share_w_n" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/video_comment_lv"
+        android:layout_width="336dp"
+        android:layout_height="138dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="16dp"
+        android:animationCache="false"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="3dp"
+        android:fadingEdge="none"
+        android:fadingEdgeLength="3dp"
+        android:scrollbars="none"
+        android:scrollingCache="@null" />
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_gift"-->
+    <!--android:layout_width="98dp"-->
+    <!--android:layout_height="184dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:layout_marginBottom="16dp"-->
+    <!--android:layout_marginRight="16dp"-->
+    <!--android:animationCache="false"-->
+    <!--android:cacheColorHint="@android:color/transparent"-->
+    <!--android:divider="@android:color/transparent"-->
+    <!--android:dividerHeight="8dp"-->
+    <!--android:fadingEdge="none"-->
+    <!--android:fadingEdgeLength="3dp"-->
+    <!--android:focusable="false"-->
+    <!--android:scrollbars="none"-->
+    <!--android:scrollingCache="@null" />-->
+
+    <com.easyvaas.elapp.view.gift.GiftViewContainer
+        android:id="@+id/GiftViewContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp" />
+
+    <ImageView
+        android:id="@+id/iv_countdown"
+        android:layout_width="161dp"
+        android:layout_height="161dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_countdown3" />
+</RelativeLayout>

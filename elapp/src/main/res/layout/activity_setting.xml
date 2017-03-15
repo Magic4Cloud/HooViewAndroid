@@ -21,11 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             layout="@layout/common_header_layout"/>
-        <View
-            android:id="@+id/common_shadow"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/actionbar_shadow_height"
-            android:background="@drawable/shape_toolbar_shadow" />
 
         <TextView
             android:layout_width="match_parent"
@@ -205,8 +200,8 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_arrow_right_personal_more"/>
         </RelativeLayout>
-        <!--<ImageView-->
-            <!--style="@style/default_horizontal_line_style"/>-->
+        <ImageView
+            style="@style/default_horizontal_line_style"/>
         <RelativeLayout
             android:id="@+id/feedback_rl"
             style="@style/item_my_setting">
@@ -234,6 +229,7 @@
         </RelativeLayout>
         <ImageView
             style="@style/default_horizontal_line_style"/>
+
         <RelativeLayout
             android:id="@+id/item_clean_cached"
             style="@style/item_my_setting">
@@ -251,7 +247,7 @@
                 android:layout_toLeftOf="@+id/clean_cached_iv"
                 android:layout_marginRight="12dp"
                 android:layout_centerVertical="true"
-                android:textColor="@color/color_main"
+                android:textColor="@color/btn_color_main"
                 android:textSize="15dp"
                 android:text="--"/>
             <ImageView
@@ -262,6 +258,7 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_arrow_right_personal_more"/>
         </RelativeLayout>
+
         <ImageView
             style="@style/default_horizontal_line_style"/>
         <RelativeLayout

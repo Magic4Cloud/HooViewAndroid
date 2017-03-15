@@ -1,37 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2016 EasyVaas.
-  ~ http://www.easyvaas.com
-  ~ All rights reserved.
-  -->
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/kv_bar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <ViewStub
-        android:id="@+id/video_view_stub"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout="@layout/include_video_view"/>
+    android:layout_height="match_parent">
 
-    <ViewStub
-        android:id="@+id/recorder_view_stub"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout="@layout/live_recorder_view"/>
-    <ViewFlipper
-        android:id="@+id/viewFlipper"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
-    <include layout="@layout/include_video_loaded"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
 
-    <ViewStub
-        android:id="@+id/live_end_view_stub"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout="@layout/live_end_playback"/>
-</FrameLayout>
+            <RelativeLayout
+                android:id="@+id/fl_player"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <com.easyvaas.sdk.player.base.EVVideoView
+                    android:id="@+id/video_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.easyvaas.elapp.view.PlayerStateView
+                    android:id="@+id/playerStateView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <include layout="@layout/layout_player_operate_btn_container" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_user"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/base_white">
+
+                <com.easyvaas.common.widget.RoundImageView
+                    android:id="@+id/riv_header"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/account_bitmap_user" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/riv_header"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="机构调研"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="每日机构解读"
+                        android:textColor="@color/text_color_gray"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/shape_player_follow_btn_bg"
+                    android:drawableLeft="@drawable/selector_follow_btn"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="关注"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/list_divider_bg" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                style="@style/CommonTabLayoutStyle"
+                android:layout_height="44dp"
+                app:tabTextColor="@color/title_text_color" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_gift_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B3303030"
+            android:visibility="gone">
+
+            <com.easyvaas.common.gift.view.GiftPagerView
+                android:id="@+id/expression_gift_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:visibility="visible" />
+        </FrameLayout>
+
+        <View
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B3303030"
+            android:visibility="gone" />
+    </FrameLayout>
+</com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar>

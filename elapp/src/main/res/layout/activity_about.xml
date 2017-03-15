@@ -1,161 +1,133 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color_gray"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
-
     <include
         android:id="@+id/common_title_tv"
-        layout="@layout/common_header_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/actionbar_shadow_height"
-        android:background="@drawable/shape_toolbar_shadow" />
-
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_layout"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:orientation="vertical"
         android:background="@color/white"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/logo_area_iv"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="34dp"
-            android:adjustViewBounds="true"
+            android:layout_marginTop="33dp"
+            android:src="@drawable/login_icon_logo"
             android:scaleType="fitXY"
-            android:src="@drawable/login_icon_logo" />
-
+            android:adjustViewBounds="true"/>
         <TextView
-            android:id="@+id/tv_version_code"
+            android:id="@+id/version_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="V1.0.1"
-            android:textColor="@color/hv622d80"
-            android:textSize="@dimen/text_size_12" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/copy_right"
-            android:textColor="@color/hv622d80"
-            android:textSize="@dimen/text_size_12" />
-
-        <TextView
-            android:id="@+id/copyright_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/compony_name"
-            android:textColor="@color/hv622d80"
-            android:textSize="@dimen/text_size_12" />
-
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/btn_color_secondary_level"/>
     </LinearLayout>
 
-    <ImageView style="@style/default_horizontal_line_style" />
-
+    <ImageView
+        style="@style/default_horizontal_line_style"/>
     <RelativeLayout
         android:id="@+id/about_us_rl"
         style="@style/item_my_setting">
-
         <TextView
+            android:text="@string/about_us_app"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/about_us_app"
-            android:textColor="@color/text_color_main"
-            android:textSize="@dimen/text_size_title_h1" />
-
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/text_color_main"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right_personal_more" />
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_arrow_right_personal_more"/>
     </RelativeLayout>
-
-    <ImageView style="@style/default_horizontal_line_style" />
-
+    <ImageView
+        style="@style/default_horizontal_line_style"/>
     <RelativeLayout
         android:id="@+id/copyright_rl"
         style="@style/item_my_setting">
-
         <TextView
+            android:text="@string/copyright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/copyright"
-            android:textColor="@color/text_color_main"
-            android:textSize="@dimen/text_size_title_h1" />
-
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/text_color_main"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right_personal_more" />
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_arrow_right_personal_more"/>
     </RelativeLayout>
-    <!--<ImageView-->
-    <!--style="@style/default_horizontal_line_style"/>-->
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/seizure_account_rl"-->
-    <!--style="@style/item_my_setting">-->
-    <!--<TextView-->
-    <!--android:text="@string/seizure_account"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:textSize="@dimen/text_size_title_h1"-->
-    <!--android:textColor="@color/text_color_main"/>-->
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:src="@drawable/ic_arrow_right_personal_more"/>-->
-    <!--</RelativeLayout>-->
+    <ImageView
+        style="@style/default_horizontal_line_style"/>
+    <RelativeLayout
+        android:id="@+id/seizure_account_rl"
+        style="@style/item_my_setting">
+        <TextView
+            android:text="@string/seizure_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/text_color_main"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_arrow_right_personal_more"/>
+    </RelativeLayout>
 
-    <!--<ImageView-->
-    <!--style="@style/default_horizontal_line_style"-->
-    <!--android:layout_marginLeft="18dp"/>-->
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/manual_check_update_rl"-->
-    <!--style="@style/item_about_us">-->
-    <!--<TextView-->
-    <!--android:text="@string/check_update"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:textSize="@dimen/text_size_title_h1"-->
-    <!--android:textColor="@color/text_color_main"/>-->
-    <!--<ImageView-->
-    <!--android:id="@+id/manual_check_update_iv"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:src="@drawable/ic_arrow_right_personal_more"/>-->
-    <!--<TextView-->
-    <!--android:id="@+id/manual_check_update_remind_tv"-->
-    <!--style="@style/red_digital_remind"-->
-    <!--android:layout_toLeftOf="@id/manual_check_update_iv"-->
-    <!--android:layout_marginRight="12dp"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:visibility="gone"/>-->
-    <!--</RelativeLayout>-->
+    <ImageView
+        style="@style/default_horizontal_line_style"
+        android:layout_marginLeft="18dp"/>
+    <RelativeLayout
+        android:id="@+id/manual_check_update_rl"
+        style="@style/item_about_us">
+        <TextView
+            android:text="@string/check_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/text_size_title_h1"
+            android:textColor="@color/text_color_main"/>
+        <ImageView
+            android:id="@+id/manual_check_update_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_arrow_right_personal_more"/>
+        <TextView
+            android:id="@+id/manual_check_update_remind_tv"
+            style="@style/red_digital_remind"
+            android:layout_toLeftOf="@id/manual_check_update_iv"
+            android:layout_marginRight="12dp"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
 </LinearLayout>

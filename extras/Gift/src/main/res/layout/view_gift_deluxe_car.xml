@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_car1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/view_gift_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp" />
+
+        <ImageView
+            android:id="@+id/iv_car1"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_car2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/view_gift_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_car2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:ignore="ContentDescription,RtlHardcoded">
+
+            <ImageView
+                android:id="@+id/iv_car2"
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/iv_tyre_left"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignTop="@+id/iv_tyre_right"
+                android:layout_marginLeft="35dp"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/iv_tyre_right"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/iv_car2"
+                android:layout_alignRight="@+id/iv_car2"
+                android:layout_marginBottom="30dp"
+                android:layout_marginRight="37dp"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

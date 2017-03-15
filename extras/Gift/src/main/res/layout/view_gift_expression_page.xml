@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/tab_title_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tab_gift_tv"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/gift"
+                android:textColor="@color/text_btn_tab_expression_selector"
+                android:textSize="@dimen/text_size_12" />
+
+            <ImageView
+                android:id="@+id/tab_gift_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:src="@drawable/tab_indicate_line" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/gift_content_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@id/tab_title_ll" />
+
+    <com.easyvaas.common.gift.view.PageIndicateView
+        android:id="@+id/page_indicate_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gift_content_view_pager"
+        android:layout_marginTop="-5dp"
+        android:gravity="center" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@+id/gift_content_view_pager"
+        android:background="#f8f8f8" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/line">
+
+        <RelativeLayout
+            android:id="@+id/my_asset_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:id="@+id/cash_in_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="@string/cash_in"
+                android:textColor="@color/btn_color_main"
+                android:textSize="@dimen/text_size_12"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/e_coin_account_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/cash_in_tv"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/cash_in_tv"
+                android:text="@string/e_coin_count"
+                android:textColor="#999999"
+                android:textSize="@dimen/text_size_12" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/send_gift_btn"
+            android:layout_width="76dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_common_btn_b"
+            android:clickable="false"
+            android:enabled="false"
+            android:text="赠送"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_12" />
+    </RelativeLayout>
+</RelativeLayout>
+

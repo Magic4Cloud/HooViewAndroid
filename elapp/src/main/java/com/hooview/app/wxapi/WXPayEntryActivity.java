@@ -8,11 +8,12 @@ package com.hooview.app.wxapi;
 
 import android.os.Bundle;
 
-import com.hooview.app.utils.Logger;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 
 import com.easyvaas.common.sharelogin.wechat.WechatHandlerActivity;
+
+import com.easyvaas.elapp.utils.Logger;
 
 public class WXPayEntryActivity extends WechatHandlerActivity {
     private static final String TAG = "WXPayEntryActivity";

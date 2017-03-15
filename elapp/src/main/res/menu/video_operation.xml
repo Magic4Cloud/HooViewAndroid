@@ -7,6 +7,8 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_share" android:title="@string/share"/>
+    <item android:id="@+id/menu_thumb" android:title="@string/modify_video_thumb"/>
+    <item android:id="@+id/menu_title" android:title="@string/modify_video_title"/>
     <item android:id="@+id/menu_remove" android:title="@string/delete"/>
     <item android:id="@+id/menu_cancel" android:title="@string/cancel"/>
 </menu>

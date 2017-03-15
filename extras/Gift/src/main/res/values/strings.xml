@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Gift</string>
+    <string name="gift">礼物</string>
+    <string name="cash_in">充值</string>
+    <string name="e_coin_count">火眼豆&#160;&#160;%1$s</string>
+    <string name="msg_gift_buy_failed_e_coin_not_enough">火眼豆不足</string>
+    <string name="gift_view_give">送了</string>
+    <string name="multiple">x%1$d</string>
+    <string name="receive_gift_tip">送出</string>
+    <string name="gift_exp_value">+%1$d点经验值</string>
+    <string name="gift_price">%d火眼豆</string>
+
+</resources>

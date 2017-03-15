@@ -10,9 +10,9 @@
         <shape >
             <stroke
                 android:width="1dp"
-                android:color="@color/color_main_pressed"/>
+                android:color="@color/btn_color_main"/>
             <solid
-                android:color="@color/color_main_pressed"/>
+                android:color="@color/base_color_btn_fill_blue_focused"/>
             <corners
                 android:radius="6dp"/>
         </shape>
@@ -21,9 +21,9 @@
         <shape>
             <stroke
                 android:width="1dp"
-                android:color="@color/color_main_pressed"/>
+                android:color="@color/btn_color_main"/>
             <solid
-                android:color="@color/color_main_pressed"/>
+                android:color="@color/base_color_btn_fill_blue_focused"/>
             <corners
                 android:radius="6dp"/>
         </shape>
@@ -32,19 +32,19 @@
         <shape>
             <stroke
                 android:width="1dp"
-                android:color="@color/color_main_pressed"/>
+                android:color="@color/btn_color_main"/>
             <solid
-                android:color="@color/color_main_pressed"/>
+                android:color="@color/base_color_btn_fill_blue_focused"/>
             <corners
                 android:radius="6dp"/>
         </shape>
     </item>
     <item android:state_selected="false" android:state_pressed="false">
         <shape>
-            <solid android:color="@color/color_main"/>
+            <solid android:color="@color/btn_color_main"/>
             <stroke
                 android:width="1dp"
-                android:color="@color/color_main"/>
+                android:color="@color/btn_color_main"/>
             <corners
                 android:radius="6dp"/>
         </shape>

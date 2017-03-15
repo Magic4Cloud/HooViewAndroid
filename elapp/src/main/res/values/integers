@@ -1,5 +1,0 @@
-<resources>
-    <integer name="animation_short">250</integer>
-    <integer name="animation_medium">300</integer>
-    <integer name="animation_long">1000</integer>
-</resources>

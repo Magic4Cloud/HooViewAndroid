@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 EasyVaas.
+  ~ http://www.easyvaas.com
+  ~ All rights reserved.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_share_qq"
+        android:title=""
+        android:icon="@drawable/ic_share_by_qq"/>
+    <item
+        android:id="@+id/menu_share_weixin"
+        android:title=""
+        android:icon="@drawable/ic_share_by_weixin"/>
+    <item
+        android:id="@+id/menu_share_weibo"
+        android:title=""
+        android:icon="@drawable/ic_share_by_weibo"/>
+    <item
+        android:id="@+id/menu_share_weixin_circle"
+        android:title=""
+        android:icon="@drawable/ic_share_by_weixin_circle"/>
+    <item
+        android:id="@+id/menu_share_qq_zone"
+        android:title=""
+        android:icon="@drawable/ic_share_by_qq_zone"/>
+</menu>

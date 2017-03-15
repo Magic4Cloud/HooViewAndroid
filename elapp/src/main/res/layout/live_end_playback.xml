@@ -1,168 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:background="@drawable/play_end_bg">
+    android:background="@drawable/live_end_bg"
+    android:orientation="vertical">
+
     <ImageView
         android:id="@+id/lep_close_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="right|top"
-        android:padding="23dp"
-        android:src="@drawable/icon_close_play"/>
+        android:padding="16dp"
+        android:src="@drawable/btn_graycancel_n" />
 
     <TextView
-        android:id="@+id/live_over_tip_tv"
+        android:id="@+id/tv_save_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/text_white"
-        android:textSize="@dimen/text_size_live_end_title"/>
-
-    <LinearLayout
-        android:id="@+id/ep_count_rl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/ed_view_number_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/text_size_18"/>
-            <TextView
-                android:id="@+id/ed_view_count_title_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="@string/watch"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/text_size_13"/>
-        </LinearLayout>
-        <ImageView
-            style="@style/default_horizontal_line_style"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/ed_like_number_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/text_size_18"/>
-            <TextView
-                android:id="@+id/ed_view_point_like_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="@string/like_count"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/text_size_13"/>
-        </LinearLayout>
-        <ImageView
-            style="@style/default_horizontal_line_style"/>
-    </LinearLayout>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="98dp"
+        android:text="@string/save_error_tips"
+        android:textColor="@color/text_color_gray"
+        android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/lep_title_tv"
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:gravity="center"
-        android:maxLines="2"
-        android:visibility="gone"
-        android:textColor="@color/text_login"
-        android:textSize="@dimen/text_size_16"/>
+        android:layout_gravity="center_horizontal"
+        android:text="00:34:33"
+        android:textColor="@color/text_color_purplish"
+        android:textSize="36sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="@string/live_duration"
+        android:textColor="@color/text_color_gray"
+        android:textSize="16sp" />
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="18dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lep_left_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/follow_plus"
-            android:drawableTop="@drawable/ic_live_follow_anchor"
-            android:drawablePadding="4dp"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/text_size_title_h1"
-            android:layout_marginRight="77dp"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/lep_right_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/ic_live_chat_anchor"
-            android:text="@string/chat_send"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/text_size_title_h1"
-            android:drawablePadding="4dp"
-            android:gravity="center"/>
+        android:layout_marginTop="55dp">
+
+        <LinearLayout
+            style="@style/LiveEndViewInfoStyle"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_watch_count"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/text_color_purplish"
+                android:textSize="18dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/watch_count_title"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LiveEndViewInfoStyle"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_follow_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/text_color_purplish"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/follow_count"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LiveEndViewInfoStyle"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_coin_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/text_color_purplish"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/tv_coin_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="火眼币"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/live_over_error_tip_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="15dp"
-        android:visibility="gone"
-        android:text="@string/live_over_error_tip"
-        android:textColor="@color/text_white"
-        android:textSize="@dimen/text_size_13"/>
-    <TextView
-        android:id="@+id/living_action_tv"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/shape_record_return"
-        android:text="@string/save_video"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_title_h1"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/delete_video_tv"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/video_delete_stroke_round_six_btn_blue_selector"
-        android:text="@string/delete_video_tip"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_title_h1"
-        android:gravity="center"/>
+
 </LinearLayout>

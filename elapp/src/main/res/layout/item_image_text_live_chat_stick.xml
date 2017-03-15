@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_line"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/tv_content"
+        android:layout_alignBottom="@+id/tv_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/shape_image_live_stick"
+            android:gravity="center"
+            android:text="@string/stick"
+            android:textColor="@color/text_color_white"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="#672f87"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginTop="22dp"
+        android:layout_toRightOf="@+id/ll_line"
+        android:paddingBottom="5dp"
+        android:text="掌趣科技中青宝万达信息能涨停中小创将继续补涨掌趣科技中青宝万达信息能涨停中小创将继续补涨"
+        android:textColor="#672f87"
+        android:textSize="16sp"/>
+</RelativeLayout>

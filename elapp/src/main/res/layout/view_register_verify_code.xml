@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <ImageView
+        android:id="@+id/iv_code_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_back" />
+
+    <TextView
+        android:id="@+id/prompt_ver_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/password_area_ll"
+        android:layout_marginTop="110dp"
+        android:text="请输入验证码" />
+
+    <LinearLayout
+        android:id="@+id/password_area_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_below="@+id/prompt_ver_code"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/code_1_tv"
+                style="@style/verification_password_set_edit_style" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/line_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/code_2_tv"
+                style="@style/verification_password_set_edit_style" />
+
+            <View
+
+                android:layout_width="40dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/line_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/code_3_tv"
+                style="@style/verification_password_set_edit_style"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
+
+            <View
+
+                android:layout_width="40dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/line_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/code_4_tv"
+                style="@style/verification_password_set_edit_style" />
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/line_gray" />
+        </LinearLayout>
+
+        <!--<EditText-->
+        <!--android:id="@+id/code_5_tv"-->
+        <!--style="@style/verification_password_set_edit_style" />-->
+
+        <!--<EditText-->
+        <!--android:id="@+id/code_6_tv"-->
+        <!--style="@style/verification_password_set_edit_style" />-->
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_next_step_ver_code"
+        style="@style/LoginRegisterBottonStyle"
+        android:layout_width="264dp"
+        android:layout_below="@+id/password_area_ll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="106dp"
+        android:text="@string/next_step" />
+
+    <LinearLayout
+        android:id="@+id/ll_login_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_next_step_ver_code"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="没有收到短信？"
+            android:textColor="@color/text_color_gray" />
+
+        <TextView
+            android:id="@+id/tv_send_code_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/send_sms_agin"
+            android:textColor="@color/text_color_purplish" />
+    </LinearLayout>
+</RelativeLayout>
