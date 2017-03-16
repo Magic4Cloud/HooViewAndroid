@@ -70,7 +70,7 @@ public abstract class BaseRvcFragment extends AbstractListFragment {
         mPullToLoadRcvView.getRecyclerView().setItemAnimator(new DefaultItemAnimator());
         mPullToLoadRcvView.getRecyclerView().setHasFixedSize(true);
         mPullToLoadRcvView.isLoadMoreEnabled(true);
-        mPullToLoadRcvView.setLoadMoreOffset(4);
+        mPullToLoadRcvView.setLoadMoreOffset(1);
         mPullToLoadRcvView.setPullCallback(new PullCallback() {
             @Override
             public void onLoadMore() {

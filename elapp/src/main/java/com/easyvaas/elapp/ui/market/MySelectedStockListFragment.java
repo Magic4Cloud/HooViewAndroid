@@ -90,6 +90,7 @@ public class MySelectedStockListFragment extends BaseListFragment {
                         if (result != null) {
                             result.getData().addAll(headerLists);
                             List<StockListModel.StockModel> data = result.getData();
+                            if (!(luLists.size()>0||hkLists.size()>0||usLists.size()>0))
                             filterStock(data);
                             if (mType.equals("2")) {
                                 result.getData().clear();
@@ -123,9 +124,10 @@ public class MySelectedStockListFragment extends BaseListFragment {
     }
 
     private void filterStock(List<StockListModel.StockModel> data) {
+
         for (StockListModel.StockModel model : data) {
-            if (!TextUtils.isEmpty(model.getSymbol()) && (model.getSymbol().startsWith("SH") || model
-                    .getSymbol().startsWith("ZH"))) {
+            if (!TextUtils.isEmpty(model.getSymbol()) && (model.getSymbol().startsWith("SZ") || model
+                    .getSymbol().startsWith("SH"))) {
                 luLists.add(model);
             } else if (!TextUtils.isEmpty(model.getSymbol()) && model.getSymbol().startsWith("HK")) {
                 hkLists.add(model);

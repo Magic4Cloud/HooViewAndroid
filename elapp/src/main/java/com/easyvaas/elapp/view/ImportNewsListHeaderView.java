@@ -17,9 +17,7 @@ import com.easyvaas.common.imageslider.SliderTypes.BaseSliderView;
 import com.easyvaas.common.imageslider.SliderTypes.TextSliderView;
 import com.easyvaas.elapp.activity.WebViewActivity;
 import com.easyvaas.elapp.bean.BannerModel;
-import com.easyvaas.elapp.bean.market.ExponentListModel;
 import com.easyvaas.elapp.bean.market.ExponentListNewModel;
-import com.easyvaas.elapp.bean.market.ExponentModel;
 import com.easyvaas.elapp.bean.news.ImportantNewsModel;
 import com.easyvaas.elapp.bean.news.NewsItemModel;
 import com.easyvaas.elapp.bean.user.ReadRecord;
@@ -239,12 +237,14 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
                 ExponentListNewModel.DataEntity.CnEntity exponentModel = mExponentListModel.getData().getCn().get(i);
                 if (i == 0) {
                     setExponent(exponentModel, mTvExponentName1, mTvExponentNumber1, mTvExponentPercent1);
+                    mLlExponent1.setTag(exponentModel);
                 } else if (i == 1) {
                     setExponent(exponentModel, mTvExponentName2, mTvExponentNumber2, mTvExponentPercent2);
+                    mLlExponent2.setTag(exponentModel);
                 } else if (i == 2) {
                     setExponent(exponentModel, mTvExponentName3, mTvExponentNumber3, mTvExponentPercent3);
+                    mLlExponent3.setTag(exponentModel);
                 }
-                mLlExponent1.setTag(exponentModel);
             }
         }
     }

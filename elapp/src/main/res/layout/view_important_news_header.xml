@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/news_list_bg_color"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/news_list_bg_color"
+              android:orientation="vertical">
 
-    <include layout="@layout/view_header_discover_slider" />
+    <include layout="@layout/view_header_discover_slider"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,32 +27,32 @@
                 android:id="@+id/tv_exponent_name1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="上证"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="上证"/>
 
             <TextView
                 android:id="@+id/tv_exponent_number1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3243.32"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:text="3243.32"/>
 
             <TextView
                 android:id="@+id/tv_exponent_percent1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-5.5[-0.17%]"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="-5.5[-0.17%]"/>
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:layout_height="49dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/base_gray" />
+            android:background="@color/base_gray"/>
 
         <LinearLayout
             android:id="@+id/ll_exponent2"
@@ -65,32 +66,32 @@
                 android:id="@+id/tv_exponent_name2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="深成"
+                tools:text="深成"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_exponent_number2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="11002.90"
+                tools:text="11002.90"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tv_exponent_percent2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+27.53[+0.25%]"
+                tools:text="+27.53[+0.25%]"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:layout_height="49dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/base_gray" />
+            android:background="@color/base_gray"/>
 
         <LinearLayout
             android:id="@+id/ll_exponent3"
@@ -104,25 +105,25 @@
                 android:id="@+id/tv_exponent_name3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="创业板"
+                tools:text="创业板"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_exponent_number3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2163.42"
+                tools:text="2163.42"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tv_exponent_percent3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-2.23[-0.10%]"
+                tools:text="-2.23[-0.10%]"
                 android:textColor="@color/selector_exponent_state_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -151,7 +152,7 @@
                 android:drawablePadding="6dp"
                 android:text="@string/hooview_gold_eye"
                 android:textColor="@color/title_text_color"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/tv_refresh_time"
@@ -159,11 +160,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="8dp"
-                android:visibility="gone"
                 android:layout_toRightOf="@+id/tv_title"
                 android:text="11：00"
                 android:textColor="@color/text_color_gray"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_load_more"
@@ -175,7 +176,7 @@
                 android:layout_marginRight="16dp"
                 android:text="@string/load_more"
                 android:textColor="@color/text_color_gray"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -187,9 +188,9 @@
             <ImageView
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                android:layout_marginLeft="12dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/hooview_gold_eye_point" />
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/hooview_gold_eye_point"/>
 
             <TextView
                 android:id="@+id/tv_eyes_news1"
@@ -197,12 +198,12 @@
                 android:layout_height="54dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="12dp"
+                android:ellipsize="end"
                 android:gravity="left|center_vertical"
                 android:maxLines="2"
-                android:ellipsize="end"
                 android:text=""
                 android:textColor="@color/title_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <View
@@ -210,7 +211,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="11dp"
             android:layout_marginRight="16dp"
-            android:background="#f0f0f0" />
+            android:background="#f0f0f0"/>
 
         <LinearLayout
             android:id="@+id/ll_eye_new2"
@@ -221,9 +222,9 @@
             <ImageView
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                android:layout_marginLeft="12dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/hooview_gold_eye_point" />
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/hooview_gold_eye_point"/>
 
             <TextView
                 android:id="@+id/tv_eyes_news2"
@@ -231,12 +232,12 @@
                 android:layout_height="54dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="12dp"
+                android:ellipsize="end"
                 android:gravity="left|center_vertical"
                 android:maxLines="2"
-                android:ellipsize="end"
                 android:text=""
                 android:textColor="@color/title_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <View
@@ -244,7 +245,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="11dp"
             android:layout_marginRight="16dp"
-            android:background="#f0f0f0" />
+            android:background="#f0f0f0"/>
 
         <LinearLayout
             android:id="@+id/ll_eye_new3"
@@ -255,9 +256,9 @@
             <ImageView
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                android:layout_marginLeft="12dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/hooview_gold_eye_point" />
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/hooview_gold_eye_point"/>
 
             <TextView
                 android:id="@+id/tv_eyes_news3"
@@ -265,12 +266,12 @@
                 android:layout_height="54dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="12dp"
+                android:ellipsize="end"
                 android:gravity="left|center_vertical"
                 android:maxLines="2"
-                android:ellipsize="end"
                 android:text=""
                 android:textColor="@color/title_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

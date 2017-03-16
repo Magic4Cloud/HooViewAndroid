@@ -62,6 +62,7 @@ public class HomeNewsFragment extends BaseFragment implements View.OnClickListen
         mTabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         String[] tabTitles = getResources().getStringArray(R.array.news_tab);
         mViewPager.setAdapter(new MyAdapter(getChildFragmentManager(), tabTitles));
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
