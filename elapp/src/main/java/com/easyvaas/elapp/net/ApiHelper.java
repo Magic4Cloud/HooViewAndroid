@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.easyvaas.common.gift.bean.GoodsEntityArray;
 import com.hooview.app.BuildConfig;
@@ -388,7 +389,7 @@ public class ApiHelper {
         } else {
             map.put("location", location);
         }
-        sRequestHelper.getAsString(ApiConstant.USER_EDIT_INFO, map, callBack);
+        sRequestHelper.postAsString(ApiConstant.USER_EDIT_INFO, map, callBack);
     }
 
     public void userEditSetting(boolean isLive, boolean isFollow, boolean isDisturb,

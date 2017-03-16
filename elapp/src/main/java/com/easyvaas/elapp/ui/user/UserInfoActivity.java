@@ -462,7 +462,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         final String birthday = mBirthdayEt.getText().toString().trim();
         final String location = mLocationEt.getText().toString().trim();
         final String signature = mSignatureEt.getText().toString().trim();
-        final String credentials = mCertificateEt.getText().toString().trim();
+        final String credentials = mCertificateEt != null ? mCertificateEt.getText().toString().trim() : "";
         final String gender = getString(R.string.male)
                 .equals(mGenderSpinner.getSelectedItem().toString().trim()) ? "male" : "female";
 
@@ -497,6 +497,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onError(String errorInfo) {
                         super.onError(errorInfo);
+                        SingleToast.show(UserInfoActivity.this, errorInfo);
                     }
 
                     @Override

@@ -75,7 +75,7 @@
             android:value="${CHANNEL_VALUE}"/>
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="5058b51ad39a89832f8a65dd"/>
+            android:value="4c4d83df3f8d7af82900182c"/>
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="${CHANNEL_VALUE}"/>

@@ -184,6 +184,7 @@ public class VipLiveListFragment extends BaseListRcvFragment {
                 DecimalFormat df2 = new DecimalFormat("###,###");
                 mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(checkImageTextLiveModel.getData().getViewcount())));
                 if (mUserInfoModel.getTags() != null) {
+                    mLLTagContainer.removeAllViews();
                     for (int i = 0; i < mUserInfoModel.getTags().size(); i++) {
                         UserInfoModel.TagsEntity tagsEntity = mUserInfoModel.getTags().get(i);
                         TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.layout_use_tag, null);

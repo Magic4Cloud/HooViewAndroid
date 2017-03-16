@@ -35,6 +35,7 @@ import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.UserUtil;
 import com.easyvaas.elapp.utils.ViewUtil;
+import com.easyvaas.elapp.view.CommonItemButton;
 import com.hooview.app.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -64,6 +65,8 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
     private TextView mTvFollowCount;
     private TextView mTvCoinCount;
     private TextView mTvCoinTitle;
+    private CommonItemButton cibMyLive;
+    private View cibMyLiveDivider;
     private Preferences mPreferences;
     private User user;
     LinearLayout tagsViewContainer;
@@ -105,7 +108,10 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
         mTvCoinCount.setOnClickListener(this);
         mTvCoinTitle = (TextView) view.findViewById(R.id.tv_coin_title);
         mTvCoinTitle.setOnClickListener(this);
-        view.findViewById(R.id.cib_my_live).setOnClickListener(this);
+        cibMyLive = (CommonItemButton) view.findViewById(R.id.cib_my_live);
+        cibMyLiveDivider = view.findViewById(R.id.cib_my_live_divider);
+
+        cibMyLive.setOnClickListener(this);
         view.findViewById(R.id.cib_my_book).setOnClickListener(this);
         view.findViewById(R.id.cib_my_collection).setOnClickListener(this);
         view.findViewById(R.id.cib_my_history).setOnClickListener(this);
@@ -194,6 +200,7 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
             mIvUserLogo.setIsVip(user.getVip());
             setUnReadMessage();
             if (user.getTags() != null) {
+                tagsViewContainer.removeAllViews();
                 for (int i = 0; i < user.getTags().size() && i < 3; i++) {
                     UserInfoModel.TagsEntity tagsEntity = user.getTags().get(i);
                     TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.layout_use_tag, null);
@@ -202,6 +209,15 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
                     tagsViewContainer.addView(textView, layoutParams);
                     textView.setText(tagsEntity.getName());
                 }
+            }
+
+            if (user.getVip() == 1) {
+                cibMyLive.setVisibility(View.VISIBLE);
+                cibMyLiveDivider.setVisibility(View.VISIBLE);
+            } else {
+                cibMyLive.setVisibility(View.GONE);
+                cibMyLiveDivider.setVisibility(View.GONE);
+                cibMyLive.setOnClickListener(null);
             }
         } else {
             mTvName.setVisibility(View.INVISIBLE);

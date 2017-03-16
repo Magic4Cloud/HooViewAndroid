@@ -372,7 +372,8 @@
             android:ellipsize="end"
             android:gravity="center_vertical|left"
             android:singleLine="true"
-            android:text="@string/certificate_hint"
+            android:hint="@string/certificate_hint"
+            android:textColorHint="@color/video_duration_text_color"
             android:textColor="@color/video_duration_text_color"
             android:textSize="@dimen/text_size_title_h1" />
 
