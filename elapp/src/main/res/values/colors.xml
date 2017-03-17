@@ -13,6 +13,8 @@
 
     <color name="base_text_white">#ffffffff</color>
 
+    <color name="transparent">#00000000</color>
+
     <color name="background_white">@color/base_white</color>
     <color name="background_content">@color/white_alpha_percent_80</color>
 

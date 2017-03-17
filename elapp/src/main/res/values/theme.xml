@@ -129,12 +129,17 @@
     <style name="FullscreenTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
-    <style name="SplashTheme" parent="FullscreenTheme">
+    <style name="SplashBaseTheme" parent="FullscreenTheme">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+    <style name="SplashTheme" parent="SplashBaseTheme">
+
     </style>
 
     <style name="Theme.PageIndicatorDefaults" parent="android:Theme">

@@ -1,66 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_gray">
+    android:background="@color/background_color_gray"
+    android:orientation="vertical">
+
     <include
         android:id="@+id/common_title_tv"
+        layout="@layout/common_header_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        layout="@layout/common_header_layout"/>
+        android:layout_alignParentTop="true" />
+
     <LinearLayout
         android:id="@+id/amount_total_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
         android:orientation="vertical">
-        <ImageView
-            style="@style/default_horizontal_line_style"/>
+
+        <ImageView style="@style/default_horizontal_line_style" />
+
         <LinearLayout
-            android:visibility="gone"
             style="@style/item_my_setting"
-            android:paddingLeft="15dp">
+            android:paddingLeft="15dp"
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/total_amount_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/avatar_big_second_size"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/text_size_title_h1"
-                android:textColor="@color/text_color_main"/>
+                android:textColor="@color/text_color_main"
+                android:textSize="@dimen/text_size_title_h1" />
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@color/white"
             android:paddingLeft="15dp">
+
             <TextView
                 android:id="@+id/tv_pay_value_header"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/avatar_big_second_size"
-                android:gravity="center_vertical"
-                android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
-                android:text="164，432 火眼豆"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:textColor="@color/base_purplish"
                 android:textSize="@dimen/text_size_title_h1"
-                android:textColor="@color/base_purplish"/>
+                tools:text="164，432 火眼豆" />
+
             <Button
                 android:id="@+id/bt_cash_in_confirm"
                 android:layout_width="60dp"
                 android:layout_height="25dp"
-                android:background="@drawable/shape_common_btn_b"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="24dp"
+                android:background="@drawable/shape_common_btn_b"
                 android:button="@null"
                 android:text="@string/cash_in"
                 android:textColor="@color/text_color_white"
@@ -68,24 +74,28 @@
                 android:visibility="visible" />
 
         </RelativeLayout>
-        <ImageView
-            style="@style/default_horizontal_line_style"/>
+
+        <ImageView style="@style/default_horizontal_line_style" />
+
         <LinearLayout
-            android:visibility="gone"
             style="@style/item_my_setting"
-            android:paddingLeft="15dp">
+            android:paddingLeft="15dp"
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/tv_pay_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/avatar_big_second_size"
-                android:text="11.12-12.12 账单明细"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/text_size_title_h1"
-                android:textColor="@color/base_purplish"/>
+                android:text="11.12-12.12 账单明细"
+                android:textColor="@color/base_purplish"
+                android:textSize="@dimen/text_size_title_h1" />
         </LinearLayout>
+
         <RelativeLayout
             style="@style/item_my_setting"
             android:paddingLeft="15dp">
+
             <TextView
                 android:id="@+id/tv_cost"
                 android:layout_width="150dp"
@@ -93,28 +103,30 @@
                 android:layout_alignParentLeft="true"
                 android:gravity="center"
                 android:text="消费"
-                android:textSize="@dimen/text_size_title_h1"
-                android:textColor="@color/selector_money_tab_title_text_color"/>
+                android:textColor="@color/selector_money_tab_title_text_color"
+                android:textSize="@dimen/text_size_title_h1" />
+
             <TextView
                 android:layout_width="2dp"
                 android:layout_height="@dimen/avatar_watcher_size"
                 android:layout_centerInParent="true"
-                android:background="@color/base_purplish"/>
+                android:background="@color/base_purplish" />
+
             <TextView
                 android:id="@+id/tv_cash"
                 android:layout_width="150dp"
                 android:layout_height="@dimen/avatar_big_second_size"
+                android:layout_alignParentRight="true"
                 android:gravity="center"
                 android:text="充值"
-                android:layout_alignParentRight="true"
-                android:textSize="@dimen/text_size_title_h1"
-                android:textColor="@color/selector_money_tab_title_text_color"/>
+                android:textColor="@color/selector_money_tab_title_text_color"
+                android:textSize="@dimen/text_size_title_h1" />
         </RelativeLayout>
     </LinearLayout>
 
     <ImageView
         android:id="@+id/line_bottom_iv"
-        style="@style/default_horizontal_line_style"/>
-    <include
-        layout="@layout/activity_common_recycler"/>
+        style="@style/default_horizontal_line_style" />
+
+    <include layout="@layout/activity_common_recycler" />
 </LinearLayout>

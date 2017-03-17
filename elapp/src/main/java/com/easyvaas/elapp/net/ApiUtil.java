@@ -92,6 +92,7 @@ public class ApiUtil {
         });
     }
 
+    // 登录过后得到火眼豆
     public static void getAssetInfo(final Context ctx) {
         ApiHelper.getInstance().getAssetInfo(new MyRequestCallBack<MyAssetEntity>() {
             @Override
