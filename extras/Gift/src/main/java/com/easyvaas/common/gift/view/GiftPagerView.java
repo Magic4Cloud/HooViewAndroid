@@ -1,9 +1,5 @@
 package com.easyvaas.common.gift.view;
 
-import java.lang.ref.SoftReference;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -18,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easyvaas.common.gift.R;
 import com.easyvaas.common.gift.bean.GiftEntity;
 import com.easyvaas.common.gift.bean.GoodsEntity;
 import com.easyvaas.common.gift.utils.GiftDB;
 import com.easyvaas.common.gift.utils.GiftUtility;
 
-import com.easyvaas.common.gift.R;
+import java.lang.ref.SoftReference;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GiftPagerView extends FrameLayout {
     public static final int TAB_CATEGORY_GIFT = 2;
@@ -267,9 +266,18 @@ public class GiftPagerView extends FrameLayout {
         mGiftDataList.removeAll(mRedPackList);
         onTabChanged(TAB_CATEGORY_GIFT);
     }
+
     public void updateAssetInfo() {
-        mECoinAccountTv.setText(mContext.getString(R.string.e_coin_count,
-                mPref.getLong(GiftDB.KEY_PARAM_ASSET_E_COIN_ACCOUNT, 0))+" >");
+        updateAssetInfo(0);
+    }
+
+    public void updateAssetInfo(int addCost) {
+        long coin = mPref.getLong(GiftDB.KEY_PARAM_ASSET_E_COIN_ACCOUNT, 0);
+        if (addCost > 0){
+            coin = coin + addCost;
+            mPref.putLong(GiftDB.KEY_PARAM_ASSET_E_COIN_ACCOUNT, coin);
+        }
+        mECoinAccountTv.setText(mContext.getString(R.string.e_coin_count, coin+" >"));
     }
 
     public void checkBurst() {
@@ -300,7 +308,7 @@ public class GiftPagerView extends FrameLayout {
             }
             eCoin -= mSelectGift.getCost();
             mPref.putLong(GiftDB.KEY_PARAM_ASSET_E_COIN_ACCOUNT, eCoin);
-            mOnGiftSendCallBack.onECoinChanged(eCoin);
+            mOnGiftSendCallBack.onECoinChanged(eCoin); // 立马扣除火眼豆
         }
         updateAssetInfo();
         return true;
@@ -328,6 +336,7 @@ public class GiftPagerView extends FrameLayout {
         giftEntity.setNickname(mNickName);
         giftEntity.setUserLogo(mLogoUrl);
         giftEntity.setAnimationType(mSelectGift.getAnitype());
+        giftEntity.setGiftCost(mSelectGift.getCost());
         mBurstGiftEntities.add(giftEntity);
         mHandler.removeMessages(MSG_BURST_COUNT_DOWN);
         mOnGiftSendCallBack.onUpdateView();

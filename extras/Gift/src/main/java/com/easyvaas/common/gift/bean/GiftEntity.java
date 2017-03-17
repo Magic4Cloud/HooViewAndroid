@@ -21,6 +21,7 @@ public class GiftEntity {
     private String giftAniUrl;
     private int animationType;
     private boolean isDisplayed;
+    private int giftCost;
 
     public GiftEntity() {
     }
@@ -118,11 +119,18 @@ public class GiftEntity {
         this.giftCount = giftCount;
     }
 
+    public int getGiftCost() {
+        return giftCost;
+    }
+
+    public void setGiftCost(int giftCost) {
+        this.giftCost = giftCost;
+    }
+
     @Override
     public String toString() {
         return "GiftEntity{" +
-                "animationType=" + animationType +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", userLogo='" + userLogo + '\'' +
                 ", giftId=" + giftId +
@@ -131,6 +139,9 @@ public class GiftEntity {
                 ", giftCount=" + giftCount +
                 ", giftPicUrl='" + giftPicUrl + '\'' +
                 ", giftAniUrl='" + giftAniUrl + '\'' +
+                ", animationType=" + animationType +
+                ", isDisplayed=" + isDisplayed +
+                ", giftCost='" + giftCost + '\'' +
                 '}';
     }
 }

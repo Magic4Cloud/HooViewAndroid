@@ -10,14 +10,12 @@ import android.widget.FrameLayout;
 
 import com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar;
 import com.easyvaas.common.emoji.utils.EmoticonsUtils;
-import com.easyvaas.common.gift.GiftManager;
 import com.easyvaas.common.gift.bean.GiftEntity;
 import com.easyvaas.common.gift.view.GiftPagerView;
 import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.chat.ChatComment;
-import com.easyvaas.elapp.bean.pay.MyAssetEntity;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.dialog.CommonPromptDialog;
@@ -26,7 +24,6 @@ import com.easyvaas.elapp.event.LiveCommentEvent;
 import com.easyvaas.elapp.event.LiveSearchStockEvent;
 import com.easyvaas.elapp.event.NewCommentEvent;
 import com.easyvaas.elapp.event.NewGiftEvent;
-import com.easyvaas.elapp.live.activity.LiveRoomBaseActivity;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
@@ -175,22 +172,24 @@ public class BasePlayerActivity extends BaseChatActivity {
         @Override
         public void sendGift(final GiftEntity data) {
 //            findViewById(R.id.player_bottom_share_btn).setVisibility(View.VISIBLE);
+            EventBus.getDefault().post(new NewGiftEvent(data));
             EventBus.getDefault().post(new ChatLiveInputEvent(ChatLiveInputEvent.ACTION_SHOW_INPUT));
-            ApiHelper.getInstance().sendGift(mVideoId, data.getGiftId(), data.getGiftCount(),
-                    false, mCurrentVideo.getName(), new MyRequestCallBack<MyAssetEntity>() {
+            ApiHelper.getInstance().sendGiftString(mVideoId, data.getGiftId(), data.getGiftCount(),
+                    false, mCurrentVideo.getName(), new MyRequestCallBack<String>() {
                         @Override
-                        public void onSuccess(MyAssetEntity result) {
-                            if (result != null) {
-                                mPref.putLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, result.getEcoin());
-                                GiftManager.setECoinCount(getApplicationContext(), result.getEcoin());
-                                mExpressionGiftLayout.updateAssetInfo();
-//                                EventBus.getDefault().post(new ChatLiveInputEvent(ChatLiveInputEvent.ACTION_SHOW_INPUT));
-                            }
+                        public void onSuccess(String result) {
+//
+                        }
+
+                        @Override
+                        public void onError(String errorInfo) {
+                            super.onError(errorInfo);
+                            mExpressionGiftLayout.updateAssetInfo(data.getGiftCost());
                         }
 
                         @Override
                         public void onFailure(String msg) {
-
+                            mExpressionGiftLayout.updateAssetInfo(data.getGiftCost());
                         }
                     });
         }

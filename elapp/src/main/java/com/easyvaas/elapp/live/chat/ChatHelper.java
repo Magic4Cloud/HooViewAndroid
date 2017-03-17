@@ -6,27 +6,12 @@
 
 package com.easyvaas.elapp.live.chat;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.easyvaas.sdk.message.wrapper.EVMessage;
-import com.easyvaas.sdk.message.wrapper.MessageCallback;
-import com.easyvaas.sdk.message.wrapper.MessageConstants;
-import com.google.gson.Gson;
-
 import com.easyvaas.common.gift.bean.GiftEntity;
-
 import com.easyvaas.elapp.bean.chat.ChatBarrage;
 import com.easyvaas.elapp.bean.chat.ChatBarrageEntity;
 import com.easyvaas.elapp.bean.chat.ChatComment;
@@ -41,6 +26,19 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.utils.Logger;
+import com.easyvaas.sdk.message.wrapper.EVMessage;
+import com.easyvaas.sdk.message.wrapper.MessageCallback;
+import com.easyvaas.sdk.message.wrapper.MessageConstants;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ChatHelper implements IChatHelper {
     private static final String TAG = "ChatHelper";
@@ -158,9 +156,10 @@ public class ChatHelper implements IChatHelper {
                             if (barrage != null) {
                                 mCallback.onBarrage(barrage);
                             }
-                            if (gift != null) {
-                                mCallback.onNewGift(gift);
-                            }
+                            // 现在改为一发送就显示礼物， 发送成功就不用显示了
+//                            if (gift != null) {
+//                                mCallback.onNewGift(gift);
+//                            }
                             if (redPackInfo != null) {
                                 Map<String, ChatRedPackInfo> map = new HashMap<>();
                                 map.put(redPackInfo.getId(), redPackInfo);

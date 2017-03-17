@@ -19,12 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.bottomsheet.BottomSheet;
-import com.easyvaas.common.gift.GiftManager;
 import com.easyvaas.common.gift.bean.GiftEntity;
 import com.easyvaas.common.gift.view.GiftPagerView;
 import com.easyvaas.elapp.adapter.ImageTextLiveMsgAdapter;
 import com.easyvaas.elapp.app.EVApplication;
-import com.easyvaas.elapp.bean.pay.MyAssetEntity;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.chat.model.EMMessageWrapper;
@@ -371,29 +369,27 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         EventBus.getDefault().post(imageTextLiveMessageEvent);
     }
 
-    private GiftPagerView.OnGiftSendCallBack mOnGiftSendCallBack
-            = new GiftPagerView.OnGiftSendCallBack() {
+    private GiftPagerView.OnGiftSendCallBack mOnGiftSendCallBack = new GiftPagerView.OnGiftSendCallBack() {
         @Override
         public void sendGift(final GiftEntity data) {
-            if (mStreamsEntity == null) {
-                return;
-            }
+            if (mStreamsEntity == null) return;
             sendGiftMsg(mUser.getNickname(), data.getGiftName(), data.getGiftCount());
-            ApiHelper.getInstance().sendGift(mRoomId, data.getGiftId(), data.getGiftCount(),
-                    false, mStreamsEntity.getUserEntity().getName(), new MyRequestCallBack<MyAssetEntity>() {
+            ApiHelper.getInstance().sendGiftString(mRoomId, data.getGiftId(), data.getGiftCount(),
+                    false, mStreamsEntity.getUserEntity().getName(), new MyRequestCallBack<String>() {
                         @Override
-                        public void onSuccess(MyAssetEntity result) {
-                            if (result != null) {
-                                mPref.putLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, result.getEcoin());
-                                GiftManager.setECoinCount(getContext(), result.getEcoin());
-                                mExpressionGiftLayout.updateAssetInfo();
-                                sendGiftMsg(mUser.getNickname(), data.getGiftName(), data.getGiftCount());
-                            }
+                        public void onSuccess(String result) {
+
+                        }
+
+                        @Override
+                        public void onError(String errorInfo) {
+                            super.onError(errorInfo);
+                            mExpressionGiftLayout.updateAssetInfo(data.getGiftCost());
                         }
 
                         @Override
                         public void onFailure(String msg) {
-
+                            mExpressionGiftLayout.updateAssetInfo(data.getGiftCost());
                         }
                     });
         }

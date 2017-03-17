@@ -10,11 +10,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.easyvaas.common.gift.bean.GoodsEntityArray;
-import com.hooview.app.BuildConfig;
-import com.hooview.app.R;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.CarouselInfoEntityArray;
 import com.easyvaas.elapp.bean.RedPackEntity;
@@ -45,6 +42,8 @@ import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.push.PushHelper;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.Utils;
+import com.hooview.app.BuildConfig;
+import com.hooview.app.R;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -757,6 +756,18 @@ public class ApiHelper {
         map.put("continue", isContinue ? "yes" : "no");
         map.put("touser", toName);
         sRequestHelper.getAsGson(ApiConstant.PAY_SEND_GIFT, map, MyAssetEntity.class, callBack);
+    }
+
+    public void sendGiftString(String vid, long goodsId, int count, boolean isContinue, String toName,
+                         MyRequestCallBack<String> callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("sessionid", mPref.getSessionId());
+        map.put("vid", vid);
+        map.put("goodsid", goodsId + "");
+        map.put("count", count + "");
+        map.put("continue", isContinue ? "yes" : "no");
+        map.put("touser", toName);
+        sRequestHelper.getAsString(ApiConstant.PAY_SEND_GIFT, map, callBack);
     }
 
     public void sendRedPack(String vid, String amount, String count, String title,
