@@ -251,7 +251,7 @@ public class ApiUtil {
             @Override
             public void onError(String errorInfo) {
                 super.onError(errorInfo);
-                Preferences.getInstance(context).logout(true);
+                Preferences.getInstance(context).logout(false);
 //              LoginActivity.start(context);
             }
 

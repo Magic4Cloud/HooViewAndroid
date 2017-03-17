@@ -4,10 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.hooview.app.R;
 import com.easyvaas.elapp.adapter.BaseFragmentPagerAdapter;
-import com.easyvaas.elapp.service.AppService;
 import com.easyvaas.elapp.ui.base.BaseTabViewPagerFragment;
+import com.hooview.app.R;
 
 public class MarketMainFragment extends BaseTabViewPagerFragment {
 
@@ -20,7 +19,7 @@ public class MarketMainFragment extends BaseTabViewPagerFragment {
     @Override
     public void onStart() {
         super.onStart();
-        AppService.startRefreshStock(getContext().getApplicationContext());
+//        AppService.startRefreshStock(getContext().getApplicationContext());
     }
 
     public class MyAdapter extends BaseFragmentPagerAdapter {

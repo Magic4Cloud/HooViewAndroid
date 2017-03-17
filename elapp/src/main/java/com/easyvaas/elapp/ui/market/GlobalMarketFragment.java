@@ -20,7 +20,6 @@ import com.easyvaas.elapp.adapter.recycler.GlobalMarketExponentAdapter;
 import com.easyvaas.elapp.bean.market.ExponentListModel;
 import com.easyvaas.elapp.bean.market.ExponentModel;
 import com.easyvaas.elapp.bean.user.GlobalStockStatus;
-import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.event.MarketRefreshEvent;
 import com.easyvaas.elapp.net.HooviewApiHelper;
@@ -71,7 +70,7 @@ public class GlobalMarketFragment extends BaseListFragment {
 
     @Override
     public void iniView(View view) {
-        Preferences.getInstance(getActivity()).clear();
+//        Preferences.getInstance(getActivity()).clear();
         mBtnEdit = (Button) view.findViewById(R.id.btn_edit);
         view.findViewById(R.id.tv_prompt).setVisibility(View.VISIBLE);
         mLayoutManager = new FooterGridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL, false);

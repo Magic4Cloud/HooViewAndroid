@@ -14,12 +14,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.hooview.app.R;
 import com.easyvaas.elapp.event.NewsListScrollEvent;
-import com.easyvaas.elapp.service.AppService;
 import com.easyvaas.elapp.ui.base.BaseFragment;
 import com.easyvaas.elapp.ui.search.GlobalSearchActivity;
 import com.easyvaas.elapp.utils.Logger;
+import com.hooview.app.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,7 +50,7 @@ public class HomeNewsFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onStart() {
         super.onStart();
-        AppService.startRefreshExponent(getContext().getApplicationContext());
+//        AppService.startRefreshExponent(getContext().getApplicationContext());
     }
 
     private void initView(View view) {

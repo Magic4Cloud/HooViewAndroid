@@ -65,6 +65,7 @@ public class MySelectedStockListFragment extends BaseListFragment {
                 mStockIdStr = result.getCollectlist();
                 List<String> codeList = result.getCodeList();
                 getStockListInfo(mStockIdStr);
+                hideEmptyView();
             }
 
             @Override
