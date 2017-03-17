@@ -192,7 +192,7 @@ public class MySelectedStockListFragment extends BaseListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(List<StockListModel.StockModel> event) {
+    public void onMexssageEvent(List<StockListModel.StockModel> event) {
         mAdapter.setStockListModel(event);
     }
 

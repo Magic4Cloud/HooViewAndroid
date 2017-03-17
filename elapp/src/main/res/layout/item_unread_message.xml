@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-    android:background="@color/background_color_gray">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+    >
+
     <TextView
         android:id="@+id/tv_unread_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/text_login"
         android:layout_marginTop="5dp"
-        android:text="02/25 15.33"/>
+        android:text="02/25 15.33"
+        android:textColor="@color/text_gray"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_below="@+id/tv_unread_time"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:orientation="vertical"
-        android:background="@drawable/bg_unread_message_shape">
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_unread_message_shape"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,19 +30,20 @@
 
             <ImageView
                 android:id="@+id/iv_msg_icon"
-                android:layout_width="15dp"
-                android:src="@drawable/live_ready_icon_beauty"
-                android:layout_marginTop="14dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginLeft="18dp"
-                android:layout_height="15dp"/>
+                android:layout_marginTop="14dp"
+                android:src="@drawable/live_ready_icon_beauty"/>
+
             <TextView
                 android:id="@+id/tv_msg_advise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="14dp"
                 android:text="直播消息提醒"/>
 
         </LinearLayout>

@@ -73,5 +73,6 @@ public class MessageUnReadListActivity extends BaseListRcvActivity{
     private void initView() {
           mGroups = new ArrayList<MessageGroupEntity>();
           mRecyclerView.setAdapter(mMsgAdapter = new MessageNoticeAdapter(mGroups,this));
+        mRecyclerView.setBackgroundResource(R.color.background_color_gray);
     }
 }
