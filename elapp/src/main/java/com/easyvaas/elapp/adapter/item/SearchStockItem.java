@@ -8,11 +8,14 @@ import android.widget.TextView;
 
 import com.easyvaas.common.adapter.AdapterItem;
 import com.easyvaas.elapp.bean.search.SearchStockModel;
+import com.easyvaas.elapp.event.MarketRefreshEvent;
 import com.easyvaas.elapp.helper.CollectHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity> {
     private Context mContext;
@@ -79,6 +82,7 @@ public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity>
                     @Override
                     public void onSuccess(String result) {
                         SingleToast.show(context, "添加自选成功");
+                        EventBus.getDefault().post(new MarketRefreshEvent());
                     }
 
                     @Override

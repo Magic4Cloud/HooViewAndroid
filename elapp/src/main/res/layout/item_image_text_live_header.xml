@@ -48,6 +48,7 @@
         android:drawablePadding="12dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
+        android:textSize="@dimen/text_size_16"
         android:text="@string/vip_list"
         android:textColor="@color/text_color_gray" />
 

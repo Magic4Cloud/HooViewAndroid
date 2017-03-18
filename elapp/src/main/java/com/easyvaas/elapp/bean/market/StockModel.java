@@ -9,7 +9,7 @@ public class StockModel implements Serializable {
      * symbol: String, 代码
      * name: String, 名称
      * changepercent: Number, 涨跌幅
-     * price: Number, 现价
+     * close: Number, 现价
      * open: Number, 开盘价
      * high: Number, 最高价
      * low: Number, 最低价
@@ -35,10 +35,19 @@ public class StockModel implements Serializable {
     private double pb;
     private double per;
     private double pre_close;
-    private double price;
+    private double close;
     private double turnoverratio;
     private long volume;
     private int rank = -1;
+
+
+    public double getClose() {
+        return close;
+    }
+
+    public void setClose(double close) {
+        this.close = close;
+    }
 
     public int getRank() {
         return rank;
@@ -142,14 +151,6 @@ public class StockModel implements Serializable {
 
     public void setPre_close(double pre_close) {
         this.pre_close = pre_close;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public double getTurnoverratio() {

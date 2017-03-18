@@ -65,6 +65,7 @@ public class MySelectedStockListFragment extends BaseListFragment {
                 mStockIdStr = result.getCollectlist();
                 List<String> codeList = result.getCodeList();
                 getStockListInfo(mStockIdStr);
+                hideEmptyView();
             }
 
             @Override
@@ -181,8 +182,10 @@ public class MySelectedStockListFragment extends BaseListFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MarketRefreshEvent event) {
-        mSwipeRefreshLayout.setRefreshing(true);
-        loadData();
+        if (mType.equals("1")) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            loadData();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -191,7 +194,7 @@ public class MySelectedStockListFragment extends BaseListFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(List<StockListModel.StockModel> event) {
+    public void onMexssageEvent(List<StockListModel.StockModel> event) {
         mAdapter.setStockListModel(event);
     }
 

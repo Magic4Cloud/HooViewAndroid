@@ -80,6 +80,7 @@ public class HKMarketFragment extends BaseListFragment {
             @Override
             public void onSuccess(UpsAndDownsDataModel result) {
                 if (result != null) {
+                    hideEmptyView();
                     mAdapter.setUpsAndDownsListModel(result);
                     mSwipeRefreshLayout.setRefreshing(false);
                 } else {

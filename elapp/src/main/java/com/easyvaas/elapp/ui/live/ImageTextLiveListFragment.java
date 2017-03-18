@@ -70,7 +70,7 @@ public class ImageTextLiveListFragment extends BaseListRcvFragment {
             public void onSuccess(TextLiveListModel result) {
                 if (result != null) {
                     getUserInfos(result);
-                    onRefreshComplete(0);
+                    onRefreshComplete(result.getCount());
                 }
             }
 

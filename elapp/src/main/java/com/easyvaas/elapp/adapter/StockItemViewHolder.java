@@ -31,7 +31,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
         if (stockModel != null) {
             mTvStockName.setText(stockModel.getName());
             mTvStockNumber.setText(stockModel.getSymbol());
-            mTvPrice.setText(stockModel.getPrice() + "");
+            mTvPrice.setText(stockModel.getClose() + "");
             mTvPercent.setText(StringUtil.getStockPercent(stockModel.getChangepercent()));
             if (stockModel.getRank() >= 0) {
                 mTvTag.setVisibility(View.VISIBLE);

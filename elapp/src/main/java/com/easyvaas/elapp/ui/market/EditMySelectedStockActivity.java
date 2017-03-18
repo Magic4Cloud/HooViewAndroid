@@ -16,18 +16,19 @@ import com.easyvaas.common.advancedRecyclerView.draggable.DraggableItemAdapter;
 import com.easyvaas.common.advancedRecyclerView.draggable.ItemDraggableRange;
 import com.easyvaas.common.advancedRecyclerView.draggable.RecyclerViewDragDropManager;
 import com.easyvaas.common.advancedRecyclerView.utils.AbstractDraggableItemViewHolder;
-import com.hooview.app.R;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.bean.user.CollectListModel;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.BaseActivity;
+import com.easyvaas.elapp.ui.search.SearchStockActivity;
+import com.hooview.app.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class EditMySelectedStockActivity extends BaseActivity implements View.OnClickListener {
     private RecyclerView mRecyclerView;
@@ -141,8 +142,11 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
         }
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements DraggableItemAdapter<MyViewHolder> {
+    class MyAdapter extends RecyclerView.Adapter implements DraggableItemAdapter<MyViewHolder> {
+
         List<StockListModel.StockModel> mItems;
+        private int normlType = 0;
+        private int addType = 1;
 
         public MyAdapter(StockListModel mModel) {
             setHasStableIds(true); // this is required for D&D feature.
@@ -156,35 +160,60 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
 
         @Override
         public long getItemId(int position) {
+            if (position < mItems.size())
             return mItems.get(position)
-                    .hashCode(); // need to return stable (= not change even after reordered) value
+                    .hashCode();
+            return 0;// need to return stable (= not change even after reordered) value
         }
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_my_stock_edit, parent, false);
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = null;
+            if (viewType == normlType) {
+                v = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.item_my_stock_edit, parent, false);
+                return new MyViewHolder(v);
+            } else if (viewType == addType) {
+                return new AddViewHolder(LayoutInflater.from(getBaseContext()).inflate(R.layout.item_add_stock_button, parent, false));
+            }
             return new MyViewHolder(v);
         }
 
+
         @Override
-        public void onBindViewHolder(MyViewHolder holder, final int position) {
-            StockListModel.StockModel stockModel = mItems.get(position);
-            holder.mTvStockName.setText(stockModel.getName());
-            holder.mTvStockNumber.setText(stockModel.getSymbol());
-            holder.mTvPercent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mItems.remove(position);
-                    notifyDataSetChanged();
-                    setFinalItems(mItems);
-                }
-            });
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+            if (getItemViewType(position) == normlType)
+            {
+                MyViewHolder holder1 = (MyViewHolder) holder;
+                StockListModel.StockModel stockModel = mItems.get(position);
+                holder1.mTvStockName.setText(stockModel.getName());
+                holder1.mTvStockNumber.setText(stockModel.getSymbol());
+                holder1.mTvPercent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mItems.remove(position);
+                        notifyDataSetChanged();
+                        setFinalItems(mItems);
+                    }
+                });
+            }
+
         }
 
         @Override
         public int getItemCount() {
-            return mItems.size();
+            return mItems.size() > 0 ? mItems.size() + 1 : mItems.size();
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (mItems.size() > 0)
+                if (position == mItems.size())
+                    return addType;
+                else
+                    return normlType;
+            else
+                return normlType;
         }
 
         @Override
@@ -221,6 +250,22 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
             mTvStockName = (TextView) itemView.findViewById(R.id.tv_stock_name);
             mTvStockNumber = (TextView) itemView.findViewById(R.id.tv_stock_number);
             mTvPercent = (ImageView) itemView.findViewById(R.id.tv_del);
+        }
+    }
+     class AddViewHolder extends RecyclerView.ViewHolder{
+
+        TextView mTvStockAdd;
+
+        AddViewHolder(View itemView) {
+            super(itemView);
+            mTvStockAdd = (TextView) itemView.findViewById(R.id.tv_add_select);
+            mTvStockAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SearchStockActivity.start(EditMySelectedStockActivity.this);
+                    finish();
+                }
+            });
         }
     }
 

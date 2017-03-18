@@ -9,15 +9,12 @@ import android.text.TextUtils;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.easyvaas.elapp.db.Preferences;
-import com.easyvaas.elapp.db.RealmHelper;
-import com.hooview.app.R;
-import com.easyvaas.elapp.service.AppService;
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.HomeLiveFragment;
 import com.easyvaas.elapp.ui.market.HomeMarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
 import com.easyvaas.elapp.ui.user.UserProfileFragment;
+import com.hooview.app.R;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
     public static final String TAB_NEWS = "news";
@@ -110,8 +107,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @Override
     protected void onStop() {
         super.onStop();
-        Intent intent = new Intent(this, AppService.class);
-        stopService(intent);
+//        Intent intent = new Intent(this, AppService.class);
+//        stopService(intent);
     }
 
     @Override
@@ -148,6 +145,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        RealmHelper.getInstance().deleteGlobalAllRecord();
+//        RealmHelper.getInstance().deleteGlobalAllRecord();
     }
 }

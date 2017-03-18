@@ -2,12 +2,11 @@ package com.easyvaas.elapp.ui.market;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.View;
 
 import com.easyvaas.elapp.adapter.BaseFragmentPagerAdapter;
-import com.hooview.app.R;
 import com.easyvaas.elapp.ui.base.BaseTabViewPagerFragment;
+import com.hooview.app.R;
 
 /**
  * Created by guojun on 2017/1/2 14:31.
@@ -17,6 +16,7 @@ public class MySelectedStockMainFragment extends BaseTabViewPagerFragment {
 
     @Override
     public void initView(View view) {
+        mViewPager.setOffscreenPageLimit(1);
         mViewPager.setAdapter(new MyAdapter(getChildFragmentManager(), getResources().getStringArray(R.array.my_stock_tab)));
         mTabLayout.setupWithViewPager(mViewPager);
     }
