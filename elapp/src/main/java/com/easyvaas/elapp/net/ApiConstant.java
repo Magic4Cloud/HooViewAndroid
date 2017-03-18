@@ -117,12 +117,14 @@ public class ApiConstant {
     public static final String DEVICE_ONLINE = HOST + "sys/device?";
     public static final String SYS_SETTINGS = HOST + "sys/settings?";
     public static final String CHECK_UPDATE = HOST + "sys/appupdate?";
+    public static final String SYS_TAG_LIST = HOST + "sys/taglist?";
     //================== EasyVass API 1.0.0 End ===============================
     // User
     public static final String USER_INFORM = HOST + "user/userinform?";
     public static final String USER_AUTH_PHONE_CHANGE = HOSTS + "user/authphonechange?";
     public static final String USER_UPDATE_PASSWORD = HOSTS + "user/modifypassword?";
     public static final String USER_FRIENDS = HOSTS + "user/friend?";
+    public static final String USER_TAG_SET = HOSTS + "user/tagset?";
     // Video
     public static final String UPLOAD_VIDEO_LOGO = HOST + "video/videologo?";
     public static final String VIDEO_PAY = HOST + "video/livepay?";

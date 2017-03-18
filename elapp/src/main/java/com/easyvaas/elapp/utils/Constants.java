@@ -89,4 +89,5 @@ public class Constants {
 
     public static final String SHARE_TYPE_NOTICE = "notice";
     public static final String SHARE_TYPE_VIDEO = "video";
+    public static final String EXTRA_ADD_LABEL = "extra_add_label";
 }

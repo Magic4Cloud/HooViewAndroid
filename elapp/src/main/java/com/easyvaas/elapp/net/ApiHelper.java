@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.easyvaas.common.gift.bean.GoodsEntityArray;
 import com.easyvaas.elapp.app.EVApplication;
@@ -26,6 +27,7 @@ import com.easyvaas.elapp.bean.pay.PayCommonRecordEntityArray;
 import com.easyvaas.elapp.bean.pay.PayOrderEntity;
 import com.easyvaas.elapp.bean.serverparam.ServerParam;
 import com.easyvaas.elapp.bean.user.AssetsRankEntityArray;
+import com.easyvaas.elapp.bean.user.BaseUserEntity;
 import com.easyvaas.elapp.bean.user.BaseUserEntityArray;
 import com.easyvaas.elapp.bean.user.CollectListModel;
 import com.easyvaas.elapp.bean.user.HistoryListModel;
@@ -976,5 +978,27 @@ public class ApiHelper {
         param.put("sessionid", mPref.getSessionId());
         param.put("type", type);
         sRequestHelper.getAsGson(ApiConstant.HISTORY, param, HistoryListModel.class, callBack);
+    }
+
+    /**
+     * 获取我的标签列表
+     * @param callBack
+     */
+    public void getTagList(MyRequestCallBack<BaseUserEntity> callBack) {
+        Map<String, String> param = new HashMap<>();
+        param.put("sessionid", mPref.getSessionId());
+        sRequestHelper.getAsGson(ApiConstant.SYS_TAG_LIST, param, BaseUserEntity.class, callBack);
+    }
+
+    /**
+     * 保存我的标签列表
+     * @param callBack
+     */
+    public void saveTagList(String tagListString, MyRequestCallBack<String> callBack) {
+        Map<String, String> param = new HashMap<>();
+        param.put("sessionid", mPref.getSessionId());
+        param.put("taglist", tagListString);
+        Log.e("test",mPref.getSessionId() +":"+tagListString);
+        sRequestHelper.getAsString(ApiConstant.USER_TAG_SET, param, callBack);
     }
 }

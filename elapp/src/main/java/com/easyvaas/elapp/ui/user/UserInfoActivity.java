@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -47,11 +48,14 @@ import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.UserUtil;
 import com.easyvaas.elapp.utils.Utils;
+import com.easyvaas.elapp.view.flowlayout.FlowLayout;
 import com.hooview.app.R;
 
 import java.io.File;
+import java.util.List;
 
 public class UserInfoActivity extends BaseActivity implements View.OnClickListener {
+    private static final int REQUEST_CODE_LABEL = 102;
     private static final String TAG = "UserInfoActivity";
     private static final int REQUEST_CODE_CITY = 0X10;
     private static final int REQUEST_CODE_IMAGE = 0;
@@ -92,6 +96,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private TextView mCommitTv;
     private TextView mCenterContentTv;
     private LinearLayout mCommitLl;
+    private FlowLayout userLabelFl;
 
     private BottomSheet mSetThumbPanel;
     private Bundle bundles;
@@ -139,6 +144,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         mBirthdayEt = (TextView) findViewById(R.id.birthday_et);
         mConstellationTv = (TextView) findViewById(R.id.constellation_tv);
         mLocationEt = (TextView) findViewById(R.id.ui_location_et);
+        userLabelFl = (FlowLayout) findViewById(R.id.user_label_fl);
 
         mSignatureEt = (TextView) findViewById(R.id.signature_et);
         Button mommitBtn = (Button) findViewById(R.id.user_info_commit_btn);
@@ -155,6 +161,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.user_info_item_6).setOnClickListener(this);
         findViewById(R.id.user_info_item_1).setOnClickListener(this);
         findViewById(R.id.user_certificate).setOnClickListener(this);
+        findViewById(R.id.user_label).setOnClickListener(this);
         mYzbNameEt.setOnClickListener(this);
         mPortraitIv.setOnClickListener(this);
         mLocationEt.setOnClickListener(this);
@@ -186,6 +193,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         boolean isVip = bundles.getBoolean(Constants.EXTRA_KEY_IS_VIP, false);
         if (isVip) {
             findViewById(R.id.user_certificate).setVisibility(View.VISIBLE);
+            findViewById(R.id.user_label).setVisibility(View.VISIBLE);
             mCertificateEt = (TextView) findViewById(R.id.certificate_et);
             mCertificate = bundles.getString(UserInfoActivity.EXTRA_KEY_USER_CERTIFICATE);
             Logger.d(TAG, "onCreate: " + mCertificate);
@@ -193,8 +201,11 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 mCertificateEt.setTextColor(getResources().getColor(R.color.login_text_color_6));
                 mCertificateEt.setText(mCertificate);
             }
+            List<String> tags = bundles.getStringArrayList(Constants.EXTRA_ADD_LABEL);
+            addLabels(tags);
         } else {
             findViewById(R.id.user_certificate).setVisibility(View.INVISIBLE);
+            findViewById(R.id.user_label).setVisibility(View.INVISIBLE);
         }
     }
 
@@ -252,6 +263,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.close_iv:
                 finish();
+                break;
+            case R.id.user_label:
+                startActivityForResult(new Intent(this, UserAddLabelActivity.class), REQUEST_CODE_LABEL);
                 break;
         }
     }
@@ -312,6 +326,21 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                         mCertificateEt.setText(ce);
                     }
                     break;
+                case REQUEST_CODE_LABEL:
+                    List<String> tags = data.getStringArrayListExtra(Constants.EXTRA_ADD_LABEL);
+                    addLabels(tags);
+                    break;
+            }
+        }
+    }
+
+    private void addLabels(List<String> tags){
+        if (tags != null && tags.size() > 0){
+            userLabelFl.removeAllViews();
+            for (int i = 0; i < tags.size(); i++) {
+                TextView textView = (TextView) LayoutInflater.from(UserInfoActivity.this).inflate(R.layout.layout_use_tag, null);
+                textView.setText(tags.get(i));
+                userLabelFl.addView(textView);
             }
         }
     }
@@ -519,4 +548,5 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         }
         return super.onTouchEvent(event);
     }
+
 }

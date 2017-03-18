@@ -46,8 +46,10 @@ import org.json.JSONObject;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class UserProfileFragment extends BaseFragment implements View.OnClickListener {
@@ -105,9 +107,7 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
         mTvFans = (TextView) view.findViewById(R.id.tv_fans);
         mTvFollowCount = (TextView) view.findViewById(R.id.tv_follow_count);
         mTvCoinCount = (TextView) view.findViewById(R.id.tv_coin_count);
-        mTvCoinCount.setOnClickListener(this);
         mTvCoinTitle = (TextView) view.findViewById(R.id.tv_coin_title);
-        mTvCoinTitle.setOnClickListener(this);
         cibMyLive = (CommonItemButton) view.findViewById(R.id.cib_my_live);
         cibMyLiveDivider = view.findViewById(R.id.cib_my_live_divider);
 
@@ -118,6 +118,7 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
         view.findViewById(R.id.cib_my_feedback).setOnClickListener(this);
         view.findViewById(R.id.ll_my_follow).setOnClickListener(this);
         view.findViewById(R.id.ll_my_fans).setOnClickListener(this);
+        view.findViewById(R.id.ll_my_coin).setOnClickListener(this);
     }
 
     @Override
@@ -174,6 +175,13 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
             bundle.putBoolean(Constants.EXTRA_KEY_IS_REGISTER, false);
             bundle.putBoolean(Constants.EXTRA_KEY_IS_VIP, user.getVip() == 1);
             bundle.putString(UserInfoActivity.EXTRA_KEY_USER_CERTIFICATE, user.getCredentials());
+            if (user.getTags() != null && user.getTags().size() > 0){
+                List<String> list = new ArrayList<>();
+                for (int i= 0; i < user.getTags().size(); i++){
+                    list.add(user.getTags().get(i).getName());
+                }
+                bundle.putStringArrayList(Constants.EXTRA_ADD_LABEL, (ArrayList<String>)list);
+            }
         }
     }
 
@@ -205,7 +213,8 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
                     UserInfoModel.TagsEntity tagsEntity = user.getTags().get(i);
                     TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.layout_use_tag, null);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    layoutParams.rightMargin = (int) ViewUtil.dp2Px(getContext(), 10);
+                    layoutParams.rightMargin = (int) ViewUtil.dp2Px(getContext(), 8);
+                    layoutParams.topMargin = (int) ViewUtil.dp2Px(getContext(), 8);
                     tagsViewContainer.addView(textView, layoutParams);
                     textView.setText(tagsEntity.getName());
                 }
@@ -281,8 +290,7 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
             case R.id.iv_setting:
                 SettingActivity.start(getActivity());
                 break;
-            case R.id.tv_coin_count:
-            case R.id.tv_coin_title:
+            case R.id.ll_my_coin:
 //                CashInActivity.start(getContext());
                 Intent intent = new Intent(getActivity(), PayRecordListActivity.class);
                 intent.putExtra(PayRecordListActivity.EXTRA_ACTIVITY_TYPE,

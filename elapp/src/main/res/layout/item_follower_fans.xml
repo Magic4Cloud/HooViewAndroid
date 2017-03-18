@@ -10,6 +10,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/avatar_big_second_bg_size"
+    android:id="@+id/my_user_item"
     android:background="@drawable/list_item_selector">
     <ImageView
         android:layout_alignParentBottom="true"

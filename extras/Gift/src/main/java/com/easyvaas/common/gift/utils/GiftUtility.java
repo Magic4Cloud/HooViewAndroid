@@ -70,6 +70,7 @@ public class GiftUtility {
     }
 
     private static void loadGoodsImage(Context context, String url) {
+        if (context == null) return;
         Picasso.with(context).load(url).fetch();
     }
 

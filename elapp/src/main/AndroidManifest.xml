@@ -566,6 +566,10 @@
             android:name="com.easyvaas.elapp.ui.search.SearchStockActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.UserAddLabelActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

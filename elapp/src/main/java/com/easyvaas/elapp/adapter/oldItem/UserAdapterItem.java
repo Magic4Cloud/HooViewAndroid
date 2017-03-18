@@ -9,12 +9,14 @@ package com.easyvaas.elapp.adapter.oldItem;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.adapter.AdapterItem;
 import com.easyvaas.common.widget.MyUserPhoto;
 
 import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
+import com.easyvaas.elapp.utils.SingleToast;
 import com.hooview.app.R;
 import com.easyvaas.elapp.bean.user.UserEntity;
 import com.easyvaas.elapp.db.Preferences;
@@ -43,6 +45,7 @@ public class UserAdapterItem implements AdapterItem<UserEntity> {
     private TextView genderTv;
     private TextView constellationTv;
     private boolean mIsFans;
+    private RelativeLayout myUserItem;
 
     private UserAdapterItem() {
 
@@ -65,6 +68,7 @@ public class UserAdapterItem implements AdapterItem<UserEntity> {
         mContext = root.getContext();
         my_user_photo = (MyUserPhoto) root.findViewById(R.id.my_user_photo);
         followCb = (Button) root.findViewById(R.id.follow_cb);
+        myUserItem = (RelativeLayout) root.findViewById(R.id.my_user_item);
         nicknameTv = (TextView) root.findViewById(R.id.nickname_tv);
         signatureTv = (TextView) root.findViewById(R.id.signature_tv);
         distanceTv = (TextView) root.findViewById(R.id.distance_tv);
@@ -86,10 +90,13 @@ public class UserAdapterItem implements AdapterItem<UserEntity> {
         my_user_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//              UserUtil.showUserInfo(mContext, model.getName());
-                if (model.getVip() == 1) {
-                    VIPUserInfoDetailActivity.start(mContext, model.getName());
-                }
+                onUserClick(model);
+            }
+        });
+        myUserItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onUserClick(model);
             }
         });
         signatureTv.setText(model.getSignature());
@@ -139,6 +146,14 @@ public class UserAdapterItem implements AdapterItem<UserEntity> {
                 ApiUtil.userFollow(mContext, model.getName(), model.getFollowed() == UserEntity.FOLLOWED, v);
             }
         });
+    }
+
+    private void onUserClick(final UserEntity model){
+        if (model.getVip() == 1) {
+            VIPUserInfoDetailActivity.start(mContext, model.getName());
+        } else {
+            SingleToast.show(mContext, mContext.getString(R.string.user_not_vip));
+        }
     }
 
     private void setUserExtInfo(boolean isVisible, UserEntity model) {

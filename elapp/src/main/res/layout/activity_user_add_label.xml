@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/list_divider_bg"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/common_header_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/list_divider_bg"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/label_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="已选标签(最多3个)"
+            android:textColor="@color/base_gray"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/label_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_toRightOf="@+id/label_message"
+            android:textColor="@color/base_purplish"
+            android:textSize="18sp"
+            tools:text="3" />
+
+        <com.easyvaas.elapp.view.flowlayout.FlowLayout
+            android:id="@+id/label_selected_fl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_message"
+            android:gravity="left" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/label_all_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="所有标签"
+            android:textColor="@color/base_gray"
+            android:textSize="16sp" />
+
+        <com.easyvaas.elapp.view.flowlayout.FlowLayout
+            android:id="@+id/label_all_fl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left" />
+
+    </LinearLayout>
+
+</LinearLayout>
