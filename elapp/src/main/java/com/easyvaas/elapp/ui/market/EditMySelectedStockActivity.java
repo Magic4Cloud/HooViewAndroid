@@ -263,6 +263,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 @Override
                 public void onClick(View v) {
                     SearchStockActivity.start(EditMySelectedStockActivity.this);
+                    finish();
                 }
             });
         }

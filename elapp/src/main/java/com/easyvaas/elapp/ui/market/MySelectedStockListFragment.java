@@ -182,8 +182,10 @@ public class MySelectedStockListFragment extends BaseListFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MarketRefreshEvent event) {
-        mSwipeRefreshLayout.setRefreshing(true);
-        loadData();
+        if (mType.equals("1")) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            loadData();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
