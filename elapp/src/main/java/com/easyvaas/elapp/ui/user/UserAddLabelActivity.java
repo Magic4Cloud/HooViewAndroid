@@ -15,8 +15,8 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.SingleToast;
-import com.easyvaas.elapp.view.flowlayout.FlowLayout;
 import com.hooview.app.R;
+import com.nex3z.flowlayout.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,10 +115,6 @@ public class UserAddLabelActivity extends BaseActivity implements View.OnClickLi
             textView.setTextColor(ContextCompat.getColor(this, R.color.base_gray));
             textView.setBackgroundResource(R.drawable.bg_user_add_tag);
         }
-        //        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//        layoutParams.rightMargin = (int) ViewUtil.dp2Px(getContext(), 12);
-//        layoutParams.topMargin = (int) ViewUtil.dp2Px(getContext(), 16);
-//        textView.setLayoutParams(layoutParams);
         return textView;
     }
 

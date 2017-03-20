@@ -194,6 +194,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         if (isVip) {
             findViewById(R.id.user_certificate).setVisibility(View.VISIBLE);
             findViewById(R.id.user_label).setVisibility(View.VISIBLE);
+            findViewById(R.id.user_label_divider).setVisibility(View.VISIBLE);
             mCertificateEt = (TextView) findViewById(R.id.certificate_et);
             mCertificate = bundles.getString(UserInfoActivity.EXTRA_KEY_USER_CERTIFICATE);
             Logger.d(TAG, "onCreate: " + mCertificate);
@@ -206,6 +207,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         } else {
             findViewById(R.id.user_certificate).setVisibility(View.INVISIBLE);
             findViewById(R.id.user_label).setVisibility(View.INVISIBLE);
+            findViewById(R.id.user_label_divider).setVisibility(View.INVISIBLE);
         }
     }
 

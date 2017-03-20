@@ -137,7 +137,7 @@ public class UserUtil {
         }
 
         ApiUtil.checkServerParam(context);
-        ApiUtil.getAssetInfo(context);
+//        ApiUtil.getAssetInfo(context);
         EventBus.getDefault().post(new UserInfoUpdateEvent());
     }
 }

@@ -386,7 +386,8 @@
             android:src="@drawable/ic_arrow_right_personal_more" />
     </RelativeLayout>
 
-    <ImageView
+    <View
+        android:id="@+id/user_label_divider"
         style="@style/default_horizontal_line_style"
         android:layout_marginLeft="15dp" />
 

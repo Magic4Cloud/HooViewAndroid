@@ -8,19 +8,23 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import com.easyvaas.common.gift.GiftManager;
 import com.easyvaas.common.sharelogin.data.ShareConstants;
 import com.easyvaas.common.sharelogin.model.ILoginManager;
 import com.easyvaas.common.sharelogin.model.PlatformActionListener;
 import com.easyvaas.common.sharelogin.qq.QQLoginManager;
 import com.easyvaas.common.sharelogin.wechat.WechatLoginManager;
 import com.easyvaas.common.sharelogin.weibo.WeiboLoginManager;
+import com.easyvaas.elapp.bean.pay.MyAssetEntity;
 import com.easyvaas.elapp.bean.user.User;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.dialog.RegisterDialog;
 import com.easyvaas.elapp.event.RegisterSuccessEvent;
 import com.easyvaas.elapp.net.ApiConstant;
@@ -206,10 +210,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         ApiHelper.getInstance().loginByPhone(phone, password, new MyRequestCallBack<User>() {
             @Override
             public void onSuccess(User user) {
-                if (user != null) {
-                    UserUtil.handleAfterLogin(getContext(), user, "LoginByPhone");
-                    finish();
-                }
+                getAssetInfo(user, "LoginByPhone");
             }
 
             @Override
@@ -244,9 +245,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 openid, unionid, accessToken, refreshToken, expiresIn, new MyRequestCallBack<User>() {
                     @Override
                     public void onSuccess(User user) {
-                        dismissLoadingDialog();
-                        finish();
-                        UserUtil.handleAfterLogin(getContext(), user, "LoginByAuth");
+                        getAssetInfo(user, "LoginByAuth");
                     }
 
                     @Override
@@ -316,8 +315,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         userInfo.getString(ShareConstants.PARAMS_REFRESH_TOKEN), userInfo.getString(ShareConstants.PARAMS_IMAGEURL), new MyRequestCallBack<User>() {
                             @Override
                             public void onSuccess(User user) {
-                                UserUtil.handleAfterLogin(getApplicationContext(), user,
-                                        "RegisterByAuth");
+                                getAssetInfo(user, "RegisterByAuth");
                             }
 
                             @Override
@@ -331,6 +329,32 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                 dismissLoadingDialog();
                             }
                         });
+    }
+
+    // 得到火眼豆
+    private void getAssetInfo(final User user, final String loginType){
+        if (user == null){
+            SingleToast.show(getApplicationContext(), R.string.msg_login_failed);
+            return;
+        }
+        UserUtil.handleAfterLogin(getContext(), user, loginType);
+        ApiHelper.getInstance().getAssetInfo(new MyRequestCallBack<MyAssetEntity>() {
+            @Override
+            public void onSuccess(MyAssetEntity result) {
+                if (result != null) {
+                    Log.e("test", "result not null");
+                    Preferences.getInstance(LoginActivity.this).putLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, result.getEcoin());
+                    GiftManager.setECoinCount(LoginActivity.this, result.getEcoin());
+                }
+                dismissLoadingDialog();
+                finish();
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                SingleToast.show(getApplicationContext(), R.string.msg_login_failed);
+            }
+        });
     }
 
     @Override

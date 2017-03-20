@@ -213,7 +213,7 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
                     UserInfoModel.TagsEntity tagsEntity = user.getTags().get(i);
                     TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.layout_use_tag, null);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    layoutParams.rightMargin = (int) ViewUtil.dp2Px(getContext(), 8);
+                    layoutParams.rightMargin = (int) ViewUtil.dp2Px(getContext(), 6);
                     layoutParams.topMargin = (int) ViewUtil.dp2Px(getContext(), 8);
                     tagsViewContainer.addView(textView, layoutParams);
                     textView.setText(tagsEntity.getName());
@@ -238,6 +238,7 @@ public class UserProfileFragment extends BaseFragment implements View.OnClickLis
             mTvFollowCount.setText(0 + "");
             UserUtil.showUserPhoto(getContext(), "", mIvUserLogo);
             mIvUserLogo.setIsVip(0);
+            tagsViewContainer.removeAllViews();
         }
     }
 

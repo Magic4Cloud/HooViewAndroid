@@ -10,7 +10,7 @@ android {
         multiDexEnabled true
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10
+        versionCode 11
         versionName "2.1.0"
 
         resValue "string", "build_time", buildTime()
@@ -153,4 +153,5 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.lzyzsd:jsbridge:1.0.4'
+    compile 'com.nex3z:flow-layout:0.1.3'
 }

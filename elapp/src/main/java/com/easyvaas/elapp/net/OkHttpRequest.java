@@ -19,6 +19,7 @@ import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
+import com.hooview.app.R;
 
 import org.json.JSONObject;
 
@@ -302,7 +303,9 @@ class OkHttpRequest implements IRequestHelper {
             boolean isLastUserLogout = Preferences.getInstance(EVApplication.getApp())
                     .getBoolean(Preferences.KEY_IS_LOGOUT, false);
             if (!isLastUserLogout) {
-                //TODO 跳登录页
+                // 登录过期
+                Preferences.getInstance(EVApplication.getApp()).logout(true);
+                SingleToast.show(EVApplication.getApp(), EVApplication.getApp().getString(R.string.login_info_expired));
                 LoginActivity.start(mContext);
             }
         } else if (!TextUtils.isEmpty(errorTips)) {
