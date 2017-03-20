@@ -90,7 +90,7 @@ android {
         }
         release {
             debuggable false
-            minifyEnabled true
+            minifyEnabled false
             shrinkResources true
             zipAlignEnabled true
             signingConfig signingConfigs.release

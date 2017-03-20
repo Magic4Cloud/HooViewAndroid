@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.ImageTextLiveInputView;
 import com.hooview.app.R;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
@@ -127,6 +129,23 @@ public class ImageTextLiveChatFragment extends BaseImageTextLiveFragment {
         message.setAttribute("nk", mUser.getNickname());
         message.setAttribute("rnk", "");
         message.setAttribute("rct", "");
+        message.setMessageStatusCallback(new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                Log.d("Misuzu","-----onSuccess");
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Log.d("Misuzu","-----onError---"+s);
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+                Log.d("Misuzu","-----onProgress---"+s);
+
+            }
+        });
         EMClient.getInstance().chatManager().sendMessage(message);
         List<EMMessage> list = new ArrayList<>();
         list.add(message);

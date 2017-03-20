@@ -1,17 +1,16 @@
 package com.easyvaas.elapp.db;
 
 
+import com.easyvaas.elapp.bean.market.ExponentModel;
+import com.easyvaas.elapp.bean.user.Collection;
+import com.easyvaas.elapp.bean.user.ReadRecord;
+import com.easyvaas.elapp.bean.user.Record;
+
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
-
-import com.easyvaas.elapp.bean.market.ExponentModel;
-import com.easyvaas.elapp.bean.user.Collection;
-import com.easyvaas.elapp.bean.user.GlobalStockStatus;
-import com.easyvaas.elapp.bean.user.ReadRecord;
-import com.easyvaas.elapp.bean.user.Record;
 
 
 public class RealmHelper {
@@ -237,7 +236,6 @@ public class RealmHelper {
      * 增加播放记录
      *
      * @param bean
-     * @param maxSize 保存最大数量
      */
     public void insertGlobalRecord(ExponentModel bean) {
         getRealm().beginTransaction();

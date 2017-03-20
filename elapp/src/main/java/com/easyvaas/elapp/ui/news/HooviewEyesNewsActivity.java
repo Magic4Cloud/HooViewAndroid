@@ -80,7 +80,8 @@ public class HooviewEyesNewsActivity extends BaseActivity {
             if (fragment != null) {
                 return fragment;
             }
-            fragments.put(position, fragment = new HooViewNewsListFragment(mChannelModel.getId() + "", mChannelModel.getPrograms().get(position).getId() + ""));
+            fragments.put(position,fragment = HooViewNewsListFragment.newInstance(mChannelModel.getId() + "", mChannelModel.getPrograms().get(position).getId() + ""));
+//            fragments.put(position, fragment = new HooViewNewsListFragment(mChannelModel.getId() + "", mChannelModel.getPrograms().get(position).getId() + ""));
             return fragment;
         }
 

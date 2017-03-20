@@ -68,6 +68,7 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
         mViewPager.setAdapter(mMyAdapter);
         mRoot = findViewById(R.id.root);
         joinChatRoom();
+        mViewPager.setOffscreenPageLimit(3);
     }
 
     public abstract String setRoomId();
@@ -111,6 +112,7 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EMClient.getInstance().chatroomManager().leaveChatRoom(mRoomId);
     }
 
     public void goToChat() {

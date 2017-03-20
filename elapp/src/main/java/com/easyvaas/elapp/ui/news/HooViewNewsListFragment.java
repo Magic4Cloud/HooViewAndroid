@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -8,7 +9,6 @@ import com.easyvaas.elapp.bean.news.NewsItemModel;
 import com.easyvaas.elapp.bean.news.NewsListModel;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
-import com.easyvaas.elapp.ui.base.BaseListFragment;
 import com.easyvaas.elapp.ui.base.BaseListRcvFragment;
 
 import java.util.ArrayList;
@@ -23,10 +23,19 @@ public class HooViewNewsListFragment extends BaseListRcvFragment {
     private String mChannelId;
     private String mProgramId;
 
-    public HooViewNewsListFragment(String mProgramId, String mChannelId) {  // 大兄弟 ide都报错了你还这样搞
-        this.mProgramId = mProgramId;
-        this.mChannelId = mChannelId;
-        mNewsList = new ArrayList<>();
+//    public HooViewNewsListFragment(String mProgramId, String mChannelId) {  // 大兄弟 ide都报错了你还这样搞
+//        this.mProgramId = mProgramId;
+//        this.mChannelId = mChannelId;
+//        mNewsList = new ArrayList<>();
+//    }
+
+    public static HooViewNewsListFragment newInstance(String mProgramId, String mChannelId) {
+        Bundle args = new Bundle();
+        args.putString("programId",mProgramId);
+        args.putString("channalId",mChannelId);
+        HooViewNewsListFragment fragment = new HooViewNewsListFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     public HooViewNewsListFragment() {
@@ -35,6 +44,8 @@ public class HooViewNewsListFragment extends BaseListRcvFragment {
 
     @Override
     public void iniView(View view) {
+        mProgramId = getArguments().getString("programId");
+        mChannelId = getArguments().getString("channalId");
         mRecyclerView.setAdapter(mAdapter = new HooviewNewsAdapter(mNewsList));
         onRefresh();
     }
