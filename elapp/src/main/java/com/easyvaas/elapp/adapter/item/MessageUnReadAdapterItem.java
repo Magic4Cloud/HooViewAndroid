@@ -47,7 +47,7 @@ public class MessageUnReadAdapterItem implements AdapterItem<MessageGroupEntity>
     public void onUpdateViews(MessageGroupEntity model, int position) {
         Utils.showImage(model.getIcon(),R.drawable.default_loading_bg,mImageIcon);
         mMsgTime.setText(model.getUpdate_time());
-        mMsgAdvise.setText(model.getTitle());
+        mMsgAdvise.setText(model.getTitle()+"消息");
         mMsgContent.setText(model.getLastest_content()!=null&&model.getLastest_content().getData()!=null?model.getLastest_content().getData().getText():"");
     }
 }

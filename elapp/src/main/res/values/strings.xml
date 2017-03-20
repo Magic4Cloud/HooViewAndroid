@@ -743,7 +743,7 @@
     <string name="cant_find_pictures">找不到图片</string>
     <string name="reply_somebody">回复%1$s:</string>
     <string name="app_url">http://www.easylive.com</string>
-    <string name="image_date_pattern">MM年dd月</string>
+    <string name="image_date_pattern">MM月dd日</string>
     <string name="who_room">的直播间</string>
     <string name="go_cash_in">去充值</string>
     <string name="cash_prompt">火眼豆不足，是否需要充值</string>
