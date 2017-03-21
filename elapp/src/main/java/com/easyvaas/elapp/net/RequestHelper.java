@@ -6,15 +6,16 @@
 
 package com.easyvaas.elapp.net;
 
-import java.util.Map;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.easyvaas.elapp.utils.Logger;
 
 import org.json.JSONObject;
 
-import com.easyvaas.elapp.utils.Logger;
+import java.util.Map;
 
 public class RequestHelper {
     private static final String TAG = RequestHelper.class.getSimpleName();
@@ -48,6 +49,7 @@ public class RequestHelper {
             MyRequestCallBack<?> callBack) {
         statisticRequestEvent(url);
         url = RequestUtil.assembleUrlWithParams(url, params);
+        Log.d("Misuzu",url);
         sRequestHelper.getAsGson(url, clazz, callBack);
     }
 

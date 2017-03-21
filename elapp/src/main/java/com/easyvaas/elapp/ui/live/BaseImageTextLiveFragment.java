@@ -14,6 +14,7 @@ public abstract class BaseImageTextLiveFragment extends BaseFragment {
     public static final String EXTRA_IS_ANCHOR = "isAnchor";
     public static final String EXTRA_WATCH_COUNT = "watchcount";
     public static final String EXTRA_STREEM = "extra_streem";
+    public static final String EXTRA_OWENERID = "extra_owenerid";
 
     @Override
     public void onResume() {

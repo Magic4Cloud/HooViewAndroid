@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,7 +23,10 @@ import com.easyvaas.common.bottomsheet.BottomSheet;
 import com.easyvaas.common.gift.bean.GiftEntity;
 import com.easyvaas.common.gift.view.GiftPagerView;
 import com.easyvaas.elapp.adapter.ImageTextLiveMsgAdapter;
+import com.easyvaas.elapp.adapter.ImageTextLiveMsgListAdapter;
 import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveHistoryModel;
+import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveHistoryModel.MsgsBean;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.chat.model.EMMessageWrapper;
@@ -33,9 +37,9 @@ import com.easyvaas.elapp.event.HideGiftViewEvent;
 import com.easyvaas.elapp.event.ImageTextLiveMessageEvent;
 import com.easyvaas.elapp.event.JoinRoomSuccessEvent;
 import com.easyvaas.elapp.net.ApiHelper;
+import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
-import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
@@ -55,6 +59,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,6 +74,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private static final int HEAD_PORTRAIT_HEIGHT = 320;
     private ImageTextLiveInputView mImageTextLiveInputView;
     private ImageTextLiveMsgAdapter mMsgAdapter;
+    private ImageTextLiveMsgListAdapter mImageTextLiveMsgListAdapter; // 新adapter
     private TextView mTvWatchCount;
     private RecyclerView mRvMsg;
     private String mRoomId;
@@ -88,6 +94,8 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     protected GiftPagerView mExpressionGiftLayout;
     private FrameLayout mFlGiftContainer;
     private LinearLayout mLlEmpty;
+    private LinkedList<MsgsBean> mDatas;
+    private String ownerId;
     private TextView liveEmptyTv;
 
     public static ImageTextLiveFragment newInstance(String roomId, boolean isAnchor, int watcherCount) {
@@ -109,6 +117,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         args.putBoolean(EXTRA_IS_ANCHOR, false);
         args.putInt(EXTRA_WATCH_COUNT, streamsEntity.getViewcount());
         args.putSerializable(EXTRA_STREEM, streamsEntity);
+        args.putString(EXTRA_OWENERID,streamsEntity.getOwnerid());
         ImageTextLiveFragment fragment = new ImageTextLiveFragment();
         fragment.setArguments(args);
         return fragment;
@@ -120,6 +129,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         mRoomId = getArguments().getString(EXTRA_CHAT_ROOM_ID);
         isAnchor = getArguments().getBoolean(EXTRA_IS_ANCHOR);
         mWatchCount = getArguments().getInt(EXTRA_WATCH_COUNT, 0);
+        ownerId = getArguments().getString(EXTRA_OWENERID);
         mStreamsEntity = (TextLiveListModel.StreamsEntity) getArguments().getSerializable(EXTRA_STREEM);
         mUser = EVApplication.getUser();
         mSetThumbPanel = Utils.getSetThumbBottomPanel(getActivity(), IMAGE_FILE_NAME,
@@ -148,9 +158,11 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         mRvMsg = (RecyclerView) view.findViewById(R.id.rcv_msg);
         liveEmptyTv = (TextView) view.findViewById(R.id.live_empty_tv);
         mEMMessageList = new LinkedList<>();
-        mMsgAdapter = new ImageTextLiveMsgAdapter(mEMMessageList);
+//        mMsgAdapter = new ImageTextLiveMsgAdapter(mEMMessageList);
+        mDatas = new LinkedList<>();
+        mImageTextLiveMsgListAdapter = new ImageTextLiveMsgListAdapter(mDatas);
         mRvMsg.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvMsg.setAdapter(mMsgAdapter);
+        mRvMsg.setAdapter(mImageTextLiveMsgListAdapter);
         if (isAnchor) {
             view.findViewById(R.id.ll_option).setVisibility(View.GONE);
             liveEmptyTv.setText(getString(R.string.image_text_live_has_not_started_my));
@@ -200,6 +212,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                 return true;
             }
         });
+        onMessageListInit();
     }
 
     private void sendMsg(String content, String msgType) {
@@ -217,8 +230,39 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         uploadChatMsg(messageWrapper);
     }
 
+    /**
+     * 从服务器拉取直播数据
+     */
     private void onMessageListInit() {
+        mDatas.clear();
+        HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId, "30", System.currentTimeMillis()/1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
+            @Override
+            public void onSuccess(ImageTextLiveHistoryModel result) {
 
+                if (result != null && result.getMsgs().size() >0)
+                {
+                    mDatas.addAll(result.getMsgs());
+                    Iterator<MsgsBean> it = mDatas.iterator();
+                    while(it.hasNext()){
+                        MsgsBean msg = it.next();
+                        if (!msg.getFrom().equals(ownerId))  //去掉不是主播的消息
+                        {
+                            it.remove();
+                        }
+                    }
+                    mLlEmpty.setVisibility(View.GONE);
+                    mImageTextLiveMsgListAdapter.notifyDataSetChanged();
+                }else
+                {
+                    mLlEmpty.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                Log.d("Misuzu","fail ---"+msg);
+            }
+        });
     }
 
 
@@ -265,22 +309,24 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
             for (int i = 0; i < event.mEMMessageList.size(); i++) {
                 message = event.mEMMessageList.get(i);
                 Logger.d(TAG, "onMessageReceived:  message=" + message.toString() + "  getTo()  " + message.getTo());
-                if (message.getFrom().equals(mUser.getName())) {
-                    handleMsg(message);
+                if (message.getFrom().equals(ownerId)) {
+                    onMessageListInit(); // 跳出循环 如果是主播的消息 更新界面
+                    break;
                 }
             }
-            Logger.d(TAG, "onMessageReceived: mEMMessageList " + mEMMessageList.size());
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (mEMMessageList.size() == 0) {
-                        mLlEmpty.setVisibility(View.VISIBLE);
-                    } else {
-                        mLlEmpty.setVisibility(View.GONE);
-                    }
-                    mMsgAdapter.notifyDataSetChanged();
-                }
-            });
+//            }
+//            Logger.d(TAG, "onMessageReceived: mEMMessageList " + mEMMessageList.size());
+//            mHandler.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if (mEMMessageList.size() == 0) {
+//                        mLlEmpty.setVisibility(View.VISIBLE);
+//                    } else {
+//                        mLlEmpty.setVisibility(View.GONE);
+//                    }
+//                    mMsgAdapter.notifyDataSetChanged();
+//                }
+//            });
         }
     }
 
@@ -470,11 +516,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         BaseImageTextLiveActivity activity = (BaseImageTextLiveActivity) getActivity();
         switch (v.getId()) {
             case R.id.iv_gift:
-                if (Preferences.getInstance(getContext()).isLogin() && EVApplication.isLogin()){
-                    showGiftToolsBar();
-                } else {
-                    LoginActivity.start(getContext());
-                }
+                showGiftToolsBar();
                 break;
             case R.id.iv_chat:
                 activity.goToChat();
