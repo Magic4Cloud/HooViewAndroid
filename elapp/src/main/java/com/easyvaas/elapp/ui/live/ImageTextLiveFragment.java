@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -45,7 +44,9 @@ import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
+import com.easyvaas.elapp.view.AutoLoadRecyclerView;
 import com.easyvaas.elapp.view.ImageTextLiveInputView;
+import com.easyvaas.elapp.view.LoadMoreListener;
 import com.easyvaas.elapp.view.gift.GiftViewContainer;
 import com.hooview.app.R;
 import com.hyphenate.chat.EMClient;
@@ -64,7 +65,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements View.OnClickListener {
+public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements View.OnClickListener,LoadMoreListener {
     private static final String TAG = "ImageTextLiveFragment";
     private static final int REQUEST_CODE_IMAGE = 0;
     private static final int REQUEST_CODE_CAMERA = 1;
@@ -72,11 +73,14 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private static final String IMAGE_FILE_NAME = "faceImage.jpg";
     private static final int HEAD_PORTRAIT_WIDTH = 320;
     private static final int HEAD_PORTRAIT_HEIGHT = 320;
+    protected int start = 0;
+    protected int count = 20;
+    protected int next;
     private ImageTextLiveInputView mImageTextLiveInputView;
     private ImageTextLiveMsgAdapter mMsgAdapter;
     private ImageTextLiveMsgListAdapter mImageTextLiveMsgListAdapter; // 新adapter
     private TextView mTvWatchCount;
-    private RecyclerView mRvMsg;
+    private AutoLoadRecyclerView mAutoLoadRecyclerView;
     private String mRoomId;
     private EMConversation mEMConversation;
     protected int pagesize = 20;
@@ -103,6 +107,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         args.putString(EXTRA_CHAT_ROOM_ID, roomId);
         args.putBoolean(EXTRA_IS_ANCHOR, isAnchor);
         args.putInt(EXTRA_WATCH_COUNT, watcherCount);
+        args.putString(EXTRA_OWENERID,EVApplication.getUser().getName());
         ImageTextLiveFragment fragment = new ImageTextLiveFragment();
         fragment.setArguments(args);
         return fragment;
@@ -155,14 +160,15 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         mRlOpertation = (RelativeLayout) view.findViewById(R.id.rl_operation);
         mGiftViewContainer = (GiftViewContainer) view.findViewById(R.id.GiftViewContainer);
         mImageTextLiveInputView = (ImageTextLiveInputView) view.findViewById(R.id.imageTextLiveInputView);
-        mRvMsg = (RecyclerView) view.findViewById(R.id.rcv_msg);
+        mAutoLoadRecyclerView = (AutoLoadRecyclerView) view.findViewById(R.id.rcv_msg);
         liveEmptyTv = (TextView) view.findViewById(R.id.live_empty_tv);
         mEMMessageList = new LinkedList<>();
 //        mMsgAdapter = new ImageTextLiveMsgAdapter(mEMMessageList);
         mDatas = new LinkedList<>();
         mImageTextLiveMsgListAdapter = new ImageTextLiveMsgListAdapter(mDatas);
-        mRvMsg.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRvMsg.setAdapter(mImageTextLiveMsgListAdapter);
+        mAutoLoadRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAutoLoadRecyclerView.setAdapter(mImageTextLiveMsgListAdapter);
+        mAutoLoadRecyclerView.setLoadMoreListener(this);
         if (isAnchor) {
             view.findViewById(R.id.ll_option).setVisibility(View.GONE);
             liveEmptyTv.setText(getString(R.string.image_text_live_has_not_started_my));
@@ -174,7 +180,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
             view.findViewById(R.id.iv_gift).setOnClickListener(this);
             view.findViewById(R.id.iv_chat).setOnClickListener(this);
             mImageTextLiveInputView.setVisibility(View.GONE);
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mRvMsg.getLayoutParams();
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mAutoLoadRecyclerView.getLayoutParams();
             layoutParams.bottomMargin = 0;
         }
         mImageTextLiveInputView.setInputViewListener(new ImageTextLiveInputView.InputViewListener() {
@@ -212,7 +218,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                 return true;
             }
         });
-        onMessageListInit();
+        onMessageListInit(false);
     }
 
     private void sendMsg(String content, String msgType) {
@@ -233,16 +239,16 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     /**
      * 从服务器拉取直播数据
      */
-    private void onMessageListInit() {
-        mDatas.clear();
-        HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId, "30", System.currentTimeMillis()/1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
+    private void onMessageListInit(final boolean isLoadMore) {
+        HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId,start,"30", System.currentTimeMillis()/1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
             @Override
             public void onSuccess(ImageTextLiveHistoryModel result) {
 
-                if (result != null && result.getMsgs().size() >0)
-                {
-                    mDatas.addAll(result.getMsgs());
-                    Iterator<MsgsBean> it = mDatas.iterator();
+                if (result != null && result.getMsgs().size() >0) {
+
+                    LinkedList<MsgsBean> tempDatas = new LinkedList<MsgsBean>();
+                    tempDatas.addAll(result.getMsgs());
+                    Iterator<MsgsBean> it = tempDatas.iterator();
                     while(it.hasNext()){
                         MsgsBean msg = it.next();
                         if (!msg.getFrom().equals(ownerId))  //去掉不是主播的消息
@@ -250,10 +256,21 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                             it.remove();
                         }
                     }
+                    if (isLoadMore) {
+                        mDatas.addAll(tempDatas);
+                        start = result.getNext();
+                    } else
+                    {
+                        mDatas.clear();
+                        mDatas.addAll(tempDatas);
+                    }
+
+
                     mLlEmpty.setVisibility(View.GONE);
                     mImageTextLiveMsgListAdapter.notifyDataSetChanged();
                 }else
                 {
+                    if (mDatas.size() <= 0)
                     mLlEmpty.setVisibility(View.VISIBLE);
                 }
             }
@@ -310,7 +327,12 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                 message = event.mEMMessageList.get(i);
                 Logger.d(TAG, "onMessageReceived:  message=" + message.toString() + "  getTo()  " + message.getTo());
                 if (message.getFrom().equals(ownerId)) {
-                    onMessageListInit(); // 跳出循环 如果是主播的消息 更新界面
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            onMessageListInit(false); // 跳出循环 如果是主播的消息 更新界面
+                        }
+                    },1000);
                     break;
                 }
             }
@@ -333,7 +355,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(JoinRoomSuccessEvent event) {
         initConversation();
-        onMessageListInit();
+        onMessageListInit(false);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -525,5 +547,10 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                 activity.share();
                 break;
         }
+    }
+
+    @Override
+    public void loadMore() {
+        onMessageListInit(true);
     }
 }
