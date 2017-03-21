@@ -8,18 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
 import com.easyvaas.elapp.bean.user.UserInfoModel;
+import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.bean.video.VideoEntityArray;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.ui.base.BaseListRcvFragment;
+import com.easyvaas.elapp.ui.live.ImageTextLiveActivity;
+import com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity;
 import com.easyvaas.elapp.ui.live.PlayerActivity;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.Utils;
@@ -170,12 +176,33 @@ public class VipLiveListFragment extends BaseListRcvFragment {
         private TextView mTvName;
         private TextView mTvWatchCount;
         private LinearLayout mLLTagContainer;
+        private RelativeLayout myLiveRoomRl;
 
         public ImageTextLiveViewHolder(View view) {
             super(view);
             mTvName = (TextView) view.findViewById(R.id.tv_name);
             mTvWatchCount = (TextView) view.findViewById(R.id.tv_watch_count);
             mLLTagContainer = (LinearLayout) view.findViewById(R.id.ll_tag_container);
+            myLiveRoomRl = (RelativeLayout) view.findViewById(R.id.my_live_room_rl);
+            myLiveRoomRl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckImageTextLiveModel model = (CheckImageTextLiveModel) myLiveRoomRl.getTag();
+                    if (model == null) return;
+                    if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin() && EVApplication.getUser() != null && model.getData().getOwnerid().equals(EVApplication.getUser().getName()))
+                        MyImageTextLiveRoomActivity.start(getContext(), (CheckImageTextLiveModel) myLiveRoomRl.getTag());
+                    else {
+                        TextLiveListModel.StreamsEntity streamsEntity = new TextLiveListModel.StreamsEntity();
+                        streamsEntity.setName(model.getData().getName());
+                        streamsEntity.setViewcount(model.getData().getViewcount());
+                        streamsEntity.setOwnerid(model.getData().getOwnerid());
+                        streamsEntity.setId(model.getData().getId());
+                        streamsEntity.setUserEntity(mUserInfoModel);
+                        ImageTextLiveActivity.start(getContext(), streamsEntity);
+                    }
+
+                }
+            });
         }
 
         public void setModel(CheckImageTextLiveModel checkImageTextLiveModel) {
@@ -194,6 +221,8 @@ public class VipLiveListFragment extends BaseListRcvFragment {
                         textView.setText(tagsEntity.getName());
                     }
                 }
+                checkImageTextLiveModel.getData().setOwnerid(mUserInfoModel.getName());
+                myLiveRoomRl.setTag(checkImageTextLiveModel);
             }
         }
     }

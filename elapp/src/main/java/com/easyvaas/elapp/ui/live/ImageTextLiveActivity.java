@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.easyvaas.elapp.event.AppBarLayoutOffsetChangeEvent;
 import com.easyvaas.elapp.event.HideGiftViewEvent;
 import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.ui.user.LoginActivity;
+import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
@@ -85,6 +87,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
         Utils.showImageBlur(this, mStreamsEntity.getUserEntity().getLogourl(), R.drawable.account_bitmap_user, headerBg);
         mTvFollow = (TextView) findViewById(R.id.tv_follow);
         mTvFollow.setOnClickListener(this);
+        avater.setOnClickListener(this);
         initFollowStatus();
     }
 
@@ -168,6 +171,10 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
                 } else {
                     LoginActivity.start(this);
                 }
+                break;
+            case R.id.riv_avater:
+                if (!TextUtils.isEmpty(mStreamsEntity.getUserEntity().getNickname()))
+                    VIPUserInfoDetailActivity.start(this, mStreamsEntity.getUserEntity().getNickname());
                 break;
         }
     }

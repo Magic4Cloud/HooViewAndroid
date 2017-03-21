@@ -305,6 +305,7 @@ class OkHttpRequest implements IRequestHelper {
             if (!isLastUserLogout) {
                 // 登录过期
                 Preferences.getInstance(EVApplication.getApp()).logout(true);
+                EVApplication.setUser(null);
                 SingleToast.show(EVApplication.getApp(), EVApplication.getApp().getString(R.string.login_info_expired));
                 LoginActivity.start(mContext);
             }

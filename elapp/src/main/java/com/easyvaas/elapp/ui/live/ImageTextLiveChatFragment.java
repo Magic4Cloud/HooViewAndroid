@@ -105,18 +105,18 @@ public class ImageTextLiveChatFragment extends BaseImageTextLiveFragment {
             }
         });
         if (isAnchor) {
-            mMsgAdapter.setOnItemClickListener(new CommonRcvAdapter.OnItemClickListener() {
+            mMsgAdapter.setOnItemLongClickListener(new CommonRcvAdapter.OnItemLongClickListener() {
                 @Override
-                public void onItemClick(View view, int position) {
+                public boolean onItemLongClick(View view, int position) {
                     EMMessageWrapper messageWrapper = mEMMessageList.get(position);
-                    Logger.d(TAG, "onItemClick: messageWrapper=" + messageWrapper.toString() + "    mUser nickName=" + mUser.getNickname());
+                    Logger.d(TAG, "onItemLongClick: messageWrapper=" + messageWrapper.toString() + "    mUser nickName=" + mUser.getNickname());
                     if (!TextUtils.isEmpty(messageWrapper.replyNickname) || !TextUtils.isEmpty(messageWrapper.replyContent)) {
-                        return;
+                        return true;
                     }
                     if (!messageWrapper.nickname.equals(mUser.getNickname())) {
                         mImageTextLiveInputView.replySomebody(messageWrapper.nickname, messageWrapper.content);
                     }
-
+                    return true;
                 }
             });
         }

@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
+import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.Logger;
 import com.hooview.app.R;
 
@@ -64,7 +67,20 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
         mIvImage = (ImageView) findViewById(R.id.iv_image);
         mRlOption = (RelativeLayout) findViewById(R.id.rl_option);
         mIvSend.setEnabled(false);
-        mEditText.setOnClickListener(this);
+//        mEditText.setOnClickListener(this);
+        mEditText.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP){
+                    if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin()) {
+                        mInputMethodManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+                    } else {
+                        LoginActivity.start(getContext());
+                    }
+                }
+                return false;
+            }
+        });
         mIvImage.setOnClickListener(this);
         mIvSend.setOnClickListener(this);
         findViewById(R.id.rl_option).setOnTouchListener(new OnTouchListener() {
@@ -137,7 +153,12 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.editText:
-                mInputMethodManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+                if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin()) {
+                    mInputMethodManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+                } else {
+                    LoginActivity.start(getContext());
+                }
+
                 break;
             case R.id.iv_image:
                 if (mInputViewListener != null) {
@@ -161,7 +182,14 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
     }
 
     public void showInput() {
-        mInputMethodManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+        if (mEditText.isFocused()) {
+            mInputMethodManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+        } else {
+            InputMethodManager mInputManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (mInputManager != null) {
+                mInputManager.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+            }
+        }
     }
 
     public void hideKeyboard() {

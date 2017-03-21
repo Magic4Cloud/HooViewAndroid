@@ -35,6 +35,7 @@ import com.easyvaas.elapp.event.JoinRoomSuccessEvent;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
+import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
@@ -87,7 +88,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     protected GiftPagerView mExpressionGiftLayout;
     private FrameLayout mFlGiftContainer;
     private LinearLayout mLlEmpty;
-
+    private TextView liveEmptyTv;
 
     public static ImageTextLiveFragment newInstance(String roomId, boolean isAnchor, int watcherCount) {
         Bundle args = new Bundle();
@@ -145,12 +146,14 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         mGiftViewContainer = (GiftViewContainer) view.findViewById(R.id.GiftViewContainer);
         mImageTextLiveInputView = (ImageTextLiveInputView) view.findViewById(R.id.imageTextLiveInputView);
         mRvMsg = (RecyclerView) view.findViewById(R.id.rcv_msg);
+        liveEmptyTv = (TextView) view.findViewById(R.id.live_empty_tv);
         mEMMessageList = new LinkedList<>();
         mMsgAdapter = new ImageTextLiveMsgAdapter(mEMMessageList);
         mRvMsg.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvMsg.setAdapter(mMsgAdapter);
         if (isAnchor) {
             view.findViewById(R.id.ll_option).setVisibility(View.GONE);
+            liveEmptyTv.setText(getString(R.string.image_text_live_has_not_started_my));
         } else {
             RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) mRlOpertation.getLayoutParams();
             layoutParams1.bottomMargin = (int) ViewUtil.dp2Px(getContext(), 156);
@@ -467,7 +470,11 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         BaseImageTextLiveActivity activity = (BaseImageTextLiveActivity) getActivity();
         switch (v.getId()) {
             case R.id.iv_gift:
-                showGiftToolsBar();
+                if (Preferences.getInstance(getContext()).isLogin() && EVApplication.isLogin()){
+                    showGiftToolsBar();
+                } else {
+                    LoginActivity.start(getContext());
+                }
                 break;
             case R.id.iv_chat:
                 activity.goToChat();

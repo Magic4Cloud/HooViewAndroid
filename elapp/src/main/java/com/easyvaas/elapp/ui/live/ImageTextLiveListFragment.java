@@ -13,9 +13,12 @@ import android.widget.TextView;
 
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
+import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveRoomModel;
 import com.easyvaas.elapp.bean.user.UserInfoArrayModel;
 import com.easyvaas.elapp.bean.user.UserInfoModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
@@ -242,11 +245,17 @@ public class ImageTextLiveListFragment extends BaseListRcvFragment {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (EVApplication.isLogin()) {
+                        if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin() && EVApplication.getUser() != null && EVApplication.getUser().getName().equals(model.getOwnerid())){
+                            CheckImageTextLiveModel liveModel = new CheckImageTextLiveModel();
+                            ImageTextLiveRoomModel roomModel = new ImageTextLiveRoomModel();
+                            roomModel.setId(model.getId());
+                            roomModel.setOwnerid(model.getOwnerid());
+                            roomModel.setName(model.getName());
+                            roomModel.setViewcount(model.getViewcount());
+                            liveModel.setData(roomModel);
+                            MyImageTextLiveRoomActivity.start(getContext(), liveModel);
+                        } else
                             ImageTextLiveActivity.start(getContext(), model);
-                        } else {
-                            LoginActivity.start(getContext());
-                        }
                     }
                 });
             }

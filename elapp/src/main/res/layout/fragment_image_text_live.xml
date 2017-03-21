@@ -60,10 +60,11 @@
             android:src="@drawable/ic_smile"/>
 
         <TextView
+            android:id="@+id/live_empty_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="牛人快来直播吧"/>
+            android:text="@string/image_text_live_has_not_started"/>
     </LinearLayout>
 
     <RelativeLayout

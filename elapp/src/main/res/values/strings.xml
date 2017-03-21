@@ -765,4 +765,6 @@
 
     <string name="user_not_vip">该用户不是会员无法查看资料</string>
     <string name="login_info_expired">当前登录信息已过期，请重新登录</string>
+    <string name="image_text_live_has_not_started">牛人暂未开始直播\n去看看其他的吧~</string>
+    <string name="image_text_live_has_not_started_my">牛人快来直播吧</string>
 </resources>
