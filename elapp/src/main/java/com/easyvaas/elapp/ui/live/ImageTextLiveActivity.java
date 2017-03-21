@@ -174,7 +174,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
                 break;
             case R.id.riv_avater:
                 if (!TextUtils.isEmpty(mStreamsEntity.getUserEntity().getNickname()))
-                    VIPUserInfoDetailActivity.start(this, mStreamsEntity.getUserEntity().getNickname());
+                    VIPUserInfoDetailActivity.start(this, mStreamsEntity.getUserEntity().getName());
                 break;
         }
     }

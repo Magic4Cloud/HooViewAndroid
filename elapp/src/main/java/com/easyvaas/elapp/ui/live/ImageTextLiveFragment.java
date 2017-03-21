@@ -40,6 +40,7 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
+import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
@@ -49,6 +50,7 @@ import com.easyvaas.elapp.view.ImageTextLiveInputView;
 import com.easyvaas.elapp.view.gift.GiftViewContainer;
 import com.hooview.app.R;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 
@@ -407,9 +409,13 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
 
     private void sendGiftMsg(String nk, String gnm, int count) {
         EMMessage message = EMMessage.createSendMessage(EMMessage.Type.CMD);
+        message.setChatType(EMMessage.ChatType.ChatRoom);
         message.setAttribute("nk", nk);
         message.setAttribute("gnm", gnm);
         message.setAttribute("gct", count);
+        EMCmdMessageBody cmdBody = new EMCmdMessageBody(Constants.EM_CMD_MESSAGE_ACTION);
+        message.addBody(cmdBody);
+        message.setTo(mRoomId);
         EMClient.getInstance().chatManager().sendMessage(message);
         List<EMMessage> list = new ArrayList<>();
         list.add(message);

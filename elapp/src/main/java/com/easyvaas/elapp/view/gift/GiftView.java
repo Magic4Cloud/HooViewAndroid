@@ -38,7 +38,8 @@ public class GiftView extends FrameLayout {
     public void startAnimate(GiftEntity giftEntity, final Runnable runnable) {
         Logger.d(TAG, "startAnimate: " + giftEntity.getGiftName());
         this.setAlpha(1);
-        mTvCount.setText(giftEntity.getGiftName() + giftEntity.getGiftCount() + unit);
+//        mTvCount.setText(giftEntity.getGiftName() + giftEntity.getGiftCount() + unit);
+        mTvCount.setText(giftEntity.getGiftName()); // 去掉礼物的单位
         mTvName.setText(giftEntity.getNickname());
         animate().alpha(0).setDuration(5000).withStartAction(new Runnable() {
             @Override
