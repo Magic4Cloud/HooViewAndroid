@@ -240,7 +240,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
      * 从服务器拉取直播数据
      */
     private void onMessageListInit(final boolean isLoadMore) {
-        HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId,start,"30", System.currentTimeMillis()/1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
+        HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId,start,count+"", System.currentTimeMillis()/1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
             @Override
             public void onSuccess(ImageTextLiveHistoryModel result) {
 
@@ -263,6 +263,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                     {
                         mDatas.clear();
                         mDatas.addAll(tempDatas);
+                        start = result.getNext();
                     }
 
 
