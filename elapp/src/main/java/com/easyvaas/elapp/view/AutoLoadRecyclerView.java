@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 
-public class AutoLoadRecyclerView extends RecyclerView  {
+public class AutoLoadRecyclerView extends RecyclerView {
 
     private LoadMoreListener loadMoreListener;
     private boolean isLoadingMore;
@@ -29,7 +29,6 @@ public class AutoLoadRecyclerView extends RecyclerView  {
         this.loadMoreListener = loadMoreListener;
     }
 
-
     /**
      * 滑动自动加载监听器
      */
@@ -38,7 +37,7 @@ public class AutoLoadRecyclerView extends RecyclerView  {
         private final boolean pauseOnScroll;
         private final boolean pauseOnFling;
 
-        public AutoLoadScrollListener( boolean pauseOnScroll, boolean pauseOnFling) {
+        public AutoLoadScrollListener(boolean pauseOnScroll, boolean pauseOnFling) {
             super();
             this.pauseOnScroll = pauseOnScroll;
             this.pauseOnFling = pauseOnFling;
