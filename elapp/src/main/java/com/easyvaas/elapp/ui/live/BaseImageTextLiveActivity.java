@@ -58,7 +58,8 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout.setupWithViewPager(mViewPager);
         List<Fragment> list = new ArrayList<>();
-        list.add(isAnchor ? ImageTextLiveFragment.newInstance(mRoomId, isAnchor, watchCount()) : ImageTextLiveFragment.newInstance(streamEntity()));
+        list.add(ImageTextLiveFragment.newInstance(streamEntity()));
+        //        list.add(isAnchor ? ImageTextLiveFragment.newInstance(mRoomId, isAnchor, watchCount()) : ImageTextLiveFragment.newInstance(streamEntity()));
         list.add(ImageTextLiveDataFragment.newInstance(isAnchor));
         list.add(ImageTextLiveChatFragment.newInstance(isAnchor, mRoomId));
         list.add(BookPlayFragment.newInstance());
