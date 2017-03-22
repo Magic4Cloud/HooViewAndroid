@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 public class AutoLoadRecyclerView extends RecyclerView {
 
     private LoadMoreListener loadMoreListener;
+
     private boolean isLoadingMore;
 
     public AutoLoadRecyclerView(Context context) {
@@ -28,7 +29,13 @@ public class AutoLoadRecyclerView extends RecyclerView {
     public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
     }
+    public boolean isLoadingMore() {
+        return isLoadingMore;
+    }
 
+    public void setLoadingMore(boolean loadingMore) {
+        isLoadingMore = loadingMore;
+    }
     /**
      * 滑动自动加载监听器
      */

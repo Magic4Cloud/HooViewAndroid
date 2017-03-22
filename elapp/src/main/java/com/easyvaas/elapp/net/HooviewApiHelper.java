@@ -236,13 +236,13 @@ public class HooviewApiHelper {
         map.put("from", TextUtils.isEmpty(emMessage.getFrom()) ? "" : emMessage.getFrom());
         map.put("nk", TextUtils.isEmpty(emMessageWrapper.nickname) ? "" : emMessageWrapper.nickname);
         map.put("msgid", TextUtils.isEmpty(emMessage.getMsgId()) ? "" : emMessage.getMsgId());
-        map.put("msgtype", TextUtils.isEmpty(emMessage.getType().toString()) ? "" : emMessage.getType().toString());
-//        map.put("msgtype","txt");
+//        map.put("msgtype", TextUtils.isEmpty(emMessage.getType().toString()) ? "" : emMessage.getType().toString());
+        map.put("msgtype","txt");
         map.put("msg", TextUtils.isEmpty(emMessageWrapper.content) ? "" : emMessageWrapper.content);
         map.put("tp", TextUtils.isEmpty(emMessageWrapper.type) ? "" : emMessageWrapper.type);
         map.put("rct", TextUtils.isEmpty(emMessageWrapper.replyContent) ? "" : emMessageWrapper.replyContent);
         map.put("rnk", TextUtils.isEmpty(emMessageWrapper.replyNickname) ? "" : emMessageWrapper.replyNickname);
-        map.put("timestamp", emMessage.getMsgTime()/1000 + "");
+        map.put("timestamp", emMessage.getMsgTime()+ "");
         map.put("img", TextUtils.isEmpty(emMessageWrapper.imageUrl) ? "" : emMessageWrapper.imageUrl);
         Log.d("Misuzu",emMessageWrapper.toString());
         sRequestHelper.postAsString(HooviewApiConstant.UPLOAD_CHAT_MESSAGE, map, callBack);
