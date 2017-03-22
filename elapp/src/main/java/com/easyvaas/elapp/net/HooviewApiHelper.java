@@ -8,6 +8,7 @@ package com.easyvaas.elapp.net;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.BannerModel;
@@ -232,24 +233,27 @@ public class HooviewApiHelper {
         EMMessage emMessage = emMessageWrapper.emaMessage;
         Map<String, String> map = new HashMap<>();
         map.put("to", TextUtils.isEmpty(emMessage.getTo()) ? "" : emMessage.getTo());
-        map.put("from", TextUtils.isEmpty(emMessage.getMsgId()) ? "" : emMessage.getMsgId());
+        map.put("from", TextUtils.isEmpty(emMessage.getFrom()) ? "" : emMessage.getFrom());
         map.put("nk", TextUtils.isEmpty(emMessageWrapper.nickname) ? "" : emMessageWrapper.nickname);
         map.put("msgid", TextUtils.isEmpty(emMessage.getMsgId()) ? "" : emMessage.getMsgId());
         map.put("msgtype", TextUtils.isEmpty(emMessage.getType().toString()) ? "" : emMessage.getType().toString());
+//        map.put("msgtype","txt");
         map.put("msg", TextUtils.isEmpty(emMessageWrapper.content) ? "" : emMessageWrapper.content);
         map.put("tp", TextUtils.isEmpty(emMessageWrapper.type) ? "" : emMessageWrapper.type);
         map.put("rct", TextUtils.isEmpty(emMessageWrapper.replyContent) ? "" : emMessageWrapper.replyContent);
         map.put("rnk", TextUtils.isEmpty(emMessageWrapper.replyNickname) ? "" : emMessageWrapper.replyNickname);
-        map.put("timestamp", emMessage.getMsgTime() + "");
+        map.put("timestamp", emMessage.getMsgTime()/1000 + "");
         map.put("img", TextUtils.isEmpty(emMessageWrapper.imageUrl) ? "" : emMessageWrapper.imageUrl);
+        Log.d("Misuzu",emMessageWrapper.toString());
         sRequestHelper.postAsString(HooviewApiConstant.UPLOAD_CHAT_MESSAGE, map, callBack);
     }
 
-    public void getImageTextLiveHistory(String roomId, String count, long stime, MyRequestCallBack<ImageTextLiveHistoryModel> callBack) {
+    public void getImageTextLiveHistory(String roomId,int start, String count, long stime, MyRequestCallBack<ImageTextLiveHistoryModel> callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("streamid", roomId);
         map.put("count", count);
         map.put("stime", stime + "");
+        map.put("start", start + "");
         sRequestHelper.getAsGson(HooviewApiConstant.GET_CHAT_HISTORY, map, ImageTextLiveHistoryModel.class, callBack);
     }
 

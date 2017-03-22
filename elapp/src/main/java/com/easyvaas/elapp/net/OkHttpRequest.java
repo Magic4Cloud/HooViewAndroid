@@ -147,6 +147,7 @@ class OkHttpRequest implements IRequestHelper {
                 .post(body)
                 .build();
         mClient.newCall(request).enqueue(new Callback() {
+
             @Override
             public void onFailure(Call call, IOException e) {
                 handlerNetworkError(call, e, callBack);

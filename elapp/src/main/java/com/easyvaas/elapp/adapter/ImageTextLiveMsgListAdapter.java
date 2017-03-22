@@ -163,7 +163,7 @@ public class ImageTextLiveMsgListAdapter extends RecyclerView.Adapter {
         public void setEMMessageWrapper(MsgsBean msg) {
             tvContent.setText(msg.getPayload().getBodies().get(0).getMsg());
             mTvReplyContent.setText(msg.getPayload().getExt().getRct());
-            mTvreplyName.setText(msg.getPayload().getExt().getRct());
+            mTvreplyName.setText(msg.getPayload().getExt().getRnk());
             mTvTime.setText(formatTime(msg.getTimestamp()));
         }
     }
