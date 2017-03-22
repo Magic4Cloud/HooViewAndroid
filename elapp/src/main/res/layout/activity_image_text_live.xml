@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dp"
-                        android:text="杜斯基"
+                        tools:text="杜斯基"
                         android:textColor="#303030"
                         android:textSize="18sp" />
 
