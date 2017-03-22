@@ -30,6 +30,13 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subscriptions.CompositeSubscription;
 
 
 public abstract class BaseImageTextLiveActivity extends BaseActivity implements EMMessageListener {
@@ -39,6 +46,8 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
     protected String mRoomId;
     private boolean isAnchor;
     protected View mRoot;
+    private CompositeSubscription compositeSubscription;
+    private boolean forbiddenCmdMessage = true; // 禁止礼物消息的处理
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +122,7 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (compositeSubscription != null) compositeSubscription.unsubscribe();
         EMClient.getInstance().chatroomManager().leaveChatRoom(mRoomId);
     }
 
@@ -139,7 +149,30 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
 
     @Override
     public void onCmdMessageReceived(List<EMMessage> list) {
-        EventBus.getDefault().post(new ImageTextLiveMessageEvent(list, ImageTextLiveMessageEvent.MSG_TYPE_CMD));
+        if (forbiddenCmdMessage) {
+            // 延迟 1 秒才对礼物消息做处理
+            Subscription noAdSubscribe = Observable.timer(1, TimeUnit.SECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<Long>() {
+                        @Override
+                        public void onCompleted() {
+                            forbiddenCmdMessage = false;
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            forbiddenCmdMessage = false;
+
+                        }
+
+                        @Override
+                        public void onNext(Long aLong) {
+                        }
+                    });
+            addSubscription(noAdSubscribe);
+        } else {
+            EventBus.getDefault().post(new ImageTextLiveMessageEvent(list, ImageTextLiveMessageEvent.MSG_TYPE_CMD));
+        }
     }
 
     @Override
@@ -155,6 +188,13 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
     @Override
     public void onMessageChanged(EMMessage emMessage, Object o) {
 
+    }
+
+    public void addSubscription(Subscription subscription) {
+        if (compositeSubscription == null) {
+            compositeSubscription = new CompositeSubscription();
+        }
+        compositeSubscription.add(subscription);
     }
 
     public class MyAdapter extends FragmentPagerAdapter {
