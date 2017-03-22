@@ -243,6 +243,11 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
      * 从服务器拉取直播数据
      */
     private void onMessageListInit(final boolean isLoadMore) {
+        if (!isLoadMore)
+        {
+            start = 0;
+            hasStick = false;
+        }
         HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId,start,count+"", System.currentTimeMillis()/1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
             @Override
             public void onSuccess(ImageTextLiveHistoryModel result) {
@@ -260,6 +265,22 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                         }
 
                     }
+                    for (int i = 0; i <tempDatas.size(); i++) {   // 筛选置顶消息
+                        MsgsBean msgsBean = tempDatas.get(i);
+                            if (msgsBean.getPayload().getExt().getTp().equals("st"))
+                            {
+                                if (!hasStick && !isLoadMore)
+                                {
+                                    tempDatas.add(0,msgsBean);
+                                    tempDatas.remove(i+1);
+                                    hasStick = true;
+                                }else
+                                {
+                                    msgsBean.getPayload().getExt().setTp("nor");
+                                }
+                            }
+                    }
+
                     if (isLoadMore) {
                         mDatas.addAll(tempDatas);
                         start = result.getNext();
@@ -336,7 +357,6 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            start = 0;
                             onMessageListInit(false); // 跳出循环 如果是主播的消息 更新界面
                         }
                     },1000);
@@ -362,7 +382,6 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(JoinRoomSuccessEvent event) {
         initConversation();
-        start = 0;
         onMessageListInit(false);
     }
 
