@@ -1,7 +1,5 @@
 package com.easyvaas.elapp.net;
 
-import android.support.compat.BuildConfig;
-
 public class HooviewApiConstant {
     public static final String HOST_WEB_APP;
     private static final String HOST_EV_APPGW;
@@ -19,6 +17,7 @@ public class HooviewApiConstant {
     public static final String GOODS_VIDEO_LIST = HOST_EV_APPGW + "video/vodlist?";
 
     public static final String UP_AND_DOWN_LIST = HOST_HOOVIEW + "/api/stock/changelist";
+    public static final String UP_AND_DOWN_LIST_HK = HOST_HOOVIEW + "/api/stock/changelist?market=hk";
     public static final String GET_EXPONENT_LIST = HOST_HOOVIEW + "/api/stock/market";
     public static final String GET_EXPONENT_GLOBAL_STOCK_LIST = HOST_HOOVIEW + "/api/stock/globalindex";
     public static final String GET_EXPONENT_SELECT_STOCK_LIST = HOST_HOOVIEW + "/api/stock/realtime?";

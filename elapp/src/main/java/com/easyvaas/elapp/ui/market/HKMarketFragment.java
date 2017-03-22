@@ -76,7 +76,7 @@ public class HKMarketFragment extends BaseListFragment {
                 }
             }
         });
-        HooviewApiHelper.getInstance().getUpAndDownList(new MyRequestCallBack<UpsAndDownsDataModel>() {
+        HooviewApiHelper.getInstance().getUpAndDownListHK(new MyRequestCallBack<UpsAndDownsDataModel>() {
             @Override
             public void onSuccess(UpsAndDownsDataModel result) {
                 if (result != null) {

@@ -411,7 +411,7 @@ public class DateTimeUtil {
     }
 
     public static String getImageTextLiveTime(Context context, long time) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return simpleDateFormat.format(new Date(time));
     }
 

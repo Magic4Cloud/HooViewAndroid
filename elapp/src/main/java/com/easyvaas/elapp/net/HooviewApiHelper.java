@@ -64,6 +64,9 @@ public class HooviewApiHelper {
     public void getUpAndDownList(MyRequestCallBack<UpsAndDownsDataModel> myRequestCallBack) {
         sRequestHelper.getAsGson(HooviewApiConstant.UP_AND_DOWN_LIST, null, UpsAndDownsDataModel.class, myRequestCallBack);
     }
+    public void getUpAndDownListHK(MyRequestCallBack<UpsAndDownsDataModel> myRequestCallBack) {
+        sRequestHelper.getAsGson(HooviewApiConstant.UP_AND_DOWN_LIST_HK, null, UpsAndDownsDataModel.class, myRequestCallBack);
+    }
 
     public void getGlobalStockList(MyRequestCallBack<ExponentListModel> myRequestCallBack) {
         sRequestHelper.getAsGson(HooviewApiConstant.GET_EXPONENT_GLOBAL_STOCK_LIST, null, ExponentListModel.class, myRequestCallBack);
