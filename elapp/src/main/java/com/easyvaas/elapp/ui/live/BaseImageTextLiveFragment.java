@@ -43,6 +43,7 @@ public abstract class BaseImageTextLiveFragment extends BaseFragment {
 
             @Override
             public void onError(String errorInfo) {
+                Log.d("Misuzu"," up onError   "+errorInfo);
                 super.onError(errorInfo);
             }
         });

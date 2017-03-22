@@ -103,6 +103,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private LinkedList<MsgsBean> mDatas;
     private String ownerId;
     private TextView liveEmptyTv;
+    private boolean hasStick; // 是否已有置顶消息
 
     public static ImageTextLiveFragment newInstance(String roomId, boolean isAnchor, int watcherCount) {
         Bundle args = new Bundle();
@@ -257,10 +258,12 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                         {
                             it.remove();
                         }
+
                     }
                     if (isLoadMore) {
                         mDatas.addAll(tempDatas);
                         start = result.getNext();
+
                     } else
                     {
                         mDatas.clear();
@@ -268,7 +271,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                         start = result.getNext();
                     }
 
-
+                    mAutoLoadRecyclerView.setLoadingMore(false);
                     mLlEmpty.setVisibility(View.GONE);
                     mImageTextLiveMsgListAdapter.notifyDataSetChanged();
                 }else
@@ -333,6 +336,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            start = 0;
                             onMessageListInit(false); // 跳出循环 如果是主播的消息 更新界面
                         }
                     },1000);
@@ -358,6 +362,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(JoinRoomSuccessEvent event) {
         initConversation();
+        start = 0;
         onMessageListInit(false);
     }
 
