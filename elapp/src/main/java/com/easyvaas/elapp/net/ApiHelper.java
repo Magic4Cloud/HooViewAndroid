@@ -132,11 +132,22 @@ public class ApiHelper {
     public void registerByPhone(String nickname, String phone, String gender, String password,
                                 String birthday, String location, String signature, String authType,
                                 MyRequestCallBack<User> callBack) {
+        String md5Pwd = "";
+        try {
+            md5Pwd = Utils.getMD5(password);
+        } catch (NoSuchAlgorithmException e) {
+            Logger.e(TAG, "getMD5 string failed !", e);
+        }
+        if (md5Pwd.isEmpty()) {
+            Logger.e(TAG, "user register failed, md5 password is empty!");
+            callBack.onFailure("Can not get md5");
+            return;
+        }
         Map<String, String> map = new HashMap<>();
         map.put("nickname", nickname);
         map.put("token", phone);
         map.put("authtype", authType);
-        map.put("password", password);
+        map.put("password", md5Pwd);
         map.put("gender", gender);
         map.put("birthday", birthday);
         map.put("location", location);

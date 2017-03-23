@@ -20,12 +20,14 @@ import com.easyvaas.elapp.bean.market.ExponentModel;
 import com.easyvaas.elapp.bean.news.MyStockNewsModel;
 import com.easyvaas.elapp.bean.user.CollectListModel;
 import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.event.NewsListScrollEvent;
 import com.easyvaas.elapp.event.RefreshStockEvent;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
+import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -49,10 +51,27 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
     protected int next;
     private boolean isHaveHeader;
     private String mMyStockCode;
+    private boolean isPageNotTop = false;
     private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
             MyStockNewsListFragment.this.onRefresh();
+        }
+    };
+    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
+        int y = 0;
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            y = y + dy;
+            if (y < ViewUtil.dp2Px(getContext(), 50) && dy < 0) {
+                isPageNotTop = false;
+                updateTabLayoutView();
+            } else if (y > ViewUtil.dp2Px(getContext(), 50) && dy > 0) {
+                isPageNotTop = true;
+                updateTabLayoutView();
+            }
         }
     };
 
@@ -87,6 +106,8 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
     public void iniView(View view) {
         mRecyclerView.setAdapter(mMyStockNewsListAdapter = new MyStockNewsListAdapter(getContext(), mNewsEntityList));
         mNewsEntityList.add(new MyStockNewsModel.NewsEntity(true));
+        mRecyclerView.addOnScrollListener(mOnScrollListener);
+        updateTabLayoutView();
         loadData(false);
     }
 
@@ -180,6 +201,18 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
 
     public void hideEmptyView() {
         mRlEmptyView.setVisibility(View.GONE);
+    }
+
+    private void updateTabLayoutView(){
+        EventBus.getDefault().post(new NewsListScrollEvent(isPageNotTop));
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mRecyclerView != null){
+            updateTabLayoutView();
+        }
     }
 
     @Override

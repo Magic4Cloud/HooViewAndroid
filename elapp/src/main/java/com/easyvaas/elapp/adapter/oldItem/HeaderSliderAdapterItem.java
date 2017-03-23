@@ -124,8 +124,8 @@ public class HeaderSliderAdapterItem implements AdapterItem {
             textSliderView
                     .description("")
                     .image(list.get(i).getImg())
-                    .empty(R.drawable.banner_default)
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .empty(R.drawable.account_bitmap_list)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .setOnSliderClickListener(mOnSliderClickListener);
             textSliderView.bundle(new Bundle());
             int type = list.get(i).getType();

@@ -103,7 +103,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
                 if (verticalOffset < -start) {
                     mTvTitle.setVisibility(View.VISIBLE);
                     mIvBack.setImageResource(R.drawable.icon_back);
-                    mIvShare.setImageResource(R.drawable.icon_share);
+                    mIvShare.setImageResource(R.drawable.btn_share_w_n);
                 } else {
                     mIvBack.setImageResource(R.drawable.live_icon_more_back);
                     mIvShare.setImageResource(R.drawable.btn_share_w_n);

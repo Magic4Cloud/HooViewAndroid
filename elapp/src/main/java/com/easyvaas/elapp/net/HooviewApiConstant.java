@@ -6,7 +6,7 @@ public class HooviewApiConstant {
 
     //private final static String HOST_HOOVIEW = BuildConfig.DEBUG?"http://dev.hooview.com":"http://dev.hooview.com";
     private final static String HOST_HOOVIEW = "http://openapi.hooview.com";
-    private static final String HOST_DEBUG = "";
+//    private static final String HOST_HOOVIEW = "http://dev.hooview.com";
 
     static {
         HOST_EV_APPGW = ApiConstant.getAppGWHost();

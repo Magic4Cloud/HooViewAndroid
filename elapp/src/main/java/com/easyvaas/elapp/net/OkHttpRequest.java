@@ -19,6 +19,7 @@ import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
+import com.hooview.app.BuildConfig;
 import com.hooview.app.R;
 
 import org.json.JSONObject;
@@ -44,6 +45,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 class OkHttpRequest implements IRequestHelper {
     private static final String TAG = "OkHttpRequest";
@@ -74,12 +76,17 @@ class OkHttpRequest implements IRequestHelper {
                 return chain.proceed(request);
             }
         };
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
+        logInterceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+
         mClient = new OkHttpClient().newBuilder()
                 .connectTimeout(MY_SOCKET_TIMEOUT_MS, TimeUnit.MILLISECONDS)
                 .readTimeout(MY_SOCKET_TIMEOUT_MS, TimeUnit.MILLISECONDS)
                 .writeTimeout(MY_SOCKET_TIMEOUT_MS, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true)
                 .addNetworkInterceptor(mNetworkInterceptor)
+                .addNetworkInterceptor(logInterceptor)
                 .cache(cache)
                 .build();
     }
@@ -120,7 +127,9 @@ class OkHttpRequest implements IRequestHelper {
             String json = new JSONObject(params).toString();
             Logger.d(TAG, "Request isPostMethod: "+json);
             requestBuilder.post(builder.build());
+            Logger.i(TAG, "Request body: " + builder.toString());
         } else {
+            Logger.i(TAG, "Request body: " + requestBuilder.toString());
             requestBuilder.get();
         }
         mClient.newCall(requestBuilder.build()).enqueue(new Callback() {

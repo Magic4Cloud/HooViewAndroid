@@ -1,6 +1,7 @@
 package com.easyvaas.common.imageslider.SliderTypes;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -207,6 +208,7 @@ public abstract class BaseSliderView {
             mLoadListener.onStart(me);
         }
 
+
         Picasso p = (mPicasso != null) ? mPicasso : Picasso.with(mContext);
         RequestCreator rq = null;
         if(mUrl!=null){
@@ -230,6 +232,9 @@ public abstract class BaseSliderView {
         if(getError() != 0){
             rq.error(getError());
         }
+
+        rq.config(Bitmap.Config.RGB_565);
+//        rq.memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE);
 
         switch (mScaleType){
             case Fit:

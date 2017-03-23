@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.easyvaas.elapp.adapter.ImportNewsAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
-import com.easyvaas.elapp.bean.market.ExponentListModel;
 import com.easyvaas.elapp.bean.market.ExponentListNewModel;
 import com.easyvaas.elapp.bean.news.ImportantNewsModel;
 import com.easyvaas.elapp.db.Preferences;
@@ -18,7 +17,6 @@ import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.ui.base.BaseListRcvFragment;
-import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.google.gson.Gson;
 
@@ -30,6 +28,7 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
     private static final String TAG = "ImportantNewsListFragme";
     private ImportNewsAdapter mAdapter;
     private ImportantNewsModel mImportantNewsModel = new ImportantNewsModel();
+    private boolean isPageNotTop = false;
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
         int y = 0;
 
@@ -37,19 +36,13 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             y = y + dy;
-            Logger.d(TAG, " y=" + y);
             if (y < ViewUtil.dp2Px(getContext(), 50) && dy < 0) {
-                EventBus.getDefault().post(new NewsListScrollEvent(false));
+                isPageNotTop = false;
+                updateTabLayoutView();
             } else if (y > ViewUtil.dp2Px(getContext(), 50) && dy > 0) {
-                EventBus.getDefault().post(new NewsListScrollEvent(true));
+                isPageNotTop = true;
+                updateTabLayoutView();
             }
-        }
-
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-            Logger.d(TAG, "onScrolled: y" + recyclerView.getScrollY() + "   x" + recyclerView.getScrollX() + "  newState" + newState);
-
         }
     };
 
@@ -62,6 +55,7 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
     public void iniView(View view) {
         mRecyclerView.setAdapter(mAdapter = new ImportNewsAdapter(getContext()));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
+        updateTabLayoutView();
         loadData(false);
     }
 
@@ -154,6 +148,18 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
                     RequestUtil.handleRequestFailed(msg);
                 }
             });
+        }
+    }
+
+    private void updateTabLayoutView(){
+        EventBus.getDefault().post(new NewsListScrollEvent(isPageNotTop));
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mRecyclerView != null){
+            updateTabLayoutView();
         }
     }
 

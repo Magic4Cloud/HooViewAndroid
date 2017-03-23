@@ -226,10 +226,10 @@ public class ImageTextLiveListFragment extends BaseListRcvFragment {
         public void setLivModel(final TextLiveListModel.StreamsEntity model) {
             if (model != null) {
                 mTvTitle.setText(model.getName());
-                mTvFollowCount.setText(getString(R.string.image_text_follow_count, model.getViewcount() + ""));
                 if (model.getUserEntity() == null) {
                     return;
                 }
+                mTvFollowCount.setText(getString(R.string.image_text_follow_count, model.getUserEntity().getFans_count() + ""));
                 Utils.showImage(model.getUserEntity().getLogourl(), R.drawable.somebody, mRivCover);
                 mLlTagContainer.removeAllViews();
                 if (model.getUserEntity().getTags() != null) {

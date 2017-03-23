@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.market.ExponentListNewModel;
-import com.hooview.app.R;
-import com.easyvaas.elapp.bean.market.ExponentListModel;
 import com.easyvaas.elapp.bean.news.ImportantNewsModel;
 import com.easyvaas.elapp.bean.news.NewsItemModel;
 import com.easyvaas.elapp.bean.user.ReadRecord;
@@ -21,6 +19,7 @@ import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.ImportNewsListHeaderView;
+import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
 public class ImportNewsAdapter extends RecyclerView.Adapter {
@@ -132,7 +131,7 @@ public class ImportNewsAdapter extends RecyclerView.Adapter {
         public void setNewsModel(final NewsItemModel newsModel) {
             if (newsModel != null) {
 //              Utils.showImage(newsModel.getCover(), R.drawable.account_bitmap_list, ivThumbnail);
-                Picasso.with(mContext).load(newsModel.getCover()).error(R.drawable.account_bitmap_list).into(ivThumbnail);
+                Picasso.with(mContext).load(newsModel.getCover()).placeholder(R.drawable.account_bitmap_list).into(ivThumbnail);
                 tvTitle.setText(newsModel.getTitle());
                 tvTime.setText(DateTimeUtil.getSimpleTime(mContext, newsModel.getTime()));
                 tvWatchCount.setText(mContext.getString(R.string.news_watch_count,

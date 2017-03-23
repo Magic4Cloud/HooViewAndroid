@@ -66,12 +66,21 @@ public class HomeNewsFragment extends BaseFragment implements View.OnClickListen
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                showTitleView(false);
                 if (position == 0) {
                     mIvSearch.setVisibility(View.VISIBLE);
                 } else {
                     mIvSearch.setVisibility(View.GONE);
                 }
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
             }
         });
         mTabLayout.setupWithViewPager(mViewPager);
