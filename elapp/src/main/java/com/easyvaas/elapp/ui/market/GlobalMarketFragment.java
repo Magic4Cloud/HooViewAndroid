@@ -1,19 +1,17 @@
 package com.easyvaas.elapp.ui.market;
 
-import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 
 import com.easyvaas.common.advancedRecyclerView.animator.DraggableItemAnimator;
 import com.easyvaas.common.advancedRecyclerView.animator.GeneralItemAnimator;
-import com.easyvaas.common.advancedRecyclerView.decoration.ItemShadowDecorator;
 import com.easyvaas.common.advancedRecyclerView.footDragGrid.FooterGridLayoutManager;
 import com.easyvaas.common.advancedRecyclerView.footDragGrid.FooterViewRecyclerViewDragDropManager;
 import com.easyvaas.elapp.adapter.recycler.GlobalMarketExponentAdapter;
@@ -70,7 +68,10 @@ public class GlobalMarketFragment extends BaseListFragment {
 
     @Override
     public void iniView(View view) {
+
 //        Preferences.getInstance(getActivity()).clear();
+        int topPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10,getResources().getDisplayMetrics());
+        mRecyclerView.setPadding(0,topPadding,0,0);
         mBtnEdit = (Button) view.findViewById(R.id.btn_edit);
         view.findViewById(R.id.tv_prompt).setVisibility(View.VISIBLE);
         mLayoutManager = new FooterGridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL, false);
@@ -81,8 +82,8 @@ public class GlobalMarketFragment extends BaseListFragment {
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         // drag & drop manager
         mRecyclerViewDragDropManager = new FooterViewRecyclerViewDragDropManager();
-        mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(
-                (NinePatchDrawable) ContextCompat.getDrawable(getContext(), R.drawable.material_shadow_z3));
+//        mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(
+//                (NinePatchDrawable) ContextCompat.getDrawable(getContext(), R.drawable.material_shadow_z3));
         // Start dragging after long press
         mRecyclerViewDragDropManager.setInitiateOnLongPress(true);
         mRecyclerViewDragDropManager.setInitiateOnMove(false);
@@ -102,8 +103,8 @@ public class GlobalMarketFragment extends BaseListFragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mWrappedAdapter);  // requires *wrapped* adapter
         mRecyclerView.setItemAnimator(animator);
-        mRecyclerView.addItemDecoration(new ItemShadowDecorator(
-                (NinePatchDrawable) ContextCompat.getDrawable(getContext(), R.drawable.material_shadow_z3)));
+//        mRecyclerView.addItemDecoration(new ItemShadowDecorator(
+//                (NinePatchDrawable) ContextCompat.getDrawable(getContext(), R.drawable.material_shadow_z3)));
         mRecyclerViewDragDropManager.attachRecyclerView(mRecyclerView);
 
         loadData();

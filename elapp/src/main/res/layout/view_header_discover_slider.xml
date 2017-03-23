@@ -12,14 +12,14 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/account_bitmap_list" />
 
     <com.easyvaas.common.imageslider.SliderLayout
         android:id="@+id/recommend_header_slider"
         android:layout_width="match_parent"
-        android:layout_height="240dp" />
+        android:layout_height="match_parent" />
     <View
         android:background="@drawable/banner_mengceng"
         android:layout_width="match_parent"

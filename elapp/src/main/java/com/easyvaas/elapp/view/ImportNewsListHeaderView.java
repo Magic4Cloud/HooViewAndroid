@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,6 +140,12 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         mNewsViewList.add(mTvEyesNews1);
         mNewsViewList.add(mTvEyesNews2);
         mNewsViewList.add(mTvEyesNews3);
+        // banner 宽高比 3：2
+        RelativeLayout bannerLayout = (RelativeLayout) findViewById(R.id.banner_layout);
+        ViewGroup.LayoutParams layoutParams =bannerLayout.getLayoutParams();
+        layoutParams.width = com.easyvaas.common.emoji.utils.Utils.getDisplayWidthPixels(getContext());
+        layoutParams.height = layoutParams.width*2/3;
+        bannerLayout.setLayoutParams(layoutParams);
     }
 
     public void setHooviewNews(ImportantNewsModel.HuoyanEntity hooviewNews) {

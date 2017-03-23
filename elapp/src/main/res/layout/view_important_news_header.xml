@@ -7,7 +7,9 @@
               android:background="@color/news_list_bg_color"
               android:orientation="vertical">
 
-    <include layout="@layout/view_header_discover_slider"/>
+    <include
+        android:id="@+id/banner_layout"
+        layout="@layout/view_header_discover_slider"/>
 
     <LinearLayout
         android:layout_width="match_parent"
