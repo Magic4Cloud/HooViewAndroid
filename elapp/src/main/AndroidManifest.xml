@@ -226,7 +226,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysVisible"/>
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
         <activity
             android:name="com.easyvaas.elapp.live.activity.LivePrepareActivity"
             android:screenOrientation="portrait"
@@ -487,7 +487,8 @@
         <activity
             android:name="com.easyvaas.elapp.ui.search.GlobalSearchActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
         <activity
             android:name="com.easyvaas.elapp.ui.news.HooviewEyesNewsActivity"
             android:screenOrientation="portrait"
