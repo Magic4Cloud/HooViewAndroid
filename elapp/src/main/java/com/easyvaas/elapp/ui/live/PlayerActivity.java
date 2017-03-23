@@ -69,6 +69,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     private PlayerStateView mPlayerStateView;
     private EVPlayer mEVPlayer;
     private EVVideoView mVideoView;
+    private ImageView ivShare;
+    private ImageView ivBack;
     private boolean isLandscape = false;
     private boolean mIsPlayLive;
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -124,6 +126,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mTvEndTime = (TextView) findViewById(R.id.tv_end_time);
         mTvCurTime = (TextView) findViewById(R.id.tv_cur_time);
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivShare = (ImageView) findViewById(R.id.iv_share);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -498,12 +502,18 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mTvCurTime.setVisibility(View.VISIBLE);
             mTvEndTime.setVisibility(View.VISIBLE);
             mIvPlayState.setVisibility(View.VISIBLE);
+            mIv_all_screen.setVisibility(View.VISIBLE);
+            ivShare.setVisibility(View.VISIBLE);
+            ivBack.setVisibility(View.VISIBLE);
             hideMediaControllerDelay();
         } else {
             mSeekBar.setVisibility(View.INVISIBLE);
             mTvCurTime.setVisibility(View.INVISIBLE);
             mTvEndTime.setVisibility(View.INVISIBLE);
             mIvPlayState.setVisibility(View.INVISIBLE);
+            mIv_all_screen.setVisibility(View.INVISIBLE);
+            ivShare.setVisibility(View.INVISIBLE);
+            ivBack.setVisibility(View.INVISIBLE);
         }
     }
 

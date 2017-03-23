@@ -39,6 +39,7 @@ public abstract class BaseSliderView {
     private String mUrl;
     private File mFile;
     private int mRes;
+    private int w;
 
     protected OnSliderClickListener mOnSliderClickListener;
 
@@ -114,6 +115,15 @@ public abstract class BaseSliderView {
                     "you only have permission to call it once");
         }
         mUrl = url;
+        return this;
+    }
+
+    public BaseSliderView width(int width){
+        if(mFile != null || mRes != 0){
+            throw new IllegalStateException("Call multi image function," +
+                    "you only have permission to call it once");
+        }
+        w = width;
         return this;
     }
 
@@ -241,7 +251,7 @@ public abstract class BaseSliderView {
                 rq.fit();
                 break;
             case CenterCrop:
-                rq.fit().centerCrop();
+//                rq.fit().centerCrop();
                 break;
             case CenterInside:
                 rq.fit().centerInside();
