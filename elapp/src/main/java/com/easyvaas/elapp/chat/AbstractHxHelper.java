@@ -23,7 +23,7 @@ public abstract class AbstractHxHelper {
         EMOptions options = new EMOptions();
         options.setAcceptInvitationAlways(false);
         options.setAutoLogin(true);
-        if (BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             options.setAppKey("cloudfocus#elapp");
         } else {
             options.setAppKey("1150160929178497#hooview");

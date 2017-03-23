@@ -94,9 +94,9 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
 
             @Override
             public void onSuccess(final EMChatRoom value) {
-                if (value != null && !mRoomId.equals(value.getId())) {
+//                if (value != null && !mRoomId.equals(value.getId())) {
                     EventBus.getDefault().post(new JoinRoomSuccessEvent());
-                }
+//                }
             }
 
             @Override

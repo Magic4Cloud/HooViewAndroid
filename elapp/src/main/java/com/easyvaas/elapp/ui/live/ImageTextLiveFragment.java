@@ -50,10 +50,12 @@ import com.easyvaas.elapp.view.ImageTextLiveInputView;
 import com.easyvaas.elapp.view.LoadMoreListener;
 import com.easyvaas.elapp.view.gift.GiftViewContainer;
 import com.hooview.app.R;
+import com.hyphenate.EMChatRoomChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.exceptions.HyphenateException;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -65,6 +67,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 
 public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements View.OnClickListener,LoadMoreListener {
@@ -103,7 +111,9 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private LinkedList<MsgsBean> mDatas;
     private String ownerId;
     private TextView liveEmptyTv;
+    private DecimalFormat df2;
     private boolean hasStick; // 是否已有置顶消息
+    private EMChatRoomChangeListener mEMChatRoomChangeListener;
 
     public static ImageTextLiveFragment newInstance(String roomId, boolean isAnchor, int watcherCount) {
         Bundle args = new Bundle();
@@ -205,8 +215,8 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         TextView tvTime = (TextView) view.findViewById(R.id.tv_time);
         tvTime.setText(DateTimeUtil.formatDate(getContext(), System.currentTimeMillis(), getString(R.string.image_date_pattern)));
         mTvWatchCount = (TextView) view.findViewById(R.id.tv_watch_count);
-        DecimalFormat df2 = new DecimalFormat("###,###");
-        mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
+        df2 = new DecimalFormat("###,###");
+        mTvWatchCount.setText("");
         mExpressionGiftLayout = (GiftPagerView) view.findViewById(R.id.expression_gift_layout);
         mExpressionGiftLayout.setOnViewClickListener(mOnGiftSendCallBack);
         if (EVApplication.getUser() != null) {
@@ -379,10 +389,79 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    /**
+     * 注册聊天室在线人数监听 且显示当前在线人数
+     */
+    public void addOnlineCountListener()
+    {
+        Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+
+                try {
+                    mWatchCount = EMClient.getInstance().chatroomManager().fetchChatRoomFromServer(mRoomId).getMemberCount();
+                    subscriber.onNext(mWatchCount);
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer integer) {
+                        mWatchCount = mWatchCount * 100;  //在线人数*100
+                        mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
+                    }
+                });
+        EMClient.getInstance().chatroomManager().addChatRoomChangeListener(mEMChatRoomChangeListener = new EMChatRoomChangeListener() {
+            @Override
+            public void onChatRoomDestroyed(String s, String s1) {
+
+            }
+
+            @Override
+            public void onMemberJoined(String s, String s1) {
+                mWatchCount = mWatchCount + 10;
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
+
+                    }
+                });
+            }
+
+            @Override
+            public void onMemberExited(String s, String s1, String s2) {
+                mWatchCount = mWatchCount - 10;
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
+
+                    }
+                });
+            }
+
+            @Override
+            public void onRemovedFromChatRoom(String s, String s1, String s2) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EMClient.getInstance().chatroomManager().removeChatRoomListener(mEMChatRoomChangeListener);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void onMessageEvent(JoinRoomSuccessEvent event) {
         initConversation();
         onMessageListInit(false);
+        addOnlineCountListener();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
