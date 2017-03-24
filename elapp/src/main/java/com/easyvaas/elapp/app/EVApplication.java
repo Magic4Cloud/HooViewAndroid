@@ -87,12 +87,12 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         initReceiver();
 
         EVSdk.enableDebugLog();
-        if (!BuildConfig.DEBUG) {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
-                    Constants.EV_SECRET_ID, "");
-        } else {
+        if (BuildConfig.DEBUG) {
             EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
                     Constants.EV_SECRET_ID_DEV, "");
+        } else {
+            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
+                    Constants.EV_SECRET_ID, "");
         }
         ApiUtil.checkSession(getContext());
         initHyphenate();

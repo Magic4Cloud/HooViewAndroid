@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.easyvaas.common.adapter.CommonRcvAdapter;
 import com.easyvaas.elapp.adapter.recycler.LiveDataAdapter;
@@ -57,6 +58,8 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
     private int start = 0;
     private int count = 10;
     private FrameLayout mFlContainer;
+    private LinearLayout llInputArea;
+    private TextView tvSearch;
 
 
     public static DataFragment newInstance() {
@@ -118,6 +121,8 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
                 Utils.showStockDetail(getContext(), name, code, true);
             }
         });
+        llInputArea = (LinearLayout) view.findViewById(R.id.ll_input_area);
+        tvSearch = (TextView) view.findViewById(R.id.tv_search);
         mFlContainer = (FrameLayout) view.findViewById(R.id.fl_webview);
         mFlContainer.addView(mWebView, new FrameLayout
                 .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -153,6 +158,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
             case R.id.rl_input_text:
                 if (getActivity() instanceof PlayerActivity) {
                     ((PlayerActivity) getActivity()).showCommentTextBox(true);
+                    llInputArea.setVisibility(View.GONE);
                 }
                 break;
         }
@@ -174,7 +180,12 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(LiveSearchStockEvent event) {
+        if (event.type == LiveSearchStockEvent.TYPE_KEYBORDER_HIDE){
+            llInputArea.setVisibility(View.VISIBLE);
+            return;
+        }
         mKeyWord = event.keyword;
+        tvSearch.setText(mKeyWord);
         searchStock();
     }
 

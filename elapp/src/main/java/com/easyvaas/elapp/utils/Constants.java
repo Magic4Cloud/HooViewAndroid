@@ -26,9 +26,12 @@ public class Constants {
     public static final String EV_APP_ID = "r7Mun6JpcwHiSdIh";
     public static final String EV_ACCESS_ID = "hdxLQK1jMMRRQlST";
     public static final String EV_SECRET_ID = "S6HQDY9M4LKnaosPrR7CZWQnsEvFgHWy";
-    public static final String EV_APP_ID_DEV = "yizhibo";
-    public static final String EV_ACCESS_ID_DEV = "yizhibo";
-    public static final String EV_SECRET_ID_DEV = "helloworld";
+//    public static final String EV_APP_ID_DEV = "yizhibo";
+//    public static final String EV_ACCESS_ID_DEV = "yizhibo";
+//    public static final String EV_SECRET_ID_DEV = "helloworld";
+    public static final String EV_APP_ID_DEV = "edjPyXz8t4ZLazV2";
+    public static final String EV_ACCESS_ID_DEV = "2MKf0XR8I4rOoTg6";
+    public static final String EV_SECRET_ID_DEV = "QSwp3Z2vgz0omrhTNDGBSEfQMtMW9wXr";
 
     //======================= Intent Constant ===============================//
     public static final String ACTION_RESET_PASSWORD = "action_reset_password";
