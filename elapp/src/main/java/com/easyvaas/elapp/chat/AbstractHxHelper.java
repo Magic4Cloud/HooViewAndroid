@@ -3,8 +3,8 @@ package com.easyvaas.elapp.chat;
 
 import android.content.Context;
 
-import com.hooview.app.BuildConfig;
 import com.easyvaas.elapp.chat.model.HxSdkModel;
+import com.hooview.app.BuildConfig;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMConnectionListener;
 import com.hyphenate.chat.EMClient;
@@ -23,7 +23,7 @@ public abstract class AbstractHxHelper {
         EMOptions options = new EMOptions();
         options.setAcceptInvitationAlways(false);
         options.setAutoLogin(true);
-        if (!BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             options.setAppKey("cloudfocus#elapp");
         } else {
             options.setAppKey("1150160929178497#hooview");

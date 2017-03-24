@@ -536,6 +536,7 @@
         <activity
             android:name="com.easyvaas.elapp.ui.live.ImageTextLiveActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity"
@@ -566,6 +567,7 @@
         <activity
             android:name="com.easyvaas.elapp.ui.search.SearchStockActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.easyvaas.elapp.ui.user.UserAddLabelActivity"
