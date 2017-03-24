@@ -413,12 +413,9 @@
         <!-- android:enabled="true" -->
         <!-- android:process=":remote"/> -->
         <!-- 环信 -->
-        <!--<meta-data-->
-            <!--android:name="EASEMOB_APPKEY"-->
-            <!--android:value="1150160929178497#hooview"/>-->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1150160929178497#hooviewtest"/>
+            android:value="1150160929178497#hooview"/>
         <!-- 声明sdk所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -539,7 +536,7 @@
         <activity
             android:name="com.easyvaas.elapp.ui.live.ImageTextLiveActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity"
@@ -570,6 +567,7 @@
         <activity
             android:name="com.easyvaas.elapp.ui.search.SearchStockActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateVisible"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.easyvaas.elapp.ui.user.UserAddLabelActivity"

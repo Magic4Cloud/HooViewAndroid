@@ -64,7 +64,8 @@ public class MySelectedStockListFragment extends BaseListFragment {
             public void onSuccess(CollectListModel result) {
                 mStockIdStr = result.getCollectlist();
                 List<String> codeList = result.getCodeList();
-                getStockListInfo(mStockIdStr);
+//                getStockListInfo(mStockIdStr);
+                getNewStockInfo(mStockIdStr);
                 hideEmptyView();
             }
 
@@ -89,9 +90,9 @@ public class MySelectedStockListFragment extends BaseListFragment {
                     @Override
                     public void onSuccess(StockListModel result) {
                         if (result != null) {
-                            result.getData().addAll(headerLists);
+//                            result.getData().addAll(headerLists);
                             List<StockListModel.StockModel> data = result.getData();
-                            if (!(luLists.size()>0||hkLists.size()>0||usLists.size()>0))
+//                            if (!(luLists.size()>0||hkLists.size()>0||usLists.size()>0))
                             filterStock(data);
                             if (mType.equals("2")) {
                                 result.getData().clear();
@@ -109,7 +110,7 @@ public class MySelectedStockListFragment extends BaseListFragment {
                             if (result.getData() != null && result.getData().size() > 0) {
                                 mAdapter.setStockListModel(result);
                                 mSwipeRefreshLayout.setRefreshing(false);
-                                EventBus.getDefault().post(result);
+//                                EventBus.getDefault().post(result);
                             } else {
                                 mSwipeRefreshLayout.setRefreshing(false);
                                 showEmptyView();
@@ -119,6 +120,12 @@ public class MySelectedStockListFragment extends BaseListFragment {
 
                     @Override
                     public void onFailure(String msg) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onError(String errorInfo) {
+                        super.onError(errorInfo);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
@@ -195,7 +202,7 @@ public class MySelectedStockListFragment extends BaseListFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMexssageEvent(List<StockListModel.StockModel> event) {
-        mAdapter.setStockListModel(event);
+//        mAdapter.setStockListModel(event);
     }
 
     @Override
