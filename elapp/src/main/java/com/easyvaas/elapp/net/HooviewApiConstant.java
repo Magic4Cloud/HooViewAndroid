@@ -38,4 +38,6 @@ public class HooviewApiConstant {
     public static final String GET_CHAT_HISTORY = HOST_HOOVIEW + "/api/textlive/history?";
     public static final String GET_BANNERS = HOST_HOOVIEW + "/api/news/banners?";
 
+    public static final String AD_SPLASH = "http://dev.hooview.com" + "/api/ad/appstart";
+
 }

@@ -1,20 +1,23 @@
 package com.easyvaas.elapp.ui;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyvaas.common.emoji.utils.EmoticonsUtils;
 import com.easyvaas.common.sharelogin.ShareBlock;
+import com.easyvaas.elapp.bean.SplashEntity;
+import com.easyvaas.elapp.net.HooviewApiHelper;
+import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.hooview.app.R;
-import com.easyvaas.elapp.activity.WebViewActivity;
 import com.easyvaas.elapp.base.BaseActivity;
 import com.easyvaas.elapp.bean.UpdateInfoEntity;
 import com.easyvaas.elapp.bean.serverparam.SplashScreen;
@@ -29,6 +32,8 @@ import com.easyvaas.elapp.utils.UpdateManager;
 import com.easyvaas.elapp.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.umeng.analytics.MobclickAgent;
 
 
@@ -53,6 +58,10 @@ public class SplashActivity extends BaseActivity {
 
     private TextView mCountdownTimerTv;
     private View preLoadMainHome = null;
+    private Button btn_jump;
+
+    private long mRequestSuccessTime;
+    private ImageView iv_top;
 
     private static class MyHandler extends Handler {
         private SoftReference<SplashActivity> softReference;
@@ -72,7 +81,7 @@ public class SplashActivity extends BaseActivity {
                 case MSG_REFRESH_COUNTDOWN_TIME:
                     int countDownTime = (int) msg.obj;
                     activity.mCountdownTimerTv.setText(activity
-                            .getString(R.string.splash_time_countdown, countDownTime));
+                            .getString(R.string.splash_time_countdown + countDownTime));
                     countDownTime--;
                     if (countDownTime > 0) {
                         Message countdownMsg = obtainMessage(MSG_REFRESH_COUNTDOWN_TIME, countDownTime);
@@ -133,13 +142,13 @@ public class SplashActivity extends BaseActivity {
         }
         setTitle(R.string.app_name);
 
-        mCountdownTimerTv = (TextView) findViewById(R.id.splash_timer_tv);
-        findViewById(R.id.splash_jump_over_tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                delayExit(0);
-            }
-        });
+//        mCountdownTimerTv = (TextView) findViewById(R.id.splash_timer_tv);
+//        findViewById(R.id.splash_jump_over_tv).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                delayExit(0);
+//            }
+//        });
         cleanHomeTopicCache();
         EmoticonsUtils.initEmoticonsDB(getApplicationContext(), false);
 
@@ -164,9 +173,15 @@ public class SplashActivity extends BaseActivity {
                 || mUpdateManager.isForceUpdate()) {
             checkUpdate();
         }
-        if (mPref.isLogin()) {
-            showDynamicSplashImage();
-        }
+
+        //初始化引导图片
+        initSplashView();
+
+//        if (mPref.isLogin()) {
+//            showDynamicSplashImage();
+//        }
+
+
     }
 
 
@@ -192,24 +207,26 @@ public class SplashActivity extends BaseActivity {
         final SplashScreen selectScreen = screenEntityArray.get(lastShowIndex);
         mPref.putInt(Preferences.KEY_PARAM_SCREEN_LAST_SHOW_INDEX, lastShowIndex);
 
-        ImageView screenIv = (ImageView) findViewById(R.id.splash_screen_iv);
-        View splashDynamicRl = findViewById(R.id.splash_dynamic_rl);
-        if (splashDynamicRl == null || screenIv == null) {
-            return;
-        }
-        screenIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (selectScreen.getType() == SplashScreen.TYPE_SPLASH_AD) {
-                    mHandler.removeMessages(MSG_REFRESH_COUNTDOWN_TIME);
-                    mHandler.removeMessages(MSG_EXIT);
-                    Intent adDetailIntent = new Intent(getApplicationContext(), WebViewActivity.class);
-                    adDetailIntent.putExtra(WebViewActivity.EXTRA_KEY_TITLE, " ");
-                    adDetailIntent.putExtra(WebViewActivity.EXTRA_KEY_URL, selectScreen.getAd_url());
-                    startActivity(adDetailIntent);
-                }
-            }
-        });
+//        ImageView screenIv = (ImageView) findViewById(R.id.splash_screen_iv);
+//        screenIv.setVisibility(View.INVISIBLE);
+//        View splashDynamicRl = findViewById(R.id.splash_dynamic_rl);
+//        splashDynamicRl.setVisibility(View.INVISIBLE);
+//        if (splashDynamicRl == null || screenIv == null) {
+//            return;
+//        }
+//        screenIv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (selectScreen.getType() == SplashScreen.TYPE_SPLASH_AD) {
+//                    mHandler.removeMessages(MSG_REFRESH_COUNTDOWN_TIME);
+//                    mHandler.removeMessages(MSG_EXIT);
+//                    Intent adDetailIntent = new Intent(getApplicationContext(), WebViewActivity.class);
+//                    adDetailIntent.putExtra(WebViewActivity.EXTRA_KEY_TITLE, " ");
+//                    adDetailIntent.putExtra(WebViewActivity.EXTRA_KEY_URL, selectScreen.getAd_url());
+//                    startActivity(adDetailIntent);
+//                }
+//            }
+//        });
         if (DateTimeUtil.isCurrentDateInSpan(selectScreen.getStart_time(), selectScreen.getEnd_time())) {
             String fileName = selectScreen.getUrl();
             try {
@@ -219,17 +236,75 @@ public class SplashActivity extends BaseActivity {
             }
             String splashImagePath = FileUtil.CACHE_SPLASH_DIR + File.separator + fileName;
             if (!FileUtil.isFileIsExist(splashImagePath)) {
-                splashDynamicRl.setVisibility(View.GONE);
+                //splashDynamicRl.setVisibility(View.GONE);
                 Utils.cachedImageAsync(this, selectScreen.getUrl(), FileUtil.CACHE_SPLASH_DIR);
             } else {
                 Message msg = mHandler.obtainMessage(MSG_REFRESH_COUNTDOWN_TIME, selectScreen.getDuration());
                 mHandler.sendMessage(msg);
-                Utils.showImage(splashImagePath, 0, screenIv);
-                splashDynamicRl.setVisibility(View.VISIBLE);
+                //Utils.showImage(splashImagePath, 0, screenIv);
+                //splashDynamicRl.setVisibility(View.VISIBLE);
             }
         } else {
-            splashDynamicRl.setVisibility(View.GONE);
+            //splashDynamicRl.setVisibility(View.GONE);
         }
+
+        //screenIv.setBackgroundResource(R.drawable.splash);
+    }
+
+    //初始化图片
+    private void initSplashView() {
+
+        btn_jump = (Button) findViewById(R.id.btn_jump);
+        btn_jump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHandler.sendEmptyMessage(MSG_EXIT);
+            }
+        });
+
+
+        iv_top = (ImageView) findViewById(R.id.iv_top);
+        ImageView iv_bottom = (ImageView) findViewById(R.id.iv_bottom);
+
+        HooviewApiHelper.getInstance().getSplashInfo(new MyRequestCallBack<SplashEntity>() {
+            @Override
+            public void onSuccess(SplashEntity result) {
+                //if (result.getReterr().equals("OK")) {
+                //开始加载图片
+                startLoadingImageView(result.getRetinfo().getAdurl());
+                mRequestSuccessTime = System.currentTimeMillis();
+                mHandler.sendEmptyMessageDelayed(MSG_EXIT, 2000);
+                //}
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+        });
+    }
+
+    private void startLoadingImageView(String url) {
+
+        Picasso.with(this).load(url).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                btn_jump.setVisibility(View.VISIBLE);
+                mHandler.removeMessages(MSG_EXIT);
+                mHandler.sendEmptyMessageDelayed(MSG_EXIT, 3000);
+                iv_top.setImageBitmap(bitmap);
+                Log.e("TAG", "图片ok");
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                Log.e("TAG", "图片正在刷新");
+            }
+        });
     }
 
     @Override

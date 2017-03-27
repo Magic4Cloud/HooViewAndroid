@@ -4,7 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.easyvaas.elapp.adapter.ImportNewsAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
@@ -57,6 +62,30 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
         mRecyclerView.addOnScrollListener(mOnScrollListener);
         updateTabLayoutView();
         loadData(false);
+
+
+        initListener();
+    }
+
+    //
+    private void initListener() {
+        mRecyclerView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mRecyclerView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                //
+                ViewGroup mViewGroup = (ViewGroup) (mRecyclerView.getChildAt(0));
+
+                View mButtomView = mViewGroup.getChildAt(mViewGroup.getChildCount() - 1);
+                int mButtom = mButtomView.getBottom();
+
+                //78dp，启动一个透明的activity
+
+                //32dp
+
+
+            }
+        });
     }
 
     @Override
@@ -151,14 +180,14 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
         }
     }
 
-    private void updateTabLayoutView(){
+    private void updateTabLayoutView() {
         EventBus.getDefault().post(new NewsListScrollEvent(isPageNotTop));
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && mRecyclerView != null){
+        if (isVisibleToUser && mRecyclerView != null) {
             updateTabLayoutView();
         }
     }

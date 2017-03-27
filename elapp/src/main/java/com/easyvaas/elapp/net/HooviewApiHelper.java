@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.BannerModel;
+import com.easyvaas.elapp.bean.SplashEntity;
 import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
 import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveHistoryModel;
 import com.easyvaas.elapp.bean.market.ExponentListModel;
@@ -64,6 +65,7 @@ public class HooviewApiHelper {
     public void getUpAndDownList(MyRequestCallBack<UpsAndDownsDataModel> myRequestCallBack) {
         sRequestHelper.getAsGson(HooviewApiConstant.UP_AND_DOWN_LIST, null, UpsAndDownsDataModel.class, myRequestCallBack);
     }
+
     public void getUpAndDownListHK(MyRequestCallBack<UpsAndDownsDataModel> myRequestCallBack) {
         sRequestHelper.getAsGson(HooviewApiConstant.UP_AND_DOWN_LIST_HK, null, UpsAndDownsDataModel.class, myRequestCallBack);
     }
@@ -240,18 +242,18 @@ public class HooviewApiHelper {
         map.put("nk", TextUtils.isEmpty(emMessageWrapper.nickname) ? "" : emMessageWrapper.nickname);
         map.put("msgid", TextUtils.isEmpty(emMessage.getMsgId()) ? "" : emMessage.getMsgId());
 //        map.put("msgtype", TextUtils.isEmpty(emMessage.getType().toString()) ? "" : emMessage.getType().toString());
-        map.put("msgtype","txt");
+        map.put("msgtype", "txt");
         map.put("msg", TextUtils.isEmpty(emMessageWrapper.content) ? "" : emMessageWrapper.content);
         map.put("tp", TextUtils.isEmpty(emMessageWrapper.type) ? "" : emMessageWrapper.type);
         map.put("rct", TextUtils.isEmpty(emMessageWrapper.replyContent) ? "" : emMessageWrapper.replyContent);
         map.put("rnk", TextUtils.isEmpty(emMessageWrapper.replyNickname) ? "" : emMessageWrapper.replyNickname);
-        map.put("timestamp", emMessage.getMsgTime()+ "");
+        map.put("timestamp", emMessage.getMsgTime() + "");
         map.put("img", TextUtils.isEmpty(emMessageWrapper.imageUrl) ? "" : emMessageWrapper.imageUrl);
-        Log.d("Misuzu",emMessageWrapper.toString());
+        Log.d("Misuzu", emMessageWrapper.toString());
         sRequestHelper.postAsString(HooviewApiConstant.UPLOAD_CHAT_MESSAGE, map, callBack);
     }
 
-    public void getImageTextLiveHistory(String roomId,int start, String count, long stime, MyRequestCallBack<ImageTextLiveHistoryModel> callBack) {
+    public void getImageTextLiveHistory(String roomId, int start, String count, long stime, MyRequestCallBack<ImageTextLiveHistoryModel> callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("streamid", roomId);
         map.put("count", count);
@@ -263,6 +265,11 @@ public class HooviewApiHelper {
     public void getBannerInfo(MyRequestCallBack<BannerModel> callBack) {
         Map<String, String> map = new HashMap<>();
         sRequestHelper.getAsGson(HooviewApiConstant.GET_BANNERS, map, BannerModel.class, callBack);
+    }
+
+    public void getSplashInfo(MyRequestCallBack<SplashEntity> callBack) {
+        Map<String, String> map = new HashMap<>();
+        sRequestHelper.getAsGson(HooviewApiConstant.AD_SPLASH, map, SplashEntity.class, callBack);
     }
 
 }
