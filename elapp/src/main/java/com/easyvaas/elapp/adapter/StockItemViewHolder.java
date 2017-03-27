@@ -17,6 +17,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
     private TextView mTvStockNumber;
     private TextView mTvPrice;
     private TextView mTvPercent;
+    private View viewDivider;
 
     public StockItemViewHolder(View itemView) {
         super(itemView);
@@ -25,6 +26,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
         mTvStockNumber = (TextView) itemView.findViewById(R.id.tv_stock_number);
         mTvPrice = (TextView) itemView.findViewById(R.id.tv_price);
         mTvPercent = (TextView) itemView.findViewById(R.id.tv_percent);
+        viewDivider = itemView.findViewById(R.id.view_divider);
     }
 
     public void setStockModel(final StockModel stockModel) {
@@ -58,7 +60,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setStockModel(final StockListModel.StockModel stockModel) {
+    public void setStockModel(final StockListModel.StockModel stockModel, boolean isEnd) {
         if (stockModel != null) {
             mTvStockName.setText(stockModel.getName());
             if(TextUtils.isEmpty(stockModel.getSymbol())){
@@ -81,6 +83,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
                 this.mTvPrice.setSelected(false);
                 this.mTvTag.setSelected(false);
             }
+            viewDivider.setVisibility(isEnd ? View.GONE : View.VISIBLE);
         }
         this.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

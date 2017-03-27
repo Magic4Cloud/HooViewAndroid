@@ -21,4 +21,17 @@
         android:layout_marginTop="4dp"
         android:text="@string/feature_no_open_prompt"
         android:textColor="@color/text_color_gray" />
+
+    <TextView
+        android:id="@+id/tv_add_select"
+        android:layout_width="124dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:background="@drawable/shape_add_stock_btn_bg"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/add_stock"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"/>
 </LinearLayout>

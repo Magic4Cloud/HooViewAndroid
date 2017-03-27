@@ -3,6 +3,7 @@ package com.easyvaas.elapp.chat;
 
 import android.content.Context;
 
+import com.easyvaas.elapp.net.ApiConstant;
 import com.hooview.app.BuildConfig;
 import com.easyvaas.elapp.chat.model.HxSdkModel;
 import com.hyphenate.EMCallBack;
@@ -23,10 +24,10 @@ public abstract class AbstractHxHelper {
         EMOptions options = new EMOptions();
         options.setAcceptInvitationAlways(false);
         options.setAutoLogin(true);
-        if (BuildConfig.DEBUG) {
-            options.setAppKey("1150160929178497#hooviewtest");
-        } else {
+        if (ApiConstant.isUserReleaseServer()) {
             options.setAppKey("1150160929178497#hooview");
+        } else {
+            options.setAppKey("1150160929178497#hooviewtest");
         }
         EMClient.getInstance().init(context, options);
         EMClient.getInstance().addConnectionListener(new MyConnectionListener());

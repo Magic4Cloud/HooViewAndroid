@@ -77,7 +77,7 @@
         <item>@string/all</item>
         <item>@string/market_tabs_chinese</item>
         <item>@string/market_tabs_hk</item>
-        <item>@string/market_tabs_usa</item>
+        <!--<item>@string/market_tabs_usa</item>-->
     </string-array>
     <string-array name="search_tab">
         <item>@string/news</item>

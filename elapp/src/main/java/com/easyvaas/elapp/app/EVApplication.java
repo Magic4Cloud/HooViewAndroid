@@ -29,7 +29,6 @@ import com.easyvaas.elapp.utils.FileUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.sdk.core.EVSdk;
 import com.google.gson.Gson;
-import com.hooview.app.BuildConfig;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -87,12 +86,12 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         initReceiver();
 
         EVSdk.enableDebugLog();
-        if (BuildConfig.DEBUG) {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
-                    Constants.EV_SECRET_ID_DEV, "");
-        } else {
+        if (ApiConstant.isUserReleaseServer()) {
             EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
                     Constants.EV_SECRET_ID, "");
+        } else {
+            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
+                    Constants.EV_SECRET_ID_DEV, "");
         }
         ApiUtil.checkSession(getContext());
         initHyphenate();

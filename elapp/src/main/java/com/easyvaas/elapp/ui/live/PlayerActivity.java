@@ -178,6 +178,9 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         tabLayout.setupWithViewPager(mViewPager);
         if (mIsPlayLive) {
             showMediaController(false);
+            mIv_all_screen.setVisibility(View.VISIBLE);
+            ivShare.setVisibility(View.VISIBLE);
+            ivBack.setVisibility(View.VISIBLE);
         } else {
             showMediaController(true);
         }

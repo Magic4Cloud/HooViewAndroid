@@ -35,7 +35,8 @@ public class MySelectedStockMainFragment extends BaseTabViewPagerFragment {
             if (fragment != null) {
                 return fragment;
             }
-            fragments.put(position, fragment = MySelectedStockListFragment.newInstance(position + 1 + ""));
+//            fragments.put(position, fragment = MySelectedStockListFragment.newInstance(position + 1 + ""));
+            fragments.put(position, fragment = MySelectedStockAllFragment.newInstance(position));
 
             return fragment;
         }
