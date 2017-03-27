@@ -16,6 +16,7 @@ import com.easyvaas.common.advancedRecyclerView.draggable.DraggableItemAdapter;
 import com.easyvaas.common.advancedRecyclerView.draggable.ItemDraggableRange;
 import com.easyvaas.common.advancedRecyclerView.draggable.RecyclerViewDragDropManager;
 import com.easyvaas.common.advancedRecyclerView.utils.AbstractDraggableItemViewHolder;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.bean.user.CollectListModel;
 import com.easyvaas.elapp.net.ApiHelper;
@@ -252,7 +253,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
             mTvPercent = (ImageView) itemView.findViewById(R.id.tv_del);
         }
     }
-     class AddViewHolder extends RecyclerView.ViewHolder{
+     private class AddViewHolder extends RecyclerView.ViewHolder{
 
         TextView mTvStockAdd;
 
@@ -275,4 +276,39 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
         mFinalItems.addAll(finalItems);
 
     }
+
+
+    /**
+     * 更新自选股 列表
+     * @param modelList 自选股列表
+     */
+    private void upDateStocks(List<StockListModel.StockModel> modelList)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < modelList.size(); i++) {
+            StockListModel.StockModel model = modelList.get(i);
+            if (i == modelList.size() - 1)
+            {
+                stringBuilder.append(model.getSymbol());
+            }else
+            {
+                stringBuilder.append(model.getSymbol()+",");
+            }
+
+            HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getAuth().get(0).getUid(), stringBuilder.toString(), new MyRequestCallBack() {
+
+                @Override
+                public void onSuccess(Object result) {
+
+                }
+
+                @Override
+                public void onFailure(String msg) {
+
+                }
+            });
+
+        }
+    }
+
 }

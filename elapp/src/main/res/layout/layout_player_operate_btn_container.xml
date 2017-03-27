@@ -49,7 +49,7 @@
             android:textColor="@color/text_color_white"
             android:textSize="14sp" />
 
-        <SeekBar
+        <com.easyvaas.common.widget.verticalseekbar.VerticalSeekBar
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="4dp"
