@@ -56,14 +56,12 @@ public class BasePlayerActivity extends BaseChatActivity {
             mBgView.setVisibility(View.GONE);
             if (isSearch) {
                 EventBus.getDefault().post(new LiveSearchStockEvent(msg));
-                mEmotionKeyBoardBar.clearText();
-                mEmotionKeyBoardBar.hideInput();
+                hideKeyBorder(true);
                 return;
             } else {
                 if (mIsGoodVideo) {
                     EventBus.getDefault().post(new LiveCommentEvent(msg));
-                    mEmotionKeyBoardBar.clearText();
-                    mEmotionKeyBoardBar.hideInput();
+                    hideKeyBorder(true);
                 } else {
                     if (mChatHelper == null) {
                         return;
@@ -90,8 +88,7 @@ public class BasePlayerActivity extends BaseChatActivity {
                             comment.setLogourl(EVApplication.getUser().getLogourl());
                         }
                         mChatHelper.chatSendComment(comment);
-                        mEmotionKeyBoardBar.clearText();
-                        mEmotionKeyBoardBar.hideInput();
+                        hideKeyBorder(true);
                     }
                 }
             }
@@ -139,7 +136,7 @@ public class BasePlayerActivity extends BaseChatActivity {
         mBgView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                mEmotionKeyBoardBar.hideInput();
+                hideKeyBorder(false);
                 mBgView.setVisibility(View.GONE);
                 return true;
             }
@@ -340,5 +337,11 @@ public class BasePlayerActivity extends BaseChatActivity {
         ShareContent shareContent = new ShareContentWebpage(mCurrentVideo.getTitle(), content,
                 mCurrentVideo.getShare_url(), mCurrentVideo.getShare_thumb_url());
         ShareHelper.getInstance(this).showShareBottomPanel(shareContent);
+    }
+
+    public void hideKeyBorder(boolean isClearText){
+        if (isClearText) mEmotionKeyBoardBar.clearText();
+        mEmotionKeyBoardBar.hideInput();
+        EventBus.getDefault().post(new LiveSearchStockEvent(LiveSearchStockEvent.TYPE_KEYBORDER_HIDE, ""));
     }
 }

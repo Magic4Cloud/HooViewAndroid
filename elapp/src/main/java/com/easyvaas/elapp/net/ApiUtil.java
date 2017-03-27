@@ -185,27 +185,30 @@ public class ApiUtil {
     }
 
     public static void checkUnreadMessage(final Context ctx) {
-        ApiHelper.getInstance().getMessageUnreadCount(new MyRequestCallBack<String>() {
-            @Override
-            public void onSuccess(String result) {
-                if (JsonParserUtil.getInt(result, "unread") > 0) {
-                    ctx.sendBroadcast(new Intent(Constants.ACTION_SHOW_NEW_MESSAGE_ICON));
+        if (ctx == null) return;
+        if (EVApplication.isLogin() && Preferences.getInstance(ctx).isLogin()) {
+            ApiHelper.getInstance().getMessageUnreadCount(new MyRequestCallBack<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    if (JsonParserUtil.getInt(result, "unread") > 0) {
+                        ctx.sendBroadcast(new Intent(Constants.ACTION_SHOW_NEW_MESSAGE_ICON));
 //                    ChatManager.getInstance().setHaveUnreadMsg(true);
-                    EventBus.getDefault().post(new NewMessageEvent(true));
-                } else {
-                    ctx.sendBroadcast(new Intent(Constants.ACTION_HIDE_NEW_MESSAGE_ICON));
+                        EventBus.getDefault().post(new NewMessageEvent(true));
+                    } else {
+                        ctx.sendBroadcast(new Intent(Constants.ACTION_HIDE_NEW_MESSAGE_ICON));
 //                    ChatManager.getInstance().setHaveUnreadMsg(false);
 //                    ChatManager.getInstance().checkUnreadChatGroupMessage(ctx);
-                    EventBus.getDefault().post(new NewMessageEvent(false));
+                        EventBus.getDefault().post(new NewMessageEvent(false));
+
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
 
                 }
-            }
-
-            @Override
-            public void onFailure(String msg) {
-
-            }
-        });
+            });
+        }
     }
 
     private static void cacheTopicList(final Context context) {
@@ -242,23 +245,26 @@ public class ApiUtil {
     }
 
     public static void checkSession(final Context context) {
-        ApiHelper.getInstance().userSessionCheck(new MyRequestCallBack<String>() {
-            @Override
-            public void onSuccess(String result) {
-                UserUtil.handleAfterLoginBySession(context);
-            }
+        if (context == null) return;
+        if (EVApplication.isLogin() && Preferences.getInstance(context).isLogin()) {
+            ApiHelper.getInstance().userSessionCheck(new MyRequestCallBack<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    UserUtil.handleAfterLoginBySession(context);
+                }
 
-            @Override
-            public void onError(String errorInfo) {
-                super.onError(errorInfo);
-                Preferences.getInstance(context).logout(false);
+                @Override
+                public void onError(String errorInfo) {
+                    super.onError(errorInfo);
+                    Preferences.getInstance(context).logout(false);
 //              LoginActivity.start(context);
-            }
+                }
 
-            @Override
-            public void onFailure(String msg) {
-                LoginActivity.start(context);
-            }
-        });
+                @Override
+                public void onFailure(String msg) {
+                    LoginActivity.start(context);
+                }
+            });
+        }
     }
 }
