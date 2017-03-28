@@ -286,13 +286,27 @@ public class HooviewApiHelper {
      * 更新自选股 顺序 数量
      * @param userId 用户ID
      * @param symbols  股票代码
+     * @param type  0 更新 1 添加
      */
-    public void updateStocks(String userId,String symbols,MyRequestCallBack callBack)
+    public void updateStocks(String userId,String symbols,String type,MyRequestCallBack callBack)
     {
         Map<String,String> map = new HashMap<>();
         map.put("userid",userId);
         map.put("symbol",symbols);
+        map.put("type",type);
         sRequestHelper.getAsString(HooviewApiConstant.UPDATE_STOCKS,map,callBack);
+    }
+
+    /**
+     * 获取自选股新闻
+     * @param userid 用户ID
+     */
+    public void getUserStockNewsList(String userid, String start, String count, MyRequestCallBack<MyStockNewsModel> callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("start", start);
+        map.put("count", count);
+        map.put("userid", userid);
+        sRequestHelper.getAsGson(HooviewApiConstant.GET_USER_STOCK_NEWS, map, MyStockNewsModel.class, callBack);
     }
 
 }

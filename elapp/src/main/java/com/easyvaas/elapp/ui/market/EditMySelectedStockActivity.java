@@ -34,6 +34,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
     private RelativeLayout mRlEmpty;
     private TextView mTvTitle;
     private TextView mTvComplete;
+    private TextView tv_add;
     private StockListModel mModel;
     private List<StockListModel.StockModel> mFinalItems = new ArrayList<StockListModel.StockModel>();
 
@@ -58,38 +59,61 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRlEmpty = (RelativeLayout) findViewById(R.id.rl_empty);
         mTvTitle = (TextView) findViewById(R.id.tv_title);
+        tv_add = (TextView) findViewById(R.id.tv_add);
         mTvComplete = (TextView) findViewById(R.id.tv_complete);
         findViewById(R.id.iv_back).setOnClickListener(this);
         mTvComplete.setOnClickListener(this);
         mTvComplete.setVisibility(View.VISIBLE);
         mTvTitle.setText(R.string.title_edit_stock);
+
+        tv_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchStockActivity.start(EditMySelectedStockActivity.this);
+            }
+        });
+
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             mModel = (StockListModel) bundle.getSerializable("stock");
             initAdapter(mModel);
         } else {
-            getStocksList();
+
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getStocksList();
+    }
 
     // 从网络上得到自选股的列表
     private void getStocksList(){
         HooviewApiHelper.getInstance().getUserStockList(EVApplication.getUser().getName(), new MyRequestCallBack<StockListModel>() {
             @Override
             public void onSuccess(StockListModel result) {
-                if (result == null) return;
-                if (result.getData()!= null && result.getData().size() > 0){
-                    initAdapter(result);
+                if (result == null)
+                {
+                    mRlEmpty.setVisibility(View.VISIBLE);
+                    return;
                 }
+                if (result.getData()!= null && result.getData().size() > 0){
+                    mRlEmpty.setVisibility(View.GONE);
+                    initAdapter(result);
+                }else
+                    mRlEmpty.setVisibility(View.VISIBLE);
             }
             @Override
             public void onFailure(String msg) {
+                mRlEmpty.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onError(String errorInfo) {
+                mRlEmpty.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -147,7 +171,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 break;
             case R.id.tv_complete:
                 upDateStocks(mFinalItems);
-                finish();
+
                 //                EventBus.getDefault().post(mFinalItems);
                 break;
         }
@@ -213,6 +237,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 holder1.mTvPercent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if (mItems.size() > 0)
                         mItems.remove(position);
                         notifyDataSetChanged();
                         setFinalItems(mItems);
@@ -285,7 +310,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 @Override
                 public void onClick(View v) {
                     SearchStockActivity.start(EditMySelectedStockActivity.this);
-                    finish();
+//                    finish();
                 }
             });
         }
@@ -315,16 +340,21 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
             }
         }
 
-            HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), stringBuilder.toString(), new MyRequestCallBack() {
+            HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), stringBuilder.toString(),"0", new MyRequestCallBack() {
 
                 @Override
                 public void onSuccess(Object result) {
-
+                    finish();
                 }
 
                 @Override
                 public void onFailure(String msg) {
+                    finish();
+                }
 
+                @Override
+                public void onError(String errorInfo) {
+                    finish();
                 }
             });
 
