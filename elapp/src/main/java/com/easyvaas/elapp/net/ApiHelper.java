@@ -10,7 +10,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.easyvaas.common.gift.bean.GoodsEntityArray;
 import com.easyvaas.elapp.app.EVApplication;
@@ -1009,7 +1008,6 @@ public class ApiHelper {
         Map<String, String> param = new HashMap<>();
         param.put("sessionid", mPref.getSessionId());
         param.put("taglist", tagListString);
-        Log.e("test",mPref.getSessionId() +":"+tagListString);
         sRequestHelper.getAsString(ApiConstant.USER_TAG_SET, param, callBack);
     }
 }

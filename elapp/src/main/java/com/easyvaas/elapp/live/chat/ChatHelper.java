@@ -10,12 +10,14 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.easyvaas.common.gift.bean.GiftEntity;
 import com.easyvaas.elapp.bean.chat.ChatBarrage;
 import com.easyvaas.elapp.bean.chat.ChatBarrageEntity;
 import com.easyvaas.elapp.bean.chat.ChatComment;
 import com.easyvaas.elapp.bean.chat.ChatCommentEntity;
+import com.easyvaas.elapp.bean.chat.ChatGiftEntity;
 import com.easyvaas.elapp.bean.chat.ChatRedPackInfo;
 import com.easyvaas.elapp.bean.chat.ChatStatusEntity;
 import com.easyvaas.elapp.bean.chat.ChatVideoCallState;
@@ -156,10 +158,9 @@ public class ChatHelper implements IChatHelper {
                             if (barrage != null) {
                                 mCallback.onBarrage(barrage);
                             }
-                            // 现在改为一发送就显示礼物， 发送成功就不用显示了
-//                            if (gift != null) {
-//                                mCallback.onNewGift(gift);
-//                            }
+                            if (gift != null) {
+                                mCallback.onNewGift(gift);
+                            }
                             if (redPackInfo != null) {
                                 Map<String, ChatRedPackInfo> map = new HashMap<>();
                                 map.put(redPackInfo.getId(), redPackInfo);
@@ -314,6 +315,23 @@ public class ChatHelper implements IChatHelper {
         String json = new Gson().toJson(statusEntity);
         Logger.d(TAG, "chatSendBarrage json: " + json);
         mEVMessage.send(mVid, comment.getContent(), json);
+    }
+
+    @Override
+    public void chatSendGift(GiftEntity gift) {
+        ChatStatusEntity statusEntity = new ChatStatusEntity();
+        ChatGiftEntity chatGift = new ChatGiftEntity();
+        chatGift.setNk(gift.getNickname());
+        chatGift.setGnm(gift.getGiftName());
+        chatGift.setGct(gift.getGiftCount());
+
+//        chatGift.setLg(gift.getUserLogo());
+//        chatGift.setGlg(gift.getGiftPicUrl());
+//        chatGift.setGid(gift.getGiftId());
+        statusEntity.setExgf(chatGift);
+        String json = new Gson().toJson(statusEntity);
+        Log.e("test", "ChatGiftEntity");
+        mEVMessage.send(mVid, "", json);
     }
 
     @Override

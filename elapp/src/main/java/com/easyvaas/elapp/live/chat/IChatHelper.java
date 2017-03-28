@@ -27,6 +27,8 @@ public interface IChatHelper {
 
     void chatSendBarrage(ChatComment comment);
 
+    void chatSendGift(GiftEntity giftEntity);
+
     void chatLiveOwnerShutUp(String name, boolean shutUp);
 
     void chatLiveSetManager(String userName, boolean setManager);

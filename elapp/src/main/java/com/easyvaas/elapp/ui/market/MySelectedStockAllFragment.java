@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui.market;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.easyvaas.elapp.adapter.recycler.SelectStockListAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
+import com.easyvaas.elapp.event.MarketRefreshEvent;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.LazyLoadFragment;
@@ -22,6 +24,10 @@ import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +59,12 @@ public class MySelectedStockAllFragment extends LazyLoadFragment {
         MySelectedStockAllFragment fragment = new MySelectedStockAllFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -176,5 +188,19 @@ public class MySelectedStockAllFragment extends LazyLoadFragment {
     public void showAddBtn(){
         showEmptyView();
         mTvAddSelect.setVisibility(View.VISIBLE);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MarketRefreshEvent event) {
+        if (getUserVisibleHint()){
+            stockRefresh.setRefreshing(true);
+            getStocksList();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

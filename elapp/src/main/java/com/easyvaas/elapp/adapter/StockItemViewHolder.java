@@ -63,13 +63,10 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
     public void setStockModel(final StockListModel.StockModel stockModel, boolean isEnd) {
         if (stockModel != null) {
             mTvStockName.setText(stockModel.getName());
-            if(TextUtils.isEmpty(stockModel.getSymbol())){
-                mTvStockNumber.setText(stockModel.getSymbol());
-            }else{
-                mTvStockNumber.setText(stockModel.getSymbol());
-            }
-            mTvPrice.setText(stockModel.getOpen()+ "");
-            mTvPercent.setText(StringUtil.getStockPercent(stockModel.getHigh()-stockModel.getLow()));
+            mTvStockNumber.setText(stockModel.getSymbol());
+            mTvPrice.setText(stockModel.getClose()+ "");
+            mTvPercent.setText(StringUtil.getStockPercent(stockModel.getPercent()));
+//            mTvPercent.setText(StringUtil.getStockPercent(stockModel.getHigh()-stockModel.getLow()));
             mTvTag.setVisibility(View.INVISIBLE);
             //通view的select属性来控制颜色
             mTvPercent.setTextColor(mTvPercent.getContext().getResources().getColor(R.color.white));
