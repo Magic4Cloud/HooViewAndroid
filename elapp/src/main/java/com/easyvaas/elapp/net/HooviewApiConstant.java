@@ -37,6 +37,7 @@ public class HooviewApiConstant {
     public static final String UPLOAD_CHAT_MESSAGE = HOST_HOOVIEW + "/api/textlive/chat?";
     public static final String GET_CHAT_HISTORY = HOST_HOOVIEW + "/api/textlive/history?";
     public static final String GET_USER_STOCKS = HOST_HOOVIEW + "/api/user/stocks?";    // 自选股列表
+    public static final String UPDATE_STOCKS = HOST_HOOVIEW+"/api/user/modifystocks"; // 修改上传自选股
 
     public static final String AD_SPLASH = "http://dev.hooview.com" + "/api/ad/appstart";
     public static final String GET_BANNERS = HOST_HOOVIEW + "/api/news/banners?";
