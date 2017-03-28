@@ -26,8 +26,6 @@ import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.hooview.app.R;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,8 +69,29 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
             mModel = (StockListModel) bundle.getSerializable("stock");
             initAdapter(mModel);
         } else {
-            getSelectStr();
+            getStocksList();
         }
+    }
+
+
+    // 从网络上得到自选股的列表
+    private void getStocksList(){
+        HooviewApiHelper.getInstance().getUserStockList(EVApplication.getUser().getName(), new MyRequestCallBack<StockListModel>() {
+            @Override
+            public void onSuccess(StockListModel result) {
+                if (result == null) return;
+                if (result.getData()!= null && result.getData().size() > 0){
+                    initAdapter(result);
+                }
+            }
+            @Override
+            public void onFailure(String msg) {
+            }
+
+            @Override
+            public void onError(String errorInfo) {
+            }
+        });
     }
 
     private void getSelectStr() {
@@ -127,8 +146,9 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 finish();
                 break;
             case R.id.tv_complete:
+                upDateStocks(mFinalItems);
                 finish();
-                EventBus.getDefault().post(mFinalItems);
+                //                EventBus.getDefault().post(mFinalItems);
                 break;
         }
     }
@@ -156,6 +176,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 mItems = new ArrayList<StockListModel.StockModel>();
                 mItems.clear();
                 mItems.addAll(mModel.getData());
+                mFinalItems.addAll(mItems);
             }
         }
 
@@ -287,15 +308,14 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < modelList.size(); i++) {
             StockListModel.StockModel model = modelList.get(i);
-            if (i == modelList.size() - 1)
-            {
+            if (i == modelList.size() - 1) {
                 stringBuilder.append(model.getSymbol());
-            }else
-            {
-                stringBuilder.append(model.getSymbol()+",");
+            } else {
+                stringBuilder.append(model.getSymbol() + ",");
             }
+        }
 
-            HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getAuth().get(0).getUid(), stringBuilder.toString(), new MyRequestCallBack() {
+            HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), stringBuilder.toString(), new MyRequestCallBack() {
 
                 @Override
                 public void onSuccess(Object result) {
@@ -309,6 +329,6 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
             });
 
         }
-    }
+
 
 }

@@ -91,7 +91,7 @@ public class StockListModel implements Serializable {
         private String time;
         private double volume;
         private String symbol;
-        private String percent;
+        private double percent;
 
         public double getPrice() {
             return price;
@@ -383,11 +383,11 @@ public class StockListModel implements Serializable {
             this.volume = volume;
         }
 
-        public String getPercent() {
+        public double getPercent() {
             return percent;
         }
 
-        public void setPercent(String percent) {
+        public void setPercent(double percent) {
             this.percent = percent;
         }
     }

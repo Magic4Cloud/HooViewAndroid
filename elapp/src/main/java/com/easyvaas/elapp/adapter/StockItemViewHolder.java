@@ -73,7 +73,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
             mTvTag.setVisibility(View.INVISIBLE);
             //通view的select属性来控制颜色
             mTvPercent.setTextColor(mTvPercent.getContext().getResources().getColor(R.color.white));
-            if (stockModel.getChangepercent() >= 0) {
+            if (stockModel.getPercent() >= 0) {
                 this.mTvPercent.setBackgroundResource(R.drawable.bg_stock_up_shape);
                 this.mTvPrice.setSelected(true);
                 this.mTvPercent.setSelected(true);
