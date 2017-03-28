@@ -769,5 +769,6 @@
     <string name="image_text_live_has_not_started_my">牛人快来直播吧</string>
 
     <string name="user_stock_nothing">你还没有添加自选哦</string>
+    <string name="added">已添加</string>
 
 </resources>

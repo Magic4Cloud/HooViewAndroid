@@ -73,11 +73,11 @@ public class GlobalSearchActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             public void afterTextChanged(Editable s) {
-                mKeyWord = String.valueOf(s);
-                if(!TextUtils.isEmpty(mKeyWord)&&mKeyWord.length()>0){
-                    mTvOperation.setSelected(true);
-                    mTvOperation.setText(R.string.complete);
-                }
+//                mKeyWord = String.valueOf(s);
+//                if(!TextUtils.isEmpty(mKeyWord)&&mKeyWord.length()>0){
+//                    mTvOperation.setSelected(true);
+//                    mTvOperation.setText(R.string.complete);
+//                }
             }
         });
 

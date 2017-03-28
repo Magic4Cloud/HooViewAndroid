@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.easyvaas.common.recycler.PullToLoadView;
 import com.easyvaas.elapp.adapter.recycler.MyStockNewsListAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.base.BaseRvcFragment;
-import com.easyvaas.elapp.bean.market.ExponentModel;
 import com.easyvaas.elapp.bean.news.MyStockNewsModel;
 import com.easyvaas.elapp.bean.user.CollectListModel;
 import com.easyvaas.elapp.db.Preferences;
@@ -114,11 +114,8 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
     @Override
     protected void loadData(final boolean isLoadMore) {
         super.loadData(isLoadMore);
-        if (TextUtils.isEmpty(mMyStockCode)) {
-            getMyStockList();
-        } else {
+
             getNewsList(isLoadMore);
-        }
     }
 
     private void getMyStockList() {
@@ -147,7 +144,7 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
     }
 
     private void getNewsList(final boolean isLoadMore) {
-        HooviewApiHelper.getInstance().getMyStockNewsList(mMyStockCode, start + "", count + "", new MyRequestCallBack<MyStockNewsModel>() {
+        HooviewApiHelper.getInstance().getUserStockNewsList(EVApplication.getUser().getName(), start + "", count + "", new MyRequestCallBack<MyStockNewsModel>() {
             @Override
             public void onSuccess(MyStockNewsModel result) {
                 if (result != null&&result.getNews().size()>0) {
@@ -163,6 +160,7 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
                 }else{
                     showNewsEmptyView();
                 }
+                mPullToLoadRcvView.getSwipeRefreshLayout().setRefreshing(false);
             }
 
             @Override
@@ -223,25 +221,21 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshStockEvent event) {
-        if (TextUtils.isEmpty(mMyStockCode)) {
-            getMyStockList();
-        } else {
             getNewsList(false);
-        }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(List<ExponentModel> event) {
-        for(ExponentModel ex:event){
-            if(!TextUtils.isEmpty(mMyStockCode)){
-                mMyStockCode = mMyStockCode+","+ex.getSymbol();
-            }else{
-                mMyStockCode = ex.getSymbol();
-            }
-            Preferences.getInstance(getActivity()).putString(ex.getName(),ex.getSymbol());
-        }
-        Preferences.getInstance(getActivity()).putString(Preferences.KEY_HOOOVIEW_SELECT_STOCK,mMyStockCode);
-        getNewsList(false);
-    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onMessageEvent(List<ExponentModel> event) {
+//        for(ExponentModel ex:event){
+//            if(!TextUtils.isEmpty(mMyStockCode)){
+//                mMyStockCode = mMyStockCode+","+ex.getSymbol();
+//            }else{
+//                mMyStockCode = ex.getSymbol();
+//            }
+//            Preferences.getInstance(getActivity()).putString(ex.getName(),ex.getSymbol());
+//        }
+//        Preferences.getInstance(getActivity()).putString(Preferences.KEY_HOOOVIEW_SELECT_STOCK,mMyStockCode);
+//        getNewsList(false);
+//    }
 
 }

@@ -81,6 +81,11 @@ public class GlobalSearchListFragment extends BaseListFragment {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
         search();
     }
 
