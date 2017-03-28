@@ -13,10 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.adapter.recycler.SelectStockListAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.LazyLoadFragment;
+import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
@@ -96,7 +98,7 @@ public class MySelectedStockAllFragment extends LazyLoadFragment {
         mTvAddSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditMySelectedStockActivity.start(getContext(), null);
+                SearchStockActivity.start(getContext());
             }
         });
     }
@@ -109,34 +111,35 @@ public class MySelectedStockAllFragment extends LazyLoadFragment {
 
     // 从网络上得到自选股的列表（会获取到全部的自选股， 没有分类）.没有加载更多
     private void getStocksList(){
-        HooviewApiHelper.getInstance().getSelectStockList("SZ000712,SZ000025,SZ000016,SZ000004", new MyRequestCallBack<StockListModel>() {
-                    @Override
-                    public void onSuccess(StockListModel result) {
-                        stockRefresh.setRefreshing(false);
-                        if (result == null) return;
-                        if (result.getData()!= null && result.getData().size() > 0){
-                            sModels.clear();
-                            filterData(result.getData());
-                            if (sModels.size() > 0){
-                                hideEmptyView();
-                                mAdapter.setStockListModel(sModels);
-                                return;
-                            }
-                        }
-                        showAddBtn();
+        HooviewApiHelper.getInstance().getUserStockList(EVApplication.getUser().getName(), new MyRequestCallBack<StockListModel>() {
+            @Override
+            public void onSuccess(StockListModel result) {
+                stockRefresh.setRefreshing(false);
+                if (result == null) return;
+                if (result.getData()!= null && result.getData().size() > 0){
+                    sModels.clear();
+                    filterData(result.getData());
+                    if (sModels.size() > 0){
+                        hideEmptyView();
+                        mAdapter.setStockListModel(sModels);
+                        return;
                     }
+                }
+                showAddBtn();
+            }
 
-                    @Override
-                    public void onFailure(String msg) {
-                        stockRefresh.setRefreshing(false);
-                    }
+            @Override
+            public void onFailure(String msg) {
+                stockRefresh.setRefreshing(false);
+                if (sModels.size() <= 0) showAddBtn();
+            }
 
-                    @Override
-                    public void onError(String errorInfo) {
-                        super.onError(errorInfo);
-                        stockRefresh.setRefreshing(false);
-                    }
-                });
+            @Override
+            public void onError(String errorInfo) {
+                stockRefresh.setRefreshing(false);
+                if (sModels.size() <= 0) showAddBtn();
+            }
+        });
     }
 
     // 过滤数据（得到当前 Tab 相关的数据）

@@ -99,6 +99,7 @@ public class BasePlayerActivity extends BaseChatActivity {
         public void onKeyBoardHide() {
             if(mBgView!=null){
                 mBgView.setVisibility(View.GONE);
+                hideKeyBorder(false);
             }
         }
 

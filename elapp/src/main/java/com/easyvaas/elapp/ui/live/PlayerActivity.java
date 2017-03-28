@@ -178,9 +178,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         tabLayout.setupWithViewPager(mViewPager);
         if (mIsPlayLive) {
             showMediaController(false);
-            mIv_all_screen.setVisibility(View.VISIBLE);
-            ivShare.setVisibility(View.VISIBLE);
-            ivBack.setVisibility(View.VISIBLE);
         } else {
             showMediaController(true);
         }
@@ -258,6 +255,9 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     private void updateVideoInfo(VideoEntity result) {
         if (mCurrentVideo.getLiving() == VideoEntity.IS_LIVING) {
             showMediaController(false);
+            mIv_all_screen.setVisibility(View.VISIBLE);
+            ivShare.setVisibility(View.VISIBLE);
+            ivBack.setVisibility(View.VISIBLE);
         } else {
             showMediaController(true);
         }

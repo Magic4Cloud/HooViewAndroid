@@ -272,4 +272,15 @@ public class HooviewApiHelper {
         sRequestHelper.getAsGson(HooviewApiConstant.AD_SPLASH, map, SplashEntity.class, callBack);
     }
 
+    /**
+     * 得到自选股的列表
+     * @param userid
+     * @param callBack
+     */
+    public void getUserStockList(String userid, MyRequestCallBack<StockListModel> callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put(ApiConstant.USER_ID, userid);
+        sRequestHelper.getAsGson(HooviewApiConstant.GET_USER_STOCKS, map, StockListModel.class, callBack);
+    }
+
 }

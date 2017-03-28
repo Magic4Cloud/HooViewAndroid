@@ -16,10 +16,10 @@ import com.easyvaas.elapp.db.Preferences;
 public class ApiConstant {
     private static final String RELEASE_HOST = "http://appgw.hooview.com/easyvaas/appgw/";
     private static final String RELEASE_WEB_APP_HOST = "http://appgw.hooview.com/easyvaas/webapp2";
-//    private static final String DEBUG_HOST = "http://appgwdev.hooview.com/easyvaas/appgw/";
-//    private static final String DEBUG_WEB_APP_HOST = "http://appgwdev.hooview.com/easyvaas/webapp2";
-    private static final String DEBUG_HOST = RELEASE_HOST;
-    private static final String DEBUG_WEB_APP_HOST = RELEASE_WEB_APP_HOST;
+    private static final String DEBUG_HOST = "http://appgwdev.hooview.com/easyvaas/appgw/";
+    private static final String DEBUG_WEB_APP_HOST = "http://appgwdev.hooview.com/easyvaas/webapp2";
+//    private static final String DEBUG_HOST = RELEASE_HOST;
+//    private static final String DEBUG_WEB_APP_HOST = RELEASE_WEB_APP_HOST;
 
     private static final boolean IS_SUPPORT_SSL = false;
 
@@ -214,4 +214,8 @@ public class ApiConstant {
     public static final int DEFAULT_PAGE_SIZE_ALL = 10000;
     public static final int DEFAULT_PAGE_SIZE = 20;
     public static final int DEFAULT_FIRST_PAGE_INDEX = 0;
+
+    //================================= PARAM API ===========================//
+    public static final String USER_ID = "userid";
+
 }
