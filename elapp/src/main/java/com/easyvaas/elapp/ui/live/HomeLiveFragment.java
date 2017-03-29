@@ -1,5 +1,7 @@
 package com.easyvaas.elapp.ui.live;
 
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -13,8 +15,10 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.easyvaas.elapp.ui.MainActivity;
 import com.hooview.app.R;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
@@ -28,8 +32,11 @@ import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.ImageTextLiveInputView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class HomeLiveFragment extends BaseFragment implements View.OnClickListener {
     public static final long ANIM_DURATION = 500;
@@ -40,6 +47,8 @@ public class HomeLiveFragment extends BaseFragment implements View.OnClickListen
     private ImageView mIvStartVideLive;
     private ImageView mIvStartImageText;
     private RelativeLayout mRlLiveBtn;
+
+    public SharedPreferences mSp;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +76,46 @@ public class HomeLiveFragment extends BaseFragment implements View.OnClickListen
         mIvStartImageText.setOnClickListener(this);
         myAdapter = new MyAdapter(getChildFragmentManager());
         mViewPager.setAdapter(myAdapter);
+        setUpIndicatorWidth();
+    }
+
+
+    /**
+     * 通过反射修改TabLayout Indicator的宽度（仅在Android 4.2及以上生效）
+     */
+    private void setUpIndicatorWidth() {
+        Class<?> tabLayoutClass = mTabLayout.getClass();
+        Field tabStrip = null;
+        try {
+            tabStrip = tabLayoutClass.getDeclaredField("mTabStrip");
+            tabStrip.setAccessible(true);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        LinearLayout layout = null;
+        try {
+            if (tabStrip != null) {
+                layout = (LinearLayout) tabStrip.get(mTabLayout);
+            }
+            for (int i = 0; i < layout.getChildCount(); i++) {
+                View child = layout.getChildAt(i);
+                child.setPadding(0, 0, 0, 0);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+
+                    int margin = (int) ViewUtil.getScreenWidth(getActivity()) / 12;
+
+                    params.setMarginStart(margin);
+                    params.setMarginEnd(margin);
+
+                }
+                child.setLayoutParams(params);
+                child.invalidate();
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -216,5 +265,13 @@ public class HomeLiveFragment extends BaseFragment implements View.OnClickListen
             }).start();
             mStartLive.setSelected(false);
         }
+    }
+
+    public TabLayout getmTabLayout() {
+        return mTabLayout;
+    }
+
+    public ViewPager getmViewPager() {
+        return mViewPager;
     }
 }

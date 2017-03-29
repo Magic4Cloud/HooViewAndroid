@@ -21,6 +21,8 @@ import com.easyvaas.elapp.event.RefreshExponentEvent;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
+import com.easyvaas.elapp.ui.MainActivity;
+import com.easyvaas.elapp.ui.MainMaskActivity;
 import com.easyvaas.elapp.ui.base.BaseListRcvFragment;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.google.gson.Gson;
@@ -76,13 +78,14 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
                 //
                 ViewGroup mViewGroup = (ViewGroup) (mRecyclerView.getChildAt(0));
 
-                View mButtomView = mViewGroup.getChildAt(mViewGroup.getChildCount() - 1);
-                int mButtom = mButtomView.getBottom();
+                View mBottomView = mViewGroup.getChildAt(mViewGroup.getChildCount() - 1);
+                int mBottom = mBottomView.getBottom();
 
                 //78dp，启动一个透明的activity
 
-                //32dp
-
+                //MainMaskActivity.start(getActivity(), );
+                MainActivity mMainActivity = (MainActivity) getActivity();
+                mMainActivity.startShowMask(mBottom - (int) ViewUtil.dp2Px(getContext(), 78));
 
             }
         });

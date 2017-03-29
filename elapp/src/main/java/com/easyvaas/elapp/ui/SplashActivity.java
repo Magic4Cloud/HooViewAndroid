@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -258,6 +259,7 @@ public class SplashActivity extends BaseActivity {
         btn_jump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mHandler.removeMessages(MSG_EXIT);
                 mHandler.sendEmptyMessage(MSG_EXIT);
             }
         });
@@ -271,7 +273,7 @@ public class SplashActivity extends BaseActivity {
             public void onSuccess(SplashEntity result) {
                 //if (result.getReterr().equals("OK")) {
                 //开始加载图片
-                startLoadingImageView(result.getRetinfo().getAdurl());
+                startLoadingImageView(result.getAdurl());
                 mRequestSuccessTime = System.currentTimeMillis();
                 mHandler.sendEmptyMessageDelayed(MSG_EXIT, 2000);
                 //}
@@ -292,7 +294,7 @@ public class SplashActivity extends BaseActivity {
                 btn_jump.setVisibility(View.VISIBLE);
                 mHandler.removeMessages(MSG_EXIT);
                 mHandler.sendEmptyMessageDelayed(MSG_EXIT, 3000);
-                iv_top.setImageBitmap(bitmap);
+                iv_top.setBackground(new BitmapDrawable(bitmap));
                 Log.e("TAG", "图片ok");
             }
 

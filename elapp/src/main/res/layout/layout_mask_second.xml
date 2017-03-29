@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom">
+
+    <ImageView
+        android:id="@+id/iv_mask"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="1dp"
+        android:background="@drawable/news" />
+
+    <ImageView
+        android:id="@+id/iv_tv"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@+id/iv_mask"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="64dp"
+        android:background="@drawable/news_word"
+        android:paddingLeft="-10dp" />
+
+    <ImageView
+
+        android:id="@+id/iv_next"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/iv_tv"
+        android:layout_alignRight="@+id/iv_tv"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="28dp"
+        android:background="@drawable/bt_hud_one" />
+
+</RelativeLayout>

@@ -8,17 +8,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/rg_navigation" />
+
     <View
-        android:background="@color/split_line_color"
         android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_above="@+id/rg_navigation"
-        android:layout_height="1dp"/>
+        android:background="@color/split_line_color" />
+
     <RadioGroup
         android:id="@+id/rg_navigation"
-        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
         android:orientation="horizontal">
 
         <RadioButton
@@ -50,4 +52,13 @@
             android:text="@string/navigation_title_user" />
 
     </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/rl_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mask"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true" />
 </RelativeLayout>

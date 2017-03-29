@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.hooview.app.R;
@@ -15,6 +16,7 @@ public class MainMaskActivity extends BaseActivity {
 
     private MainActivity mMainActivity;
     private int mMarginTop;
+    private RelativeLayout rl_mask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,11 @@ public class MainMaskActivity extends BaseActivity {
 
 
     private void initViews() {
+        rl_mask = (RelativeLayout) findViewById(R.id.activity_main_mask);
 
     }
+
+
 
     //把对象设置进去，以便操作MainActivity
     public void setMainActivity(MainActivity activity) {
