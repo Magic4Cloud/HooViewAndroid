@@ -95,14 +95,20 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         FeedbackHelper.getInstance(this).init(this, Constants.APP_FEEDBACK_KEY);
         initReceiver();
 
-        EVSdk.enableDebugLog();
-        if (ApiConstant.isUserReleaseServer()) {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
-                    Constants.EV_SECRET_ID, "");
-        } else {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
-                    Constants.EV_SECRET_ID_DEV, "");
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                EVSdk.enableDebugLog();
+                if (ApiConstant.isUserReleaseServer()) {
+                    EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
+                            Constants.EV_SECRET_ID, "");
+                } else {
+                    EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
+                            Constants.EV_SECRET_ID_DEV, "");
+                }
+            }
+        });
+
         ApiUtil.checkSession(getContext());
         initHyphenate();
     }
@@ -138,13 +144,19 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         if (user == null) {
             return;
         }
-        if (ApiConstant.isUserReleaseServer()) {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
-                    Constants.EV_SECRET_ID, mUser.getName());
-        } else {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
-                    Constants.EV_SECRET_ID_DEV, mUser.getName());
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (ApiConstant.isUserReleaseServer()) {
+                    EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
+                            Constants.EV_SECRET_ID, mUser.getName());
+                } else {
+                    EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
+                            Constants.EV_SECRET_ID_DEV, mUser.getName());
+                }
+            }
+        });
+
         if (user.getAuth() != null) {
             for (int i = 0, n = user.getAuth().size(); i < n; i++) {
                 User.AuthEntity authEntity = user.getAuth().get(i);

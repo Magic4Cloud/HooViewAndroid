@@ -144,8 +144,8 @@ public class BaseLiveRoomActivity extends BaseChatActivity implements View.OnCli
                 return false;
             }
         });
-        mTvAssets.setText(getString(R.string.hooview_coin_tips, 0 + ""));
-        mTvWatchCount.setText(getString(R.string.hooview_coin_tips, 0 + ""));
+        mTvAssets.setText(getString(R.string.hooview_coin_tips2, 0 + ""));
+        mTvWatchCount.setText(getString(R.string.watch_count_tips, 0 + ""));
         mGiftViewContainer = (GiftViewContainer) findViewById(R.id.GiftViewContainer);
     }
 
@@ -265,7 +265,7 @@ public class BaseLiveRoomActivity extends BaseChatActivity implements View.OnCli
             mLikeCount = chatVideoInfo.getLike_count();
             mWatchingCount = chatVideoInfo.getWatching_count();
             mHooviewCoinCount = chatVideoInfo.getRiceRoll_count();
-            mTvAssets.setText(getString(R.string.hooview_coin_tips, mHooviewCoinCount + ""));
+            mTvAssets.setText(getString(R.string.hooview_coin_tips2, mHooviewCoinCount + ""));
             updateWatchLikeCounts(mWatchingCount);
             // TODO: 2017/1/10
 //            if (mLiveRoomManager != null) {

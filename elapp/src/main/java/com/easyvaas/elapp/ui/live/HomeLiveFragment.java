@@ -69,6 +69,7 @@ public class HomeLiveFragment extends BaseFragment implements View.OnClickListen
         mTabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
         mRlLiveBtn = (RelativeLayout) view.findViewById(R.id.rl_live);
+        mRlLiveBtn.setVisibility(View.INVISIBLE);
         mIvStartVideLive = (ImageView) view.findViewById(R.id.iv_start_video_live);
         mIvStartImageText = (ImageView) view.findViewById(R.id.iv_start_image_text_live);
         mTabLayout.setupWithViewPager(mViewPager);
