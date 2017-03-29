@@ -205,6 +205,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         rl_mask.addView(mRelativeLayout);
     }
 
+
+    //最后一个
     private void addThirdMask() {
         rl_mask.removeAllViews();
         RelativeLayout mRelativeLayout = (RelativeLayout)
@@ -222,7 +224,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             @Override
             public void onClick(View v) {
                 rl_mask.removeAllViews();
-                rl_mask.setVisibility(View.INVISIBLE);
+                rl_mask.setVisibility(View.GONE);
                 if (mHomeLiveFragment != null && mHomeLiveFragment.getmViewPager() != null) {
                     mHomeLiveFragment.getmViewPager().setCurrentItem(0);
                 }
@@ -233,7 +235,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         });
     }
 
-    //第三个蒙版。直播
+    //第三个蒙版。视频直播
     private void addFourMask() {
         RelativeLayout mRelativeLayout = (RelativeLayout)
                 LayoutInflater.from(this).inflate(R.layout.layout_mask_five, rl_mask, false);
@@ -247,6 +249,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mRelativeLayout.findViewById(R.id.iv_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rl_mask.removeAllViews();
                 if (mHomeLiveFragment != null && mHomeLiveFragment.getmViewPager() != null) {
                     mHomeLiveFragment.getmViewPager().setCurrentItem(1);
                 }
