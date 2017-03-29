@@ -25,8 +25,10 @@ import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.utils.Constants;
 import com.google.gson.Gson;
+import com.growingio.android.sdk.collection.GrowingIO;
 import com.hooview.app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeaderSliderAdapterItem implements AdapterItem {
@@ -119,6 +121,7 @@ public class HeaderSliderAdapterItem implements AdapterItem {
 
     private void assembleSliderView(List<BannerModel.DataEntity> list) {
         mSliderLayout.removeAllSliders();
+        List<String> bannerDescriptions = new ArrayList<>();
         for (int i = 0, n = list.size(); i < n; i++) {
             TextSliderView textSliderView = new TextSliderView(mContext);
             textSliderView
@@ -135,6 +138,8 @@ public class HeaderSliderAdapterItem implements AdapterItem {
             textSliderView.getBundle().putString(EXTRA_KEY,
                     list.get(i).getResource());
             mSliderLayout.addSlider(textSliderView);
+            bannerDescriptions.add(list.get(i).getImg());
         }
+        GrowingIO.getInstance().trackBanner(mSliderLayout, bannerDescriptions);
     }
 }

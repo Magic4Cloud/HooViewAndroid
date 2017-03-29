@@ -144,6 +144,15 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
     }
 
     private void getNewsList(final boolean isLoadMore) {
+        if (EVApplication.getUser() == null) {
+            showMyStockEmptyView();
+            mRlEmptyView.setVisibility(View.VISIBLE);
+            mTvAddBtn.setVisibility(View.GONE);
+            mIvIcon.setImageResource(R.drawable.ic_smile);
+            mTvPrompt.setText(R.string.user_not_login);
+            mPullToLoadRcvView.getSwipeRefreshLayout().setRefreshing(false);
+            return;
+        }
         HooviewApiHelper.getInstance().getUserStockNewsList(EVApplication.getUser().getName(), start + "", count + "", new MyRequestCallBack<MyStockNewsModel>() {
             @Override
             public void onSuccess(MyStockNewsModel result) {
@@ -168,6 +177,7 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
                 if (!isLoadMore) {
                     showNewsEmptyView();
                 }
+                mPullToLoadRcvView.getSwipeRefreshLayout().setRefreshing(false);
             }
 
             @Override
@@ -175,6 +185,7 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
                 if (!isLoadMore) {
                     showNewsEmptyView();
                 }
+                mPullToLoadRcvView.getSwipeRefreshLayout().setRefreshing(false);
             }
         });
     }

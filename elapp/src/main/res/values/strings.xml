@@ -770,5 +770,6 @@
 
     <string name="user_stock_nothing">你还没有添加自选哦</string>
     <string name="added">已添加</string>
+    <string name="user_not_login">您还没有登录哦</string>
 
 </resources>

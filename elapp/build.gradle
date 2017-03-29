@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'com.growingio.android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -14,6 +15,8 @@ android {
         versionName "2.1.1"
 
         resValue "string", "build_time", buildTime()
+        resValue("string", "growingio_project_id", "a9d9a45702edf729")
+        resValue("string", "growingio_url_scheme", "growing.dd4ec50c87debcfb")
 
         ndk {
             abiFilters "armeabi", "armeabi-v7a"
@@ -155,4 +158,5 @@ dependencies {
     compile 'com.github.lzyzsd:jsbridge:1.0.4'
     compile 'com.nex3z:flow-layout:0.1.3'
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    compile 'com.growingio.android:vds-android-agent:0.9.103@aar'
 }
