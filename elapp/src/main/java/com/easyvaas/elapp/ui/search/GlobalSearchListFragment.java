@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.easyvaas.common.adapter.CommonRcvAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.hooview.app.R;
 import com.easyvaas.elapp.adapter.recycler.SearchLiveResultAdapter;
 import com.easyvaas.elapp.adapter.recycler.SearchNewsResultAdapter;
@@ -179,7 +180,7 @@ public class GlobalSearchListFragment extends BaseListFragment {
     }
 
     public void searchStock() {
-        HooviewApiHelper.getInstance().searchStock(mKeyWord, start + "", count + "", new MyRequestCallBack<SearchStockModel>() {
+        HooviewApiHelper.getInstance().searchStock(mKeyWord, EVApplication.getUser().getName(),start + "", count + "", new MyRequestCallBack<SearchStockModel>() {
             @Override
             public void onSuccess(SearchStockModel result) {
                 if (result != null && result.getData() != null) {

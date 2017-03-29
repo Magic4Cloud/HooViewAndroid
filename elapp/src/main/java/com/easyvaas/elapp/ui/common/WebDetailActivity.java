@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui.common;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -42,6 +43,9 @@ import com.github.lzyzsd.jsbridge.BridgeWebView;
 import com.github.lzyzsd.jsbridge.CallBackFunction;
 import com.hooview.app.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import io.realm.RealmResults;
 
 import static com.hooview.app.R.id.tv_news_comment;
@@ -78,6 +82,7 @@ public class WebDetailActivity extends BaseActivity {
     private TextView mTvStockRefresh;
     private TextView mTvStockShare;
     private String code;
+    private int isCollected; // 0 未添加 1 已添加
 
 
     @Override
@@ -136,6 +141,7 @@ public class WebDetailActivity extends BaseActivity {
             tvSubhead.setText(code);
             mRlBottomNews.setVisibility(View.GONE);
             mRlBottomStock.setVisibility(View.VISIBLE);
+            isStockAdded();
         } else if (detailType == TYPE_NEWS) {
             tvTitle.setVisibility(View.GONE);
             tvSubhead.setVisibility(View.GONE);
@@ -385,7 +391,7 @@ public class WebDetailActivity extends BaseActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.tv_stock_add:
-                    collectStock(code);
+                    collectStock(code,isCollected);
                     break;
                 case R.id.tv_stock_share:
                     shareUrl();
@@ -444,16 +450,30 @@ public class WebDetailActivity extends BaseActivity {
         }
     }
 
-    private void collectStock(String code) {
+    private void collectStock(String code, final int type) {
         if (TextUtils.isEmpty(code)) {
             return;
         }
-
-        HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), code,"1", new MyRequestCallBack() {
+        HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), code, type == 1?"2":"1", new MyRequestCallBack() {
 
             @Override
             public void onSuccess(Object result) {
-                SingleToast.show(WebDetailActivity.this, "添加自选成功");
+                if (type == 0)
+                {
+                    SingleToast.show(WebDetailActivity.this, getString(R.string.add_stock_success));
+                    mTvStockAdd.setSelected(true);
+                    isCollected = 1;
+                    mTvStockAdd.setText(R.string.added);
+                    mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.comment_level_other));
+                }else
+                {
+                    SingleToast.show(WebDetailActivity.this, getString(R.string.delect_stock_sucess));
+                    isCollected = 0;
+                    mTvStockAdd.setSelected(false);
+                    mTvStockAdd.setText(getString(R.string.add_stock_btn));
+                    mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.text_color_gray));
+                }
+
             }
 
             @Override
@@ -461,29 +481,42 @@ public class WebDetailActivity extends BaseActivity {
 
             }
         });
+    }
 
+    /**
+     * 判断是否已经勾选了股票
+     */
+    private void isStockAdded()
+    {
+        HooviewApiHelper.getInstance().isStockAdded(EVApplication.getUser().getName(), code, new MyRequestCallBack() {
+            @Override
+            public void onSuccess(Object result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result.toString());
+                    int exist = jsonObject.getInt("exist");  // 0 不存在 1 存在
+                    if (exist == 1)
+                    {
+                        mTvStockAdd.setSelected(true);
+                        isCollected = 1;
+                        mTvStockAdd.setText(R.string.added);
+                        mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.comment_level_other));
+                    }else
+                    {
+                        isCollected = 0;
+                        mTvStockAdd.setSelected(false);
+                        mTvStockAdd.setText(getString(R.string.add_stock_btn));
+                        mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.text_color_gray));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-//
-//        CollectHelper.collectStock(WebDetailActivity.this.getApplicationContext(), code,
-//                new MyRequestCallBack<String>() {
-//
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        mTvStockAdd.setSelected(true);
-//                        SingleToast.show(getApplicationContext(), "添加自选成功");
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String msg) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(String errorInfo) {
-//                        super.onError(errorInfo);
-//                    }
-//                });
+            @Override
+            public void onFailure(String msg) {
 
+            }
+        });
     }
 
 
