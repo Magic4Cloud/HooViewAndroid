@@ -5,8 +5,8 @@ public class HooviewApiConstant {
     private static final String HOST_EV_APPGW;
 
     //private final static String HOST_HOOVIEW = BuildConfig.DEBUG?"http://dev.hooview.com":"http://dev.hooview.com";
-    private final static String HOST_HOOVIEW = "http://openapi.hooview.com";
-//    private static final String HOST_HOOVIEW = "http://dev.hooview.com";
+//    private final static String HOST_HOOVIEW = "http://openapi.hooview.com";
+    private static final String HOST_HOOVIEW = "http://dev.hooview.com";
 
     static {
         HOST_EV_APPGW = ApiConstant.getAppGWHost();
@@ -36,8 +36,11 @@ public class HooviewApiConstant {
     public static final String CHECK_IMAGE_TEXT_LIVE_ROOM = HOST_HOOVIEW + "/api/textlive/owner?";
     public static final String UPLOAD_CHAT_MESSAGE = HOST_HOOVIEW + "/api/textlive/chat?";
     public static final String GET_CHAT_HISTORY = HOST_HOOVIEW + "/api/textlive/history?";
-    public static final String GET_BANNERS = HOST_HOOVIEW + "/api/news/banners?";
+    public static final String GET_USER_STOCKS = HOST_HOOVIEW + "/api/user/stocks?";    // 自选股列表
+    public static final String UPDATE_STOCKS = HOST_HOOVIEW+"/api/user/modifystocks?"; // 修改上传自选股
+    public static final String GET_USER_STOCK_NEWS = HOST_HOOVIEW+"/api/user/stocknews?"; // 自选股新闻
 
     public static final String AD_SPLASH = "http://dev.hooview.com" + "/api/ad/appstart";
+    public static final String GET_BANNERS = HOST_HOOVIEW + "/api/news/banners?";
 
 }

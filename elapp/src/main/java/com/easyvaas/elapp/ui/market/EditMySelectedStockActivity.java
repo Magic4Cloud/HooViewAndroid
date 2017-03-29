@@ -16,6 +16,7 @@ import com.easyvaas.common.advancedRecyclerView.draggable.DraggableItemAdapter;
 import com.easyvaas.common.advancedRecyclerView.draggable.ItemDraggableRange;
 import com.easyvaas.common.advancedRecyclerView.draggable.RecyclerViewDragDropManager;
 import com.easyvaas.common.advancedRecyclerView.utils.AbstractDraggableItemViewHolder;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.bean.user.CollectListModel;
 import com.easyvaas.elapp.net.ApiHelper;
@@ -25,8 +26,6 @@ import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.hooview.app.R;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +34,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
     private RelativeLayout mRlEmpty;
     private TextView mTvTitle;
     private TextView mTvComplete;
+    private TextView tv_add;
     private StockListModel mModel;
     private List<StockListModel.StockModel> mFinalItems = new ArrayList<StockListModel.StockModel>();
 
@@ -59,19 +59,63 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRlEmpty = (RelativeLayout) findViewById(R.id.rl_empty);
         mTvTitle = (TextView) findViewById(R.id.tv_title);
+        tv_add = (TextView) findViewById(R.id.tv_add);
         mTvComplete = (TextView) findViewById(R.id.tv_complete);
         findViewById(R.id.iv_back).setOnClickListener(this);
         mTvComplete.setOnClickListener(this);
         mTvComplete.setVisibility(View.VISIBLE);
         mTvTitle.setText(R.string.title_edit_stock);
+
+        tv_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchStockActivity.start(EditMySelectedStockActivity.this);
+            }
+        });
+
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             mModel = (StockListModel) bundle.getSerializable("stock");
             initAdapter(mModel);
         } else {
-            getSelectStr();
+
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getStocksList();
+    }
+
+    // 从网络上得到自选股的列表
+    private void getStocksList(){
+        HooviewApiHelper.getInstance().getUserStockList(EVApplication.getUser().getName(), new MyRequestCallBack<StockListModel>() {
+            @Override
+            public void onSuccess(StockListModel result) {
+                if (result == null)
+                {
+                    mRlEmpty.setVisibility(View.VISIBLE);
+                    return;
+                }
+                if (result.getData()!= null && result.getData().size() > 0){
+                    mRlEmpty.setVisibility(View.GONE);
+                    initAdapter(result);
+                }else
+                    mRlEmpty.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onFailure(String msg) {
+                mRlEmpty.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError(String errorInfo) {
+                mRlEmpty.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void getSelectStr() {
@@ -126,8 +170,9 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 finish();
                 break;
             case R.id.tv_complete:
-                finish();
-                EventBus.getDefault().post(mFinalItems);
+                upDateStocks(mFinalItems);
+
+                //                EventBus.getDefault().post(mFinalItems);
                 break;
         }
     }
@@ -155,6 +200,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 mItems = new ArrayList<StockListModel.StockModel>();
                 mItems.clear();
                 mItems.addAll(mModel.getData());
+                mFinalItems.addAll(mItems);
             }
         }
 
@@ -191,6 +237,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 holder1.mTvPercent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if (mItems.size() > 0)
                         mItems.remove(position);
                         notifyDataSetChanged();
                         setFinalItems(mItems);
@@ -252,7 +299,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
             mTvPercent = (ImageView) itemView.findViewById(R.id.tv_del);
         }
     }
-     class AddViewHolder extends RecyclerView.ViewHolder{
+     private class AddViewHolder extends RecyclerView.ViewHolder{
 
         TextView mTvStockAdd;
 
@@ -263,7 +310,7 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
                 @Override
                 public void onClick(View v) {
                     SearchStockActivity.start(EditMySelectedStockActivity.this);
-                    finish();
+//                    finish();
                 }
             });
         }
@@ -275,4 +322,43 @@ public class EditMySelectedStockActivity extends BaseActivity implements View.On
         mFinalItems.addAll(finalItems);
 
     }
+
+
+    /**
+     * 更新自选股 列表
+     * @param modelList 自选股列表
+     */
+    private void upDateStocks(List<StockListModel.StockModel> modelList)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < modelList.size(); i++) {
+            StockListModel.StockModel model = modelList.get(i);
+            if (i == modelList.size() - 1) {
+                stringBuilder.append(model.getSymbol());
+            } else {
+                stringBuilder.append(model.getSymbol() + ",");
+            }
+        }
+
+            HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), stringBuilder.toString(),"0", new MyRequestCallBack() {
+
+                @Override
+                public void onSuccess(Object result) {
+                    finish();
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    finish();
+                }
+
+                @Override
+                public void onError(String errorInfo) {
+                    finish();
+                }
+            });
+
+        }
+
+
 }

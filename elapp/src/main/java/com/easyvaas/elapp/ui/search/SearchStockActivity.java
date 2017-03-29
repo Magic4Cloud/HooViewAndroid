@@ -77,11 +77,11 @@ public class SearchStockActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                mKeyWord = String.valueOf(s);
-                if (!TextUtils.isEmpty(mKeyWord) && mKeyWord.length() > 0) {
-                    mTvOperation.setSelected(true);
-                    mTvOperation.setText(R.string.complete);
-                }
+//                mKeyWord = String.valueOf(s);
+//                if (!TextUtils.isEmpty(mKeyWord) && mKeyWord.length() > 0) {
+//                    mTvOperation.setSelected(true);
+//                    mTvOperation.setText(R.string.complete);
+//                }
             }
         });
 
@@ -107,7 +107,7 @@ public class SearchStockActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_operation:
-                if (!mTvOperation.isSelected() && mTvOperation.getText().equals(getString(R.string.cancel))) {
+                if (mTvOperation.getText().equals(getString(R.string.cancel))) {
                     finish();
                 } else {
                     mKeyWord = mEtSearch.getText().toString().trim();

@@ -27,6 +27,15 @@ public class SearchStockModel extends BaseListModel {
         private String symbol;
         private String market;
         private String name;
+        private boolean isSelected; // 选中状态
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
+        }
 
         public String getSymbol() {
             return symbol;

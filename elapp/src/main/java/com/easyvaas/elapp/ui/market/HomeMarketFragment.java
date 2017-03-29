@@ -8,15 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import com.hooview.app.R;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.event.MarketRefreshEvent;
 import com.easyvaas.elapp.ui.base.BaseFragment;
 import com.easyvaas.elapp.ui.search.GlobalSearchActivity;
+import com.easyvaas.elapp.ui.user.LoginActivity;
+import com.hooview.app.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import static com.hooview.app.R.id.tv_market;
 
 public class HomeMarketFragment extends BaseFragment implements View.OnClickListener {
     private FragmentManager mFm;
@@ -43,7 +48,7 @@ public class HomeMarketFragment extends BaseFragment implements View.OnClickList
     }
 
     private void initView(View view) {
-        mRbMarket = (RadioButton) view.findViewById(R.id.tv_market);
+        mRbMarket = (RadioButton) view.findViewById(tv_market);
         mRbMyStock = (RadioButton) view.findViewById(R.id.tv_my_stock);
         mRbMarket.setOnClickListener(this);
         mRbMyStock.setOnClickListener(this);
@@ -79,15 +84,18 @@ public class HomeMarketFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_market:
-                mFm.beginTransaction().hide(mMySelectedStockMainFragment).commit();
-                mFm.beginTransaction().show(mMarketMainFragment).commit();
-                mIvEdit.setVisibility(View.GONE);
+            case tv_market:
+                rbMarketClicked();
                 break;
             case R.id.tv_my_stock:
-                mFm.beginTransaction().hide(mMarketMainFragment).commit();
-                mFm.beginTransaction().show(mMySelectedStockMainFragment).commit();
-                mIvEdit.setVisibility(View.VISIBLE);
+                if (EVApplication.isLogin() && Preferences.getInstance(getContext()).isLogin()) {
+                    mFm.beginTransaction().hide(mMarketMainFragment).commit();
+                    mFm.beginTransaction().show(mMySelectedStockMainFragment).commit();
+                    mIvEdit.setVisibility(View.VISIBLE);
+                } else {
+                    mRbMarket.setChecked(true);
+                    LoginActivity.start(getContext());
+                }
                 break;
             case R.id.iv_edit:
                 EditMySelectedStockActivity.start(getContext(), stockListModel);
@@ -101,8 +109,15 @@ public class HomeMarketFragment extends BaseFragment implements View.OnClickList
         }
     }
 
+    private void rbMarketClicked(){
+        mFm.beginTransaction().hide(mMySelectedStockMainFragment).commit();
+        mFm.beginTransaction().show(mMarketMainFragment).commit();
+        mIvEdit.setVisibility(View.GONE);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(StockListModel event) {
         stockListModel = event;
     }
+
 }

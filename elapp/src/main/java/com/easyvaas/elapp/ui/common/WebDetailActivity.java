@@ -24,7 +24,6 @@ import com.easyvaas.elapp.bean.user.Collection;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.db.RealmHelper;
-import com.easyvaas.elapp.helper.CollectHelper;
 import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.HooviewApiConstant;
 import com.easyvaas.elapp.net.HooviewApiHelper;
@@ -253,12 +252,13 @@ public class WebDetailActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (mEtComment.isShown()) {
-            hideInputMethod();
-            mInputCommentBar.setVisibility(View.GONE);
-        } else {
-            super.onBackPressed();
-        }
+//        if (mEtComment.isShown()) {
+//            hideInputMethod();
+//            mInputCommentBar.setVisibility(View.GONE);
+//        } else {
+//
+//        }
+        super.onBackPressed();
     }
 
     @Override
@@ -448,25 +448,41 @@ public class WebDetailActivity extends BaseActivity {
         if (TextUtils.isEmpty(code)) {
             return;
         }
-        CollectHelper.collectStock(WebDetailActivity.this.getApplicationContext(), code,
-                new MyRequestCallBack<String>() {
 
-                    @Override
-                    public void onSuccess(String result) {
-                        mTvStockAdd.setSelected(true);
-                        SingleToast.show(getApplicationContext(), "添加自选成功");
-                    }
+        HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), code,"1", new MyRequestCallBack() {
 
-                    @Override
-                    public void onFailure(String msg) {
+            @Override
+            public void onSuccess(Object result) {
+                SingleToast.show(WebDetailActivity.this, "添加自选成功");
+            }
 
-                    }
+            @Override
+            public void onFailure(String msg) {
 
-                    @Override
-                    public void onError(String errorInfo) {
-                        super.onError(errorInfo);
-                    }
-                });
+            }
+        });
+
+
+//
+//        CollectHelper.collectStock(WebDetailActivity.this.getApplicationContext(), code,
+//                new MyRequestCallBack<String>() {
+//
+//                    @Override
+//                    public void onSuccess(String result) {
+//                        mTvStockAdd.setSelected(true);
+//                        SingleToast.show(getApplicationContext(), "添加自选成功");
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String msg) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(String errorInfo) {
+//                        super.onError(errorInfo);
+//                    }
+//                });
 
     }
 

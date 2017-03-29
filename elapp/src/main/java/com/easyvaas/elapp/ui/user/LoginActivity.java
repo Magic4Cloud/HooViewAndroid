@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
@@ -342,7 +341,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             @Override
             public void onSuccess(MyAssetEntity result) {
                 if (result != null) {
-                    Log.e("test", "result not null");
                     Preferences.getInstance(LoginActivity.this).putLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, result.getEcoin());
                     GiftManager.setECoinCount(LoginActivity.this, result.getEcoin());
                 }

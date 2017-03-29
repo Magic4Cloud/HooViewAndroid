@@ -97,14 +97,15 @@
 
                 <data android:scheme="elapp"/>
             </intent-filter>
+            <!-- GrowingIO 启动圈选接口 -->
             <intent-filter>
-                <data android:scheme="growing.b1bd48c4c22aabd3"/>
-
+                <data android:scheme="growing.dd4ec50c87debcfb"/>
                 <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
             </intent-filter>
+            <!-- GrowingIO 启动圈选接口 -->
         </activity>
         <activity
             android:name="com.easyvaas.elapp.activity.login.LoginMainActivity"

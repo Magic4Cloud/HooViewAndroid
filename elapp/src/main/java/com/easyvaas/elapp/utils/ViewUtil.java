@@ -7,8 +7,11 @@
 package com.easyvaas.elapp.utils;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import com.hooview.app.R;
 
 /**
  * 控件绘制所需要的一些工具方法
@@ -33,5 +36,10 @@ public class ViewUtil {
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.heightPixels;
+    }
+
+    public static void initSwipeRefreshLayout(SwipeRefreshLayout swipeLayout) {
+        if (swipeLayout == null) return;
+        swipeLayout.setColorSchemeResources(R.color.base_purplish);
     }
 }

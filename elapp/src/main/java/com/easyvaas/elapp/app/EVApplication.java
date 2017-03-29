@@ -22,6 +22,7 @@ import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.NukeSSLCerts;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.push.PushHelper;
+import com.easyvaas.elapp.utils.CarNetCrashHandler;
 import com.easyvaas.elapp.utils.ChannelUtil;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
@@ -29,6 +30,8 @@ import com.easyvaas.elapp.utils.FileUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.sdk.core.EVSdk;
 import com.google.gson.Gson;
+import com.growingio.android.sdk.collection.Configuration;
+import com.growingio.android.sdk.collection.GrowingIO;
 import com.hooview.app.BuildConfig;
 import com.umeng.analytics.MobclickAgent;
 
@@ -55,7 +58,13 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         super.onCreate();
         app = this;
 
+        if (BuildConfig.DEBUG) CarNetCrashHandler.getInstance().setCustomCrashHandler(getApplicationContext());
+
         ChannelUtil.initChannelFromApk(this);
+        GrowingIO.startWithConfiguration(this, new Configuration()
+                .useID()
+                .trackAllFragments()
+                .setChannel("dev"));
 
         //if (BuildConfig.DEBUG) {
         NukeSSLCerts.nuke();
@@ -87,12 +96,12 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         initReceiver();
 
         EVSdk.enableDebugLog();
-        if (BuildConfig.DEBUG) {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
-                    Constants.EV_SECRET_ID_DEV, "");
-        } else {
+        if (ApiConstant.isUserReleaseServer()) {
             EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
                     Constants.EV_SECRET_ID, "");
+        } else {
+            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
+                    Constants.EV_SECRET_ID_DEV, "");
         }
         ApiUtil.checkSession(getContext());
         initHyphenate();

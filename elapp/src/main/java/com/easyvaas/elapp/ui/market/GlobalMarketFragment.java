@@ -248,11 +248,13 @@ public class GlobalMarketFragment extends BaseListFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MarketRefreshEvent event) {
-        if(!mCanRefresh){
-            mSwipeRefreshLayout.setRefreshing(true);
-            loadData();
-        }else{
-            mSwipeRefreshLayout.setRefreshing(false);
+        if (getUserVisibleHint()) {
+            if (!mCanRefresh) {
+                mSwipeRefreshLayout.setRefreshing(true);
+                loadData();
+            } else {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
         }
     }
 

@@ -119,8 +119,10 @@ public class HKMarketFragment extends BaseListFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MarketRefreshEvent event) {
-        mSwipeRefreshLayout.setRefreshing(true);
-        loadData();
+        if (getUserVisibleHint()) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            loadData();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

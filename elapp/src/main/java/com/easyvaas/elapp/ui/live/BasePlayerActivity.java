@@ -99,6 +99,7 @@ public class BasePlayerActivity extends BaseChatActivity {
         public void onKeyBoardHide() {
             if(mBgView!=null){
                 mBgView.setVisibility(View.GONE);
+                EventBus.getDefault().post(new LiveSearchStockEvent(LiveSearchStockEvent.TYPE_KEYBORDER_HIDE, ""));
             }
         }
 
@@ -168,8 +169,8 @@ public class BasePlayerActivity extends BaseChatActivity {
             = new GiftPagerView.OnGiftSendCallBack() {
         @Override
         public void sendGift(final GiftEntity data) {
-//            findViewById(R.id.player_bottom_share_btn).setVisibility(View.VISIBLE);
-            EventBus.getDefault().post(new NewGiftEvent(data));
+//            findViewById(R.id.player_bottom_share_btn).setVbility(View.VISIBLE);
+//            if (mChatHelper != null) mChatHelper.chatSendGift(data);
             EventBus.getDefault().post(new ChatLiveInputEvent(ChatLiveInputEvent.ACTION_SHOW_INPUT));
             ApiHelper.getInstance().sendGiftString(mVideoId, data.getGiftId(), data.getGiftCount(),
                     false, mCurrentVideo.getName(), new MyRequestCallBack<String>() {

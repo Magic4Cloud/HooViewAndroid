@@ -59,7 +59,8 @@
     <string-array name="market_tabs">
         <item>@string/market_tabs_chinese</item>
         <item>@string/market_tabs_hk</item>
-        <item>@string/market_tabs_usa</item>
+        <!-- 去掉美股 -->
+        <!--<item>@string/market_tabs_usa</item>-->
         <item>@string/market_tabs_global</item>
     </string-array>
     <string-array name="global_content_manager_tabs">
@@ -77,7 +78,7 @@
         <item>@string/all</item>
         <item>@string/market_tabs_chinese</item>
         <item>@string/market_tabs_hk</item>
-        <item>@string/market_tabs_usa</item>
+        <!--<item>@string/market_tabs_usa</item>-->
     </string-array>
     <string-array name="search_tab">
         <item>@string/news</item>

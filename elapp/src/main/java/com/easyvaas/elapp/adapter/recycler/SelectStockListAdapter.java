@@ -1,24 +1,22 @@
 package com.easyvaas.elapp.adapter.recycler;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hooview.app.R;
 import com.easyvaas.elapp.adapter.StockItemViewHolder;
 import com.easyvaas.elapp.bean.market.ExponentListNewModel;
 import com.easyvaas.elapp.bean.market.StockListModel;
-import com.easyvaas.elapp.bean.market.StockModel;
-import com.easyvaas.elapp.bean.market.UpsAndDownsDataModel;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.ExponentCellView;
+import com.hooview.app.R;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by guoliuya on 2017/2/28.
@@ -96,7 +94,7 @@ public class SelectStockListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Object object = datas.get(position);
         if (holder instanceof StockItemViewHolder && object instanceof StockListModel.StockModel) {
-            ((StockItemViewHolder) holder).setStockModel((StockListModel.StockModel) object);
+            ((StockItemViewHolder) holder).setStockModel((StockListModel.StockModel) object, position == datas.size() - 1);
         }
     }
 

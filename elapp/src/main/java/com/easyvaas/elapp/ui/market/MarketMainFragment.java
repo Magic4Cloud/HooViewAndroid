@@ -36,16 +36,18 @@ public class MarketMainFragment extends BaseTabViewPagerFragment {
             if (fragment != null) {
                 return fragment;
             }
-            if (position == 3) {
+            if (position == 2) {
                 fragments.put(position, fragment = new GlobalMarketFragment());
             } else if (position == 0) {
                 fragments.put(position, fragment = new ChineseMarketFragment());
             } else if (position == 1) {
                 fragments.put(position, fragment = new HKMarketFragment());
 
-            } else if (position == 2) {
-                fragments.put(position, fragment = new USAMarketFragment());
             }
+            // 去掉美股
+//            else if (position == 2) {
+//                fragments.put(position, fragment = new USAMarketFragment());
+//            }
             return fragment;
         }
 
