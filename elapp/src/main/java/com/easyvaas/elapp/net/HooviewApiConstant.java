@@ -39,6 +39,7 @@ public class HooviewApiConstant {
     public static final String GET_USER_STOCKS = HOST_HOOVIEW + "/api/user/stocks?";    // 自选股列表
     public static final String UPDATE_STOCKS = HOST_HOOVIEW+"/api/user/modifystocks?"; // 修改上传自选股
     public static final String GET_USER_STOCK_NEWS = HOST_HOOVIEW+"/api/user/stocknews?"; // 自选股新闻
+    public static final String IS_STOCK_ADDED = HOST_HOOVIEW+"/api/user/collect/stock?"; //是否已添加自选股
 
     public static final String AD_SPLASH = "http://dev.hooview.com" + "/api/ad/appstart";
     public static final String GET_BANNERS = HOST_HOOVIEW + "/api/news/banners?";

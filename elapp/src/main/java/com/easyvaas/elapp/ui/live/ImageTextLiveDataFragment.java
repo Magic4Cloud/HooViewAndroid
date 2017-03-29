@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 
 import com.easyvaas.common.adapter.CommonRcvAdapter;
 import com.easyvaas.elapp.adapter.recycler.LiveDataAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.search.SearchStockModel;
 import com.easyvaas.elapp.event.AppBarLayoutOffsetChangeEvent;
 import com.easyvaas.elapp.net.HooviewApiConstant;
@@ -225,7 +226,7 @@ public class ImageTextLiveDataFragment extends BaseFragment implements View.OnCl
             SingleToast.show(getContext(), getString(R.string.error_search_stock));
             return;
         }
-        HooviewApiHelper.getInstance().searchStock(mKeyWord, start + "", count + "", new MyRequestCallBack<SearchStockModel>() {
+        HooviewApiHelper.getInstance().searchStock(mKeyWord, EVApplication.getUser().getName(),start + "", count + "", new MyRequestCallBack<SearchStockModel>() {
             @Override
             public void onSuccess(SearchStockModel result) {
                 if (result != null && result.getData() != null && result.getData().size() != 0) {

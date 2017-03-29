@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,11 +14,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.easyvaas.common.emoji.utils.EmoticonsUtils;
 import com.easyvaas.common.sharelogin.ShareBlock;
 import com.easyvaas.elapp.bean.SplashEntity;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
+import com.easyvaas.elapp.utils.NetworkUtil;
 import com.hooview.app.R;
 import com.easyvaas.elapp.base.BaseActivity;
 import com.easyvaas.elapp.bean.UpdateInfoEntity;
@@ -265,18 +271,19 @@ public class SplashActivity extends BaseActivity {
         });
 
 
+
         iv_top = (ImageView) findViewById(R.id.iv_top);
         ImageView iv_bottom = (ImageView) findViewById(R.id.iv_bottom);
-
+        mHandler.sendEmptyMessageDelayed(MSG_EXIT, 2000);
+        if (NetworkUtil.isNetworkAvailable(this)) {
+            iv_top.setBackgroundColor(Color.WHITE);
+        } else {
+            return;
+        }
         HooviewApiHelper.getInstance().getSplashInfo(new MyRequestCallBack<SplashEntity>() {
             @Override
             public void onSuccess(SplashEntity result) {
-                //if (result.getReterr().equals("OK")) {
-                //开始加载图片
                 startLoadingImageView(result.getAdurl());
-                mRequestSuccessTime = System.currentTimeMillis();
-                mHandler.sendEmptyMessageDelayed(MSG_EXIT, 2000);
-                //}
             }
 
             @Override
@@ -287,26 +294,10 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void startLoadingImageView(String url) {
-
-        Picasso.with(this).load(url).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                btn_jump.setVisibility(View.VISIBLE);
-                mHandler.removeMessages(MSG_EXIT);
-                mHandler.sendEmptyMessageDelayed(MSG_EXIT, 3000);
-                iv_top.setBackground(new BitmapDrawable(bitmap));
-                Log.e("TAG", "图片ok");
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                Log.e("TAG", "图片正在刷新");
-            }
-        });
+        Glide.with(this).load(url).centerCrop().into(iv_top);
+        btn_jump.setVisibility(View.VISIBLE);
+        mHandler.removeMessages(MSG_EXIT);
+        mHandler.sendEmptyMessageDelayed(MSG_EXIT, 3000);
     }
 
     @Override

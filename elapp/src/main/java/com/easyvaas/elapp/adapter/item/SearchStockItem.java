@@ -59,7 +59,7 @@ public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity>
     @Override
     public void onUpdateViews(final SearchStockModel.DataEntity model, int position) {
         if (model != null) {
-            if (model.isSelected())
+            if (model.getCollected() == 1)
             {
                 mIvAdd.setVisibility(View.GONE);
                 mtvCom.setVisibility(View.VISIBLE);
@@ -76,24 +76,42 @@ public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity>
             mIvAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    collectStock(mContext, model.getSymbol());
-                    model.setSelected(true);
-                    mIvAdd.setVisibility(View.GONE);
-                    mtvCom.setVisibility(View.VISIBLE);
+                    collectStock(mContext, model.getSymbol(),model.getCollected());
+                    model.setCollected(0);
+
+                }
+            });
+            mtvCom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    collectStock(mContext, model.getSymbol(),model.getCollected());
+                    model.setCollected(1);
+
                 }
             });
         }
     }
 
-    private void collectStock(final Context context, String code) {
+    private void collectStock(final Context context, String code, final int type) {
         if (TextUtils.isEmpty(code)) {
             return;
         }
-        HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), code,"1", new MyRequestCallBack() {
+        HooviewApiHelper.getInstance().updateStocks(EVApplication.getUser().getName(), code, type == 1?"2":"1", new MyRequestCallBack() {
 
             @Override
             public void onSuccess(Object result) {
-                SingleToast.show(context, "添加自选成功");
+                if (type == 0)
+                {
+                    SingleToast.show(context, context.getString(R.string.add_stock_success));
+                    mIvAdd.setVisibility(View.GONE);
+                    mtvCom.setVisibility(View.VISIBLE);
+                }else
+                {
+                    SingleToast.show(context,context.getString(R.string.delect_stock_sucess));
+                    mIvAdd.setVisibility(View.VISIBLE);
+                    mtvCom.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
