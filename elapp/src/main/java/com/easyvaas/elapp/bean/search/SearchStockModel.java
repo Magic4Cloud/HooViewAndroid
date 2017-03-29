@@ -27,14 +27,14 @@ public class SearchStockModel extends BaseListModel {
         private String symbol;
         private String market;
         private String name;
-        private boolean isSelected; // 选中状态
+        private int collected; // 选中状态 0未选 1选了
 
-        public boolean isSelected() {
-            return isSelected;
+        public int getCollected() {
+            return collected;
         }
 
-        public void setSelected(boolean selected) {
-            isSelected = selected;
+        public void setCollected(int collected) {
+            this.collected = collected;
         }
 
         public String getSymbol() {

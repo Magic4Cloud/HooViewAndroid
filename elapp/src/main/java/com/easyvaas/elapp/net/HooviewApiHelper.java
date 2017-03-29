@@ -133,11 +133,12 @@ public class HooviewApiHelper {
         sRequestHelper.getAsGson(HooviewApiConstant.SEARCH_NEWS, map, SearchNewsModel.class, callBack);
     }
 
-    public void searchStock(String title, String start, String count, MyRequestCallBack<SearchStockModel> callBack) {
+    public void searchStock(String title,String userid ,String start, String count, MyRequestCallBack<SearchStockModel> callBack) {
         Map<String, String> map = new HashMap<>();
         map.put("start", start);
         map.put("count", count);
         map.put("name", title);
+        map.put("userid",userid);
         sRequestHelper.getAsGson(HooviewApiConstant.SEARCH_STOCK, map, SearchStockModel.class, callBack);
     }
 
@@ -286,7 +287,7 @@ public class HooviewApiHelper {
      * 更新自选股 顺序 数量
      * @param userId 用户ID
      * @param symbols  股票代码
-     * @param type  0 更新 1 添加
+     * @param type  0 更新 1 添加 2 删除
      */
     public void updateStocks(String userId,String symbols,String type,MyRequestCallBack callBack)
     {
@@ -307,6 +308,17 @@ public class HooviewApiHelper {
         map.put("count", count);
         map.put("userid", userid);
         sRequestHelper.getAsGson(HooviewApiConstant.GET_USER_STOCK_NEWS, map, MyStockNewsModel.class, callBack);
+    }
+
+    /**
+     * 是否添加过该自选股
+     * @param userid 用户ID
+     */
+    public void isStockAdded(String userid, String symbol, MyRequestCallBack callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("symbol", symbol);
+        map.put("userid", userid);
+        sRequestHelper.getAsString(HooviewApiConstant.IS_STOCK_ADDED, map,callBack);
     }
 
 }
