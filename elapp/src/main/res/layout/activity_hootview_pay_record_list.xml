@@ -44,19 +44,58 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingLeft="15dp">
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/income"
+                android:textColor="@color/fire_eyeballs_color"
+                android:textSize="14dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_fire_eyeballs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/tv_income"
+                android:gravity="center_vertical"
+                android:text="--"
+                android:textColor="@color/fire_eyeballs_color"
+                android:textSize="36dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_fire_eyeballs_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_fire_eyeballs"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tv_fire_eyeballs"
+                android:gravity="center_vertical"
+                android:text="@string/hooview_coin_tips3"
+                android:textColor="@color/fire_eyeballs_color"
+                android:textSize="18dp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_pay_value_header"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/avatar_big_second_size"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
+                android:layout_below="@+id/tv_fire_eyeballs"
+                android:layout_margin="5dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/base_purplish"
-                android:textSize="@dimen/text_size_title_h1"
+                android:textSize="18dp"
                 tools:text="164，432 火眼豆" />
 
             <Button
@@ -64,8 +103,7 @@
                 android:layout_width="60dp"
                 android:layout_height="25dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="24dp"
+                android:layout_alignBottom="@+id/tv_pay_value_header"
                 android:background="@drawable/shape_common_btn_b"
                 android:button="@null"
                 android:text="@string/cash_in"

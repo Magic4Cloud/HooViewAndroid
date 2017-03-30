@@ -158,9 +158,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     //蒙版的实现
     public void startShowMask(int maginBottom) {
-        if (mSp.getBoolean("isShowed", false)) {
-            return;
-        }
+//        if (mSp.getBoolean("isShowed", false)) {
+//            return;
+//        }
         rl_mask.setVisibility(View.VISIBLE);
         addFirstMask(maginBottom);
     }
@@ -198,7 +198,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 //addThirdMask();
 
                 rl_mask.removeAllViews();
-                mRgNavigation.check(R.id.rb_live);
+                mRbLive.setChecked(true);
                 addFourMask();
             }
         });
@@ -226,8 +226,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 if (mHomeLiveFragment != null && mHomeLiveFragment.getmViewPager() != null) {
                     mHomeLiveFragment.getmViewPager().setCurrentItem(0);
                 }
-                mRgNavigation.check(R.id.rb_news);
-
+                mRbNews.setChecked(true);
                 mSp.edit().putBoolean("isShowed", true).apply();
             }
         });
@@ -275,7 +274,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             @Override
             public void onClick(View v) {
                 rl_mask.removeAllViews();
-                mRgNavigation.check(R.id.rb_market);
+                mRbMarket.setChecked(true);
                 addThirdMask();
             }
         });

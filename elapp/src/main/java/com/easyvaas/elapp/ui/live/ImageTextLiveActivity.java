@@ -161,11 +161,9 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
                     if (v.isSelected()) {
                         v.setSelected(false);
                         SingleToast.show(getApplicationContext(), getString(R.string.cancel_follow_sccuess));
-                        Preferences.getInstance(this).putBoolean(mStreamsEntity.getUserEntity().getName(), false);
                     } else {
                         v.setSelected(true);
                         SingleToast.show(getApplicationContext(), getString(R.string.follow_sccuess));
-                        Preferences.getInstance(this).putBoolean(mStreamsEntity.getUserEntity().getName(), true);
                     }
                     ApiUtil.userFollow(ImageTextLiveActivity.this, mStreamsEntity.getUserEntity().getName(), v.isSelected(), v);
                 } else {

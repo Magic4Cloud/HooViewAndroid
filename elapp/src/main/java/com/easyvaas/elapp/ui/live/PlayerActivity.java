@@ -436,11 +436,9 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     if (v.isSelected()) {
                         v.setSelected(false);
                         SingleToast.show(getApplicationContext(), getString(R.string.cancel_follow_sccuess));
-                        Preferences.getInstance(this).putBoolean(mCurrentVideo.getName(), false);
                     } else {
                         v.setSelected(true);
                         SingleToast.show(getApplicationContext(), getString(R.string.follow_sccuess));
-                        Preferences.getInstance(this).putBoolean(mCurrentVideo.getName(), true);
                     }
                     ApiUtil.userFollow(PlayerActivity.this, mCurrentVideo.getName(), v.isSelected(), v);
                 } else {

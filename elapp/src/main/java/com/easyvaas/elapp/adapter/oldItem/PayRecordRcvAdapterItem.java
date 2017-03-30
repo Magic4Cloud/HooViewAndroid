@@ -60,7 +60,7 @@ public class PayRecordRcvAdapterItem implements AdapterItem<PayRecordListEntity>
         String eCoin = model.getEcoin() + "";
         SpannableString info = null;
         if (PayRecordListActivity.TYPE_CASH_IN.equals(mRecordType)) {
-            info = new SpannableString("+" + model.getEcoin());
+            info = new SpannableString("" + model.getEcoin());
         } else {
             info = new SpannableString("-" + model.getEcoin());
         }

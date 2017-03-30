@@ -40,7 +40,7 @@ public class ApiUtil {
         userFollow(ctx, userId, isChecked, clickedView, null);
     }
 
-    public static void userFollow(final Context ctx, String userId, final boolean isChecked,
+    public static void userFollow(final Context ctx, final String userId, final boolean isChecked,
                                   final View clickedView, final MyRequestCallBack<String> callBack) {
         if (clickedView != null) {
             clickedView.setEnabled(false);
@@ -55,8 +55,10 @@ public class ApiUtil {
                 User user = EVApplication.getUser();
                 if (isChecked) {
                     user.setFollow_count(user.getFollow_count() + 1);
+                    Preferences.getInstance(ctx).putBoolean(userId, true);
                 } else {
                     user.setFollow_count(user.getFollow_count() - 1);
+                    Preferences.getInstance(ctx).putBoolean(userId, false);
                 }
                 if (clickedView != null) {
                     clickedView.setEnabled(true);
