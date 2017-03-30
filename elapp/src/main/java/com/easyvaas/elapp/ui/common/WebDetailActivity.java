@@ -62,6 +62,7 @@ public class WebDetailActivity extends BaseActivity {
     public static final int TYPE_EXPONENT = 102;
     public static final int TYPE_NEWS = 103;
     public static final int TYPE_COMMENTS = 104;
+    public static final int TYPE_PUBLIC = 105; // 公告
 
     private FrameLayout mFlContainer;
     private EditText mEtComment;
@@ -156,6 +157,13 @@ public class WebDetailActivity extends BaseActivity {
             mInputCommentBar.setVisibility(View.VISIBLE);
             tvTitle.setText(R.string.all_comments);
             tvSubhead.setVisibility(View.GONE);
+        }else if (detailType == TYPE_PUBLIC)
+        {
+            tvTitle.setText(name);
+            tvSubhead.setVisibility(View.GONE);
+            mRlBottomNews.setVisibility(View.GONE);
+            mRlBottomStock.setVisibility(View.GONE);
+            tvCommentCount.setVisibility(View.GONE);
         }
 
         mInputCommentBar.findViewById(R.id.iv_send).setOnClickListener(new View.OnClickListener() {
@@ -248,6 +256,8 @@ public class WebDetailActivity extends BaseActivity {
             case TYPE_COMMENTS:
                 url = "/?page=posts&newsid=" + code;
                 break;
+            case TYPE_PUBLIC:
+                url = "/?page=announcement&url="+code;
         }
         if (TextUtils.isEmpty(url)) {
             Logger.e(TAG, "load url is empty! load type: " + type);
@@ -383,6 +393,14 @@ public class WebDetailActivity extends BaseActivity {
             public void handler(String data, CallBackFunction function) {
                 String name = JsonParserUtil.getString(data, "name");
                 VIPUserInfoDetailActivity.start(WebDetailActivity.this, name);
+            }
+        });
+        mWebView.registerHandler("showStockAnnouncementDetail", new BridgeHandler() {
+            @Override
+            public void handler(String data, CallBackFunction function) {
+                String url =  JsonParserUtil.getString(data,"url");
+                String title=  JsonParserUtil.getString(data,"title");
+                Utils.showPublicNewsDetail(WebDetailActivity.this,title,url);
             }
         });
     }

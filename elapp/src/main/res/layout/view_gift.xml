@@ -2,15 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_gift"
     android:layout_width="80dp"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="60dp"
-        android:layout_height="20dp"
-        android:ellipsize="middle"
+        android:layout_height="wrap_content"
         android:text="lkjljkjljljkljkl"
         android:textColor="@color/text_color_white"
         android:textSize="14sp" />
