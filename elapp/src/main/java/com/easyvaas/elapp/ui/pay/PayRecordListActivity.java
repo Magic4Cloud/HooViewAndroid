@@ -15,10 +15,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.easyvaas.common.gift.GiftManager;
 import com.easyvaas.common.recycler.PullToLoadView;
-import com.hooview.app.R;
 import com.easyvaas.elapp.adapter.oldRecycler.PayCommonRcvAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.base.BaseRvcActivity;
+import com.easyvaas.elapp.bean.pay.MyAssetEntity;
 import com.easyvaas.elapp.bean.pay.PayCommonRecordEntityArray;
 import com.easyvaas.elapp.bean.pay.PayRecordListEntity;
 import com.easyvaas.elapp.db.Preferences;
@@ -28,6 +30,7 @@ import com.easyvaas.elapp.net.JsonParserUtil;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.utils.SingleToast;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,9 @@ public class PayRecordListActivity extends BaseRvcActivity {
     private TextView mCashDetailTv;
     private TextView mCostTv;
     private TextView mCastTv;
+    private TextView tvIncome;
+    private TextView tvFireEyeballs;
+    private TextView tvFireEyeballsUnit;
     private Button mCashInBt;
     private String mType;
     private boolean mIsLoadMore;
@@ -121,7 +127,6 @@ public class PayRecordListActivity extends BaseRvcActivity {
             mEmptyView.setTitle(getString(R.string.empty_no_amount));
         }
 
-        long eCoinBalance = Preferences.getInstance(this).getLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, 0);
         mRecordListEntityList = new ArrayList<PayRecordListEntity>();
         mPullToLoadRcvView = (PullToLoadView) findViewById(R.id.pull_load_view);
         mTotalAmountTv = (TextView) findViewById(R.id.total_amount_tv);
@@ -138,6 +143,9 @@ public class PayRecordListActivity extends BaseRvcActivity {
         mHootViewValueTv = (TextView) findViewById(R.id.tv_pay_value_header);
         mCashInBt = (Button) findViewById(R.id.bt_cash_in_confirm);
         mCashDetailTv = (TextView) findViewById(R.id.tv_pay_detail);
+        tvIncome = (TextView) findViewById(R.id.tv_income);
+        tvFireEyeballs = (TextView) findViewById(R.id.tv_fire_eyeballs);
+        tvFireEyeballsUnit = (TextView) findViewById(R.id.tv_fire_eyeballs_unit);
         mCashInBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,7 +171,7 @@ public class PayRecordListActivity extends BaseRvcActivity {
                 mPullToLoadRcvView.initLoad();
             }
         });
-        mHootViewValueTv.setText(eCoinBalance+getString(R.string.hooview_coin));
+        updateECoin();
         if (mType.equals(TYPE_CASH_OUT)) {
             mCenterContentTv.setText(getString(R.string.my_sum));
         } else if (mType.equals(TYPE_CASH_IN)) {
@@ -176,6 +184,8 @@ public class PayRecordListActivity extends BaseRvcActivity {
         mAdapter = new PayCommonRcvAdapter(getApplicationContext(), mRecordListEntityList, mType);
         mPullToLoadRcvView.getRecyclerView().setAdapter(mAdapter);
         mPullToLoadRcvView.initLoad();
+        isShowFireEyeballs(EVApplication.getUser().getVip() == 1 ? View.VISIBLE : View.GONE);
+        getAssetInfo();
     }
 
     private void updateAmountTotalInfo(int totalAmount) {
@@ -198,6 +208,45 @@ public class PayRecordListActivity extends BaseRvcActivity {
                     mRequestCallBack);
             ApiHelper.getInstance().getRechargeTotal(mGetTotalCallBack);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateECoin();
+    }
+
+    private void updateECoin(){
+        if (mHootViewValueTv != null) {
+            long eCoinBalance = Preferences.getInstance(this).getLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, 0);
+            mHootViewValueTv.setText(eCoinBalance + getString(R.string.hooview_coin));
+        }
+    }
+
+    private void isShowFireEyeballs(int status){
+        tvIncome.setVisibility(status);
+        tvFireEyeballs.setVisibility(status);
+        tvFireEyeballsUnit.setVisibility(status);
+    }
+
+    // 得到火眼币和火眼豆
+    private void getAssetInfo(){
+        ApiHelper.getInstance().getAssetInfo(new MyRequestCallBack<MyAssetEntity>() {
+            @Override
+            public void onSuccess(MyAssetEntity result) {
+                if (result != null){
+                    tvFireEyeballs.setText(result.getRiceroll() + "");
+                    mHootViewValueTv.setText(result.getEcoin() + getString(R.string.hooview_coin));
+                    Preferences.getInstance(PayRecordListActivity.this).putLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, result.getEcoin());
+                    GiftManager.setECoinCount(PayRecordListActivity.this, result.getEcoin());
+                }
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+        });
     }
 
 }

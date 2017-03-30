@@ -142,11 +142,9 @@ public class VIPUserInfoDetailActivity extends BaseActivity implements View.OnCl
                     if (v.isSelected()) {
                         v.setSelected(false);
                         SingleToast.show(getApplicationContext(), getString(R.string.cancel_follow_sccuess));
-                        Preferences.getInstance(this).putBoolean(mName, false);
                     } else {
                         v.setSelected(true);
                         SingleToast.show(getApplicationContext(), getString(R.string.follow_sccuess));
-                        Preferences.getInstance(this).putBoolean(mName, true);
                     }
                     ApiUtil.userFollow(VIPUserInfoDetailActivity.this, mName, v.isSelected(), v);
                 } else {

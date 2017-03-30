@@ -664,6 +664,7 @@
     <string name="hooview_coin_tips">火眼豆 %s</string>
     <string name="hooview_coin">火眼豆</string>
     <string name="hooview_coin_tips2">火眼币 %s</string>
+    <string name="hooview_coin_tips3">火眼币</string>
     <string name="watch_count_tips">%s人观看</string>
     <string name="feature_no_open_prompt">暂未开通，敬请期待</string>
     <string name="user_join_tips">%s进入直播间了</string>
@@ -773,5 +774,6 @@
     <string name="add_stock_success">添加自选成功</string>
     <string name="delect_stock_sucess">删除自选成功</string>
     <string name="user_not_login">您还没有登录哦</string>
+    <string name="income">收入</string>
 
 </resources>
