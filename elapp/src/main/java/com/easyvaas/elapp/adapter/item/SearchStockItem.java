@@ -9,11 +9,15 @@ import android.widget.TextView;
 import com.easyvaas.common.adapter.AdapterItem;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.search.SearchStockModel;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
+import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
+
+import static com.easyvaas.elapp.app.EVApplication.isLogin;
 
 public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity> {
     private Context mContext;
@@ -76,6 +80,10 @@ public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity>
             mIvAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (!Preferences.getInstance(mContext).isLogin() || !isLogin()) {
+                        LoginActivity.start(mContext);
+                        return;
+                    }
                     collectStock(mContext, model.getSymbol(),model.getCollected());
                     model.setCollected(0);
 
