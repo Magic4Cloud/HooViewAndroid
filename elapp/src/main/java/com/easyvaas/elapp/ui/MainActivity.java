@@ -7,23 +7,21 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.HomeLiveFragment;
 import com.easyvaas.elapp.ui.market.HomeMarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
 import com.easyvaas.elapp.ui.user.UserProfileFragment;
-import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
 
@@ -89,8 +87,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mUserProfileFragment = new UserProfileFragment();
         mHomeMarketFragment = new HomeMarketFragment();
         mHomeNewsFragment = new HomeNewsFragment();
-        mCurrentFragment = mHomeNewsFragment;
-        mFragmentManager.beginTransaction().add(R.id.fl_content,mHomeNewsFragment).commit();
+        mCurrentFragment = mUserProfileFragment;
+        mFragmentManager.beginTransaction().replace(R.id.fl_content, mUserProfileFragment).commit();
+        selectTab(getIntent());
     }
 
     private void selectTab(Intent intent) {
@@ -125,40 +124,35 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //        stopService(intent);
     }
 
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_news:
-               switchFragment(mHomeNewsFragment);
+                if (mCurrentFragment != mHomeNewsFragment && !mHomeNewsFragment.isAdded()) {
+                    mCurrentFragment = mHomeNewsFragment;
+                    mFragmentManager.beginTransaction().replace(R.id.fl_content, mHomeNewsFragment).commit();
+                }
                 break;
             case R.id.rb_live:
-                switchFragment(mHomeLiveFragment);
+                if (mCurrentFragment != mHomeLiveFragment && !mHomeLiveFragment.isAdded()) {
+                    mCurrentFragment = mHomeLiveFragment;
+                    mFragmentManager.beginTransaction().replace(R.id.fl_content, mHomeLiveFragment).commit();
+                }
                 break;
             case R.id.rb_market:
-                switchFragment(mHomeMarketFragment);
+                if (mCurrentFragment != mHomeMarketFragment && !mHomeMarketFragment.isAdded()) {
+                    mCurrentFragment = mHomeMarketFragment;
+                    mFragmentManager.beginTransaction().replace(R.id.fl_content, mHomeMarketFragment).commit();
+                }
                 break;
             case R.id.rb_user:
-                switchFragment(mUserProfileFragment);
+                if (mCurrentFragment != mUserProfileFragment && !mUserProfileFragment.isAdded()) {
+                    mCurrentFragment = mUserProfileFragment;
+                    mFragmentManager.beginTransaction().replace(R.id.fl_content, mUserProfileFragment).commit();
+                }
                 break;
 
         }
-    }
-
-    /**
-     * 切换fragment
-     */
-    private void switchFragment(Fragment fragment)
-    {
-        if (!fragment.isAdded())
-        {
-            mFragmentManager.beginTransaction().hide(mCurrentFragment).add(R.id.fl_content,fragment).commit();
-        }else
-        {
-            if (mCurrentFragment != fragment)
-            mFragmentManager.beginTransaction().show(fragment).hide(mCurrentFragment).commit();
-        }
-        mCurrentFragment = fragment;
     }
 
 
@@ -211,8 +205,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         rl_mask.addView(mRelativeLayout);
     }
 
-
-    //最后一个
     private void addThirdMask() {
         rl_mask.removeAllViews();
         RelativeLayout mRelativeLayout = (RelativeLayout)
@@ -241,7 +233,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         });
     }
 
-    //第三个蒙版。视频直播
+    //第三个蒙版。直播
     private void addFourMask() {
         RelativeLayout mRelativeLayout = (RelativeLayout)
                 LayoutInflater.from(this).inflate(R.layout.layout_mask_five, rl_mask, false);
@@ -256,6 +248,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             @Override
             public void onClick(View v) {
                 rl_mask.removeAllViews();
+                mRgNavigation.check(R.id.rb_live);
                 if (mHomeLiveFragment != null && mHomeLiveFragment.getmViewPager() != null) {
                     mHomeLiveFragment.getmViewPager().setCurrentItem(1);
                 }
@@ -288,21 +281,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         });
     }
 
-    private long firstPressTime= 0;
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if(keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN){
-
-            if (System.currentTimeMillis()-firstPressTime>2000){
-                SingleToast.show(MainActivity.this,getString(R.string.press_to_exit),Toast.LENGTH_SHORT);
-                firstPressTime = System.currentTimeMillis();
-            }else{
-                finish();
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+    public void onBackPressed() {
+        super.onBackPressed();
+//        RealmHelper.getInstance().deleteGlobalAllRecord();
     }
 }

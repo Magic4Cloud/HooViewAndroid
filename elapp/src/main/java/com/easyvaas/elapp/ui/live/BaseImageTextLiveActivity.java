@@ -137,7 +137,7 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
         if (TextUtils.isEmpty(imageUrl)) {
             return;
         } else {
-            ScreenShotShareActivity.start(this, imageUrl, EVApplication.getUser().getNickname() + getString(R.string.who_room));
+            ScreenShotShareActivity.start(this, imageUrl);
         }
     }
 

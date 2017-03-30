@@ -23,13 +23,11 @@ public class ScreenShotShareActivity extends BaseActivity implements View.OnClic
     private ImageView mIvShareImage;
     private String imageUrl;
     private ShareHelper mShareHelper;
-    private String title;
     private ShareContent shareContentPic;
 
-    public static void start(Context context, String imageUrl, String title) {
+    public static void start(Context context, String imageUrl) {
         Intent starter = new Intent(context, ScreenShotShareActivity.class);
         starter.putExtra(EXTRA_IMAGE_URL, imageUrl);
-        starter.putExtra(EXTRA_TITLE, title);
         context.startActivity(starter);
     }
 
@@ -37,7 +35,6 @@ public class ScreenShotShareActivity extends BaseActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
-        title = getIntent().getStringExtra(EXTRA_TITLE);
         if (TextUtils.isEmpty(imageUrl)) {
             finish();
             return;

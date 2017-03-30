@@ -77,11 +77,12 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
                 mRecyclerView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 //
                 ViewGroup mViewGroup = (ViewGroup) (mRecyclerView.getChildAt(0));
-
+                if (mViewGroup == null) {
+                    return;
+                }
                 View mBottomView = mViewGroup.getChildAt(mViewGroup.getChildCount() - 1);
                 int mBottom = mBottomView.getBottom();
 
-                //78dp，启动一个透明的activity
 
                 //MainMaskActivity.start(getActivity(), );
                 MainActivity mMainActivity = (MainActivity) getActivity();
