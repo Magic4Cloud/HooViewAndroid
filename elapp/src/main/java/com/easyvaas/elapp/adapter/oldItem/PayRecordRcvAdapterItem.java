@@ -7,18 +7,14 @@
 package com.easyvaas.elapp.adapter.oldItem;
 
 import android.content.Context;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.AbsoluteSizeSpan;
 import android.view.View;
 import android.widget.TextView;
 
 import com.easyvaas.common.adapter.AdapterItem;
-
-import com.hooview.app.R;
-import com.easyvaas.elapp.bean.pay.PayRecordListEntity;
 import com.easyvaas.elapp.activity.pay.PayRecordListActivity;
+import com.easyvaas.elapp.bean.pay.PayRecordListEntity;
+import com.hooview.app.R;
 
 public class PayRecordRcvAdapterItem implements AdapterItem<PayRecordListEntity> {
     private Context mContext;
@@ -57,14 +53,15 @@ public class PayRecordRcvAdapterItem implements AdapterItem<PayRecordListEntity>
         mDescriptionTv.setText(model.getDescription());
         mDataTv.setText(TextUtils.isEmpty(model.getTime())?"":model.getTime().substring(0,10));
         mTimeTv.setText(TextUtils.isEmpty(model.getTime())?"":model.getTime().substring(10,model.getTime().length()));
-        String eCoin = model.getEcoin() + "";
-        SpannableString info = null;
-        if (PayRecordListActivity.TYPE_CASH_IN.equals(mRecordType)) {
-            info = new SpannableString("" + model.getEcoin());
-        } else {
-            info = new SpannableString("-" + model.getEcoin());
-        }
-        info.setSpan(new AbsoluteSizeSpan(66), 0, eCoin.length() + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mBarleyTv.setText(info);
+//        String eCoin = model.getEcoin() + "";
+//        SpannableString info = null;
+//        if (PayRecordListActivity.TYPE_CASH_IN.equals(mRecordType)) {
+//            info = new SpannableString("+" + model.getEcoin());
+//        } else {
+//            info = new SpannableString("-" + model.getEcoin());
+//        }
+//        info.setSpan(new AbsoluteSizeSpan(66), 0, eCoin.length() + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        mBarleyTv.setText(PayRecordListActivity.TYPE_CASH_IN.equals(mRecordType) ? (model.getEcoin() + "") : ("-" + model.getEcoin()));
     }
 }
