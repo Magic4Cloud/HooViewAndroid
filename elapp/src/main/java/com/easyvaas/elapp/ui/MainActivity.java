@@ -158,11 +158,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     //蒙版的实现
     public void startShowMask(int maginBottom) {
-//        if (mSp.getBoolean("isShowed", false)) {
-//            return;
-//        }
+        if (mSp.getBoolean("isShowed", false)) {
+            return;
+        }
         rl_mask.setVisibility(View.VISIBLE);
         addFirstMask(maginBottom);
+
     }
 
     //添加第一个蒙版
