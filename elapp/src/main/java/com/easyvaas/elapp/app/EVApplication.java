@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 import com.growingio.android.sdk.collection.Configuration;
 import com.growingio.android.sdk.collection.GrowingIO;
 import com.hooview.app.BuildConfig;
+import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -57,6 +58,13 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
     public void onCreate() {
         super.onCreate();
         app = this;
+
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
 
         if (BuildConfig.DEBUG) CarNetCrashHandler.getInstance().setCustomCrashHandler(getApplicationContext());
 
