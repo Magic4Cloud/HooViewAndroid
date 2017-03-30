@@ -19,6 +19,7 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -97,6 +98,7 @@ public class CashInActivity extends BaseActivity {
                 case AlipayHelper.MSG_SDK_PAY_FLAG:
                     PayResult payResult = new PayResult((String) msg.obj);
                     Logger.d(TAG, "Pay result: " + payResult);
+                    Log.d("pay","Pay result: " + payResult);
                     /**
                      * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
                      * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&

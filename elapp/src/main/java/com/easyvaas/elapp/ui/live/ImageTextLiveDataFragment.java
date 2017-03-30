@@ -226,7 +226,8 @@ public class ImageTextLiveDataFragment extends BaseFragment implements View.OnCl
             SingleToast.show(getContext(), getString(R.string.error_search_stock));
             return;
         }
-        HooviewApiHelper.getInstance().searchStock(mKeyWord, EVApplication.getUser().getName(),start + "", count + "", new MyRequestCallBack<SearchStockModel>() {
+        String userId = EVApplication.getUser() != null ? EVApplication.getUser().getName():"";
+        HooviewApiHelper.getInstance().searchStock(mKeyWord,userId,start + "", count + "", new MyRequestCallBack<SearchStockModel>() {
             @Override
             public void onSuccess(SearchStockModel result) {
                 if (result != null && result.getData() != null && result.getData().size() != 0) {
