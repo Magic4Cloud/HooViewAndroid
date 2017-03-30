@@ -141,7 +141,8 @@ public class WebDetailActivity extends BaseActivity {
             tvSubhead.setText(code);
             mRlBottomNews.setVisibility(View.GONE);
             mRlBottomStock.setVisibility(View.VISIBLE);
-            isStockAdded();
+            if (EVApplication.getUser() != null)
+                isStockAdded();
         } else if (detailType == TYPE_NEWS) {
             tvTitle.setVisibility(View.GONE);
             tvSubhead.setVisibility(View.GONE);
@@ -391,6 +392,10 @@ public class WebDetailActivity extends BaseActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.tv_stock_add:
+                    if (!Preferences.getInstance(WebDetailActivity.this).isLogin() || !EVApplication.isLogin()) {
+                        LoginActivity.start(WebDetailActivity.this);
+                        return;
+                    }
                     collectStock(code,isCollected);
                     break;
                 case R.id.tv_stock_share:
