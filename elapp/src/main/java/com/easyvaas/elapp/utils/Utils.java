@@ -748,6 +748,10 @@ public class Utils {
     public static void showNewsDetail(Context context, String title, String newsId) {
         showWebDetail(context, title, newsId, WebDetailActivity.TYPE_NEWS);
     }
+    // 公告
+    public static void showPublicNewsDetail(Context context, String title, String url) {
+        showWebDetail(context, title, url, WebDetailActivity.TYPE_PUBLIC);
+    }
 
     private static void showWebDetail(Context context, String title, String code, int type) {
         Intent intent = new Intent(context, WebDetailActivity.class);
