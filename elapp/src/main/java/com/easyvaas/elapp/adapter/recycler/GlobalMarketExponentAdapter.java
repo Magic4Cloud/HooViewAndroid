@@ -34,7 +34,6 @@ import com.easyvaas.common.advancedRecyclerView.utils.AbstractDraggableItemViewH
 import com.easyvaas.elapp.bean.market.ExponentModel;
 import com.easyvaas.elapp.ui.market.GlobalContentEditActivity;
 import com.easyvaas.elapp.utils.Logger;
-import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 
 import java.text.DecimalFormat;
@@ -150,12 +149,13 @@ public class GlobalMarketExponentAdapter
                 holder.mTvName.setText(model.getName());
                 holder.mTvNumber.setText(number);
                 holder.mTvPercent.setText(percentStr);
-                holder.mCardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Utils.showStockDetail(holder.mCardView.getContext(), model.getName(), model.getSymbol(), false);
-                    }
-                });
+                // 现在不能点击进详情
+//                holder.mCardView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Utils.showStockDetail(holder.mCardView.getContext(), model.getName(), model.getSymbol(), false);
+//                    }
+//                });
 
                 if (percentStr.startsWith("-")) {
                     holder.mCardView.setCardBackgroundColor(ctx.getResources()

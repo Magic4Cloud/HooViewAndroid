@@ -7,14 +7,15 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="58dp">
+        android:layout_height="58dp"
+        android:background="@color/white">
 
         <com.easyvaas.common.widget.RoundImageView
             android:id="@+id/iv_header"
             android:layout_width="40dp"
-            android:layout_marginLeft="12dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
             android:src="@drawable/account_bitmap_user" />
 
         <TextView
@@ -37,6 +38,7 @@
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/iv_header"
             android:text="火眼主播小莹"
+            android:textColor="@color/text_warm_gray"
             android:visibility="visible" />
 
         <TextView
@@ -46,7 +48,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="12dp"
-            android:text="122观看" />
+            android:text="122观看"
+            android:textColor="@color/text_warm_gray" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -58,10 +61,11 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/account_bitmap_list" />
-         <ImageView
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="#B3303030"/>
+            android:background="#B3303030" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -96,4 +100,8 @@
             android:paddingTop="4dp"
             android:src="@drawable/btn_play_n" />
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/list_divider_bg"/>
 </LinearLayout>

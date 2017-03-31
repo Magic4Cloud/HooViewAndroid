@@ -11,4 +11,5 @@
     app:tabIndicatorHeight="1dp"
     app:tabSelectedTextColor="@color/text_color_purplish"
     app:tabTextColor="@color/text_color_gray"
+    app:tabTextAppearance="@style/TabLayoutTextAppearance"
     tools:showIn="@layout/fragment_home_live" />

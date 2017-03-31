@@ -91,7 +91,8 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
         if (holder instanceof ExponentViewHolder) {
             ((ExponentViewHolder) holder).setExponentModel((ExponentListNewModel) object);
         } else if (holder instanceof StockItemViewHolder && object instanceof StockModel) {
-            ((StockItemViewHolder) holder).setStockModel((StockModel) object);
+            ((StockItemViewHolder) holder).setStockModel((StockModel) object,
+                    (position + 1 < datas.size() - 1) && datas.get(position + 1) instanceof TitleModel ? View.GONE : View.VISIBLE);
         } else if (holder instanceof TitleViewHolder && object instanceof TitleModel) {
             ((TitleViewHolder) holder).setTitle(((TitleModel) object).isUP);
         }
