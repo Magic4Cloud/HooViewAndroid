@@ -7,7 +7,8 @@
     <com.easyvaas.common.recycler.PullToLoadView
         android:id="@+id/pull_load_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/list_divider_bg"/>
 
     <include layout="@layout/layout_empty" />
 </FrameLayout>

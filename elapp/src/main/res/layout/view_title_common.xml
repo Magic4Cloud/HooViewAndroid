@@ -36,4 +36,9 @@
         android:text="@string/complete"
         android:textColor="@color/text_color_purplish"
         android:visibility="gone" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/list_divider_bg"/>
 </RelativeLayout>

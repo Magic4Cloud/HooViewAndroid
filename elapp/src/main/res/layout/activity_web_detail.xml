@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/title"
@@ -19,7 +19,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:scaleType="center"
-            android:src="@drawable/icon_back" />
+            android:src="@drawable/icon_back"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="this is title"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_subhead"
@@ -48,7 +48,7 @@
                 android:layout_below="@+id/tv_title"
                 android:layout_centerHorizontal="true"
                 android:text="this is subhead"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
         </LinearLayout>
     </RelativeLayout>
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="50dp"/>
 
     <RelativeLayout
         android:id="@+id/rl_bottom_stock"
@@ -75,7 +75,7 @@
             android:layout_marginLeft="15dp"
             android:layout_toLeftOf="@+id/tv_add"
             android:gravity="center_vertical"
-            android:text="@string/stock_detail_chat_hint" />
+            android:text="@string/stock_detail_chat_hint"/>
 
         <TextView
             android:id="@+id/tv_stock_add"
@@ -83,7 +83,7 @@
             android:layout_marginRight="42dp"
             android:layout_toLeftOf="@+id/tv_stock_share"
             android:drawableTop="@drawable/selector_selected_btn_state"
-            android:text="@string/add_stock_btn" />
+            android:text="@string/add_stock_btn"/>
 
         <TextView
             android:id="@+id/tv_stock_share"
@@ -91,7 +91,7 @@
             android:layout_marginRight="42dp"
             android:layout_toLeftOf="@+id/tv_stock_refresh"
             android:drawableTop="@drawable/icon_share"
-            android:text="@string/share" />
+            android:text="@string/share"/>
 
         <TextView
             android:id="@+id/tv_stock_refresh"
@@ -99,12 +99,12 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="17dp"
             android:drawableTop="@drawable/market_refresh_gray"
-            android:text="@string/refresh" />
+            android:text="@string/refresh"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/line_gray" />
+            android:background="@color/split_line_color"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -122,7 +122,7 @@
             android:layout_marginLeft="15dp"
             android:layout_toLeftOf="@+id/tv_add"
             android:gravity="center_vertical"
-            android:text="@string/stock_detail_chat_hint" />
+            android:text="@string/stock_detail_chat_hint"/>
 
         <TextView
             android:id="@+id/tv_news_share"
@@ -130,7 +130,7 @@
             android:layout_marginRight="42dp"
             android:layout_toLeftOf="@+id/tv_news_collect"
             android:drawableTop="@drawable/icon_share"
-            android:text="@string/share" />
+            android:text="@string/share"/>
 
         <TextView
             android:id="@+id/tv_news_collect"
@@ -138,7 +138,7 @@
             android:layout_marginRight="42dp"
             android:layout_toLeftOf="@+id/tv_news_comment"
             android:drawableTop="@drawable/selector_news_collect"
-            android:text="@string/collect" />
+            android:text="@string/collect"/>
 
         <TextView
             android:id="@+id/tv_news_comment"
@@ -146,7 +146,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="17dp"
             android:drawableTop="@drawable/btn_news_comment_n"
-            android:text="@string/comment" />
+            android:text="@string/comment"/>
 
         <TextView
             android:id="@+id/tv_news_comment_count"
@@ -162,12 +162,12 @@
             android:paddingRight="5dp"
             android:textColor="@color/pure_white"
             android:textSize="10sp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/line_gray" />
+            android:background="@color/split_line_color"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -175,40 +175,49 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/shape_chat_input_bg"
-        android:orientation="horizontal"
+        android:background="@color/white"
         android:visibility="gone">
 
-        <EditText
-            android:id="@+id/et_comment"
-            style="@style/DetailChatEditTextButton"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_toLeftOf="@+id/tv_word_count"
-            android:focusable="true"
-            android:gravity="center_vertical|left"
-            android:hint="@string/input_prompt"
-            android:imeOptions="actionSend"
-            android:maxLength="140"
-            android:padding="0dp"
-            android:textColorHint="@color/text_color_gray" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_chat_input_bg">
 
-        <TextView
-            android:id="@+id/tv_word_count"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/iv_send"
-            android:gravity="center_vertical"
-            android:text="@string/stock_detail_chat_hint" />
+            <EditText
+                android:id="@+id/et_comment"
+                style="@style/DetailChatEditTextButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_toLeftOf="@+id/tv_word_count"
+                android:focusable="true"
+                android:gravity="center_vertical|left"
+                android:hint="@string/input_prompt"
+                android:imeOptions="actionSend"
+                android:maxLength="140"
+                android:padding="0dp"
+                android:textColorHint="@color/text_color_gray"/>
 
-        <ImageView
-            android:id="@+id/iv_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="15dp"
-            android:src="@drawable/btn_send_comment" />
+            <TextView
+                android:id="@+id/tv_word_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/iv_send"
+                android:gravity="center_vertical"
+                android:text="@string/stock_detail_chat_hint"/>
+
+            <ImageView
+                android:id="@+id/iv_send"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="15dp"
+                android:src="@drawable/btn_send_comment"/>
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

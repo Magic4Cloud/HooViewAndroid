@@ -3,14 +3,14 @@ package com.easyvaas.elapp.adapter.item;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.adapter.AdapterItem;
-import com.hooview.app.R;
 import com.easyvaas.elapp.bean.user.Collection;
-import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.Utils;
+import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -23,6 +23,7 @@ public class CollectionAdapterItem implements AdapterItem<Collection> {
     TextView tvTitle;
     TextView tvTime;
     TextView tvWatchCount;
+    RelativeLayout mRelativeLayout;
 
     public CollectionAdapterItem(Context context) {
         this.mContext = context;
@@ -39,6 +40,7 @@ public class CollectionAdapterItem implements AdapterItem<Collection> {
         tvTitle = (TextView) root.findViewById(R.id.tv_title);
         tvTime = (TextView) root.findViewById(R.id.tv_time);
         tvWatchCount = (TextView) root.findViewById(R.id.tv_watch_count);
+        mRelativeLayout = (RelativeLayout) root.findViewById(R.id.new_parent_layout);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class CollectionAdapterItem implements AdapterItem<Collection> {
             tvTime.setText(model.getTime());
             tvWatchCount.setText(mContext.getString(R.string.news_watch_count,
                     StringUtil.formatThousand(model.getCount())));
-            ivThumbnail.setOnClickListener(new View.OnClickListener() {
+            mRelativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Utils.showNewsDetail(mContext, model.getTitle(), model.getId() + "");
