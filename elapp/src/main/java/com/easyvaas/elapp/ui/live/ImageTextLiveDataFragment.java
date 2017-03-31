@@ -57,7 +57,7 @@ public class ImageTextLiveDataFragment extends BaseFragment implements View.OnCl
     private RecyclerView mRecyclerView;
     private List<SearchStockModel.DataEntity> data;
     private LiveDataAdapter mAdapter;
-    private EditText mEtSearch;
+    protected EditText mEtSearch;
     private View mLLEmpty;
     private String mKeyWord;
     private int start = 0;

@@ -3,10 +3,15 @@ package com.easyvaas.elapp.ui.live;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,6 +31,7 @@ import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
+import com.sina.weibo.sdk.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -51,7 +57,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mStreamsEntity = (TextLiveListModel.StreamsEntity) getIntent().getSerializableExtra(EXTRA_TEXT_LIVE_MODEL);
-        Logger.d(TAG, "onCreate: "+mStreamsEntity.getId());
+        Logger.d(TAG, "onCreate: " + mStreamsEntity.getId());
         if (mStreamsEntity == null) {
             finish();
             return;
@@ -89,7 +95,43 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
         mTvFollow.setOnClickListener(this);
         avater.setOnClickListener(this);
         initFollowStatus();
+
+
+        tabLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogUtil.e("TAGGG", "被点击了");
+            }
+        });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                LogUtil.e("TAGGG", "被点击了");
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
+
+//    public void hideInput() {
+//        InputMethodManager inputMethodManager =
+//                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//
+//        if (list != null && ((ImageTextLiveDataFragment) list.get(1)).mEtSearch != null) {
+//            inputMethodManager.hideSoftInputFromWindow(((ImageTextLiveDataFragment) list.get(1)).mEtSearch.getWindowToken(), 0);
+//        }
+//
+//        SystemClock.sleep(2000);
+//    }
 
     private void initCollapsingToolbarLayout() {
         mAppBarLayout = (AppBarLayout) findViewById(R.id.AppBarLayout);
@@ -98,7 +140,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Logger.d(TAG, "onOffsetChanged: verticalOffset==" + verticalOffset);
+                Log.d(TAG, "onOffsetChanged: verticalOffset==" + verticalOffset);
                 EventBus.getDefault().post(new AppBarLayoutOffsetChangeEvent(verticalOffset));
                 if (verticalOffset < -start) {
                     mTvTitle.setVisibility(View.VISIBLE);

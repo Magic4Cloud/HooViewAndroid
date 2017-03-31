@@ -48,6 +48,8 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
     protected View mRoot;
     private CompositeSubscription compositeSubscription;
     private boolean forbiddenCmdMessage = true; // 禁止礼物消息的处理
+    protected TabLayout tabLayout;
+    protected List<Fragment> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +65,10 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
     private void initView() {
         mRoomId = setRoomId();
         isAnchor = isAnchor();
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout.setupWithViewPager(mViewPager);
-        List<Fragment> list = new ArrayList<>();
+        list = new ArrayList<>();
 //        list.add(ImageTextLiveFragment.newInstance(streamEntity()));
                 list.add(isAnchor ? ImageTextLiveFragment.newInstance(mRoomId, isAnchor, watchCount()) : ImageTextLiveFragment.newInstance(streamEntity()));
         list.add(ImageTextLiveDataFragment.newInstance(isAnchor));
