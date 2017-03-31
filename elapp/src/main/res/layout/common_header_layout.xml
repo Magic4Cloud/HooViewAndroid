@@ -45,4 +45,9 @@
             android:textSize="@dimen/text_size_title_h1"
             android:visibility="gone"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/common_custom_title_tv"
+        android:background="@color/list_divider_bg"/>
 </RelativeLayout>

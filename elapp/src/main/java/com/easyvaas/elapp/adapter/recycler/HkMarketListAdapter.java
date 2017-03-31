@@ -99,7 +99,8 @@ public class HkMarketListAdapter extends RecyclerView.Adapter {
             ((HkMarketListAdapter.ExponentViewHolder) holder)
                     .setExponentModel((ExponentListNewModel) object);
         } else if (holder instanceof StockItemViewHolder && object instanceof StockModel) {
-            ((StockItemViewHolder) holder).setStockModel((StockModel) object);
+            ((StockItemViewHolder) holder).setStockModel((StockModel) object,
+                    (position + 1 < datas.size() - 1) && datas.get(position + 1) instanceof TitleModel ? View.GONE : View.VISIBLE);
         } else if (
                 holder instanceof HkMarketListAdapter.TitleViewHolder
                         && object instanceof HkMarketListAdapter.TitleModel) {

@@ -14,7 +14,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -160,15 +159,16 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mTvGroup = (TextView) findViewById(R.id.tv_group);
         mVideoView = (EVVideoView) findViewById(R.id.video_view);
         mFlPlayer = (RelativeLayout) findViewById(R.id.fl_player);
-        mFlPlayer.setOnTouchListener(new View.OnTouchListener() {
+        mFlPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (!mIsPlayLive) {
+            public void onClick(View v) {
+                if (mIsPlayLive) return;
+                if (!getMediaControllerIsShow()) {
                     showMediaController(true);
                     hideMediaControllerDelay();
-                    return true;
                 } else {
-                    return false;
+                    showMediaController(false);
+                    mHandler.removeCallbacks(runnableHideMediaController);
                 }
             }
         });
@@ -516,6 +516,11 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             ivShare.setVisibility(View.INVISIBLE);
             ivBack.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private boolean getMediaControllerIsShow(){
+        if (ivBack.getVisibility() == View.VISIBLE) return true;
+        else return false;
     }
 
     public void hideMediaControllerDelay() {

@@ -29,7 +29,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
         viewDivider = itemView.findViewById(R.id.view_divider);
     }
 
-    public void setStockModel(final StockModel stockModel) {
+    public void setStockModel(final StockModel stockModel, int status) {
         if (stockModel != null) {
             mTvStockName.setText(stockModel.getName());
             mTvStockNumber.setText(stockModel.getSymbol());
@@ -51,6 +51,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
                 this.mTvPrice.setSelected(false);
                 this.mTvTag.setSelected(false);
             }
+            viewDivider.setVisibility(status);
         }
         this.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

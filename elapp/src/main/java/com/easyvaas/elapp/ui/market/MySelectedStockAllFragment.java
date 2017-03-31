@@ -143,13 +143,13 @@ public class MySelectedStockAllFragment extends LazyLoadFragment {
             @Override
             public void onFailure(String msg) {
                 stockRefresh.setRefreshing(false);
-                if (sModels.size() <= 0) showAddBtn();
+                showAddBtn();
             }
 
             @Override
             public void onError(String errorInfo) {
                 stockRefresh.setRefreshing(false);
-                if (sModels.size() <= 0) showAddBtn();
+                showAddBtn();
             }
         });
     }

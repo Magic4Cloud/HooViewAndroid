@@ -39,6 +39,7 @@
         android:layout_alignLeft="@+id/tv_stock_name"
         android:layout_below="@+id/horizontal_center_line"
         android:text="SZ300104"
+        android:textColor="@color/text_warm_gray"
         android:textSize="14sp" />
 
     <TextView
