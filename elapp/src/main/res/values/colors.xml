@@ -129,7 +129,7 @@
     <color name="text_color_white">#fff</color>
     <color name="text_color_white_alpha_80">#CCffffff</color>
     <color name="text_color_black">#000</color>
-    <color name="split_line_color">#d9d9d9</color>
+    <color name="split_line_color">#8cd9d9d9</color>
     <color name="title_view_bg">#fff</color>
     <color name="exponent_up">#ff5756</color>
     <color name="exponent_down">#00b57c</color>

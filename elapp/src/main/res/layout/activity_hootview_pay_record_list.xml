@@ -26,7 +26,7 @@
         android:layout_marginTop="6dp"
         android:orientation="vertical">
 
-        <ImageView style="@style/default_horizontal_line_style" />
+        <!--<ImageView style="@style/default_horizontal_line_style" />-->
 
         <LinearLayout
             style="@style/item_my_setting"
@@ -162,9 +162,9 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/line_bottom_iv"
-        style="@style/default_horizontal_line_style" />
+    <!--<ImageView-->
+        <!--android:id="@+id/line_bottom_iv"-->
+        <!--style="@style/default_horizontal_line_style" />-->
 
     <include layout="@layout/activity_common_recycler" />
 </LinearLayout>
