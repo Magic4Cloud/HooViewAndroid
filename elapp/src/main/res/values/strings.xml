@@ -776,4 +776,7 @@
     <string name="user_not_login">您还没有登录哦</string>
     <string name="income">收入</string>
     <string name="press_to_exit">再按一次退出火眼财经</string>
+
+
+    <string name="please_enter_code">请输入股票代码/简称</string>
 </resources>

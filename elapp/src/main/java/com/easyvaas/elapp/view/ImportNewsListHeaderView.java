@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Utils;
+import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
 
 import java.text.DecimalFormat;
@@ -64,6 +66,8 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
     private TextView mTvEyesNews3;
     private List<NewsItemModel> hooviewList;
     private List<TextView> mNewsViewList;
+
+    private List<ImageView> mImageViewList;
     private BannerModel mBannerModel;
     private ExponentListNewModel mExponentListModel;
     private ImportantNewsModel.HuoyanEntity huoyanEntity;
@@ -133,6 +137,10 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         findViewById(R.id.ll_eye_new1).setOnClickListener(this);
         findViewById(R.id.ll_eye_new2).setOnClickListener(this);
         findViewById(R.id.ll_eye_new3).setOnClickListener(this);
+
+        ImageView iv_tv1 = (ImageView) findViewById(R.id.iv_1);
+        ImageView iv_tv2 = (ImageView) findViewById(R.id.iv_2);
+        ImageView iv_tv3 = (ImageView) findViewById(R.id.iv_3);
         mTvEyesNews1 = (TextView) findViewById(R.id.tv_eyes_news1);
         mTvEyesNews2 = (TextView) findViewById(R.id.tv_eyes_news2);
         mTvEyesNews3 = (TextView) findViewById(R.id.tv_eyes_news3);
@@ -140,11 +148,17 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         mNewsViewList.add(mTvEyesNews1);
         mNewsViewList.add(mTvEyesNews2);
         mNewsViewList.add(mTvEyesNews3);
+
+        mImageViewList = new ArrayList<>();
+        mImageViewList.add(iv_tv1);
+        mImageViewList.add(iv_tv2);
+        mImageViewList.add(iv_tv3);
+
         // banner 宽高比 3：2
         RelativeLayout bannerLayout = (RelativeLayout) findViewById(R.id.banner_layout);
-        ViewGroup.LayoutParams layoutParams =bannerLayout.getLayoutParams();
+        ViewGroup.LayoutParams layoutParams = bannerLayout.getLayoutParams();
         layoutParams.width = com.easyvaas.common.emoji.utils.Utils.getDisplayWidthPixels(getContext());
-        layoutParams.height = layoutParams.width*2/3;
+        layoutParams.height = layoutParams.width * 2 / 3;
         bannerLayout.setLayoutParams(layoutParams);
     }
 
@@ -158,11 +172,22 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
                     ViewGroup viewGroup = (ViewGroup) mNewsViewList.get(i).getParent();
                     viewGroup.setTag(hooviewList.get(i));
                     viewGroup.setVisibility(VISIBLE);
+                    updatePointMargin(mImageViewList.get(i), mNewsViewList.get(i));
+
                 } else {
                     ViewGroup viewGroup = (ViewGroup) mNewsViewList.get(i).getParent();
                     viewGroup.setVisibility(GONE);
                 }
             }
+        }
+    }
+
+    //更新点的间距
+    private void updatePointMargin(ImageView imageView, TextView textView) {
+        if (textView.getLineCount() == 2) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+            params.topMargin = -(int) ViewUtil.dp2Px(mContext, 7);
+            imageView.setLayoutParams(params);
         }
     }
 
@@ -225,8 +250,8 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
     }
 
     private void insertHistoryRecord(NewsItemModel newsModel) {
-        String mVideoId = newsModel.getId()+"";
-        if (!TextUtils.isEmpty(mVideoId)&&!RealmHelper.getInstance().queryReadRecordId(mVideoId)) {
+        String mVideoId = newsModel.getId() + "";
+        if (!TextUtils.isEmpty(mVideoId) && !RealmHelper.getInstance().queryReadRecordId(mVideoId)) {
             ReadRecord bean = new ReadRecord();
             bean.setId(String.valueOf(mVideoId));
             bean.setPic(newsModel.getCover());

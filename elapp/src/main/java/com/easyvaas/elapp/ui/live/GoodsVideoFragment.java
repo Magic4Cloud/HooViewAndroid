@@ -37,8 +37,8 @@ public class GoodsVideoFragment extends BaseListRcvFragment {
     public void iniView(View view) {
         LinearLayoutManager l = new LinearLayoutManager(getContext());
         l.setOrientation(LinearLayoutManager.VERTICAL);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(),
-                DividerItemDecoration.HORIZONTAL);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
+                DividerItemDecoration.VERTICAL);
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.shape_goods_video_divider));
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.setAdapter(mMyAdapter = new MyAdapter());

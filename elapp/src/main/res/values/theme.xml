@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 EasyVaas.
   ~ http://www.easyvaas.com
   ~ All rights reserved.
@@ -42,7 +41,9 @@
 
         <item name="android:windowFrame">@null</item>
         <item name="android:windowTitleStyle">@style/Base.DialogWindowTitle.AppCompat</item>
-        <item name="android:windowTitleBackgroundStyle">@style/Base.DialogWindowTitleBackground.AppCompat</item>
+        <item name="android:windowTitleBackgroundStyle">
+            @style/Base.DialogWindowTitleBackground.AppCompat
+        </item>
         <!--<item name="android:windowBackground">@drawable/abc_dialog_material_background_light</item>-->
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -132,12 +133,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="SplashBaseTheme" parent="FullscreenTheme">
-        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
+
     <style name="SplashTheme" parent="SplashBaseTheme">
 
     </style>
@@ -145,8 +148,9 @@
     <style name="Theme.PageIndicatorDefaults" parent="android:Theme">
         <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>
-    <style name="Widget">
-    </style>
+
+    <style name="Widget"></style>
+
     <style name="Widget.TabPageIndicator" parent="Widget">
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/ic_tab_indicator</item>
@@ -158,10 +162,12 @@
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:maxLines">1</item>
     </style>
+
     <style name="TextAppearance.TabPageIndicator" parent="Widget">
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/text_red_selector</item>
     </style>
+
     <style name="Widget.IconPageIndicator" parent="Widget">
         <item name="android:gravity">center</item>
         <item name="height">@dimen/action_bar_status_bar_height</item>

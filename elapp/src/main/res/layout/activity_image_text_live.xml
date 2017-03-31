@@ -11,7 +11,8 @@
         android:id="@+id/AppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="206dp"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:elevation="0dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/CollapsingToolbarLayout"
@@ -54,9 +55,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dp"
-                        tools:text="杜斯基"
                         android:textColor="#303030"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        tools:text="杜斯基" />
 
                     <LinearLayout
                         android:id="@+id/ll_user_info"

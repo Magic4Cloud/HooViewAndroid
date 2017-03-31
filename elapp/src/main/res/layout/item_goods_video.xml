@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -12,9 +14,9 @@
         <com.easyvaas.common.widget.RoundImageView
             android:id="@+id/iv_header"
             android:layout_width="40dp"
-            android:layout_marginLeft="12dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
             android:src="@drawable/account_bitmap_user" />
 
         <TextView
@@ -58,10 +60,11 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/account_bitmap_list" />
-         <ImageView
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="#B3303030"/>
+            android:background="#B3303030" />
 
         <TextView
             android:id="@+id/tv_title"

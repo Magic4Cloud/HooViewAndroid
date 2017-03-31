@@ -10,8 +10,16 @@
         android:id="@+id/riv_thumb"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:type="round"
-        app:border_radius="4dp" />
+        app:border_radius="4dp"
+        app:type="round" />
+
+    <com.easyvaas.common.widget.RoundImageView
+        android:layout_width="132dp"
+        android:layout_height="88dp"
+        android:src="@drawable/shape_round4_mask"
+        app:border_radius="4dp"
+        app:type="round" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

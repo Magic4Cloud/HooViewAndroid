@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="94dp"
-    android:background="@android:color/white"
+    android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
 
     <ImageView
@@ -46,11 +46,4 @@
         android:text=""
         android:textColor="@color/text_color_gray" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="16dp"
-        android:background="#f0f0f0" />
 </RelativeLayout>

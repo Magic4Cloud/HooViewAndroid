@@ -19,13 +19,19 @@
             android:layout_height="80dp"
             android:background="@drawable/account_bitmap_list" />
 
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:background="#80303030"
+            />
+
         <TextView
             android:id="@+id/tv_tag_living"
             android:layout_width="52dp"
             android:layout_height="22dp"
             android:layout_gravity="center"
-            android:gravity="center"
             android:background="@drawable/shape_video_tag_living"
+            android:gravity="center"
             android:text="@string/living"
             android:textColor="@color/text_color_white"
             android:visibility="gone" />
@@ -34,10 +40,10 @@
             android:id="@+id/iv_tag_payback"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="9dp"
-            android:background="@drawable/shape_video_tag_playback"
-            android:src="@drawable/ic_playback_n"
             android:layout_gravity="center"
+            android:background="@drawable/shape_video_tag_playback"
+            android:padding="9dp"
+            android:src="@drawable/ic_playback_n"
             android:visibility="visible" />
     </FrameLayout>
 

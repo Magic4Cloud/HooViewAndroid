@@ -95,31 +95,6 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
         mTvFollow.setOnClickListener(this);
         avater.setOnClickListener(this);
         initFollowStatus();
-
-
-        tabLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogUtil.e("TAGGG", "被点击了");
-            }
-        });
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                LogUtil.e("TAGGG", "被点击了");
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
 //    public void hideInput() {
