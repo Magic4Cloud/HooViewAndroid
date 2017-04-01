@@ -11,6 +11,7 @@
         android:layout_marginBottom="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/market_word" />
 
     <ImageView
@@ -18,9 +19,9 @@
         android:id="@+id/iv_next"
         android:layout_width="80dp"
         android:layout_height="30dp"
-        android:layout_above="@+id/iv"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="35dp"
         android:background="@drawable/bt_hud_two" />
 

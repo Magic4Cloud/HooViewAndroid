@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/new_parent_layout"
+    android:layout_width="match_parent"
     android:layout_height="94dp"
-    android:background="?attr/selectableItemBackground"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
@@ -22,8 +22,8 @@
         android:layout_marginLeft="14dp"
         android:layout_marginRight="16dp"
         android:layout_toRightOf="@+id/iv_thumbnail"
-        android:maxLines="2"
         android:ellipsize="end"
+        android:maxLines="2"
         android:text=""
         android:textColor="@color/title_text_color" />
 
