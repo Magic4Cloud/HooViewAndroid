@@ -492,6 +492,7 @@ public class CashInActivity extends BaseActivity {
         }
         if (mCashInOptionAlipayList.size() > 0) {
             mAlipayOptionRb.setVisibility(View.VISIBLE);
+            mAlipayOptionRb.setChecked(true);
             showCashInOptionList();
         } else {
             mAlipayOptionRb.setVisibility(View.GONE);
