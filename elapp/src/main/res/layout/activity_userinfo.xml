@@ -149,13 +149,10 @@
             android:src="@drawable/ic_arrow_right_personal_more" />
     </RelativeLayout>
 
-    <ImageView
-        style="@style/default_horizontal_line_style"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp" />
 
     <RelativeLayout
         android:id="@+id/user_info_item_3"
+        android:layout_marginTop="10dp"
         style="@style/item_user_info">
 
         <TextView

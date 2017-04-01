@@ -84,6 +84,7 @@ public class WebDetailActivity extends BaseActivity {
     private TextView mTvStockShare;
     private String code;
     private int isCollected; // 0 未添加 1 已添加
+    private  int detailType;
 
 
     @Override
@@ -97,7 +98,7 @@ public class WebDetailActivity extends BaseActivity {
         final String name = getIntent().getStringExtra(EXTRA_NAME);
         code = getIntent().getStringExtra(EXTRA_CODE);
         final String title = getIntent().getStringExtra(EXTRA_TITLE);
-        final int detailType = getIntent().getIntExtra(EXTRA_TYPE, TYPE_STOCK);
+         detailType = getIntent().getIntExtra(EXTRA_TYPE, TYPE_STOCK);
         if (TextUtils.isEmpty(code)) {
             finish();
             return;
@@ -159,7 +160,7 @@ public class WebDetailActivity extends BaseActivity {
             tvSubhead.setVisibility(View.GONE);
         }else if (detailType == TYPE_PUBLIC)
         {
-            tvTitle.setText(name);
+//            tvTitle.setText(name);
             tvSubhead.setVisibility(View.GONE);
             mRlBottomNews.setVisibility(View.GONE);
             mRlBottomStock.setVisibility(View.GONE);
@@ -171,7 +172,7 @@ public class WebDetailActivity extends BaseActivity {
             public void onClick(View view) {
                 String comment = mEtComment.getText().toString();
                 if (TextUtils.isEmpty(comment)) {
-                    SingleToast.show(getApplicationContext(), "You must input comment!");
+                    SingleToast.show(getApplicationContext(), R.string.input_comment);
                 } else {
                     postComment(code, detailType == TYPE_STOCK);
                 }
@@ -185,7 +186,7 @@ public class WebDetailActivity extends BaseActivity {
                 if (EditorInfo.IME_ACTION_SEND == i) {
                     String comment = textView.getText().toString();
                     if (TextUtils.isEmpty(comment)) {
-                        SingleToast.show(getApplicationContext(), "You must input comment!");
+                        SingleToast.show(getApplicationContext(), R.string.input_comment);
                         return false;
                     } else {
                         postComment(code, detailType == TYPE_STOCK);
@@ -269,13 +270,13 @@ public class WebDetailActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-//        if (mEtComment.isShown()) {
-//            hideInputMethod();
-//            mInputCommentBar.setVisibility(View.GONE);
-//        } else {
-//
-//        }
-        super.onBackPressed();
+        if (mEtComment.isShown() && detailType != TYPE_COMMENTS) {
+            hideInputMethod();
+            mInputCommentBar.setVisibility(View.GONE);
+        } else {
+
+            super.onBackPressed();
+        }
     }
 
     @Override
