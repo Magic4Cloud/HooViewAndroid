@@ -66,11 +66,11 @@ public class PayRecordListActivity extends BaseRvcActivity {
             if (result != null) {
                 if (!mIsLoadMore) {
                     mRecordListEntityList.clear();
-                    if (result.getCount() == 0) {
-                        findViewById(R.id.line_bottom_iv).setVisibility(View.GONE);
-                    } else {
-                        findViewById(R.id.line_bottom_iv).setVisibility(View.VISIBLE);
-                    }
+//                    if (result.getCount() == 0) {
+//                        findViewById(R.id.line_bottom_iv).setVisibility(View.GONE);
+//                    } else {
+//                        findViewById(R.id.line_bottom_iv).setVisibility(View.VISIBLE);
+//                    }
                 }
                 mRecordListEntityList.addAll(result.getRecordlist());
                 mAdapter.notifyDataSetChanged();
