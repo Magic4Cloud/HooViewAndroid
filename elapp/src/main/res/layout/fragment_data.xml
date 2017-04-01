@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="请输入关键词"
+                android:hint="@string/please_enter_code"
                 android:maxLength="10"
                 android:paddingLeft="14dp"
                 android:textColor="@color/text_color_gray" />

@@ -57,7 +57,7 @@
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="14dp"
         android:gravity="center"
         android:text="44.11%"
         android:textColor="@color/selector_stock_state_color" />
