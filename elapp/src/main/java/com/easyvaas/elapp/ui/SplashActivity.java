@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -271,7 +272,6 @@ public class SplashActivity extends BaseActivity {
         });
 
 
-
         iv_top = (ImageView) findViewById(R.id.iv_top);
         ImageView iv_bottom = (ImageView) findViewById(R.id.iv_bottom);
         mHandler.sendEmptyMessageDelayed(MSG_EXIT, 2000);
@@ -283,7 +283,11 @@ public class SplashActivity extends BaseActivity {
         HooviewApiHelper.getInstance().getSplashInfo(new MyRequestCallBack<SplashEntity>() {
             @Override
             public void onSuccess(SplashEntity result) {
-                startLoadingImageView(result.getAdurl());
+                if (TextUtils.isEmpty(result.getAdurl())) {
+                    iv_top.setBackgroundResource(R.drawable.default_banner);
+                } else {
+                    startLoadingImageView(result.getAdurl());
+                }
             }
 
             @Override
