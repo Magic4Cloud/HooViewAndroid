@@ -11,8 +11,8 @@ android {
         multiDexEnabled true
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 12
-        versionName "2.1.1"
+        versionCode 13
+        versionName "2.1.2"
 
         resValue "string", "build_time", buildTime()
         resValue("string", "growingio_project_id", "a9d9a45702edf729")

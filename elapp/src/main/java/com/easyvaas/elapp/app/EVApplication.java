@@ -102,7 +102,7 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         FeedbackHelper.getInstance(this).init(this, Constants.APP_FEEDBACK_KEY);
         initReceiver();
 
-        EVSdk.enableDebugLog();
+//        EVSdk.enableDebugLog();
         if (ApiConstant.isUserReleaseServer()) {
             EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
                     Constants.EV_SECRET_ID, "");
