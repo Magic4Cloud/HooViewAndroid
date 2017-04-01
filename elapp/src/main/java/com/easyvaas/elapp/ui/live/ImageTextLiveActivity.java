@@ -3,15 +3,11 @@ package com.easyvaas.elapp.ui.live;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +27,6 @@ import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
-import com.sina.weibo.sdk.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -87,6 +82,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
         }
         TextView tvName = (TextView) findViewById(R.id.tv_name);
         tvName.setText(mStreamsEntity.getUserEntity().getNickname());
+        mTvTitle.setText(mStreamsEntity.getUserEntity().getNickname());
         ImageView headerBg = (ImageView) findViewById(R.id.iv_header_bg);
         ImageView avater = (RoundImageView) findViewById(R.id.riv_avater);
         Utils.showImage(mStreamsEntity.getUserEntity().getLogourl(), R.drawable.account_bitmap_user, avater);
