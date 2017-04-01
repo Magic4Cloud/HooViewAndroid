@@ -120,6 +120,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/cash_in_option_weixin"
+                android:visibility="gone"
                 android:textColor="#59b64c" />
 
             <RadioButton
