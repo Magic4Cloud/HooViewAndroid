@@ -3,7 +3,6 @@ package com.easyvaas.elapp.adapter.item;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.adapter.AdapterItem;
@@ -12,6 +11,7 @@ import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
+import com.nex3z.flowlayout.FlowLayout;
 
 /**
  * Created by guojun on 2016/12/29 17:46.
@@ -22,7 +22,7 @@ public class MyStockNewsItem implements AdapterItem<MyStockNewsModel.NewsEntity>
     private Context mContext;
     private TextView mTvTime;
     private TextView mTvTitle;
-    private LinearLayout mLlStocksContainer;
+    private FlowLayout mLlStocksContainer;
     private MyStockNewsModel.NewsEntity model;
 
     public MyStockNewsItem(Context context) {
@@ -38,7 +38,7 @@ public class MyStockNewsItem implements AdapterItem<MyStockNewsModel.NewsEntity>
     public void onBindViews(View root) {
         mTvTime = (TextView) root.findViewById(R.id.tv_time);
         mTvTitle = (TextView) root.findViewById(R.id.tv_title);
-        mLlStocksContainer = (LinearLayout) root.findViewById(R.id.ll_stocks);
+        mLlStocksContainer = (FlowLayout) root.findViewById(R.id.ll_stocks);
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +74,7 @@ public class MyStockNewsItem implements AdapterItem<MyStockNewsModel.NewsEntity>
                     TextView tvStock = (TextView) view.findViewById(R.id.tv_name);
                     TextView tvPercent = (TextView) view.findViewById(R.id.tv_percent);
                     tvStock.setText(stocksEntity.getName());
-                    double percent = Double.parseDouble(stocksEntity.getPersent());
+                    double percent = Double.parseDouble(stocksEntity.getPercent());
                     tvPercent.setText(StringUtil.getStockPercent(percent));
                     tvPercent.setSelected(percent > 0);
                     tvStock.setSelected(percent > 0);

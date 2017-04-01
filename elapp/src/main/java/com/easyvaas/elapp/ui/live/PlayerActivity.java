@@ -33,6 +33,7 @@ import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.ui.user.LoginActivity;
+import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
@@ -252,7 +253,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     }
 
     //TODO 更新头像，用户名等
-    private void updateVideoInfo(VideoEntity result) {
+    private void updateVideoInfo(final VideoEntity result) {
         if (mCurrentVideo.getLiving() == VideoEntity.IS_LIVING) {
             showMediaController(false);
             mIv_all_screen.setVisibility(View.VISIBLE);
@@ -264,6 +265,14 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         Utils.showImage(result.getLogourl(), R.drawable.account_bitmap_user, mRivHeader);
         mTvName.setText(result.getNickname());
         mTvGroup.setText(result.getSignature());
+        mRivHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(result.getName())){
+                    VIPUserInfoDetailActivity.start(PlayerActivity.this, result.getName());
+                }
+            }
+        });
     }
 
     private void startWatchLive() {

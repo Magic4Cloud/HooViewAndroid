@@ -92,7 +92,7 @@ public class MyStockNewsModel extends BaseListModel {
 
         private String symbol;
         private String name;
-        private String persent;
+        private String percent;
 
         public String getSymbol() {
             return symbol;
@@ -110,12 +110,12 @@ public class MyStockNewsModel extends BaseListModel {
             this.name = name;
         }
 
-        public String getPersent() {
-            return persent;
+        public String getPercent() {
+            return percent;
         }
 
-        public void setPersent(String persent) {
-            this.persent = persent;
+        public void setPercent(String percent) {
+            this.percent = percent;
         }
     }
 }

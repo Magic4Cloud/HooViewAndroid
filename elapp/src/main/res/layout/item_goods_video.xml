@@ -26,7 +26,7 @@
             android:layout_marginRight="16dp"
             android:layout_toRightOf="@+id/iv_header"
             android:text="火眼主播小莹"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/title_text_color"
             android:textSize="16sp"
             android:visibility="gone" />
 
@@ -39,7 +39,7 @@
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/iv_header"
             android:text="火眼主播小莹"
-            android:textColor="@color/text_warm_gray"
+            android:textColor="@color/title_text_color"
             android:visibility="visible" />
 
         <TextView
