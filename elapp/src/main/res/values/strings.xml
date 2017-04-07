@@ -780,4 +780,8 @@
 
     <string name="please_enter_code">请输入股票代码/简称</string>
     <string name="input_comment">请输入评论内容哦</string>
+    <string name="news_import">要闻</string>
+    <string name="news_speed">快讯</string>
+    <string name="news_slecte">自选</string>
+    <string name="news_specil">专栏</string>
 </resources>
