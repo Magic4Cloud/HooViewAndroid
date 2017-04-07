@@ -150,8 +150,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.netflix.rxjava:rxjava-core:0.20.7'
-    compile 'com.netflix.rxjava:rxjava-android:0.20.7'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'org.greenrobot:eventbus:3.0.0'
@@ -162,4 +160,20 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
 //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
+    //net
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+
+    //rx
+    compile 'io.reactivex:rxjava:1.2.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
+
+    //di
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+
+
 }
