@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.TabLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.TabLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tabLayout"
-    android:background="@color/tab_bg_white"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:background="@color/tab_bg_white"
     app:tabIndicatorColor="@color/base_purplish"
     app:tabIndicatorHeight="1dp"
     app:tabSelectedTextColor="@color/text_color_purplish"
-    app:tabTextColor="@color/text_color_gray"
     app:tabTextAppearance="@style/TabLayoutTextAppearance"
-    tools:showIn="@layout/fragment_home_live" />
+    app:tabTextColor="@color/text_color_gray"
+    tools:showIn="@layout/fragment_home_live"/>

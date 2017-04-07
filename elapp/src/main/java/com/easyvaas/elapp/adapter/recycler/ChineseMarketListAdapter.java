@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 沪深
+ */
 public class ChineseMarketListAdapter extends RecyclerView.Adapter {
     private static final int ITEM_TYPE_EXPONENT = 1;
     private static final int ITEM_TYPE_STOCK = 2;
@@ -70,8 +73,7 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
         RecyclerView.ViewHolder viewHolder = null;
         switch (viewType) {
             case ITEM_TYPE_EXPONENT:
-                viewHolder = new ExponentViewHolder(
-                        layoutInflater.inflate(R.layout.item_market_list_exponent, parent, false));
+                viewHolder = new ExponentViewHolder(layoutInflater.inflate(R.layout.item_market_list_exponent, parent, false));
                 break;
             case ITEM_TYPE_STOCK:
                 viewHolder = new StockItemViewHolder(

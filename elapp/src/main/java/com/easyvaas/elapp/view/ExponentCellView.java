@@ -9,12 +9,20 @@ import android.widget.TextView;
 
 import com.hooview.app.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class ExponentCellView extends FrameLayout {
-    private TextView mTvName;
-    private TextView mTvNumber;
-    private TextView mTvPercent;
-    private CardView mCardView;
+
+    @BindView(R.id.tv_name)
+    TextView mTvName;
+    @BindView(R.id.tv_number)
+    TextView mTvNumber;
+    @BindView(R.id.tv_percent)
+    TextView mTvPercent;
+    @BindView(R.id.cardView)
+    CardView mCardView;
 
     public ExponentCellView(Context context) {
         this(context, null);
@@ -22,15 +30,8 @@ public class ExponentCellView extends FrameLayout {
 
     public ExponentCellView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView();
-    }
-
-    private void initView() {
         View.inflate(getContext(), R.layout.view_exponent_cell, this);
-        mTvName = (TextView) findViewById(R.id.tv_name);
-        mTvNumber = (TextView) findViewById(R.id.tv_number);
-        mTvPercent = (TextView) findViewById(R.id.tv_percent);
-        mCardView = (CardView) findViewById(R.id.cardView);
+        ButterKnife.bind(this);
     }
 
     public void updateData(String name, String number, String percent) {

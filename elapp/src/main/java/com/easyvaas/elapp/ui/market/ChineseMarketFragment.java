@@ -19,7 +19,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+/**
+ * 沪深
+ */
 public class ChineseMarketFragment extends BaseListFragment {
+
     private ChineseMarketListAdapter mAdapter;
 
     public static ChineseMarketFragment newInstance() {
@@ -41,6 +45,9 @@ public class ChineseMarketFragment extends BaseListFragment {
         loadData();
     }
 
+    /**
+     * 加载数据
+     */
     public void loadData() {
         HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<ExponentListNewModel>() {
             @Override
@@ -79,7 +86,7 @@ public class ChineseMarketFragment extends BaseListFragment {
         HooviewApiHelper.getInstance().getUpAndDownList(new MyRequestCallBack<UpsAndDownsDataModel>() {
             @Override
             public void onSuccess(UpsAndDownsDataModel result) {
-                Log.d("Misuzu","-------------success");
+                Log.d("Misuzu", "-------------success");
                 if (result != null) {
                     hideEmptyView();
                     mAdapter.setUpsAndDownsListModel(result);
@@ -93,7 +100,7 @@ public class ChineseMarketFragment extends BaseListFragment {
 
             @Override
             public void onFailure(String msg) {
-                Log.d("Misuzu","-------------onFailure-----msg-> "+msg);
+                Log.d("Misuzu", "-------------onFailure-----msg-> " + msg);
                 mSwipeRefreshLayout.setRefreshing(false);
                 if (mAdapter.getItemCount() == 0) {
                     showEmptyView(R.string.has_no_data);
@@ -103,7 +110,7 @@ public class ChineseMarketFragment extends BaseListFragment {
             @Override
             public void onError(String errorInfo) {
                 super.onError(errorInfo);
-                Log.d("Misuzu","-------------onError  "+errorInfo);
+                Log.d("Misuzu", "-------------onError  " + errorInfo);
                 mSwipeRefreshLayout.setRefreshing(false);
                 if (mAdapter.getItemCount() == 0) {
                     showEmptyView(R.string.has_no_data);
@@ -135,6 +142,6 @@ public class ChineseMarketFragment extends BaseListFragment {
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-
     }
+
 }

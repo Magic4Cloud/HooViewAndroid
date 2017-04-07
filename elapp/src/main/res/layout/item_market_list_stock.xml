@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="63dp"
     android:background="#fff">
@@ -13,7 +13,7 @@
         android:background="@drawable/selector_stock_rank_tag"
         android:gravity="center"
         android:text="1"
-        android:textColor="@color/text_white" />
+        android:textColor="@color/text_white"/>
 
     <TextView
         android:id="@+id/tv_stock_name"
@@ -23,14 +23,14 @@
         android:layout_marginLeft="24dp"
         android:text="N安车"
         android:textColor="@color/market_list_stock_name"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
     <View
         android:id="@+id/horizontal_center_line"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_centerVertical="true"
-        android:background="#00ffffff" />
+        android:background="#00ffffff"/>
 
     <TextView
         android:id="@+id/tv_stock_number"
@@ -40,7 +40,7 @@
         android:layout_below="@+id/horizontal_center_line"
         android:text="SZ300104"
         android:textColor="@color/text_warm_gray"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tv_price"
@@ -49,7 +49,7 @@
         android:layout_centerInParent="true"
         android:text="192.11"
         android:textColor="@color/selector_stock_state_color"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/tv_percent"
@@ -60,7 +60,7 @@
         android:layout_marginRight="14dp"
         android:gravity="center"
         android:text="44.11%"
-        android:textColor="@color/selector_stock_state_color" />
+        android:textColor="@color/selector_stock_state_color"/>
 
     <View
         android:id="@+id/view_divider"
@@ -69,5 +69,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="10dp"
-        android:background="@color/split_line_color" />
+        android:background="@color/split_line_color"/>
+
 </RelativeLayout>

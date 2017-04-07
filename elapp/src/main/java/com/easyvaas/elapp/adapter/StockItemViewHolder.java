@@ -11,22 +11,27 @@ import com.easyvaas.elapp.bean.market.StockModel;
 import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.Utils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class StockItemViewHolder extends RecyclerView.ViewHolder {
-    private TextView mTvTag;
-    private TextView mTvStockName;
-    private TextView mTvStockNumber;
-    private TextView mTvPrice;
-    private TextView mTvPercent;
-    private View viewDivider;
+
+    @BindView(R.id.tv_tag)
+    TextView mTvTag;
+    @BindView(R.id.tv_stock_name)
+    TextView mTvStockName;
+    @BindView(R.id.tv_stock_number)
+    TextView mTvStockNumber;
+    @BindView(R.id.tv_price)
+    TextView mTvPrice;
+    @BindView(R.id.tv_percent)
+    TextView mTvPercent;
+    @BindView(R.id.view_divider)
+    View viewDivider;
 
     public StockItemViewHolder(View itemView) {
         super(itemView);
-        mTvTag = (TextView) itemView.findViewById(R.id.tv_tag);
-        mTvStockName = (TextView) itemView.findViewById(R.id.tv_stock_name);
-        mTvStockNumber = (TextView) itemView.findViewById(R.id.tv_stock_number);
-        mTvPrice = (TextView) itemView.findViewById(R.id.tv_price);
-        mTvPercent = (TextView) itemView.findViewById(R.id.tv_percent);
-        viewDivider = itemView.findViewById(R.id.view_divider);
+        ButterKnife.bind(this, itemView);
     }
 
     public void setStockModel(final StockModel stockModel, int status) {
@@ -65,7 +70,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
         if (stockModel != null) {
             mTvStockName.setText(stockModel.getName());
             mTvStockNumber.setText(stockModel.getSymbol());
-            mTvPrice.setText(stockModel.getClose()+ "");
+            mTvPrice.setText(stockModel.getClose() + "");
             mTvPercent.setText(StringUtil.getStockPercent(stockModel.getPercent()));
 //            mTvPercent.setText(StringUtil.getStockPercent(stockModel.getHigh()-stockModel.getLow()));
             mTvTag.setVisibility(View.INVISIBLE);
@@ -86,7 +91,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
         this.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.showStockDetail(v.getContext(), stockModel.getName(), TextUtils.isEmpty(stockModel.getSymbol())?stockModel.getSymbol():stockModel.getSymbol(), true);
+                Utils.showStockDetail(v.getContext(), stockModel.getName(), TextUtils.isEmpty(stockModel.getSymbol()) ? stockModel.getSymbol() : stockModel.getSymbol(), true);
             }
         });
     }

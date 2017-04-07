@@ -8,6 +8,9 @@ import com.easyvaas.elapp.adapter.BaseFragmentPagerAdapter;
 import com.easyvaas.elapp.ui.base.BaseTabViewPagerFragment;
 import com.hooview.app.R;
 
+/**
+ * 市场
+ */
 public class MarketMainFragment extends BaseTabViewPagerFragment {
 
     @Override
