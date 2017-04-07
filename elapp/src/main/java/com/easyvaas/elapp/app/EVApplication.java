@@ -88,7 +88,7 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
             FileUtil.copyAssetsFiles(this, FileUtil.WATERMARK_FILE_NAME, waterFilePath);
         }
 
-        JPushInterface.setDebugMode(false);
+        JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         PushHelper.getInstance(this)
                 .savePushInfo("JPushID", "", "j_" + JPushInterface.getRegistrationID(this));

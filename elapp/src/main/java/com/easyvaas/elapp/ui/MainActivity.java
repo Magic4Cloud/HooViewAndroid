@@ -22,6 +22,7 @@ import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.HomeLiveFragment;
 import com.easyvaas.elapp.ui.market.HomeMarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
+import com.easyvaas.elapp.ui.news.NewsMainFragment;
 import com.easyvaas.elapp.ui.user.UserProfileFragment;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -44,6 +45,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private HomeLiveFragment mHomeLiveFragment;
     private HomeMarketFragment mHomeMarketFragment;
     private HomeNewsFragment mHomeNewsFragment;
+    private NewsMainFragment mNewsMainFragment;
     private Fragment mCurrentFragment;
     public SharedPreferences mSp;
     private RelativeLayout rl_mask;
@@ -89,8 +91,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mUserProfileFragment = new UserProfileFragment();
         mHomeMarketFragment = new HomeMarketFragment();
         mHomeNewsFragment = new HomeNewsFragment();
+        mNewsMainFragment = NewsMainFragment.newInstance();
         mCurrentFragment = mHomeNewsFragment;
-        mFragmentManager.beginTransaction().add(R.id.fl_content,mHomeNewsFragment).commit();
+        mRbNews.setChecked(true);
     }
 
     private void selectTab(Intent intent) {
@@ -130,7 +133,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_news:
-               switchFragment(mHomeNewsFragment);
+               switchFragment(mNewsMainFragment);
                 break;
             case R.id.rb_live:
                 switchFragment(mHomeLiveFragment);
