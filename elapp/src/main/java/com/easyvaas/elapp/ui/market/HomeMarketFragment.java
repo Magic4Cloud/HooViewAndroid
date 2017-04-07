@@ -21,8 +21,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import static com.hooview.app.R.id.tv_market;
-
+/**
+ * 行情
+ */
 public class HomeMarketFragment extends BaseFragment implements View.OnClickListener {
     private FragmentManager mFm;
     private MarketMainFragment mMarketMainFragment;
@@ -48,7 +49,7 @@ public class HomeMarketFragment extends BaseFragment implements View.OnClickList
     }
 
     private void initView(View view) {
-        mRbMarket = (RadioButton) view.findViewById(tv_market);
+        mRbMarket = (RadioButton) view.findViewById(R.id.tv_market);
         mRbMyStock = (RadioButton) view.findViewById(R.id.tv_my_stock);
         mRbMarket.setOnClickListener(this);
         mRbMyStock.setOnClickListener(this);
@@ -71,49 +72,61 @@ public class HomeMarketFragment extends BaseFragment implements View.OnClickList
     public void onStart() {
         super.onStart();
         if (mRbMarket.isChecked()) {
-            mFm.beginTransaction().hide(mMySelectedStockMainFragment).commit();
-            mFm.beginTransaction().show(mMarketMainFragment).commit();
-            mIvEdit.setVisibility(View.GONE);
+            showMarket();
         } else {
-            mFm.beginTransaction().hide(mMarketMainFragment).commit();
-            mFm.beginTransaction().show(mMySelectedStockMainFragment).commit();
-            mIvEdit.setVisibility(View.VISIBLE);
+            showMyStock();
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case tv_market:
-                rbMarketClicked();
+            // 市场
+            case R.id.tv_market:
+                showMarket();
                 break;
+            // 自选
             case R.id.tv_my_stock:
                 if (EVApplication.isLogin() && Preferences.getInstance(getContext()).isLogin()) {
-                    mFm.beginTransaction().hide(mMarketMainFragment).commit();
-                    mFm.beginTransaction().show(mMySelectedStockMainFragment).commit();
-                    mIvEdit.setVisibility(View.VISIBLE);
+                    // 已登录，显示自选
+                    showMyStock();
                 } else {
+                    // 未登录，去登录
                     mRbMarket.setChecked(true);
                     LoginActivity.start(getContext());
                 }
                 break;
+            // 编辑自选
             case R.id.iv_edit:
                 EditMySelectedStockActivity.start(getContext(), stockListModel);
                 break;
+            // 搜索
             case R.id.iv_search:
                 GlobalSearchActivity.start(getContext());
                 break;
+            // 刷新
             case R.id.iv_refresh:
                 EventBus.getDefault().post(new MarketRefreshEvent());
                 break;
         }
     }
 
-    private void rbMarketClicked(){
-        mFm.beginTransaction().hide(mMySelectedStockMainFragment).commit();
-        mFm.beginTransaction().show(mMarketMainFragment).commit();
+    /**
+     * 显示市场，隐藏自选
+     */
+    private void showMarket() {
+        mFm.beginTransaction().hide(mMySelectedStockMainFragment).show(mMarketMainFragment).commit();
         mIvEdit.setVisibility(View.GONE);
     }
+
+    /**
+     * 显示自选，隐藏市场
+     */
+    private void showMyStock() {
+        mFm.beginTransaction().hide(mMarketMainFragment).show(mMySelectedStockMainFragment).commit();
+        mIvEdit.setVisibility(View.VISIBLE);
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(StockListModel event) {
