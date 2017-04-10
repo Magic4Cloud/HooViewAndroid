@@ -69,7 +69,7 @@ public class MySelectedStockAllFragment extends LazyLoadFragment {
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = View.inflate(getContext(), R.layout.fragment_my_selected_stock_all, null);
+        View view = View.inflate(getContext(), R.layout.fragment_market_optional, null);
         stockRefresh = (SwipeRefreshLayout) view.findViewById(R.id.stock_refresh);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.stock_rv);
         mTvPrompt = (TextView) view.findViewById(R.id.tv_prompt);

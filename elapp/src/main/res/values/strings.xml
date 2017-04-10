@@ -784,4 +784,9 @@
     <string name="news_speed">快讯</string>
     <string name="news_slecte">自选</string>
     <string name="news_specil">专栏</string>
+
+    <string name="market_stock">自选</string>
+    <string name="market_chinese">沪深</string>
+    <string name="market_hk">港股</string>
+    <string name="market_global">全球</string>
 </resources>

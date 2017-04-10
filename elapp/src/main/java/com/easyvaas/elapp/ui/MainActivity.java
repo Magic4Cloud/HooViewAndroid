@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.HomeLiveFragment;
 import com.easyvaas.elapp.ui.market.HomeMarketFragment;
+import com.easyvaas.elapp.ui.market.MarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
 import com.easyvaas.elapp.ui.news.NewsMainFragment;
 import com.easyvaas.elapp.ui.user.UserProfileFragment;
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private HomeMarketFragment mHomeMarketFragment;
     private HomeNewsFragment mHomeNewsFragment;
     private NewsMainFragment mNewsMainFragment;
+    private MarketFragment mMarketFragment;
     private Fragment mCurrentFragment;
     public SharedPreferences mSp;
     private RelativeLayout rl_mask;
@@ -92,6 +94,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mHomeMarketFragment = new HomeMarketFragment();
         mHomeNewsFragment = new HomeNewsFragment();
         mNewsMainFragment = NewsMainFragment.newInstance();
+        mMarketFragment = MarketFragment.newInstance();
         mCurrentFragment = mHomeNewsFragment;
         mRbNews.setChecked(true);
     }
@@ -139,7 +142,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 switchFragment(mHomeLiveFragment);
                 break;
             case R.id.rb_market:
-                switchFragment(mHomeMarketFragment);
+                switchFragment(mMarketFragment);
                 break;
             case R.id.rb_user:
                 switchFragment(mUserProfileFragment);

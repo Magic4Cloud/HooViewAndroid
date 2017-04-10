@@ -80,7 +80,7 @@ public class SelectStockListAdapter extends RecyclerView.Adapter {
                 break;
             case ITEM_TYPE_STOCK:
                 viewHolder = new StockItemViewHolder(
-                        layoutInflater.inflate(R.layout.item_market_list_stock, parent, false));
+                        layoutInflater.inflate(R.layout.item_market_optional_stock, parent, false));
                 break;
             case ITEM_TYPE_TITLE:
                 viewHolder = new SelectStockListAdapter.TitleViewHolder(
