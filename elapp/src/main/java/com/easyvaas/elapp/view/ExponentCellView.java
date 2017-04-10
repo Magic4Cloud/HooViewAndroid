@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.easyvaas.elapp.utils.ViewUtil;
+import com.hitomi.cslibrary.CrazyShadow;
+import com.hitomi.cslibrary.base.CrazyShadowDirection;
 import com.hooview.app.R;
 
 import butterknife.BindView;
@@ -51,12 +54,21 @@ public class ExponentCellView extends FrameLayout {
     }
 
     public void setCardViewBackground(boolean up) {
+        Context context = mCardView.getContext();
+        int bg;
         if (up) {
-            mCardView.setCardBackgroundColor(mCardView.getContext().getResources()
-                    .getColor(R.color.exponent_up));
+            bg = context.getResources().getColor(R.color.exponent_up);
         } else {
-            mCardView.setCardBackgroundColor(mCardView.getContext().getResources()
-                    .getColor(R.color.exponent_down));
+            bg = context.getResources().getColor(R.color.exponent_down);
         }
+        mCardView.setCardBackgroundColor(bg);
+        new CrazyShadow.Builder()
+                .setContext(context)
+                .setDirection(CrazyShadowDirection.RIGHT_BOTTOM_LEFT)
+                .setShadowRadius(ViewUtil.dp2Px(context, 4))
+                .setCorner(ViewUtil.dp2Px(context, 4))
+                .setBackground(bg)
+                .setImpl(CrazyShadow.IMPL_DRAW)
+                .action(this);
     }
 }

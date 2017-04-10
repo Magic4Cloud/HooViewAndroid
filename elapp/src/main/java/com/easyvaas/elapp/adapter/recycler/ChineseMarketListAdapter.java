@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.adapter.recycler;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +28,10 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
     private UpsAndDownsDataModel upsAndDownsListModel;
     private ExponentListNewModel exponentListModel;
     private LinkedList datas;
+    private Context mContext;
 
-    public ChineseMarketListAdapter() {
+    public ChineseMarketListAdapter(Context context) {
+        mContext = context;
         datas = new LinkedList();
         exponentListModel = new ExponentListNewModel();
     }
@@ -171,17 +174,21 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
 
     private class TitleViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTitle;
+        private View mViewExponent;
 
         TitleViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+            mViewExponent = itemView.findViewById(R.id.view_exponent);
         }
 
         public void setTitle(boolean isUP) {
             if (isUP) {
                 tvTitle.setText(R.string.up_list_title);
+                mViewExponent.setBackgroundColor(mContext.getResources().getColor(R.color.view_exponent_up));
             } else {
                 tvTitle.setText(R.string.down_list_title);
+                mViewExponent.setBackgroundColor(mContext.getResources().getColor(R.color.view_exponent_down));
             }
         }
     }

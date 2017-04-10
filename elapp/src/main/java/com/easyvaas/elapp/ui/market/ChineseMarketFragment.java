@@ -41,7 +41,7 @@ public class ChineseMarketFragment extends BaseListFragment {
 
     @Override
     public void iniView(View view) {
-        mRecyclerView.setAdapter(mAdapter = new ChineseMarketListAdapter());
+        mRecyclerView.setAdapter(mAdapter = new ChineseMarketListAdapter(getContext()));
         loadData();
     }
 

@@ -40,7 +40,7 @@ public class HKMarketFragment extends BaseListFragment {
 
     @Override
     public void iniView(View view) {
-        mRecyclerView.setAdapter(mAdapter = new HkMarketListAdapter());
+        mRecyclerView.setAdapter(mAdapter = new HkMarketListAdapter(getContext()));
         loadData();
     }
 

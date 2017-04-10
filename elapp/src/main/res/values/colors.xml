@@ -139,7 +139,7 @@
     <color name="market_list_stock_name">#303030</color>
     <color name="live_room_bg">#303030</color>
     <color name="market_list_stock_price">#ff4342</color>
-    <color name="list_divider_bg">#f8f8f8</color>
+    <color name="list_divider_bg">#f7f7f7</color>
     <color name="market_list_tag_down">#00b57c</color>
     <color name="market_list_tag_up">#ae3231</color>
     <color name="tab_bg_white">#fff</color>
@@ -182,5 +182,8 @@
     <color name="tab_text_color_selected">#622d80</color>
 
     <color name="f8f8f8">#f8f8f8</color>
+
+    <color name="view_exponent_up">#a72f2c</color>
+    <color name="view_exponent_down">#1c8139</color>
 
 </resources>
