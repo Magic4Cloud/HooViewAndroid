@@ -292,7 +292,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onFailure(String msg) {
-
+                iv_top.setBackgroundResource(R.drawable.default_banner);
             }
         });
     }
