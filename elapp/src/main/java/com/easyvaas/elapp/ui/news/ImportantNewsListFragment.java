@@ -57,6 +57,9 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
         super.onCreate(savedInstanceState);
     }
 
+    public static ImportantNewsListFragment newInstance() {
+        return new ImportantNewsListFragment();
+    }
     @Override
     public void iniView(View view) {
         mRecyclerView.setAdapter(mAdapter = new ImportNewsAdapter(getContext()));

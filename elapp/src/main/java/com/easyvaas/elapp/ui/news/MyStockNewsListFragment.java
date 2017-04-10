@@ -81,6 +81,9 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
         EventBus.getDefault().register(this);
     }
 
+    public static MyStockNewsListFragment newInstance() {
+        return  new MyStockNewsListFragment();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = View.inflate(getContext(), R.layout.fragment_my_stock, null);
@@ -105,6 +108,7 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
 
     public void iniView(View view) {
         mRecyclerView.setAdapter(mMyStockNewsListAdapter = new MyStockNewsListAdapter(getContext(), mNewsEntityList));
+        mNewsEntityList.clear();
         mNewsEntityList.add(new MyStockNewsModel.NewsEntity(true));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
         updateTabLayoutView();

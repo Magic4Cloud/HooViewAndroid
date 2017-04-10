@@ -32,6 +32,7 @@ public class NewsMainFragment extends MyBaseFragment {
     ViewPager mNewsTabViewpager;
 
     private String[] titles;
+    private Fragment[] mFragments;
 
     @Override
     protected int getLayout() {
@@ -40,10 +41,17 @@ public class NewsMainFragment extends MyBaseFragment {
 
     @Override
     protected void initViewAndData() {
-        titles = new String[]{getString(R.string.news_import),
+        titles = new String[]{
+                getString(R.string.news_import),
                 getString(R.string.news_speed),
                 getString(R.string.news_slecte),
                 getString(R.string.news_specil)};
+        mFragments = new Fragment[]{
+                ImportantNewsListFragment.newInstance(),
+                LastestNewsListFragment.newInstance(),
+                MyStockNewsListFragment.newInstance(),
+                MyStockNewsListFragment.newInstance(),
+        };
         mNewsTabViewpager.setAdapter(new MainPageAdapter(getChildFragmentManager()));
         mNewsTablayout.setViewPager(mNewsTabViewpager);
         mNewsTabViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -78,7 +86,7 @@ public class NewsMainFragment extends MyBaseFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return new ImportantNewsListFragment();
+            return mFragments[position];
         }
 
         @Override

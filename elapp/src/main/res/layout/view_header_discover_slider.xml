@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:visibility="gone"
         android:src="@drawable/account_bitmap_list" />
 
     <com.easyvaas.common.imageslider.SliderLayout
@@ -23,5 +24,6 @@
     <View
         android:background="@drawable/banner_mengceng"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 </RelativeLayout>

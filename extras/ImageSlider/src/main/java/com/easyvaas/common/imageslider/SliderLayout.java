@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -140,6 +142,8 @@ public class SliderLayout extends RelativeLayout{
      */
     private long mSliderDuration = 4000;
 
+    private RelativeLayout viewPagerParent;
+
     /**
      * Visibility of {@link com.easyvaas.common.imageslider.Indicators.PagerIndicator}
      */
@@ -190,7 +194,9 @@ public class SliderLayout extends RelativeLayout{
 
         mViewPager = (InfiniteViewPager)findViewById(R.id.daimajia_slider_viewpager);
         mViewPager.setAdapter(wrappedAdapter);
-
+        mViewPager.setPadding(80,0,80,0);
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setClipToPadding(false);
         mViewPager.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -209,10 +215,45 @@ public class SliderLayout extends RelativeLayout{
         setPresetTransformer(mTransformerId);
         setSliderTransformDuration(mTransformerSpan,null);
         setIndicatorVisibility(mIndicatorVisibility);
+        mViewPager.setPageTransformer(true,new ScaleTransformer());
         if(mAutoCycle){
             startAutoCycle();
         }
+
     }
+
+    public class ScaleTransformer implements ViewPagerEx.PageTransformer {
+        private static final float MIN_SCALE = 0.85f;
+        private static final float MIN_ALPHA = 0.5f;
+
+        @Override
+        public void transformPage(View page, float position) {
+            if (position < -1 || position > 1) {
+//                page.setAlpha(MIN_ALPHA);
+                page.setScaleX(MIN_SCALE + 0.05f);
+                page.setScaleY(MIN_SCALE);
+            } else if (position <= 1) { // [-1,1]
+                float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
+                if (position < 0) {
+                    float scaleX = 1 + 0.15f * position;
+                    float roundX = Math.round(scaleX*100)/100.0f;
+                    Log.d("Misuzu","p ---- "+ roundX);
+                    if (roundX >= 0.85 )
+                        scaleX = scaleFactor;
+                    page.setScaleX(scaleX+0.05f);
+                    page.setScaleY(scaleX);
+                } else {
+
+                    float scaleX = 1 - 0.15f * position;
+                    page.setScaleX(scaleX+0.05f);
+                    page.setScaleY(scaleX);
+                }
+//                page.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+        }
+        }
+    }
+
+
 
     public void addOnPageChangeListener(ViewPagerEx.OnPageChangeListener onPageChangeListener){
         if(onPageChangeListener != null){
@@ -439,6 +480,7 @@ public class SliderLayout extends RelativeLayout{
             }
         }
     }
+
 
     /**
      * set preset PagerTransformer via the name of transforemer.

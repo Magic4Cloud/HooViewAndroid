@@ -158,7 +158,7 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         RelativeLayout bannerLayout = (RelativeLayout) findViewById(R.id.banner_layout);
         ViewGroup.LayoutParams layoutParams = bannerLayout.getLayoutParams();
         layoutParams.width = com.easyvaas.common.emoji.utils.Utils.getDisplayWidthPixels(getContext());
-        layoutParams.height = layoutParams.width * 2 / 3;
+        layoutParams.height = layoutParams.width * 2 / 4;
         bannerLayout.setLayoutParams(layoutParams);
     }
 

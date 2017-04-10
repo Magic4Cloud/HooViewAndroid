@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -24,29 +25,15 @@ public class LastestNewsListFragment extends BaseListRcvFragment {
     private int start;
     private int count = 10;
     private boolean isPageNotTop = false;
-    private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
-        int y = 0;
 
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-            y = y + dy;
-            if (y < ViewUtil.dp2Px(getContext(), 50) && dy < 0) {
-                isPageNotTop = false;
-                updateTabLayoutView();
-            } else if (y > ViewUtil.dp2Px(getContext(), 50) && dy > 0) {
-                isPageNotTop = true;
-                updateTabLayoutView();
-            }
-        }
-    };
-
+    public static LastestNewsListFragment newInstance() {
+        return new LastestNewsListFragment();
+    }
     @Override
     public void iniView(View view) {
         mRecyclerView.setAdapter(mAdapter = new LastestNewsListAdapter(getContext(), lastestNewsModelist));
+        lastestNewsModelist.clear();
         lastestNewsModelist.add(new LastestNewsModel.NewsFlashEntity(true));
-        mRecyclerView.addOnScrollListener(mOnScrollListener);
-        updateTabLayoutView();
         loadData(false);
     }
 
@@ -80,15 +67,15 @@ public class LastestNewsListFragment extends BaseListRcvFragment {
     }
 
     private void updateTabLayoutView(){
-        EventBus.getDefault().post(new NewsListScrollEvent(isPageNotTop));
+//        EventBus.getDefault().post(new NewsListScrollEvent(isPageNotTop));
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && mRecyclerView != null){
-            updateTabLayoutView();
-        }
+//        if (isVisibleToUser && mRecyclerView != null){
+//            updateTabLayoutView();
+//        }
     }
 
     @Override
