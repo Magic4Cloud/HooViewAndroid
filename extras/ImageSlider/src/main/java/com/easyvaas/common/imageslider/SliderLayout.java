@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import android.widget.RelativeLayout;
 
 import com.easyvaas.common.imageslider.Animations.BaseAnimationInterface;
 import com.easyvaas.common.imageslider.Indicators.PagerIndicator;
-import com.easyvaas.common.imageslider.R;
 import com.easyvaas.common.imageslider.SliderTypes.BaseSliderView;
 import com.easyvaas.common.imageslider.Transformers.AccordionTransformer;
 import com.easyvaas.common.imageslider.Transformers.BackgroundToForegroundTransformer;
@@ -222,7 +220,7 @@ public class SliderLayout extends RelativeLayout{
 
     }
 
-    public class ScaleTransformer implements ViewPagerEx.PageTransformer {
+    private class ScaleTransformer implements ViewPagerEx.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;
 
@@ -237,7 +235,6 @@ public class SliderLayout extends RelativeLayout{
                 if (position < 0) {
                     float scaleX = 1 + 0.15f * position;
                     float roundX = Math.round(scaleX*100)/100.0f;
-                    Log.d("Misuzu","p ---- "+ roundX);
                     if (roundX >= 0.85 )
                         scaleX = scaleFactor;
                     page.setScaleX(scaleX+0.05f);

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/user_tag_bg"
+    >
+    <View
+        android:id="@+id/item_line"
+        android:layout_width="2dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:background="@color/item_line_purple"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/powerful_person"
+        android:layout_toRightOf="@id/item_line"
+        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="19dp"
+        android:textColor="@color/title_text_color"
+        android:textSize="14sp"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/item_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_below="@id/item_line"/>
+</RelativeLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/item_news_layout"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/selectableItemBackground"
+              android:orientation="vertical"
+              android:paddingRight="12dp"
+              android:paddingTop="12dp">
+
+    <TextView
+        android:id="@+id/item_news_title"
+        style="@style/title_text_style"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        tools:text="每个人都有属于自己的一片森林，也许我们 从来不曾去过，但它一直在那里，总会在那里。迷失的人迷失了，相逢的人会再相逢"
+        />
+
+    <include layout="@layout/layout_time_readcounts"/>
+
+    <View
+        android:id="@+id/divider_line"
+        style="@style/divider_view_style"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"/>
+</LinearLayout>

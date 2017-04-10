@@ -60,7 +60,7 @@ public class RetrofitHelper{
     //初始化Retrofit
     private void initRetrofit() {
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(HooviewApiConstant.HOST_HOOVIEW)
+                .baseUrl(HooviewApiConstant.HOST_HOOVIEW+"/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(mOkHttpClient)

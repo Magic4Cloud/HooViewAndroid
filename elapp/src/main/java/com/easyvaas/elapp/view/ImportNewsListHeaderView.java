@@ -20,8 +20,10 @@ import com.easyvaas.common.imageslider.SliderTypes.TextSliderView;
 import com.easyvaas.elapp.activity.WebViewActivity;
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.market.ExponentListNewModel;
-import com.easyvaas.elapp.bean.news.ImportantNewsModel;
 import com.easyvaas.elapp.bean.news.NewsItemModel;
+import com.easyvaas.elapp.bean.news.TopRatedModel;
+import com.easyvaas.elapp.bean.news.TopRatedModel.HooviewBean.NewsBean;
+import com.easyvaas.elapp.bean.news.TopRatedModel.IndexBean;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.RealmHelper;
@@ -64,13 +66,13 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
     private TextView mTvEyesNews1;
     private TextView mTvEyesNews2;
     private TextView mTvEyesNews3;
-    private List<NewsItemModel> hooviewList;
+    private List<NewsBean> hooviewList;
     private List<TextView> mNewsViewList;
 
     private List<ImageView> mImageViewList;
     private BannerModel mBannerModel;
-    private ExponentListNewModel mExponentListModel;
-    private ImportantNewsModel.HuoyanEntity huoyanEntity;
+    private List<IndexBean> mIndexList;
+    private TopRatedModel.HooviewBean huoyanEntity;
     private BaseSliderView.OnSliderClickListener mOnSliderClickListener = new BaseSliderView.OnSliderClickListener() {
         @Override
         public void onSliderClick(BaseSliderView slider) {
@@ -162,7 +164,7 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         bannerLayout.setLayoutParams(layoutParams);
     }
 
-    public void setHooviewNews(ImportantNewsModel.HuoyanEntity hooviewNews) {
+    public void setHooviewNews(TopRatedModel.HooviewBean hooviewNews) {
         this.huoyanEntity = hooviewNews;
         hooviewList = hooviewNews.getNews();
         if (hooviewList != null) {
@@ -262,31 +264,31 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         }
     }
 
-    public void setExponentListModel(ExponentListNewModel mExponentListModel) {
-        this.mExponentListModel = mExponentListModel;
-        if (mExponentListModel != null && mExponentListModel.getData() != null) {
-            for (int i = 0; i < mExponentListModel.getData().getCn().size() && i < 3; i++) {
-                ExponentListNewModel.DataEntity.CnEntity exponentModel = mExponentListModel.getData().getCn().get(i);
+    public void setExponentListModel(List<IndexBean> mIndexList) {
+        this.mIndexList = mIndexList;
+        if (mIndexList != null ) {
+            for (int i = 0; i < mIndexList.size() && i < 3; i++) {
+                IndexBean mIndexBean = mIndexList.get(i);
                 if (i == 0) {
-                    setExponent(exponentModel, mTvExponentName1, mTvExponentNumber1, mTvExponentPercent1);
-                    mLlExponent1.setTag(exponentModel);
+                    setExponent(mIndexBean, mTvExponentName1, mTvExponentNumber1, mTvExponentPercent1);
+                    mLlExponent1.setTag(mIndexBean);
                 } else if (i == 1) {
-                    setExponent(exponentModel, mTvExponentName2, mTvExponentNumber2, mTvExponentPercent2);
-                    mLlExponent2.setTag(exponentModel);
+                    setExponent(mIndexBean, mTvExponentName2, mTvExponentNumber2, mTvExponentPercent2);
+                    mLlExponent2.setTag(mIndexBean);
                 } else if (i == 2) {
-                    setExponent(exponentModel, mTvExponentName3, mTvExponentNumber3, mTvExponentPercent3);
-                    mLlExponent3.setTag(exponentModel);
+                    setExponent(mIndexBean, mTvExponentName3, mTvExponentNumber3, mTvExponentPercent3);
+                    mLlExponent3.setTag(mIndexBean);
                 }
             }
         }
     }
 
-    private void setExponent(ExponentListNewModel.DataEntity.CnEntity exponent,
+    private void setExponent(IndexBean exponent,
                              TextView name, TextView price, TextView precent) {
-        if (exponent.getChangepercent() > 0) {
+        if (exponent.getChangePercent() > 0) {
             String percentStr = getContext().getString(R.string.exponent_percent_up);
             percentStr = String.format(percentStr,
-                    (exponent.getClose() - exponent.getPreclose()), exponent.getChangepercent());
+                    (exponent.getClose() - exponent.getOpen()), exponent.getChangePercent());
             String number = new DecimalFormat(".##").format(exponent.getClose());
             name.setSelected(true);
             price.setSelected(true);
@@ -297,7 +299,7 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         } else {
             String percentStr = getContext().getString(R.string.exponent_percent);
             percentStr = String.format(percentStr,
-                    (exponent.getClose() - exponent.getPreclose()), exponent.getChangepercent());
+                    (exponent.getClose() - exponent.getOpen()), exponent.getChangePercent());
             String number = new DecimalFormat(".##").format(exponent.getClose());
             name.setSelected(false);
             price.setSelected(false);

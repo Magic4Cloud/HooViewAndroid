@@ -190,6 +190,10 @@ public class Utils {
         showImage(target.getContext(), url, loadingResId, target);
     }
 
+    public static void showNewsImage(String url, ImageView target) {
+        showImage(target.getContext(), url, R.drawable.account_bitmap_list, target);
+    }
+
     private static void showImage(Context context, String url, @DrawableRes int loadingResId, Object target) {
         if (TextUtils.isEmpty(url)) {
             return;

@@ -12,9 +12,9 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hooview.app.R;
-import com.easyvaas.elapp.bean.news.ChannelModel;
+import com.easyvaas.elapp.bean.news.TopRatedModel.HooviewBean.ChannelsBean;
 import com.easyvaas.elapp.ui.base.BaseActivity;
+import com.hooview.app.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,9 +24,9 @@ public class HooviewEyesNewsActivity extends BaseActivity {
     protected ViewPager mViewPager;
     private TextView mTvTitle;
     private static final String EXTRA_CHANNEL = "extra_channel";
-    private ChannelModel mChannelModel;
+    private ChannelsBean mChannelModel;
 
-    public static void start(Context context, ChannelModel channelsModel) {
+    public static void start(Context context, ChannelsBean channelsModel) {
         Intent starter = new Intent(context, HooviewEyesNewsActivity.class);
         starter.putExtra(EXTRA_CHANNEL, channelsModel);
         context.startActivity(starter);
@@ -37,7 +37,7 @@ public class HooviewEyesNewsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hooview_eyes);
 //        mChannelModel = Preferences.getInstance(getApplicationContext()).getJsonObject(Preferences.KEY_HOOOVIEW_EYE_TABS, ImportantNewsModel.HuoyanEntity.ChannelsEntity.class);
-        mChannelModel = (ChannelModel) getIntent().getSerializableExtra(EXTRA_CHANNEL);
+        mChannelModel = (ChannelsBean) getIntent().getSerializableExtra(EXTRA_CHANNEL);
         if (mChannelModel == null) {
             finish();
             return;

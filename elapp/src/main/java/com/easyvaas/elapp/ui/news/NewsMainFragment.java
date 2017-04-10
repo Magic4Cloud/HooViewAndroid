@@ -47,7 +47,7 @@ public class NewsMainFragment extends MyBaseFragment {
                 getString(R.string.news_slecte),
                 getString(R.string.news_specil)};
         mFragments = new Fragment[]{
-                ImportantNewsListFragment.newInstance(),
+                TopRatedNewsFragment.newInstance(),
                 LastestNewsListFragment.newInstance(),
                 MyStockNewsListFragment.newInstance(),
                 MyStockNewsListFragment.newInstance(),

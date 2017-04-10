@@ -48,13 +48,13 @@ public class ImportNewsAdapter extends RecyclerView.Adapter {
        if (position == 0) {
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
             if (mImportantNewsModel != null && mImportantNewsModel.getHuoyan() != null) {
-                headerViewHolder.importNewsListHeaderView.setHooviewNews(mImportantNewsModel.getHuoyan());
+//                headerViewHolder.importNewsListHeaderView.setHooviewNews(mImportantNewsModel.getHuoyan());
             }
             if (mBannerModel != null) {
                 headerViewHolder.importNewsListHeaderView.setBannerModel(mBannerModel);
             }
             if (mExponentListModel != null) {
-                headerViewHolder.importNewsListHeaderView.setExponentListModel(mExponentListModel);
+//                headerViewHolder.importNewsListHeaderView.setExponentListModel(mExponentListModel);
 
             }
         } else {

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/item_news_layout"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:background="?attr/selectableItemBackground"
+             android:paddingBottom="8dp"
+             android:paddingLeft="10dp"
+             android:paddingRight="10dp"
+             android:paddingTop="8dp"
+    >
+
+    <ImageView
+        android:id="@+id/item_topic_img"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:maxHeight="130dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_img"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="#822e2e2e"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_topic_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="22dp"
+            android:background="@color/topic_yellow"
+            android:paddingBottom="2dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:text="@string/topic"
+            android:textColor="@color/title_text_color"
+            android:textSize="10sp"/>
+
+        <TextView
+            android:id="@+id/item_topic_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="37dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/item_topic_icon"
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="房地产税呼声再起声再声再声再声再声再"/>
+
+        <TextView
+            android:id="@+id/item_topic_readcounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="18802"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@id/item_topic_readcounts"
+            android:layout_toLeftOf="@id/item_topic_readcounts"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_news_read_r"/>
+
+    </RelativeLayout>
+</FrameLayout>

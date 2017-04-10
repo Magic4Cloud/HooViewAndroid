@@ -186,4 +186,10 @@
     <color name="view_exponent_up">#a72f2c</color>
     <color name="view_exponent_down">#1c8139</color>
 
+    <color name="divider_color">#eeeeee</color>
+    <color name="topic_yellow">#ffe07e</color>
+    <color name="item_line_purple">#8531e2</color>
+    <color name="number_purple">#50007e</color>
+
+
 </resources>
