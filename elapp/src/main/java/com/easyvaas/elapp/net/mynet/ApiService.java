@@ -7,6 +7,7 @@ import com.easyvaas.elapp.bean.news.TopRatedModel;
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -22,6 +23,9 @@ public interface ApiService {
      */
     @GET("api/v2/news/home")
     Observable<NetResponse<TopRatedModel>> getTopRatedNews();
+
+    @GET
+    Observable<NetResponse<TopRatedModel>> getTopRatedNewsTest(@Url String url);
 
     @GET("api/news/banners")
     Observable<NetResponse<BannerModel>> getBannerNews();

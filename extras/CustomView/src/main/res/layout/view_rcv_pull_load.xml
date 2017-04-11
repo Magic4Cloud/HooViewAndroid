@@ -22,6 +22,7 @@
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_centerInParent="true"/>
 
     <LinearLayout
@@ -31,6 +32,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white_alpha_percent_45"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="horizontal">
         <ProgressBar
             android:id="@+id/progressBar"

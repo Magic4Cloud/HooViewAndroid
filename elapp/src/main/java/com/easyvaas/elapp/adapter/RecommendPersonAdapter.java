@@ -8,14 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.easyvaas.common.widget.MyUserPhoto;
 import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
 import com.easyvaas.elapp.utils.UserUtil;
+import com.easyvaas.elapp.view.CircleImageView;
 import com.hooview.app.R;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -42,7 +43,7 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         RecommendViewholder mRecommendViewholder = (RecommendViewholder) holder;
         RecommendBean data = datas.get(position);
-        mRecommendViewholder.mItemPersonFans.setText(data.getFellow());
+        mRecommendViewholder.mItemPersonFans.setText(String.valueOf(data.getFellow()));
         mRecommendViewholder.mItemPersonName.setText(data.getNickname());
         UserUtil.showUserPhoto(mContext,data.getAvatar(),mRecommendViewholder.mItemPersonAvator);
     }
@@ -55,7 +56,7 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
     public class RecommendViewholder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_person_avator)
-        MyUserPhoto mItemPersonAvator;
+        CircleImageView mItemPersonAvator;
         @BindView(R.id.item_person_name)
         TextView mItemPersonName;
         @BindView(R.id.item_person_fans)
@@ -65,6 +66,7 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
 
         public RecommendViewholder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this,itemView);
         }
 
         @OnClick(R.id.item_card_layout)

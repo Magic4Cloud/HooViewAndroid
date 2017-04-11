@@ -92,15 +92,15 @@ public class TopRatedModel extends BaseListBean {
              * Programs : [{"id":1,"name":"机构调研","priority":31},{"id":2,"name":"火眼看盘","priority":12},{"id":3,"name":"晚间公告","priority":1}]
              */
 
-            private int id;
+            private String id;
             private String name;
             private List<ProgramsBean> Programs;
 
-            public int getId() {
+            public String getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(String id) {
                 this.id = id;
             }
 
@@ -127,15 +127,15 @@ public class TopRatedModel extends BaseListBean {
                  * priority : 31
                  */
 
-                private int id;
+                private String id;
                 private String name;
                 private int priority;
 
-                public int getId() {
+                public String getId() {
                     return id;
                 }
 
-                public void setId(int id) {
+                public void setId(String id) {
                     this.id = id;
                 }
 
@@ -167,18 +167,18 @@ public class TopRatedModel extends BaseListBean {
              * viewCount : 6428
              */
 
-            private int id;
+            private String id;
             private int type;
             private String title;
             private String time;
             private int viewCount;
             private List<String> cover;
 
-            public int getId() {
+            public String getId() {
                 return id;
             }
 
-            public void setId(int id) {
+            public void setId(String id) {
                 this.id = id;
             }
 
@@ -232,16 +232,16 @@ public class TopRatedModel extends BaseListBean {
          * fellow : 1234
          */
 
-        private int id;
+        private String id;
         private String nickname;
         private String avatar;
         private int fellow;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 
@@ -336,18 +336,18 @@ public class TopRatedModel extends BaseListBean {
          * viewCount : 6428
          */
 
-        private int id;
+        private String id;
         private int type;
         private String title;
         private String time;
         private int viewCount;
         private List<String> cover;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

@@ -140,7 +140,7 @@ public class PullToLoadView extends FrameLayout {
 
     public void showNoMoreDataView() {
         mProgressBar.setVisibility(GONE);
-        mBottomTipLl.setVisibility(VISIBLE);
+        mBottomTipLl.setVisibility(GONE);
         mNoMoreTv.setText(getResources().getString(R.string.no_more_data));
         mNoMoreTv.setVisibility(VISIBLE);
     }
@@ -150,7 +150,7 @@ public class PullToLoadView extends FrameLayout {
     }
 
     public void showLoadingDataView() {
-        mBottomTipLl.setVisibility(VISIBLE);
+        mBottomTipLl.setVisibility(GONE);
         mProgressBar.setVisibility(VISIBLE);
         mNoMoreTv.setText(getResources().getString(R.string.loading_data));
         mNoMoreTv.setVisibility(VISIBLE);

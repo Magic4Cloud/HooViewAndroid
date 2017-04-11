@@ -52,4 +52,11 @@
         <attr name="android:layout_gravity"/>
     </declare-styleable>
     <!-- FlowLayout End -->
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format= "dimension" />
+        <attr name="civ_border_color" format= "color" />
+        <attr name="civ_border_overlay" format= "boolean" />
+        <attr name="civ_fill_color" format= "color" />
+    </declare-styleable >
 </resources>

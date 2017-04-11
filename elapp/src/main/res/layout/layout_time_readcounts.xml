@@ -9,6 +9,7 @@
     android:layout_marginLeft="2dp"
     android:layout_marginStart="2dp"
     android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     tools:showIn="@layout/item_no_img_news">
 
     <ImageView
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/text_gray"
+        android:textColor="@color/text_color_gray"
         android:textSize="14sp"
         tools:text="今天 14:20"/>
 
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/text_gray"
+        android:textColor="@color/text_color_gray"
         android:textSize="14sp"
         tools:text="183123"/>
 

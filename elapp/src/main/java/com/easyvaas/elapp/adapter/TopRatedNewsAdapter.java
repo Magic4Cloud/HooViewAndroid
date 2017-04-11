@@ -20,9 +20,11 @@ import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Utils;
+import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.ImportNewsListHeaderView;
 import com.hooview.app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,8 +33,6 @@ import butterknife.OnClick;
 
 import static android.support.v7.widget.RecyclerView.Adapter;
 import static android.support.v7.widget.RecyclerView.ViewHolder;
-import static com.easyvaas.elapp.adapter.ImportNewsAdapter.ITEM_TYPE_HEADER;
-import static com.easyvaas.elapp.adapter.ImportNewsAdapter.ITEM_TYPE_NORMAL;
 
 /**
  * Date   2017/4/10
@@ -62,15 +62,15 @@ public class TopRatedNewsAdapter extends Adapter {
             case TYPE_HEADER:
                 return new HeaderViewHolder(new ImportNewsListHeaderView(mContext));
             case TYPE_MULTI_PIC:
-                return new MultiImgViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_multi_news,parent,false));
+                return new MultiImgViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_multi_news, parent, false));
             case TYPE_NO_PIC:
-                return new NoImgViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_no_img_news,parent,false));
+                return new NoImgViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_no_img_news, parent, false));
             case TYPE_PERSON:
-                return new PersonViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_powerful_person_news,parent,false));
+                return new PersonViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_powerful_person_news, parent, false));
             case TYPE_SPECIAL_TOPIC:
-                return new TopicViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_special_topic_news,parent,false));
+                return new TopicViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_special_topic_news, parent, false));
             case TYPE_ONE_PIC:
-                return new OneImgViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_one_img_news,parent,false));
+                return new OneImgViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_one_img_news, parent, false));
         }
         return null;
     }
@@ -89,28 +89,27 @@ public class TopRatedNewsAdapter extends Adapter {
                 headerViewHolder.importNewsListHeaderView.setExponentListModel(mTopRatedModel.getIndex());
             }
         } else {
-            if (mTopRatedModel.getHomeNews() !=null && mTopRatedModel.getHomeNews().size()>0 )
-            {
-                HomeNewsBean mNewsBean = mTopRatedModel.getHomeNews().get(position-1);
+            if (mTopRatedModel.getHomeNews() != null && mTopRatedModel.getHomeNews().size() > 0) {
+                HomeNewsBean mNewsBean = mTopRatedModel.getHomeNews().get(position - 1);
                 HomeNewsBean mNewsBeanNext = null;
-                if (mTopRatedModel.getHomeNews().size()>position)   // 取下一条数据的数据类型 来判断是否需要隐藏下划线
+                if (mTopRatedModel.getHomeNews().size() > position)   // 取下一条数据的数据类型 来判断是否需要隐藏下划线
                     mNewsBeanNext = mTopRatedModel.getHomeNews().get(position);
-                switch (mNewsBean.getType())
-                {
+                switch (mNewsBean.getType()) {
                     case 0:
                         int coverSize = mNewsBean.getCover().size(); //根据图片个数来判断加载布局类型
                         if (coverSize == 0)
-                            ((NoImgViewHolder) holder).initData(mNewsBean,mNewsBeanNext);
-                        else if(coverSize == 1)
-                            ((OneImgViewHolder) holder).initData(mNewsBean,mNewsBeanNext);
+                            ((NoImgViewHolder) holder).initData(mNewsBean, mNewsBeanNext);
+                        else if (coverSize == 1)
+                            ((OneImgViewHolder) holder).initData(mNewsBean, mNewsBeanNext);
                         else
-                            ((MultiImgViewHolder) holder).initData(mNewsBean,mNewsBeanNext);
-                       break;
+                            ((MultiImgViewHolder) holder).initData(mNewsBean, mNewsBeanNext);
+                        break;
                     case 1:
                         ((TopicViewHolder) holder).initData(mNewsBean);
                         break;
                     case 2:
                         ((PersonViewHolder) holder).initData(mTopRatedModel.getRecommend());
+                        break;
 
                 }
             }
@@ -139,13 +138,35 @@ public class TopRatedNewsAdapter extends Adapter {
      * 设置新闻列表数据
      */
     public void setTopRatedModel(TopRatedModel topRatedModel) {
-        this.mTopRatedModel = topRatedModel;
+        mTopRatedModel.setRecommend(topRatedModel.getRecommend());
+        mTopRatedModel.setHomeNews(topRatedModel.getHomeNews());
+        mTopRatedModel.setHooview(topRatedModel.getHooview());
+        mTopRatedModel.setIndex(topRatedModel.getIndex());
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? ITEM_TYPE_HEADER : ITEM_TYPE_NORMAL;
+        if (position == 0)
+            return TYPE_HEADER;
+        if (mTopRatedModel.getHomeNews() != null && mTopRatedModel.getHomeNews().size() > 0) {
+            HomeNewsBean data = mTopRatedModel.getHomeNews().get(position -1);
+            switch (data.getType()) {
+                case 0:
+                    int coverSize = data.getCover().size(); //根据图片个数来判断加载布局类型
+                    if (coverSize == 0)
+                        return TYPE_NO_PIC;
+                    else if (coverSize == 1)
+                        return TYPE_ONE_PIC;
+                    else
+                        return TYPE_MULTI_PIC;
+                case 1:
+                    return TYPE_SPECIAL_TOPIC;
+                case 2:
+                    return TYPE_PERSON;
+            }
+        }
+        return TYPE_NO_PIC;
     }
 
     /**
@@ -190,21 +211,19 @@ public class TopRatedNewsAdapter extends Adapter {
 
         @OnClick(R.id.item_news_layout)
         public void onViewClicked() {
-            Utils.showNewsDetail(mContext,data.getTitle(),data.getId()+"");
+            Utils.showNewsDetail(mContext, data.getTitle(), data.getId() + "");
         }
 
-        private void initData(HomeNewsBean data,HomeNewsBean nextData)
-        {
+        private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(data.getViewCount());
-            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext,data.getTime()));
-            Utils.showNewsImage(data.getCover().get(0),mItemNewsPic1);
-            Utils.showNewsImage(data.getCover().get(1),mItemNewsPic2);
-            Utils.showNewsImage(data.getCover().get(2),mItemNewsPic3);
-            if (nextData != null)
-            {
-                if (nextData.getType() == 1 || nextData.getType() ==2)
+            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext, data.getTime()));
+            Utils.showNewsImage(data.getCover().get(0), mItemNewsPic1);
+            Utils.showNewsImage(data.getCover().get(1), mItemNewsPic2);
+            Utils.showNewsImage(data.getCover().get(2), mItemNewsPic3);
+            if (nextData != null) {
+                if (nextData.getType() == 1 || nextData.getType() == 2)
                     mDividerLine.setVisibility(View.GONE);
                 else
                     mDividerLine.setVisibility(View.VISIBLE);
@@ -238,20 +257,18 @@ public class TopRatedNewsAdapter extends Adapter {
 
         @OnClick(R.id.item_news_layout)
         public void onViewClicked() {
-            Utils.showNewsDetail(mContext,data.getTitle(),data.getId()+"");
+            Utils.showNewsDetail(mContext, data.getTitle(), data.getId() + "");
 
         }
 
-        private void initData(HomeNewsBean data,HomeNewsBean nextData)
-        {
+        private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(data.getViewCount());
-            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext,data.getTime()));
-            Utils.showNewsImage(data.getCover().get(0),mItemNewsPic);
-            if (nextData != null)
-            {
-                if (nextData.getType() == 1 || nextData.getType() ==2)
+            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext, data.getTime()));
+            Utils.showNewsImage(data.getCover().get(0), mItemNewsPic);
+            if (nextData != null) {
+                if (nextData.getType() == 1 || nextData.getType() == 2)
                     mDividerLine.setVisibility(View.GONE);
                 else
                     mDividerLine.setVisibility(View.VISIBLE);
@@ -283,18 +300,16 @@ public class TopRatedNewsAdapter extends Adapter {
 
         @OnClick(R.id.item_news_layout)
         public void onViewClicked() {
-            Utils.showNewsDetail(mContext,data.getTitle(),data.getId()+"");
+            Utils.showNewsDetail(mContext, data.getTitle(), data.getId() + "");
         }
 
-        private void initData(HomeNewsBean data,HomeNewsBean nextData)
-        {
+        private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(data.getViewCount());
-            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext,data.getTime()));
-            if (nextData != null)
-            {
-                if (nextData.getType() == 1 || nextData.getType() ==2)
+            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext, data.getTime()));
+            if (nextData != null) {
+                if (nextData.getType() == 1 || nextData.getType() == 2)
                     mDividerLine.setVisibility(View.GONE);
                 else
                     mDividerLine.setVisibility(View.VISIBLE);
@@ -327,11 +342,10 @@ public class TopRatedNewsAdapter extends Adapter {
             // Aya : 2017/4/11 专题跳转
         }
 
-        private void initData(HomeNewsBean data)
-        {
+        private void initData(HomeNewsBean data) {
             mItemTopicTitle.setText(data.getTitle());
-            mItemTopicReadcounts.setText(data.getViewCount());
-            Utils.showNewsImage(data.getCover().get(0),mItemTopicImg);
+            mItemTopicReadcounts.setText(String.valueOf(data.getViewCount()));
+            Utils.showNewsImage(data.getCover().get(0), mItemTopicImg);
         }
     }
 
@@ -350,12 +364,17 @@ public class TopRatedNewsAdapter extends Adapter {
             ButterKnife.bind(this, itemView);
             LinearLayoutManager manager = new LinearLayoutManager(mContext);
             manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            datas = new ArrayList<>();
             mItemRecyclerview.setHasFixedSize(true);
-            mItemRecyclerview.setAdapter(mPersonAdapter = new RecommendPersonAdapter(mContext,datas));
+            mItemRecyclerview.setLayoutManager(manager);
+            mItemRecyclerview.setPadding((int) ViewUtil.dp2Px(mContext,12),0,0,0);
+            mItemRecyclerview.setClipToPadding(false);
+            mItemRecyclerview.setAdapter(mPersonAdapter = new RecommendPersonAdapter(mContext, datas));
+
         }
 
-        private void initData(List<RecommendBean> data)
-        {
+        private void initData(List<RecommendBean> data) {
+            datas.clear();
             datas.addAll(data);
             mPersonAdapter.notifyDataSetChanged();
         }
