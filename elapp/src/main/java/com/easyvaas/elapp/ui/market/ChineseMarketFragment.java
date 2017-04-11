@@ -49,12 +49,13 @@ public class ChineseMarketFragment extends BaseListFragment {
      * 加载数据
      */
     public void loadData() {
+        mSwipeRefreshLayout.setRefreshing(true);
         HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<ExponentListNewModel>() {
             @Override
             public void onSuccess(ExponentListNewModel result) {
 
                 if (result != null) {
-                    hideEmptyView();
+                    hideWithData();
                     mAdapter.setExponentListModel(result);
                 } else {
                     if (mAdapter.getItemCount() == 0) {
@@ -88,7 +89,7 @@ public class ChineseMarketFragment extends BaseListFragment {
             public void onSuccess(UpsAndDownsDataModel result) {
                 Log.d("Misuzu", "-------------success");
                 if (result != null) {
-                    hideEmptyView();
+                    hideWithData();
                     mAdapter.setUpsAndDownsListModel(result);
                     mSwipeRefreshLayout.setRefreshing(false);
                 } else {
@@ -119,9 +120,18 @@ public class ChineseMarketFragment extends BaseListFragment {
         });
     }
 
+    private void hideWithData() {
+        hideEmptyView();
+        showOperationView(R.drawable.logo);
+    }
+
     @Override
     public void onRefresh() {
-        super.onRefresh();
+        loadData();
+    }
+
+    @Override
+    public void onOperation() {
         loadData();
     }
 

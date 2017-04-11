@@ -16,9 +16,11 @@ import com.hooview.app.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public abstract class BaseListFragment extends BaseFragment {
+
     @BindView(R.id.recyclerView)
     protected RecyclerView mRecyclerView;
     @BindView(R.id.swipeRefreshLayout)
@@ -29,6 +31,10 @@ public abstract class BaseListFragment extends BaseFragment {
     protected ImageView mIvPrompt;
     @BindView(R.id.ll_empty)
     protected LinearLayout mLLEmpty;
+    @BindView(R.id.tv_add_select)
+    protected TextView mTvAddSelect;
+    @BindView(R.id.iv_operation)
+    protected ImageView mImageViewOperation;
     private Unbinder mUnbinder;
     protected int start = 0;
     protected int count = 20;
@@ -55,12 +61,6 @@ public abstract class BaseListFragment extends BaseFragment {
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mUnbinder.unbind();
-    }
-
     public abstract void iniView(View view);
 
     public void showEmptyView() {
@@ -78,6 +78,24 @@ public abstract class BaseListFragment extends BaseFragment {
         mTvPrompt.setText(prompt);
     }
 
+    public void hideEmptyView() {
+        mLLEmpty.setVisibility(View.GONE);
+    }
+
+    /**
+     * 显示操作按钮
+     *
+     * @param resId int
+     */
+    public void showOperationView(int resId) {
+        mImageViewOperation.setImageResource(resId);
+        mImageViewOperation.setVisibility(View.VISIBLE);
+    }
+
+    public void hideOperationView() {
+        mImageViewOperation.setVisibility(View.GONE);
+    }
+
     /**
      * 下拉刷新，需要子类重写该方法
      */
@@ -85,8 +103,15 @@ public abstract class BaseListFragment extends BaseFragment {
 
     }
 
-    public void hideEmptyView() {
-        mLLEmpty.setVisibility(View.GONE);
+    @OnClick(R.id.iv_operation)
+    public void onOperation() {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 
 }

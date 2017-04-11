@@ -21,9 +21,12 @@ public class StockModel implements Serializable {
      * pb: Number, 市净率
      * mktcap: Number, 总市值
      * nmc: Number, 流通市值
+     * datetime: string 交易时间
+     * preclose: number 昨日收盘价
+     * nationalFlag: string 国旗地址
      */
 
-    private long amount;
+    private double amount;
     private double changepercent;
     private String symbol;
     private double high;
@@ -38,6 +41,9 @@ public class StockModel implements Serializable {
     private double close;
     private double turnoverratio;
     private long volume;
+    private double preclose;
+    private String datetime;
+    private String nationalFlag;
     private int rank = -1;
 
 
@@ -57,11 +63,11 @@ public class StockModel implements Serializable {
         this.rank = rank;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -167,5 +173,54 @@ public class StockModel implements Serializable {
 
     public void setVolume(long volume) {
         this.volume = volume;
+    }
+
+    public double getPreclose() {
+        return preclose;
+    }
+
+    public void setPreclose(double preclose) {
+        this.preclose = preclose;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public String getNationalFlag() {
+        return nationalFlag;
+    }
+
+    public void setNationalFlag(String nationalFlag) {
+        this.nationalFlag = nationalFlag;
+    }
+
+    @Override
+    public String toString() {
+        return "StockModel{" +
+                "amount=" + amount +
+                ", changepercent=" + changepercent +
+                ", symbol='" + symbol + '\'' +
+                ", high=" + high +
+                ", low=" + low +
+                ", mktcap=" + mktcap +
+                ", name='" + name + '\'' +
+                ", nmc=" + nmc +
+                ", open=" + open +
+                ", pb=" + pb +
+                ", per=" + per +
+                ", pre_close=" + pre_close +
+                ", close=" + close +
+                ", turnoverratio=" + turnoverratio +
+                ", volume=" + volume +
+                ", preclose=" + preclose +
+                ", datetime='" + datetime + '\'' +
+                ", nationalFlag='" + nationalFlag + '\'' +
+                ", rank=" + rank +
+                '}';
     }
 }

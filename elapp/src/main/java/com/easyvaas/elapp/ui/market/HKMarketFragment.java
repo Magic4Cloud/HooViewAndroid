@@ -45,11 +45,12 @@ public class HKMarketFragment extends BaseListFragment {
     }
 
     public void loadData() {
+        mSwipeRefreshLayout.setRefreshing(true);
         HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<ExponentListNewModel>() {
             @Override
             public void onSuccess(ExponentListNewModel result) {
                 if (result != null) {
-                    hideEmptyView();
+                    hideWithData();
                     mAdapter.setExponentListModel(result);
                 } else {
                     if (mAdapter.getItemCount() == 0) {
@@ -80,7 +81,7 @@ public class HKMarketFragment extends BaseListFragment {
             @Override
             public void onSuccess(UpsAndDownsDataModel result) {
                 if (result != null) {
-                    hideEmptyView();
+                    hideWithData();
                     mAdapter.setUpsAndDownsListModel(result);
                     mSwipeRefreshLayout.setRefreshing(false);
                 } else {
@@ -113,8 +114,17 @@ public class HKMarketFragment extends BaseListFragment {
 
     @Override
     public void onRefresh() {
-        super.onRefresh();
         loadData();
+    }
+
+    @Override
+    public void onOperation() {
+        loadData();
+    }
+
+    private void hideWithData() {
+        hideEmptyView();
+        showOperationView(R.drawable.logo);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

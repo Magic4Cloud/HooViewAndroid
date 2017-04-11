@@ -15,8 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:orientation="horizontal"
-            app:layout_scrollFlags="scroll|snap|enterAlways">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/market_logo"

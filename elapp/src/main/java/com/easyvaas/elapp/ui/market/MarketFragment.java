@@ -51,7 +51,7 @@ public class MarketFragment extends MyBaseFragment {
                 MarketOptionalFragment.newInstance(),
                 ChineseMarketFragment.newInstance(),
                 HKMarketFragment.newInstance(),
-                GlobalMarketFragment.newInstance()
+                MarketGlobalFragment.newInstance()
         };
         mMarketTabViewpager.setAdapter(new MarketPagerAdapter(getChildFragmentManager()));
         mMarketTabLayout.setViewPager(mMarketTabViewpager);

@@ -1,7 +1,10 @@
 package com.easyvaas.elapp.net.mynet;
 
 import com.easyvaas.elapp.bean.BannerModel;
+import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
+
+import java.util.List;
 
 import retrofit2.http.GET;
 import rx.Observable;
@@ -22,5 +25,8 @@ public interface ApiService {
 
     @GET("api/news/banners")
     Observable<NetResponse<BannerModel>> getBannerNews();
+
+    @GET("api/v2/stock/globalindex")
+    Observable<NetResponse<List<MarketGlobalModel>>> getMarketGlobalStock();
 
 }
