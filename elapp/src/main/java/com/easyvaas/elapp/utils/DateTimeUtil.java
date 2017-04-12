@@ -125,6 +125,37 @@ public class DateTimeUtil {
         return result;
     }
 
+    public static String getNewsTime(Context context, String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
+
+        String result = "";
+        if (sServerDateFormatter == null) {
+            sServerDateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        }
+        time = time.trim();
+        ParsePosition pos = new ParsePosition(0);
+        Date cTime = sServerDateFormatter.parse(time, pos);
+        long duration = System.currentTimeMillis() - cTime.getTime();
+        long MILLIS_ONE_MONTH = 30 * 24 * 3600 * 1000L;
+        long MILLIS_ONE_WEEK = 7 * 24 * 3600 * 1000;
+        long MILLIS_ONE_DAY = 24 * 3600 * 1000;
+        long MILLIS_ONE_HOUR = 3600 * 1000;
+
+        SimpleDateFormat format = new SimpleDateFormat("  HH:mm", Locale.getDefault());
+        if (duration < MILLIS_ONE_DAY) {
+            result = "今天"+format.format(cTime);
+        } else if (duration > MILLIS_ONE_DAY && duration < MILLIS_ONE_DAY * 2) {
+            result = "昨天"+format.format(cTime);
+        } else {
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd HH:mm", Locale.getDefault());
+            result = formatter.format(cTime);
+        }
+        return result;
+    }
+
+
     // 2015-06-15 10:36:05
     public static String getSimpleTime(Context context, String time) {
         if (TextUtils.isEmpty(time)) {

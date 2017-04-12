@@ -224,7 +224,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
             mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
-            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext, data.getTime()));
+            mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             Utils.showNewsImage(data.getCover().get(0), mItemNewsPic1);
             Utils.showNewsImage(data.getCover().get(1), mItemNewsPic2);
             Utils.showNewsImage(data.getCover().get(2), mItemNewsPic3);
@@ -271,7 +271,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
             mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
-            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext, data.getTime()));
+            mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             Utils.showNewsImage(data.getCover().get(0), mItemNewsPic);
             if (nextData != null) {
                 if (nextData.getType() == 1 || nextData.getType() == 2)
@@ -313,7 +313,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
             mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
-            mItemNewsTime.setText(DateTimeUtil.getShortTime(mContext, data.getTime()));
+            mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             if (nextData != null) {
                 if (nextData.getType() == 1 || nextData.getType() == 2)
                     mDividerLine.setVisibility(View.GONE);

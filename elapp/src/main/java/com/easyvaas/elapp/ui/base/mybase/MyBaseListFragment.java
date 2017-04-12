@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.base.mybase;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     @Override
     protected void initViewAndData() {
         mSwiprefreshlayout.setOnRefreshListener(this);
+        mSwiprefreshlayout.setColorSchemeColors(ContextCompat.getColor(getContext(),R.color.base_purplish));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerview.setLayoutManager(linearLayoutManager);
         changeRecyclerView(); // 重写改变列表设置
