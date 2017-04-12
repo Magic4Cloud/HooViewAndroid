@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -19,6 +17,7 @@ import com.hooview.app.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Date   2017/4/12
@@ -39,6 +38,12 @@ public class TopicActivity extends MyBaseActivity {
     AppBarLayout appbar;
     @BindView(R.id.topic_fragment)
     FrameLayout topicFragment;
+    @BindView(R.id.topic_back)
+    ImageView topicBack;
+    @BindView(R.id.topic_title)
+    TextView topicTitle;
+    @BindView(R.id.toolbar_line)
+    View toolbarLine;
 
     @Override
     protected int getLayout() {
@@ -56,17 +61,27 @@ public class TopicActivity extends MyBaseActivity {
         manager.beginTransaction().add(R.id.topic_fragment, TopicFragment.newInstance()).commit();
     }
 
-    private void initToolBar()
-    {
-        collapsingToolbar.setTitle("专题");
-        collapsingToolbar.setCollapsedTitleGravity(Gravity.CENTER_VERTICAL);
-        collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(this,R.color.transparent));
-        collapsingToolbar.setCollapsedTitleTextColor(ContextCompat.getColor(this,R.color.white));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    private void initToolBar() {
+        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                int scrollRangle = appBarLayout.getTotalScrollRange();
+                if (verticalOffset == 0) {
+                    topicTitle.setAlpha(0.0f);
+                    toolbarLine.setAlpha(0.0f);
+                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                    toolbarLine.setAlpha(1);
+                } else {
+                    float alpha = Math.abs(Math.round(1.0f * verticalOffset / scrollRangle) * 10) / 10;
+                    topicTitle.setAlpha(alpha);
+                    toolbarLine.setAlpha(0.0f);
+                }
             }
         });
+    }
+
+    @OnClick(R.id.topic_back)
+    public void onViewClicked() {
+        finish();
     }
 }

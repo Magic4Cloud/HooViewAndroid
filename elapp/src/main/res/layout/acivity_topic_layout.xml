@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:fitsSystemWindows="true"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:elevation="0.5dp">
+        app:elevation="0.5dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -41,19 +41,36 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/icon_back"
                 app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp">
-                <TextView
-                    android:id="@+id/topic_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_gravity="center"
-                    android:textColor="@color/title_text_color"
-                  />
-                </android.support.v7.widget.Toolbar>
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/topic_back"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_back"/>
+                    <TextView
+                        android:id="@+id/topic_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/text_color_gray"
+                        android:text="专题"
+                        android:textSize="18sp" />
+                    <View
+                        android:id="@+id/toolbar_line"
+                        android:layout_alignParentBottom="true"
+                        style="@style/divider_view_style"
+                        android:layout_height="0.5dp"/>
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
