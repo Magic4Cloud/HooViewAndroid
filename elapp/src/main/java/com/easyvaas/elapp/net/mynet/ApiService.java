@@ -2,6 +2,7 @@ package com.easyvaas.elapp.net.mynet;
 
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
+import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 
 import java.util.List;
@@ -32,5 +33,11 @@ public interface ApiService {
 
     @GET("api/v2/stock/globalindex")
     Observable<NetResponse<List<MarketGlobalModel>>> getMarketGlobalStock();
+
+    @GET("api/v2/news/column")
+    Observable<NetResponse<NewsColumnModel>> getNewsColumn();
+
+    @GET
+    Observable<NetResponse<NewsColumnModel>> getNewsColumnTest(@Url String url);
 
 }

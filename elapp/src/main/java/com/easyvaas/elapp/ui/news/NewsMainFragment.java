@@ -50,7 +50,7 @@ public class NewsMainFragment extends MyBaseFragment {
                 TopNewsFragment.newInstance(),
                 LastestNewsListFragment.newInstance(),
                 MyStockNewsListFragment.newInstance(),
-                TopNewsFragment.newInstance(),
+                NewsColumnFragment.newInstance(),
         };
         mNewsTabViewpager.setAdapter(new MainPageAdapter(getChildFragmentManager()));
         mNewsTablayout.setViewPager(mNewsTabViewpager);
