@@ -1,12 +1,10 @@
 package com.easyvaas.elapp.ui.market;
 
-import android.view.View;
-
 import com.easyvaas.elapp.adapter.recycler.MarketGlobalListAdapter;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
-import com.easyvaas.elapp.ui.base.BaseListFragment;
+import com.easyvaas.elapp.ui.base.BaseListLazyFragment;
 import com.easyvaas.elapp.utils.Logger;
 import com.hooview.app.R;
 
@@ -18,19 +16,20 @@ import rx.schedulers.Schedulers;
 /**
  * Date    2017/4/11
  * Author  xiaomao
- * <p>
- * 行情----全球
+ * 行情---全球
  */
 
-public class MarketGlobalFragment extends BaseListFragment {
+public class MarketGlobalFragment extends BaseListLazyFragment {
 
     private MarketGlobalListAdapter mAdapter;
 
+    /**
+     * 初始化adapter
+     */
     @Override
-    public void iniView(View view) {
+    protected void initAdapter() {
         mAdapter = new MarketGlobalListAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
-        loadData();
     }
 
     @Override
@@ -43,6 +42,19 @@ public class MarketGlobalFragment extends BaseListFragment {
         loadData();
     }
 
+    @Override
+    protected void onVisibleChanged(boolean isVisible) {
+        if (isVisible && !mIsLoad) {
+            loadData();
+            mIsLoad = true;
+        }
+        if (!isVisible) {
+            if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }
+    }
+
     private void loadData() {
         mSwipeRefreshLayout.setRefreshing(true);
         RetrofitHelper.getInstance().getService().getMarketGlobalStock()
@@ -51,7 +63,6 @@ public class MarketGlobalFragment extends BaseListFragment {
                 .subscribe(new NetSubscribe<List<MarketGlobalModel>>() {
                     @Override
                     public void OnSuccess(List<MarketGlobalModel> list) {
-                        mSwipeRefreshLayout.setRefreshing(false);
                         if (list != null && list.size() > 0) {
                             if (mAdapter != null) {
                                 mAdapter.setData(list);
@@ -60,13 +71,14 @@ public class MarketGlobalFragment extends BaseListFragment {
                         } else {
                             showWithoutData();
                         }
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void OnFailue(String msg) {
                         Logger.e(MarketGlobalFragment.class.getSimpleName(), msg);
-                        mSwipeRefreshLayout.setRefreshing(false);
                         showWithoutData();
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }

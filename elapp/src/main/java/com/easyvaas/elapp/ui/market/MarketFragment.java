@@ -49,8 +49,8 @@ public class MarketFragment extends MyBaseFragment {
                 getString(R.string.market_global)};
         mFragments = new Fragment[] {
                 MarketOptionalFragment.newInstance(),
-                ChineseMarketFragment.newInstance(),
-                HKMarketFragment.newInstance(),
+                MarketChineseFragment.newInstance(),
+                MarketHKFragment.newInstance(),
                 MarketGlobalFragment.newInstance()
         };
         mMarketTabViewpager.setAdapter(new MarketPagerAdapter(getChildFragmentManager()));

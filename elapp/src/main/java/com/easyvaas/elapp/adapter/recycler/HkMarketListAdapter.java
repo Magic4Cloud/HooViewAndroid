@@ -201,10 +201,10 @@ public class HkMarketListAdapter extends RecyclerView.Adapter {
 
         public void setTitle(boolean isUP) {
             if (isUP) {
-                tvTitle.setText(R.string.up_list_title);
+                tvTitle.setText("领涨股");
                 mViewExponent.setBackgroundColor(mContext.getResources().getColor(R.color.view_exponent_up));
             } else {
-                tvTitle.setText(R.string.down_list_title);
+                tvTitle.setText("领跌股");
                 mViewExponent.setBackgroundColor(mContext.getResources().getColor(R.color.view_exponent_down));
             }
         }

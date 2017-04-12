@@ -7,7 +7,7 @@ import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
-import com.easyvaas.elapp.ui.base.BaseListFragment;
+import com.easyvaas.elapp.ui.base.BaseListLazyFragment;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.hooview.app.R;
 
@@ -16,18 +16,33 @@ import butterknife.OnClick;
 /**
  * Date    2017/4/10
  * Author  xiaomao
- * 行情--自选
+ * 行情---自选
  */
-public class MarketOptionalFragment extends BaseListFragment {
+public class MarketOptionalFragment extends BaseListLazyFragment {
 
     private SelectStockListAdapter mAdapter;
     private StockListModel mStockListModel;
 
+    /**
+     * 初始化adapter
+     */
     @Override
-    public void iniView(View view) {
+    protected void initAdapter() {
         mAdapter = new SelectStockListAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        loadData();
+    }
+
+    @Override
+    protected void onVisibleChanged(boolean isVisible) {
+        if (isVisible && !mIsLoad) {
+            loadData();
+            mIsLoad = true;
+        }
+        if (!isVisible) {
+            if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing()) {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }
     }
 
     @Override
@@ -49,10 +64,10 @@ public class MarketOptionalFragment extends BaseListFragment {
      * 从网络上得到自选股的列表（会获取到全部的自选股， 没有分类）.没有加载更多
      */
     private void loadData() {
+        mSwipeRefreshLayout.setRefreshing(true);
         HooviewApiHelper.getInstance().getUserStockList(EVApplication.getUser().getName(), new MyRequestCallBack<StockListModel>() {
             @Override
             public void onSuccess(StockListModel result) {
-                mSwipeRefreshLayout.setRefreshing(false);
                 mStockListModel = result;
                 if (result != null && result.getData() != null && result.getData().size() > 0) {
                     mAdapter.setStockListModel(result.getData());
@@ -60,18 +75,19 @@ public class MarketOptionalFragment extends BaseListFragment {
                 } else {
                     showWithoutData();
                 }
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(String msg) {
-                mSwipeRefreshLayout.setRefreshing(false);
                 showWithoutData();
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onError(String errorInfo) {
-                mSwipeRefreshLayout.setRefreshing(false);
                 showWithoutData();
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
