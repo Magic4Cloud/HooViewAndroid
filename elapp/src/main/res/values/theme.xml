@@ -24,6 +24,7 @@
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/base_purplish</item>
         <item name="android:windowBackground">@color/background_white</item>
         <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
     </style>
@@ -76,7 +77,7 @@
         <!-- Support library compatibility -->
         <item name="colorPrimary">#cfcfcf</item>
         <item name="colorPrimaryDark">@color/material_blue_grey_800</item>
-        <item name="colorAccent">@color/material_deep_teal_500</item>
+        <item name="colorAccent">@color/base_purplish</item>
         <item name="actionBarStyle">@style/MyActionBar</item>
         <item name="actionBarDivider">@null</item>
         <item name="actionBarTabTextStyle">@style/MyActionBarTabText</item>

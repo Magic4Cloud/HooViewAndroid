@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
-import com.easyvaas.elapp.utils.UserUtil;
 import com.easyvaas.elapp.view.CircleImageView;
 import com.hooview.app.R;
 
@@ -45,7 +45,8 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
         RecommendBean data = datas.get(position);
         mRecommendViewholder.mItemPersonFans.setText(String.valueOf(data.getFellow()));
         mRecommendViewholder.mItemPersonName.setText(data.getNickname());
-        UserUtil.showUserPhoto(mContext,data.getAvatar(),mRecommendViewholder.mItemPersonAvator);
+//        UserUtil.showUserPhoto(mContext,data.getAvatar(),mRecommendViewholder.mItemPersonAvator);
+        Glide.with(mContext).load(data.getAvatar()).into(mRecommendViewholder.mItemPersonAvator);
     }
 
     @Override
