@@ -1,6 +1,5 @@
-package com.easyvaas.elapp.adapter;
+package com.easyvaas.elapp.adapter.news;
 
-import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -12,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.easyvaas.elapp.adapter.RecommendPersonAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.db.RealmHelper;
+import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -31,16 +33,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.support.v7.widget.RecyclerView.Adapter;
-import static android.support.v7.widget.RecyclerView.ViewHolder;
-
 /**
  * Date   2017/4/10
  * Editor  Misuzu
  * 首页要闻Adpater  手都写麻了。。。-A-
  */
 
-public class TopRatedNewsAdapter extends Adapter {
+public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsBean> {
 
     private static final int TYPE_HEADER = 1; //banner
     private static final int TYPE_NO_PIC = 2; //无图
@@ -48,16 +47,15 @@ public class TopRatedNewsAdapter extends Adapter {
     private static final int TYPE_MULTI_PIC = 4;//多图
     private static final int TYPE_PERSON = 5; // 牛人推荐
     private static final int TYPE_SPECIAL_TOPIC = 6;//专栏
-    private Context mContext;
     private TopRatedModel mTopRatedModel;
 
-    public TopRatedNewsAdapter(Context context, TopRatedModel topRatedModel) {
-        mContext = context;
+    public TopRatedNewsMyAdapter(TopRatedModel topRatedModel) {
+        super(topRatedModel.getHomeNews());
         mTopRatedModel = topRatedModel;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    protected BaseViewHolder OnCreateViewByHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER:
                 return new HeaderViewHolder(new ImportNewsListHeaderView(mContext));
@@ -76,7 +74,8 @@ public class TopRatedNewsAdapter extends Adapter {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    protected void convert(BaseViewHolder holder, TopRatedModel.HomeNewsBean item) {
+        int position = holder.getLayoutPosition();
         if (position == 0) {
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
             if (mTopRatedModel.getHooview() != null) {
@@ -89,11 +88,11 @@ public class TopRatedNewsAdapter extends Adapter {
                 headerViewHolder.importNewsListHeaderView.setExponentListModel(mTopRatedModel.getIndex());
             }
         } else {
-            if (mTopRatedModel.getHomeNews() != null && mTopRatedModel.getHomeNews().size() > 0) {
-                HomeNewsBean mNewsBean = mTopRatedModel.getHomeNews().get(position - 1);
+            if (mData != null && mData.size() > 0) {
+                HomeNewsBean mNewsBean = mData.get(position - 1);
                 HomeNewsBean mNewsBeanNext = null;
-                if (mTopRatedModel.getHomeNews().size() > position)   // 取下一条数据的数据类型 来判断是否需要隐藏下划线
-                    mNewsBeanNext = mTopRatedModel.getHomeNews().get(position);
+                if (mData.size() > position)   // 取下一条数据的数据类型 来判断是否需要隐藏下划线
+                    mNewsBeanNext = mData.get(position);
                 switch (mNewsBean.getType()) {
                     case 0:
                         int coverSize = mNewsBean.getCover().size(); //根据图片个数来判断加载布局类型
@@ -116,11 +115,12 @@ public class TopRatedNewsAdapter extends Adapter {
         }
     }
 
+
     @Override
     public int getItemCount() {
         int count = 1;
-        if (mTopRatedModel != null && mTopRatedModel.getHomeNews() != null) {
-            count = count + mTopRatedModel.getHomeNews().size();
+        if (mData != null) {
+            count = count + mData.size();
         }
         return count;
     }
@@ -139,14 +139,19 @@ public class TopRatedNewsAdapter extends Adapter {
      */
     public void setTopRatedModel(TopRatedModel topRatedModel) {
         mTopRatedModel.setRecommend(topRatedModel.getRecommend());
-        mTopRatedModel.setHomeNews(topRatedModel.getHomeNews());
         mTopRatedModel.setHooview(topRatedModel.getHooview());
         mTopRatedModel.setIndex(topRatedModel.getIndex());
+        mTopRatedModel.setHomeNews(topRatedModel.getHomeNews());
+        setNewData(topRatedModel.getHomeNews());
         notifyDataSetChanged();
     }
 
+    public TopRatedModel getTopRatedModel() {
+        return mTopRatedModel;
+    }
+
     @Override
-    public int getItemViewType(int position) {
+    protected int getItemViewByType(int position) {
         if (position == 0)
             return TYPE_HEADER;
         if (mTopRatedModel.getHomeNews() != null && mTopRatedModel.getHomeNews().size() > 0) {
@@ -169,10 +174,11 @@ public class TopRatedNewsAdapter extends Adapter {
         return TYPE_NO_PIC;
     }
 
+
     /**
      * banner类型
      */
-    private class HeaderViewHolder extends ViewHolder {
+    private class HeaderViewHolder extends BaseViewHolder {
         public ImportNewsListHeaderView importNewsListHeaderView;
 
         public HeaderViewHolder(View itemView) {
@@ -184,7 +190,7 @@ public class TopRatedNewsAdapter extends Adapter {
     /**
      * 多图类型
      */
-    public class MultiImgViewHolder extends ViewHolder {
+    public class MultiImgViewHolder extends BaseViewHolder {
 
         @BindView(R.id.item_news_title)
         TextView mItemNewsTitle;
@@ -234,7 +240,7 @@ public class TopRatedNewsAdapter extends Adapter {
     /**
      * 单图类型
      */
-    public class OneImgViewHolder extends ViewHolder {
+    public class OneImgViewHolder extends BaseViewHolder {
 
         @BindView(R.id.item_news_pic)
         ImageView mItemNewsPic;
@@ -279,7 +285,7 @@ public class TopRatedNewsAdapter extends Adapter {
     /**
      * 无图类型
      */
-    public class NoImgViewHolder extends ViewHolder {
+    public class NoImgViewHolder extends BaseViewHolder {
 
         @BindView(R.id.item_news_title)
         TextView mItemNewsTitle;
@@ -320,7 +326,7 @@ public class TopRatedNewsAdapter extends Adapter {
     /**
      * 专题类型
      */
-    public class TopicViewHolder extends ViewHolder {
+    public class TopicViewHolder extends BaseViewHolder {
 
         @BindView(R.id.item_topic_img)
         ImageView mItemTopicImg;
@@ -352,7 +358,7 @@ public class TopRatedNewsAdapter extends Adapter {
     /**
      * 牛人推荐类型
      */
-    public class PersonViewHolder extends ViewHolder {
+    public class PersonViewHolder extends BaseViewHolder {
 
         @BindView(R.id.item_recyclerview)
         RecyclerView mItemRecyclerview;
