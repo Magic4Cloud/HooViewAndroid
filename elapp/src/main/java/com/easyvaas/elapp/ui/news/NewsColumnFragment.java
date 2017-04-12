@@ -48,7 +48,6 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
      * @param isLoadMore
      */
     private void loadData(final boolean isLoadMore) {
-        mSwiprefreshlayout.setRefreshing(true);
         RetrofitHelper.getInstance().getService().getNewsColumnTest("https://demo2821846.mockable.io/news/column")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,7 +63,6 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
                     @Override
                     public void OnFailue(String msg) {
                         Log.e("OnFailue", msg);
-                        mSwiprefreshlayout.setRefreshing(false);
                     }
                 });
     }

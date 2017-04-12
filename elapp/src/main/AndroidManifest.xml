@@ -577,7 +577,7 @@
         <activity
             android:name="com.easyvaas.elapp.ui.news.TopicActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreen"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

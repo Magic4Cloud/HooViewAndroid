@@ -346,13 +346,17 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
             mItemRecyclerview.setLayoutManager(manager);
             mItemRecyclerview.setPadding((int) ViewUtil.dp2Px(mContext,12),0,0,0);
             mItemRecyclerview.setClipToPadding(false);
-            mItemRecyclerview.setAdapter(mPersonAdapter = new RecommendPersonAdapter(mContext, datas));
+
         }
 
         private void initData(List<RecommendBean> data) {
-            datas.clear();
-            datas.addAll(data);
-            mPersonAdapter.notifyDataSetChanged();
+            if (mItemRecyclerview.getAdapter() == null)
+            {
+                datas.addAll(data);
+                mItemRecyclerview.setAdapter(mPersonAdapter = new RecommendPersonAdapter(mContext, datas));
+                mPersonAdapter.notifyDataSetChanged();
+            }
+
         }
     }
 

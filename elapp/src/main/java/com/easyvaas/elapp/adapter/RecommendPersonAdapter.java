@@ -6,12 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
+import com.easyvaas.elapp.utils.UserUtil;
+import com.easyvaas.elapp.view.CircleImageTransformation;
 import com.easyvaas.elapp.view.CircleImageView;
 import com.hooview.app.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,8 +49,8 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
         RecommendBean data = datas.get(position);
         mRecommendViewholder.mItemPersonFans.setText(String.valueOf(data.getFellow()));
         mRecommendViewholder.mItemPersonName.setText(data.getNickname());
-//        UserUtil.showUserPhoto(mContext,data.getAvatar(),mRecommendViewholder.mItemPersonAvator);
-        Glide.with(mContext).load(data.getAvatar()).into(mRecommendViewholder.mItemPersonAvator);
+//        Glide.with(mContext).load(R.drawable.test_img).into(mRecommendViewholder.mItemPersonAvator);
+        Picasso.with(mContext).load(data.getAvatar()).transform(new CircleImageTransformation()).into(mRecommendViewholder.mItemPersonAvator);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
     public class RecommendViewholder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_person_avator)
-        CircleImageView mItemPersonAvator;
+        ImageView mItemPersonAvator;
         @BindView(R.id.item_person_name)
         TextView mItemPersonName;
         @BindView(R.id.item_person_fans)

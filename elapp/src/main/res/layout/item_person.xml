@@ -18,12 +18,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.easyvaas.elapp.view.CircleImageView
+    <ImageView
         android:id="@+id/item_person_avator"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/account_bitmap_user"
         android:layout_marginTop="14dp"
         />
     <TextView

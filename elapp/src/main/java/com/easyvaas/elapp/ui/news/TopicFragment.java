@@ -1,11 +1,14 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.widget.ImageView;
+
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopicModel;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,8 @@ public class TopicFragment extends MyBaseListFragment<NormalNewsAdapter> {
 
     @Override
     protected NormalNewsAdapter initAdapter() {
-        return new NormalNewsAdapter(new ArrayList<TopRatedModel.HomeNewsBean>());
+        NormalNewsAdapter adapter =new NormalNewsAdapter(new ArrayList<TopRatedModel.HomeNewsBean>());
+        return adapter;
     }
 
     @Override
