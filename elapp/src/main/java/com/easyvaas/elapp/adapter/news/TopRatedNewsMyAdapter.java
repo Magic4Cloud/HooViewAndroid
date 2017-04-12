@@ -1,16 +1,16 @@
 package com.easyvaas.elapp.adapter.news;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.adapter.RecommendPersonAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
@@ -20,6 +20,7 @@ import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
+import com.easyvaas.elapp.ui.news.TopicActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -31,7 +32,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Date   2017/4/10
@@ -206,18 +206,11 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         TextView mItemNewsReadcounts;
         @BindView(R.id.divider_line)
         View mDividerLine;
-        @BindView(R.id.item_news_layout)
-        LinearLayout mItemNewsLayout;
         HomeNewsBean data;
 
         private MultiImgViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick(R.id.item_news_layout)
-        public void onViewClicked() {
-            Utils.showNewsDetail(mContext, data.getTitle(), data.getId() + "");
         }
 
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
@@ -252,19 +245,11 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         TextView mItemNewsReadcounts;
         @BindView(R.id.divider_line)
         View mDividerLine;
-        @BindView(R.id.item_news_layout)
-        LinearLayout mItemNewsLayout;
         HomeNewsBean data;
 
         private OneImgViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick(R.id.item_news_layout)
-        public void onViewClicked() {
-            Utils.showNewsDetail(mContext, data.getTitle(), data.getId() + "");
-
         }
 
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
@@ -295,18 +280,11 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         TextView mItemNewsReadcounts;
         @BindView(R.id.divider_line)
         View mDividerLine;
-        @BindView(R.id.item_news_layout)
-        LinearLayout mItemNewsLayout;
         HomeNewsBean data;
 
         private NoImgViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick(R.id.item_news_layout)
-        public void onViewClicked() {
-            Utils.showNewsDetail(mContext, data.getTitle(), data.getId() + "");
         }
 
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
@@ -334,18 +312,11 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         TextView mItemTopicTitle;
         @BindView(R.id.item_topic_readcounts)
         TextView mItemTopicReadcounts;
-        @BindView(R.id.item_news_layout)
-        FrameLayout mItemNewsLayout;
         HomeNewsBean data;
 
         private TopicViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick(R.id.item_news_layout)
-        public void onViewClicked() {
-            // Aya : 2017/4/11 专题跳转
         }
 
         private void initData(HomeNewsBean data) {
@@ -385,6 +356,25 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         }
     }
 
+    // 设置点击事件
+    @Override
+    protected void initOnItemClickListener() {
+
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId())
+                {
+                    case R.id.item_news_layout:
+                        Utils.showNewsDetail(mContext,mData.get(position-1).getTitle() ,mData.get(position-1).getId());
+                        break;
+                    case R.id.item_topic_layout:
+                        mContext.startActivity(new Intent(mContext, TopicActivity.class));
+                        break;
+                }
+            }
+        });
+    }
 
     /**
      * 插入已读新闻到数据库

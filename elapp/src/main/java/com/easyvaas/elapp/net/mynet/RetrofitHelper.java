@@ -49,7 +49,7 @@ public class RetrofitHelper{
             mBuilder.addInterceptor(loggingInterceptor);
         }
         //设置超时
-        mBuilder.connectTimeout(10, TimeUnit.SECONDS);
+        mBuilder.connectTimeout(15, TimeUnit.SECONDS);
         mBuilder.readTimeout(20, TimeUnit.SECONDS);
         mBuilder.writeTimeout(20, TimeUnit.SECONDS);
         //错误重连

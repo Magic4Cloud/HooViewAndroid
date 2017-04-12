@@ -4,6 +4,7 @@ import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
+import com.easyvaas.elapp.bean.news.TopicModel;
 
 import java.util.List;
 
@@ -27,6 +28,9 @@ public interface ApiService {
 
     @GET
     Observable<NetResponse<TopRatedModel>> getTopRatedNewsTest(@Url String url);
+
+    @GET
+    Observable<NetResponse<TopicModel>> getTopicListTest(@Url String url);
 
     @GET("api/news/banners")
     Observable<NetResponse<BannerModel>> getBannerNews();

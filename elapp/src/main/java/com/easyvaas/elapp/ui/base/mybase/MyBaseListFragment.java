@@ -62,6 +62,8 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     protected void setLoadMoreCallBack(T mAdapter) {
         if (mAdapter != null)
         {
+            mAdapter.initOnItemClickListener();
+            mAdapter.setAutoLoadMoreSize(4);
             mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {

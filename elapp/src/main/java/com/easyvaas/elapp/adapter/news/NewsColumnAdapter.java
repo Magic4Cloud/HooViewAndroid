@@ -43,6 +43,11 @@ public class NewsColumnAdapter extends MyBaseAdapter<NewsColumnModel.ColumnModel
         return new ItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_news_column, parent, false));
     }
 
+    @Override
+    protected void initOnItemClickListener() {
+
+    }
+
     /**
      * Implement this method and use the helper to adapt the view to the given item.
      *

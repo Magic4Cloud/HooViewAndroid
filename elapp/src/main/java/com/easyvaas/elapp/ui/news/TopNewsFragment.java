@@ -1,7 +1,5 @@
 package com.easyvaas.elapp.ui.news;
 
-import android.support.v7.widget.StaggeredGridLayoutManager;
-
 import com.easyvaas.elapp.adapter.news.TopRatedNewsMyAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
@@ -33,11 +31,6 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
             getNewsData(isLoadMore);
     }
 
-    @Override
-    protected void changeRecyclerView() {
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerview.setLayoutManager(manager);
-    }
 
     /**
      * 获取新闻列表

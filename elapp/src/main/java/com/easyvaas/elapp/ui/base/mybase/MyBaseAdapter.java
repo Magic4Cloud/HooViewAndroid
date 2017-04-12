@@ -36,6 +36,7 @@ public abstract class MyBaseAdapter<T> extends BaseQuickAdapter<T, BaseViewHolde
 
     protected abstract int getItemViewByType(int position);  //设置不同类型
     protected abstract BaseViewHolder OnCreateViewByHolder(ViewGroup parent, int viewType); //设置ViewHolder
+    protected abstract void initOnItemClickListener();// 设置点击事件监听
 
     /**
      * 处理上拉 下拉的数据

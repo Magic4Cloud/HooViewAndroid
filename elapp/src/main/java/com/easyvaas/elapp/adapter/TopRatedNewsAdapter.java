@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.db.RealmHelper;
+import com.easyvaas.elapp.ui.news.TopicActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -340,6 +342,7 @@ public class TopRatedNewsAdapter extends Adapter {
         @OnClick(R.id.item_news_layout)
         public void onViewClicked() {
             // Aya : 2017/4/11 专题跳转
+            mContext.startActivity(new Intent(mContext, TopicActivity.class));
         }
 
         private void initData(HomeNewsBean data) {
