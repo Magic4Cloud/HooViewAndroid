@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/user_tag_bg"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+              app:layout_collapseMode="parallax"
+              app:layout_collapseParallaxMultiplier="0.8"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/topic_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/account_bitmap_list"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/special_topic_bg">
+
+            <TextView
+                android:id="@+id/item_topic_readcounts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:text="18802"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_alignTop="@id/item_topic_readcounts"
+                android:layout_toLeftOf="@id/item_topic_readcounts"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_news_read_r"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:scaleType="centerCrop"
+            android:src="@drawable/special_layer"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/user_tag_bg"
+        android:paddingBottom="10dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:id="@+id/topic_title"
+            style="@style/title_text_style"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            tools:text="      房地产税呼声再起房地产税呼声再起房地产税呼声再起房地产税呼声再起"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_news_special"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/topic_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="@color/text_color_gray"
+        tools:text="在去年930调楼市依然高温不退,引发了,过去20天中调控的升级，也让备受关注的房地产税话题,再次成为关注焦点。嘻嘻嘻嘻"
+
+        />
+</LinearLayout>
