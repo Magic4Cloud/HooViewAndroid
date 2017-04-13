@@ -7,6 +7,7 @@
 package com.easyvaas.elapp.app;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.easyvaas.common.feedback.FeedbackHelper;
 import com.easyvaas.common.sharelogin.weibo.AccessTokenKeeper;
@@ -90,8 +91,9 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
 
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
-        PushHelper.getInstance(this)
-                .savePushInfo("JPushID", "", "j_" + JPushInterface.getRegistrationID(this));
+        String registrationId = JPushInterface.getRegistrationID(this);
+        Log.e("JPushInterface", "registrationId: .....  " + registrationId);
+        PushHelper.getInstance(this).savePushInfo("JPushID", "", "j_" + registrationId);
 
         String name = Preferences.getInstance(this).getUserNumber();
         String nickname = Preferences.getInstance(this).getUserNickname();

@@ -119,7 +119,7 @@ public class MarketHKFragment extends BaseListLazyFragment {
 
     private void hideWithData() {
         hideEmptyView();
-        showOperationView(R.drawable.logo);
+        showOperationView(R.drawable.market_refresh_xm);
     }
 
     public static MarketHKFragment newInstance() {

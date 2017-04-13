@@ -99,7 +99,7 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
 
     private void hideWithData() {
         hideEmptyView();
-        showOperationView(R.drawable.logo);
+        showOperationView(R.drawable.market_edit_xm);
     }
 
     public static MarketOptionalFragment newInstance() {

@@ -4,11 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
+import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.CircleImageView;
 import com.hooview.app.R;
@@ -57,7 +60,7 @@ public class NewsColumnAdapter extends MyBaseAdapter<NewsColumnModel.ColumnModel
     @Override
     protected void convert(BaseViewHolder helper, NewsColumnModel.ColumnModel item) {
         if (helper instanceof ItemViewHolder) {
-            ((ItemViewHolder)helper).setModel(item);
+            ((ItemViewHolder) helper).setModel(item, helper.getLayoutPosition());
         }
     }
 
@@ -75,26 +78,41 @@ public class NewsColumnAdapter extends MyBaseAdapter<NewsColumnModel.ColumnModel
         TextView title;
         @BindView(R.id.news_column_introduce)
         TextView introduce;
+        @BindView(R.id.news_column_user)
+        RelativeLayout mViewUser;
+        @BindView(R.id.news_column_article)
+        LinearLayout mViewArticle;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void setModel(NewsColumnModel.ColumnModel model) {
+        public void setModel(final NewsColumnModel.ColumnModel model, int position) {
             if (model != null) {
-                NewsColumnModel.Author author = model.getAuthor();
+                final NewsColumnModel.Author author = model.getAuthor();
                 if (author != null) {
                     Utils.showNewsImage(author.getAvatar(), avatar);
                     nickname.setText(author.getNickname());
                     introduceUser.setText(author.getIntroduce());
-                    // // TODO: 2017/4/12 on click
+                    mViewUser.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            VIPUserInfoDetailActivity.start(mContext, author.getId());
+                        }
+                    });
                 }
                 Utils.showNewsImage(model.getCover(), cover);
                 title.setText(model.getTitle());
                 introduce.setText(model.getIntroduce());
-                // // TODO: 2017/4/12 on click
+                mViewArticle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Utils.showNewsDetail(mContext, model.getTitle(), model.getId());
+                    }
+                });
             }
         }
+
     }
 }
