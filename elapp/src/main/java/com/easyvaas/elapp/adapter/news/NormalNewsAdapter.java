@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
@@ -49,9 +50,16 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
         return null;
     }
 
+    // 设置点击事件
     @Override
     protected void initOnItemClickListener() {
 
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Utils.showNewsDetail(mContext,mData.get(position).getTitle() ,mData.get(position).getId());
+            }
+        });
     }
 
     @Override

@@ -233,9 +233,9 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
             case R.id.ll_eye_new1:
             case R.id.ll_eye_new2:
             case R.id.ll_eye_new3:
-                NewsItemModel news = (NewsItemModel) v.getTag();
+                NewsBean news = (NewsBean) v.getTag();
                 if (news != null) {
-                    insertHistoryRecord(news);
+//                    insertHistoryRecord(news);
                     Utils.showNewsDetail(mContext, news.getTitle(), news.getId() + "");
                 }
                 break;

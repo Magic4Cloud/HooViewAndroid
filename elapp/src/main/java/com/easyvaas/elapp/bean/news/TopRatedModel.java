@@ -60,7 +60,7 @@ public class TopRatedModel extends BaseListBean {
         this.homeNews = homeNews;
     }
 
-    public static class HooviewBean {
+    public static class HooviewBean implements Serializable{
         /**
          * channels : {"id":2,"name":"火眼金睛","Programs":[{"id":1,"name":"机构调研","priority":31},{"id":2,"name":"火眼看盘","priority":12},{"id":3,"name":"晚间公告","priority":1}]}
          * news : [{"id":8189,"type":1,"cover":[],"title":"商业新力量 迈向新未来","time":"2017-04-05 11:05:49","viewCount":6428},{"id":8189,"type":1,"cover":[],"title":"商业新力量 迈向新未来","time":"2017-04-05 11:05:49","viewCount":6428},{"id":8189,"type":1,"cover":[],"title":"商业新力量 迈向新未来","time":"2017-04-05 11:05:49","viewCount":6428}]
@@ -85,7 +85,7 @@ public class TopRatedModel extends BaseListBean {
             this.news = news;
         }
 
-        public static class ChannelsBean implements Serializable {
+        public static class ChannelsBean implements Serializable{
             /**
              * id : 2
              * name : 火眼金睛
@@ -120,7 +120,7 @@ public class TopRatedModel extends BaseListBean {
                 this.Programs = Programs;
             }
 
-            public static class ProgramsBean {
+            public static class ProgramsBean implements Serializable {
                 /**
                  * id : 1
                  * name : 机构调研

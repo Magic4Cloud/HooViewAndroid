@@ -140,7 +140,7 @@
         app:cardCornerRadius="4dp"
         app:cardUseCompatPadding="true"
         app:cardPreventCornerOverlap="false"
-        app:cardElevation="2dp">
+        app:cardElevation="1dp">
 
 
     <LinearLayout

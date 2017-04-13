@@ -54,6 +54,7 @@ public abstract class MyBaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+        unSubsribe();
     }
 
     @Override
