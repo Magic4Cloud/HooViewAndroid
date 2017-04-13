@@ -102,7 +102,8 @@ public class NewsColumnAdapter extends MyBaseAdapter<NewsColumnModel.ColumnModel
                         }
                     });
                 }
-                Utils.showNewsImage(model.getCover(), cover);
+//                Utils.showNewsImage(model.getCover(), cover);
+                Utils.showImageBlur(mContext, model.getCover(), R.drawable.account_bitmap_list, cover);
                 title.setText(model.getTitle());
                 introduce.setText(model.getIntroduce());
                 mViewArticle.setOnClickListener(new View.OnClickListener() {

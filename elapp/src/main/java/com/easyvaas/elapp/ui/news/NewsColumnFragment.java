@@ -1,6 +1,5 @@
 package com.easyvaas.elapp.ui.news;
 
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
@@ -42,8 +41,7 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
     @Override
     protected void changeRecyclerView() {
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerview.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerview.setPadding((int) ViewUtil.dp2Px(getContext(), 8), 0, (int) ViewUtil.dp2Px(getContext(), 8), 0);
+        mRecyclerview.setPadding((int) ViewUtil.dp2Px(getContext(), 7), 0, (int) ViewUtil.dp2Px(getContext(), 7), 0);
         mRecyclerview.setLayoutManager(manager);
     }
 
