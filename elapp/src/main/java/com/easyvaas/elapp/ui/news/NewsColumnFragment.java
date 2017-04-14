@@ -51,7 +51,7 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
      * @param isLoadMore
      */
     private void loadData(final boolean isLoadMore) {
-        RetrofitHelper.getInstance().getService().getNewsColumnTest("https://demo2821846.mockable.io/news/column")
+        RetrofitHelper.getInstance().getService().getNewsColumn(start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NewsColumnModel>() {
@@ -59,6 +59,9 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
                     public void OnSuccess(NewsColumnModel data) {
                         if (data != null && data.getNews() != null && data.getNews().size() > 0) {
                             mAdapter.dealLoadData(isLoadMore, data.getNews());
+                            hideEmptyView();
+                        } else {
+                            showEmptyView("专栏当前没有相关文章");
                         }
                         mSwiprefreshlayout.setRefreshing(false);
                     }
@@ -66,6 +69,8 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
                     @Override
                     public void OnFailue(String msg) {
                         Log.e("OnFailue", msg);
+                        showEmptyView();
+                        mSwiprefreshlayout.setRefreshing(false);
                     }
                 });
     }

@@ -4,6 +4,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hooview.app.R;
@@ -22,6 +26,12 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     protected RecyclerView mRecyclerview;
     @BindView(R.id.swiprefreshlayout)
     protected SwipeRefreshLayout mSwiprefreshlayout;
+    @BindView(R.id.ll_empty)
+    protected LinearLayout mEmptyLayout;
+    @BindView(R.id.iv_prompt)
+    protected ImageView mEmptyImageView;
+    @BindView(R.id.tv_prompt)
+    protected TextView mEmptyTextView;
     protected T mAdapter;
     protected int start;
 
@@ -94,4 +104,29 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      * 获取列表数据
      */
     protected abstract void getListData(Boolean isLoadMore);
+
+    public void showEmptyView() {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.setVisibility(View.VISIBLE);
+        }
+        if (mEmptyTextView != null) {
+            mEmptyTextView.setText(R.string.empty_data);
+        }
+    }
+
+    public void showEmptyView(String prompt) {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.setVisibility(View.VISIBLE);
+        }
+        if (mEmptyTextView != null) {
+            mEmptyTextView.setText(prompt);
+        }
+    }
+
+    public void hideEmptyView() {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.setVisibility(View.GONE);
+        }
+    }
+
 }

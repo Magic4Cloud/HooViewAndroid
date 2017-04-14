@@ -49,7 +49,7 @@ public interface ApiService {
     Observable<NetResponse<List<MarketGlobalModel>>> getMarketGlobalStock();
 
     @GET("api/v2/news/column")
-    Observable<NetResponse<NewsColumnModel>> getNewsColumn();
+    Observable<NetResponse<NewsColumnModel>> getNewsColumn(@Query("start") int start);
 
     @GET
     Observable<NetResponse<NewsColumnModel>> getNewsColumnTest(@Url String url);
