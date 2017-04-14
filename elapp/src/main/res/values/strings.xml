@@ -792,4 +792,5 @@
     <string name="market_hk">港股</string>
     <string name="market_global">全球</string>
     <string name="focus">人关注</string>
+    <string name="network_errro">网络不给力哦~</string>
 </resources>

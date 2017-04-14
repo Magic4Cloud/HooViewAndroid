@@ -23,6 +23,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     @BindView(R.id.swiprefreshlayout)
     protected SwipeRefreshLayout mSwiprefreshlayout;
     protected T mAdapter;
+    protected int start;
 
     @Override
     protected int getLayout() {
@@ -53,6 +54,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      */
     @Override
     public void onRefresh() {
+        start = 0;
         getListData(false);
     }
 
@@ -67,6 +69,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
             mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {
+                    start += 20 ;
                     getListData(true);
                 }
             }, mRecyclerview);

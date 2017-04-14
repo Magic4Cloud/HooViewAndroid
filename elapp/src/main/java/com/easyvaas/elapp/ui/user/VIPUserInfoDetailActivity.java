@@ -127,6 +127,8 @@ public class VIPUserInfoDetailActivity extends BaseActivity implements View.OnCl
         }
         TextView tvName = (TextView) findViewById(R.id.tv_name);
         tvName.setText(mUserInfoModel.getNickname());
+        TextView textSlogn  = (TextView) findViewById(R.id.tv_company);
+        textSlogn.setText(mUserInfoModel.getSignature());
     }
 
     @Override

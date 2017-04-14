@@ -1,18 +1,26 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
+import com.easyvaas.elapp.ui.search.GlobalSearchActivity;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Date   2017/4/7
@@ -30,6 +38,7 @@ public class NewsMainFragment extends MyBaseFragment {
     ImageView mNewsSearch;
     @BindView(R.id.news_tab_viewpager)
     ViewPager mNewsTabViewpager;
+    Unbinder unbinder;
 
     private String[] titles;
     private Fragment[] mFragments;
@@ -77,8 +86,26 @@ public class NewsMainFragment extends MyBaseFragment {
         return new NewsMainFragment();
     }
 
-    private class MainPageAdapter extends FragmentPagerAdapter
-    {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick(R.id.news_search)
+    public void onViewClicked() {
+        GlobalSearchActivity.start(getContext());
+    }
+
+    private class MainPageAdapter extends FragmentPagerAdapter {
 
         private MainPageAdapter(FragmentManager fm) {
             super(fm);
@@ -107,7 +134,7 @@ public class NewsMainFragment extends MyBaseFragment {
         for (int i = 0; i < titles.length; i++) {
             TextView v = mNewsTablayout.getTitleView(i);
             if (v != null) {
-                v.setTextSize(TypedValue.COMPLEX_UNIT_SP,i == currentPosition ? 16: 14);
+                v.setTextSize(TypedValue.COMPLEX_UNIT_SP, i == currentPosition ? 16 : 14);
             }
         }
     }

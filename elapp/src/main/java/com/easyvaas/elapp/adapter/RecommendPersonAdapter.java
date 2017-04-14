@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
-import com.easyvaas.elapp.utils.UserUtil;
+import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.view.CircleImageTransformation;
-import com.easyvaas.elapp.view.CircleImageView;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
@@ -49,7 +47,6 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
         RecommendBean data = datas.get(position);
         mRecommendViewholder.mItemPersonFans.setText(String.valueOf(data.getFellow()));
         mRecommendViewholder.mItemPersonName.setText(data.getNickname());
-//        Glide.with(mContext).load(R.drawable.test_img).into(mRecommendViewholder.mItemPersonAvator);
         Picasso.with(mContext).load(data.getAvatar()).transform(new CircleImageTransformation()).into(mRecommendViewholder.mItemPersonAvator);
     }
 
@@ -77,6 +74,7 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
         @OnClick(R.id.item_card_layout)
         public void onViewClicked() {
             // Aya : 2017/4/11 跳转用户界面疑问
+            VIPUserInfoDetailActivity.start(mContext,datas.get(getLayoutPosition()).getId());
         }
     }
 }

@@ -57,6 +57,7 @@ public abstract class MyBaseFragment extends Fragment {
         unSubsribe();
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -89,6 +90,7 @@ public abstract class MyBaseFragment extends Fragment {
     {
         if (mCompositeSubscription != null)
             mCompositeSubscription.unsubscribe();
+        mCompositeSubscription = null;
     }
 
 

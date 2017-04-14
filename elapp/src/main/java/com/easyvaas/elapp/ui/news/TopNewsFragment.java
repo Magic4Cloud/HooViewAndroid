@@ -37,7 +37,7 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
      * 获取新闻列表
      */
     private void getNewsData(final boolean isLoadMore) {
-       Subscription subscription =  RetrofitHelper.getInstance().getService().getTopRatedNewsTest("http://www.mocky.io/v2/58ec8f0c2700000c1048942d")
+       Subscription subscription =  RetrofitHelper.getInstance().getService().getTopRatedNews(start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<TopRatedModel>() {

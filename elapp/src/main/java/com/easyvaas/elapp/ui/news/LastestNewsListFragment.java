@@ -1,18 +1,13 @@
 package com.easyvaas.elapp.ui.news;
 
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.easyvaas.elapp.adapter.recycler.LastestNewsListAdapter;
 import com.easyvaas.elapp.bean.news.LastestNewsModel;
-import com.easyvaas.elapp.event.NewsListScrollEvent;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.BaseListRcvFragment;
 import com.easyvaas.elapp.utils.ViewUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +26,11 @@ public class LastestNewsListFragment extends BaseListRcvFragment {
     }
     @Override
     public void iniView(View view) {
+        mRecyclerView.setPadding(0, (int) ViewUtil.dp2Px(getContext(),4),0,0);
+        mRecyclerView.setClipToPadding(false);
         mRecyclerView.setAdapter(mAdapter = new LastestNewsListAdapter(getContext(), lastestNewsModelist));
         lastestNewsModelist.clear();
-        lastestNewsModelist.add(new LastestNewsModel.NewsFlashEntity(true));
+//        lastestNewsModelist.add(new LastestNewsModel.NewsFlashEntity(true));
         loadData(false);
     }
 
@@ -48,10 +45,10 @@ public class LastestNewsListFragment extends BaseListRcvFragment {
             @Override
             public void onSuccess(LastestNewsModel result) {
                 if (result != null) {
-                    if(!isLoadMore&&isHaveHeader){
-                        isHaveHeader = true;
-                        lastestNewsModelist.clear();
-                    }
+//                    if(!isLoadMore&&isHaveHeader){
+//                        isHaveHeader = true;
+//                        lastestNewsModelist.clear();
+//                    }
                     mNextPageIndex = result.getNext();
                     lastestNewsModelist.addAll(result.getNewsFlash());
                     mAdapter.notifyDataSetChanged();

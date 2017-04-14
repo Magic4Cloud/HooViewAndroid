@@ -9,6 +9,7 @@ import com.easyvaas.elapp.bean.news.TopicModel;
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -23,8 +24,8 @@ public interface ApiService {
     /**
      * 首页要闻
      */
-    @GET("api/v2/news/home")
-    Observable<NetResponse<TopRatedModel>> getTopRatedNews();
+    @GET("api/v3/news/home")
+    Observable<NetResponse<TopRatedModel>> getTopRatedNews(@Query("start") int start);
 
     @GET
     Observable<NetResponse<TopRatedModel>> getTopRatedNewsTest(@Url String url);
@@ -32,8 +33,17 @@ public interface ApiService {
     @GET
     Observable<NetResponse<TopicModel>> getTopicListTest(@Url String url);
 
+    /**
+     * banner新闻
+     */
     @GET("api/news/banners")
     Observable<NetResponse<BannerModel>> getBannerNews();
+
+    /**
+     * 专题列表
+     */
+    @GET("api/v2/news/topic")
+    Observable<NetResponse<TopicModel>> getTopicList(@Query("id") String id,@Query("start") int start);
 
     @GET("api/v2/stock/globalindex")
     Observable<NetResponse<List<MarketGlobalModel>>> getMarketGlobalStock();

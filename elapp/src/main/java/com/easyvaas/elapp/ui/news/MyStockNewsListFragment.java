@@ -2,6 +2,7 @@ package com.easyvaas.elapp.ui.news;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -89,6 +90,9 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
         View view = View.inflate(getContext(), R.layout.fragment_my_stock, null);
         mPullToLoadRcvView = (PullToLoadView) view.findViewById(R.id.pull_load_view);
         mRecyclerView = mPullToLoadRcvView.getRecyclerView();
+        mRecyclerView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.white));
+        mRecyclerView.setPadding(0, (int) ViewUtil.dp2Px(getContext(),4),0,0);
+        mRecyclerView.setClipToPadding(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRlEmptyView = (RelativeLayout) view.findViewById(R.id.rl_empty);
         mTvAddBtn = (TextView) view.findViewById(R.id.tv_add);
@@ -109,7 +113,7 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
     public void iniView(View view) {
         mRecyclerView.setAdapter(mMyStockNewsListAdapter = new MyStockNewsListAdapter(getContext(), mNewsEntityList));
         mNewsEntityList.clear();
-        mNewsEntityList.add(new MyStockNewsModel.NewsEntity(true));
+//        mNewsEntityList.add(new MyStockNewsModel.NewsEntity(true));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
         updateTabLayoutView();
         loadData(false);
@@ -164,7 +168,7 @@ public class MyStockNewsListFragment extends BaseRvcFragment {
                     if (!isLoadMore) {
                         isHaveHeader = true;
                         mNewsEntityList.clear();
-                        mNewsEntityList.add(new MyStockNewsModel.NewsEntity(true));
+//                        mNewsEntityList.add(new MyStockNewsModel.NewsEntity(true));
                     }
                     mNextPageIndex = result.getNext();
                     mNewsEntityList.addAll(result.getNews());
