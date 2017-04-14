@@ -230,12 +230,12 @@ public class Utils {
         if (url.startsWith("/")) {
             File file = new File(url);
             if (file.exists()) {
-                requestCreator = Picasso.with(context).load(file).transform(new BlurTransformation(context));
+                requestCreator = Picasso.with(context).load(file).transform(BlurTransformation.getInstance(context));
             } else if (target instanceof ImageView && loadingResId > 0) {
                 ((ImageView) target).setImageResource(loadingResId);
             }
         } else {
-            requestCreator = Picasso.with(context).load(url).transform(new BlurTransformation(context));
+            requestCreator = Picasso.with(context).load(url).transform(BlurTransformation.getInstance(context));
         }
         if (requestCreator != null) {
             if (loadingResId > 0) {

@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.easyvaas.elapp.adapter.recycler.SelectStockListAdapter;
+import com.easyvaas.elapp.adapter.market.SelectStockListAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.event.MarketRefreshEvent;

@@ -66,6 +66,42 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    public void setStockModel(final StockModel stockModel, boolean hide) {
+        if (stockModel != null) {
+            mTvStockName.setText(stockModel.getName());
+            mTvStockNumber.setText(stockModel.getSymbol());
+            mTvPrice.setText(stockModel.getClose() + "");
+            mTvPercent.setText(StringUtil.getStockPercent(stockModel.getChangepercent()));
+            if (stockModel.getRank() >= 0) {
+                mTvTag.setVisibility(View.VISIBLE);
+                mTvTag.setText("" + (stockModel.getRank() + 1));
+            } else {
+                mTvTag.setVisibility(View.INVISIBLE);
+            }
+            //通view的select属性来控制颜色
+            if (stockModel.getChangepercent() >= 0) {
+                this.mTvPrice.setSelected(true);
+                this.mTvPercent.setSelected(true);
+                this.mTvTag.setSelected(true);
+            } else {
+                this.mTvPercent.setSelected(false);
+                this.mTvPrice.setSelected(false);
+                this.mTvTag.setSelected(false);
+            }
+            if (hide) {
+                viewDivider.setVisibility(View.GONE);
+            } else {
+                viewDivider.setVisibility(View.VISIBLE);
+            }
+        }
+        this.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.showStockDetail(v.getContext(), stockModel.getName(), stockModel.getSymbol() + "", true);
+            }
+        });
+    }
+
     public void setStockModel(final StockListModel.StockModel stockModel, boolean isEnd) {
         if (stockModel != null) {
             mTvStockName.setText(stockModel.getName());

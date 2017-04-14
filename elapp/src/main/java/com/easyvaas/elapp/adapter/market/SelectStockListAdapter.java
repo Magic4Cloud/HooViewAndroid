@@ -1,4 +1,4 @@
-package com.easyvaas.elapp.adapter.recycler;
+package com.easyvaas.elapp.adapter.market;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

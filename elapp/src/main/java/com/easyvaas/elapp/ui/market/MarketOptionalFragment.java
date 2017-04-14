@@ -2,7 +2,7 @@ package com.easyvaas.elapp.ui.market;
 
 import android.view.View;
 
-import com.easyvaas.elapp.adapter.recycler.SelectStockListAdapter;
+import com.easyvaas.elapp.adapter.market.SelectStockListAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.net.HooviewApiHelper;
@@ -64,7 +64,9 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
      * 从网络上得到自选股的列表（会获取到全部的自选股， 没有分类）.没有加载更多
      */
     private void loadData() {
-        mSwipeRefreshLayout.setRefreshing(true);
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(true);
+        }
         HooviewApiHelper.getInstance().getUserStockList(EVApplication.getUser().getName(), new MyRequestCallBack<StockListModel>() {
             @Override
             public void onSuccess(StockListModel result) {
@@ -75,26 +77,34 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
                 } else {
                     showWithoutData();
                 }
-                mSwipeRefreshLayout.setRefreshing(false);
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
             public void onFailure(String msg) {
                 showWithoutData();
-                mSwipeRefreshLayout.setRefreshing(false);
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
             }
 
             @Override
             public void onError(String errorInfo) {
                 showWithoutData();
-                mSwipeRefreshLayout.setRefreshing(false);
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
     }
 
     private void showWithoutData() {
         showEmptyView("您还没有添加自选噢");
-        mTvAddSelect.setVisibility(View.VISIBLE);
+        if (mTvAddSelect != null) {
+            mTvAddSelect.setVisibility(View.VISIBLE);
+        }
     }
 
     private void hideWithData() {

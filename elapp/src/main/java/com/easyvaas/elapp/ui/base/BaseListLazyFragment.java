@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
 
 import butterknife.BindView;
@@ -59,6 +60,7 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
     @Override
     protected void initView() {
         mUnbinder = ButterKnife.bind(this, mRootView);
+        ViewUtil.initSwipeRefreshLayout(mSwipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(mRefreshListener);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -71,22 +73,36 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
     protected abstract void initAdapter();
 
     public void showEmptyView() {
-        mLLEmpty.setVisibility(View.VISIBLE);
-        mTvPrompt.setText(R.string.empty_data);
+        if (mLLEmpty != null) {
+            mLLEmpty.setVisibility(View.VISIBLE);
+        }
+        if (mTvPrompt != null) {
+            mTvPrompt.setText(R.string.empty_data);
+        }
     }
 
     public void showEmptyView(int prompt) {
-        mLLEmpty.setVisibility(View.VISIBLE);
-        mTvPrompt.setText(prompt);
+        if (mLLEmpty != null) {
+            mLLEmpty.setVisibility(View.VISIBLE);
+        }
+        if (mTvPrompt != null) {
+            mTvPrompt.setText(prompt);
+        }
     }
 
     public void showEmptyView(String prompt) {
-        mLLEmpty.setVisibility(View.VISIBLE);
-        mTvPrompt.setText(prompt);
+        if (mLLEmpty != null) {
+            mLLEmpty.setVisibility(View.VISIBLE);
+        }
+        if (mTvPrompt != null) {
+            mTvPrompt.setText(prompt);
+        }
     }
 
     public void hideEmptyView() {
-        mLLEmpty.setVisibility(View.GONE);
+        if (mLLEmpty != null) {
+            mLLEmpty.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -94,12 +110,16 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
      * @param resId int
      */
     public void showOperationView(int resId) {
-        mImageViewOperation.setImageResource(resId);
-        mImageViewOperation.setVisibility(View.VISIBLE);
+        if (mImageViewOperation != null) {
+            mImageViewOperation.setImageResource(resId);
+            mImageViewOperation.setVisibility(View.VISIBLE);
+        }
     }
 
     public void hideOperationView() {
-        mImageViewOperation.setVisibility(View.GONE);
+        if (mImageViewOperation != null) {
+            mImageViewOperation.setVisibility(View.GONE);
+        }
     }
 
     /**

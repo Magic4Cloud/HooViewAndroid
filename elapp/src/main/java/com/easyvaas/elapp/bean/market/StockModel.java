@@ -45,7 +45,34 @@ public class StockModel implements Serializable {
     private String datetime;
     private String nationalFlag;
     private int rank = -1;
+    private String category;
+    private int headerId;
+    private boolean lastInCategory;
+    private boolean up;
 
+    public boolean isUp() {
+        return up;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
+    }
+
+    public boolean isLastInCategory() {
+        return lastInCategory;
+    }
+
+    public void setLastInCategory(boolean lastInCategory) {
+        this.lastInCategory = lastInCategory;
+    }
+
+    public int getHeaderId() {
+        return headerId;
+    }
+
+    public void setHeaderId(int headerId) {
+        this.headerId = headerId;
+    }
 
     public double getClose() {
         return close;
@@ -197,6 +224,14 @@ public class StockModel implements Serializable {
 
     public void setNationalFlag(String nationalFlag) {
         this.nationalFlag = nationalFlag;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override

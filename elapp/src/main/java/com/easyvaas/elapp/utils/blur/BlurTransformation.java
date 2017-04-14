@@ -13,9 +13,20 @@ import com.squareup.picasso.Transformation;
 
 public class BlurTransformation implements Transformation {
 
+    private static BlurTransformation mInstance = null;
+
     RenderScript rs;
 
-    public BlurTransformation(Context context) {
+    public static BlurTransformation getInstance(Context context) {
+        if (mInstance == null) {
+            synchronized (BlurTransformation.class) {
+                mInstance = new BlurTransformation(context);
+            }
+        }
+        return mInstance;
+    }
+
+    private BlurTransformation(Context context) {
         super();
         rs = RenderScript.create(context);
     }

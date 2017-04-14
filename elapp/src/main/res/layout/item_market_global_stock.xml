@@ -36,6 +36,7 @@
                     android:layout_height="22dp"
                     android:layout_marginLeft="4dp"
                     android:text="N安车"
+                    android:maxLines="1"
                     android:textColor="@color/market_list_stock_name"
                     android:textSize="16sp"/>
 
