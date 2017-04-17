@@ -85,7 +85,7 @@ public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity>
                         return;
                     }
                     collectStock(mContext, model.getSymbol(),model.getCollected());
-                    model.setCollected(0);
+                    model.setCollected(1);
 
                 }
             });
@@ -93,7 +93,7 @@ public class SearchStockItem implements AdapterItem<SearchStockModel.DataEntity>
                 @Override
                 public void onClick(View v) {
                     collectStock(mContext, model.getSymbol(),model.getCollected());
-                    model.setCollected(1);
+                    model.setCollected(0);
 
                 }
             });

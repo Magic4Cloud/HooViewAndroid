@@ -51,6 +51,7 @@ public class TopicActivity extends MyBaseActivity {
     @BindView(R.id.topic_title_top)
     TextView mTopicTitleTop;
 
+
     @Override
     protected int getLayout() {
         return R.layout.acivity_topic_layout;
@@ -64,7 +65,7 @@ public class TopicActivity extends MyBaseActivity {
         }
         initToolBar();
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().add(R.id.topic_fragment, TopicFragment.newInstance()).commit();
+        manager.beginTransaction().add(R.id.topic_fragment, TopicFragment.newInstance(getIntent().getStringExtra("id"))).commit();
     }
 
     private void initToolBar() {

@@ -1,7 +1,6 @@
 package com.easyvaas.elapp.ui.common;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -72,16 +72,16 @@ public class WebDetailActivity extends BaseActivity {
 
     private RelativeLayout mRlBottomNews;
     private TextView mTvNewsCommentHint;
-    private TextView mTvNewsShare;
-    private TextView mTvNewsCollect;
-    private TextView mTvNewsComment;
+    private ImageView mTvNewsShare;
+    private ImageView mTvNewsCollect;
+    private ImageView mTvNewsComment;
 
 
     private RelativeLayout mRlBottomStock;
     private TextView mTvStockCommentHint;
-    private TextView mTvStockAdd;
-    private TextView mTvStockRefresh;
-    private TextView mTvStockShare;
+    private ImageView mTvStockAdd;
+    private ImageView mTvStockRefresh;
+    private ImageView mTvStockShare;
     private String code;
     private int isCollected; // 0 未添加 1 已添加
     private  int detailType;
@@ -109,9 +109,9 @@ public class WebDetailActivity extends BaseActivity {
         mInputCommentBar = findViewById(R.id.rl_input_text);
 
         mRlBottomStock = (RelativeLayout) findViewById(R.id.rl_bottom_stock);
-        mTvStockAdd = (TextView) findViewById(R.id.tv_stock_add);
-        mTvStockRefresh = (TextView) findViewById(R.id.tv_stock_refresh);
-        mTvStockShare = (TextView) findViewById(R.id.tv_stock_share);
+        mTvStockAdd = (ImageView) findViewById(R.id.tv_stock_add);
+        mTvStockRefresh = (ImageView) findViewById(R.id.tv_stock_refresh);
+        mTvStockShare = (ImageView) findViewById(R.id.tv_stock_share);
         mTvStockCommentHint = (TextView) findViewById(R.id.tv_stock_comment_hint);
 
         mTvStockAdd.setOnClickListener(mOnClickListener);
@@ -120,9 +120,9 @@ public class WebDetailActivity extends BaseActivity {
         mTvStockCommentHint.setOnClickListener(mOnClickListener);
 
         mRlBottomNews = (RelativeLayout) findViewById(R.id.rl_bottom_news);
-        mTvNewsCollect = (TextView) findViewById(R.id.tv_news_collect);
-        mTvNewsComment = (TextView) findViewById(tv_news_comment);
-        mTvNewsShare = (TextView) findViewById(R.id.tv_news_share);
+        mTvNewsCollect = (ImageView) findViewById(R.id.tv_news_collect);
+        mTvNewsComment = (ImageView) findViewById(tv_news_comment);
+        mTvNewsShare = (ImageView) findViewById(R.id.tv_news_share);
 
         mTvNewsCommentHint = (TextView) findViewById(R.id.tv_news_comment_hint);
         mTvNewsCollect.setOnClickListener(mOnClickListener);
@@ -431,11 +431,11 @@ public class WebDetailActivity extends BaseActivity {
                         LoginActivity.start(WebDetailActivity.this);
                         return;
                     }
-                    if ((!TextUtils.isEmpty(code) && !RealmHelper.getInstance().queryCollectionId(code))) {
-                        mTvNewsCollect.setSelected(true);
-                        getCollectionInfo(code);
-                    } else {
+                    if ((!TextUtils.isEmpty(code) && RealmHelper.getInstance().queryCollectionId(code))) {
                         mTvNewsCollect.setSelected(false);
+                        RealmHelper.getInstance().deleteCollection(code);
+                    } else {
+                        mTvNewsCollect.setSelected(true);
                         getCollectionInfo(code);
                     }
                     break;
@@ -487,15 +487,11 @@ public class WebDetailActivity extends BaseActivity {
                     SingleToast.show(WebDetailActivity.this, getString(R.string.add_stock_success));
                     mTvStockAdd.setSelected(true);
                     isCollected = 1;
-                    mTvStockAdd.setText(R.string.added);
-                    mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.comment_level_other));
                 }else
                 {
                     SingleToast.show(WebDetailActivity.this, getString(R.string.delect_stock_sucess));
                     isCollected = 0;
                     mTvStockAdd.setSelected(false);
-                    mTvStockAdd.setText(getString(R.string.add_stock_btn));
-                    mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.text_color_gray));
                 }
 
             }
@@ -522,14 +518,10 @@ public class WebDetailActivity extends BaseActivity {
                     {
                         mTvStockAdd.setSelected(true);
                         isCollected = 1;
-                        mTvStockAdd.setText(R.string.added);
-                        mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.comment_level_other));
                     }else
                     {
                         isCollected = 0;
                         mTvStockAdd.setSelected(false);
-                        mTvStockAdd.setText(getString(R.string.add_stock_btn));
-                        mTvStockAdd.setTextColor(ContextCompat.getColor(getBaseContext(),R.color.text_color_gray));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

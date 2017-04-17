@@ -371,9 +371,12 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
                 {
                     case R.id.item_news_layout:
                         Utils.showNewsDetail(mContext,mData.get(position-1).getTitle() ,mData.get(position-1).getId());
+                        insertHistoryRecord(mData.get(position -1));
                         break;
                     case R.id.item_topic_layout:
-                        mContext.startActivity(new Intent(mContext, TopicActivity.class));
+                        Intent intent = new Intent(mContext,TopicActivity.class);
+                        intent.putExtra("id",mData.get(position-1).getId());
+                        mContext.startActivity(intent);
                         break;
                 }
             }

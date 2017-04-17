@@ -115,6 +115,7 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
 
         ApiUtil.checkSession(getContext());
         initHyphenate();
+        getUser();
     }
 
     /**

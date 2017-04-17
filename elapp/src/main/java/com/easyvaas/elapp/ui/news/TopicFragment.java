@@ -1,5 +1,7 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.os.Bundle;
+
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopicModel;
@@ -28,7 +30,7 @@ public class TopicFragment extends MyBaseListFragment<NormalNewsAdapter> {
 
     @Override
     protected void getListData(final Boolean isLoadMore) {
-        Subscription subscription =  RetrofitHelper.getInstance().getService().getTopicListTest("https://demo2821846.mockable.io/news/topic")
+        Subscription subscription =  RetrofitHelper.getInstance().getService().getTopicList(getArguments().getString("id"),start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<TopicModel>() {
@@ -55,7 +57,12 @@ public class TopicFragment extends MyBaseListFragment<NormalNewsAdapter> {
         addSubscribe(subscription);
     }
 
-    public static TopicFragment newInstance() {
-        return new TopicFragment();
+    public static TopicFragment newInstance(String id) {
+
+        Bundle args = new Bundle();
+        args.putString("id",id);
+        TopicFragment fragment = new TopicFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 }

@@ -47,10 +47,7 @@ public abstract class MyBaseActivity extends AppCompatActivity {
 
         if (mCompositeSubscription == null)
             mCompositeSubscription = new CompositeSubscription();
-        else
-        {
-            mCompositeSubscription.add(subscription);
-        }
+        mCompositeSubscription.add(subscription);
     }
 
     /**
