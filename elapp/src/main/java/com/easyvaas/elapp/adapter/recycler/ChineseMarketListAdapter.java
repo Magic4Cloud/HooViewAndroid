@@ -26,14 +26,14 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
     private static final int ITEM_TYPE_STOCK = 2;
     private static final int ITEM_TYPE_TITLE = 3;
     private UpsAndDownsDataModel upsAndDownsListModel;
-    private ExponentListNewModel exponentListModel;
+    private MarketExponentModel exponentListModel;
     private LinkedList datas;
     private Context mContext;
 
     public ChineseMarketListAdapter(Context context) {
         mContext = context;
         datas = new LinkedList();
-        exponentListModel = new ExponentListNewModel();
+        exponentListModel = new MarketExponentModel();
     }
 
     public void setUpsAndDownsListModel(UpsAndDownsDataModel upsAndDownsListModel) {
@@ -61,9 +61,9 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setExponentListModel(ExponentListNewModel listModel) {
+    public void setExponentListModel(MarketExponentModel listModel) {
         this.exponentListModel = listModel;
-        if (datas.size() > 0 && (datas.get(0) instanceof ExponentListNewModel)) {
+        if (datas.size() > 0 && (datas.get(0) instanceof MarketExponentModel)) {
             datas.remove(0);
         }
         datas.addFirst(listModel);
@@ -94,7 +94,7 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Object object = datas.get(position);
         if (holder instanceof ExponentViewHolder) {
-            ((ExponentViewHolder) holder).setExponentModel((ExponentListNewModel) object);
+            ((ExponentViewHolder) holder).setExponentModel((MarketExponentModel) object);
         } else if (holder instanceof StockItemViewHolder && object instanceof StockModel) {
             ((StockItemViewHolder) holder).setStockModel((StockModel) object,
                     (position + 1 < datas.size() - 1) && datas.get(position + 1) instanceof TitleModel ? View.GONE : View.VISIBLE);
@@ -106,7 +106,7 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         Object obj = datas.get(position);
-        if (obj instanceof ExponentListNewModel) {
+        if (obj instanceof MarketExponentModel) {
             return ITEM_TYPE_EXPONENT;
         } else if (obj instanceof TitleModel) {
             return ITEM_TYPE_TITLE;
@@ -142,12 +142,12 @@ public class ChineseMarketListAdapter extends RecyclerView.Adapter {
             exponentCellViews.add((ExponentCellView) itemView.findViewById(R.id.exponent3));
         }
 
-        void setExponentModel(ExponentListNewModel listModel) {
+        void setExponentModel(MarketExponentModel listModel) {
             if (listModel == null || listModel.getData() == null) {
                 return;
             }
             for (int i = 0; i < 3; i++) {
-                final ExponentListNewModel.DataEntity.CnEntity model = listModel.getData().getCn().get(i);
+                final MarketExponentModel.ExponentEntity model = listModel.getData().getCn().get(i);
                 ExponentCellView cellView = exponentCellViews.get(i);
                 String percentStr;
                 if (model.getChangepercent() >= 0) {

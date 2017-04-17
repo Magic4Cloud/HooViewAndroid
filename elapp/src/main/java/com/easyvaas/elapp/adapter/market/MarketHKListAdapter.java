@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.adapter.StockItemViewHolder;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.StockModel;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.Utils;
@@ -29,14 +29,14 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
     private static final int ITEM_TYPE_EXPONENT = 1;
     private static final int ITEM_TYPE_STOCK = 2;
     private Context mContext;
-    private ExponentListNewModel mListNewModel = new ExponentListNewModel();
+    private MarketExponentModel mListNewModel = new MarketExponentModel();
     private List<StockModel> mList = new ArrayList<StockModel>();
 
     public MarketHKListAdapter(Context context) {
         mContext = context;
     }
 
-    public void setDataHeader(ExponentListNewModel listModel) {
+    public void setDataHeader(MarketExponentModel listModel) {
         if (listModel != null) {
             mListNewModel = listModel;
         }
@@ -67,8 +67,8 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Object object = getItem(position);
-        if (position == 0 && holder instanceof MarketHKListAdapter.ExponentViewHolder && object instanceof ExponentListNewModel) {
-            ExponentListNewModel model = (ExponentListNewModel) object;
+        if (position == 0 && holder instanceof MarketHKListAdapter.ExponentViewHolder && object instanceof MarketExponentModel) {
+            MarketExponentModel model = (MarketExponentModel) object;
             ((MarketHKListAdapter.ExponentViewHolder) holder).setExponentModel(model);
         } else if (holder instanceof StockItemViewHolder && object instanceof StockModel) {
             StockModel model = (StockModel) object;
@@ -79,7 +79,7 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
     @Override
     public int getItemViewType(int position) {
         Object object = getItem(position);
-        if (position == 0 && object instanceof ExponentListNewModel) {
+        if (position == 0 && object instanceof MarketExponentModel) {
             return ITEM_TYPE_EXPONENT;
         } else if (object instanceof StockModel){
             return ITEM_TYPE_STOCK;
@@ -98,7 +98,7 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
     @Override
     public long getHeaderId(int position) {
         Object object = getItem(position);
-        if (position == 0 && object instanceof ExponentListNewModel) {
+        if (position == 0 && object instanceof MarketExponentModel) {
             return -1;
         } else if (object instanceof StockModel){
             return ((StockModel)object).getHeaderId();
@@ -140,12 +140,12 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
             exponentCellViews.add((ExponentCellView) itemView.findViewById(R.id.exponent3));
         }
 
-        void setExponentModel(ExponentListNewModel listModel) {
+        void setExponentModel(MarketExponentModel listModel) {
             if (listModel == null || listModel.getData() == null) {
                 return;
             }
             for (int i = 0; i < 3; i++) {
-                final ExponentListNewModel.DataEntity.HkEntity model = listModel.getData().getHk().get(i);
+                final MarketExponentModel.ExponentEntity model = listModel.getData().getHk().get(i);
                 ExponentCellView cellView = exponentCellViews.get(i);
                 Logger.d("guojun", "setExponentModel: " + model.toString());
                 String percentStr;
@@ -199,12 +199,5 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
         }
     }
 
-    private class TitleModel {
-        boolean isUP;
-
-        TitleModel(boolean isUP) {
-            this.isUP = isUP;
-        }
-    }
 }
 

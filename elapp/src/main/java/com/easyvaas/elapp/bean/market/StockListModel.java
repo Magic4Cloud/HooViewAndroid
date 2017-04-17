@@ -93,6 +93,16 @@ public class StockListModel implements Serializable {
         private String symbol;
         private double percent;
 
+        private int headerId;
+
+        public int getHeaderId() {
+            return headerId;
+        }
+
+        public void setHeaderId(int headerId) {
+            this.headerId = headerId;
+        }
+
         public double getPrice() {
             return price;
         }

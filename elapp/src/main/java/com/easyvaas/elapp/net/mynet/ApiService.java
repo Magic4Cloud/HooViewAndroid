@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.net.mynet;
 
 import com.easyvaas.elapp.bean.BannerModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
@@ -50,6 +51,9 @@ public interface ApiService {
 
     @GET("api/v2/news/column")
     Observable<NetResponse<NewsColumnModel>> getNewsColumn(@Query("start") int start);
+
+    @GET("/api/stock/market")
+    Observable<NetResponse<MarketExponentModel>> getMarketExponent();
 
     @GET
     Observable<NetResponse<NewsColumnModel>> getNewsColumnTest(@Url String url);

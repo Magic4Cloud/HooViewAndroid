@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.easyvaas.elapp.adapter.ImportNewsAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.news.ImportantNewsModel;
 import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.event.NewsListScrollEvent;
@@ -126,9 +123,9 @@ public class ImportantNewsListFragment extends BaseListRcvFragment {
     }
 
     public void getExponent(boolean isLoadMore) {
-        HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<ExponentListNewModel>() {
+        HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<MarketExponentModel>() {
             @Override
-            public void onSuccess(ExponentListNewModel result) {
+            public void onSuccess(MarketExponentModel result) {
                 mAdapter.setExponentListModel(result);
             }
 

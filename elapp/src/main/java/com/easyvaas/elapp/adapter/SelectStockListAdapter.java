@@ -1,4 +1,4 @@
-package com.easyvaas.elapp.adapter.market;
+package com.easyvaas.elapp.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,8 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.easyvaas.elapp.adapter.StockItemViewHolder;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.ExponentCellView;
@@ -27,12 +26,12 @@ public class SelectStockListAdapter extends RecyclerView.Adapter {
     private static final int ITEM_TYPE_STOCK = 2;
     private static final int ITEM_TYPE_TITLE = 3;
     private StockListModel upsAndDownsListModel;
-    private ExponentListNewModel exponentListModel;
+    private MarketExponentModel exponentListModel;
     private LinkedList datas;
 
     public SelectStockListAdapter() {
         datas = new LinkedList();
-        exponentListModel = new ExponentListNewModel();
+        exponentListModel = new MarketExponentModel();
     }
 
     public void setStockListModel(StockListModel upsAndDownsListModel) {
@@ -60,9 +59,9 @@ public class SelectStockListAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setExponentListModel(ExponentListNewModel listModel) {
+    public void setExponentListModel(MarketExponentModel listModel) {
         this.exponentListModel = listModel;
-        if (datas.size() > 0 && (datas.get(0) instanceof ExponentListNewModel)) {
+        if (datas.size() > 0 && (datas.get(0) instanceof MarketExponentModel)) {
             datas.remove(0);
         }
         datas.addFirst(listModel);
@@ -101,7 +100,7 @@ public class SelectStockListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         Object obj = datas.get(position);
-        if (obj instanceof ExponentListNewModel) {
+        if (obj instanceof MarketExponentModel) {
             return ITEM_TYPE_EXPONENT;
         } else if (obj instanceof SelectStockListAdapter.TitleModel) {
             return ITEM_TYPE_TITLE;
@@ -125,12 +124,12 @@ public class SelectStockListAdapter extends RecyclerView.Adapter {
             exponentCellViews.add((ExponentCellView) itemView.findViewById(R.id.exponent3));
         }
 
-        void setExponentModel(ExponentListNewModel listModel) {
+        void setExponentModel(MarketExponentModel listModel) {
             if (listModel == null || listModel.getData() == null) {
                 return;
             }
             for (int i = 0; i < 3; i++) {
-                final ExponentListNewModel.DataEntity.HkEntity model = listModel.getData().getHk().get(i);
+                final MarketExponentModel.ExponentEntity model = listModel.getData().getHk().get(i);
                 ExponentCellView cellView = exponentCellViews.get(i);
                 String percentStr = cellView.getContext().getString(R.string.exponent_percent);
                 percentStr = String.format(percentStr,

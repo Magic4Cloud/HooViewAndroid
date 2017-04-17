@@ -19,7 +19,7 @@ import com.easyvaas.common.imageslider.SliderTypes.BaseSliderView;
 import com.easyvaas.common.imageslider.SliderTypes.TextSliderView;
 import com.easyvaas.elapp.activity.WebViewActivity;
 import com.easyvaas.elapp.bean.BannerModel;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.news.NewsItemModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HooviewBean.NewsBean;
@@ -242,8 +242,8 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
             case R.id.ll_exponent1:
             case R.id.ll_exponent2:
             case R.id.ll_exponent3:
-                ExponentListNewModel.DataEntity.CnEntity exponentModel
-                        = (ExponentListNewModel.DataEntity.CnEntity) v.getTag();
+                MarketExponentModel.ExponentEntity exponentModel
+                        = (MarketExponentModel.ExponentEntity) v.getTag();
                 if (exponentModel != null) {
                     Utils.showStockDetail(mContext, exponentModel.getName(), exponentModel.getSymbol(), false);
                 }

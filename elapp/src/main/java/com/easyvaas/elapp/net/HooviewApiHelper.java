@@ -16,7 +16,7 @@ import com.easyvaas.elapp.bean.SplashEntity;
 import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
 import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveHistoryModel;
 import com.easyvaas.elapp.bean.market.ExponentListModel;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.bean.market.UpsAndDownsDataModel;
 import com.easyvaas.elapp.bean.message.UnReadMessageEntity;
@@ -73,8 +73,8 @@ public class HooviewApiHelper {
         sRequestHelper.getAsGson(HooviewApiConstant.GET_EXPONENT_GLOBAL_STOCK_LIST, null, ExponentListModel.class, myRequestCallBack);
     }
 
-    public void getExponentListNew(MyRequestCallBack<ExponentListNewModel> myRequestCallBack) {
-        sRequestHelper.getAsGson(HooviewApiConstant.GET_EXPONENT_LIST, null, ExponentListNewModel.class, myRequestCallBack);
+    public void getExponentListNew(MyRequestCallBack<MarketExponentModel> myRequestCallBack) {
+        sRequestHelper.getAsGson(HooviewApiConstant.GET_EXPONENT_LIST, null, MarketExponentModel.class, myRequestCallBack);
     }
 
     public void getSelectStockList(String listStr, MyRequestCallBack<StockListModel> callBack) {

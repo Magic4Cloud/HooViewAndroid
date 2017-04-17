@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.adapter.StockItemViewHolder;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.StockModel;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.ExponentCellView;
@@ -28,14 +28,14 @@ public class MarketChineseListAdapter extends BaseAdapter implements StickyRecyc
     private static final int ITEM_TYPE_EXPONENT = 1;
     private static final int ITEM_TYPE_STOCK = 2;
     private Context mContext;
-    private ExponentListNewModel mListNewModel = new ExponentListNewModel();
+    private MarketExponentModel mListNewModel;
     private List<StockModel> mList = new ArrayList<StockModel>();
 
     public MarketChineseListAdapter(Context context) {
         mContext = context;
     }
 
-    public void setDataHeader(ExponentListNewModel listModel) {
+    public void setDataHeader(MarketExponentModel listModel) {
         if (listModel != null) {
             mListNewModel = listModel;
         }
@@ -66,8 +66,8 @@ public class MarketChineseListAdapter extends BaseAdapter implements StickyRecyc
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Object object = getItem(position);
-        if (position == 0 && holder instanceof MarketChineseListAdapter.ExponentViewHolder && object instanceof ExponentListNewModel) {
-            ExponentListNewModel model = (ExponentListNewModel) object;
+        if (position == 0 && holder instanceof MarketChineseListAdapter.ExponentViewHolder && object instanceof MarketExponentModel) {
+            MarketExponentModel model = (MarketExponentModel) object;
             ((MarketChineseListAdapter.ExponentViewHolder) holder).setExponentModel(model);
         } else if (holder instanceof StockItemViewHolder && object instanceof StockModel) {
             StockModel model = (StockModel) object;
@@ -78,7 +78,7 @@ public class MarketChineseListAdapter extends BaseAdapter implements StickyRecyc
     @Override
     public int getItemViewType(int position) {
         Object object = getItem(position);
-        if (position == 0 && object instanceof ExponentListNewModel) {
+        if (position == 0 && object instanceof MarketExponentModel) {
             return ITEM_TYPE_EXPONENT;
         } else if (object instanceof StockModel){
             return ITEM_TYPE_STOCK;
@@ -97,7 +97,7 @@ public class MarketChineseListAdapter extends BaseAdapter implements StickyRecyc
     @Override
     public long getHeaderId(int position) {
         Object object = getItem(position);
-        if (position == 0 && object instanceof ExponentListNewModel) {
+        if (position == 0 && object instanceof MarketExponentModel) {
             return -1;
         } else if (object instanceof StockModel){
             return ((StockModel)object).getHeaderId();
@@ -139,12 +139,12 @@ public class MarketChineseListAdapter extends BaseAdapter implements StickyRecyc
             exponentCellViews.add((ExponentCellView) itemView.findViewById(R.id.exponent3));
         }
 
-        void setExponentModel(ExponentListNewModel listModel) {
+        void setExponentModel(MarketExponentModel listModel) {
             if (listModel == null || listModel.getData() == null) {
                 return;
             }
             for (int i = 0; i < 3; i++) {
-                final ExponentListNewModel.DataEntity.CnEntity model = listModel.getData().getCn().get(i);
+                final MarketExponentModel.ExponentEntity model = listModel.getData().getCn().get(i);
                 ExponentCellView cellView = exponentCellViews.get(i);
                 String percentStr;
                 if (model.getChangepercent() >= 0) {
@@ -190,11 +190,4 @@ public class MarketChineseListAdapter extends BaseAdapter implements StickyRecyc
         }
     }
 
-    private class TitleModel {
-        boolean isUP;
-
-        TitleModel(boolean isUP) {
-            this.isUP = isUP;
-        }
-    }
 }

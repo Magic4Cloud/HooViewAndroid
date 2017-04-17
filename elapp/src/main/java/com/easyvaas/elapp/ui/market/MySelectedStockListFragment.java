@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.easyvaas.elapp.adapter.market.SelectStockListAdapter;
+import com.easyvaas.elapp.adapter.SelectStockListAdapter;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.bean.user.CollectListModel;
 import com.easyvaas.elapp.event.MarketRefreshEvent;

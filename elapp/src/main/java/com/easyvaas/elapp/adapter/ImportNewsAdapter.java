@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.bean.BannerModel;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.news.ImportantNewsModel;
 import com.easyvaas.elapp.bean.news.NewsItemModel;
 import com.easyvaas.elapp.bean.user.ReadRecord;
@@ -28,7 +28,7 @@ public class ImportNewsAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private ImportantNewsModel mImportantNewsModel;
     private BannerModel mBannerModel;
-    private ExponentListNewModel mExponentListModel;
+    private MarketExponentModel mExponentListModel;
 
     public ImportNewsAdapter(Context context) {
         mContext = context;
@@ -93,7 +93,7 @@ public class ImportNewsAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setExponentListModel(ExponentListNewModel model) {
+    public void setExponentListModel(MarketExponentModel model) {
         if (model != null) {
             mExponentListModel = model;
             notifyItemChanged(0);

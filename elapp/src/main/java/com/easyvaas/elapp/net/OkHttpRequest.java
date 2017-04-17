@@ -115,7 +115,7 @@ class OkHttpRequest implements IRequestHelper {
 
     private void requestAsGson(String url, Map<String, String> params, final Class clazz,
                                final MyRequestCallBack<?> callBack, boolean isPostMethod) {
-        Logger.d(TAG, "Request url: " + url);
+        Logger.e(TAG, "Request url: " + url);
         Request.Builder requestBuilder = new Request.Builder().url(url);
         if (isPostMethod) {
             FormBody.Builder builder = new FormBody.Builder();
@@ -127,9 +127,9 @@ class OkHttpRequest implements IRequestHelper {
             String json = new JSONObject(params).toString();
             Logger.d(TAG, "Request isPostMethod: "+json);
             requestBuilder.post(builder.build());
-            Logger.i(TAG, "Request body: " + builder.toString());
+            Logger.d(TAG, "Request body: " + builder.toString());
         } else {
-            Logger.i(TAG, "Request body: " + requestBuilder.toString());
+            Logger.d(TAG, "Request body: " + requestBuilder.toString());
             requestBuilder.get();
         }
         mClient.newCall(requestBuilder.build()).enqueue(new Callback() {

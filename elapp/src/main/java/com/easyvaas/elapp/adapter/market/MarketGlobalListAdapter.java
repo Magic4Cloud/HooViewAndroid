@@ -28,7 +28,6 @@ public class MarketGlobalListAdapter extends BaseAdapter<StockModel, MarketGloba
         implements StickyRecyclerHeadersAdapter<MarketGlobalListAdapter.TitleViewHolder> {
 
     private Context mContext;
-    private List<StockModel> mList;
 
     public MarketGlobalListAdapter(Context context) {
         mContext = context;
@@ -38,7 +37,6 @@ public class MarketGlobalListAdapter extends BaseAdapter<StockModel, MarketGloba
      * 设置数据
      */
     public void setData(List<StockModel> list) {
-        mList = list;
         this.addAll(list);
     }
 
@@ -88,7 +86,7 @@ public class MarketGlobalListAdapter extends BaseAdapter<StockModel, MarketGloba
      */
     @Override
     public void onBindHeaderViewHolder(TitleViewHolder holder, int position) {
-        holder.setTitle(getItem(position).getCategory(), position);
+        holder.setTitle(getItem(position).getCategory());
     }
 
     public class StockViewHolder extends RecyclerView.ViewHolder {
@@ -103,6 +101,8 @@ public class MarketGlobalListAdapter extends BaseAdapter<StockModel, MarketGloba
         TextView mTvPercent;
         @BindView(R.id.view_divider)
         View viewDivider;
+        @BindView(R.id.view_bottom_blank)
+        View viewBottomBlank;
 
         public StockViewHolder(View itemView) {
             super(itemView);
@@ -125,8 +125,10 @@ public class MarketGlobalListAdapter extends BaseAdapter<StockModel, MarketGloba
                 }
                 if (hide) {
                     viewDivider.setVisibility(View.GONE);
+                    viewBottomBlank.setVisibility(View.VISIBLE);
                 } else {
                     viewDivider.setVisibility(View.VISIBLE);
+                    viewBottomBlank.setVisibility(View.GONE);
                 }
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -139,29 +141,19 @@ public class MarketGlobalListAdapter extends BaseAdapter<StockModel, MarketGloba
     }
 
     public class TitleViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.view_top_blank)
-        View mViewBlank;
         @BindView(R.id.tv_title)
         TextView tvTitle;
         @BindView(R.id.view_exponent)
         View mViewExponent;
-        @BindView(R.id.market_list_title_divider)
-        View mViewDivider;
 
         TitleViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void setTitle(String title, int position) {
-            if (position == 0) {
-                mViewBlank.setVisibility(View.GONE);
-            } else {
-                mViewBlank.setVisibility(View.VISIBLE);
-            }
+        public void setTitle(String title) {
             tvTitle.setText(title);
             mViewExponent.setBackgroundColor(mContext.getResources().getColor(R.color.view_exponent_up));
-            mViewDivider.setVisibility(View.GONE);
         }
     }
 

@@ -6,11 +6,10 @@
 
 package com.easyvaas.elapp.net;
 
-import java.lang.reflect.Type;
-
+import com.easyvaas.elapp.utils.Logger;
 import com.google.gson.Gson;
 
-import com.easyvaas.elapp.utils.Logger;
+import java.lang.reflect.Type;
 
 public abstract class MyRequestCallBack<T> {
     private static final String TAG = "RequestCallBack";
@@ -27,6 +26,7 @@ public abstract class MyRequestCallBack<T> {
     }
 
     protected void parseGson(String json, Class<T> clazz) {
+        Logger.e(TAG, clazz + ":: " + json);
         if (clazz == String.class) {
             onSuccess((T) json);
         } else {

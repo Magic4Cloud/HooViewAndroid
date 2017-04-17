@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.adapter.StockItemViewHolder;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.StockModel;
 import com.easyvaas.elapp.bean.market.UpsAndDownsDataModel;
 import com.easyvaas.elapp.utils.Logger;
@@ -30,14 +30,14 @@ public class HkMarketListAdapter extends RecyclerView.Adapter {
     private static final int ITEM_TYPE_STOCK = 2;
     private static final int ITEM_TYPE_TITLE = 3;
     private UpsAndDownsDataModel upsAndDownsListModel;
-    private ExponentListNewModel exponentListModel;
+    private MarketExponentModel exponentListModel;
     private LinkedList datas;
     private Context mContext;
 
     public HkMarketListAdapter(Context context) {
         mContext = context;
         datas = new LinkedList();
-        exponentListModel = new ExponentListNewModel();
+        exponentListModel = new MarketExponentModel();
     }
 
     public void setUpsAndDownsListModel(UpsAndDownsDataModel upsAndDownsListModel) {
@@ -65,9 +65,9 @@ public class HkMarketListAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setExponentListModel(ExponentListNewModel listModel) {
+    public void setExponentListModel(MarketExponentModel listModel) {
         this.exponentListModel = listModel;
-        if (datas.size() > 0 && (datas.get(0) instanceof ExponentListNewModel)) {
+        if (datas.size() > 0 && (datas.get(0) instanceof MarketExponentModel)) {
             datas.remove(0);
         }
         datas.addFirst(listModel);
@@ -100,7 +100,7 @@ public class HkMarketListAdapter extends RecyclerView.Adapter {
         Object object = datas.get(position);
         if (holder instanceof HkMarketListAdapter.ExponentViewHolder) {
             ((HkMarketListAdapter.ExponentViewHolder) holder)
-                    .setExponentModel((ExponentListNewModel) object);
+                    .setExponentModel((MarketExponentModel) object);
         } else if (holder instanceof StockItemViewHolder && object instanceof StockModel) {
             ((StockItemViewHolder) holder).setStockModel((StockModel) object,
                     (position + 1 < datas.size() - 1) && datas.get(position + 1) instanceof TitleModel ? View.GONE : View.VISIBLE);
@@ -115,7 +115,7 @@ public class HkMarketListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         Object obj = datas.get(position);
-        if (obj instanceof ExponentListNewModel) {
+        if (obj instanceof MarketExponentModel) {
             return ITEM_TYPE_EXPONENT;
         } else if (obj instanceof HkMarketListAdapter.TitleModel) {
             return ITEM_TYPE_TITLE;
@@ -151,12 +151,12 @@ public class HkMarketListAdapter extends RecyclerView.Adapter {
             exponentCellViews.add((ExponentCellView) itemView.findViewById(R.id.exponent3));
         }
 
-        void setExponentModel(ExponentListNewModel listModel) {
+        void setExponentModel(MarketExponentModel listModel) {
             if (listModel == null || listModel.getData() == null) {
                 return;
             }
             for (int i = 0; i < 3; i++) {
-                final ExponentListNewModel.DataEntity.HkEntity model = listModel.getData().getHk().get(i);
+                final MarketExponentModel.ExponentEntity model = listModel.getData().getHk().get(i);
                 ExponentCellView cellView = exponentCellViews.get(i);
                 Logger.d("guojun", "setExponentModel: " + model.toString());
                 String percentStr;

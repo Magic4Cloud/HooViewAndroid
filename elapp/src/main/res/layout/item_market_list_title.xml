@@ -6,17 +6,6 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/view_top_blank"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/list_divider_bg"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/list_divider_bg"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,11 +33,5 @@
             android:textSize="14sp"/>
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/market_list_title_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/split_line_market"/>
 
 </LinearLayout>

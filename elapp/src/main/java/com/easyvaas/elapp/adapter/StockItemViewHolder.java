@@ -28,6 +28,8 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
     TextView mTvPercent;
     @BindView(R.id.view_divider)
     View viewDivider;
+    @BindView(R.id.view_bottom_blank)
+    View viewBottomBlank;
 
     public StockItemViewHolder(View itemView) {
         super(itemView);
@@ -57,6 +59,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
                 this.mTvTag.setSelected(false);
             }
             viewDivider.setVisibility(status);
+            viewBottomBlank.setVisibility(View.GONE);
         }
         this.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +93,10 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
             }
             if (hide) {
                 viewDivider.setVisibility(View.GONE);
+                viewBottomBlank.setVisibility(View.VISIBLE);
             } else {
                 viewDivider.setVisibility(View.VISIBLE);
+                viewBottomBlank.setVisibility(View.GONE);
             }
         }
         this.itemView.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +128,7 @@ public class StockItemViewHolder extends RecyclerView.ViewHolder {
                 this.mTvTag.setSelected(false);
             }
             viewDivider.setVisibility(isEnd ? View.GONE : View.VISIBLE);
+            viewBottomBlank.setVisibility(isEnd ? View.VISIBLE : View.GONE);
         }
         this.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

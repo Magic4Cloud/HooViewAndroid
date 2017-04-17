@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.easyvaas.elapp.adapter.recycler.ChineseMarketListAdapter;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.UpsAndDownsDataModel;
 import com.easyvaas.elapp.event.MarketRefreshEvent;
 import com.easyvaas.elapp.event.RefreshExponentEvent;
@@ -50,9 +50,9 @@ public class ChineseMarketFragment extends BaseListFragment {
      */
     public void loadData() {
         mSwipeRefreshLayout.setRefreshing(true);
-        HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<ExponentListNewModel>() {
+        HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<MarketExponentModel>() {
             @Override
-            public void onSuccess(ExponentListNewModel result) {
+            public void onSuccess(MarketExponentModel result) {
 
                 if (result != null) {
                     hideWithData();

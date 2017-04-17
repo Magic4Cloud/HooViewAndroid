@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.easyvaas.elapp.adapter.recycler.HkMarketListAdapter;
-import com.easyvaas.elapp.bean.market.ExponentListNewModel;
+import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.UpsAndDownsDataModel;
 import com.easyvaas.elapp.event.MarketRefreshEvent;
 import com.easyvaas.elapp.event.RefreshExponentEvent;
@@ -46,9 +46,9 @@ public class HKMarketFragment extends BaseListFragment {
 
     public void loadData() {
         mSwipeRefreshLayout.setRefreshing(true);
-        HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<ExponentListNewModel>() {
+        HooviewApiHelper.getInstance().getExponentListNew(new MyRequestCallBack<MarketExponentModel>() {
             @Override
-            public void onSuccess(ExponentListNewModel result) {
+            public void onSuccess(MarketExponentModel result) {
                 if (result != null) {
                     hideWithData();
                     mAdapter.setExponentListModel(result);

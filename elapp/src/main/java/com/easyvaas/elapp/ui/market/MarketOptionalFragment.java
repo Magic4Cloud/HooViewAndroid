@@ -1,8 +1,9 @@
 package com.easyvaas.elapp.ui.market;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.easyvaas.elapp.adapter.market.SelectStockListAdapter;
+import com.easyvaas.elapp.adapter.market.MarketOptionalListAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.net.HooviewApiHelper;
@@ -11,7 +12,10 @@ import com.easyvaas.elapp.ui.base.BaseListLazyFragment;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.hooview.app.R;
 
+import java.util.List;
+
 import butterknife.OnClick;
+import lib.adapter.expand.StickyRecyclerHeadersDecoration;
 
 /**
  * Date    2017/4/10
@@ -20,7 +24,8 @@ import butterknife.OnClick;
  */
 public class MarketOptionalFragment extends BaseListLazyFragment {
 
-    private SelectStockListAdapter mAdapter;
+    private MarketOptionalListAdapter mAdapter;
+    private StickyRecyclerHeadersDecoration mHeadersDecoration;
     private StockListModel mStockListModel;
 
     /**
@@ -28,7 +33,20 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
      */
     @Override
     protected void initAdapter() {
-        mAdapter = new SelectStockListAdapter();
+        if (mAdapter == null) {
+            mAdapter = new MarketOptionalListAdapter();
+        }
+        if (mHeadersDecoration == null) {
+            mHeadersDecoration = new StickyRecyclerHeadersDecoration(mAdapter);
+            mRecyclerView.addItemDecoration(mHeadersDecoration);
+        }
+        // setTouchHelper();
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                mHeadersDecoration.invalidateHeaders();
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -72,7 +90,8 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
             public void onSuccess(StockListModel result) {
                 mStockListModel = result;
                 if (result != null && result.getData() != null && result.getData().size() > 0) {
-                    mAdapter.setStockListModel(result.getData());
+                    dealData(result.getData());
+                    mAdapter.setData(result.getData());
                     hideWithData();
                 } else {
                     showWithoutData();
@@ -99,6 +118,20 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
             }
         });
     }
+
+    public void dealData(List<StockListModel.StockModel> list) {
+        if (list == null || list.size() == 0) {
+            return;
+        }
+        for (int i = 0; i < list.size(); i++) {
+            StockListModel.StockModel model = list.get(i);
+            if (i >= 0 && i < 3) {
+                model.setRank(i);
+            }
+            model.setHeaderId(1);
+        }
+    }
+
 
     private void showWithoutData() {
         showEmptyView("您还没有添加自选噢");
