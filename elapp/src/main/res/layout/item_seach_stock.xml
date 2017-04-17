@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="66dp"
+    android:layout_height="64dp"
     android:background="@color/background_white"
     android:orientation="vertical">
 
@@ -9,12 +10,12 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="22dp"
         android:layout_marginTop="11dp"
         android:ellipsize="middle"
         android:text="沪深"
         android:textColor="@color/title_text_color"
-        android:textSize="16sp" />
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/tc_code"
@@ -25,34 +26,35 @@
         android:ellipsize="middle"
         android:text="6000000"
         android:textColor="@color/text_color_gray"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <ImageButton
         android:id="@+id/iv_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_market_n"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="30dp"
-        android:visibility="visible" />
+        android:layout_marginRight="12dp"
+        android:background="@drawable/market_add_optional"
+        android:visibility="visible"/>
+
     <TextView
         android:id="@+id/tv_add_complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="18dp"
         android:text="@string/added"
         android:textColor="@color/vip_text"
-        android:visibility="gone" />
-
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/line_gray" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/line_gray"/>
+
 </RelativeLayout>
