@@ -137,17 +137,16 @@
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="#fafafa"
         app:cardPreventCornerOverlap="false"
-        app:cardElevation="1dp">
-
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:background="#fafafa"
         android:orientation="vertical">
 
         <RelativeLayout

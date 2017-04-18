@@ -23,7 +23,7 @@
             app:contentScrim="@color/white"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="20dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
                 android:id="@+id/iv_content"
@@ -63,12 +63,15 @@
                         android:src="@drawable/icon_back"/>
                     <TextView
                         android:id="@+id/topic_title_top"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:layout_centerInParent="true"
+                        android:maxLines="1"
+                        android:ellipsize="none"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@id/topic_back"
                         android:textColor="@color/text_color_gray"
-                        android:text="专题"
                         android:textSize="18sp" />
                     <View
                         android:id="@+id/toolbar_line"

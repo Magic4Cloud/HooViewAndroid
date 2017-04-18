@@ -55,6 +55,7 @@ public class MarketFragment extends MyBaseFragment {
         };
         mMarketTabViewpager.setAdapter(new MarketPagerAdapter(getChildFragmentManager()));
         mMarketTabLayout.setViewPager(mMarketTabViewpager);
+        updateTabStyles(0);
         mMarketTabViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

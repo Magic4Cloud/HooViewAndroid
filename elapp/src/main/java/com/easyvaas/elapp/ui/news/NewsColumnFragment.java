@@ -10,6 +10,7 @@ import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
 import com.easyvaas.elapp.utils.ViewUtil;
 
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -51,7 +52,7 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
      * @param isLoadMore
      */
     private void loadData(final boolean isLoadMore) {
-        RetrofitHelper.getInstance().getService().getNewsColumn(start)
+       Subscription subscription = RetrofitHelper.getInstance().getService().getNewsColumn(start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NewsColumnModel>() {
@@ -72,6 +73,7 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
                         mSwiprefreshlayout.setRefreshing(false);
                     }
                 });
+        addSubscribe(subscription);
     }
 
     public static NewsColumnFragment newInstance() {

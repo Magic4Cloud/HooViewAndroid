@@ -79,9 +79,10 @@ public class TopicActivity extends MyBaseActivity {
                     toolbarLine.setAlpha(0.0f);
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
                     toolbarLine.setAlpha(1);
+                    mTopicTitleTop.setAlpha(1);
                 } else {
                     float alpha = Math.abs(Math.round(1.0f * verticalOffset / scrollRangle) * 10) / 10;
-                    mTopicTitleTop.setAlpha(alpha);
+                    mTopicTitleTop.setAlpha(0.0f);
                     toolbarLine.setAlpha(0.0f);
                 }
             }

@@ -1,14 +1,10 @@
 package com.easyvaas.elapp.ui.news;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,9 +14,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Date   2017/4/7
@@ -38,7 +32,6 @@ public class NewsMainFragment extends MyBaseFragment {
     ImageView mNewsSearch;
     @BindView(R.id.news_tab_viewpager)
     ViewPager mNewsTabViewpager;
-    Unbinder unbinder;
 
     private String[] titles;
     private Fragment[] mFragments;
@@ -63,6 +56,7 @@ public class NewsMainFragment extends MyBaseFragment {
         };
         mNewsTabViewpager.setAdapter(new MainPageAdapter(getChildFragmentManager()));
         mNewsTablayout.setViewPager(mNewsTabViewpager);
+        updateTabStyles(0);
         mNewsTabViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -86,19 +80,6 @@ public class NewsMainFragment extends MyBaseFragment {
         return new NewsMainFragment();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
     @OnClick(R.id.news_search)
     public void onViewClicked() {
