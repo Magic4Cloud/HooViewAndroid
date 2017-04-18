@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.adapter.item;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -52,7 +53,8 @@ public class ReadHistoryAdapterItem implements AdapterItem<ReadRecord> {
     public void onUpdateViews(final ReadRecord model, int position) {
         if (model != null) {
             //              Utils.showImage(newsModel.getCover(), R.drawable.account_bitmap_list, ivThumbnail);
-            Picasso.with(mContext).load(model.getPic()).error(R.drawable.account_bitmap_list).into(ivThumbnail);
+            if (!TextUtils.isEmpty(model.getPic()))
+                Picasso.with(mContext).load(model.getPic()).error(R.drawable.account_bitmap_list).into(ivThumbnail);
             tvTitle.setText(model.getTitle());
             tvTime.setText(model.getTime());
             tvWatchCount.setText(mContext.getString(R.string.news_watch_count,

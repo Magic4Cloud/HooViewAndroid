@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.easyvaas.common.imageslider.SliderLayout;
 import com.easyvaas.common.imageslider.SliderTypes.BaseSliderView;
 import com.easyvaas.common.imageslider.SliderTypes.TextSliderView;
+import com.easyvaas.common.imageslider.Tricks.ViewPagerEx;
 import com.easyvaas.elapp.activity.WebViewActivity;
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.market.MarketExponentModel;
@@ -160,7 +161,7 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         RelativeLayout bannerLayout = (RelativeLayout) findViewById(R.id.banner_layout);
         ViewGroup.LayoutParams layoutParams = bannerLayout.getLayoutParams();
         layoutParams.width = com.easyvaas.common.emoji.utils.Utils.getDisplayWidthPixels(getContext());
-        layoutParams.height = layoutParams.width * 2 / 4;
+        layoutParams.height = (int)(layoutParams.width - ViewUtil.dp2Px(mContext,40))* 2 / 3;
         bannerLayout.setLayoutParams(layoutParams);
     }
 
@@ -219,6 +220,8 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
                     list.get(i).getResource());
             mSliderLayout.addSlider(textSliderView);
         }
+        mSliderLayout.totalCountsTextView.setText(" / "+list.size());
+        mSliderLayout.addOnPageChangeListener(new pageChangeListener());
     }
 
 
@@ -310,4 +313,23 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         }
     }
 
+    private class pageChangeListener  implements ViewPagerEx.OnPageChangeListener
+    {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            mSliderLayout.currentCountTextView.setText(""+ (mSliderLayout.getCurrentPosition()+1));
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    }
 }

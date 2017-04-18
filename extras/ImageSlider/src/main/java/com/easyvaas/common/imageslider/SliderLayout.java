@@ -5,12 +5,13 @@ import android.content.res.TypedArray;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.easyvaas.common.imageslider.Animations.BaseAnimationInterface;
 import com.easyvaas.common.imageslider.Indicators.PagerIndicator;
@@ -115,6 +116,8 @@ public class SliderLayout extends RelativeLayout{
      */
     private Timer mResumingTimer;
     private TimerTask mResumingTask;
+    public TextView totalCountsTextView;
+    public TextView currentCountTextView;
 
     /**
      * If {@link com.easyvaas.common.imageslider.Tricks.ViewPagerEx} is Cycling
@@ -145,7 +148,7 @@ public class SliderLayout extends RelativeLayout{
     /**
      * Visibility of {@link com.easyvaas.common.imageslider.Indicators.PagerIndicator}
      */
-    private PagerIndicator.IndicatorVisibility mIndicatorVisibility = PagerIndicator.IndicatorVisibility.Visible;
+    private PagerIndicator.IndicatorVisibility mIndicatorVisibility = PagerIndicator.IndicatorVisibility.Invisible;
 
     /**
      * {@link com.easyvaas.common.imageslider.Tricks.ViewPagerEx} 's transformer
@@ -190,9 +193,12 @@ public class SliderLayout extends RelativeLayout{
         mSliderAdapter = new SliderAdapter(mContext);
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(mSliderAdapter);
 
+        totalCountsTextView = (TextView) findViewById(R.id.page_total_textview);
+        currentCountTextView = (TextView) findViewById(R.id.page_count_textview);
+
         mViewPager = (InfiniteViewPager)findViewById(R.id.daimajia_slider_viewpager);
         mViewPager.setAdapter(wrappedAdapter);
-        mViewPager.setPadding(80,0,80,0);
+        mViewPager.setPadding(dp2px(25),0,dp2px(25),0);
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setClipToPadding(false);
         mViewPager.setOnTouchListener(new OnTouchListener() {
@@ -221,7 +227,7 @@ public class SliderLayout extends RelativeLayout{
     }
 
     private class ScaleTransformer implements ViewPagerEx.PageTransformer {
-        private static final float MIN_SCALE = 0.85f;
+        private static final float MIN_SCALE = 0.88f;
         private static final float MIN_ALPHA = 0.5f;
 
         @Override
@@ -233,15 +239,15 @@ public class SliderLayout extends RelativeLayout{
             } else if (position <= 1) { // [-1,1]
                 float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
                 if (position < 0) {
-                    float scaleX = 1 + 0.15f * position;
+                    float scaleX = 1 + 0.12f * position;
                     float roundX = Math.round(scaleX*100)/100.0f;
-                    if (roundX >= 0.85 )
+                    if (roundX >= 0.88 )
                         scaleX = scaleFactor;
                     page.setScaleX(scaleX+0.05f);
                     page.setScaleY(scaleX);
                 } else {
 
-                    float scaleX = 1 - 0.15f * position;
+                    float scaleX = 1 - 0.12f * position;
                     page.setScaleX(scaleX+0.05f);
                     page.setScaleY(scaleX);
                 }
@@ -741,5 +747,13 @@ public class SliderLayout extends RelativeLayout{
 
     public void moveNextPosition() {
         moveNextPosition(true);
+    }
+
+    /**
+     * dp 2 px
+     */
+    protected int dp2px(int dpVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, getResources().getDisplayMetrics());
     }
 }
