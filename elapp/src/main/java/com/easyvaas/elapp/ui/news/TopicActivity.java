@@ -40,7 +40,7 @@ public class TopicActivity extends MyBaseActivity {
     ImageView topicBack;
     @BindView(R.id.topic_title)
     TextView mTopicTitle;
-    @BindView(R.id.toolbar_line)
+    @BindView(R.id.topic_line)
     View toolbarLine;
     @BindView(R.id.topic_img)
     ImageView mTopicImg;
@@ -55,6 +55,11 @@ public class TopicActivity extends MyBaseActivity {
     @Override
     protected int getLayout() {
         return R.layout.acivity_topic_layout;
+    }
+
+    @Override
+    protected String getTitleText() {
+        return null;
     }
 
     @Override

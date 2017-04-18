@@ -65,16 +65,16 @@
                         android:id="@+id/topic_title_top"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="44dp"
+                        android:layout_marginLeft="44dp"
                         android:gravity="center"
                         android:layout_centerInParent="true"
                         android:maxLines="1"
                         android:ellipsize="none"
-                        android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@id/topic_back"
                         android:textColor="@color/text_color_gray"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                     <View
-                        android:id="@+id/toolbar_line"
+                        android:id="@+id/topic_line"
                         android:layout_alignParentBottom="true"
                         style="@style/divider_view_style"
                         android:layout_height="0.5dp"/>

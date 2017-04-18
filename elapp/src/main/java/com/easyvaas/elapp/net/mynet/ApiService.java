@@ -11,7 +11,6 @@ import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -22,24 +21,18 @@ import rx.Observable;
 
 public interface ApiService {
 
+    /*-------------------------------------------资讯----------------------------------------*/
+
     /**
      * 首页要闻
      */
     @GET("api/v3/news/home")
     Observable<NetResponse<TopRatedModel>> getTopRatedNews(@Query("start") int start);
-
-    @GET
-    Observable<NetResponse<TopRatedModel>> getTopRatedNewsTest(@Url String url);
-
-    @GET
-    Observable<NetResponse<TopicModel>> getTopicListTest(@Url String url);
-
     /**
      * banner新闻
      */
     @GET("api/news/banners")
     Observable<NetResponse<BannerModel>> getBannerNews();
-
     /**
      * 专题列表
      */
@@ -52,10 +45,12 @@ public interface ApiService {
     @GET("api/v2/news/column")
     Observable<NetResponse<NewsColumnModel>> getNewsColumn(@Query("start") int start);
 
+    /*-------------------------------------------市场----------------------------------------*/
+
     @GET("/api/stock/market")
     Observable<NetResponse<MarketExponentModel>> getMarketExponent();
 
-    @GET
-    Observable<NetResponse<NewsColumnModel>> getNewsColumnTest(@Url String url);
+    /*-------------------------------------------用户中心----------------------------------------*/
+
 
 }
