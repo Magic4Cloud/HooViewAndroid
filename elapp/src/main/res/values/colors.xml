@@ -195,4 +195,6 @@
 
     <color name="banner_number">#a2612c80</color>
 
+    <color name="text_user_info_edit">#303030</color>
+
 </resources>

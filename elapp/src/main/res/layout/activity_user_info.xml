@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f7f7f7"
+        android:baselineAligned="false"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/common_title_tv"
+            layout="@layout/common_header_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/user_info_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:background="?attr/selectableItemBackground"
+                android:paddingLeft="16dp"
+                android:paddingRight="14dp">
+
+                <TextView
+                    android:id="@+id/tv_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/default_user_image"
+                    android:textColor="@color/base_gray"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <com.easyvaas.common.widget.RoundImageView
+                    android:id="@+id/user_info_portrait_iv"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/tv_header"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/login_icon_default"
+                    app:border_width="0dp"
+                    app:type="circle"/>
+
+                <ImageView
+                    android:id="@+id/camera_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/user_info_portrait_iv"
+                    android:layout_alignRight="@id/user_info_portrait_iv"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/login_personal_setting_icon_photo"/>
+
+                <ImageView
+                    android:id="@+id/arrow_iv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_right_personal_more"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="13dp"
+                    android:background="#eeeeee"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/user_info_item_1"
+                style="@style/item_user_info_edit"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/nickname_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/nickname"
+                    android:textColor="@color/base_gray"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <EditText
+                    android:id="@+id/user_info_nickname_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="54dp"
+                    android:layout_toRightOf="@id/nickname_tv"
+                    android:background="@null"
+                    android:gravity="center_vertical|left"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:text="@string/nickname"
+                    android:textColor="@color/text_user_info_edit"
+                    android:textSize="@dimen/text_size_16"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/user_info_item_3"
+                style="@style/item_user_info_edit"
+                android:background="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/sex_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/sex"
+                    android:textColor="@color/base_gray"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <TextView
+                    android:id="@+id/user_info_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toLeftOf="@+id/arrow_iv2"
+                    android:layout_toRightOf="@+id/sex_tv"
+                    android:text="男"
+                    android:textColor="@color/text_user_info_edit"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <ImageView
+                    android:id="@+id/arrow_iv2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_right_personal_more"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/user_info_item_5"
+                style="@style/item_user_info_edit"
+                android:background="?attr/selectableItemBackground">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="13dp"
+                    android:background="#eeeeee"/>
+
+                <TextView
+                    android:id="@+id/area_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/area"
+                    android:textColor="@color/base_gray"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <TextView
+                    android:id="@+id/ui_location_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toLeftOf="@+id/arrow_iv5"
+                    android:layout_toRightOf="@id/area_tv"
+                    android:gravity="center_vertical|left"
+                    android:maxLines="1"
+                    android:text="@string/default_user_location"
+                    android:textColor="@color/text_user_info_edit"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <ImageView
+                    android:id="@+id/arrow_iv5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_right_personal_more"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/user_info_item_6"
+                style="@style/item_user_info_edit"
+                android:background="?attr/selectableItemBackground">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="13dp"
+                    android:background="#eeeeee"/>
+
+                <TextView
+                    android:id="@+id/signature_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/signature"
+                    android:textColor="@color/base_gray"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <TextView
+                    android:id="@+id/signature_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toLeftOf="@+id/arrow_iv6"
+                    android:layout_toRightOf="@id/signature_tv"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|left"
+                    android:maxLines="1"
+                    android:text="@string/hint_signature"
+                    android:textColor="@color/text_user_info_edit"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <ImageView
+                    android:id="@+id/arrow_iv6"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_right_personal_more"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/user_certificate"
+                style="@style/item_user_info_edit">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="13dp"
+                    android:background="#eeeeee"/>
+
+                <TextView
+                    android:id="@+id/certificate_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/certificate"
+                    android:textColor="@color/base_gray"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <EditText
+                    android:id="@+id/certificate_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="54dp"
+                    android:layout_toRightOf="@id/certificate_tv"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|left"
+                    android:hint="@string/certificate_hint"
+                    android:maxLines="1"
+                    android:textColor="@color/text_user_info_edit"
+                    android:textSize="@dimen/text_size_16"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/user_label"
+                style="@style/item_user_info_edit"
+                android:background="?attr/selectableItemBackground">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="13dp"
+                    android:background="#eeeeee"/>
+
+                <TextView
+                    android:id="@+id/user_label_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/my_label"
+                    android:textColor="@color/base_gray"
+                    android:textSize="@dimen/text_size_16"/>
+
+                <com.easyvaas.elapp.view.flowlayout.FlowLayout
+                    android:id="@+id/user_label_fl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toLeftOf="@+id/certificate_iv7"
+                    android:layout_toRightOf="@+id/user_label_tv"
+                    android:gravity="left"/>
+
+                <ImageView
+                    android:id="@+id/certificate_iv7"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_right_personal_more"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
