@@ -65,7 +65,7 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
 
     private Shape mIndicatorShape = Shape.Oval;
 
-    private IndicatorVisibility mVisibility = IndicatorVisibility.Visible;
+    private IndicatorVisibility mVisibility = IndicatorVisibility.Invisible;
 
     private int mDefaultSelectedColor;
     private int mDefaultUnSelectedColor;
@@ -298,9 +298,9 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
      */
     public void setIndicatorVisibility(IndicatorVisibility visibility){
         if(visibility == IndicatorVisibility.Visible){
-            setVisibility(View.VISIBLE);
+            setVisibility(View.GONE); // Aya : 2017/4/17 暂时设成不显示
         }else{
-            setVisibility(View.INVISIBLE);
+            setVisibility(View.GONE);
         }
         resetDrawable();
     }
@@ -329,7 +329,7 @@ public class PagerIndicator extends LinearLayout implements ViewPagerEx.OnPageCh
             throw new IllegalStateException("Viewpager does not have adapter instance");
         }
         mPager = pager;
-        mPager.addOnPageChangeListener(this);
+//        mPager.addOnPageChangeListener(this);
         ((InfinitePagerAdapter)mPager.getAdapter()).getRealAdapter().registerDataSetObserver(dataChangeObserver);
     }
 

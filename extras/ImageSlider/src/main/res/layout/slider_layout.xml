@@ -24,6 +24,7 @@
         android:gravity="center"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <com.easyvaas.common.imageslider.Indicators.PagerIndicator
@@ -61,4 +62,33 @@
         android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#bc612c80">
+        <TextView
+            android:id="@+id/page_count_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="24sp"
+            android:text="1"
+            android:gravity="center"
+            android:textColor="#FFF"/>
+        <TextView
+            android:id="@+id/page_total_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:text=" / 5"
+            android:paddingTop="5dp"
+            android:gravity="center"
+            android:textColor="#FFF"/>
+        </LinearLayout>
+
 </RelativeLayout>

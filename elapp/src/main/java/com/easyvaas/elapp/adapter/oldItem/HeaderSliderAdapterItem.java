@@ -9,7 +9,6 @@ package com.easyvaas.elapp.adapter.oldItem;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.easyvaas.common.adapter.AdapterItem;
@@ -19,12 +18,10 @@ import com.easyvaas.common.imageslider.SliderTypes.TextSliderView;
 import com.easyvaas.elapp.activity.WebViewActivity;
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.CarouselInfoEntity;
-import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.utils.Constants;
-import com.google.gson.Gson;
 import com.growingio.android.sdk.collection.GrowingIO;
 import com.hooview.app.R;
 
@@ -78,15 +75,15 @@ public class HeaderSliderAdapterItem implements AdapterItem {
 
     @Override
     public void onSetViews() {
-        String json = Preferences.getInstance(mContext)
-                .getString(Preferences.KEY_CACHED_CAROUSEL_INFO_JSON);
-        if (TextUtils.isEmpty(json)) {
-            loadCarouseInfo();
-        } else {
-            BannerModel result = new Gson().fromJson(json, BannerModel.class);
-            assembleSliderView(result.getData());
-            mSliderLayout.setVisibility(View.VISIBLE);
-        }
+//        String json = Preferences.getInstance(mContext)
+//                .getString(Preferences.KEY_CACHED_CAROUSEL_INFO_JSON);
+//        if (TextUtils.isEmpty(json)) {
+//            loadCarouseInfo();
+//        } else {
+//            BannerModel result = new Gson().fromJson(json, BannerModel.class);
+//            assembleSliderView(result.getData());
+//            mSliderLayout.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override
