@@ -73,7 +73,7 @@ public class TopicActivity extends MyBaseActivity {
         manager.beginTransaction().add(R.id.topic_fragment, TopicFragment.newInstance(getIntent().getStringExtra("id"))).commit();
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
         // 动态改变toolbar
         appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
