@@ -57,11 +57,10 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
                 .subscribe(new NetSubscribe<NewsColumnModel>() {
                     @Override
                     public void OnSuccess(NewsColumnModel data) {
-                        if (data != null && data.getNews() != null && data.getNews().size() > 0) {
+                        if (data != null) {
                             mAdapter.dealLoadData(isLoadMore, data.getNews());
-                            hideEmptyView();
-                        } else {
-                            showEmptyView("专栏当前没有相关文章");
+                        } else if (!isLoadMore && data == null){
+                            showEmptyView();
                         }
                         mSwiprefreshlayout.setRefreshing(false);
                     }

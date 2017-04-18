@@ -6,10 +6,12 @@ import android.view.View;
 import com.easyvaas.elapp.adapter.market.MarketOptionalListAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.BaseListLazyFragment;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
+import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.hooview.app.R;
 
 import java.util.List;
@@ -75,7 +77,11 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
 
     @Override
     public void onOperation() {
-        EditMySelectedStockActivity.start(getContext(), mStockListModel);
+        if (!Preferences.getInstance(getContext().getApplicationContext()).isLogin() || !EVApplication.isLogin()) {
+            LoginActivity.start(getContext());
+        } else {
+            EditMySelectedStockActivity.start(getContext(), mStockListModel);
+        }
     }
 
     /**
