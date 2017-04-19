@@ -46,12 +46,10 @@ public class NewsMainFragment extends MyBaseFragment {
         titles = new String[]{
                 getString(R.string.news_import),
                 getString(R.string.news_speed),
-                getString(R.string.news_slecte),
                 getString(R.string.news_specil)};
         mFragments = new Fragment[]{
                 TopNewsFragment.newInstance(),
                 LastestNewsListFragment.newInstance(),
-                MyStockNewsListFragment.newInstance(),
                 NewsColumnFragment.newInstance(),
         };
         mNewsTabViewpager.setAdapter(new MainPageAdapter(getChildFragmentManager()));

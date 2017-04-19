@@ -33,7 +33,6 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
             getNewsData(isLoadMore);
     }
 
-
     /**
      * 获取新闻列表
      */

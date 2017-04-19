@@ -23,6 +23,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
+        android:src="@drawable/account_bitmap_user"
         android:layout_marginTop="14dp"
         />
     <TextView
@@ -36,10 +37,11 @@
         android:layout_marginRight="2dp"
         android:gravity="center_horizontal"
         tools:text="浅海天野"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="21dp"
+        android:gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
         <TextView
@@ -48,13 +50,13 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@color/number_purple"
-            tools:text="1,343"/>
+            tools:text="11"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/text_gray"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="3dp"
             android:text="@string/focus"/>
     </LinearLayout>
 

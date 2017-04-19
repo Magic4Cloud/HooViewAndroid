@@ -43,7 +43,7 @@
                 android:layout_height="44dp"
                 android:padding="12dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="100dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/market_search"/>
         </LinearLayout>

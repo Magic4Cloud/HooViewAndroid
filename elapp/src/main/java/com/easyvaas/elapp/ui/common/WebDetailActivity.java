@@ -280,6 +280,12 @@ public class WebDetailActivity extends BaseActivity {
     }
 
     @Override
+    public void finish() {
+        super.finish();
+        hideInputMethod();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         hideInputMethod();
@@ -386,7 +392,10 @@ public class WebDetailActivity extends BaseActivity {
             @Override
             public void handler(String data, CallBackFunction function) {
                 String count = JsonParserUtil.getString(data, "count");
-                tvCommentCount.setText(count);
+                if (count.equals("0"))
+                    tvCommentCount.setText("");
+                else
+                    tvCommentCount.setText(count);
             }
         });
         mWebView.registerHandler("showVipUserInfo", new BridgeHandler() {

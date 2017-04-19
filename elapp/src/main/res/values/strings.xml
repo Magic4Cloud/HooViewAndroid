@@ -783,7 +783,7 @@
     <string name="news_import">要闻</string>
     <string name="news_speed">快讯</string>
     <string name="news_slecte">自选</string>
-    <string name="news_specil">专栏</string>
+    <string name="news_specil">文章</string>
     <string name="topic">专题</string>
     <string name="powerful_person">牛人推荐</string>
 
@@ -792,9 +792,22 @@
     <string name="market_hk">港股</string>
     <string name="market_global">全球</string>
     <string name="focus">人关注</string>
-    <string name="network_error">网络不给力哦~</string>
 
+    //emptyView
     <string name="empty_net_error">网络不稳定 请刷新重试</string>
     <string name="empty_net_refresh">重新刷新</string>
     <string name="empty_no_data">暂时没有数据哦</string>
+    <string name="network_error">网络不给力哦~</string>
+
+    //个人中心
+    <string name="user_center">用户中心</string>
+    <string name="user_msg">我的消息</string>
+    <string name="user_balance">我的余额</string>
+    <string name="user_publish">我的发布</string>
+    <string name="user_buy">我的购买</string>
+    <string name="user_colloction">我的收藏</string>
+    <string name="user_history">历史记录</string>
+    <string name="user_login_text">登录/注册</string>
+    <string name="user_login_info">点击登录 更多精彩</string>
+
 </resources>
