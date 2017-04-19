@@ -30,6 +30,10 @@ public class MyEmptyView extends LinearLayout {
     @BindView(R.id.empty_layout)
     LinearLayout mEmptyLayout;
 
+    boolean isShowJump; // 是否显示了跳转按钮 在数据空的时候
+    String emptyText;  // 提示文字
+    String jumpText;  // 跳转按钮文字
+
     public MyEmptyView(Context context) {
         super(context);
         initView();
@@ -48,6 +52,8 @@ public class MyEmptyView extends LinearLayout {
     private void initView() {
         inflate(getContext(), R.layout.my_empty_layout, this);
         ButterKnife.bind(this,this);
+        emptyText = getContext().getString(R.string.empty_no_data);
+        jumpText = "";
     }
 
     /**
@@ -63,7 +69,7 @@ public class MyEmptyView extends LinearLayout {
      */
     public void setEmptyTxt(String text)
     {
-        mEmptyTxt.setText(text);
+        mEmptyTxt.setText(emptyText = text);
     }
 
     /**
@@ -71,9 +77,10 @@ public class MyEmptyView extends LinearLayout {
      */
     public void setEmptyJump(String text,OnClickListener listener)
     {
-        mEmptyImg.setVisibility(VISIBLE);
-        mEmptyJump.setText(text);
+        isShowJump = true;
+        mEmptyJump.setText(jumpText = text);
         mEmptyJump.setVisibility(VISIBLE);
+        mEmptyJump.setOnClickListener(listener);
     }
 
     /**
@@ -82,7 +89,11 @@ public class MyEmptyView extends LinearLayout {
     public void showEmptyOnNoData()
     {
         setVisibility(VISIBLE);
-        mEmptyJump.setVisibility(GONE);
+        mEmptyTxt.setText(emptyText);
+        if (!isShowJump)
+            mEmptyJump.setVisibility(GONE);
+        else
+            mEmptyTxt.setText(jumpText);
     }
 
     /**
@@ -95,6 +106,14 @@ public class MyEmptyView extends LinearLayout {
         mEmptyTxt.setText(getContext().getString(R.string.empty_net_error));
         mEmptyJump.setText(getContext().getString(R.string.empty_net_refresh));
         mEmptyJump.setOnClickListener(listener);
+    }
+
+    /**
+     * 隐藏图片显示
+     */
+    public void hideImage()
+    {
+        mEmptyImg.setVisibility(GONE);
     }
 
     /**

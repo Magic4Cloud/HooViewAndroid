@@ -197,6 +197,6 @@
     <color name="empty_bg">#f8f8f8</color>
 
     <color name="text_user_info_edit">#303030</color>
-    <color name="text_user_info_hint">#cccccc</color>
+    <color name="text_color_orange">#ff6c24</color>
 
 </resources>

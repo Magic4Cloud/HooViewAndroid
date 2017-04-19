@@ -25,7 +25,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     @BindView(R.id.swiprefreshlayout)
     protected SwipeRefreshLayout mSwiprefreshlayout;
     @BindView(R.id.empty_view)
-    MyEmptyView mEmptyView;
+    protected MyEmptyView mEmptyView;
 
     protected T mAdapter;
     protected int start;

@@ -25,6 +25,7 @@ import com.easyvaas.elapp.ui.market.MarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
 import com.easyvaas.elapp.ui.news.NewsMainFragment;
 import com.easyvaas.elapp.ui.user.UserProfileFragment;
+import com.easyvaas.elapp.ui.user.newuser.UserCenterFragment;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
@@ -48,6 +49,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private HomeNewsFragment mHomeNewsFragment;
     private NewsMainFragment mNewsMainFragment;
     private MarketFragment mMarketFragment;
+    private UserCenterFragment mUserCenterFragment;
     private Fragment mCurrentFragment;
     public SharedPreferences mSp;
     private RelativeLayout rl_mask;
@@ -95,6 +97,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mHomeNewsFragment = new HomeNewsFragment();
         mNewsMainFragment = NewsMainFragment.newInstance();
         mMarketFragment = MarketFragment.newInstance();
+        mUserCenterFragment = UserCenterFragment.newInstance();
         mCurrentFragment = mHomeNewsFragment;
         mRbNews.setChecked(true);
     }
@@ -145,7 +148,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 switchFragment(mMarketFragment);
                 break;
             case R.id.rb_user:
-                switchFragment(mUserProfileFragment);
+                switchFragment(mUserCenterFragment);
                 break;
 
         }
