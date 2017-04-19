@@ -5,11 +5,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.easyvaas.elapp.view.base.MyEmptyView;
 import com.hooview.app.R;
 
 import butterknife.BindView;
@@ -20,20 +18,18 @@ import butterknife.BindView;
  * 列表界面简单基类
  */
 
-public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBaseFragment implements SwipeRefreshLayout.OnRefreshListener, LoadOperator {
 
     @BindView(R.id.recyclerview)
     protected RecyclerView mRecyclerview;
     @BindView(R.id.swiprefreshlayout)
     protected SwipeRefreshLayout mSwiprefreshlayout;
-    @BindView(R.id.ll_empty)
-    protected LinearLayout mEmptyLayout;
-    @BindView(R.id.iv_prompt)
-    protected ImageView mEmptyImageView;
-    @BindView(R.id.tv_prompt)
-    protected TextView mEmptyTextView;
+    @BindView(R.id.empty_view)
+    MyEmptyView mEmptyView;
+
     protected T mAdapter;
     protected int start;
+
 
     @Override
     protected int getLayout() {
@@ -43,20 +39,24 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     @Override
     protected void initViewAndData() {
         mSwiprefreshlayout.setOnRefreshListener(this);
-        mSwiprefreshlayout.setColorSchemeColors(ContextCompat.getColor(getContext(),R.color.base_purplish));
+        mSwiprefreshlayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.base_purplish));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerview.setLayoutManager(linearLayoutManager);
         changeRecyclerView(); // 重写改变列表设置
+        changeEmptyView();// 重写改变empty显示
         mAdapter = initAdapter();
-        setLoadMoreCallBack(mAdapter);
-        mRecyclerview.setAdapter(mAdapter);
-        mSwiprefreshlayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mSwiprefreshlayout.setRefreshing(true);
-            }
-        });
-        onRefresh();
+        if (mAdapter != null)
+        {
+            setLoadMoreCallBack(mAdapter);
+            mRecyclerview.setAdapter(mAdapter);
+            mSwiprefreshlayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    setLoading(true);
+                }
+            });
+            onRefresh();
+        }
     }
 
     /**
@@ -72,19 +72,17 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      * 加载更多回调
      */
     protected void setLoadMoreCallBack(T mAdapter) {
-        if (mAdapter != null)
-        {
+        if (mAdapter != null) {
             mAdapter.initOnItemClickListener();
             mAdapter.setAutoLoadMoreSize(4);
             mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {
-                    start += 20 ;
+                    start += 20;
                     getListData(true);
                 }
             }, mRecyclerview);
         }
-
     }
 
     /**
@@ -92,6 +90,52 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      */
     protected void changeRecyclerView() {
 
+    }
+
+    /**
+     * 配置Empty显示
+     */
+    protected void changeEmptyView() {
+
+    }
+
+    /**
+     * 显示空布局
+     */
+    @Override
+    public void showEmpty() {
+        mEmptyView.showEmptyOnNoData();
+    }
+
+    /**
+     * 显示错误布局
+     */
+    @Override
+    public void showError() {
+        mEmptyView.showErrorOnNetError(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideEmpty();
+                setLoading(true);
+                onRefresh();
+            }
+        });
+    }
+
+    /**
+     * 隐藏空布局
+     */
+    @Override
+    public void hideEmpty() {
+        mEmptyView.hideEmptyView();
+    }
+
+    /**
+     * 设置刷新显示状态
+     */
+    @Override
+    public void setLoading(boolean isLoading) {
+        mSwiprefreshlayout.setRefreshing(isLoading);
     }
 
 
@@ -104,29 +148,5 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      * 获取列表数据
      */
     protected abstract void getListData(Boolean isLoadMore);
-
-    public void showEmptyView() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setVisibility(View.VISIBLE);
-        }
-        if (mEmptyTextView != null) {
-            mEmptyTextView.setText(R.string.empty_data);
-        }
-    }
-
-    public void showEmptyView(String prompt) {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setVisibility(View.VISIBLE);
-        }
-        if (mEmptyTextView != null) {
-            mEmptyTextView.setText(prompt);
-        }
-    }
-
-    public void hideEmptyView() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setVisibility(View.GONE);
-        }
-    }
 
 }

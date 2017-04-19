@@ -41,15 +41,18 @@ public abstract class MyBaseAdapter<T> extends BaseQuickAdapter<T, BaseViewHolde
     /**
      * 处理上拉 下拉的数据
      */
-    public void dealLoadData(boolean isLoadMore,List<T> data)
+    public void dealLoadData(LoadOperator loadOperator,boolean isLoadMore,List<T> data)
     {
         if (!isLoadMore) //下拉刷新
         {
             if (data != null && data.size() > 0)
             {
+                loadOperator.hideEmpty();
                 setNewData(data);
                 setEnableLoadMore(true);
-            }
+            }else
+                loadOperator.showEmpty();
+            loadOperator.setLoading(false);
         }else  // 上拉加载
         {
             if (data != null && data.size() > 0)
@@ -60,4 +63,20 @@ public abstract class MyBaseAdapter<T> extends BaseQuickAdapter<T, BaseViewHolde
                 loadMoreEnd();
         }
     }
+
+    /**
+     * 处理加载错误情况
+     */
+    public void dealLoadError(LoadOperator loadOperator,boolean isLoadMore)
+    {
+        if (!isLoadMore)
+        {
+            if (mData.size() == 0)
+                loadOperator.showError();
+            loadOperator.setLoading(false);
+        }
+        else
+            loadMoreFail();
+    }
+
 }

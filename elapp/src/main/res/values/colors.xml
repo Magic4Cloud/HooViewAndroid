@@ -194,6 +194,7 @@
     <color name="special_topic_bg">#822e2e2e</color>
 
     <color name="banner_number">#a2612c80</color>
+    <color name="empty_bg">#f8f8f8</color>
 
     <color name="text_user_info_edit">#303030</color>
 

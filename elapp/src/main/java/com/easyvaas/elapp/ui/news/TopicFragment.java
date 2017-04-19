@@ -38,20 +38,16 @@ public class TopicFragment extends MyBaseListFragment<NormalNewsAdapter> {
                     public void OnSuccess(TopicModel topicModel) {
                         if (topicModel != null)
                         {
-                            mAdapter.dealLoadData(isLoadMore,topicModel.getNews());
+                            mAdapter.dealLoadData(TopicFragment.this,isLoadMore,topicModel.getNews());
                             if (!isLoadMore) {
                                 ((TopicActivity) getActivity()).initHeaderDatas(topicModel);
                             }
                         }
-                        mSwiprefreshlayout.setRefreshing(false);
                     }
 
                     @Override
                     public void OnFailue(String msg) {
-                        if (isLoadMore)
-                            mAdapter.loadMoreFail();
-                        else
-                            mSwiprefreshlayout.setRefreshing(false);
+                       mAdapter.dealLoadError(TopicFragment.this,isLoadMore);
                     }
                 });
         addSubscribe(subscription);

@@ -59,18 +59,14 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
                     @Override
                     public void OnSuccess(NewsColumnModel data) {
                         if (data != null) {
-                            mAdapter.dealLoadData(isLoadMore, data.getNews());
-                        } else if (!isLoadMore && data == null){
-                            showEmptyView();
+                            mAdapter.dealLoadData(NewsColumnFragment.this,isLoadMore, data.getNews());
                         }
-                        mSwiprefreshlayout.setRefreshing(false);
                     }
 
                     @Override
                     public void OnFailue(String msg) {
                         Log.e("OnFailue", msg);
-                        showEmptyView();
-                        mSwiprefreshlayout.setRefreshing(false);
+                        mAdapter.dealLoadError(NewsColumnFragment.this,isLoadMore);
                     }
                 });
         addSubscribe(subscription);

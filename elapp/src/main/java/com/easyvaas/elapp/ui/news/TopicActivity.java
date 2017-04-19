@@ -68,12 +68,12 @@ public class TopicActivity extends MyBaseActivity {
             WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
             localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
         }
-        initToolBar();
+        initAppBar();
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().add(R.id.topic_fragment, TopicFragment.newInstance(getIntent().getStringExtra("id"))).commit();
     }
 
-    protected void initToolBar() {
+    private void initAppBar() {
         // 动态改变toolbar
         appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override

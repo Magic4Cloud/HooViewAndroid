@@ -380,7 +380,7 @@
     <string name="choose_from_album">选择本地图片</string>
     <string name="choose_from_camera">拍照</string>
     <string name="no_friend">暂无好友</string>
-    <string name="empty_title">暂无数据</string>
+    <string name="empty_title">暂时没有数据哦</string>
     <string name="empty_no_data_title">空空如也，啥也木有</string>
     <string name="empty_no_amount">暂无充值记录</string>
     <string name="empty_no_score">暂无消费记录</string>
@@ -792,5 +792,9 @@
     <string name="market_hk">港股</string>
     <string name="market_global">全球</string>
     <string name="focus">人关注</string>
-    <string name="network_errro">网络不给力哦~</string>
+    <string name="network_error">网络不给力哦~</string>
+
+    <string name="empty_net_error">网络不稳定 请刷新重试</string>
+    <string name="empty_net_refresh">重新刷新</string>
+    <string name="empty_no_data">暂时没有数据哦</string>
 </resources>

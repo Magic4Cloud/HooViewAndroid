@@ -49,17 +49,13 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
                         {
                             if (!isLoadMore)
                                 mAdapter.setTopRatedModel(topRatedModel);
-                            mAdapter.dealLoadData(isLoadMore,topRatedModel.getHomeNews());
-                            mSwiprefreshlayout.setRefreshing(false);
+                            mAdapter.dealLoadData(TopNewsFragment.this,isLoadMore,topRatedModel.getHomeNews());
                         }
                     }
 
                     @Override
                     public void OnFailue(String msg) {
-                        if (isLoadMore)
-                            mAdapter.loadMoreFail();
-                        else
-                            mSwiprefreshlayout.setRefreshing(false);
+                        mAdapter.dealLoadError(TopNewsFragment.this,isLoadMore);
                     }
                 });
         addSubscribe(subscription);
