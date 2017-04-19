@@ -761,8 +761,11 @@
     <string name="user_cash_in_protocol">用户充值协议</string>
     <string name="default_sign">火眼助你成为财经大师</string>
     <string name="certificate">执业证号</string>
+    <string name="introduce">详细资料</string>
     <string name="my_label">我的标签</string>
     <string name="certificate_hint">请完善您的证券执业资格号</string>
+    <string name="introduce_hint">请完善您的详细资料</string>
+    <string name="pop_input_hint">例如 \"火眼财经资深投顾\"</string>
 
     <string name="user_not_vip">该用户不是会员无法查看资料</string>
     <string name="login_info_expired">当前登录信息已过期，请重新登录</string>

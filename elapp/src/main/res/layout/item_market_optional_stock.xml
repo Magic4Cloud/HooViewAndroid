@@ -70,16 +70,14 @@
 
                 <TextView
                     android:id="@+id/tv_percent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
-                    android:gravity="center|left"
-                    android:maxWidth="90dp"
-                    android:minWidth="80dp"
-                    android:paddingBottom="4dp"
+                    android:gravity="center"
                     android:paddingLeft="8dp"
-                    android:paddingTop="4dp"
-                    android:text="44.11%"
+                    android:paddingRight="8dp"
+                    android:maxLines="1"
+                    android:text="444.111%"
                     android:textColor="@color/selector_stock_state_color"/>
 
             </RelativeLayout>

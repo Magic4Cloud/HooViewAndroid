@@ -26,7 +26,7 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class MyBaseActivity extends AppCompatActivity {
 
     @BindView(R.id.toobar_title_view)
-    ToolBarTitleView mToobarTitleView;
+    protected ToolBarTitleView mToobarTitleView;
 
     protected Activity mContext;
     protected Unbinder mUnbinder;

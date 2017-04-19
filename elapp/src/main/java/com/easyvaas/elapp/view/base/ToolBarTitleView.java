@@ -57,20 +57,20 @@ public class ToolBarTitleView extends LinearLayout {
 
     /**
      * 设置标题
+     *
      * @param title 标题
      */
-    public void setTitleText(String title)
-    {
+    public void setTitleText(String title) {
         mTitleText.setText(title);
     }
 
     /**
      * 设置右边图标
-     * @param imgRes 图片资源
+     *
+     * @param imgRes   图片资源
      * @param listener 点击监听
      */
-    public void setTitleRightImg(@DrawableRes int imgRes,@Nullable OnClickListener listener)
-    {
+    public void setTitleRightImg(@DrawableRes int imgRes, @Nullable OnClickListener listener) {
         mTitleRightImg.setVisibility(VISIBLE);
         mTitleRightImg.setImageResource(imgRes);
         mTitleRightImg.setOnClickListener(listener);
@@ -78,23 +78,24 @@ public class ToolBarTitleView extends LinearLayout {
 
     /**
      * 设置右边文字
-     * @param text 文字
-     * @param color 文字颜色
+     *
+     * @param text     文字
+     * @param color    文字颜色
      * @param listener 点击监听
      */
-    public void setTitleTextRight(String text,@ColorRes int color,@Nullable OnClickListener listener)
-    {
+    public void setTitleTextRight(String text, @ColorRes int color, @Nullable OnClickListener listener) {
         mTitleTextRight.setVisibility(VISIBLE);
-        mTitleRightImg.setOnClickListener(listener);
-        mTitleText.setTextColor(ContextCompat.getColor(getContext(),color));
+        mTitleTextRight.setText(text);
+        mTitleTextRight.setOnClickListener(listener);
+        mTitleTextRight.setTextColor(ContextCompat.getColor(getContext(), color));
     }
 
     /**
      * back 返回监听
+     *
      * @param listener 点击监听
      */
-    public void setTitleBackListener(@Nullable OnClickListener listener)
-    {
+    public void setTitleBackListener(@Nullable OnClickListener listener) {
         mTitleBack.setOnClickListener(listener);
     }
 

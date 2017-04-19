@@ -295,6 +295,29 @@ public class Utils {
                 }).build();
     }
 
+    /**
+     * 相机
+     */
+    public static void openCamera(Activity activity, String fileName, int requestCode) {
+        Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT,
+                    Uri.fromFile(new File(Environment.getExternalStorageDirectory(), fileName)));
+        }
+        activity.startActivityForResult(intentFromCapture, requestCode);
+    }
+
+    /**
+     * 相册
+     */
+    public static void openPhotoAlbum(Activity activity, int requestCode) {
+        if (openPhotosNormal(activity, requestCode) || openPhotosBrowser(activity, requestCode)) {
+            // Have open select photo app, do nothing
+        } else {
+            SingleToast.show(activity, R.string.msg_no_photos_browser_tip);
+        }
+    }
+
     private static boolean openPhotosNormal(Activity activity, int actResultCode) {
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_TYPE);

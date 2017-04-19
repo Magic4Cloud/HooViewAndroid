@@ -134,6 +134,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name="com.easyvaas.elapp.ui.user.UserInfoModifyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name="com.easyvaas.elapp.activity.setting.BindUserAuthActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -537,8 +541,8 @@
         <activity
             android:name="com.easyvaas.elapp.ui.live.ImageTextLiveActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name="com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity"
             android:launchMode="singleTask"
@@ -568,8 +572,8 @@
         <activity
             android:name="com.easyvaas.elapp.ui.search.SearchStockActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateVisible"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateVisible"/>
         <activity
             android:name="com.easyvaas.elapp.ui.user.UserAddLabelActivity"
             android:screenOrientation="portrait"

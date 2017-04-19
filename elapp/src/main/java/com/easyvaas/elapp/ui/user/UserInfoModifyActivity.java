@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,11 +21,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.bottomsheet.BottomSheet;
@@ -34,7 +31,6 @@ import com.easyvaas.common.sharelogin.data.ShareConstants;
 import com.easyvaas.elapp.activity.home.HomeTabActivity;
 import com.easyvaas.elapp.activity.user.CitySelectListActivity;
 import com.easyvaas.elapp.app.EVApplication;
-import com.easyvaas.elapp.base.BaseActivity;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.ApiConstant;
@@ -42,8 +38,10 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.net.UploadThumbAsyncTask;
+import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
+import com.easyvaas.elapp.ui.pop.OperationPopupWindow;
+import com.easyvaas.elapp.ui.pop.UserInfoEditPopupWindow;
 import com.easyvaas.elapp.utils.Constants;
-import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.UserUtil;
@@ -55,9 +53,9 @@ import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class UserInfoModifyActivity extends BaseActivity implements View.OnClickListener {
+public class UserInfoModifyActivity extends MyBaseActivity implements View.OnClickListener {
     private static final int REQUEST_CODE_LABEL = 102;
     private static final String TAG = "UserInfoActivity";
     private static final int REQUEST_CODE_CITY = 0X10;
@@ -87,30 +85,28 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
 
     @BindView(R.id.user_info_portrait_iv)
     ImageView mPortraitIv;
-    @BindView(R.id.yb_id_et)
-    TextView mYzbIdEt;
+    @BindView(R.id.camera_iv)
+    ImageView mCameraIv;
     @BindView(R.id.user_info_nickname_et)
     EditText mNicknameEt;
-    @BindView(R.id.birthday_et)
-    TextView mBirthdayEt;
-    @BindView(R.id.constellation_tv)
-    TextView mConstellationTv;
+    @BindView(R.id.user_info_sex)
+    TextView mSexTv;
     @BindView(R.id.ui_location_et)
     TextView mLocationEt;
     @BindView(R.id.signature_et)
     TextView mSignatureEt;
+    @BindView(R.id.user_info_item_certificate)
+    RelativeLayout mItemCertificate;
     @BindView(R.id.certificate_et)
-    TextView mCertificateEt;
-    @BindView(R.id.close_iv)
-    ImageView mCloseIv;
-    @BindView(R.id.add_option_iv)
-    TextView mCommitTv;
-    @BindView(R.id.common_custom_title_tv)
-    TextView mCenterContentTv;
-    @BindView(R.id.add_option_view)
-    LinearLayout mCommitLl;
+    EditText mCertificateEt;
+    @BindView(R.id.user_info_item_label)
+    RelativeLayout mItemLabel;
     @BindView(R.id.user_label_fl)
     FlowLayout userLabelFl;
+    @BindView(R.id.user_info_item_introduce)
+    RelativeLayout mItemIntroduce;
+    @BindView(R.id.introduce_et)
+    TextView mIntroduceTv;
 
     private BottomSheet mSetThumbPanel;
     private Bundle bundles;
@@ -123,9 +119,13 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
     private String mSignature;
     private String mCertificate;
 
+    private OperationPopupWindow mPopupWindowAvatar;
+    private OperationPopupWindow mPopupWindowSex;
+    private UserInfoEditPopupWindow mPopupWindowEditSelf;
+
     public static void start(Context context, Bundle bundle) {
         if (Preferences.getInstance(context).isLogin() && EVApplication.isLogin()) {
-            Intent starter = new Intent(context, UserInfoActivity.class);
+            Intent starter = new Intent(context, UserInfoModifyActivity.class);
             starter.putExtras(bundle);
             context.startActivity(starter);
         } else {
@@ -141,64 +141,35 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        mIsCancelRequestAfterDestroy = false;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
-        ButterKnife.bind(this);
+    protected int getLayout() {
+        return R.layout.activity_user_info;
+    }
+
+    @Override
+    protected String getTitleText() {
+        return "编辑资料";
+    }
+
+    @Override
+    protected void initViewAndData() {
+        appbarRight();
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         bundles = getIntent().getExtras();
         mIsSetRegisterInfo = getIntent().getBooleanExtra(Constants.EXTRA_KEY_IS_REGISTER, false);
-
         mSetThumbPanel = Utils.getSetThumbBottomPanel(this, IMAGE_FILE_NAME,
                 REQUEST_CODE_CAMERA, REQUEST_CODE_IMAGE);
-
-        Button mommitBtn = (Button) findViewById(R.id.user_info_commit_btn);
-
-        mCommitTv.setVisibility(View.VISIBLE);
-        mCommitTv.setText(getString(R.string.complete));
-        mCenterContentTv.setText(getString(R.string.user_info_set));
-        mCommitLl.setOnClickListener(this);
-        mCloseIv.setOnClickListener(this);
-        findViewById(R.id.user_info_birthday_rl).setOnClickListener(this);
-        findViewById(R.id.user_info_item_6).setOnClickListener(this);
-        findViewById(R.id.user_info_item_1).setOnClickListener(this);
-        findViewById(R.id.user_certificate).setOnClickListener(this);
-        findViewById(R.id.user_label).setOnClickListener(this);
-        mNicknameEt.setOnClickListener(this);
-        mPortraitIv.setOnClickListener(this);
-        mLocationEt.setOnClickListener(this);
         mLocationEt.setText(R.string.default_user_location);
-        mommitBtn.setOnClickListener(this);
-        mDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                mBirthdayEt.setText(year + "-" + (month + 1) + "-" + day);
-                String constellation = DateTimeUtil.getConstellation(getApplicationContext(), month + 1, day);
-                mConstellationTv.setText(constellation);
-            }
-        }, 1990, 5, 15);
-        mDatePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-
-        if (mIsSetRegisterInfo) {
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(false);
-            }
-            mommitBtn.setText(R.string.next_step);
-        } else {
-            mommitBtn.setText(R.string.complete);
-        }
-
         if (bundles != null && (!mIsSetRegisterInfo)) {
             setUserInfo(bundles);
         }
+        // 大V身份
         boolean isVip = bundles.getBoolean(Constants.EXTRA_KEY_IS_VIP, false);
+        isVip = true;
         if (isVip) {
-            findViewById(R.id.user_certificate).setVisibility(View.VISIBLE);
-            findViewById(R.id.user_label).setVisibility(View.VISIBLE);
+            mItemCertificate.setVisibility(View.VISIBLE);
+            mItemLabel.setVisibility(View.VISIBLE);
+            mItemIntroduce.setVisibility(View.VISIBLE);
             mCertificate = bundles.getString(UserInfoActivity.EXTRA_KEY_USER_CERTIFICATE);
-            Logger.d(TAG, "onCreate: " + mCertificate);
             if (!TextUtils.isEmpty(mCertificate)) {
                 mCertificateEt.setTextColor(getResources().getColor(R.color.login_text_color_6));
                 mCertificateEt.setText(mCertificate);
@@ -206,20 +177,119 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
             List<String> tags = bundles.getStringArrayList(Constants.EXTRA_ADD_LABEL);
             addLabels(tags);
         } else {
-            findViewById(R.id.user_certificate).setVisibility(View.INVISIBLE);
-            findViewById(R.id.user_label).setVisibility(View.INVISIBLE);
+            mItemCertificate.setVisibility(View.GONE);
+            mItemLabel.setVisibility(View.GONE);
+            mItemIntroduce.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * 完成
+     */
+    private void appbarRight() {
+        mToobarTitleView.setTitleTextRight("完成", R.color.btn_color_secondary_level, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: 2017/4/19
+                Logger.e("......", "done............");
+            }
+        });
+    }
+
+    /**
+     * 头像
+     */
+    @OnClick(R.id.user_info_avatar)
+    public void onAvatarClick() {
+        if (mPopupWindowAvatar == null) {
+            mPopupWindowAvatar = new OperationPopupWindow(this);
+            mPopupWindowAvatar.init("相册", "拍照");
+            mPopupWindowAvatar.setOnOperationListener(new OperationPopupWindow.OnOperationListener() {
+                @Override
+                public void onUp() {
+                    Utils.openPhotoAlbum(UserInfoModifyActivity.this, REQUEST_CODE_IMAGE);
+                }
+
+                @Override
+                public void onDown() {
+                    Utils.openCamera(UserInfoModifyActivity.this, IMAGE_FILE_NAME, REQUEST_CODE_CAMERA);
+                }
+            });
+        }
+        mPopupWindowAvatar.showAtBottom();
+//        mSetThumbPanel.show();
+    }
+
+    /**
+     * 性别
+     */
+    @OnClick(R.id.user_info_item_sex)
+    public void onSexClick() {
+        if (mPopupWindowSex == null) {
+            mPopupWindowSex = new OperationPopupWindow(this);
+            mPopupWindowSex.init("男", "女");
+            mPopupWindowSex.setOnOperationListener(new OperationPopupWindow.OnOperationListener() {
+                @Override
+                public void onUp() {
+                    mSexTv.setText("男");
+                }
+
+                @Override
+                public void onDown() {
+                    mSexTv.setText("女");
+                }
+            });
+        }
+        mPopupWindowSex.showAtBottom();
+    }
+
+    /**
+     * 地区
+     */
+    @OnClick(R.id.user_info_item_area)
+    public void onAreaClick() {
+        startActivityForResult(new Intent(this, CitySelectListActivity.class), REQUEST_CODE_CITY);
+    }
+
+    /**
+     * 介绍自己
+     */
+    @OnClick(R.id.user_info_item_self)
+    public void onSelfClick() {
+        if (mPopupWindowEditSelf == null) {
+            mPopupWindowEditSelf = new UserInfoEditPopupWindow(this);
+            mPopupWindowEditSelf.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
+                @Override
+                public void onConfirm(String text) {
+                    if (text != null) {
+                        if (text.length() > 14) {
+                            text = text.substring(0, 13);
+                        }
+                        mSignatureEt.setText(text);
+                    }
+                }
+            });
+        }
+        mPopupWindowEditSelf.show();
+    }
+
+    /**
+     * 我的标签
+     */
+    @OnClick(R.id.user_info_item_label)
+    public void onUserLabelClick() {
+        startActivityForResult(new Intent(this, UserAddLabelActivity.class), REQUEST_CODE_LABEL);
+    }
+
+    @OnClick(R.id.user_info_item_introduce)
+    public void onIntroduceClick() {
+        mNicknameEt.requestFocus();
+        imm.showSoftInput(mNicknameEt, InputMethodManager.SHOW_FORCED);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ui_location_et:
-                startActivityForResult(new Intent(this, CitySelectListActivity.class), REQUEST_CODE_CITY);
-                break;
-            case R.id.user_info_portrait_iv:
-                mSetThumbPanel.show();
-                break;
             case R.id.user_info_nickname_et:
                 //TODO
                 Intent editNickNameIntent = new Intent(UserInfoModifyActivity.this, UserInfoEditActivity.class);
@@ -248,27 +318,7 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
                     editUserInfo();
                 }
                 break;
-            case R.id.user_info_birthday_rl:
-                String date[] = mBirthdayEt.getText().toString().split("-");
-                if (date.length == 3) {
-                    mDatePickerDialog.updateDate(Integer.valueOf(date[0]), Integer.valueOf(date[1]) - 1,
-                            Integer.valueOf(date[2]));
-                }
-                mDatePickerDialog.show();
-                break;
-            case R.id.add_option_view:
-                if (mIsSetRegisterInfo) {
-                    phoneRegistration(bundles);
-                } else {
-                    editUserInfo();
-                }
-                break;
-            case R.id.close_iv:
-                finish();
-                break;
-            case R.id.user_label:
-                startActivityForResult(new Intent(this, UserAddLabelActivity.class), REQUEST_CODE_LABEL);
-                break;
+
         }
     }
 
@@ -384,13 +434,24 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
         if (mSetThumbPanel != null && mSetThumbPanel.isShowing()) {
             mSetThumbPanel.dismiss();
         }
+        if (mPopupWindowAvatar != null) {
+            mPopupWindowAvatar.close();
+        }
+        if (mPopupWindowSex != null) {
+            mPopupWindowSex.close();
+        }
     }
 
+
+    /**
+     * 设置用户信息
+     *
+     * @param userInfo
+     */
     private void setUserInfo(Bundle userInfo) {
         String logoUrl = userInfo.getString(ShareConstants.PARAMS_IMAGEURL);
         String gender = userInfo.getString(ShareConstants.PARAMS_SEX);
         String city = userInfo.getString(ShareConstants.USER_CITY);
-        String birthday = userInfo.getString(ShareConstants.BIRTHDAY);
         mNickname = userInfo.getString(ShareConstants.PARAMS_NICK_NAME);
         mSignature = userInfo.getString(ShareConstants.DESCRIPTION);
         /*if (User.GENDER_FEMALE.equals(gender)) {
@@ -398,14 +459,6 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
         } else {
             mGenderSpinner.setSelection(SPINNER_MALE_INDEX);
         }*/
-        if (TextUtils.isEmpty(birthday) || birthday.equals(BIRTHDAY_NO_SELECT)) {
-            birthday = DEFAULT_BIRTHDAY;
-            mConstellationTv.setText(getResources().getString(R.string.constellation_cancer));
-        }
-        mBirthdayEt.setText(birthday);
-        int month = Integer.parseInt(birthday.split("-")[1]);
-        int day = Integer.parseInt(birthday.split("-")[2]);
-        mConstellationTv.setText(DateTimeUtil.getConstellation(this, month, day));
         if (!TextUtils.isEmpty(mNickname)) {
             mNicknameEt.setTextColor(getResources().getColor(R.color.login_text_color_6));
             mNicknameEt.setText(mNickname);
@@ -418,7 +471,6 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
             mSignatureEt.setTextColor(getResources().getColor(R.color.login_text_color_6));
             mSignatureEt.setText(mSignature);
         }
-
         UserUtil.showUserPhoto(this, logoUrl, mPortraitIv);
     }
 
@@ -432,24 +484,17 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
             SingleToast.show(getApplicationContext(), getResources().getString(R.string.msg_nickname_empty));
             return;
         }
-        String birthday = mBirthdayEt.getText().toString().trim();
         String location = mLocationEt.getText().toString().trim();
         String signature = mSignatureEt.getText().toString().trim();
         if (TextUtils.isEmpty(location)) {
             location = getString(R.string.default_user_location);
         }
-        if (birthday.equals(BIRTHDAY_NO_SELECT)) {
-            SingleToast.show(getApplicationContext(), getResources().getString(R.string.msg_birthday_empty));
-            return;
-        }
-        showLoadingDialog(R.string.submit_data, false, false);
         String phone = bundles.getString("token");
         String password = bundles.getString("password");
-        ApiHelper.getInstance().registerByPhone(nickname, phone, gender, password, birthday,
+        ApiHelper.getInstance().registerByPhone(nickname, phone, gender, password, "",
                 location, signature, authType, new MyRequestCallBack<User>() {
                     @Override
                     public void onSuccess(User user) {
-                        dismissLoadingDialog();
                         SingleToast.show(getApplicationContext(), R.string.msg_registered_success);
 
                         if (mTempLogoPic != null && mTempLogoPic.exists()) {
@@ -466,12 +511,10 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
                     @Override
                     public void onError(String errorInfo) {
                         super.onError(errorInfo);
-                        dismissLoadingDialog();
                     }
 
                     @Override
                     public void onFailure(String msg) {
-                        dismissLoadingDialog();
                         RequestUtil.handleRequestFailed(msg);
                         SingleToast.show(getApplicationContext(), R.string.msg_registered_error);
                     }
@@ -489,7 +532,6 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
         }
 
         final String nickname = mNicknameEt.getText().toString().trim();
-        final String birthday = mBirthdayEt.getText().toString().trim();
         final String location = mLocationEt.getText().toString().trim();
         final String signature = mSignatureEt.getText().toString().trim();
         final String credentials = mCertificateEt != null ? mCertificateEt.getText().toString().trim() : "";
@@ -500,19 +542,18 @@ public class UserInfoModifyActivity extends BaseActivity implements View.OnClick
             return;
         }
 
-        if (nickname.equals(user.getNickname()) && birthday.equals(user.getBirthday()) && location
+        if (nickname.equals(user.getNickname()) && location
                 .equals(user.getLocation()) && signature.equals(user.getSignature()) && gender
                 .equals(user.getGender()) && credentials.equals(user.getCredentials())) {
             finish();
             return;
         }
         Logger.d(TAG, "editUserInfo: " + user.toString());
-        ApiHelper.getInstance().userEditInfo(nickname, birthday, location, gender,
+        ApiHelper.getInstance().userEditInfo(nickname, "", location, gender,
                 signature, credentials, new MyRequestCallBack<String>() {
                     @Override
                     public void onSuccess(String result) {
                         user.setNickname(nickname);
-                        user.setBirthday(birthday);
                         user.setLocation(location);
                         user.setGender(gender);
                         user.setSignature(signature);
