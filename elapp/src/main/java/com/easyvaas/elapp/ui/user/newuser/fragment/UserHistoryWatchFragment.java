@@ -1,4 +1,4 @@
-package com.easyvaas.elapp.ui.user;
+package com.easyvaas.elapp.ui.user.newuser.fragment;
 
 import com.easyvaas.elapp.adapter.UserVLivingAdapter;
 import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
@@ -14,29 +14,19 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Date    2017/4/20
- * Author  xiaomao
- * 个人中心---我的发布---直播
+ * Date   2017/4/20
+ * Editor  Misuzu
  */
 
-public class MyLivingFragment extends MyBaseListFragment<UserVLivingAdapter> {
+public class UserHistoryWatchFragment  extends MyBaseListFragment<UserVLivingAdapter>{
 
 
-    /**
-     * 初始化Adapter
-     */
     @Override
     protected UserVLivingAdapter initAdapter() {
-        UserVLivingAdapter adapter = new UserVLivingAdapter(new ArrayList<VideoEntity>());
-        adapter.showHeader(true);
-        return adapter;
+        return new UserVLivingAdapter(new ArrayList<VideoEntity>());
     }
 
-    /**
-     * 获取列表数据
-     *
-     * @param isLoadMore
-     */
+
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService().getHisteryTest("http://demo2821846.mockable.io/user/historylist?type=0")
@@ -45,18 +35,18 @@ public class MyLivingFragment extends MyBaseListFragment<UserVLivingAdapter> {
                 .subscribe(new NetSubscribe<UserHistoryTestModel>() {
                     @Override
                     public void OnSuccess(UserHistoryTestModel result) {
-                        mAdapter.dealLoadData(MyLivingFragment.this, isLoadMore, result.getVideolive());
+                        mAdapter.dealLoadData(UserHistoryWatchFragment.this, isLoadMore, result.getVideolive());
                     }
 
                     @Override
                     public void OnFailue(String msg) {
-                        mAdapter.dealLoadError(MyLivingFragment.this, isLoadMore);
+                        mAdapter.dealLoadError(UserHistoryWatchFragment.this, isLoadMore);
                     }
                 });
         addSubscribe(subscription);
     }
 
-    public static MyLivingFragment newInstance() {
-        return new MyLivingFragment();
+    public static UserHistoryWatchFragment newInstance() {
+        return new UserHistoryWatchFragment();
     }
 }

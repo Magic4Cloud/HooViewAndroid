@@ -191,6 +191,10 @@ class OkHttpRequest implements IRequestHelper {
                 .url(RequestUtil.assembleUrlWithParams(url, params))
                 .post(requestBody)
                 .build();
+
+//     ≥
+
+
         mClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -320,6 +324,7 @@ class OkHttpRequest implements IRequestHelper {
                 LoginActivity.start(mContext);
             }
         } else if (!TextUtils.isEmpty(errorTips)) {
+            if (!errorTips.equals("无数据"))
             SingleToast.show(EVApplication.getApp(), errorTips);
         }
     }

@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
-import com.easyvaas.elapp.ui.news.TopNewsFragment;
 import com.easyvaas.elapp.ui.user.newuser.fragment.UserHistoryRedNewFragment;
+import com.easyvaas.elapp.ui.user.newuser.fragment.UserHistoryWatchFragment;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 
@@ -44,9 +44,8 @@ public class UserHistoryNewActivity extends MyBaseActivity {
                 getString(R.string.user_history_watch),
                 getString(R.string.user_history_read)};
         mFragments = new Fragment[]{
-                TopNewsFragment.newInstance(),
-                UserHistoryRedNewFragment.newInstance()
-               };
+                UserHistoryWatchFragment.newInstance(),
+                UserHistoryRedNewFragment.newInstance()};
 
         mUserHistoryViewpager.setAdapter(new HistoryPageAdapter(getSupportFragmentManager()));
         mUserHistoryTablayout.setViewPager(mUserHistoryViewpager);

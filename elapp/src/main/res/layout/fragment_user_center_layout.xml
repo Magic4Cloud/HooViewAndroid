@@ -68,8 +68,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/title_text_color"
                     android:textSize="22dp"
-                    android:text="浅海野"
-                    tools:text="浅海野"/>
+                    android:text="@string/nickname"
+                  />
 
                 <ImageView
                     android:id="@+id/user_center_sex"
@@ -79,6 +79,7 @@
                     android:layout_alignTop="@id/user_center_name"
                     android:layout_toRightOf="@id/user_center_name"
                     android:layout_marginTop="3dp"
+                    android:visibility="gone"
                     android:src="@drawable/ic_woman"/>
 
                 <TextView
@@ -89,8 +90,8 @@
                     android:layout_marginTop="2dp"
                     android:textColor="@color/text_color_gray"
                     android:textSize="16sp"
-                    android:text="火眼财经资深投顾"
-                    tools:text="火眼财经资深投顾"/>
+                    android:text=""
+                    tools:text=""/>
 
                 <TextView
                     android:id="@+id/user_center_focuscounts"
@@ -100,8 +101,7 @@
                     android:layout_marginTop="16dp"
                     android:textColor="@color/text_color_orange"
                     android:textSize="17sp"
-                    android:text="22"
-                    tools:text="22"/>
+                    android:text="0"/>
 
                 <TextView
                     android:id="@+id/user_center_focustxt"
@@ -122,8 +122,7 @@
                     android:layout_toRightOf="@id/user_center_focustxt"
                     android:textColor="@color/text_color_orange"
                     android:textSize="17sp"
-                    android:text="523"
-                    tools:text="523"/>
+                    android:text="0"/>
 
                 <TextView
                     android:id="@+id/user_center_fanstxt"
@@ -143,9 +142,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="30dp"
                     android:src="@drawable/user_avtor"
-                    app:small_height="17dp"
+                    app:small_height="30dp"
                     app:small_icon="@drawable/ic_v"
-                    app:small_width="17dp"/>
+                    app:small_width="30dp"/>
             </RelativeLayout>
 
             <View
@@ -179,6 +178,7 @@
                     android:layout_height="14dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="1dp"
+                    android:visibility="gone"
                     android:src="@drawable/ic_n"/>
                 <View
                     android:layout_width="0dp"

@@ -591,6 +591,10 @@
             android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserCollectionNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

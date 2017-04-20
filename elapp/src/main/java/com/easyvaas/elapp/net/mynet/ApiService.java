@@ -8,7 +8,9 @@ import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.bean.news.TopicModel;
+import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
+import com.easyvaas.elapp.net.ApiConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,18 +35,16 @@ public interface ApiService {
      */
     @GET("api/v3/news/home")
     Observable<NetResponse<TopRatedModel>> getTopRatedNews(@Query("start") int start);
-
     /**
      * banner新闻
      */
     @GET("api/news/banners")
     Observable<NetResponse<BannerModel>> getBannerNews();
-
     /**
      * 专题列表
      */
     @GET("api/v2/news/topic")
-    Observable<NetResponse<TopicModel>> getTopicList(@Query("id") String id, @Query("start") int start);
+    Observable<NetResponse<TopicModel>> getTopicList(@Query("id") String id,@Query("start") int start);
 
     /**
      * 资讯专栏
@@ -69,18 +69,22 @@ public interface ApiService {
     /*-------------------------------------------用户中心----------------------------------------*/
 
     /**
+     * 获取用户信息
+     */
+    @GET(ApiConstant.DEBUG_HOST+"user/info")
+    Observable<NetResponse<User>> getUserInfo(@Query("name") String id,
+                                              @Query("sessionid") String sessionid);
+    /**
      * 用户阅读记录
-     *
      * @param type 0 观看 1 文章
      */
     @GET("api/v2/user/historylist")
     Observable<NetResponse<NormalNewsModel>> getUserReadHistory(@Query("userid") String id,
-                                                                @Query("sessionid") String sessionid,
-                                                                @Query("type") String type);
+                                                                        @Query("sessionid") String sessionid,
+                                                                        @Query("type") String type);
 
     /**
      * 用户观看记录
-     *
      * @param type 0 观看 1 文章
      */
     @GET("api/v2/user/historylist")
@@ -99,5 +103,13 @@ public interface ApiService {
      */
     @GET
     Observable<NetResponse<UserHistoryTestModel>> getHisteryTest(@Url String url);
+
+    /**
+     * 用户收藏列表
+     */
+    @GET("api/v2/user/favoritelist")
+    Observable<NetResponse<NormalNewsModel>> getUserCollection(@Query("userid") String id,
+                                                               @Query("sessionid") String sessionid);
+
 
 }

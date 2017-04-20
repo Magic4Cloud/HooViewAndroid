@@ -37,16 +37,17 @@ import static com.tencent.open.utils.Global.getContext;
  * adapter: 我的发布---直播
  */
 
-public class UserVLivingAdapter extends MyBaseAdapter {
+public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
 
     private static final int TYPE_IMAGE_TEXT = 1;
     private static final int TYPE_VIDEO = 2;
     private boolean mHasHeader = false;
     private CheckImageTextLiveModel mImageTextModel;
 
-    public UserVLivingAdapter(List data) {
+    public UserVLivingAdapter(List<VideoEntity> data) {
         super(data);
     }
+
 
     public void showHeader(boolean showHeader) {
         mHasHeader = showHeader;
@@ -93,10 +94,10 @@ public class UserVLivingAdapter extends MyBaseAdapter {
      * @param item   The item that needs to be displayed.
      */
     @Override
-    protected void convert(BaseViewHolder helper, Object item) {
+    protected void convert(BaseViewHolder helper, VideoEntity item) {
         if (helper.getLayoutPosition() == 0 && mHasHeader && helper instanceof ImageTextViewHolder) {
             ((ImageTextViewHolder)helper).setModel(mImageTextModel);
-        } else if (helper instanceof VideoViewHolder && item instanceof VideoEntity) {
+        } else if (helper instanceof VideoViewHolder) {
             ((VideoViewHolder) helper).setModel((VideoEntity) item);
         }
     }

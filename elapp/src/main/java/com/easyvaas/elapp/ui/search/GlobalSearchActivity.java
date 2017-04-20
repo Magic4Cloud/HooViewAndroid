@@ -135,7 +135,7 @@ public class GlobalSearchActivity extends BaseActivity implements View.OnClickLi
                 return fragment;
             }
             if (position == 0) {
-                fragments.put(position, fragment = GlobalSearchListFragment.newInstance(GlobalSearchListFragment.TYPE_NEWS, mKeyWord, position));
+                fragments.put(position, fragment = GloabalNewsSearchFragment.newInstance());
             } else if (position == 1) {
                 fragments.put(position, fragment = GlobalSearchListFragment.newInstance(GlobalSearchListFragment.TYPE_LIVE, mKeyWord, position));
             } else {

@@ -142,7 +142,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="#fafafa"
         app:cardCornerRadius="5dp"
-        app:cardElevation="2dp"
+        app:cardElevation="0dp"
         app:cardPreventCornerOverlap="false">
 
         <LinearLayout
