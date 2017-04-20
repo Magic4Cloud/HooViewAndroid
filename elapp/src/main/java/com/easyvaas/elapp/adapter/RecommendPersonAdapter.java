@@ -47,7 +47,7 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
         RecommendBean data = datas.get(position);
         mRecommendViewholder.mItemPersonFans.setText(String.valueOf(data.getFellow()));
         mRecommendViewholder.mItemPersonName.setText(data.getNickname());
-        Picasso.with(mContext).load(data.getAvatar()).transform(new CircleImageTransformation()).into(mRecommendViewholder.mItemPersonAvator);
+        Picasso.with(mContext).load(data.getAvatar()).transform(new CircleImageTransformation()).placeholder(R.drawable.user_avator_circle).into(mRecommendViewholder.mItemPersonAvator);
     }
 
     @Override

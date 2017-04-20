@@ -142,10 +142,10 @@
                     android:layout_height="60dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/test_img"
-                    app:small_height="15dp"
+                    android:src="@drawable/user_avtor"
+                    app:small_height="17dp"
                     app:small_icon="@drawable/ic_v"
-                    app:small_width="15dp"/>
+                    app:small_width="17dp"/>
             </RelativeLayout>
 
             <View
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textColor="@color/title_text_color"
                     android:text="@string/user_msg"/>
 

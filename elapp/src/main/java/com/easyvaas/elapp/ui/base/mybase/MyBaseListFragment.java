@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.base.MyEmptyView;
 import com.hooview.app.R;
 
@@ -138,6 +139,14 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
         mSwiprefreshlayout.setRefreshing(isLoading);
     }
 
+    /**
+     * 设置padding Top
+     */
+    protected void setPaddingTop(int dp)
+    {
+        mRecyclerview.setClipToPadding(false);
+        mRecyclerview.setPadding(0, (int) ViewUtil.dp2Px(getContext(),dp),0,0);
+    }
 
     /**
      * 初始化Adapter

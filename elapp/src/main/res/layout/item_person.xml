@@ -23,7 +23,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/account_bitmap_user"
+        android:src="@drawable/user_avtor"
         android:layout_marginTop="14dp"
         />
     <TextView

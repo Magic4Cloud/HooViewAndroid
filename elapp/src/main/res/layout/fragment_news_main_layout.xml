@@ -30,12 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:tl_indicator_color="@color/base_purplish"
-                app:tl_textSelectColor="@color/base_purplish"
-                app:tl_textUnselectColor="@color/tab_text_color"
-                app:tl_indicator_width="15dp"
-                app:tl_tab_space_equal="true"
-                app:tl_textsize="14sp"
+                style="@style/slider_layout_style"
                 />
             <ImageView
                 android:id="@+id/news_search"

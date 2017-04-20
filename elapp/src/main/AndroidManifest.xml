@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.hooview.app">
+<manifest package="com.hooview.app"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -587,7 +587,10 @@
             android:name="com.easyvaas.elapp.ui.news.TopicActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

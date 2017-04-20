@@ -15,10 +15,10 @@ import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
 import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.FollowersListActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
-import com.easyvaas.elapp.ui.user.MyCollectListActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
 import com.easyvaas.elapp.ui.user.UserHistoryActivity;
 import com.easyvaas.elapp.ui.user.UserInfoModifyActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.hooview.app.R;
 
@@ -77,7 +77,7 @@ public class UserCenterFragment extends MyBaseFragment {
 
     @Override
     protected void initViewAndData() {
-
+        mUserCenterAvator.setIsVip(1);
     }
 
     public static UserCenterFragment newInstance() {
@@ -91,7 +91,6 @@ public class UserCenterFragment extends MyBaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_edit_layout:  // 编辑资料
-//                UserInfoActivity.start(getActivity(), new Bundle());
                 UserInfoModifyActivity.start(getActivity(), new Bundle());
                 break;
             case R.id.user_settting: // 设置界面
@@ -122,10 +121,10 @@ public class UserCenterFragment extends MyBaseFragment {
             case R.id.user_center_buy:
                 break;
             case R.id.user_center_collect: //收藏列表
-                MyCollectListActivity.start(getActivity());
+                startActivity(new Intent(getActivity(),UserHistoryActivity.class));
                 break;
             case R.id.user_center_history: //历史记录
-                UserHistoryActivity.start(getActivity());
+                startActivity(new Intent(getActivity(),UserHistoryNewActivity.class));
                 break;
         }
     }
