@@ -199,6 +199,12 @@
     <color name="text_user_info_edit">#303030</color>
     <color name="text_user_info_hint">#cccccc</color>
     <color name="text_color_orange">#ff6c24</color>
-    <color name="text_user_info_hint">#cccccc</color>
+
+
+    <color name="video_living_cover">#7f090909</color>
+    <color name="video_living_living">#ff9e00</color>
+    <color name="video_living_good">#e36060</color>
+    <color name="video_living_playback">#999999</color>
+    <color name="video_living_pay">#659ae0</color>
 
 </resources>

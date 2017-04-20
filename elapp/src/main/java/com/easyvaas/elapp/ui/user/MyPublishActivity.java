@@ -1,6 +1,11 @@
 package com.easyvaas.elapp.ui.user;
 
+import android.widget.FrameLayout;
+
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
+import com.hooview.app.R;
+
+import butterknife.BindView;
 
 /**
  * Date    2017/4/20
@@ -10,9 +15,12 @@ import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
 
 public class MyPublishActivity extends MyBaseActivity {
 
+    @BindView(R.id.fl_content)
+    FrameLayout mFrameLayout;
+
     @Override
     protected int getLayout() {
-        return 0;
+        return R.layout.activity_my_publish;
     }
 
     @Override
@@ -22,6 +30,6 @@ public class MyPublishActivity extends MyBaseActivity {
 
     @Override
     protected void initViewAndData() {
-
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_content, MyLivingFragment.newInstance()).commit();
     }
 }

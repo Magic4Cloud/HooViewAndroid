@@ -4,6 +4,7 @@ package com.easyvaas.elapp.bean.imageTextLive;
 import com.easyvaas.elapp.bean.user.UserInfoModel;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ImageTextLiveRoomModel implements Serializable {
 
@@ -12,6 +13,15 @@ public class ImageTextLiveRoomModel implements Serializable {
     private String name;
     private int state;
     private int viewcount;
+    private List<UserInfoModel.TagsEntity> tags;
+
+    public List<UserInfoModel.TagsEntity> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<UserInfoModel.TagsEntity> tags) {
+        this.tags = tags;
+    }
 
     public UserInfoModel getUserInfo() {
         return userInfo;

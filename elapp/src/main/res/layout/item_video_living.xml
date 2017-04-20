@@ -1,86 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:paddingTop="16dp">
 
-    <FrameLayout
-        android:id="@+id/fl_cover"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="12dp">
-
-        <ImageView
-            android:id="@+id/iv_cover"
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="@drawable/account_bitmap_list" />
-
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="80dp"
-            android:background="#80303030"
-            />
-
-        <TextView
-            android:id="@+id/tv_tag_living"
-            android:layout_width="52dp"
-            android:layout_height="22dp"
-            android:layout_gravity="center"
-            android:background="@drawable/shape_video_tag_living"
-            android:gravity="center"
-            android:text="@string/living"
-            android:textColor="@color/text_color_white"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/iv_tag_payback"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/shape_video_tag_playback"
-            android:padding="9dp"
-            android:src="@drawable/ic_playback_n"
-            android:visibility="visible" />
-    </FrameLayout>
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/item_video_living"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="22dp"
-        android:layout_marginRight="22dp"
-        android:layout_toRightOf="@+id/fl_cover"
-        android:orientation="vertical">
+        android:layout_height="70dp"
+        android:background="?attr/selectableItemBackground"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="this is title"
-            android:textColor="@color/text_color_black"
-            android:textSize="16sp" />
+        <RelativeLayout
+            android:id="@+id/fl_cover"
+            android:layout_width="120dp"
+            android:layout_height="70dp">
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="name"
-            android:textColor="@color/text_color_gray"
-            android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:background="@drawable/account_bitmap_list"/>
 
-        <TextView
-            android:id="@+id/tv_watch_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/watch_count"
-            android:textColor="@color/text_color_gray"
-            android:textSize="14sp" />
+            <View
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:background="@color/video_living_cover"/>
 
-    </LinearLayout>
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_hot"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_hot"/>
+
+            <TextView
+                android:id="@+id/tv_watch_count"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/iv_hot"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="17,184人观看"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/fl_cover">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="安邦举牌格力的可能性分析"
+                android:textColor="@color/title_text_color"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="金色红牛"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:text="01/12 12:30"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_operator"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:elevation="0dp"
+                app:cardCornerRadius="4dp">
+
+                <TextView
+                    android:id="@+id/tv_operator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/video_living_living"
+                    android:gravity="center"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:text="直播中"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@+id/cv_operator"
+                android:elevation="0dp"
+                app:cardCornerRadius="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/video_living_pay"
+                    android:gravity="center"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:text="付费"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

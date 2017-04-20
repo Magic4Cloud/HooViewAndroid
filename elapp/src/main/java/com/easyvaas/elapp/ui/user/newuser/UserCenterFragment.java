@@ -15,6 +15,7 @@ import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
 import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.FollowersListActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
+import com.easyvaas.elapp.ui.user.MyPublishActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
 import com.easyvaas.elapp.ui.user.UserHistoryActivity;
 import com.easyvaas.elapp.ui.user.UserInfoModifyActivity;
@@ -117,6 +118,7 @@ public class UserCenterFragment extends MyBaseFragment {
                 startActivity(intent);
                 break;
             case R.id.user_center_publish:
+                startActivity(new Intent(getActivity(), MyPublishActivity.class));
                 break;
             case R.id.user_center_buy:
                 break;
