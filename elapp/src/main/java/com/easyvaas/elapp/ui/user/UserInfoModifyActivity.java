@@ -122,6 +122,7 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
     private OperationPopupWindow mPopupWindowAvatar;
     private OperationPopupWindow mPopupWindowSex;
     private UserInfoEditPopupWindow mPopupWindowEditSelf;
+    private UserInfoEditPopupWindow mPopupWindowEditIntroduce;
 
     public static void start(Context context, Bundle bundle) {
         if (Preferences.getInstance(context).isLogin() && EVApplication.isLogin()) {
@@ -263,14 +264,14 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
                 public void onConfirm(String text) {
                     if (text != null) {
                         if (text.length() > 14) {
-                            text = text.substring(0, 13);
+                            text = text.substring(0, 14);
                         }
                         mSignatureEt.setText(text);
                     }
                 }
             });
         }
-        mPopupWindowEditSelf.show();
+        mPopupWindowEditSelf.showWithInputMethod();
     }
 
     /**
@@ -281,10 +282,21 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
         startActivityForResult(new Intent(this, UserAddLabelActivity.class), REQUEST_CODE_LABEL);
     }
 
+    /**
+     * 详细资料
+     */
     @OnClick(R.id.user_info_item_introduce)
     public void onIntroduceClick() {
-        mNicknameEt.requestFocus();
-        imm.showSoftInput(mNicknameEt, InputMethodManager.SHOW_FORCED);
+        if (mPopupWindowEditIntroduce == null) {
+            mPopupWindowEditIntroduce = new UserInfoEditPopupWindow(this);
+            mPopupWindowEditIntroduce.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
+                @Override
+                public void onConfirm(String text) {
+                    mIntroduceTv.setText(text);
+                }
+            });
+        }
+        mPopupWindowEditIntroduce.showWithInputMethod();
     }
 
     @Override
@@ -391,7 +403,11 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
             userLabelFl.removeAllViews();
             for (int i = 0; i < tags.size(); i++) {
                 TextView textView = (TextView) LayoutInflater.from(UserInfoModifyActivity.this).inflate(R.layout.layout_use_tag, null);
-                textView.setText(tags.get(i));
+                String text = tags.get(i);
+                if (i < tags.size() - 1) {
+                    text += "，";
+                }
+                textView.setText(text);
                 userLabelFl.addView(textView);
             }
         }

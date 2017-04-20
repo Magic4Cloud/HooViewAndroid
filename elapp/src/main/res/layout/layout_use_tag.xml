@@ -3,9 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_user_tag"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
     android:text="大盘解说"
     android:textColor="@color/user_tag_text_color"
-    android:textSize="14sp"/>
+    android:textSize="@dimen/text_size_16"/>

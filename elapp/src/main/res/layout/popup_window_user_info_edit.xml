@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:background="#f9f9f9">
+        android:background="#f9f9f9"
+        android:paddingBottom="252dp">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cv_input"
@@ -32,7 +32,6 @@
                 android:hint="@string/pop_input_hint"
                 android:lineSpacingExtra="1dp"
                 android:maxLength="100"
-                android:maxLines="3"
                 android:paddingBottom="12dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"

@@ -30,9 +30,11 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
     CardView mPopConfirm;
     @BindView(R.id.cv_cancel)
     CardView mPopCancel;
+    private Handler mHandler;
 
     public UserInfoEditPopupWindow(Activity activity) {
         super(activity);
+        mHandler = new Handler();
     }
 
     /**
@@ -69,6 +71,13 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
     }
 
     /**
+     * 初始化
+     */
+    public void init(String text) {
+        mPopInput.setText(text);
+    }
+
+    /**
      * 取消
      */
     @OnClick(R.id.cv_cancel)
@@ -91,10 +100,6 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
         close();
     }
 
-    public EditText getPopInput() {
-        return mPopInput;
-    }
-
     public interface OnConfirmListener {
         void onConfirm(String text);
     }
@@ -105,10 +110,20 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
         mListener = listener;
     }
 
-    public void show() {
+    public void showWithInputMethod() {
         showAtBottom();
         mPopInput.requestFocus();
-        new Handler().postDelayed(new Runnable() {
+        showInputMethod();
+    }
+
+    /**
+     * 异步弹出软键盘
+     */
+    protected void showInputMethod() {
+        if (mHandler == null) {
+            mHandler = new Handler();
+        }
+        mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(INPUT_METHOD_SERVICE);
@@ -117,12 +132,10 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
         }, 0);
     }
 
-    protected void showInputMethod(View view) {
-        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(INPUT_METHOD_SERVICE);
-        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
-    }
-
-    public void hideInputMethod() {
+    /**
+     * 隐藏软键盘
+     */
+    protected void hideInputMethod() {
         InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(INPUT_METHOD_SERVICE);
         if (mActivity.getCurrentFocus() != null) {
             if (mActivity.getCurrentFocus().getWindowToken() != null) {
@@ -130,5 +143,11 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
                         InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
+    }
+
+    @Override
+    public void close() {
+        super.close();
+        hideInputMethod();
     }
 }

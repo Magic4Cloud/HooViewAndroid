@@ -18,7 +18,7 @@ import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
 import com.easyvaas.elapp.ui.user.MyCollectListActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
 import com.easyvaas.elapp.ui.user.UserHistoryActivity;
-import com.easyvaas.elapp.ui.user.UserInfoActivity;
+import com.easyvaas.elapp.ui.user.UserInfoModifyActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.hooview.app.R;
 
@@ -91,7 +91,8 @@ public class UserCenterFragment extends MyBaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_edit_layout:  // 编辑资料
-                UserInfoActivity.start(getActivity(), new Bundle());
+//                UserInfoActivity.start(getActivity(), new Bundle());
+                UserInfoModifyActivity.start(getActivity(), new Bundle());
                 break;
             case R.id.user_settting: // 设置界面
                 SettingActivity.start(getActivity());
