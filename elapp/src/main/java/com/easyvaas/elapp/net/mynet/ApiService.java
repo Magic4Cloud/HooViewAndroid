@@ -4,13 +4,17 @@ import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
+import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
+import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.bean.news.TopicModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -52,5 +56,28 @@ public interface ApiService {
 
     /*-------------------------------------------用户中心----------------------------------------*/
 
+    /**
+     * 用户阅读记录
+     * @param type 0 观看 1 文章
+     */
+    @GET("api/v2/user/historylist")
+    Observable<NetResponse<NormalNewsModel>> getUserReadHistory(@Query("userid") String id,
+                                                                        @Query("sessionid") String sessionid,
+                                                                        @Query("type") String type);
+
+    /**
+     * 用户观看记录
+     * @param type 0 观看 1 文章
+     */
+    @GET("api/v2/user/historylist")
+    Observable<NetResponse<ArrayList<HomeNewsBean>>> getUserWatchHistory(@Query("userid") String id,
+                                                                         @Query("sessionid") String sessionid,
+                                                                         @Query("type") String type);
+
+    /**
+     * 用户阅读记录 测试
+     */
+    @GET()
+    Observable<NetResponse<NormalNewsModel>> getUserReadHistoryTest(@Url String url);
 
 }

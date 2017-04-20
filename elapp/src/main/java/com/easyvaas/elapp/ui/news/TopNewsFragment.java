@@ -6,7 +6,6 @@ import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
-import com.easyvaas.elapp.utils.ViewUtil;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -81,11 +80,6 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
         addSubscribe(subscription);
     }
 
-    @Override
-    protected void changeRecyclerView() {
-        mRecyclerview.setClipToPadding(false);
-        mRecyclerview.setPadding(0, (int) ViewUtil.dp2Px(mContext,4),0,0);
-    }
 
     public static TopNewsFragment newInstance() {
         return new TopNewsFragment();

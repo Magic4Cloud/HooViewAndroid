@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
@@ -8,7 +9,7 @@ import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
-import com.easyvaas.elapp.utils.ViewUtil;
+import com.hooview.app.R;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -41,8 +42,8 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
 
     @Override
     protected void changeRecyclerView() {
+        mRecyclerview.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerview.setPadding((int) ViewUtil.dp2Px(getContext(), 7), 0, (int) ViewUtil.dp2Px(getContext(), 7), 0);
         mRecyclerview.setLayoutManager(manager);
     }
 

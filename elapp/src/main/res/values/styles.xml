@@ -550,6 +550,7 @@
         <item name="android:textColor">@color/title_text_color</item>
     </style>
 
+    // 用户中心item text
     <style name="user_text_section_style">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -559,6 +560,7 @@
         <item name="android:textColor">@color/title_text_color</item>
     </style>
 
+    //用户中心item
     <style name="user_section_layout_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">55dp</item>
@@ -567,5 +569,25 @@
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:paddingLeft">18dp</item>
         <item name="android:paddingRight">16dp</item>
+    </style>
+
+    //滑动选择器
+    <style name="slider_layout_style">
+        <item name="tl_indicator_color">@color/base_purplish</item>
+        <item name="tl_textSelectColor">@color/base_purplish</item>
+        <item name="tl_textUnselectColor">@color/tab_text_color</item>
+        <item name="tl_indicator_width">15dp</item>
+        <item name="tl_tab_space_equal">true</item>
+        <item name="tl_textsize">14sp</item>
+    </style>
+
+    //滑动选择器 用户
+    <style name="slider_layout_user_style">
+        <item name="tl_indicator_color">@color/base_purplish</item>
+        <item name="tl_textSelectColor">@color/base_purplish</item>
+        <item name="tl_textUnselectColor">@color/title_text_color</item>
+        <item name="tl_indicator_width">15dp</item>
+        <item name="tl_tab_space_equal">true</item>
+        <item name="tl_textsize">16sp</item>
     </style>
 </resources>

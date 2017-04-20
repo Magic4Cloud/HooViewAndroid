@@ -786,7 +786,7 @@
     <string name="news_import">要闻</string>
     <string name="news_speed">快讯</string>
     <string name="news_slecte">自选</string>
-    <string name="news_specil">文章</string>
+    <string name="news_specil">专栏</string>
     <string name="topic">专题</string>
     <string name="powerful_person">牛人推荐</string>
 
@@ -812,5 +812,7 @@
     <string name="user_history">历史记录</string>
     <string name="user_login_text">登录/注册</string>
     <string name="user_login_info">点击登录 更多精彩</string>
+    <string name="user_history_watch">观看历史</string>
+    <string name="user_history_read">阅读历史</string>
 
 </resources>
