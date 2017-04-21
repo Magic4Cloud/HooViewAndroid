@@ -6,6 +6,11 @@
 
 package com.easyvaas.elapp.utils;
 
+import android.content.Context;
+import android.text.TextUtils;
+
+import com.hooview.app.R;
+
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -13,11 +18,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.Locale;
-
-import android.content.Context;
-import android.text.TextUtils;
-
-import com.hooview.app.R;
 
 public class DateTimeUtil {
     public static final String TAG = "DateTimeUtil";
@@ -51,6 +51,26 @@ public class DateTimeUtil {
         long sec = duration / 1000;
         String durationformat = context.getString(
                 sec < 3600 ? R.string.duration_format_short : R.string.duration_format_long);
+
+        /* Provide multiple arguments so the format can be changed easily
+         * by modifying the xml.
+         */
+        sFormatBuilder.setLength(0);
+
+        final Object[] timeArgs = sTimeArgs;
+        timeArgs[0] = sec / 3600;
+        timeArgs[1] = sec / 60;
+        timeArgs[2] = (sec / 60) % 60;
+        timeArgs[3] = sec;
+        timeArgs[4] = sec % 60;
+
+        return sFormatter.format(durationformat, timeArgs).toString();
+    }
+
+    public static String getDurationTimeCn(Context context, long duration) {
+        long sec = duration / 1000;
+        String durationformat = context.getString(
+                sec < 3600 ? R.string.duration_format_short_cn : R.string.duration_format_long_cn);
 
         /* Provide multiple arguments so the format can be changed easily
          * by modifying the xml.
@@ -137,7 +157,10 @@ public class DateTimeUtil {
         time = time.trim();
         ParsePosition pos = new ParsePosition(0);
         Date cTime = sServerDateFormatter.parse(time, pos);
-        long duration = System.currentTimeMillis() - cTime.getTime();
+        long duration = 0;
+        if (cTime != null) {
+            duration = System.currentTimeMillis() - cTime.getTime();
+        }
         long MILLIS_ONE_MONTH = 30 * 24 * 3600 * 1000L;
         long MILLIS_ONE_WEEK = 7 * 24 * 3600 * 1000;
         long MILLIS_ONE_DAY = 24 * 3600 * 1000;
@@ -145,9 +168,9 @@ public class DateTimeUtil {
 
         SimpleDateFormat format = new SimpleDateFormat("  HH:mm", Locale.getDefault());
         if (duration < MILLIS_ONE_DAY) {
-            result = "今天"+format.format(cTime);
+            result = "今天" + format.format(cTime);
         } else if (duration > MILLIS_ONE_DAY && duration < MILLIS_ONE_DAY * 2) {
-            result = "昨天"+format.format(cTime);
+            result = "昨天" + format.format(cTime);
         } else {
             SimpleDateFormat formatter = new SimpleDateFormat("MM/dd HH:mm", Locale.getDefault());
             result = formatter.format(cTime);
@@ -193,6 +216,23 @@ public class DateTimeUtil {
             result = formatter.format(cTime);
         }
 
+        return result;
+    }
+
+    /**
+     * 11月12日
+     */
+    public static String getCheatsTime(Context context, String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
+        String result = "";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss", Locale.getDefault());
+        time = time.trim();
+        ParsePosition pos = new ParsePosition(0);
+        Date cTime = format.parse(time, pos);
+        SimpleDateFormat formatter = new SimpleDateFormat("MM月dd日", Locale.getDefault());
+        result = formatter.format(cTime);
         return result;
     }
 

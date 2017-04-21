@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.hooview.app"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.hooview.app">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -134,11 +134,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.UserInfoModifyActivity"
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserInfoModifyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.MyPublishActivity"
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserPublishActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserBuyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 

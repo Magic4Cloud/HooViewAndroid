@@ -54,7 +54,9 @@
     <string name="today_time">今天 %1$s</string>
 
     <string name="duration_format_short" translatable="false">%2$d:%5$02d</string>
+    <string name="duration_format_short_cn" translatable="false">%2$d分%5$02d秒</string>
     <string name="duration_format_long" translatable="false">%1$d:%3$02d:%5$02d</string>
+    <string name="duration_format_long_cn" translatable="false">%1$d时%3$02d分%5$02d秒</string>
 
     <string name="sharing">正在分享</string>
     <string name="share_user_title">%s的个人主页</string>
@@ -689,6 +691,7 @@
     <string name="search_stock_empty_prompt">很抱歉，没有相关信息</string>
     <string name="search_empty_prompt">请输入搜索关键词！</string>
     <string name="watch_count">%s人观看</string>
+    <string name="sales_count">%s人已买</string>
     <string name="living">直播中</string>
     <string name="my_sum">我的余额</string>
     <string name="my_message">消息提醒</string>

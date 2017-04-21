@@ -15,6 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 public abstract class BaseListLazyFragment extends BaseLazyFragment {
 
@@ -33,7 +35,8 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
     @BindView(R.id.iv_operation)
     protected ImageView mImageViewOperation;
     protected LinearLayoutManager mLayoutManager;
-    private Unbinder mUnbinder;
+    protected Unbinder mUnbinder;
+    protected CompositeSubscription mCompositeSubscription;
     protected int start = 0;
     protected int count = 20;
     protected int next;
@@ -107,6 +110,7 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
 
     /**
      * 显示操作按钮
+     *
      * @param resId int
      */
     public void showOperationView(int resId) {
@@ -138,6 +142,26 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+        unSubsribe();
+    }
+
+    /**
+     * 添加订阅到集合
+     */
+    protected void addSubscribe(Subscription subscription) {
+
+        if (mCompositeSubscription == null)
+            mCompositeSubscription = new CompositeSubscription();
+        mCompositeSubscription.add(subscription);
+    }
+
+    /**
+     * 解除所有订阅
+     */
+    protected void unSubsribe() {
+        if (mCompositeSubscription != null)
+            mCompositeSubscription.unsubscribe();
+        mCompositeSubscription = null;
     }
 
 }

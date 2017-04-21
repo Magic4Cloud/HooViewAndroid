@@ -25,9 +25,11 @@ import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.FollowersListActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
-import com.easyvaas.elapp.ui.user.MyPublishActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserBuyActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserPublishActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
 import com.easyvaas.elapp.ui.user.UserInfoActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserInfoModifyActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserCollectionNewActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity;
 import com.easyvaas.elapp.utils.Constants;
@@ -229,7 +231,7 @@ public class UserCenterFragment extends MyBaseFragment {
         }
         switch (view.getId()) {
             case R.id.user_edit_layout:  // 编辑资料
-                UserInfoActivity.start(getActivity(),bundle);
+                UserInfoModifyActivity.start(getActivity(), bundle);
                 break;
             case R.id.user_settting: // 设置界面
                 SettingActivity.start(getActivity());
@@ -255,9 +257,10 @@ public class UserCenterFragment extends MyBaseFragment {
                 startActivity(intent);
                 break;
             case R.id.user_center_publish:
-                startActivity(new Intent(getActivity(), MyPublishActivity.class));
+                startActivity(new Intent(getActivity(), UserPublishActivity.class));
                 break;
             case R.id.user_center_buy:
+                startActivity(new Intent(getActivity(), UserBuyActivity.class));
                 break;
             case R.id.user_center_collect: //收藏列表
                 startActivity(new Intent(getActivity(),UserCollectionNewActivity.class));

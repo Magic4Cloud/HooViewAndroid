@@ -1,6 +1,6 @@
 package com.easyvaas.elapp.ui.user.newuser.fragment;
 
-import com.easyvaas.elapp.adapter.UserVLivingAdapter;
+import com.easyvaas.elapp.adapter.usernew.UserVLivingAdapter;
 import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;

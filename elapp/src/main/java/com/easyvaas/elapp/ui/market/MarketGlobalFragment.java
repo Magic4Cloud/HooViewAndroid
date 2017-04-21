@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lib.adapter.expand.StickyRecyclerHeadersDecoration;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -94,7 +95,7 @@ public class MarketGlobalFragment extends BaseListLazyFragment {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setRefreshing(true);
         }
-        RetrofitHelper.getInstance().getService().getMarketGlobalStock()
+        Subscription subscription = RetrofitHelper.getInstance().getService().getMarketGlobalStock()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<List<MarketGlobalModel>>() {
@@ -143,6 +144,7 @@ public class MarketGlobalFragment extends BaseListLazyFragment {
                         }
                     }
                 });
+        addSubscribe(subscription);
     }
 
     public static MarketGlobalFragment newInstance() {

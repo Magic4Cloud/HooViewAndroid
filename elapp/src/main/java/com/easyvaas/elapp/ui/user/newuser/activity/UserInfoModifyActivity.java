@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-package com.easyvaas.elapp.ui.user;
+package com.easyvaas.elapp.ui.user.newuser.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -41,6 +41,10 @@ import com.easyvaas.elapp.net.UploadThumbAsyncTask;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
 import com.easyvaas.elapp.ui.pop.OperationPopupWindow;
 import com.easyvaas.elapp.ui.pop.UserInfoEditPopupWindow;
+import com.easyvaas.elapp.ui.user.LoginActivity;
+import com.easyvaas.elapp.ui.user.UserAddLabelActivity;
+import com.easyvaas.elapp.ui.user.UserInfoActivity;
+import com.easyvaas.elapp.ui.user.UserInfoEditActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;

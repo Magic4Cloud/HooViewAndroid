@@ -8,8 +8,10 @@ import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.bean.news.TopicModel;
+import com.easyvaas.elapp.bean.user.CheatsListModel;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
+import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.net.ApiConstant;
 
 import java.util.ArrayList;
@@ -101,7 +103,7 @@ public interface ApiService {
     /**
      * 视频列表测试
      */
-    @GET
+    @GET()
     Observable<NetResponse<UserHistoryTestModel>> getHisteryTest(@Url String url);
 
     /**
@@ -110,6 +112,96 @@ public interface ApiService {
     @GET("api/v2/user/favoritelist")
     Observable<NetResponse<NormalNewsModel>> getUserCollection(@Query("userid") String id,
                                                                @Query("sessionid") String sessionid);
+
+    /**
+     * 秘籍列表
+     */
+    @GET("api/v2/user/cheats")
+    Observable<NetResponse<CheatsListModel>> getUserCheats(@Query("userid") String userId, @Query("start") int start);
+
+    /**
+     * 我的发布---直播
+     */
+    @GET("api/v2/user/works?type=0")
+    Observable<NetResponse<UserPublishVideoModel>> getUserPublishLiving(@Query("userid") String id,
+                                                                       @Query("sessionid") String sessionid,
+                                                                       @Query("start") int start);
+
+    /**
+     * 我的发布---直播，测试
+     */
+    @GET()
+    Observable<NetResponse<UserPublishVideoModel>> getUserPublishLivingTest(@Url String url);
+
+    /**
+     * 我的发布---秘籍
+     */
+    @GET("api/v2/user/works?type=1")
+    Observable<NetResponse<CheatsListModel>> getUserPublishCheats(@Query("userid") String id,
+                                                                       @Query("sessionid") String sessionid,
+                                                                       @Query("start") int start);
+
+    /**
+     * 我的发布---秘籍，测试
+     */
+    @GET()
+    Observable<NetResponse<CheatsListModel>> getUserPublishCheatsTest(@Url String url);
+
+    /**
+     * 我的发布---文章
+     */
+    @GET("api/v2/user/works?type=2")
+    Observable<NetResponse<NormalNewsModel>> getUserPublishArticle(@Query("userid") String id,
+                                                           @Query("sessionid") String sessionid,
+                                                           @Query("start") int start);
+
+    /**
+     * 我的发布---文章，测试
+     */
+    @GET()
+    Observable<NetResponse<NormalNewsModel>> getUserPublishArticleTest(@Url String url);
+
+    /**
+     * 我的购买---视频直播
+     */
+    @GET("api/v2/user/purchase?type=0")
+    Observable<NetResponse<UserPublishVideoModel>> getUserBuyLiving(@Query("userid") String id,
+                                                                        @Query("sessionid") String sessionid,
+                                                                        @Query("start") int start);
+
+    /**
+     * 我的购买---视频直播，测试
+     */
+    @GET()
+    Observable<NetResponse<UserPublishVideoModel>> getUserBuyLivingTest(@Url String url);
+
+    /**
+     * 我的购买---精品视频
+     */
+    @GET("api/v2/user/purchase?type=1")
+    Observable<NetResponse<UserPublishVideoModel>> getUserBuyVideo(@Query("userid") String id,
+                                                                    @Query("sessionid") String sessionid,
+                                                                    @Query("start") int start);
+
+    /**
+     * 我的购买---精品视频，测试
+     */
+    @GET()
+    Observable<NetResponse<UserPublishVideoModel>> getUserBuyVideoTest(@Url String url);
+
+    /**
+     * 我的购买---已买秘籍
+     */
+    @GET("api/v2/user/purchase?type=1")
+    Observable<NetResponse<CheatsListModel>> getUserBuyCheats(@Query("userid") String id,
+                                                                   @Query("sessionid") String sessionid,
+                                                                   @Query("start") int start);
+
+    /**
+     * 我的购买---已买秘籍，测试
+     */
+    @GET()
+    Observable<NetResponse<CheatsListModel>> getUserBuyCheatsTest(@Url String url);
 
 
 }

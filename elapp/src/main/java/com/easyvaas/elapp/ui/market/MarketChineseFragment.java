@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lib.adapter.expand.StickyRecyclerHeadersDecoration;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -73,7 +74,7 @@ public class MarketChineseFragment extends BaseListLazyFragment {
             mSwipeRefreshLayout.setRefreshing(true);
         }
         // 市场指数
-        RetrofitHelper.getInstance().getService().getMarketExponent()
+        Subscription subscription = RetrofitHelper.getInstance().getService().getMarketExponent()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<MarketExponentModel>() {
@@ -102,6 +103,7 @@ public class MarketChineseFragment extends BaseListLazyFragment {
                         }
                     }
                 });
+        addSubscribe(subscription);
         // 大盘涨跌
         HooviewApiHelper.getInstance().getUpAndDownList(new MyRequestCallBack<UpsAndDownsDataModel>() {
             @Override

@@ -35,31 +35,30 @@ public abstract class MyBaseAdapter<T> extends BaseQuickAdapter<T, BaseViewHolde
     }
 
     protected abstract int getItemViewByType(int position);  //设置不同类型
+
     protected abstract BaseViewHolder OnCreateViewByHolder(ViewGroup parent, int viewType); //设置ViewHolder
+
     protected abstract void initOnItemClickListener();// 设置点击事件监听
 
     /**
      * 处理上拉 下拉的数据
      */
-    public void dealLoadData(LoadOperator loadOperator,boolean isLoadMore,List<T> data)
-    {
+    public void dealLoadData(LoadOperator loadOperator, boolean isLoadMore, List<T> data) {
         if (!isLoadMore) //下拉刷新
         {
-            if (data != null && data.size() > 0)
-            {
+            if (data != null && data.size() > 0) {
                 loadOperator.hideEmpty();
                 setNewData(data);
                 setEnableLoadMore(true);
-            }else
+            } else
                 loadOperator.showEmpty();
             loadOperator.setLoading(false);
-        }else  // 上拉加载
+        } else  // 上拉加载
         {
-            if (data != null && data.size() > 0)
-            {
+            if (data != null && data.size() > 0) {
                 addData(data);
                 loadMoreComplete();
-            }else
+            } else
                 loadMoreEnd();
         }
     }
@@ -67,15 +66,12 @@ public abstract class MyBaseAdapter<T> extends BaseQuickAdapter<T, BaseViewHolde
     /**
      * 处理加载错误情况
      */
-    public void dealLoadError(LoadOperator loadOperator,boolean isLoadMore)
-    {
-        if (!isLoadMore)
-        {
+    public void dealLoadError(LoadOperator loadOperator, boolean isLoadMore) {
+        if (!isLoadMore) {
             if (mData.size() == 0)
                 loadOperator.showError();
             loadOperator.setLoading(false);
-        }
-        else
+        } else
             loadMoreFail();
     }
 

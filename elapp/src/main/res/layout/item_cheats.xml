@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f8f8f8"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/item_cheats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:minWidth="340dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/tab_text_color_selected"/>
+
+            <TextView
+                android:id="@+id/cheats_time"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="11月12日"
+                android:textColor="@color/tab_text_color_selected"
+                android:textSize="14sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/view_divider"
+                    android:orientation="vertical"
+                    android:paddingRight="12dp">
+
+                    <TextView
+                        android:id="@+id/cheats_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="22dp"
+                        android:maxLines="1"
+                        android:text="猛牛出击_低位牛股蓄势待发"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="@dimen/text_size_16"/>
+
+                    <TextView
+                        android:id="@+id/cheats_introduce"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="今日特价推出《猛牛出击_低位牛股蓄势待发》……"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_14"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/item_cheats_price"
+                    android:background="#eeeeee"/>
+
+                <LinearLayout
+                    android:id="@+id/item_cheats_price"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp">
+
+                    <TextView
+                        android:id="@+id/cheats_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="180000"
+                        android:textColor="@color/tab_text_color_selected"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/cheats_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="17dp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="火眼豆"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/text_size_12"/>
+
+                    <TextView
+                        android:id="@+id/cheats_sale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="17dp"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="1,371人已买"
+                        android:textColor="#ff6c67"
+                        android:textSize="@dimen/text_size_12"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

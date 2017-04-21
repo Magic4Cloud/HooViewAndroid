@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="#f8f8f8"/>
+
+    <RelativeLayout
+        android:id="@+id/item_buy_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="32dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="16dp">
+
+        <com.easyvaas.elapp.view.CircleImageView
+            android:id="@+id/video_avatar"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/user_avtor"/>
+
+        <TextView
+            android:id="@+id/video_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_toRightOf="@+id/video_avatar"
+            android:maxLines="1"
+            android:layout_marginLeft="2dp"
+            android:text="火眼主播小莹"
+            android:textColor="@color/title_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
+        <TextView
+            android:id="@+id/video_time"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/video_avatar"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:text="2017/05/13"
+            android:textColor="@color/text_gray"
+            android:textSize="14sp"/>
+
+        <RelativeLayout
+            android:id="@+id/video_video"
+            android:layout_width="match_parent"
+            android:layout_height="186dp"
+            android:layout_below="@+id/video_time"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/video_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:minWidth="330dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/account_bitmap_list"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/video_living_cover"/>
+
+            <ImageView
+                android:id="@+id/video_play"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/user_buy_play"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/video_info"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/video_video"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/video_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:maxLines="1"
+                android:text="9分23秒"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/video_watch_count"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:maxLines="1"
+                android:text="147,184人观看"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/video_hot"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_toLeftOf="@+id/video_watch_count"
+                android:src="@drawable/ic_hot"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/video_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/video_info"
+            android:layout_marginTop="4dp"
+            android:text="安邦举牌格力的可能性分析"
+            android:textColor="@color/title_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
