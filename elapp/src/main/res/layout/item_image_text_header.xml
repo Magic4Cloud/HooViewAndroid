@@ -24,7 +24,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             android:layout_marginTop="10dp"
-            android:text="1,714人关注"
+            android:text="1,714人参与"
             android:textColor="@color/tab_text_color_selected"
             android:textSize="14sp"/>
 
@@ -68,6 +68,7 @@
         android:paddingLeft="12dp"
         android:paddingTop="10dp"
         android:text="往期视频直播"
+        android:visibility="gone"
         android:textColor="@color/base_gray"
         android:textSize="14sp"/>
 

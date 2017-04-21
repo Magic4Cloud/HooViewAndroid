@@ -585,7 +585,7 @@
     <style name="slider_layout_user_style">
         <item name="tl_indicator_color">@color/base_purplish</item>
         <item name="tl_textSelectColor">@color/base_purplish</item>
-        <item name="tl_textUnselectColor">@color/title_text_color</item>
+        <item name="tl_textUnselectColor">@color/tab_text_color</item>
         <item name="tl_indicator_width">15dp</item>
         <item name="tl_tab_space_equal">true</item>
         <item name="tl_textsize">16sp</item>

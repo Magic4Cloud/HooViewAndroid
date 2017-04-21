@@ -141,7 +141,7 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 checkImageTextLiveModel.setData(model);
                 // follow
                 DecimalFormat df2 = new DecimalFormat("###,###");
-                mFollowTv.setText(mContext.getString(R.string.image_text_follow_count, df2.format(model.getViewcount())));
+                mFollowTv.setText(mContext.getString(R.string.user_text_follow_count, df2.format(model.getViewcount())));
                 // name
                 mNameTv.setText(model.getName());
                 // tag

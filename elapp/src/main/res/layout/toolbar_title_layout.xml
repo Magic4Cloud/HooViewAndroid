@@ -31,7 +31,8 @@
             android:layout_alignParentRight="true"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
-            android:visibility="gone"
+            android:layout_marginRight="5dp"
+            android:visibility="visible"
            />
         <TextView
             android:id="@+id/title_text_right"

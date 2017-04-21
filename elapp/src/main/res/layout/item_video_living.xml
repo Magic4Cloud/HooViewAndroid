@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:paddingBottom="10dp"
-    android:paddingTop="16dp">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/item_video_living"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="96dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="10dp"
         android:background="?attr/selectableItemBackground"
         android:paddingLeft="12dp"
         android:paddingRight="12dp">
@@ -48,7 +48,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="2dp"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/iv_hot"
                 android:gravity="center_vertical"
                 android:maxLines="1"
@@ -113,8 +113,8 @@
                     android:layout_height="match_parent"
                     android:background="@color/video_living_living"
                     android:gravity="center"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:text="直播中"
                     android:textColor="@color/white"
                     android:textSize="12sp"/>
@@ -136,8 +136,8 @@
                     android:layout_height="match_parent"
                     android:background="@color/video_living_pay"
                     android:gravity="center"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:text="付费"
                     android:textColor="@color/white"
                     android:textSize="12sp"/>

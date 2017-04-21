@@ -25,13 +25,13 @@ import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.FollowersListActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
-import com.easyvaas.elapp.ui.user.newuser.activity.UserBuyActivity;
-import com.easyvaas.elapp.ui.user.newuser.activity.UserPublishActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
 import com.easyvaas.elapp.ui.user.UserInfoActivity;
-import com.easyvaas.elapp.ui.user.newuser.activity.UserInfoModifyActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserBuyActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserCollectionNewActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserPublishActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserVipPageActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
@@ -231,7 +231,8 @@ public class UserCenterFragment extends MyBaseFragment {
         }
         switch (view.getId()) {
             case R.id.user_edit_layout:  // 编辑资料
-                UserInfoModifyActivity.start(getActivity(), bundle);
+//                UserInfoActivity.start(getActivity(),bundle);
+                startActivity(new Intent(getActivity(), UserVipPageActivity.class));
                 break;
             case R.id.user_settting: // 设置界面
                 SettingActivity.start(getActivity());

@@ -95,7 +95,7 @@ public abstract class MyBaseActivity extends AppCompatActivity {
     }
 
 
-    protected abstract int getLayout(); // 获取布局ID
+    protected abstract @LayoutRes int getLayout(); // 获取布局ID
 
     protected abstract String getTitleText(); // 获取标题title
 

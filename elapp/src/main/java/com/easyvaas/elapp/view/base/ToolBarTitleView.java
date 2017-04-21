@@ -99,5 +99,19 @@ public class ToolBarTitleView extends LinearLayout {
         mTitleBack.setOnClickListener(listener);
     }
 
+    /**
+     * 返回右边图片 方便调整
+     */
+    public ImageView getRightImage()
+    {
+        return mTitleRightImg;
+    }
 
+    /**
+     * 返回中间TextView 方便调整
+     */
+    public TextView getCenterTextView()
+    {
+        return mTitleText;
+    }
 }
