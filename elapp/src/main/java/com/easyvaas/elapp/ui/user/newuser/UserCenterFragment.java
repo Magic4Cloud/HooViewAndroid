@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.easyvaas.common.sharelogin.data.ShareConstants;
 import com.easyvaas.common.widget.MyUserPhoto;
-import com.easyvaas.elapp.activity.user.FansListActivity;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.db.Preferences;
@@ -21,8 +20,6 @@ import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
-import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
-import com.easyvaas.elapp.ui.user.FollowersListActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
@@ -259,7 +256,7 @@ public class UserCenterFragment extends MyBaseFragment {
                 intent.putExtra(PayRecordListActivity.EXTRA_ACTIVITY_TYPE,
                         PayRecordListActivity.TYPE_CASH_IN);
                 startActivity(intent);*/
-                startActivity(new Intent(getActivity(), UserBalanceActivity.class));
+                UserBalanceActivity.start(getActivity(), bundle);
                 break;
             case R.id.user_center_publish:
                 startActivity(new Intent(getActivity(), UserPublishActivity.class));

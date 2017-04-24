@@ -433,7 +433,7 @@
     <string name="cash_in_count_selector">请选择充值金额</string>
     <string name="cash_in_mode_selector">请选择充值方式</string>
     <string name="kindly_reminder">关于火眼豆的解释请点击下方的资产相关说明查看。</string>
-    <string name="cash_in_confirm">确认充值</string>
+    <string name="cash_in_confirm">立即充值</string>
     <string name="title_cash_out">提现</string>
     <string name="money_amount_other">其它金额</string>
     <string name="cash_out_money_amount_hint">可提现金额%1$.2f元</string>

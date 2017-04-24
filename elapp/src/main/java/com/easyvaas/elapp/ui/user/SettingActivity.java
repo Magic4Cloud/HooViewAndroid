@@ -1,6 +1,5 @@
 package com.easyvaas.elapp.ui.user;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -14,7 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hooview.app.R;
+import com.easyvaas.common.feedback.FeedbackHelper;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.UpdateInfoEntity;
 import com.easyvaas.elapp.db.Preferences;
@@ -25,6 +24,7 @@ import com.easyvaas.elapp.ui.base.BaseTitleActivity;
 import com.easyvaas.elapp.utils.FileUtil;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.UpdateManager;
+import com.hooview.app.R;
 
 import java.io.File;
 
@@ -74,6 +74,7 @@ public class SettingActivity extends BaseTitleActivity implements View.OnClickLi
         findViewById(R.id.rl_update_version).setOnClickListener(this);
         findViewById(R.id.rl_clear_memory).setOnClickListener(this);
         findViewById(R.id.btn_logout).setOnClickListener(this);
+        findViewById(R.id.rl_feedback).setOnClickListener(this);
         mNoticeFollowEventCb = (CheckBox) findViewById(R.id.notice_follow_event_cb);
         mTvVersion = (TextView) findViewById(R.id.tv_version);
         new Thread() {
@@ -148,6 +149,9 @@ public class SettingActivity extends BaseTitleActivity implements View.OnClickLi
                 break;
             case R.id.btn_logout:
                 logout();
+                break;
+            case R.id.rl_feedback:
+                FeedbackHelper.getInstance(this).showFeedbackUI();
                 break;
 
         }

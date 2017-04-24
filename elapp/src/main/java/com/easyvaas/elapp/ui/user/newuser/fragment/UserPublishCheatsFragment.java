@@ -2,6 +2,7 @@ package com.easyvaas.elapp.ui.user.newuser.fragment;
 
 import com.easyvaas.elapp.adapter.usernew.UserCheatsAdapter;
 import com.easyvaas.elapp.bean.user.CheatsListModel;
+import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
@@ -43,7 +44,7 @@ public class UserPublishCheatsFragment extends MyBaseListFragment<UserCheatsAdap
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getUserPublishCheatsTest("http://192.168.8.125:8888/user/works?type=1")
+                RetrofitHelper.getInstance().getService().getUserPublishCheatsTest(ApiConstant.MOCK_HOST + "/user/works?type=1")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<CheatsListModel>() {

@@ -3,6 +3,7 @@ package com.easyvaas.elapp.ui.user.newuser.fragment;
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
+import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
@@ -36,7 +37,7 @@ public class UserPublishArticleFragment extends MyBaseListFragment<NormalNewsAda
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserPublishArticleTest("http://192.168.8.125:8888/user/works?type=2")
+                .getUserPublishArticleTest(ApiConstant.MOCK_HOST + "/user/works?type=2")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NormalNewsModel>() {

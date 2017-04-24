@@ -5,43 +5,44 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/base_white"
-    android:gravity="center_horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/base_white"
+                android:gravity="center_horizontal">
 
     <include
         android:id="@+id/common_title_tv"
-        layout="@layout/common_header_layout"
+        layout="@layout/common_header_layout_pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"/>
 
     <LinearLayout
         android:id="@+id/account_balance_ll"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_below="@+id/common_title_tv"
-        android:background="#5c2d7e"
+        android:background="#622d80"
         android:gravity="center"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
-            android:text="火眼豆"
-            android:textColor="@color/text_color_white"
-            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/e_coin_balance_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
             android:layout_marginTop="2dp"
             android:textColor="@color/text_color_white"
-            android:textSize="24sp" />
+            android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="火眼豆"
+            android:textColor="@color/text_color_white"
+            android:textSize="12sp"/>
+
     </LinearLayout>
 
     <TextView
@@ -54,7 +55,7 @@
         android:text="@string/cash_in_count_selector"
         android:textColor="@color/text_color_secondary_level"
         android:textSize="@dimen/text_size_13"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/cash_in_amount_lv"
@@ -78,7 +79,8 @@
             android:fadingEdge="none"
             android:fadingEdgeLength="3dp"
             android:scrollbars="vertical"
-            android:scrollingCache="@null" />
+            android:scrollingCache="@null"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -98,7 +100,7 @@
             android:text="@string/cash_in_mode_selector"
             android:textColor="@color/text_common"
             android:textSize="@dimen/text_size_12"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <RadioGroup
             android:id="@+id/cash_in_option_rg"
@@ -120,8 +122,8 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/cash_in_option_weixin"
-                android:visibility="gone"
-                android:textColor="#59b64c" />
+                android:textColor="#59b64c"
+                android:visibility="visible"/>
 
             <RadioButton
                 android:id="@+id/cash_in_option_alipay_rb"
@@ -129,14 +131,17 @@
                 android:layout_height="@dimen/button_common_height"
                 android:layout_marginLeft="25dp"
                 android:button="@null"
+                android:checked="true"
                 android:drawableBottom="@drawable/selector_pay_alipay_drawable_bottom"
                 android:drawableLeft="@drawable/selector_pay_alipay_drawable_left"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/cash_in_option_alipay"
                 android:textColor="#009fe8"
-                android:visibility="visible" />
+                android:visibility="visible"/>
+
         </RadioGroup>
+
     </LinearLayout>
 
     <LinearLayout
@@ -144,7 +149,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/cash_in_mode_ll"
-
         android:layout_marginLeft="14dp"
         android:layout_marginTop="14dp"
         android:orientation="horizontal">
@@ -155,16 +159,17 @@
             android:layout_height="wrap_content"
             android:button="@drawable/selector_checked_btn"
             android:checked="true"
-            android:text="@string/agree"
-            android:textColor="@color/text_color_gray" />
+            android:text=" 同意"
+            android:textColor="@color/text_color_gray"/>
 
         <TextView
             android:id="@+id/tv_user_protocol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="6dp"
             android:text="@string/user_cash_inprotocol"
-            android:textColor="@color/text_color_purplish" />
+            android:textColor="@color/text_color_purplish"/>
+
     </LinearLayout>
 
     <TextView
@@ -178,12 +183,12 @@
         android:paddingTop="15dp"
         android:textColor="@color/text_red"
         android:textSize="@dimen/text_size_title_h2"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/cash_in_confirm_btn"
-        android:layout_width="210dp"
-        android:layout_height="@dimen/button_common_height"
+        android:layout_width="260dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
@@ -192,6 +197,7 @@
         android:button="@null"
         android:text="@string/cash_in_confirm"
         android:textColor="@color/text_color_white"
-        android:textSize="@dimen/text_size_title_h2"
-        android:visibility="visible" />
+        android:textSize="@dimen/text_size_16"
+        android:visibility="visible"/>
+
 </RelativeLayout>

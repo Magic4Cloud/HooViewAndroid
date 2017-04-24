@@ -2,6 +2,7 @@ package com.easyvaas.elapp.ui.user.newuser.activity;
 
 import android.support.v4.app.FragmentManager;
 
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
 import com.easyvaas.elapp.ui.user.newuser.fragment.UserCollectionFragment;
 import com.hooview.app.R;
@@ -27,7 +28,7 @@ public class UserCollectionNewActivity extends MyBaseActivity {
     @Override
     protected void initViewAndData() {
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().add(R.id.user_collection_layout, UserCollectionFragment.newInstance()).commit();
+        manager.beginTransaction().add(R.id.user_collection_layout, UserCollectionFragment.newInstance(EVApplication.getUser().getName(), EVApplication.getUser().getSessionid())).commit();
     }
 
 }

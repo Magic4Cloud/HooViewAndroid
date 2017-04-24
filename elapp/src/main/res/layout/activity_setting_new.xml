@@ -3,153 +3,192 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/list_divider_bg"
+    android:background="#f8f8f8"
     android:orientation="vertical">
 
     <include layout="@layout/view_title_common"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="4dp"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_account"
-        style="@style/item_my_setting">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/icon_head"
-            android:text="@string/account_manager"
-            android:textColor="@color/text_color_gray"
-            android:textSize="16sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/btn_next_n"/>
-    </RelativeLayout>
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_live_push"
-        style="@style/item_my_setting">
+        <RelativeLayout
+            android:id="@+id/rl_account"
+            style="@style/item_setting">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/icon_head"
+                android:text="@string/account_manager"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp"/>
 
-            android:text="直播提醒"
-            android:textColor="@color/text_color_gray"
-            android:textSize="16sp"/>
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/btn_next_n"/>
 
-        <CheckBox
-            android:id="@+id/notice_follow_event_cb"
-            style="@style/toggle_button"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:checked="true"/>
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="8dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#f8f8f8"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_clear_memory"
-        style="@style/item_my_setting">
+        <RelativeLayout
+            android:id="@+id/rl_live_push"
+            style="@style/item_setting">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/clear_cache_memory"
-            android:textColor="@color/text_color_gray"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="直播提醒"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/cached_size_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="12dp"
-            android:text="--"
-            android:textColor="#000"
-            android:textSize="15dp"/>
-    </RelativeLayout>
+            <CheckBox
+                android:id="@+id/notice_follow_event_cb"
+                style="@style/toggle_button"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_centerVertical="true"
+                android:checked="true"/>
 
+        </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/list_divider_bg"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
+            android:background="#f8f8f8"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_update_version"
-        style="@style/item_my_setting">
+        <RelativeLayout
+            android:id="@+id/rl_clear_memory"
+            style="@style/item_setting">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/update_version"
-            android:textColor="@color/text_color_gray"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/clear_cache_memory"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/tv_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="12dp"
-            android:textColor="#000"
-            android:textSize="15dp"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/cached_size_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:text="--"
+                android:textColor="@color/title_text_color"
+                android:textSize="16sp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="8dp"/>
+        </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#f8f8f8"/>
 
-    <RelativeLayout
-        android:id="@+id/rl_about"
-        style="@style/item_my_setting">
+        <RelativeLayout
+            android:id="@+id/rl_update_version"
+            style="@style/item_setting">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/about_hooview"
-            android:textColor="@color/text_color_gray"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/update_version"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/btn_next_n"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/title_text_color"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="8dp"
+            android:background="#f8f8f8"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_about"
+            style="@style/item_setting">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/about_hooview"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/btn_next_n"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#f8f8f8"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_feedback"
+            style="@style/item_setting">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/feedback"
+                android:textColor="@color/text_color_gray"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/btn_next_n"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="260dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="54dp"
         android:background="@drawable/shape_common_btn_b"
         android:text="@string/logout"
         android:textColor="@color/text_color_white"

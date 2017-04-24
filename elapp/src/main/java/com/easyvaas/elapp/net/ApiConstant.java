@@ -21,6 +21,8 @@ public class ApiConstant {
 //    private static final String DEBUG_HOST = RELEASE_HOST;
 //    private static final String DEBUG_WEB_APP_HOST = RELEASE_WEB_APP_HOST;
 
+    public static final String MOCK_HOST = "http://192.168.8.191:8888";
+
     private static final boolean IS_SUPPORT_SSL = false;
 
     private static String HOST = DEBUG_HOST;

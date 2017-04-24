@@ -3,6 +3,7 @@ package com.easyvaas.elapp.ui.user.newuser.fragment;
 import com.easyvaas.elapp.adapter.usernew.UserVLivingAdapter;
 import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
+import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
@@ -46,7 +47,7 @@ public class UserPublishLivingFragment extends MyBaseListFragment<UserVLivingAda
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getUserPublishLivingTest("http://192.168.8.191:8888/user/works?type=0")
+                RetrofitHelper.getInstance().getService().getUserPublishLivingTest(ApiConstant.MOCK_HOST + "/user/works?type=0")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<UserPublishVideoModel>() {

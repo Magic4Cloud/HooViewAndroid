@@ -1,91 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/balance_swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.CoordinatorLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/balance_appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/balance_appbar_layout"
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:elevation="0dp">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
+                    android:background="@color/white"
+                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/balance_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:maxLines="1"
+                        android:text="164,521"
+                        android:textColor="@color/tab_text_color_selected"
+                        android:textSize="30sp"/>
 
-                        <TextView
-                            android:id="@+id/balance_money"
-                            android:layout_width="wrap_content"
-                            android:layout_height="42dp"
-                            android:maxLines="1"
-                            android:text="164,521"
-                            android:textColor="@color/tab_text_color_selected"
-                            android:textSize="30sp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="17dp"
-                            android:layout_marginTop="4dp"
-                            android:text="火眼豆"
-                            android:textColor="@color/tab_text_color_selected"
-                            android:textSize="12sp"/>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        android:background="#f7f7f7"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="17dp"
+                        android:layout_marginTop="4dp"
+                        android:text="火眼豆"
+                        android:textColor="@color/tab_text_color_selected"
+                        android:textSize="12sp"/>
 
                 </LinearLayout>
 
-            </android.support.design.widget.CollapsingToolbarLayout>
+                <LinearLayout
+                    android:id="@+id/balance_income_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:background="#c9dfd5eb"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:gravity="center"
+                        android:text="总收入"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="14sp"/>
 
-                <com.flyco.tablayout.SlidingTabLayout
-                    android:id="@+id/balance_tab_layout"
-                    style="@style/slider_layout_user_style"
-                    android:layout_width="140dp"
-                    android:layout_height="44dp"
-                    android:layout_alignParentRight="true">
-                </com.flyco.tablayout.SlidingTabLayout>
+                    <TextView
+                        android:id="@+id/balance_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:gravity="center"
+                        android:text="32,242,323"
+                        android:textColor="#fc501a"
+                        android:textSize="14sp"/>
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:gravity="center"
+                        android:text="火眼币"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="14sp"/>
 
-        </android.support.design.widget.AppBarLayout>
+                </LinearLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/balance_tab_viewpager"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#f7f7f7"/>
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
-        </android.support.v4.view.ViewPager>
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/balance_tab_layout"
+                style="@style/slider_layout_user_style"
+                android:layout_width="140dp"
+                android:layout_height="44dp"
+                android:layout_alignParentRight="true">
+            </com.flyco.tablayout.SlidingTabLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+        </RelativeLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/balance_tab_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v4.view.ViewPager>
+
+</android.support.design.widget.CoordinatorLayout>

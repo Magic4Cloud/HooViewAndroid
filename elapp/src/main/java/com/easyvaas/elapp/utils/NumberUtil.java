@@ -14,7 +14,7 @@ public class NumberUtil {
      * @param number
      * @return
      */
-    public static String format(int number) {
+    public static String format(long number) {
         String result = "";
         if (number < 1000) {
             result = String.valueOf(number);
