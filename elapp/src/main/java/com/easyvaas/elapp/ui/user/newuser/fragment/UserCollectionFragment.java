@@ -1,11 +1,16 @@
 package com.easyvaas.elapp.ui.user.newuser.fragment;
 
+import android.os.Bundle;
+
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
+import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -21,9 +26,27 @@ import rx.schedulers.Schedulers;
 
 public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter> {
 
+    private String userId;
+    private String sessionId;
+
     @Override
     protected NormalNewsAdapter initAdapter() {
         return new NormalNewsAdapter(new ArrayList<HomeNewsBean>());
+    }
+
+    @Override
+    protected void changeEmptyView() {
+        super.changeEmptyView();
+        if (userId.equals(EVApplication.getUser().getName()))
+            mEmptyView.setEmptyTxt(getString(R.string.empty_no_collect));
+        else
+            mEmptyView.setEmptyTxt(getString(R.string.empty_no_user_colloct));
+    }
+
+    @Override
+    protected void initSomeData() {
+        userId = getArguments().getString(AppConstants.USER_ID);
+        sessionId = getArguments().getString(AppConstants.SESSION_ID);
     }
 
     @Override
@@ -36,12 +59,12 @@ public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter
                     @Override
                     public void OnSuccess(NormalNewsModel normalNewsModel) {
                         if (normalNewsModel != null)
-                            mAdapter.dealLoadData(UserCollectionFragment.this,isLoadMore,normalNewsModel.getNews());
+                            mAdapter.dealLoadData(UserCollectionFragment.this, isLoadMore, normalNewsModel.getNews());
                     }
 
                     @Override
                     public void OnFailue(String msg) {
-                        mAdapter.dealLoadError(UserCollectionFragment.this,isLoadMore);
+                        mAdapter.dealLoadError(UserCollectionFragment.this, isLoadMore);
                     }
                 });
         addSubscribe(subscription);
@@ -52,8 +75,14 @@ public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter
         setPaddingTop(4);
     }
 
-    public static UserCollectionFragment newInstance() {
-       return new UserCollectionFragment();
+    public static UserCollectionFragment newInstance(String userId,String sessionId) {
+
+        Bundle args = new Bundle();
+        args.putString(AppConstants.USER_ID, userId);
+        args.putString(AppConstants.SESSION_ID,sessionId);
+        UserCollectionFragment fragment = new UserCollectionFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 }

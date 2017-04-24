@@ -33,7 +33,7 @@ public class VipUserArticleFragment extends MyBaseListFragment<NormalNewsAdapter
 
     @Override
     protected void changeRecyclerView() {
-        setPaddingTop(5);
+        setPaddingTop(4);
     }
 
     @Override

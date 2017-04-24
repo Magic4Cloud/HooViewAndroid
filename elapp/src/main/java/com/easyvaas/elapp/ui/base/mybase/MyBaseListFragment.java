@@ -39,6 +39,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
 
     @Override
     protected void initViewAndData() {
+        initSomeData();//初始化一些数据
         mSwiprefreshlayout.setOnRefreshListener(this);
         mSwiprefreshlayout.setColorSchemeColors(ContextCompat.getColor(getContext(), R.color.base_purplish));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -84,6 +85,14 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
                 }
             }, mRecyclerview);
         }
+    }
+
+    /**
+     * 初始化某些数据
+     */
+    protected void initSomeData()
+    {
+
     }
 
     /**

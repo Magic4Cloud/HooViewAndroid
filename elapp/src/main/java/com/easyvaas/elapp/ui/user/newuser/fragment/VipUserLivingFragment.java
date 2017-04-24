@@ -34,10 +34,19 @@ public class VipUserLivingFragment extends MyBaseListFragment<UserVLivingAdapter
     }
 
     @Override
+    protected void changeRecyclerView() {
+        setPaddingTop(4);
+    }
+
+    @Override
+    protected void initSomeData() {
+        userId = getArguments().getString(AppConstants.USER_ID);
+    }
+
+    @Override
     protected void initViewAndData() {
         super.initViewAndData();
-        setPaddingTop(4);
-        userId = getArguments().getString(AppConstants.USER_ID);
+
     }
 
     @Override

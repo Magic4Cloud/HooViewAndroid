@@ -21,6 +21,7 @@ import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
+import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.FollowersListActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
@@ -29,6 +30,8 @@ import com.easyvaas.elapp.ui.user.UserInfoActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserBalanceActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserBuyActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserCollectionNewActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserFansActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserFocusActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserPublishActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserVipPageActivity;
@@ -239,11 +242,11 @@ public class UserCenterFragment extends MyBaseFragment {
                 break;
             case R.id.user_center_focuscounts:
             case R.id.user_center_focustxt: //关注列表
-                startActivity(new Intent(getActivity(), FollowersListActivity.class));
+                startActivity(new Intent(getActivity(), UserFocusActivity.class));
                 break;
             case R.id.user_center_fanscounts:
             case R.id.user_center_fanstxt: // 粉丝列表
-                Intent fansIntent = new Intent(getActivity(), FansListActivity.class);
+                Intent fansIntent = new Intent(getActivity(), UserFansActivity.class);
                 fansIntent.putExtra(Constants.EXTRA_KEY_USER_ID,
                         Preferences.getInstance(getContext()).getUserNumber());
                 startActivity(fansIntent);
