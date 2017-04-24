@@ -207,4 +207,8 @@
     <color name="video_living_playback">#999999</color>
     <color name="video_living_pay">#659ae0</color>
 
+    <color name="user_comment_blue">#8ec1eb</color>
+    <color name="user_comment_orange">#ebbc8e</color>
+    <color name="user_comment_purple">#b3a2e9</color>
+
 </resources>

@@ -804,6 +804,16 @@
     <string name="empty_net_refresh">重新刷新</string>
     <string name="empty_no_data">暂时没有数据哦</string>
     <string name="network_error">网络不给力哦~</string>
+    <string name="empty_no_fans">您还没有粉丝噢</string>
+    <string name="empty_no_vipfans">Ta还没有粉丝噢</string>
+    <string name="empty_no_user_colloct">Ta还没有收藏资讯噢</string>
+    <string name="empty_no_focus">您还没有关注的人噢</string>
+    <string name="empty_no_collect">您还没有收藏资讯噢</string>
+    <string name="empty_no_watch">您还没有收看视频/直播噢</string>
+    <string name="empty_no_read">您还没有看过任何资讯噢</string>
+    <string name="empty_no_living">您还没有直播噢</string>
+    <string name="empty_no_cheats">您还没有发布秘籍噢</string>
+    <string name="empty_no_article">您还没有文章噢</string>
 
     //个人中心
     <string name="user_center">用户中心</string>
@@ -824,5 +834,10 @@
     <string name="user_article">文章</string>
     <string name="user_fans">粉丝</string>
     <string name="user_text_follow_count">%s人参与</string>
+    <string name="user_myfans">我的粉丝</string>
+    <string name="user_myfoucs">我的关注</string>
+    <string name="opreat_fail">操作失败</string>
+    <string name="unfollow_success">取消关注成功</string>
+
 
 </resources>

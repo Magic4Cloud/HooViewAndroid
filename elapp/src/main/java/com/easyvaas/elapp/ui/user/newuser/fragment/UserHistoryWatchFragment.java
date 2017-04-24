@@ -6,6 +6,7 @@ import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,16 @@ public class UserHistoryWatchFragment  extends MyBaseListFragment<UserVLivingAda
         return new UserVLivingAdapter(new ArrayList<VideoEntity>());
     }
 
+    @Override
+    protected void changeRecyclerView() {
+        setPaddingTop(4);
+    }
+
+    @Override
+    protected void changeEmptyView() {
+        super.changeEmptyView();
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_watch));
+    }
 
     @Override
     protected void getListData(final Boolean isLoadMore) {

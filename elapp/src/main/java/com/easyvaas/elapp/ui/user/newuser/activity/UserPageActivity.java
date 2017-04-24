@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,10 +19,8 @@ import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
-import com.easyvaas.elapp.ui.user.newuser.fragment.UserFansFragment;
 import com.easyvaas.elapp.ui.user.newuser.fragment.VipUserArticleFragment;
 import com.easyvaas.elapp.ui.user.newuser.fragment.VipUserCheatsFragment;
-import com.easyvaas.elapp.ui.user.newuser.fragment.VipUserLivingFragment;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
@@ -40,51 +37,49 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
- * Date   2017/4/21
+ * Date   2017/4/23
  * Editor  Misuzu
- * 大V主页
+ * 普通用户主页
  */
 
-public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.vip_avator)
-    ImageView mVipAvator;
-    @BindView(R.id.vip_number)
-    TextView mVipNumber;
-    @BindView(R.id.vip_info)
-    TextView mVipInfo;
-    @BindView(R.id.vip_name)
-    TextView mVipName;
-    @BindView(R.id.vip_fans_text)
-    TextView mVipFansText;
-    @BindView(R.id.vip_fans_counts)
-    TextView mVipFansCounts;
-    @BindView(R.id.vip_focus_button)
-    TextView mVipFocusButton;
-    @BindView(R.id.vip_tags)
-    TextView mVipTags;
-    @BindView(R.id.vip_introduce)
-    TextView mVipIntroduce;
-    @BindView(R.id.vip_tab_layout)
-    SlidingTabLayout mVipTabLayout;
-    @BindView(R.id.vip_tab_viewpager)
-    ViewPager mVipTabViewpager;
-    @BindView(R.id.vip_appbar_layout)
-    AppBarLayout mVipAppbarLayout;
-    @BindView(R.id.vip_collapsing_layout)
-    CollapsingToolbarLayout mVipCollapsingLayout;
+
+    @BindView(R.id.user_page_avator)
+    ImageView mUserPageAvator;
+    @BindView(R.id.user_page_info)
+    TextView mUserPageInfoText;
+    @BindView(R.id.user_page_name)
+    TextView mUserPageName;
+    @BindView(R.id.user_page_fans_text)
+    TextView mUserPageFansText;
+    @BindView(R.id.user_page_fans_counts)
+    TextView mUserPageFansCounts;
+    @BindView(R.id.user_page_focus_text)
+    TextView mUserPageFocusText;
+    @BindView(R.id.user_page_focus_counts)
+    TextView mUserPageFocusCounts;
+    @BindView(R.id.user_page_focus_button)
+    TextView mUserPageFocusButton;
+    @BindView(R.id.user_page_collapsing_layout)
+    CollapsingToolbarLayout mUserPageCollapsingLayout;
+    @BindView(R.id.user_page_tab_layout)
+    SlidingTabLayout mUserPageTabLayout;
+    @BindView(R.id.user_page_appbar_layout)
+    AppBarLayout mUserPageAppbarLayout;
+    @BindView(R.id.user_page_tab_viewpager)
+    ViewPager mUserPageTabViewpager;
+    @BindView(R.id.user_page_CoordinatorLayout)
+    CoordinatorLayout mUserPageCoordinatorLayout;
     @BindView(R.id.user_swipe_refresh_layout)
     SwipeRefreshLayout mUserSwipeRefreshLayout;
-    @BindView(R.id.vip_CoordinatorLayout)
-    CoordinatorLayout mCoordinatorLayout;
-
     private String[] titles;
     private Fragment[] mFragments;
     private UserPageInfo mUserPageInfo;
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_vip_page_layout;
+        return R.layout.activity_user_page_layout;
     }
 
     @Override
@@ -99,7 +94,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
         mToobarTitleView.setTitleRightImg(R.drawable.btn_report_n, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SingleToast.show(UserVipPageActivity.this, R.string.msg_report_success);
+                SingleToast.show(UserPageActivity.this, R.string.msg_report_success);
             }
         });
     }
@@ -112,20 +107,15 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
 
     private void initTabView() {
         titles = new String[]{
-                getString(R.string.user_living),
-                getString(R.string.user_secret),
-                getString(R.string.user_article),
-                getString(R.string.user_fans)};
+                getString(R.string.comment),
+                getString(R.string.collect)};
         mFragments = new Fragment[]{
-                VipUserLivingFragment.newInstance("id"),
                 VipUserCheatsFragment.newInstance("id"),
-                VipUserArticleFragment.newInstance("id"),
-                UserFansFragment.newInstance(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid())
-        };
+                VipUserArticleFragment.newInstance("id")};
         mUserSwipeRefreshLayout.setOnRefreshListener(this);
         mUserSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.base_purplish));
-        mVipTabViewpager.setAdapter(new VipPageAdapter(getSupportFragmentManager()));
-        mVipTabLayout.setViewPager(mVipTabViewpager);
+        mUserPageTabViewpager.setAdapter(new VipPageAdapter(getSupportFragmentManager()));
+        mUserPageTabLayout.setViewPager(mUserPageTabViewpager);
         mUserSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -137,7 +127,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
 
     private void initAppBar() {
         // 动态改变toolbar
-        mVipAppbarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+        mUserPageAppbarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 int scrollRangle = appBarLayout.getTotalScrollRange();
@@ -154,11 +144,10 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
 
 
     /**
-     * 获取大V用户信息
+     * 获取用户信息
      */
-    private void getVipUserInfo()
-    {
-        mCoordinatorLayout.setVisibility(View.VISIBLE);
+    private void getVipUserInfo() {
+        mUserPageCoordinatorLayout.setVisibility(View.VISIBLE);
     }
 
 
@@ -167,21 +156,18 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
      */
     private void setHeaderData(UserPageInfo data) {
 
-        mVipName.setText(data.getNickname());
-        mVipInfo.setText(data.getSignature());
-        mVipNumber.setText(data.getCredentials());
-        mVipTags.setText(TextUtils.join(",",data.getTags()));
-        mVipIntroduce.setText(data.getIntroduce());
-        mVipFansCounts.setText(data.getFans_count());
-        Picasso.with(this).load(data.getLogourl()).placeholder(R.drawable.account_bitmap_list).into(mVipAvator);
+        mUserPageName.setText(data.getNickname());
+        mUserPageInfoText.setText(data.getSignature());
+        mUserPageFansCounts.setText(String.valueOf(data.getFans_count()));
+        mUserPageFocusCounts.setText(String.valueOf(data.getFollow_count()));
+        Picasso.with(this).load(data.getLogourl()).placeholder(R.drawable.account_bitmap_list).into(mUserPageAvator);
         if (data.getFollowed() == 1) // 0 关注 1 已关注
         {
-            mVipFocusButton.setSelected(true);
-            mVipFocusButton.setText(R.string.user_followed);
-        }else
-        {
-            mVipFocusButton.setSelected(false);
-            mVipFocusButton.setText(R.string.user_follow);
+            mUserPageFocusButton.setSelected(true);
+            mUserPageFocusButton.setText(R.string.user_followed);
+        } else {
+            mUserPageFocusButton.setSelected(false);
+            mUserPageFocusButton.setText(R.string.user_follow);
         }
 
     }
@@ -203,12 +189,11 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
     /**
      * 关注 取消关注 点击
      */
-    @OnClick(R.id.vip_focus_button)
-    public void onViewClicked()
-    {
-        final int action = mVipFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
+    @OnClick(R.id.user_page_focus_button)
+    public void onViewClicked() {
+        final int action = mUserPageFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .followSomeOne("id",EVApplication.getUser().getSessionid(),action)
+                .followSomeOne("id", EVApplication.getUser().getSessionid(), action)  // Aya : 2017/4/23 待调试接口
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NoResponeBackModel>() {
@@ -216,23 +201,36 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
                     public void OnSuccess(NoResponeBackModel s) {
                         if (action == 1) // 0 关注 1 已关注
                         {
-                            mVipFocusButton.setSelected(true);
-                            mVipFocusButton.setText(R.string.user_followed);
-                            SingleToast.show(EVApplication.getApp(),R.string.follow_sccuess);
-                        }else
-                        {
-                            mVipFocusButton.setSelected(false);
-                            mVipFocusButton.setText(R.string.user_follow);
-                            SingleToast.show(EVApplication.getApp(),R.string.follow_cancel);
+                            mUserPageFocusButton.setSelected(true);
+                            mUserPageFocusButton.setText(R.string.user_followed);
+                            SingleToast.show(EVApplication.getApp(), R.string.follow_sccuess);
+                        } else {
+                            mUserPageFocusButton.setSelected(false);
+                            mUserPageFocusButton.setText(R.string.user_follow);
+                            SingleToast.show(EVApplication.getApp(), R.string.follow_cancel);
                         }
                     }
 
                     @Override
                     public void OnFailue(String msg) {
-                        SingleToast.show(EVApplication.getApp(),R.string.opreat_fail);
+                        SingleToast.show(EVApplication.getApp(), R.string.opreat_fail);
                     }
                 });
         addSubscribe(subscription);
+    }
+
+
+
+    @OnClick({R.id.user_page_fans_text, R.id.user_page_fans_counts, R.id.user_page_focus_text, R.id.user_page_focus_counts})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.user_page_fans_text:
+            case R.id.user_page_fans_counts:
+                break;
+            case R.id.user_page_focus_text:
+            case R.id.user_page_focus_counts:
+                break;
+        }
     }
 
 

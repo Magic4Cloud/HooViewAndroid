@@ -90,7 +90,7 @@
                     android:layout_marginTop="2dp"
                     android:textColor="@color/text_color_gray"
                     android:textSize="16sp"
-                    android:text=""
+                    android:maxLength="15"
                     tools:text=""/>
 
                 <TextView
@@ -101,6 +101,7 @@
                     android:layout_marginTop="16dp"
                     android:textColor="@color/text_color_orange"
                     android:textSize="17sp"
+                    android:paddingBottom="10dp"
                     android:text="0"/>
 
                 <TextView
@@ -109,6 +110,7 @@
                     android:layout_alignTop="@id/user_center_focuscounts"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="0.5dp"
+                    android:paddingBottom="10dp"
                     android:layout_toRightOf="@id/user_center_focuscounts"
                     android:text="@string/focus"
                     />
@@ -122,6 +124,7 @@
                     android:layout_toRightOf="@id/user_center_focustxt"
                     android:textColor="@color/text_color_orange"
                     android:textSize="17sp"
+                    android:paddingBottom="10dp"
                     android:text="0"/>
 
                 <TextView
@@ -130,6 +133,7 @@
                     android:layout_alignTop="@id/user_center_fanscounts"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="0.5dp"
+                    android:paddingBottom="10dp"
                     android:layout_toRightOf="@id/user_center_fanscounts"
                     android:text="@string/fans"
                     />

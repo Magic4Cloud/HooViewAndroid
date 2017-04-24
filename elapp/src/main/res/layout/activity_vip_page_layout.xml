@@ -76,6 +76,7 @@
                                 android:layout_above="@id/vip_number"
                                 android:layout_marginBottom="5dp"
                                 android:text="火眼财经资深投顾"
+                                android:maxLength="15"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"/>
 

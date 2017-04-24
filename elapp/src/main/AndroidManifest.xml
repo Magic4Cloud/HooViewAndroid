@@ -604,6 +604,18 @@
             android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserVipPageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserFansActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserFocusActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserPageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

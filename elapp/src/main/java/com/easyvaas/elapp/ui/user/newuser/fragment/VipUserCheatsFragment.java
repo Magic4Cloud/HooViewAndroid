@@ -1,11 +1,13 @@
 package com.easyvaas.elapp.ui.user.newuser.fragment;
 
+import android.os.Bundle;
+
 import com.easyvaas.elapp.adapter.usernew.UserCheatsAdapter;
 import com.easyvaas.elapp.bean.user.CheatsListModel;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
+import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
-import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -14,49 +16,42 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Date    2017/4/20
- * Author  xiaomao
- * 个人中心---我的发布---秘籍
+ * Date   2017/4/21
+ * Editor  Misuzu
+ * 大V 秘籍
  */
 
-public class UserPublishCheatsFragment extends MyBaseListFragment<UserCheatsAdapter> {
+public class VipUserCheatsFragment extends MyBaseListFragment<UserCheatsAdapter> {
 
-    /**
-     * 初始化Adapter
-     */
+    private String userId;
+
     @Override
     protected UserCheatsAdapter initAdapter() {
         return new UserCheatsAdapter(new ArrayList<CheatsListModel.CheatsModel>());
     }
 
     @Override
-    protected void changeEmptyView() {
-        super.changeEmptyView();
-        mEmptyView.setEmptyTxt(getString(R.string.empty_no_cheats));
+    protected void initSomeData() {
+        userId = getArguments().getString(AppConstants.USER_ID);
     }
 
-    /**
-     * 获取列表数据
-     *
-     * @param isLoadMore
-     */
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getUserPublishCheatsTest("http://192.168.8.125:8888/user/works?type=1")
+                RetrofitHelper.getInstance().getService().getUserBuyCheatsTest("http://192.168.8.125:8888/user/purchases?type=2")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<CheatsListModel>() {
                             @Override
                             public void OnSuccess(CheatsListModel result) {
                                 if (result != null) {
-                                    mAdapter.dealLoadData(UserPublishCheatsFragment.this, isLoadMore, result.getCheats());
+                                    mAdapter.dealLoadData(VipUserCheatsFragment.this, isLoadMore, result.getCheats());
                                 }
                             }
 
                             @Override
                             public void OnFailue(String msg) {
-                                mAdapter.dealLoadError(UserPublishCheatsFragment.this, isLoadMore);
+                                mAdapter.dealLoadError(VipUserCheatsFragment.this, isLoadMore);
                             }
                         });
         addSubscribe(subscription);
@@ -67,7 +62,14 @@ public class UserPublishCheatsFragment extends MyBaseListFragment<UserCheatsAdap
         setPaddingTop(4);
     }
 
-    public static UserPublishCheatsFragment newInstance() {
-        return new UserPublishCheatsFragment();
+    public static VipUserCheatsFragment newInstance(String userId) {
+
+        Bundle args = new Bundle();
+        args.putString(AppConstants.USER_ID, userId);
+        VipUserCheatsFragment fragment = new VipUserCheatsFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
+
+
 }

@@ -6,6 +6,7 @@ import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ import rx.schedulers.Schedulers;
  * 用户历史阅读记录
  */
 
-public class UserHistoryRedNewFragment extends MyBaseListFragment<NormalNewsAdapter> {
+public class UserHistoryReadNewFragment extends MyBaseListFragment<NormalNewsAdapter> {
 
     @Override
     protected NormalNewsAdapter initAdapter() {
@@ -28,7 +29,13 @@ public class UserHistoryRedNewFragment extends MyBaseListFragment<NormalNewsAdap
 
     @Override
     protected void changeRecyclerView() {
-        setPaddingTop(5);
+        setPaddingTop(4);
+    }
+
+    @Override
+    protected void changeEmptyView() {
+        super.changeEmptyView();
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_read));
     }
 
     @Override
@@ -41,18 +48,18 @@ public class UserHistoryRedNewFragment extends MyBaseListFragment<NormalNewsAdap
                     @Override
                     public void OnSuccess(NormalNewsModel normalNewsModel) {
                         if (normalNewsModel != null)
-                        mAdapter.dealLoadData(UserHistoryRedNewFragment.this,isLoadMore,normalNewsModel.getNews());
+                        mAdapter.dealLoadData(UserHistoryReadNewFragment.this,isLoadMore,normalNewsModel.getNews());
                     }
 
                     @Override
                     public void OnFailue(String msg) {
-                        mAdapter.dealLoadError(UserHistoryRedNewFragment.this,isLoadMore);
+                        mAdapter.dealLoadError(UserHistoryReadNewFragment.this,isLoadMore);
                     }
                 });
         addSubscribe(subscription);
     }
 
-    public static UserHistoryRedNewFragment newInstance() {
-        return new UserHistoryRedNewFragment();
+    public static UserHistoryReadNewFragment newInstance() {
+        return new UserHistoryReadNewFragment();
     }
 }

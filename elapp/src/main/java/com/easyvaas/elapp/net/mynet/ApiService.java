@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.net.mynet;
 
 import com.easyvaas.elapp.bean.BannerModel;
+import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
@@ -9,8 +10,10 @@ import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.bean.news.TopicModel;
 import com.easyvaas.elapp.bean.user.CheatsListModel;
+import com.easyvaas.elapp.bean.user.UserFollowModel;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
+import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.net.ApiConstant;
 
@@ -76,6 +79,36 @@ public interface ApiService {
     @GET(ApiConstant.DEBUG_HOST+"user/info")
     Observable<NetResponse<User>> getUserInfo(@Query("name") String id,
                                               @Query("sessionid") String sessionid);
+
+    /**
+     * 获取用户信息V2
+     */
+    @GET("api/v2/user/info")
+    Observable<NetResponse<User>> getUserInfoNew(@Query("name") String id,
+                                              @Query("sessionid") String sessionid);
+
+    /**
+     * 获取用户粉丝列表
+     */
+    @GET(ApiConstant.DEBUG_HOST+"user/fanslist")
+    Observable<NetResponse<UserFollowModel>> getUserFans(@Query("name") String id,
+                                                         @Query("sessionid") String sessionid,
+                                                         @Query("start") int start);
+
+    /**
+     * 获取用户关注列表
+     */
+    @GET(ApiConstant.DEBUG_HOST+"user/followerlist")
+    Observable<NetResponse<UserFollowModel>> getUserFocus(@Query("name") String id,
+                                                          @Query("sessionid") String sessionid,
+                                                          @Query("start") int start);
+    /**
+     * 关注用户 0 取消关注 1 关注
+     */
+    @GET(ApiConstant.DEBUG_HOST+"user/follow")
+    Observable<NetResponse<NoResponeBackModel>> followSomeOne(@Query("name") String id,
+                                                              @Query("sessionid") String sessionid,
+                                                              @Query("action") int action);
     /**
      * 用户阅读记录
      * @param type 0 观看 1 文章
@@ -203,5 +236,33 @@ public interface ApiService {
     @GET()
     Observable<NetResponse<CheatsListModel>> getUserBuyCheatsTest(@Url String url);
 
+    /**
+     * 大V直播列表
+     */
+    @GET("api/v2/user/videos")
+    Observable<NetResponse<UserPublishVideoModel>> getVipUserPublishLiving(@Query("userid") String id,
+                                                                           @Query("start") int start);
+
+    /**
+     * 大V秘籍列表
+     */
+    @GET("api/v2/user/cheats")
+    Observable<NetResponse<CheatsListModel>> getVUserBuyCheats(@Query("userid") String id,
+                                                               @Query("start") int start);
+
+    /**
+     * 大V文章列表
+     */
+    @GET("api/v2/user/news")
+    Observable<NetResponse<NormalNewsModel>> getVUserPublishArticle(@Query("userid") String id,
+                                                                    @Query("start") int start);
+
+    /**
+     * 查看他人主页信息
+     */
+    @GET("api/v2/user/baseinfo")
+    Observable<NetResponse<UserPageInfo>> getUserPageInfo(@Query("userid") String id,
+                                                          @Query("sessionid") String sessionid,
+                                                          @Query("personid") String personId);
 
 }

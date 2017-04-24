@@ -23,6 +23,15 @@ public class User extends BaseUserEntity implements Serializable {
     private String impwd;
     private String share_url;
     private int living;
+    private String introduce; // 详细介绍
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
 
     public int getLiving() {
         return living;
