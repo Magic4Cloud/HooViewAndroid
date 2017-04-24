@@ -39,7 +39,7 @@ public class UserPublishLivingFragment extends MyBaseListFragment<UserVLivingAda
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getUserPublishLivingTest("http://192.168.8.125:8888/user/works?type=0")
+                RetrofitHelper.getInstance().getService().getUserPublishLivingTest("http://192.168.8.191:8888/user/works?type=0")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<UserPublishVideoModel>() {

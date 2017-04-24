@@ -148,6 +148,11 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
+            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserBalanceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
             android:name="com.easyvaas.elapp.activity.setting.BindUserAuthActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

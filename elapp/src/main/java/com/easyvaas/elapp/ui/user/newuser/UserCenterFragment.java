@@ -21,12 +21,12 @@ import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
-import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.FollowersListActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
 import com.easyvaas.elapp.ui.user.UserInfoActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserBalanceActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserBuyActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserCollectionNewActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity;
@@ -252,10 +252,11 @@ public class UserCenterFragment extends MyBaseFragment {
                 MessageUnReadListActivity.start(getActivity());
                 break;
             case R.id.user_center_balance: // 余额列表
-                Intent intent = new Intent(getActivity(), PayRecordListActivity.class);
+                /*Intent intent = new Intent(getActivity(), PayRecordListActivity.class);
                 intent.putExtra(PayRecordListActivity.EXTRA_ACTIVITY_TYPE,
                         PayRecordListActivity.TYPE_CASH_IN);
-                startActivity(intent);
+                startActivity(intent);*/
+                startActivity(new Intent(getActivity(), UserBalanceActivity.class));
                 break;
             case R.id.user_center_publish:
                 startActivity(new Intent(getActivity(), UserPublishActivity.class));
