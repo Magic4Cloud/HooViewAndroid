@@ -28,7 +28,7 @@ public class UserCollectionNewActivity extends MyBaseActivity {
     @Override
     protected void initViewAndData() {
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().add(R.id.user_collection_layout, UserCollectionFragment.newInstance(EVApplication.getUser().getName(), EVApplication.getUser().getSessionid())).commit();
+        manager.beginTransaction().add(R.id.user_collection_layout, UserCollectionFragment.newInstance(EVApplication.getUser().getName())).commit();
     }
 
 }

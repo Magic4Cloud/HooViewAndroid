@@ -1,10 +1,6 @@
 package com.easyvaas.elapp.net.mynet;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import com.easyvaas.elapp.app.EVApplication;
-import com.hooview.app.R;
 
 import rx.Subscriber;
 
@@ -25,7 +21,7 @@ public abstract class NetSubscribe<T> extends Subscriber<NetResponse<T>> {
     public void onError(Throwable e) {
         OnFailue(e.toString());
         Log.e("Misuzu","error --->"+e.toString());
-        Toast.makeText(EVApplication.getApp(),EVApplication.getApp().getString(R.string.network_error),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(EVApplication.getApp(),EVApplication.getApp().getString(R.string.network_error),Toast.LENGTH_SHORT).show();
     }
 
     @Override

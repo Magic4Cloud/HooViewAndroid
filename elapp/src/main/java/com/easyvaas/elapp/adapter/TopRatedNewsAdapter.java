@@ -341,7 +341,6 @@ public class TopRatedNewsAdapter extends Adapter {
 
         @OnClick(R.id.item_news_layout)
         public void onViewClicked() {
-            // Aya : 2017/4/11 专题跳转
             mContext.startActivity(new Intent(mContext, TopicActivity.class));
         }
 

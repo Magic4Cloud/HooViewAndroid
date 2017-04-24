@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.bean.news.TopRatedModel.RecommendBean;
-import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
+import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.CircleImageTransformation;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
@@ -73,8 +73,9 @@ public class RecommendPersonAdapter extends RecyclerView.Adapter {
 
         @OnClick(R.id.item_card_layout)
         public void onViewClicked() {
-            // Aya : 2017/4/11 跳转用户界面疑问
-            VIPUserInfoDetailActivity.start(mContext,datas.get(getLayoutPosition()).getId());
+
+            Utils.toUserPager(mContext,datas.get(getLayoutPosition()).getId(),1);
+
         }
     }
 }

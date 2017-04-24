@@ -27,7 +27,6 @@ import rx.schedulers.Schedulers;
 public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter> {
 
     private String userId;
-    private String sessionId;
 
     @Override
     protected NormalNewsAdapter initAdapter() {
@@ -46,13 +45,12 @@ public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter
     @Override
     protected void initSomeData() {
         userId = getArguments().getString(AppConstants.USER_ID);
-        sessionId = getArguments().getString(AppConstants.SESSION_ID);
     }
 
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserReadHistoryTest("http://demo2821846.mockable.io/user/favoritelist")
+                .getUserCollection(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NormalNewsModel>() {
@@ -75,11 +73,10 @@ public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter
         setPaddingTop(4);
     }
 
-    public static UserCollectionFragment newInstance(String userId,String sessionId) {
+    public static UserCollectionFragment newInstance(String userId) {
 
         Bundle args = new Bundle();
         args.putString(AppConstants.USER_ID, userId);
-        args.putString(AppConstants.SESSION_ID,sessionId);
         UserCollectionFragment fragment = new UserCollectionFragment();
         fragment.setArguments(args);
         return fragment;

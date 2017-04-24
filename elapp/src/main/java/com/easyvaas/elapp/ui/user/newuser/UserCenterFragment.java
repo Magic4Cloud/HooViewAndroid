@@ -31,8 +31,8 @@ import com.easyvaas.elapp.ui.user.newuser.activity.UserFansActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserFocusActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity;
 import com.easyvaas.elapp.ui.user.newuser.activity.UserPublishActivity;
-import com.easyvaas.elapp.ui.user.newuser.activity.UserVipPageActivity;
 import com.easyvaas.elapp.utils.Constants;
+import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
@@ -106,7 +106,6 @@ public class UserCenterFragment extends MyBaseFragment {
         bundle = new Bundle();
         mPreferences = Preferences.getInstance(getContext().getApplicationContext());
         EventBus.getDefault().register(this);
-        mUserCenterAvator.setIsVip(1);
     }
 
 
@@ -232,7 +231,7 @@ public class UserCenterFragment extends MyBaseFragment {
         switch (view.getId()) {
             case R.id.user_edit_layout:  // 编辑资料
 //                UserInfoActivity.start(getActivity(),bundle);
-                startActivity(new Intent(getActivity(), UserVipPageActivity.class));
+                Utils.toUserPager(mContext,EVApplication.getUser().getName(),1);
                 break;
             case R.id.user_settting: // 设置界面
                 SettingActivity.start(getActivity());

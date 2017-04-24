@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui.user.newuser.fragment;
 
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
@@ -41,7 +42,7 @@ public class UserHistoryReadNewFragment extends MyBaseListFragment<NormalNewsAda
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserReadHistoryTest("http://demo2821846.mockable.io/user/historylist?type=1")
+                .getUserReadHistory(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NormalNewsModel>() {

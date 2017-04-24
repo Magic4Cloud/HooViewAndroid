@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.user.Record;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.Preferences;
@@ -32,6 +33,8 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
+import com.easyvaas.elapp.net.mynet.NetSubscribe;
+import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Constants;
@@ -51,6 +54,8 @@ import com.hooview.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener {
@@ -106,7 +111,33 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         initView();
         initPlayer();
         loadVideoInfo();
+        addVideoToHistory();
+    }
 
+
+    /**
+     * 添加观看记录
+     */
+    private void addVideoToHistory()
+    {
+        if (EVApplication.isLogin())
+        {
+            RetrofitHelper.getInstance().getService()
+                    .addWatchVideoInfo(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),mVideoId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                        @Override
+                        public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+
+                        }
+
+                        @Override
+                        public void OnFailue(String msg) {
+
+                        }
+                    });
+        }
     }
 
     private void insertHistoryRecord() {

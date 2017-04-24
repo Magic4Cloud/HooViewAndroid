@@ -19,7 +19,9 @@ import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
+import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
+import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.newuser.fragment.UserFansFragment;
 import com.easyvaas.elapp.ui.user.newuser.fragment.VipUserArticleFragment;
 import com.easyvaas.elapp.ui.user.newuser.fragment.VipUserCheatsFragment;
@@ -81,6 +83,9 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
     private String[] titles;
     private Fragment[] mFragments;
     private UserPageInfo mUserPageInfo;
+    private String userId;
+    private String sessionId;
+    private String personId;
 
     @Override
     protected int getLayout() {
@@ -106,6 +111,11 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
 
     @Override
     protected void initViewAndData() {
+        userId = getIntent().getStringExtra(AppConstants.USER_ID);
+        sessionId = getIntent().getStringExtra(AppConstants.SESSION_ID);
+        personId = getIntent().getStringExtra(AppConstants.PERSON_ID);
+        if (userId.equals(personId)) //自己看自己主页 隐藏关注按钮
+            mVipFocusButton.setVisibility(View.GONE);
         initTabView();
         initAppBar();
     }
@@ -206,33 +216,35 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
     @OnClick(R.id.vip_focus_button)
     public void onViewClicked()
     {
-        final int action = mVipFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
-        Subscription subscription = RetrofitHelper.getInstance().getService()
-                .followSomeOne("id",EVApplication.getUser().getSessionid(),action)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<NoResponeBackModel>() {
-                    @Override
-                    public void OnSuccess(NoResponeBackModel s) {
-                        if (action == 1) // 0 关注 1 已关注
-                        {
-                            mVipFocusButton.setSelected(true);
-                            mVipFocusButton.setText(R.string.user_followed);
-                            SingleToast.show(EVApplication.getApp(),R.string.follow_sccuess);
-                        }else
-                        {
-                            mVipFocusButton.setSelected(false);
-                            mVipFocusButton.setText(R.string.user_follow);
-                            SingleToast.show(EVApplication.getApp(),R.string.follow_cancel);
+        if (EVApplication.isLogin()) {
+            final int action = mVipFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
+            Subscription subscription = RetrofitHelper.getInstance().getService()
+                    .followSomeOne("id", EVApplication.getUser().getSessionid(), action)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                        @Override
+                        public void OnSuccess(NoResponeBackModel s) {
+                            if (action == 1) // 0 关注 1 已关注
+                            {
+                                mVipFocusButton.setSelected(true);
+                                mVipFocusButton.setText(R.string.user_followed);
+                                SingleToast.show(EVApplication.getApp(), R.string.follow_sccuess);
+                            } else {
+                                mVipFocusButton.setSelected(false);
+                                mVipFocusButton.setText(R.string.user_follow);
+                                SingleToast.show(EVApplication.getApp(), R.string.follow_cancel);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void OnFailue(String msg) {
-                        SingleToast.show(EVApplication.getApp(),R.string.opreat_fail);
-                    }
-                });
-        addSubscribe(subscription);
+                        @Override
+                        public void OnFailue(String msg) {
+                            SingleToast.show(EVApplication.getApp(), R.string.opreat_fail);
+                        }
+                    });
+            addSubscribe(subscription);
+        }else
+            LoginActivity.start(mContext);
     }
 
 

@@ -18,9 +18,11 @@ import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
+import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
-import com.easyvaas.elapp.ui.user.newuser.fragment.VipUserArticleFragment;
-import com.easyvaas.elapp.ui.user.newuser.fragment.VipUserCheatsFragment;
+import com.easyvaas.elapp.ui.user.LoginActivity;
+import com.easyvaas.elapp.ui.user.newuser.fragment.UserFansFragment;
+import com.easyvaas.elapp.ui.user.newuser.fragment.UserPageCommentFragment;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
@@ -76,6 +78,9 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
     private String[] titles;
     private Fragment[] mFragments;
     private UserPageInfo mUserPageInfo;
+    private String userId;
+    private String sessionId;
+    private String personId;
 
     @Override
     protected int getLayout() {
@@ -101,6 +106,11 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
 
     @Override
     protected void initViewAndData() {
+        userId = getIntent().getStringExtra(AppConstants.USER_ID);
+        sessionId = getIntent().getStringExtra(AppConstants.SESSION_ID);
+        personId = getIntent().getStringExtra(AppConstants.PERSON_ID);
+        if (userId.equals(personId)) //自己看自己主页 隐藏关注按钮
+            mUserPageFocusButton.setVisibility(View.GONE);
         initTabView();
         initAppBar();
     }
@@ -110,8 +120,8 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
                 getString(R.string.comment),
                 getString(R.string.collect)};
         mFragments = new Fragment[]{
-                VipUserCheatsFragment.newInstance("id"),
-                VipUserArticleFragment.newInstance("id")};
+                UserPageCommentFragment.newInstance(userId,personId),
+                UserFansFragment.newInstance(personId,sessionId)};
         mUserSwipeRefreshLayout.setOnRefreshListener(this);
         mUserSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.base_purplish));
         mUserPageTabViewpager.setAdapter(new VipPageAdapter(getSupportFragmentManager()));
@@ -191,34 +201,37 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
      */
     @OnClick(R.id.user_page_focus_button)
     public void onViewClicked() {
-        final int action = mUserPageFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
-        Subscription subscription = RetrofitHelper.getInstance().getService()
-                .followSomeOne("id", EVApplication.getUser().getSessionid(), action)  // Aya : 2017/4/23 待调试接口
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<NoResponeBackModel>() {
-                    @Override
-                    public void OnSuccess(NoResponeBackModel s) {
-                        if (action == 1) // 0 关注 1 已关注
-                        {
-                            mUserPageFocusButton.setSelected(true);
-                            mUserPageFocusButton.setText(R.string.user_followed);
-                            SingleToast.show(EVApplication.getApp(), R.string.follow_sccuess);
-                        } else {
-                            mUserPageFocusButton.setSelected(false);
-                            mUserPageFocusButton.setText(R.string.user_follow);
-                            SingleToast.show(EVApplication.getApp(), R.string.follow_cancel);
+
+        if (EVApplication.isLogin()) {
+            final int action = mUserPageFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
+            Subscription subscription = RetrofitHelper.getInstance().getService()
+                    .followSomeOne("id", EVApplication.getUser().getSessionid(), action)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                        @Override
+                        public void OnSuccess(NoResponeBackModel s) {
+                            if (action == 1) // 0 关注 1 已关注
+                            {
+                                mUserPageFocusButton.setSelected(true);
+                                mUserPageFocusButton.setText(R.string.user_followed);
+                                SingleToast.show(EVApplication.getApp(), R.string.follow_sccuess);
+                            } else {
+                                mUserPageFocusButton.setSelected(false);
+                                mUserPageFocusButton.setText(R.string.user_follow);
+                                SingleToast.show(EVApplication.getApp(), R.string.follow_cancel);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void OnFailue(String msg) {
-                        SingleToast.show(EVApplication.getApp(), R.string.opreat_fail);
-                    }
-                });
-        addSubscribe(subscription);
+                        @Override
+                        public void OnFailue(String msg) {
+                            SingleToast.show(EVApplication.getApp(), R.string.opreat_fail);
+                        }
+                    });
+            addSubscribe(subscription);
+        } else
+            LoginActivity.start(mContext);
     }
-
 
 
     @OnClick({R.id.user_page_fans_text, R.id.user_page_fans_counts, R.id.user_page_focus_text, R.id.user_page_focus_counts})

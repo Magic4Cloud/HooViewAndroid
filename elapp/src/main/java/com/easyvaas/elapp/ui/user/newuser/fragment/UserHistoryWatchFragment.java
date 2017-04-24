@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui.user.newuser.fragment;
 
 import com.easyvaas.elapp.adapter.usernew.UserVLivingAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
@@ -41,7 +42,8 @@ public class UserHistoryWatchFragment  extends MyBaseListFragment<UserVLivingAda
 
     @Override
     protected void getListData(final Boolean isLoadMore) {
-        Subscription subscription = RetrofitHelper.getInstance().getService().getHisteryTest("http://demo2821846.mockable.io/user/historylist?type=0")
+        Subscription subscription = RetrofitHelper.getInstance().getService()
+                .getUserWatchHistory(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<UserHistoryTestModel>() {

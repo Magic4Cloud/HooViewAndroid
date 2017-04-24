@@ -43,7 +43,10 @@ import com.easyvaas.elapp.live.activity.PlayerActivity;
 import com.easyvaas.elapp.live.activity.SetPasswordActivity;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.RequestHelper;
+import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.common.WebDetailActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserPageActivity;
+import com.easyvaas.elapp.ui.user.newuser.activity.UserVipPageActivity;
 import com.easyvaas.elapp.utils.blur.BlurTransformation;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
@@ -799,5 +802,29 @@ public class Utils {
         } catch (ActivityNotFoundException exception) {
             SingleToast.show(context, R.string.msg_need_app_market);
         }
+    }
+
+    /**
+     * 跳转用户主页  | 大V | 普通用户
+     */
+    public static void toUserPager(Context context,String personId,int vip)
+    {
+        String userId = "";
+        String sessionId = "";
+        if (EVApplication.getUser() != null)
+        {
+            userId = EVApplication.getUser().getName();
+            sessionId = EVApplication.getUser().getSessionid();
+        }
+        Intent intent = new Intent();
+        intent.putExtra(AppConstants.USER_ID,userId);
+        intent.putExtra(AppConstants.SESSION_ID,sessionId);
+        intent.putExtra(AppConstants.PERSON_ID,personId);
+
+        if (vip == 1)
+            intent.setClass(context, UserVipPageActivity.class);
+        else
+            intent.setClass(context, UserPageActivity.class);
+        context.startActivity(intent);
     }
 }

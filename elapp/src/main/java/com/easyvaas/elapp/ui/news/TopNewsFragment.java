@@ -42,7 +42,6 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
                 .subscribe(new NetSubscribe<TopRatedModel>() {
                     @Override
                     public void OnSuccess(TopRatedModel topRatedModel) {
-                        // Aya : 2017/4/11 后台接口有问题 延后调试
                         if (topRatedModel != null)
                         {
                             if (!isLoadMore)

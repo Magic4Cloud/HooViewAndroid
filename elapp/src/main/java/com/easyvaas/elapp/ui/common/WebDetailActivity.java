@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
 import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.user.Collection;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.db.Preferences;
@@ -31,6 +32,8 @@ import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.JsonParserUtil;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
+import com.easyvaas.elapp.net.mynet.NetSubscribe;
+import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
@@ -47,6 +50,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.realm.RealmResults;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.hooview.app.R.id.tv_news_comment;
 
@@ -92,6 +97,32 @@ public class WebDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_detail);
         initViews();
+        addNewsToHistory();
+    }
+
+    /**
+     * 添加阅读记录
+     */
+    private void addNewsToHistory()
+    {
+        if (EVApplication.isLogin())
+        {
+            RetrofitHelper.getInstance().getService()
+                    .addReadNewsInfo(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),code)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                        @Override
+                        public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+
+                        }
+
+                        @Override
+                        public void OnFailue(String msg) {
+
+                        }
+                    });
+        }
     }
 
     private void initViews() {
