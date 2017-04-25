@@ -115,7 +115,6 @@ class OkHttpRequest implements IRequestHelper {
 
     private void requestAsGson(String url, Map<String, String> params, final Class clazz,
                                final MyRequestCallBack<?> callBack, boolean isPostMethod) {
-        Logger.e(TAG, "Request url: " + url);
         Request.Builder requestBuilder = new Request.Builder().url(url);
         if (isPostMethod) {
             FormBody.Builder builder = new FormBody.Builder();
@@ -132,6 +131,7 @@ class OkHttpRequest implements IRequestHelper {
             Logger.d(TAG, "Request body: " + requestBuilder.toString());
             requestBuilder.get();
         }
+        Logger.e(TAG, "Request url: " + RequestUtil.assembleUrlWithAllParams(url, params));
         mClient.newCall(requestBuilder.build()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

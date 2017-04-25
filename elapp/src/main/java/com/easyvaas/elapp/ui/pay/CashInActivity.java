@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.easyvaas.common.gift.GiftManager;
 import com.easyvaas.common.sharelogin.model.PlatformActionListener;
@@ -140,7 +141,7 @@ public class CashInActivity extends BaseActivity {
 
                     if (mSelectPosition >= 0) {
                         CashInOptionEntity optionEntity = mCashInOptionList.get(mSelectPosition);
-                        Logger.d(TAG, "Pay start: mSelectPosition=" + mSelectPosition + "   " + optionEntity.getRmb());
+                        Logger.e(TAG, "Pay start: mSelectPosition=" + mSelectPosition + "   " + optionEntity.getRmb());
                         if (optionEntity.getPlatform() == CashInOptionEntity.PLATFORM_WEIXIN) {
                             showLoadingDialog(R.string.loading_data, false, true);
                             cashInByWeixin(optionEntity.getRmb());
@@ -481,18 +482,25 @@ public class CashInActivity extends BaseActivity {
                 mCashInOptionAlipayList.add(option);
             }
         }
+        Logger.e(TAG, "wechat " + mCashInOptionWeixinList.size() + "   alipay" + mCashInOptionAlipayList.size());
+        // 微信列表
         if (mCashInOptionWeixinList.size() > 0) {
             mWeixinOptionRb.setVisibility(View.VISIBLE);
-            mCashInOptionList.addAll(mCashInOptionWeixinList);
+//            mCashInOptionList.addAll(mCashInOptionWeixinList);
             mWeixinOptionRb.setChecked(true);
+            mCashInOptionList = mCashInOptionWeixinList;
+            mCashInAmountAdapter.notifyDataSetChanged();
             showCashInOptionList();
         } else {
             mWeixinOptionRb.setVisibility(View.GONE);
             mWeixinOptionRb.setChecked(false);
         }
+        // 支付宝列表
         if (mCashInOptionAlipayList.size() > 0) {
             mAlipayOptionRb.setVisibility(View.VISIBLE);
             mAlipayOptionRb.setChecked(true);
+            mCashInOptionList = mCashInOptionAlipayList;
+            mCashInAmountAdapter.notifyDataSetChanged();
             showCashInOptionList();
         } else {
             mAlipayOptionRb.setVisibility(View.GONE);
@@ -501,6 +509,7 @@ public class CashInActivity extends BaseActivity {
     }
 
     private void cashInByWeixin(int cashInECoinAmount) {
+        Logger.e(TAG, "wechat pay...");
         ApiHelper.getInstance().cashInByWeixin(cashInECoinAmount,
                 new MyRequestCallBack<PayOrderEntity>() {
                     @Override
@@ -514,6 +523,9 @@ public class CashInActivity extends BaseActivity {
                     @Override
                     public void onError(String errorInfo) {
                         super.onError(errorInfo);
+                        Logger.e(TAG, "onError" + errorInfo);
+                        dismissLoadingDialog();
+                        Toast.makeText(CashInActivity.this, "连接失败，请稍后再试", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -524,6 +536,7 @@ public class CashInActivity extends BaseActivity {
     }
 
     private void cashInByAlipay(final int cashInECoinAmount) {
+        Logger.e(TAG, "alipay pay...");
         ApiHelper.getInstance().cashInByAlipay(cashInECoinAmount,
                 new MyRequestCallBack<PayOrderEntity>() {
                     @Override
@@ -536,6 +549,9 @@ public class CashInActivity extends BaseActivity {
                     @Override
                     public void onError(String errorInfo) {
                         super.onError(errorInfo);
+                        Logger.e(TAG, "onError" + errorInfo);
+                        dismissLoadingDialog();
+                        Toast.makeText(CashInActivity.this, "连接失败，请稍后再试", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

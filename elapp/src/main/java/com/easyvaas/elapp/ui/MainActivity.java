@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.HomeLiveFragment;
+import com.easyvaas.elapp.ui.live.livenew.LiveMainFragment;
 import com.easyvaas.elapp.ui.market.HomeMarketFragment;
 import com.easyvaas.elapp.ui.market.MarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private FragmentManager mFragmentManager;
     private UserProfileFragment mUserProfileFragment;
     private HomeLiveFragment mHomeLiveFragment;
+    private LiveMainFragment mLiveMainFragment;
     private HomeMarketFragment mHomeMarketFragment;
     private HomeNewsFragment mHomeNewsFragment;
     private NewsMainFragment mNewsMainFragment;
@@ -92,6 +94,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     private void initTab() {
         mHomeLiveFragment = new HomeLiveFragment();
+        mLiveMainFragment = LiveMainFragment.newInstance();
         mUserProfileFragment = new UserProfileFragment();
         mHomeMarketFragment = new HomeMarketFragment();
         mHomeNewsFragment = new HomeNewsFragment();
@@ -142,7 +145,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                switchFragment(mNewsMainFragment);
                 break;
             case R.id.rb_live:
-                switchFragment(mHomeLiveFragment);
+                switchFragment(mLiveMainFragment);
                 break;
             case R.id.rb_market:
                 switchFragment(mMarketFragment);
@@ -240,8 +243,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             public void onClick(View v) {
                 rl_mask.removeAllViews();
                 rl_mask.setVisibility(View.GONE);
-                if (mHomeLiveFragment != null && mHomeLiveFragment.getmViewPager() != null) {
-                    mHomeLiveFragment.getmViewPager().setCurrentItem(0);
+                if (mLiveMainFragment != null && mLiveMainFragment.getViewPager() != null) {
+                    mLiveMainFragment.getViewPager().setCurrentItem(0);
                 }
                 mRbNews.setChecked(true);
                 mSp.edit().putBoolean("isShowed", true).apply();
@@ -264,8 +267,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             @Override
             public void onClick(View v) {
                 rl_mask.removeAllViews();
-                if (mHomeLiveFragment != null && mHomeLiveFragment.getmViewPager() != null) {
-                    mHomeLiveFragment.getmViewPager().setCurrentItem(1);
+                if (mLiveMainFragment != null && mLiveMainFragment.getViewPager() != null) {
+                    mLiveMainFragment.getViewPager().setCurrentItem(1);
                 }
                 addFiveMask();
             }

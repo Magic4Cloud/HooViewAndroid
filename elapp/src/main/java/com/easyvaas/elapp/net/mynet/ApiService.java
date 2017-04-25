@@ -15,6 +15,7 @@ import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
+import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 
@@ -300,5 +301,13 @@ public interface ApiService {
                                                                     @Query(AppConstants.SESSION_ID) String sessionid,
                                                                     @Query(AppConstants.NEWS_ID) String newsid,
                                                                     @Query("action") int action);
+
+
+
+
+
+    /*-------------------------------------------直播----------------------------------------*/
+    @GET(ApiConstant.DEBUG_HOST+"video/recommendlist")
+    Observable<NetResponse<RecommendVideoListModel>> getLiveVideo(@Query(AppConstants.START) int start);
 
 }
