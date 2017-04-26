@@ -1,14 +1,17 @@
 package com.easyvaas.elapp.ui.user.usernew.fragment;
 
 import android.os.Bundle;
+import android.view.Gravity;
 
 import com.easyvaas.elapp.adapter.usernew.UserPageCommentAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel.PostsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
 
 import java.util.ArrayList;
@@ -47,6 +50,11 @@ public class UserPageCommentFragment extends MyBaseListFragment<UserPageCommentA
     @Override
     protected void changeEmptyView() {
         mEmptyView.setEmptyTxt(getString(R.string.empty_no_user_comment));
+        if (EVApplication.isLogin())
+            if (userId.equals(EVApplication.getUser().getName()))
+                mEmptyView.setEmptyTxt(getString(R.string.empty_user_comment));
+        mEmptyView.getEmptyLayout().setGravity(Gravity.CENTER_HORIZONTAL);
+        mEmptyView.getEmptyLayout().setPadding(0, (int) ViewUtil.dp2Px(mContext,85),0,0);
     }
 
     @Override

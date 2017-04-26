@@ -49,10 +49,14 @@ public class VipUserFansFragment extends MyBaseListFragment<UserFollowAdapter> {
 
     @Override
     protected void changeEmptyView() {
-        if (userId.equals(EVApplication.getUser().getName()))
-            mEmptyView.setEmptyTxt(getString(R.string.empty_no_fans));
-        else
-            mEmptyView.setEmptyTxt(getString(R.string.empty_no_vipfans));
+
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_vipfans));
+
+        if (EVApplication.isLogin()) {
+            if (userId.equals(EVApplication.getUser().getName()))
+                mEmptyView.setEmptyTxt(getString(R.string.empty_no_fans));
+        }
+
         mEmptyView.getEmptyLayout().setGravity(Gravity.CENTER_HORIZONTAL);
         mEmptyView.getEmptyLayout().setPadding(0, (int) ViewUtil.dp2Px(mContext,70),0,0);
         mEmptyView.hideImage();

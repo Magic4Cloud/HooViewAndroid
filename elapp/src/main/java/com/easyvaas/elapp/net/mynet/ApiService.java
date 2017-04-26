@@ -4,6 +4,7 @@ import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
+import com.easyvaas.elapp.bean.news.NewsCollectStatus;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
@@ -80,21 +81,21 @@ public interface ApiService {
      * 获取用户信息
      */
     @GET("api/v2/user/info")
-    Observable<NetResponse<User>> getUserInfo(@Query(AppConstants.USER_ID) String id,
+    Observable<NetResponse<User>> getUserInfo(@Query(AppConstants.NAME) String id,
                                               @Query(AppConstants.SESSION_ID) String sessionid);
 
     /**
      * 获取用户信息V2
      */
     @GET("api/v2/user/info")
-    Observable<NetResponse<User>> getUserInfoNew(@Query("name") String id,
+    Observable<NetResponse<User>> getUserInfoNew(@Query(AppConstants.USER_ID) String id,
                                               @Query(AppConstants.SESSION_ID) String sessionid);
 
     /**
      * 获取用户粉丝列表
      */
     @GET(ApiConstant.DEBUG_HOST+"user/fanslist")
-    Observable<NetResponse<UserFollowModel>> getUserFans(@Query("name") String id,
+    Observable<NetResponse<UserFollowModel>> getUserFans(@Query(AppConstants.NAME) String id,
                                                          @Query(AppConstants.SESSION_ID) String sessionid,
                                                          @Query(AppConstants.START) int start);
 
@@ -102,16 +103,16 @@ public interface ApiService {
      * 获取用户关注列表
      */
     @GET(ApiConstant.DEBUG_HOST+"user/followerlist")
-    Observable<NetResponse<UserFollowModel>> getUserFocus(@Query("name") String id,
+    Observable<NetResponse<UserFollowModel>> getUserFocus(@Query(AppConstants.NAME) String id,
                                                           @Query(AppConstants.SESSION_ID) String sessionid,
                                                           @Query(AppConstants.START) int start);
     /**
      * 关注用户 0 取消关注 1 关注
      */
     @GET(ApiConstant.DEBUG_HOST+"user/follow")
-    Observable<NetResponse<NoResponeBackModel>> followSomeOne(@Query("name") String id,
+    Observable<NetResponse<NoResponeBackModel>> followSomeOne(@Query(AppConstants.NAME) String id,
                                                               @Query(AppConstants.SESSION_ID) String sessionid,
-                                                              @Query("action") int action);
+                                                              @Query(AppConstants.ACTION) int action);
     /**
      * 用户阅读记录 0 观看 1 文章
      */
@@ -143,8 +144,9 @@ public interface ApiService {
     /**
      * 用户收藏列表
      */
-    @GET("api/v2/user/favoritelist")
-    Observable<NetResponse<NormalNewsModel>> getUserCollection(@Query(AppConstants.USER_ID) String id);
+    @GET("api/v2/user/favorites")
+    Observable<NetResponse<NormalNewsModel>> getUserCollection(@Query(AppConstants.USER_ID) String id,
+                                                               @Query(AppConstants.START) int start);
 
     /**
      * 秘籍列表
@@ -267,11 +269,15 @@ public interface ApiService {
 
     /**
      * 评论点赞
+     * @param type （0，新闻；1，股票；2，视频）
+     * @param action （0，取消；1，点赞）
      */
     @GET("api/v2/posts/like")
     Observable<NetResponse<NoResponeBackModel>> praiseClick(@Query(AppConstants.USER_ID) String id,
                                                             @Query(AppConstants.SESSION_ID) String sessionid,
-                                                            @Query(AppConstants.POST_ID) String postid);
+                                                            @Query(AppConstants.POST_ID) String postid,
+                                                            @Query(AppConstants.TYPE) int type,
+                                                            @Query(AppConstants.ACTION) int action);
 
 
     /**
@@ -304,8 +310,18 @@ public interface ApiService {
     Observable<NetResponse<NoResponeBackModel>> addNewsToColloction(@Query(AppConstants.USER_ID) String id,
                                                                     @Query(AppConstants.SESSION_ID) String sessionid,
                                                                     @Query(AppConstants.NEWS_ID) String newsid,
-                                                                    @Query("action") int action);
+                                                                    @Query(AppConstants.ACTION) int action);
 
+
+    /**
+     * 判断收藏状态
+     * type	1 资讯 2 视频 3 指数 4 股票
+     */
+    @GET(ApiConstant.DEBUG_HOST+"user/collect")
+    Observable<NetResponse<NewsCollectStatus>> getNewsCollectStatus(@Query(AppConstants.SESSION_ID) String sessionid,
+                                                                    @Query(AppConstants.CODE) String newsid,
+                                                                    @Query(AppConstants.ACTION) int action,
+                                                                    @Query(AppConstants.TYPE) int type);
     /**
      * 编辑个人资料
      */
@@ -330,6 +346,13 @@ public interface ApiService {
      */
     @GET(ApiConstant.DEBUG_HOST + "video/recommendlist")
     Observable<NetResponse<RecommendVideoListModel>> getLiveVideo(@Query(AppConstants.START) int start);
+
+    /**
+     *  直播付费
+     */
+    @GET(ApiConstant.DEBUG_HOST+"video/livepay")
+    Observable<NetResponse<NoResponeBackModel>> payForVideo(@Query(AppConstants.SESSION_ID) String sessionid,
+                                                            @Query(AppConstants.VID) String vid);
 
     /**
      * 直播---图文直播列表

@@ -39,9 +39,10 @@ public abstract class MyBaseActivity extends AppCompatActivity {
         setContentView(getLayout());
         mUnbinder = ButterKnife.bind(this);
         mContext = this;
-        initToolBar();
         initViewAndData();
+        initToolBar();
     }
+
 
     /**
      * 初始化ToolBar 可重写修改属性

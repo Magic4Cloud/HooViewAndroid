@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.user.usernew.activity;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -21,21 +22,17 @@ import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
-import com.easyvaas.elapp.ui.user.usernew.fragment.UserFansFragment;
+import com.easyvaas.elapp.ui.user.usernew.fragment.UserPageCollectionFragment;
 import com.easyvaas.elapp.ui.user.usernew.fragment.UserPageCommentFragment;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -89,7 +86,7 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
 
     @Override
     protected String getTitleText() {
-        return "浅海野";
+        return "";
     }
 
     @Override
@@ -121,7 +118,7 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
                 getString(R.string.collect)};
         mFragments = new Fragment[]{
                 UserPageCommentFragment.newInstance(userId,personId),
-                UserFansFragment.newInstance(personId,sessionId)};
+                UserPageCollectionFragment.newInstance(personId)};
         mUserSwipeRefreshLayout.setOnRefreshListener(this);
         mUserSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.base_purplish));
         mUserPageTabViewpager.setAdapter(new VipPageAdapter(getSupportFragmentManager()));
@@ -157,7 +154,30 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
      * 获取用户信息
      */
     private void getVipUserInfo() {
-        mUserPageCoordinatorLayout.setVisibility(View.VISIBLE);
+
+        Subscription subscription = RetrofitHelper.getInstance().getService()
+                .getUserPageInfo(userId,sessionId,personId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<UserPageInfo>() {
+                    @Override
+                    public void OnSuccess(UserPageInfo userPageInfo) {
+                        mUserSwipeRefreshLayout.setRefreshing(false);
+                        if (userPageInfo != null) {
+                            setHeaderData(userPageInfo);
+                        }
+                        mUserPageCoordinatorLayout.setVisibility(View.VISIBLE);
+                        mUserSwipeRefreshLayout.setEnabled(false);
+                    }
+
+                    @Override
+                    public void OnFailue(String msg) {
+                        mUserSwipeRefreshLayout.setRefreshing(false);
+                        SingleToast.show(UserPageActivity.this,R.string.network_error);
+                    }
+                });
+        addSubscribe(subscription);
+
     }
 
 
@@ -166,6 +186,7 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
      */
     private void setHeaderData(UserPageInfo data) {
 
+        mToobarTitleView.setTitleText(data.getNickname());
         mUserPageName.setText(data.getNickname());
         mUserPageInfoText.setText(data.getSignature());
         mUserPageFansCounts.setText(String.valueOf(data.getFans_count()));
@@ -184,16 +205,9 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
 
     @Override
     public void onRefresh() {
-        Observable.timer(1, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-                        getVipUserInfo();
-                        mUserSwipeRefreshLayout.setRefreshing(false);
-                        mUserSwipeRefreshLayout.setEnabled(false);
-                    }
-                });
+
+        getVipUserInfo();
+
     }
 
     /**
@@ -205,7 +219,7 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
         if (EVApplication.isLogin()) {
             final int action = mUserPageFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
             Subscription subscription = RetrofitHelper.getInstance().getService()
-                    .followSomeOne("id", EVApplication.getUser().getSessionid(), action)
+                    .followSomeOne(personId, EVApplication.getUser().getSessionid(), action)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new NetSubscribe<NoResponeBackModel>() {
@@ -234,14 +248,25 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
     }
 
 
+    /**
+     * 跳转用户
+     */
     @OnClick({R.id.user_page_fans_text, R.id.user_page_fans_counts, R.id.user_page_focus_text, R.id.user_page_focus_counts})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_page_fans_text:
             case R.id.user_page_fans_counts:
+                Intent fansIntent = new Intent(this, UserFansActivity.class);
+                fansIntent.putExtra(AppConstants.USER_ID,personId);
+                fansIntent.putExtra(AppConstants.SESSION_ID,sessionId);
+                startActivity(fansIntent);
                 break;
             case R.id.user_page_focus_text:
-            case R.id.user_page_focus_counts:
+            case R.id.user_page_focus_counts: // Aya : 2017/4/26 跳转问题 session不能为空
+                Intent focusIntent = new Intent(this, UserFocusActivity.class);
+                focusIntent.putExtra(AppConstants.USER_ID,personId);
+                focusIntent.putExtra(AppConstants.SESSION_ID,sessionId);
+                startActivity(focusIntent);
                 break;
         }
     }

@@ -37,7 +37,6 @@ import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
-import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
@@ -57,13 +56,11 @@ import com.hooview.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
-import static android.icu.text.RelativeDateTimeFormatter.Direction.THIS;
 
 public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener,PayOrRechargeListener {
     private static final String TAG = "PlayerActivity";
@@ -86,6 +83,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     private PlayerNeedPayView mPlayerNeedPayView;
     private boolean isLandscape = false;
     private boolean mIsPlayLive;
+    private int payCounts;// 付费的金额
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable runnableHideMediaController = new Runnable() {
         @Override
@@ -118,7 +116,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mCurrentVideo.setVid(mVideoId);
         initView();
         initPlayer();
-        loadVideoInfo();   // Aya : 2017/4/25  这里是开始播放  如果是付费的话 这里不应该load mark
+        loadVideoInfo();
         addVideoToHistory();
     }
 
@@ -252,8 +250,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
 
             @Override
             public void goBuy() {
-                // Aya : 2017/4/25 弹出支付框 需要传入价格  需要修改10多个跳转界面
-                PlayerPayDialogFragment.newInstance(new Random().nextInt(200)).show(getSupportFragmentManager(),"");
+                PlayerPayDialogFragment.newInstance(payCounts).show(getSupportFragmentManager(),"");
             }
         });
     }
@@ -263,10 +260,25 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
      */
     @Override
     public void payForVideo() {
-        //// Aya : 2017/4/26 待调试接口
-        SingleToast.show(this,R.string.video_pay_success);
-        startWatchLive();
-        mPlayerNeedPayView.setVisibility(View.GONE);
+
+        RetrofitHelper.getInstance().getService()
+                .payForVideo(Preferences.getInstance(this).getSessionId(),mVideoId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                    @Override
+                    public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+                        ApiUtil.getAssetInfo(PlayerActivity.this);
+                        SingleToast.show(PlayerActivity.this,R.string.video_pay_success);
+                        startWatchLive();
+                        mPlayerNeedPayView.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void OnFailue(String msg) {
+                        SingleToast.show(PlayerActivity.this,R.string.hooview_coin_not_enough);
+                    }
+                });
     }
 
     /**
@@ -299,9 +311,18 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                             mCurrentVideo = result;
                             updateVideoInfo(result);
 //                            chatServerInit(true);
-//                            startWatchLive();   暂时隐藏
                             insertHistoryRecord();
                             initFollowStatus();
+                            if (result.getPermission() == 7 && result.getPrice() >0)
+                            {
+                                mPlayerNeedPayView.setVisibility(View.VISIBLE); // 显示 付费蒙层
+                                mPlayerNeedPayView.setPlayerPayCounts(result.getPrice());
+                                payCounts = result.getPrice();
+                            }else
+                            {
+                                mPlayerNeedPayView.setVisibility(View.GONE);
+                                startWatchLive();
+                            }
                         }
                     }
 
@@ -344,9 +365,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mRivHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(result.getName())){
-                    VIPUserInfoDetailActivity.start(PlayerActivity.this, result.getName());
-                }
+                Utils.toUserPager(PlayerActivity.this,result.getName(),result.getVip());
             }
         });
     }
@@ -453,13 +472,13 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        // TODO Not work, need to improve.
-        String vid = intent.getStringExtra(Constants.EXTRA_KEY_VIDEO_ID);
-        if (mVideoId.equals(vid)) {
-        } else if (!TextUtils.isEmpty(vid)) {
-//            resetChatData();
-            startWatchLive();
-        }
+//        // TODO Not work, need to improve.
+//        String vid = intent.getStringExtra(Constants.EXTRA_KEY_VIDEO_ID);
+//        if (mVideoId.equals(vid)) {
+//        } else if (!TextUtils.isEmpty(vid)) {
+////            resetChatData();
+//            startWatchLive();
+//        }
     }
 
     private void stopPlayerAndShowEndView() {

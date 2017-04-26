@@ -3,7 +3,6 @@ package com.easyvaas.elapp.ui.user.usernew.fragment;
 import android.os.Bundle;
 
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
-import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
@@ -35,11 +34,7 @@ public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter
 
     @Override
     protected void changeEmptyView() {
-        super.changeEmptyView();
-        if (userId.equals(EVApplication.getUser().getName()))
-            mEmptyView.setEmptyTxt(getString(R.string.empty_no_collect));
-        else
-            mEmptyView.setEmptyTxt(getString(R.string.empty_no_user_colloct));
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_collect));
     }
 
     @Override
@@ -50,7 +45,7 @@ public class UserCollectionFragment extends MyBaseListFragment<NormalNewsAdapter
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserCollection(userId)
+                .getUserCollection(userId,start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NormalNewsModel>() {

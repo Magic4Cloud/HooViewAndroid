@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
@@ -20,12 +21,12 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Date   2017/4/21
+ * Date   2017/4/20
  * Editor  Misuzu
- * 大V 文章界面
+ * 用户收藏fragment
  */
 
-public class VipUserArticleFragment extends MyBaseListFragment<NormalNewsAdapter>{
+public class UserPageCollectionFragment extends MyBaseListFragment<NormalNewsAdapter> {
 
     private String userId;
 
@@ -35,55 +36,55 @@ public class VipUserArticleFragment extends MyBaseListFragment<NormalNewsAdapter
     }
 
     @Override
-    protected void changeRecyclerView() {
-        setPaddingTop(4);
-    }
-
-    @Override
-    protected void initViewAndData() {
-        super.initViewAndData();
-        userId = getArguments().getString(AppConstants.USER_ID);
-    }
-
-    @Override
     protected void changeEmptyView() {
-        // Aya : 2017/4/26 细节 如果自己看自己 提示语
-        mEmptyView.setEmptyTxt(getString(R.string.empty_no_viparticle));
+
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_user_colloct));
+        if (EVApplication.isLogin())
+            if (userId.equals(EVApplication.getUser().getName()))
+                mEmptyView.setEmptyTxt(getString(R.string.empty_no_collect));
+
         mEmptyView.getEmptyLayout().setGravity(Gravity.CENTER_HORIZONTAL);
-        mEmptyView.getEmptyLayout().setPadding(0, (int) ViewUtil.dp2Px(mContext,70),0,0);
-        mEmptyView.hideImage();
+        mEmptyView.getEmptyLayout().setPadding(0, (int) ViewUtil.dp2Px(mContext,85),0,0);
+    }
+
+    @Override
+    protected void initSomeData() {
+        userId = getArguments().getString(AppConstants.USER_ID);
     }
 
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getVipUserPublishArticle(userId,start)
+                .getUserCollection(userId,start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NormalNewsModel>() {
                     @Override
                     public void OnSuccess(NormalNewsModel normalNewsModel) {
                         if (normalNewsModel != null)
-                            mAdapter.dealLoadData(VipUserArticleFragment.this,isLoadMore,normalNewsModel.getNews());
+                            mAdapter.dealLoadData(UserPageCollectionFragment.this, isLoadMore, normalNewsModel.getNews());
                     }
 
                     @Override
                     public void OnFailue(String msg) {
-                        mAdapter.dealLoadError(VipUserArticleFragment.this,isLoadMore);
+                        mAdapter.dealLoadError(UserPageCollectionFragment.this, isLoadMore);
                     }
                 });
         addSubscribe(subscription);
     }
 
+    @Override
+    protected void changeRecyclerView() {
+        setPaddingTop(4);
+    }
 
-    public static VipUserArticleFragment newInstance(String userId) {
+    public static UserPageCollectionFragment newInstance(String userId) {
 
         Bundle args = new Bundle();
         args.putString(AppConstants.USER_ID, userId);
-        VipUserArticleFragment fragment = new VipUserArticleFragment();
+        UserPageCollectionFragment fragment = new UserPageCollectionFragment();
         fragment.setArguments(args);
         return fragment;
-
     }
 
 }

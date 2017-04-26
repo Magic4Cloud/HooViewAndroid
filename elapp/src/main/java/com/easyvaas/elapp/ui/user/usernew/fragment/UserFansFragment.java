@@ -3,6 +3,7 @@ package com.easyvaas.elapp.ui.user.usernew.fragment;
 import android.os.Bundle;
 
 import com.easyvaas.elapp.adapter.usernew.UserFollowAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.UserFollow;
 import com.easyvaas.elapp.bean.user.UserFollowModel;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
@@ -46,8 +47,13 @@ public class UserFansFragment extends MyBaseListFragment<UserFollowAdapter> {
 
     @Override
     protected void changeEmptyView() {
-        super.changeEmptyView();
-        mEmptyView.setEmptyTxt(getString(R.string.empty_no_fans));
+
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_vipfans));
+
+        if (EVApplication.isLogin()) {
+            if (userId.equals(EVApplication.getUser().getName()))
+                mEmptyView.setEmptyTxt(getString(R.string.empty_no_fans));
+        }
     }
 
 

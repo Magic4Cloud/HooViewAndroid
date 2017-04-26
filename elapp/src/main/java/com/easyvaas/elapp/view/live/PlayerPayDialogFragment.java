@@ -9,10 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.hooview.app.R;
-
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,8 +60,7 @@ public class PlayerPayDialogFragment extends BottomSheetDialogFragment {
     private void setData(int payCounts)
     {
         mPayCounts.setText(String.valueOf(payCounts));
-        int ecoin = new Random().nextInt(200);
-//        int ecoin = (int) Preferences.getInstance(getContext()).getLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT,0);
+        int ecoin = (int) Preferences.getInstance(getContext()).getLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT,0);
         mPayCoinLeft.setText(String.valueOf(ecoin));
         if (payCounts <= ecoin)
         {

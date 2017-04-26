@@ -51,9 +51,9 @@ public class PlayerNeedPayView extends LinearLayout {
     /**
      * 设置付费金额
      */
-    public void setPlayerPayCounts(String payCounts)
+    public void setPlayerPayCounts(int payCounts)
     {
-        mPlayerPayCounts.setText(payCounts);
+        mPlayerPayCounts.setText(String.valueOf(payCounts));
     }
 
     /**

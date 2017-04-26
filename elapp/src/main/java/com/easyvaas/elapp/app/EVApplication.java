@@ -141,17 +141,18 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
                 User user = new User();
                 user.setName(Preferences.getInstance(app).getUserNumber());
                 user.setSessionid(Preferences.getInstance(app).getSessionId());
-                updateUserInfo();
+//                updateUserInfo();
             }
         }
         return mUser;
     }
 
     public static void setUser(User user) {
+        if (user != null)
+            if (user.getName() == null)  //易视云接口返Name 火眼返回的是userId
+                user.setName(user.getUserid());
         EVApplication.mUser = user;
-        if (user == null) {
-            return;
-        }
+
         if (ApiConstant.isUserReleaseServer()) {
             EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
                     Constants.EV_SECRET_ID, mUser.getName());

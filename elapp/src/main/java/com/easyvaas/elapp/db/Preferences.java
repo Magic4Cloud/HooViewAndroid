@@ -179,8 +179,11 @@ public class Preferences {
     }
 
     public void storageUserInfo(User user) {
-        putString(KEY_USER_NUMBER, user.getName());
-        putString(KEY_SESSION_ID, user.getSessionid());
+        String userId = user.getName();
+        if (userId == null)
+            userId = user.getUserid();
+        putString(KEY_USER_NUMBER, userId);
+        putString(KEY_SESSION_ID, user.sessionid); // Aya : 2017/4/26 暂时这样 测试
         putString(KEY_USER_NICKNAME, user.getNickname());
         putBoolean(KEY_IS_LOGOUT, false);
     }

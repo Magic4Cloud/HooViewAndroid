@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 
 import com.easyvaas.elapp.adapter.usernew.UserVLivingAdapter;
-import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
+import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
@@ -56,13 +56,19 @@ public class VipUserLivingFragment extends MyBaseListFragment<UserVLivingAdapter
 
     @Override
     protected void getListData(final Boolean isLoadMore) {
-        Subscription subscription = RetrofitHelper.getInstance().getService().getHisteryTest("http://demo2821846.mockable.io/user/historylist?type=0")
+        Subscription subscription = RetrofitHelper.getInstance().getService()
+                .getVipUserPublishLiving(userId,start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<UserHistoryTestModel>() {
+                .subscribe(new NetSubscribe<UserPublishVideoModel>() {
                     @Override
-                    public void OnSuccess(UserHistoryTestModel result) {
-                        mAdapter.dealLoadData(VipUserLivingFragment.this, isLoadMore, result.getVideolive());
+                    public void OnSuccess(UserPublishVideoModel result) {
+                        if (result != null)
+                        {
+                            if (!isLoadMore)
+                                 mAdapter.setHeaderModel(result.getTextlive());
+                            mAdapter.dealLoadData(VipUserLivingFragment.this, isLoadMore, result.getVideolive());
+                        }
                     }
 
                     @Override

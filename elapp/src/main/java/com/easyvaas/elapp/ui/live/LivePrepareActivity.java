@@ -6,6 +6,11 @@
 
 package com.easyvaas.elapp.ui.live;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -25,6 +30,7 @@ import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -58,6 +64,7 @@ import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.NetworkUtil;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
+import com.easyvaas.elapp.view.live.SwitchButton;
 import com.easyvaas.sdk.live.base.audio.AudioManager;
 import com.easyvaas.sdk.live.base.camera.CameraManager;
 import com.easyvaas.sdk.live.base.view.CameraPreview;
@@ -125,6 +132,10 @@ public class LivePrepareActivity extends BaseActivity {
     private AlertDialog mSetPermissionDialog;
     private AlertDialog mSetTopicDialog;
     private AlertDialog mSetVideoPrice;
+    private CheckBox mCameraSwitch;
+    private SwitchButton mPaySwitchButton;
+    private EditText mPayEditText;
+    private boolean isNeedToPay; // 是否需要付费
 
     public static void start(Context context) {
         if (Preferences.getInstance(context).isLogin() && EVApplication.isLogin()) {
@@ -133,6 +144,200 @@ public class LivePrepareActivity extends BaseActivity {
         } else {
             LoginActivity.start(context);
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        mIsCancelRequestAfterDestroy = false;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_live_preapre);
+
+        mPref = Preferences.getInstance(this);
+        mLiveConfig = new LivePrepareConfig();
+        TopicEntityArray topicArray = new Gson()
+                .fromJson(mPref.getString(Preferences.KEY_CACHED_TOPICS_INFO_JSON), TopicEntityArray.class);
+        mTopicList = (topicArray == null ? new ArrayList<TopicEntity>() : topicArray.getTopics());
+        mHandler = new MyHandler<>(this);
+
+        initUIComponents();
+
+        int shareType = mPref.getInt(Preferences.KEY_LAST_SHARE_LIVE_TYPE, 0);
+        switch (shareType) {
+            case SHARE_TYPE_WEIBO:
+                mShareToSinaCb.setChecked(true);
+                break;
+            case SHARE_TYPE_QQ:
+                mShareToQQCb.setChecked(true);
+                break;
+            case SHARE_TYPE_WEIXIN:
+                mShareToWeixinCb.setChecked(true);
+                break;
+            case SHARE_TYPE_WEIXIN_CIRCLE:
+                mShareToWeixinCircleCb.setChecked(true);
+                break;
+        }
+
+        mSetThumbPanel = new BottomSheet.Builder(this).sheet(R.menu.select_thumb)
+                .listener(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case R.id.menu_select_thumb_by_camera:
+                                initShowSetThumbView();
+                                break;
+                            case R.id.menu_select_thumb_by_gallery:
+                                Intent intentFromGallery = new Intent();
+                                intentFromGallery.setType("image/*");
+                                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
+                                startActivityForResult(intentFromGallery, REQUEST_CODE_IMAGE);
+                                break;
+                            case R.id.menu_cancel:
+                                dialog.dismiss();
+                                break;
+                        }
+                    }
+                }).build();
+
+        mCameraManager = new CameraManager();
+        mCameraManager.initWithCameraView(mCameraPreview);
+        mHandler.sendEmptyMessageDelayed(MSG_SWITCH_CAMANE, 1000);
+
+        if (mCameraManager.acquireCamera(false) != null && mCameraManager.initImageSize(this)) {
+            //            if (!mCameraManager.isHaveFrontCamera()) {
+            //                findViewById(R.id.live_prepare_switch_camera_cb).setVisibility(View.GONE);
+            //            }
+            if (!NetworkUtil.isNetworkAvailable(this)) {
+                setInitStatus(false, R.string.msg_network_invalid);
+            }
+        } else {
+            setInitStatus(false, R.string.camera_open_error);
+            SingleToast.show(this, R.string.msg_no_permission_open_camera);
+            return;
+        }
+
+        try {
+            Class.forName("android.media.MediaCodec");
+        } catch (ClassNotFoundException e) {
+            Logger.e(TAG, "NoClassDefFoundError: android.media.MediaCodec");
+            setInitStatus(false, R.string.title_version_not_supported);
+            return;
+        }
+        if (!AudioManager.getInstance().obtainAudioRecordParameters()) {
+            setInitStatus(false, R.string.title_audio_record_error);
+            return;
+        }
+        if (!AudioManager.getInstance().initAudioProfile(this)) {
+            setInitStatus(false, R.string.title_audio_encode_error);
+            return;
+        }
+        setInitStatus(true, R.string.live_prepare_to_start);
+    }
+
+    private void initUIComponents() {
+        mCameraPreview = (CameraPreview) findViewById(R.id.camera_preview);
+
+        findViewById(R.id.live_start_btn).setOnClickListener(mOnClickListener);
+        findViewById(R.id.iv_back).setOnClickListener(mOnClickListener);
+        mLiveCoverTv = (TextView) findViewById(R.id.live_cover_tv);
+        mLiveCoverTv.setOnClickListener(mOnClickListener);
+        mLiveTitleEt = (EditText) findViewById(R.id.live_title_et);
+        mPrepareProgressBar = (ProgressBar) findViewById(R.id.live_prepare_pb);
+        mLiveStartBtn = (Button) findViewById(R.id.live_start_btn);
+
+        mShareToSinaCb = (CheckBox) findViewById(R.id.share_weibo_cb);
+        mShareToWeixinCb = (CheckBox) findViewById(R.id.share_weixin_cb);
+        mShareToWeixinCircleCb = (CheckBox) findViewById(R.id.share_weixin_circle_cb);
+        mShareToQQCb = (CheckBox) findViewById(R.id.share_qq_cb);
+        mShareToSinaCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        mShareToWeixinCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        mShareToWeixinCircleCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        mShareToQQCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        mLiveCoverLL = (LinearLayout) findViewById(R.id.live_cover_ll);
+        mLivePreCoverRv = (RoundImageView) findViewById(R.id.live_pre_cover_rv);
+        mLivePreCoverRv.setOnClickListener(mOnClickListener);
+        ((CheckBox) findViewById(R.id.live_limit_cb)).setOnCheckedChangeListener(mOnCheckedChangeListener);
+
+        if (mTopicList.size() > 0) {
+            mLiveConfig.setTopicId(mTopicList.get(0).getId());
+        }
+        mPaySwitchButton = (SwitchButton) findViewById(R.id.live_pay_toggle);
+        mPayEditText = (EditText) findViewById(R.id.live_pay_input);
+        mPaySwitchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                if (isChecked)
+                {
+                    mPayEditText.setVisibility(View.VISIBLE);
+                    setEditVisiableAnimate(true);
+                }
+                else
+                {
+                    setEditVisiableAnimate(false);
+                }
+                isNeedToPay = isChecked;
+            }
+        });
+    }
+
+    /**
+     * 开始直播
+     */
+    private void liveStart() {
+        //        if (TextUtils.isEmpty(mLiveTitleEt.getText().toString().trim())) {
+        //            Toast.makeText(this, R.string.record_title_empty_tips, Toast.LENGTH_SHORT).show();
+        //            mLiveStartBtn.setEnabled(true);
+        //            return;
+        //        }
+        //        if (TextUtils.isEmpty(mLiveConfig.getCustomThumbPath())) {
+        //            Toast.makeText(this, R.string.cover_tips, Toast.LENGTH_SHORT).show();
+        //            mLiveStartBtn.setEnabled(true);
+        //            return;
+        //        }
+        if (mCameraManager != null) {
+            mCameraManager.releaseCamera();
+            mCameraManager = null;
+        }
+        if (mCameraPreview != null) {
+            mCameraPreview.getHolder().removeCallback(mCameraPreview);
+            mCameraPreview = null;
+        }
+        showLoadingDialog(getString(R.string.ready_to_live),false,true);
+        // Aya : 2017/4/25 暂时标题这样起 取消上传图片 需要添加加载图
+        ApiHelper.getInstance().liveStart(EVApplication.getUser().getNickname()+"直播中", mLiveConfig.isShowLocation(),
+                mLiveConfig.getVideoLimitType(), mLiveConfig.getVideoPassword(), mLiveConfig.getVideoPrice(),
+                new MyRequestCallBack<LiveInfoEntity>() {
+                    @Override
+                    public void onSuccess(LiveInfoEntity result) {
+                        Logger.d(TAG, "live start result : " + result);
+                        mLiveConfig.setVid(result.getVid());
+                        mLiveConfig.setUri(result.getUri());
+                        mLiveConfig.setLiveShareUrl(result.getShare_url());
+                        setLiveTitle(result.getVid());
+                        setTopic(result.getVid());
+                        //                        uploadThumb(result.getVid());
+                        startToRecord();
+                        dismissLoadingDialog();
+                    }
+
+                    @Override
+                    public void onError(String errorInfo) {
+                        super.onError(errorInfo);
+                        if (isFinishing()) {
+                            return;
+                        }
+                        if (ApiConstant.E_USER_PHONE_NOT_EXISTS.equals(errorInfo)) {
+                            showBindPhoneDialog();
+                            setInitStatus(false, R.string.live_prepare_load_failed);
+                        }
+                        dismissLoadingDialog();
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        RequestUtil.handleRequestFailed(msg);
+                        setInitStatus(true, R.string.live_prepare_load_failed);
+                    }
+                });
     }
 
     private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
@@ -191,6 +396,7 @@ public class LivePrepareActivity extends BaseActivity {
                     v.setEnabled(false);
                     liveStart();
                     break;
+                case R.id.live_cover_ll:
                 case R.id.live_cover_tv:
                     if (mSetThumbPanel != null && mLiveStartBtn.isEnabled()) {
                         mSetThumbPanel.show();
@@ -258,6 +464,16 @@ public class LivePrepareActivity extends BaseActivity {
                             }
                             onShareCheckChange(compoundButton, isChecked, getString(R.string.qq));
                             break;
+                        case R.id.live_set_thumb_camera_cb:
+                            if (mCameraManager.isHaveFrontCamera())
+                                    mCameraManager.toggleCamera();
+                            mLiveConfig.setIsUseFrontCamera(isChecked);
+                            if (!isChecked) {
+                                mCameraSwitch.setText(R.string.live_switch_camera_front);
+                            } else {
+                                mCameraSwitch.setText(R.string.live_switch_camera_rear);
+                            }
+                            break;
 //                        case R.id.live_limit_cb:
 //                            showSetPermissionDialog();
 //                            break;
@@ -306,25 +522,6 @@ public class LivePrepareActivity extends BaseActivity {
                 if (isFinishing()) {
                     return;
                 }
-//                final boolean isChecked = ((CheckBox) findViewById(R.id.live_prepare_switch_camera_cb))
-//                        .isChecked();
-                if (mCameraManager.isUseFrontCamera()) {
-                    try {
-                        mCameraManager.toggleCamera();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    CheckBox switchThumbCheckBox = (CheckBox) mSetThumbView
-                            .findViewById(R.id.live_set_thumb_camera_cb);
-                    switchThumbCheckBox.setOnCheckedChangeListener(null);
-                    switchThumbCheckBox.setChecked(mLiveConfig.isUseFrontCamera());
-                    if (switchThumbCheckBox.isChecked()) {
-                        switchThumbCheckBox.setText(R.string.live_switch_camera_front);
-                    } else {
-                        switchThumbCheckBox.setText(R.string.live_switch_camera_rear);
-                    }
-                    switchThumbCheckBox.setOnCheckedChangeListener(mOnCheckedChangeListener);
-                }
                 break;
             case MSG_SHARE_TO_SINA:
 //                alphaOut(mShareToSinaTv);
@@ -344,129 +541,43 @@ public class LivePrepareActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        mIsCancelRequestAfterDestroy = false;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live_preapre);
+    private void setEditVisiableAnimate(boolean isVisiable)
+    {
 
-        mPref = Preferences.getInstance(this);
-        mLiveConfig = new LivePrepareConfig();
-        TopicEntityArray topicArray = new Gson()
-                .fromJson(mPref.getString(Preferences.KEY_CACHED_TOPICS_INFO_JSON), TopicEntityArray.class);
-        mTopicList = (topicArray == null ? new ArrayList<TopicEntity>() : topicArray.getTopics());
-        mHandler = new MyHandler<>(this);
-
-        initUIComponents();
-
-        int shareType = mPref.getInt(Preferences.KEY_LAST_SHARE_LIVE_TYPE, 0);
-        switch (shareType) {
-            case SHARE_TYPE_WEIBO:
-                mShareToSinaCb.setChecked(true);
-                break;
-            case SHARE_TYPE_QQ:
-                mShareToQQCb.setChecked(true);
-                break;
-            case SHARE_TYPE_WEIXIN:
-                mShareToWeixinCb.setChecked(true);
-                break;
-            case SHARE_TYPE_WEIXIN_CIRCLE:
-                mShareToWeixinCircleCb.setChecked(true);
-                break;
+        if (isVisiable){
+            PropertyValuesHolder inAlpha = PropertyValuesHolder.ofFloat(View.ALPHA,0,1);
+            PropertyValuesHolder inScale = PropertyValuesHolder.ofFloat(View.SCALE_X,0,1);
+            ValueAnimator inAnimate = ObjectAnimator.ofPropertyValuesHolder(mPayEditText,inAlpha,inScale);
+            inAnimate.setInterpolator(new AccelerateInterpolator());
+            inAnimate.setDuration(300);
+            inAnimate.start();
+        }else
+        {
+            PropertyValuesHolder outAlpha = PropertyValuesHolder.ofFloat(View.ALPHA,1,0);
+            PropertyValuesHolder outScale = PropertyValuesHolder.ofFloat(View.SCALE_X,1,0);
+            ValueAnimator outAnimate = ObjectAnimator.ofPropertyValuesHolder(mPayEditText,outAlpha,outScale);
+            outAnimate.setInterpolator(new AccelerateInterpolator());
+            outAnimate.setDuration(300);
+            outAnimate.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    mPayEditText.setVisibility(View.GONE);
+                }
+            });
+            outAnimate.start();
         }
 
-        mSetThumbPanel = new BottomSheet.Builder(this).sheet(R.menu.select_thumb)
-                .listener(new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case R.id.menu_select_thumb_by_camera:
-                                initShowSetThumbView();
-                                break;
-                            case R.id.menu_select_thumb_by_gallery:
-                                Intent intentFromGallery = new Intent();
-                                intentFromGallery.setType("image/*");
-                                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
-                                startActivityForResult(intentFromGallery, REQUEST_CODE_IMAGE);
-                                break;
-                            case R.id.menu_cancel:
-                                dialog.dismiss();
-                                break;
-                        }
-                    }
-                }).build();
-
-        mCameraManager = new CameraManager();
-        mCameraManager.initWithCameraView(mCameraPreview);
-        mHandler.sendEmptyMessageDelayed(MSG_SWITCH_CAMANE, 1000);
-
-        if (mCameraManager.acquireCamera(false) != null && mCameraManager.initImageSize(this)) {
-//            if (!mCameraManager.isHaveFrontCamera()) {
-//                findViewById(R.id.live_prepare_switch_camera_cb).setVisibility(View.GONE);
-//            }
-            if (!NetworkUtil.isNetworkAvailable(this)) {
-                setInitStatus(false, R.string.msg_network_invalid);
-            }
-        } else {
-            setInitStatus(false, R.string.camera_open_error);
-            SingleToast.show(this, R.string.msg_no_permission_open_camera);
-            return;
-        }
-
-        try {
-            Class.forName("android.media.MediaCodec");
-        } catch (ClassNotFoundException e) {
-            Logger.e(TAG, "NoClassDefFoundError: android.media.MediaCodec");
-            setInitStatus(false, R.string.title_version_not_supported);
-            return;
-        }
-        if (!AudioManager.getInstance().obtainAudioRecordParameters()) {
-            setInitStatus(false, R.string.title_audio_record_error);
-            return;
-        }
-        if (!AudioManager.getInstance().initAudioProfile(this)) {
-            setInitStatus(false, R.string.title_audio_encode_error);
-            return;
-        }
-        setInitStatus(true, R.string.live_prepare_to_start);
     }
 
-    private void initUIComponents() {
-        mCameraPreview = (CameraPreview) findViewById(R.id.camera_preview);
-
-        findViewById(R.id.live_start_btn).setOnClickListener(mOnClickListener);
-        findViewById(R.id.iv_back).setOnClickListener(mOnClickListener);
-        mLiveCoverTv = (TextView) findViewById(R.id.live_cover_tv);
-        mLiveCoverTv.setOnClickListener(mOnClickListener);
-        mLiveTitleEt = (EditText) findViewById(R.id.live_title_et);
-        mPrepareProgressBar = (ProgressBar) findViewById(R.id.live_prepare_pb);
-        mLiveStartBtn = (Button) findViewById(R.id.live_start_btn);
-
-        mShareToSinaCb = (CheckBox) findViewById(R.id.share_weibo_cb);
-        mShareToWeixinCb = (CheckBox) findViewById(R.id.share_weixin_cb);
-        mShareToWeixinCircleCb = (CheckBox) findViewById(R.id.share_weixin_circle_cb);
-        mShareToQQCb = (CheckBox) findViewById(R.id.share_qq_cb);
-        mShareToSinaCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
-        mShareToWeixinCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
-        mShareToWeixinCircleCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
-        mShareToQQCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
-        mLiveCoverLL = (LinearLayout) findViewById(R.id.live_cover_ll);
-        mLivePreCoverRv = (RoundImageView) findViewById(R.id.live_pre_cover_rv);
-        mLivePreCoverRv.setOnClickListener(mOnClickListener);
-        ((CheckBox) findViewById(R.id.live_limit_cb)).setOnCheckedChangeListener(mOnCheckedChangeListener);
-
-        if (mTopicList.size() > 0) {
-            mLiveConfig.setTopicId(mTopicList.get(0).getId());
-        }
-    }
 
     private void initShowSetThumbView() {
-        CheckBox cameraCb;
+
         mSetThumbView = findViewById(R.id.live_prepare_set_thumb_rl);
         if (mSetThumbView == null) {
             mSetThumbView = ((ViewStub) findViewById(R.id.live_prepare_set_thumb_view_stub)).inflate();
-            cameraCb = (CheckBox) mSetThumbView.findViewById(R.id.live_set_thumb_camera_cb);
-            cameraCb.setOnCheckedChangeListener(mOnCheckedChangeListener);
+            mCameraSwitch = (CheckBox) mSetThumbView.findViewById(R.id.live_set_thumb_camera_cb);
+            mCameraSwitch.setOnCheckedChangeListener(mOnCheckedChangeListener);
             mSetThumbView.findViewById(R.id.live_ready_shoot_thumb_btn).setOnClickListener(mOnClickListener);
             mSetThumbView.findViewById(R.id.live_ready_set_thumb_close).setOnClickListener(mOnClickListener);
             mSetThumbView.setOnTouchListener(new View.OnTouchListener() {
@@ -476,7 +587,7 @@ public class LivePrepareActivity extends BaseActivity {
                 }
             });
             if (!mCameraManager.isHaveFrontCamera()) {
-                cameraCb.setVisibility(View.GONE);
+                mCameraSwitch.setVisibility(View.GONE);
             }
         }
         findViewById(R.id.live_ready_setting_rl).setVisibility(View.GONE);
@@ -510,64 +621,7 @@ public class LivePrepareActivity extends BaseActivity {
         mLiveStartBtn.setClickable(isOK);
     }
 
-    /**
-     * 开始直播
-     */
-    private void liveStart() {
-//        if (TextUtils.isEmpty(mLiveTitleEt.getText().toString().trim())) {
-//            Toast.makeText(this, R.string.record_title_empty_tips, Toast.LENGTH_SHORT).show();
-//            mLiveStartBtn.setEnabled(true);
-//            return;
-//        }
-//        if (TextUtils.isEmpty(mLiveConfig.getCustomThumbPath())) {
-//            Toast.makeText(this, R.string.cover_tips, Toast.LENGTH_SHORT).show();
-//            mLiveStartBtn.setEnabled(true);
-//            return;
-//        }
-        if (mCameraManager != null) {
-            mCameraManager.releaseCamera();
-            mCameraManager = null;
-        }
-        if (mCameraPreview != null) {
-            mCameraPreview.getHolder().removeCallback(mCameraPreview);
-            mCameraPreview = null;
-        }
 
-        // Aya : 2017/4/25 暂时标题这样起 取消上传图片 需要添加加载图
-        ApiHelper.getInstance().liveStart(EVApplication.getUser().getNickname()+"直播中", mLiveConfig.isShowLocation(),
-                mLiveConfig.getVideoLimitType(), mLiveConfig.getVideoPassword(), mLiveConfig.getVideoPrice(),
-                new MyRequestCallBack<LiveInfoEntity>() {
-                    @Override
-                    public void onSuccess(LiveInfoEntity result) {
-                        Logger.d(TAG, "live start result : " + result);
-                        mLiveConfig.setVid(result.getVid());
-                        mLiveConfig.setUri(result.getUri());
-                        mLiveConfig.setLiveShareUrl(result.getShare_url());
-                        setLiveTitle(result.getVid());
-                        setTopic(result.getVid());
-//                        uploadThumb(result.getVid());
-                        startToRecord();
-                    }
-
-                    @Override
-                    public void onError(String errorInfo) {
-                        super.onError(errorInfo);
-                        if (isFinishing()) {
-                            return;
-                        }
-                        if (ApiConstant.E_USER_PHONE_NOT_EXISTS.equals(errorInfo)) {
-                            showBindPhoneDialog();
-                            setInitStatus(false, R.string.live_prepare_load_failed);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String msg) {
-                        RequestUtil.handleRequestFailed(msg);
-                        setInitStatus(true, R.string.live_prepare_load_failed);
-                    }
-                });
-    }
 
     private void setVideoPrice(final CheckBox limitCb) {
         if (mSetVideoPrice == null) {

@@ -22,6 +22,7 @@ import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.NoResponeBackModel;
+import com.easyvaas.elapp.bean.news.NewsCollectStatus;
 import com.easyvaas.elapp.bean.user.Collection;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.db.Preferences;
@@ -50,9 +51,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.realm.RealmResults;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
+import static com.alibaba.sdk.android.feedback.impl.FeedbackAPI.mContext;
 import static com.hooview.app.R.id.tv_news_comment;
 
 public class WebDetailActivity extends BaseActivity {
@@ -90,6 +94,7 @@ public class WebDetailActivity extends BaseActivity {
     private String code;
     private int isCollected; // 0 未添加 1 已添加
     private  int detailType;
+    private CompositeSubscription mCompositeSubscription;
 
 
     @Override
@@ -97,7 +102,11 @@ public class WebDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_detail);
         initViews();
-        addNewsToHistory();
+        if (detailType == TYPE_NEWS)
+        {
+            addNewsToHistory(); // 添加阅读记录
+            getCollectStatus();//判断收藏状态
+        }
     }
 
     /**
@@ -107,7 +116,7 @@ public class WebDetailActivity extends BaseActivity {
     {
         if (EVApplication.isLogin())
         {
-            RetrofitHelper.getInstance().getService()
+           Subscription subscription = RetrofitHelper.getInstance().getService()
                     .addReadNewsInfo(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),code)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -122,6 +131,7 @@ public class WebDetailActivity extends BaseActivity {
 
                         }
                     });
+            mCompositeSubscription.add(subscription);
         }
     }
 
@@ -134,7 +144,7 @@ public class WebDetailActivity extends BaseActivity {
             finish();
             return;
         }
-
+        mCompositeSubscription = new CompositeSubscription();
         mFlContainer = (FrameLayout) findViewById(R.id.fl_container);
         mEtComment = (EditText) findViewById(R.id.et_comment);
         mInputCommentBar = findViewById(R.id.rl_input_text);
@@ -329,6 +339,7 @@ public class WebDetailActivity extends BaseActivity {
         mWebView.removeAllViews();
         mWebView.destroy();
         mFlContainer.removeAllViews();
+        mCompositeSubscription.unsubscribe();
     }
 
     private void postComment(String code, boolean isStock) {
@@ -466,18 +477,8 @@ public class WebDetailActivity extends BaseActivity {
                 case R.id.tv_news_share:
                     shareUrl();
                     break;
-                case R.id.tv_news_collect:
-                    if (!Preferences.getInstance(WebDetailActivity.this).isLogin() || !EVApplication.isLogin()) {
-                        LoginActivity.start(WebDetailActivity.this);
-                        return;
-                    }
-                    if ((!TextUtils.isEmpty(code) && RealmHelper.getInstance().queryCollectionId(code))) {
-                        mTvNewsCollect.setSelected(false);
-                        RealmHelper.getInstance().deleteCollection(code);
-                    } else {
-                        mTvNewsCollect.setSelected(true);
-                        getCollectionInfo(code);
-                    }
+                case R.id.tv_news_collect:  // 文章收藏
+                    setCollectStatus();
                     break;
                 case tv_news_comment:
                     if (!Preferences.getInstance(WebDetailActivity.this).isLogin() || !EVApplication.isLogin()) {
@@ -503,6 +504,66 @@ public class WebDetailActivity extends BaseActivity {
             }
         }
     };
+
+    /**
+     * 判断收藏状态
+     */
+    private void getCollectStatus()
+    {
+        if (EVApplication.isLogin()) {
+           Subscription subscription =  RetrofitHelper.getInstance().getService()
+                    .getNewsCollectStatus(EVApplication.getUser().getSessionid(),code,0,1)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<NewsCollectStatus>() {
+                        @Override
+                        public void OnSuccess(NewsCollectStatus newsCollectStatus) {
+                            if (newsCollectStatus.getExist() == 1)
+                                mTvNewsCollect.setSelected(true);
+                            else
+                                mTvNewsCollect.setSelected(false);
+                        }
+
+                        @Override
+                        public void OnFailue(String msg) {
+
+                        }
+                    });
+            mCompositeSubscription.add(subscription);
+        }
+    }
+
+    /**
+     * 收藏点击状态
+     */
+    private void setCollectStatus()
+    {
+        if (EVApplication.isLogin()) {
+            final int action = mTvNewsCollect.isSelected() ? 0 : 1;
+         Subscription subscription = RetrofitHelper.getInstance().getService()
+                    .addNewsToColloction(EVApplication.getUser().getName(),
+                            EVApplication.getUser().getSessionid(),
+                            code,action)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                        @Override
+                        public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+                            if (action == 0) {
+                                mTvNewsCollect.setSelected(false);
+                            } else {
+                                mTvNewsCollect.setSelected(true);
+                            }
+                        }
+                        @Override
+                        public void OnFailue(String msg) {
+                            SingleToast.show(WebDetailActivity.this,R.string.opreat_fail);
+                        }
+                    });
+            mCompositeSubscription.add(subscription);
+        }else
+            LoginActivity.start(mContext);
+    }
 
     private void getCollectionInfo(String id) {
         RealmResults<ReadRecord> results = RealmHelper.getInstance().getRealm().where(ReadRecord.class).findAll();

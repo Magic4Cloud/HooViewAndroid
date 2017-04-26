@@ -1,6 +1,5 @@
 package com.easyvaas.elapp.adapter.news;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
-import com.easyvaas.elapp.bean.user.ReadRecord;
-import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Utils;
@@ -61,7 +58,6 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Utils.showNewsDetail(mContext,mData.get(position).getTitle() ,mData.get(position).getId());
-                insertHistoryRecord(mData.get(position));
             }
         });
     }
@@ -213,21 +209,6 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
         }
     }
 
-    /**
-     * 插入已读新闻到数据库
-     */
-    private void insertHistoryRecord(HomeNewsBean newsModel) {
-        String mVideoId = newsModel.getId() + "";
-        if (!TextUtils.isEmpty(mVideoId) && !RealmHelper.getInstance().queryReadRecordId(mVideoId)) {
-            ReadRecord bean = new ReadRecord();
-            bean.setId(String.valueOf(mVideoId));
-            bean.setPic(newsModel.getCover().size() > 0 ? newsModel.getCover().get(0) : "");
-            bean.setTitle(newsModel.getTitle());
-            bean.setTime(DateTimeUtil.getSimpleTime(mContext, newsModel.getTime()));
-            bean.setCount(newsModel.getViewCount());
-            RealmHelper.getInstance().insertReadRecord(bean, 30);
-        }
-    }
 }
 
 

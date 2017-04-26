@@ -6,6 +6,9 @@
 
 package com.easyvaas.elapp.bean.user;
 
+import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.db.Preferences;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +18,8 @@ public class User extends BaseUserEntity implements Serializable {
     public static final String AUTH_TYPE_QQ = "qq";
     public static final String AUTH_TYPE_WEIXIN = "weixin";
 
-    private String sessionid;
+    private String userid;
+    public String sessionid;
     private List<AuthEntity> auth;
     private String authtype;
     private int followed_flag;
@@ -24,6 +28,15 @@ public class User extends BaseUserEntity implements Serializable {
     private String share_url;
     private int living;
     private String introduce; // 详细介绍
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
 
     public String getIntroduce() {
         return introduce;
@@ -41,8 +54,9 @@ public class User extends BaseUserEntity implements Serializable {
         this.living = living;
     }
 
+    // Aya : 2017/4/26 等后台改完后 恢复到原来状态
     public String getSessionid() {
-        return sessionid;
+        return Preferences.getInstance(EVApplication.getApp()).getSessionId();
     }
 
     public void setSessionid(String sessionid) {

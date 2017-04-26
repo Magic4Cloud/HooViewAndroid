@@ -20,6 +20,7 @@ import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.ui.live.PlayerActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
+import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
@@ -148,19 +149,27 @@ public class UserPageCommentAdapter extends MyBaseAdapter<PostsBean> {
         public void praiseClick() {
             if (EVApplication.isLogin()) {
                 PostsBean postsBean = mData.get(getLayoutPosition());
+                final int action = mUserCommentPraiseIcon.isSelected() ? 0 : 1;
                 RetrofitHelper.getInstance().getService()
-                        .praiseClick(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),postsBean.getId())
+                        .praiseClick(EVApplication.getUser().getName(),
+                                     EVApplication.getUser().getSessionid(),
+                                     postsBean.getId(),postsBean.getTopic().getType(),action)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<NoResponeBackModel>() {
                             @Override
                             public void OnSuccess(NoResponeBackModel noResponeBackModel) {
-
+                                if (action == 0) {
+                                    mUserCommentPraiseIcon.setSelected(false);
+                                    SingleToast.show(mContext,R.string.user_praise_cancel);
+                                } else {
+                                    mUserCommentPraiseIcon.setSelected(true);
+                                    SingleToast.show(mContext,R.string.user_praise_success);
+                                }
                             }
-
                             @Override
                             public void OnFailue(String msg) {
-
+                                SingleToast.show(mContext,R.string.opreat_fail);
                             }
                         });
             }else

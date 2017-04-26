@@ -815,7 +815,9 @@
     <string name="empty_no_vipliving">Ta还没有发布过直播噢</string>
     <string name="empty_no_viparticle">Ta还没有发布过文章噢</string>
     <string name="empty_no_user_comment">Ta还没有发布过评论噢</string>
+    <string name="empty_user_comment">您还没有发布过评论噢</string>
     <string name="empty_no_focus">您还没有关注的人噢</string>
+    <string name="empty_no_userfocus">Ta还没有关注的人噢</string>
     <string name="empty_no_collect">您还没有收藏资讯噢</string>
     <string name="empty_no_watch">您还没有收看视频/直播噢</string>
     <string name="empty_no_read">您还没有看过任何资讯噢</string>
@@ -844,8 +846,12 @@
     <string name="user_text_follow_count">%s人参与</string>
     <string name="user_myfans">我的粉丝</string>
     <string name="user_myfoucs">我的关注</string>
+    <string name="user_tafans">Ta的粉丝</string>
+    <string name="user_tafoucs">Ta的关注</string>
     <string name="opreat_fail">操作失败</string>
     <string name="unfollow_success">取消关注成功</string>
+    <string name="user_praise_success">点赞成功</string>
+    <string name="user_praise_cancel">取消点赞成功</string>
 
     //直播界面
     <string name="player_pay_tip">&#160;&#160;&#160;&#160;当前为付费直播\n点击购买马上加入</string>
@@ -855,6 +861,8 @@
     <string name="hooview_coin_left">火眼豆余额</string>
     <string name="hooview_coin_not_enough">您的火眼豆余额不足</string>
     <string name="video_pay_success">购买成功</string>
-
+    <string name="live_pay">付费</string>
+    <string name="live_pay_tips">请输入直播价格(火眼豆)</string>
+    <string name="ready_to_live">准备直播中...</string>
 
 </resources>

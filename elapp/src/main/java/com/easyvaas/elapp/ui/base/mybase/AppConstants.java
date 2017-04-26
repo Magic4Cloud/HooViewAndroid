@@ -14,8 +14,13 @@ public class AppConstants {
     public static final String VIDEO_ID = "videoid"; // video id
     public static final String NEWS_ID = "newsid"; // news id
     public static final String POST_ID = "postid"; // post id
+    public static final String VID = "vid"; //视频id
 
     public static final String START = "start"; //page start
     public static final String PARAMS = "params"; // 普通参数
+    public static final String ACTION = "action";
+    public static final String TYPE = "type";
+    public static final String NAME = "name"; //旧版API name = userid
+    public static final String CODE = "code"; //旧版API 新闻id
 
 }
