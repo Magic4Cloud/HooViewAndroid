@@ -144,8 +144,8 @@ public class BaseUserEntity extends BaseUer implements Serializable {
     @Override
     public String toString() {
         return "BaseUserEntity{" +
-                "birthday='" + birthday + '\'' +
-                ", signature='" + signature + '\'' +
+                "signature='" + signature + '\'' +
+                ", birthday='" + birthday + '\'' +
                 ", location='" + location + '\'' +
                 ", fans_count=" + fans_count +
                 ", follow_count=" + follow_count +
@@ -153,6 +153,8 @@ public class BaseUserEntity extends BaseUer implements Serializable {
                 ", living_count=" + living_count +
                 ", video_count=" + video_count +
                 ", costecoin=" + costecoin +
+                ", credentials='" + credentials + '\'' +
+                ", tags=" + tags +
                 ", imuser='" + imuser + '\'' +
                 '}' + super.toString();
     }

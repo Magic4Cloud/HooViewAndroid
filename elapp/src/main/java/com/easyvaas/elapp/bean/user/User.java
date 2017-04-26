@@ -144,4 +144,19 @@ public class User extends BaseUserEntity implements Serializable {
             return token;
         }
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "sessionid='" + sessionid + '\'' +
+                ", auth=" + auth +
+                ", authtype='" + authtype + '\'' +
+                ", followed_flag=" + followed_flag +
+                ", invite_url='" + invite_url + '\'' +
+                ", impwd='" + impwd + '\'' +
+                ", share_url='" + share_url + '\'' +
+                ", living=" + living +
+                ", introduce='" + introduce + '\'' +
+                '}' + super.toString();
+    }
 }

@@ -9,6 +9,7 @@ package com.easyvaas.elapp.ui.user.usernew.activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -38,13 +39,13 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.net.UploadThumbAsyncTask;
+import com.easyvaas.elapp.net.mynet.NetSubscribe;
+import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
 import com.easyvaas.elapp.ui.pop.OperationPopupWindow;
 import com.easyvaas.elapp.ui.pop.UserInfoEditPopupWindow;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.UserAddLabelActivity;
-import com.easyvaas.elapp.ui.user.UserInfoActivity;
-import com.easyvaas.elapp.ui.user.UserInfoEditActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
@@ -53,15 +54,26 @@ import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.flowlayout.FlowLayout;
 import com.hooview.app.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
-public class UserInfoModifyActivity extends MyBaseActivity implements View.OnClickListener {
+/**
+ * 编辑资料
+ */
+public class UserInfoModifyActivity extends MyBaseActivity{
+
+    private static final String TAG = UserInfoModifyActivity.class.getSimpleName();
     private static final int REQUEST_CODE_LABEL = 102;
-    private static final String TAG = "UserInfoActivity";
     private static final int REQUEST_CODE_CITY = 0X10;
     private static final int REQUEST_CODE_IMAGE = 0;
     private static final int REQUEST_CODE_CAMERA = 1;
@@ -80,6 +92,7 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
     public static final String EXTRA_KEY_USER_SIGN = "extra_key_user_sign";
     public static final String EXTRA_KEY_USER_CERTIFICATE = "extra_key_user_certificate";
     public static final String EXTRA_KEY_USER_TYPE = "extra_key_user_type";
+    public static final String EXTRA_KEY_USER_INTRODUCE = "extra_key_user_introduce";
     public static final int EXTRA_KEY_USER_TYPE_CHANGE_SIGN = 1;
     public static final int EXTRA_KEY_USER_TYPE_CHANGE_NICK = 2;
     public static final int EXTRA_KEY_USER_TYPE_CERTIFICATE = 3;
@@ -161,9 +174,8 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         bundles = getIntent().getExtras();
         mIsSetRegisterInfo = getIntent().getBooleanExtra(Constants.EXTRA_KEY_IS_REGISTER, false);
-        mSetThumbPanel = Utils.getSetThumbBottomPanel(this, IMAGE_FILE_NAME,
-                REQUEST_CODE_CAMERA, REQUEST_CODE_IMAGE);
-        mLocationEt.setText(R.string.default_user_location);
+//        mSetThumbPanel = Utils.getSetThumbBottomPanel(this, IMAGE_FILE_NAME, REQUEST_CODE_CAMERA, REQUEST_CODE_IMAGE);
+        // 设置用户信息
         if (bundles != null && (!mIsSetRegisterInfo)) {
             setUserInfo(bundles);
         }
@@ -172,15 +184,16 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
         isVip = true;
         if (isVip) {
             mItemCertificate.setVisibility(View.VISIBLE);
-            mItemLabel.setVisibility(View.VISIBLE);
-            mItemIntroduce.setVisibility(View.VISIBLE);
-            mCertificate = bundles.getString(UserInfoActivity.EXTRA_KEY_USER_CERTIFICATE);
+            mCertificate = bundles.getString(EXTRA_KEY_USER_CERTIFICATE);
             if (!TextUtils.isEmpty(mCertificate)) {
                 mCertificateEt.setTextColor(getResources().getColor(R.color.login_text_color_6));
                 mCertificateEt.setText(mCertificate);
             }
+            mItemLabel.setVisibility(View.VISIBLE);
             List<String> tags = bundles.getStringArrayList(Constants.EXTRA_ADD_LABEL);
             addLabels(tags);
+            mItemIntroduce.setVisibility(View.VISIBLE);
+            mIntroduceTv.setText(bundles.getString(EXTRA_KEY_USER_INTRODUCE));
         } else {
             mItemCertificate.setVisibility(View.GONE);
             mItemLabel.setVisibility(View.GONE);
@@ -195,8 +208,8 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
         mToobarTitleView.setTitleTextRight("完成", R.color.btn_color_secondary_level, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 2017/4/19
-                Logger.e("......", "done............");
+                // 编辑资料
+                editUserInfo();
             }
         });
     }
@@ -301,41 +314,6 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
             });
         }
         mPopupWindowEditIntroduce.showWithInputMethod();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.user_info_nickname_et:
-                //TODO
-                Intent editNickNameIntent = new Intent(UserInfoModifyActivity.this, UserInfoEditActivity.class);
-                editNickNameIntent.putExtra(EXTRA_KEY_USER_NICKNAME, mNickname);
-                editNickNameIntent.putExtra(EXTRA_KEY_USER_TYPE, EXTRA_KEY_USER_TYPE_CHANGE_NICK);
-                startActivityForResult(editNickNameIntent, REQUEST_CODE_EDIT_NICKNAME);
-                break;
-            case R.id.user_info_item_6:
-                //TODO
-                Intent editSignIntent = new Intent(UserInfoModifyActivity.this, UserInfoEditActivity.class);
-                editSignIntent.putExtra(EXTRA_KEY_USER_SIGN, mSignature);
-                editSignIntent.putExtra(EXTRA_KEY_USER_TYPE, EXTRA_KEY_USER_TYPE_CHANGE_SIGN);
-                startActivityForResult(editSignIntent, REQUEST_CODE_EDIT_SIGN);
-                break;
-            case R.id.user_certificate:
-                //TODO
-                Intent certificateIntent = new Intent(UserInfoModifyActivity.this, UserInfoEditActivity.class);
-                certificateIntent.putExtra(EXTRA_KEY_USER_CERTIFICATE, mCertificate);
-                certificateIntent.putExtra(EXTRA_KEY_USER_TYPE, EXTRA_KEY_USER_TYPE_CERTIFICATE);
-                startActivityForResult(certificateIntent, REQUEST_CODE_EDIT_CERTIFICATE);
-                break;
-            case R.id.user_info_commit_btn:
-                if (mIsSetRegisterInfo) {
-                    phoneRegistration(bundles);
-                } else {
-                    editUserInfo();
-                }
-                break;
-
-        }
     }
 
     @Override
@@ -474,11 +452,11 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
         String city = userInfo.getString(ShareConstants.USER_CITY);
         mNickname = userInfo.getString(ShareConstants.PARAMS_NICK_NAME);
         mSignature = userInfo.getString(ShareConstants.DESCRIPTION);
-        /*if (User.GENDER_FEMALE.equals(gender)) {
-            mGenderSpinner.setSelection(SPINNER_FEMALE_INDEX);
+        if (User.GENDER_FEMALE.equals(gender)) {
+            mSexTv.setText("女");
         } else {
-            mGenderSpinner.setSelection(SPINNER_MALE_INDEX);
-        }*/
+            mSexTv.setText("男");
+        }
         if (!TextUtils.isEmpty(mNickname)) {
             mNicknameEt.setTextColor(getResources().getColor(R.color.login_text_color_6));
             mNicknameEt.setText(mNickname);
@@ -541,35 +519,101 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
                 });
     }
 
+    /**
+     * 上传资料
+     */
     private void editUserInfo() {
         final User user = EVApplication.getUser();
+
         if (mTempLogoPic != null && mTempLogoPic.exists()) {
-            AsyncTask uploadTask = new UploadThumbAsyncTask(null);
-            String uploadUrl = ApiConstant.USER_UPLOAD_LOGO
-                    + "sessionid=" + Preferences.getInstance(this).getSessionId();
-            uploadTask.execute(uploadUrl, BitmapFactory.decodeFile(mTempLogoPic.getAbsolutePath()));
-            user.setLogourl(mTempLogoPic.getAbsolutePath());
+            String uploadUrl = ApiConstant.USER_UPLOAD_LOGO + "sessionid=" + Preferences.getInstance(this).getSessionId();
+            Bitmap uploadBitMap = BitmapFactory.decodeFile(mTempLogoPic.getAbsolutePath());
+            String fileName = UUID.randomUUID() + "_" + System.currentTimeMillis() + ".jpg";
+            ApiHelper.getInstance().uploadThumb(uploadUrl, null, uploadBitMap, fileName, new MyRequestCallBack<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            try {
+                                JSONObject object = new JSONObject(result);
+                                user.setLogourl(object.optString("logourl"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(String errorInfo) {
+                            SingleToast.show(UserInfoModifyActivity.this, "上传头像失败");
+                        }
+
+                        @Override
+                        public void onFailure(String msg) {
+                            SingleToast.show(UserInfoModifyActivity.this, "上传头像失败");
+                        }
+                    }
+            );
+            /*AsyncTask uploadTask = new UploadThumbAsyncTask(null);
+            uploadTask.execute(uploadUrl, uploadBitMap);
+            user.setLogourl(mTempLogoPic.getAbsolutePath());*/
         }
-
+        // params
         final String nickname = mNicknameEt.getText().toString().trim();
-        final String location = mLocationEt.getText().toString().trim();
+        final String logoUrl = "";
+        final String location = TextUtils.isEmpty(mLocationEt.getText().toString().trim()) ? getString(R.string.default_user_location) : mLocationEt.getText().toString().trim();
+        final String birthday = "1990-01-01";
         final String signature = mSignatureEt.getText().toString().trim();
+        final String gender = getString(R.string.male).equals(mSexTv.getText().toString().trim()) ? "male" : "female";
         final String credentials = mCertificateEt != null ? mCertificateEt.getText().toString().trim() : "";
-        final String gender = /*getString(R.string.male).equals(mGenderSpinner.getSelectedItem().toString().trim()) ? "male" : */"female";
-
+        Logger.e(TAG, credentials);
+        final String introduce = mIntroduceTv != null ? mIntroduceTv.getText().toString().trim() : "";
+        Logger.e(TAG, introduce);
+        // 判断
         if (TextUtils.isEmpty(nickname) || getString(R.string.nickname).equals(nickname)) {
             SingleToast.show(this, R.string.msg_nickname_empty);
             return;
         }
-
-        if (nickname.equals(user.getNickname()) && location
-                .equals(user.getLocation()) && signature.equals(user.getSignature()) && gender
-                .equals(user.getGender()) && credentials.equals(user.getCredentials())) {
+        // 未编辑，直接退出
+        if (nickname.equals(user.getNickname()) && location.equals(user.getLocation())
+                && signature.equals(user.getSignature()) && gender.equals(user.getGender())
+                && credentials.equals(user.getCredentials())) {
             finish();
             return;
         }
-        Logger.d(TAG, "editUserInfo: " + user.toString());
-        ApiHelper.getInstance().userEditInfo(nickname, "", location, gender,
+        // 已编辑，提交服务器，在退出
+        Subscription subscription = RetrofitHelper.getInstance().getService().
+                editUserInfo(
+                        Preferences.getInstance(EVApplication.getApp()).getUserNumber(),
+                        Preferences.getInstance(EVApplication.getApp()).getSessionId(),
+                        nickname,
+                        /*logoUrl,*/
+                        location,
+                        birthday,
+                        signature,
+                        gender,
+                        credentials,
+                        introduce)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<Object>() {
+                    @Override
+                    public void OnSuccess(Object o) {
+                        user.setNickname(nickname);
+                        user.setLocation(location);
+                        user.setSignature(signature);
+                        user.setGender(gender);
+                        user.setCredentials(credentials);
+                        user.setIntroduce(introduce);
+                        Preferences.getInstance(getApplicationContext()).putString(Preferences.KEY_USER_NICKNAME, nickname);
+                        EVApplication.updateUserInfo();
+                        finish();
+                    }
+
+                    @Override
+                    public void OnFailue(String msg) {
+                        SingleToast.show(UserInfoModifyActivity.this, msg);
+                    }
+                });
+        addSubscribe(subscription);
+        /*ApiHelper.getInstance().userEditInfo(nickname, "", location, gender,
                 signature, credentials, new MyRequestCallBack<String>() {
                     @Override
                     public void onSuccess(String result) {
@@ -594,7 +638,7 @@ public class UserInfoModifyActivity extends MyBaseActivity implements View.OnCli
                     public void onFailure(String msg) {
                         RequestUtil.handleRequestFailed(msg);
                     }
-                });
+                });*/
     }
 
     @Override

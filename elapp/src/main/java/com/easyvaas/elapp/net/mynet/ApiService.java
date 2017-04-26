@@ -80,7 +80,7 @@ public interface ApiService {
      * 获取用户信息
      */
     @GET("api/v2/user/info")
-    Observable<NetResponse<User>> getUserInfo(@Query("name") String id,
+    Observable<NetResponse<User>> getUserInfo(@Query(AppConstants.USER_ID) String id,
                                               @Query(AppConstants.SESSION_ID) String sessionid);
 
     /**
@@ -306,7 +306,20 @@ public interface ApiService {
                                                                     @Query(AppConstants.NEWS_ID) String newsid,
                                                                     @Query("action") int action);
 
-
+    /**
+     * 编辑个人资料
+     */
+    @GET("api/v2/user/edit")
+    Observable<NetResponse<Object>> editUserInfo(@Query(AppConstants.USER_ID) String userId,
+                                         @Query(AppConstants.SESSION_ID) String sessionId,
+                                         @Query("nickname") String nickname,
+                                         /*@Query("logoUrl") String logoUrl,*/
+                                         @Query("location") String location,
+                                         @Query("birthday") String birthday,
+                                         @Query("signature") String signature,
+                                         @Query("gender") String gender,
+                                         @Query("credentials") String credentials,
+                                         @Query("introduce") String introduce);
 
 
 

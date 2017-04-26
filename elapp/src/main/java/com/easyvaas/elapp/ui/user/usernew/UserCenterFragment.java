@@ -24,15 +24,15 @@ import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
 import com.easyvaas.elapp.ui.user.SettingActivity;
-import com.easyvaas.elapp.ui.user.UserInfoActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserBuyActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserCollectionNewActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserFansActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserFocusActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserHistoryNewActivity;
+import com.easyvaas.elapp.ui.user.usernew.activity.UserInfoModifyActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserPublishActivity;
 import com.easyvaas.elapp.utils.Constants;
-import com.easyvaas.elapp.utils.Utils;
+import com.easyvaas.elapp.utils.Logger;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
@@ -187,14 +187,22 @@ public class UserCenterFragment extends MyBaseFragment {
         }
         if (user != null) {
             bundle.putString(ShareConstants.PARAMS_NICK_NAME, user.getNickname());
+            Logger.e("user info", "Nickname " + user.getNickname());
             bundle.putString(ShareConstants.PARAMS_IMAGEURL, user.getLogourl());
+            Logger.e("user info", "Logourl " + user.getLogourl());
             bundle.putString(ShareConstants.PARAMS_SEX, user.getGender());
+            Logger.e("user info", "Gender " + user.getGender());
             bundle.putString(ShareConstants.USER_CITY, user.getLocation());
+            Logger.e("user info", "Location " + user.getLocation());
             bundle.putString(ShareConstants.DESCRIPTION, user.getSignature());
+            Logger.e("user info", "Signature " + user.getSignature());
             bundle.putString(ShareConstants.BIRTHDAY, user.getBirthday());
+            Logger.e("user info", "Birthday " + user.getBirthday());
             bundle.putBoolean(Constants.EXTRA_KEY_IS_REGISTER, false);
             bundle.putBoolean(Constants.EXTRA_KEY_IS_VIP, user.getVip() == 1);
-            bundle.putString(UserInfoActivity.EXTRA_KEY_USER_CERTIFICATE, user.getCredentials());
+            Logger.e("user info", "Vip " + user.getVip());
+            bundle.putString(UserInfoModifyActivity.EXTRA_KEY_USER_CERTIFICATE, user.getCredentials());
+            Logger.e("user info", "Credentials " + user.getCredentials());
             if (user.getTags() != null && user.getTags().size() > 0){
                 List<String> list = new ArrayList<>();
                 for (int i= 0; i < user.getTags().size(); i++){
@@ -202,6 +210,8 @@ public class UserCenterFragment extends MyBaseFragment {
                 }
                 bundle.putStringArrayList(Constants.EXTRA_ADD_LABEL, (ArrayList<String>)list);
             }
+            bundle.putString(UserInfoModifyActivity.EXTRA_KEY_USER_INTRODUCE, user.getIntroduce());
+            Logger.e("user info", "Introduce " + user.getIntroduce());
         }
     }
 
@@ -230,8 +240,8 @@ public class UserCenterFragment extends MyBaseFragment {
         }
         switch (view.getId()) {
             case R.id.user_edit_layout:  // 编辑资料
-//                UserInfoActivity.start(getActivity(),bundle);
-                Utils.toUserPager(mContext,EVApplication.getUser().getName(),1);
+                UserInfoModifyActivity.start(getActivity(), bundle);
+//                Utils.toUserPager(mContext,EVApplication.getUser().getName(),1);
                 break;
             case R.id.user_settting: // 设置界面
                 SettingActivity.start(getActivity());
