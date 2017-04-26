@@ -139,9 +139,9 @@ public class ImageTextLiveListFragment extends BaseListRcvFragment {
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             RecyclerView.ViewHolder viewHolder;
             if (viewType == ITEM_VIEW_HEADER) {
-                viewHolder = new HeaderViewHolder(LayoutInflater.from(getContext()).inflate(R.layout.item_image_text_live_header, parent, false));
+                viewHolder = new HeaderViewHolder(LayoutInflater.from(getContext()).inflate(R.layout.item_live_image_text_hot, parent, false));
             } else {
-                viewHolder = new NormalItemViewHolder(LayoutInflater.from(getContext()).inflate(R.layout.item_image_text_live, parent, false));
+                viewHolder = new NormalItemViewHolder(LayoutInflater.from(getContext()).inflate(R.layout.item_live_image_text, parent, false));
             }
             return viewHolder;
         }
@@ -217,10 +217,10 @@ public class ImageTextLiveListFragment extends BaseListRcvFragment {
 
         public NormalItemViewHolder(View view) {
             super(view);
-            mTvFollowCount = (TextView) view.findViewById(R.id.tv_follow_count);
-            mTvTitle = (TextView) view.findViewById(R.id.tv_title);
+            mTvFollowCount = (TextView) view.findViewById(R.id.image_text_follow_count);
+            mTvTitle = (TextView) view.findViewById(R.id.image_text_title);
             mLlTagContainer = (LinearLayout) view.findViewById(R.id.ll_tag_container);
-            mRivCover = (RoundImageView) view.findViewById(R.id.iv_cover);
+            mRivCover = (RoundImageView) view.findViewById(R.id.image_text_cover);
         }
 
         public void setLivModel(final TextLiveListModel.StreamsEntity model) {
@@ -277,7 +277,7 @@ public class ImageTextLiveListFragment extends BaseListRcvFragment {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Logger.d(TAG, "HotVipAdapter onCreateViewHolder: ");
-            return new HotVipViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hot_vip, parent, false));
+            return new HotVipViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_image_text_hot_item, parent, false));
         }
 
         @Override

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/image_text_hot"
+        android:layout_width="match_parent"
+        android:layout_height="172dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#f8f8f8"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:drawableLeft="@drawable/ic_list_n"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="@string/vip_list"
+        android:textColor="@color/text_color_gray"
+        android:textSize="@dimen/text_size_16"/>
+
+</LinearLayout>

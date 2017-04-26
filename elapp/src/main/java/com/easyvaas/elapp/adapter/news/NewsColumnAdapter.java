@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
-import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.view.CircleImageView;
 import com.hooview.app.R;
@@ -98,11 +97,11 @@ public class NewsColumnAdapter extends MyBaseAdapter<NewsColumnModel.ColumnModel
                     mViewUser.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            VIPUserInfoDetailActivity.start(mContext, author.getId());
+                            // // TODO: 2017/4/26 vip
+                            Utils.toUserPager(mContext, author.getId(), 1);
                         }
                     });
                 }
-//                Utils.showNewsImage(model.getCover(), cover);
                 Utils.showImageBlur(mContext, model.getCover(), R.drawable.account_bitmap_list, cover);
                 title.setText(model.getTitle());
                 introduce.setText(model.getIntroduce());

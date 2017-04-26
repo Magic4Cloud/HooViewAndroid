@@ -15,7 +15,9 @@ import com.easyvaas.elapp.bean.user.UserHistoryTestModel;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
+import com.easyvaas.elapp.bean.video.GoodsVideoListModel;
 import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
+import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 
@@ -310,8 +312,22 @@ public interface ApiService {
 
     /*-------------------------------------------直播----------------------------------------*/
 
-
-    @GET(ApiConstant.DEBUG_HOST+"video/recommendlist")
+    /**
+     * 直播---视频直播列表
+     */
+    @GET(ApiConstant.DEBUG_HOST + "video/recommendlist")
     Observable<NetResponse<RecommendVideoListModel>> getLiveVideo(@Query(AppConstants.START) int start);
+
+    /**
+     * 直播---图文直播列表
+     */
+    @GET("api/textlive/home")
+    Observable<NetResponse<TextLiveListModel>> getLiveImageText(@Query(AppConstants.START) int start);
+
+    /**
+     * 直播---精品视频列表
+     */
+    @GET(ApiConstant.DEBUG_HOST + "video/vodlist")
+    Observable<NetResponse<GoodsVideoListModel>> getLiveGoodVideo(@Query(AppConstants.START) int start);
 
 }

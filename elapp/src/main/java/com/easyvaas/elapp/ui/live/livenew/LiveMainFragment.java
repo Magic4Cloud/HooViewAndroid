@@ -20,8 +20,6 @@ import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
-import com.easyvaas.elapp.ui.live.GoodsVideoFragment;
-import com.easyvaas.elapp.ui.live.ImageTextLiveListFragment;
 import com.easyvaas.elapp.ui.live.LivePrepareActivity;
 import com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity;
 import com.easyvaas.elapp.ui.search.GlobalSearchActivity;
@@ -75,8 +73,8 @@ public class LiveMainFragment extends MyBaseFragment {
                 getString(R.string.live_good_video)};
         mFragments = new Fragment[]{
                 LiveVideoListFragment.newInstance(),
-                new ImageTextLiveListFragment(),
-                new GoodsVideoFragment()
+                LiveImageTextListFragment.newInstance(),
+                LiveGoodVideoListFragment.newInstance()
         };
         mTabViewpager.setAdapter(new LivePagerAdapter(getChildFragmentManager()));
         mTabLayout.setViewPager(mTabViewpager);

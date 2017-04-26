@@ -6,6 +6,7 @@
               android:orientation="vertical">
 
     <View
+        android:id="@+id/view_top_blank"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="#f8f8f8"/>
@@ -20,28 +21,35 @@
         android:paddingRight="15dp"
         android:paddingTop="16dp">
 
-        <com.easyvaas.elapp.view.CircleImageView
-            android:id="@+id/video_avatar"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/user_avtor"/>
+        <RelativeLayout
+            android:id="@+id/video_user"
+            android:layout_width="match_parent"
+            android:layout_height="22dp">
 
-        <TextView
-            android:id="@+id/video_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_toRightOf="@+id/video_avatar"
-            android:maxLines="1"
-            android:layout_marginLeft="2dp"
-            android:text="火眼主播小莹"
-            android:textColor="@color/title_text_color"
-            android:textSize="@dimen/text_size_16"/>
+            <com.easyvaas.elapp.view.CircleImageView
+                android:id="@+id/video_avatar"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/user_avtor"/>
+
+            <TextView
+                android:id="@+id/video_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toRightOf="@+id/video_avatar"
+                android:maxLines="1"
+                android:text="火眼主播小莹"
+                android:textColor="@color/title_text_color"
+                android:textSize="@dimen/text_size_16"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/video_time"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_below="@+id/video_avatar"
+            android:layout_below="@+id/video_user"
             android:layout_marginTop="4dp"
             android:maxLines="1"
             android:text="2017/05/13"

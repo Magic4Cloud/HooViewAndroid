@@ -29,9 +29,15 @@ import butterknife.ButterKnife;
 
 public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
 
+    private boolean mIsLive = false;
 
     public UserVideoAdapter(List<VideoEntity> data) {
         super(data);
+    }
+
+    public UserVideoAdapter(List<VideoEntity> data, boolean isLive) {
+        super(data);
+        mIsLive = isLive;
     }
 
     @Override
@@ -58,7 +64,7 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
     @Override
     protected void convert(BaseViewHolder helper, VideoEntity item) {
         if (helper instanceof VideoViewHolder) {
-            ((VideoViewHolder) helper).setModel(item);
+            ((VideoViewHolder) helper).setModel(item, helper.getLayoutPosition());
         }
     }
 
@@ -66,6 +72,10 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
 
         @BindView(R.id.item_buy_video)
         View mRootView;
+        @BindView(R.id.view_top_blank)
+        View mBlankTop;
+        @BindView(R.id.video_user)
+        View mUserView;
         @BindView(R.id.video_avatar)
         CircleImageView mAvatarCiv;
         @BindView(R.id.video_nickname)
@@ -90,7 +100,12 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
             ButterKnife.bind(this, view);
         }
 
-        void setModel(final VideoEntity videoEntity) {
+        void setModel(final VideoEntity videoEntity, int position) {
+            if (position == 0 && mIsLive) {
+                mBlankTop.setVisibility(View.GONE);
+            } else {
+                mBlankTop.setVisibility(View.VISIBLE);
+            }
             if (videoEntity != null) {
                 // avatar
                 Utils.showNewsImage(videoEntity.getLogourl(), mAvatarCiv);
@@ -108,17 +123,17 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
                 mHotIv.setVisibility(View.GONE);
                 // title
                 mTitleTv.setText(videoEntity.getTitle());
-                // click // play
-                mPlayIv.setOnClickListener(new View.OnClickListener() {
+                // click
+                mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode());
                     }
                 });
-                mRootView.setOnClickListener(new View.OnClickListener() {
+                mUserView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode());
+                        Utils.toUserPager(mContext, videoEntity.getName(), videoEntity.getVip());
                     }
                 });
             }
