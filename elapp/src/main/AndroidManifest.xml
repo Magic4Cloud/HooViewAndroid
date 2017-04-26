@@ -134,21 +134,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserInfoModifyActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserInfoModifyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserPublishActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserBuyActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserPublishActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserBalanceActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserBuyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserBalanceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
@@ -598,27 +598,27 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserHistoryNewActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserHistoryNewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserCollectionNewActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserCollectionNewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserVipPageActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserVipPageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserFansActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserFansActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserFocusActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserFocusActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.easyvaas.elapp.ui.user.newuser.activity.UserPageActivity"
+            android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserPageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

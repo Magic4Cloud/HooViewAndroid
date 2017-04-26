@@ -811,6 +811,10 @@
     <string name="empty_no_fans">您还没有粉丝噢</string>
     <string name="empty_no_vipfans">Ta还没有粉丝噢</string>
     <string name="empty_no_user_colloct">Ta还没有收藏资讯噢</string>
+    <string name="empty_no_vipcheats">Ta还没有发布过秘籍噢</string>
+    <string name="empty_no_vipliving">Ta还没有发布过直播噢</string>
+    <string name="empty_no_viparticle">Ta还没有发布过文章噢</string>
+    <string name="empty_no_user_comment">Ta还没有发布过评论噢</string>
     <string name="empty_no_focus">您还没有关注的人噢</string>
     <string name="empty_no_collect">您还没有收藏资讯噢</string>
     <string name="empty_no_watch">您还没有收看视频/直播噢</string>
@@ -842,6 +846,15 @@
     <string name="user_myfoucs">我的关注</string>
     <string name="opreat_fail">操作失败</string>
     <string name="unfollow_success">取消关注成功</string>
+
+    //直播界面
+    <string name="player_pay_tip">&#160;&#160;&#160;&#160;当前为付费直播\n点击购买马上加入</string>
+    <string name="player_go_buy">购买</string>
+    <string name="player_go_recharge">充值</string>
+    <string name="pay_buy_living">购买直播</string>
+    <string name="hooview_coin_left">火眼豆余额</string>
+    <string name="hooview_coin_not_enough">您的火眼豆余额不足</string>
+    <string name="video_pay_success">购买成功</string>
 
 
 </resources>

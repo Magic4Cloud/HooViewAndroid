@@ -35,6 +35,7 @@ import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
+import com.easyvaas.elapp.ui.pay.CashInActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Constants;
@@ -44,6 +45,9 @@ import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.PlayerStateView;
+import com.easyvaas.elapp.view.live.PlayerNeedPayView;
+import com.easyvaas.elapp.view.live.PlayerPayDialogFragment;
+import com.easyvaas.elapp.view.live.PlayerPayDialogFragment.PayOrRechargeListener;
 import com.easyvaas.sdk.player.EVPlayer;
 import com.easyvaas.sdk.player.PlayerConstants;
 import com.easyvaas.sdk.player.base.EVPlayerBase;
@@ -53,12 +57,15 @@ import com.hooview.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
-public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener {
+import static android.icu.text.RelativeDateTimeFormatter.Direction.THIS;
+
+public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener,PayOrRechargeListener {
     private static final String TAG = "PlayerActivity";
     private RoundImageView mRivHeader;
     private TextView mTvName;
@@ -76,6 +83,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     private EVVideoView mVideoView;
     private ImageView ivShare;
     private ImageView ivBack;
+    private PlayerNeedPayView mPlayerNeedPayView;
     private boolean isLandscape = false;
     private boolean mIsPlayLive;
     private Handler mHandler = new Handler(Looper.getMainLooper());
@@ -110,7 +118,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mCurrentVideo.setVid(mVideoId);
         initView();
         initPlayer();
-        loadVideoInfo();
+        loadVideoInfo();   // Aya : 2017/4/25  这里是开始播放  如果是付费的话 这里不应该load mark
         addVideoToHistory();
     }
 
@@ -230,6 +238,43 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mViewPager.setPageMargin((int) ViewUtil.dp2Px(getApplicationContext(), 10));
             mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager(), list, getResources().getStringArray(R.array.play_tab)));
         }
+        mPlayerNeedPayView = (PlayerNeedPayView) findViewById(R.id.player_pay_mask);
+        mPlayerNeedPayView.setPayMaskOnclickListener(new PlayerNeedPayView.PayMaskOnclickListener() {
+            @Override
+            public void goShare() {
+                shareVideo();
+            }
+
+            @Override
+            public void goBack() {
+                finish();
+            }
+
+            @Override
+            public void goBuy() {
+                // Aya : 2017/4/25 弹出支付框 需要传入价格  需要修改10多个跳转界面
+                PlayerPayDialogFragment.newInstance(new Random().nextInt(200)).show(getSupportFragmentManager(),"");
+            }
+        });
+    }
+
+    /**
+     * 余额足够 直接购买
+     */
+    @Override
+    public void payForVideo() {
+        //// Aya : 2017/4/26 待调试接口
+        SingleToast.show(this,R.string.video_pay_success);
+        startWatchLive();
+        mPlayerNeedPayView.setVisibility(View.GONE);
+    }
+
+    /**
+     * 余额不足 需要跳转充值
+     */
+    @Override
+    public void skipToReCharge() {
+        CashInActivity.start(this);
     }
 
     private void initPlayer() {
@@ -254,7 +299,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                             mCurrentVideo = result;
                             updateVideoInfo(result);
 //                            chatServerInit(true);
-                            startWatchLive();
+//                            startWatchLive();   暂时隐藏
                             insertHistoryRecord();
                             initFollowStatus();
                         }

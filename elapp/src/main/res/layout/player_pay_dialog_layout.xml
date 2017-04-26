@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/pay_buy_living"
+        android:textColor="@color/text_color_gray"
+        />
+
+    <View
+        style="@style/divider_view_style"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pay_counts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="200"
+            android:textColor="@color/pay_text_yellow"
+            android:textSize="30sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="@string/hooview_coin"
+            android:textColor="@color/pay_text_yellow"
+            android:layout_marginLeft="3dp"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
+    <View
+        style="@style/divider_view_style"
+        android:layout_marginTop="12dp"
+        android:layout_height="3dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="18dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hooview_coin_left"
+            android:textColor="@color/text_color_gray"
+            android:textSize="16sp"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/pay_coin_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1000"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/text_color_gray"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/pay_no_enough_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hooview_coin_not_enough"
+        android:textColor="@color/base_red"
+        android:textSize="16sp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="6dp"
+        />
+
+    <Button
+        android:id="@+id/pay_submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="120dp"
+        android:textSize="18sp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_common_btn_b"
+        android:text="@string/player_go_buy"/>
+</LinearLayout>

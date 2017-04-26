@@ -115,14 +115,16 @@ public interface ApiService {
      */
     @GET("api/v2/user/histories?type=1")
     Observable<NetResponse<NormalNewsModel>> getUserReadHistory(@Query(AppConstants.USER_ID) String id,
-                                                                        @Query(AppConstants.SESSION_ID) String sessionid);
+                                                                @Query(AppConstants.SESSION_ID) String sessionid,
+                                                                @Query(AppConstants.START) int start);
 
     /**
      * 用户观看记录 0 观看 1 文章
      */
     @GET("api/v2/user/histories?type=0")
     Observable<NetResponse<UserHistoryTestModel>> getUserWatchHistory(@Query(AppConstants.USER_ID) String id,
-                                                                         @Query(AppConstants.SESSION_ID) String sessionid);
+                                                                      @Query(AppConstants.SESSION_ID) String sessionid,
+                                                                      @Query(AppConstants.START) int start);
 
     /**
      * 用户阅读记录 测试
@@ -307,6 +309,8 @@ public interface ApiService {
 
 
     /*-------------------------------------------直播----------------------------------------*/
+
+
     @GET(ApiConstant.DEBUG_HOST+"video/recommendlist")
     Observable<NetResponse<RecommendVideoListModel>> getLiveVideo(@Query(AppConstants.START) int start);
 

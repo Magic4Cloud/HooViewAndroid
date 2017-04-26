@@ -123,4 +123,12 @@ public class MyEmptyView extends LinearLayout {
     {
         setVisibility(GONE);
     }
+
+    /**
+     * 获取根布局
+     */
+    public LinearLayout getEmptyLayout()
+    {
+        return mEmptyLayout;
+    }
 }

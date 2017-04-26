@@ -15,10 +15,10 @@
     <ImageView
         android:id="@+id/iv_share"
         style="@style/PlayerOperateBtnStyle"
-        android:layout_above="@+id/ll_player_btn"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="12dp"
         android:layout_marginRight="12dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/btn_share_w_n" />
 
 

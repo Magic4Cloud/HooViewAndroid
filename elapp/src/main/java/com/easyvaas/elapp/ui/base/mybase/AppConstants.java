@@ -16,5 +16,6 @@ public class AppConstants {
     public static final String POST_ID = "postid"; // post id
 
     public static final String START = "start"; //page start
+    public static final String PARAMS = "params"; // 普通参数
 
 }

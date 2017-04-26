@@ -210,5 +210,6 @@
     <color name="user_comment_blue">#8ec1eb</color>
     <color name="user_comment_orange">#ebbc8e</color>
     <color name="user_comment_purple">#b3a2e9</color>
+    <color name="pay_text_yellow">#ffb60b</color>
 
 </resources>

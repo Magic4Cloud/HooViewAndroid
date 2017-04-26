@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/kv_bar"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar android:id="@+id/kv_bar"
+                                                   xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,14 +23,19 @@
                 <com.easyvaas.sdk.player.base.EVVideoView
                     android:id="@+id/video_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"/>
 
                 <com.easyvaas.elapp.view.PlayerStateView
                     android:id="@+id/playerStateView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"/>
 
-                <include layout="@layout/layout_player_operate_btn_container" />
+                <include layout="@layout/layout_player_operate_btn_container"/>
+
+                <com.easyvaas.elapp.view.live.PlayerNeedPayView
+                    android:id="@+id/player_pay_mask"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -45,7 +50,7 @@
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:src="@drawable/account_bitmap_user" />
+                    android:src="@drawable/account_bitmap_user"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -61,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:text="机构调研"
                         android:textColor="@color/title_text_color"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
                     <TextView
                         android:id="@+id/tv_group"
@@ -69,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:text="每日机构解读"
                         android:textColor="@color/text_color_gray"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"/>
 
                 </LinearLayout>
 
@@ -87,25 +92,25 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="关注"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </RelativeLayout>
 
             <View
                 android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:background="@color/list_divider_bg" />
+                android:background="@color/list_divider_bg"/>
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"
                 style="@style/CommonTabLayoutStyle"
                 android:layout_height="44dp"
-                app:tabTextColor="@color/title_text_color" />
+                app:tabTextColor="@color/title_text_color"/>
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
@@ -121,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:visibility="visible" />
+                android:visibility="visible"/>
         </FrameLayout>
 
         <View
@@ -129,6 +134,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#B3303030"
-            android:visibility="gone" />
+            android:visibility="gone"/>
     </FrameLayout>
 </com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar>

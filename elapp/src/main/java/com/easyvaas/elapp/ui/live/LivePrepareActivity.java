@@ -34,11 +34,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.easyvaas.common.bottomsheet.BottomSheet;
 import com.easyvaas.common.widget.RoundImageView;
-import com.hooview.app.R;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.base.BaseActivity;
 import com.easyvaas.elapp.bean.TopicEntity;
@@ -64,6 +62,7 @@ import com.easyvaas.sdk.live.base.audio.AudioManager;
 import com.easyvaas.sdk.live.base.camera.CameraManager;
 import com.easyvaas.sdk.live.base.view.CameraPreview;
 import com.google.gson.Gson;
+import com.hooview.app.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -511,17 +510,20 @@ public class LivePrepareActivity extends BaseActivity {
         mLiveStartBtn.setClickable(isOK);
     }
 
+    /**
+     * 开始直播
+     */
     private void liveStart() {
-        if (TextUtils.isEmpty(mLiveTitleEt.getText().toString().trim())) {
-            Toast.makeText(this, R.string.record_title_empty_tips, Toast.LENGTH_SHORT).show();
-            mLiveStartBtn.setEnabled(true);
-            return;
-        }
-        if (TextUtils.isEmpty(mLiveConfig.getCustomThumbPath())) {
-            Toast.makeText(this, R.string.cover_tips, Toast.LENGTH_SHORT).show();
-            mLiveStartBtn.setEnabled(true);
-            return;
-        }
+//        if (TextUtils.isEmpty(mLiveTitleEt.getText().toString().trim())) {
+//            Toast.makeText(this, R.string.record_title_empty_tips, Toast.LENGTH_SHORT).show();
+//            mLiveStartBtn.setEnabled(true);
+//            return;
+//        }
+//        if (TextUtils.isEmpty(mLiveConfig.getCustomThumbPath())) {
+//            Toast.makeText(this, R.string.cover_tips, Toast.LENGTH_SHORT).show();
+//            mLiveStartBtn.setEnabled(true);
+//            return;
+//        }
         if (mCameraManager != null) {
             mCameraManager.releaseCamera();
             mCameraManager = null;
@@ -530,7 +532,9 @@ public class LivePrepareActivity extends BaseActivity {
             mCameraPreview.getHolder().removeCallback(mCameraPreview);
             mCameraPreview = null;
         }
-        ApiHelper.getInstance().liveStart(mLiveConfig.getLiveTitle(), mLiveConfig.isShowLocation(),
+
+        // Aya : 2017/4/25 暂时标题这样起 取消上传图片 需要添加加载图
+        ApiHelper.getInstance().liveStart(EVApplication.getUser().getNickname()+"直播中", mLiveConfig.isShowLocation(),
                 mLiveConfig.getVideoLimitType(), mLiveConfig.getVideoPassword(), mLiveConfig.getVideoPrice(),
                 new MyRequestCallBack<LiveInfoEntity>() {
                     @Override
@@ -541,7 +545,7 @@ public class LivePrepareActivity extends BaseActivity {
                         mLiveConfig.setLiveShareUrl(result.getShare_url());
                         setLiveTitle(result.getVid());
                         setTopic(result.getVid());
-                        uploadThumb(result.getVid());
+//                        uploadThumb(result.getVid());
                         startToRecord();
                     }
 

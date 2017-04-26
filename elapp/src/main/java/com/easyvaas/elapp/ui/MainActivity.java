@@ -26,7 +26,7 @@ import com.easyvaas.elapp.ui.market.MarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
 import com.easyvaas.elapp.ui.news.NewsMainFragment;
 import com.easyvaas.elapp.ui.user.UserProfileFragment;
-import com.easyvaas.elapp.ui.user.newuser.UserCenterFragment;
+import com.easyvaas.elapp.ui.user.usernew.UserCenterFragment;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
