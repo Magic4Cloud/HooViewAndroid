@@ -32,7 +32,6 @@ import com.easyvaas.elapp.ui.user.usernew.activity.UserHistoryNewActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserInfoModifyActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserPublishActivity;
 import com.easyvaas.elapp.utils.Constants;
-import com.easyvaas.elapp.utils.Logger;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
@@ -120,7 +119,7 @@ public class UserCenterFragment extends MyBaseFragment {
             return;
         }
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserInfo(userId,sessionId)
+                .getUserInfo(userId, sessionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<User>() {
@@ -143,10 +142,8 @@ public class UserCenterFragment extends MyBaseFragment {
     /**
      * 更新UI
      */
-    private void updateUI()
-    {
-        if (mPreferences.isLogin() && EVApplication.isLogin())
-        {
+    private void updateUI() {
+        if (mPreferences.isLogin() && EVApplication.isLogin()) {
             User user = EVApplication.getUser();
             mUserCenterName.setText(user.getNickname());
             mUserCenterFanscounts.setText(String.valueOf(user.getFans_count()));
@@ -161,13 +158,12 @@ public class UserCenterFragment extends MyBaseFragment {
             {
                 mUserCenterAvator.setIsVip(1);
                 mUserCenterPublish.setVisibility(View.VISIBLE);
-            }else
-            {
+            } else {
                 mUserCenterAvator.setIsVip(0);
                 mUserCenterPublish.setVisibility(View.GONE);
             }
             mUserCenterSex.setVisibility(View.VISIBLE);
-        }else  // 未登录情况
+        } else  // 未登录情况
         {
             mUserCenterName.setText(R.string.user_login_text);
             mUserCenterIntroduce.setText(R.string.user_login_info);
@@ -187,31 +183,22 @@ public class UserCenterFragment extends MyBaseFragment {
         }
         if (user != null) {
             bundle.putString(ShareConstants.PARAMS_NICK_NAME, user.getNickname());
-            Logger.e("user info", "Nickname " + user.getNickname());
             bundle.putString(ShareConstants.PARAMS_IMAGEURL, user.getLogourl());
-            Logger.e("user info", "Logourl " + user.getLogourl());
             bundle.putString(ShareConstants.PARAMS_SEX, user.getGender());
-            Logger.e("user info", "Gender " + user.getGender());
             bundle.putString(ShareConstants.USER_CITY, user.getLocation());
-            Logger.e("user info", "Location " + user.getLocation());
             bundle.putString(ShareConstants.DESCRIPTION, user.getSignature());
-            Logger.e("user info", "Signature " + user.getSignature());
             bundle.putString(ShareConstants.BIRTHDAY, user.getBirthday());
-            Logger.e("user info", "Birthday " + user.getBirthday());
             bundle.putBoolean(Constants.EXTRA_KEY_IS_REGISTER, false);
             bundle.putBoolean(Constants.EXTRA_KEY_IS_VIP, user.getVip() == 1);
-            Logger.e("user info", "Vip " + user.getVip());
             bundle.putString(UserInfoModifyActivity.EXTRA_KEY_USER_CERTIFICATE, user.getCredentials());
-            Logger.e("user info", "Credentials " + user.getCredentials());
-            if (user.getTags() != null && user.getTags().size() > 0){
+            if (user.getTags() != null && user.getTags().size() > 0) {
                 List<String> list = new ArrayList<>();
-                for (int i= 0; i < user.getTags().size(); i++){
+                for (int i = 0; i < user.getTags().size(); i++) {
                     list.add(user.getTags().get(i).getName());
                 }
-                bundle.putStringArrayList(Constants.EXTRA_ADD_LABEL, (ArrayList<String>)list);
+                bundle.putStringArrayList(Constants.EXTRA_ADD_LABEL, (ArrayList<String>) list);
             }
             bundle.putString(UserInfoModifyActivity.EXTRA_KEY_USER_INTRODUCE, user.getIntroduce());
-            Logger.e("user info", "Introduce " + user.getIntroduce());
         }
     }
 
@@ -232,7 +219,7 @@ public class UserCenterFragment extends MyBaseFragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.user_settting, R.id.user_center_focuscounts, R.id.user_center_focustxt, R.id.user_center_fanscounts, R.id.user_center_fanstxt, R.id.user_center_message, R.id.user_center_balance, R.id.user_center_publish, R.id.user_center_buy, R.id.user_center_collect, R.id.user_center_history,R.id.user_edit_layout})
+    @OnClick({R.id.user_settting, R.id.user_center_focuscounts, R.id.user_center_focustxt, R.id.user_center_fanscounts, R.id.user_center_fanstxt, R.id.user_center_message, R.id.user_center_balance, R.id.user_center_publish, R.id.user_center_buy, R.id.user_center_collect, R.id.user_center_history, R.id.user_edit_layout})
     public void onViewClicked(View view) {
         if (!mPreferences.isLogin() || !EVApplication.isLogin()) {
             LoginActivity.start(getActivity());
@@ -274,10 +261,10 @@ public class UserCenterFragment extends MyBaseFragment {
                 startActivity(new Intent(getActivity(), UserBuyActivity.class));
                 break;
             case R.id.user_center_collect: //收藏列表
-                startActivity(new Intent(getActivity(),UserCollectionNewActivity.class));
+                startActivity(new Intent(getActivity(), UserCollectionNewActivity.class));
                 break;
             case R.id.user_center_history: //历史记录
-                startActivity(new Intent(getActivity(),UserHistoryNewActivity.class));
+                startActivity(new Intent(getActivity(), UserHistoryNewActivity.class));
                 break;
         }
     }

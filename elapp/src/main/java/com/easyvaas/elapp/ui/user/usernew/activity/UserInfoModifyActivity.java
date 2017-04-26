@@ -276,6 +276,7 @@ public class UserInfoModifyActivity extends MyBaseActivity{
     public void onSelfClick() {
         if (mPopupWindowEditSelf == null) {
             mPopupWindowEditSelf = new UserInfoEditPopupWindow(this);
+            mPopupWindowEditSelf.init(mSignatureEt.getText().toString().trim());
             mPopupWindowEditSelf.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
                 @Override
                 public void onConfirm(String text) {
@@ -306,6 +307,7 @@ public class UserInfoModifyActivity extends MyBaseActivity{
     public void onIntroduceClick() {
         if (mPopupWindowEditIntroduce == null) {
             mPopupWindowEditIntroduce = new UserInfoEditPopupWindow(this);
+            mPopupWindowEditIntroduce.init(mIntroduceTv.getText().toString().trim());
             mPopupWindowEditIntroduce.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
                 @Override
                 public void onConfirm(String text) {
