@@ -68,10 +68,10 @@ public class UserPageCommentAdapter extends MyBaseAdapter<PostsBean> {
                         Utils.showNewsDetail(mContext, data.getTopic().getTitle(), data.getTopic().getId());
                         break;
                     case 1:
-                        Utils.showStockDetail(mContext, data.getTopic().getTitle(), data.getTopic().getId(), true);
+                        PlayerActivity.start(mContext, data.getTopic().getId(), VideoEntity.IS_VIDEO, VideoEntity.IS_GOOD_VIDEO);
                         break;
                     case 2:
-                        PlayerActivity.start(mContext,data.getTopic().getId(), VideoEntity.IS_VIDEO,VideoEntity.IS_GOOD_VIDEO);
+                        Utils.showStockDetail(mContext, data.getTopic().getTitle(), data.getTopic().getId(), true);
                         break;
                 }
 
@@ -152,8 +152,8 @@ public class UserPageCommentAdapter extends MyBaseAdapter<PostsBean> {
                 final int action = mUserCommentPraiseIcon.isSelected() ? 0 : 1;
                 RetrofitHelper.getInstance().getService()
                         .praiseClick(EVApplication.getUser().getName(),
-                                     EVApplication.getUser().getSessionid(),
-                                     postsBean.getId(),postsBean.getTopic().getType(),action)
+                                EVApplication.getUser().getSessionid(),
+                                postsBean.getId(), postsBean.getTopic().getType(), action)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<NoResponeBackModel>() {
@@ -161,18 +161,19 @@ public class UserPageCommentAdapter extends MyBaseAdapter<PostsBean> {
                             public void OnSuccess(NoResponeBackModel noResponeBackModel) {
                                 if (action == 0) {
                                     mUserCommentPraiseIcon.setSelected(false);
-                                    SingleToast.show(mContext,R.string.user_praise_cancel);
+                                    SingleToast.show(mContext, R.string.user_praise_cancel);
                                 } else {
                                     mUserCommentPraiseIcon.setSelected(true);
-                                    SingleToast.show(mContext,R.string.user_praise_success);
+                                    SingleToast.show(mContext, R.string.user_praise_success);
                                 }
                             }
+
                             @Override
                             public void OnFailue(String msg) {
-                                SingleToast.show(mContext,R.string.opreat_fail);
+                                SingleToast.show(mContext, R.string.opreat_fail);
                             }
                         });
-            }else
+            } else
                 LoginActivity.start(mContext);
         }
     }

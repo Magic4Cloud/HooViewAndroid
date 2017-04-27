@@ -47,7 +47,7 @@ public class SearchVideoAdapterItem implements AdapterItem<VideoEntity> {
             @Override
             public void onClick(View v) {
                 if (videoEntity != null) {
-                    PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(),videoEntity.getMode());
+                    PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(),videoEntity.getMode(),videoEntity.getPermission());
                 }
             }
         });

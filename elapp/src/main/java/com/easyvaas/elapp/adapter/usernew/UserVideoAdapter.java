@@ -127,7 +127,7 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
                 mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode());
+                        PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode(),videoEntity.getPermission());
                     }
                 });
                 mUserView.setOnClickListener(new View.OnClickListener() {

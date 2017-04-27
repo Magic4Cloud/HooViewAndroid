@@ -142,7 +142,7 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
                 mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode());
+                        PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode(),videoEntity.getPermission());
                     }
                 });
             }
@@ -247,7 +247,7 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
                     mHotRootView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode());
+                            PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode(),videoEntity.getPermission());
                         }
                     });
                 }

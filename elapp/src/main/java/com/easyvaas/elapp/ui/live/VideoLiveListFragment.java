@@ -14,16 +14,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.RoundImageView;
-import com.hooview.app.R;
 import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
-import com.easyvaas.elapp.ui.base.BaseListFragment;
-import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.ui.base.BaseListRcvFragment;
+import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.Utils;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +129,8 @@ public class VideoLiveListFragment extends BaseListRcvFragment {
                         PlayerActivity.start(getActivity(),
                                 recommendVideoListModel.getRecommend().get(position - 1).getVid(),
                                 recommendVideoListModel.getRecommend().get(position - 1).getLiving(),
-                                recommendVideoListModel.getRecommend().get(position - 1).getMode());
+                                recommendVideoListModel.getRecommend().get(position - 1).getMode(),
+                                recommendVideoListModel.getRecommend().get(position - 1).getPermission());
                     }
                 });
             }
@@ -256,7 +256,7 @@ public class VideoLiveListFragment extends BaseListRcvFragment {
             hotVideoViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PlayerActivity.start(getContext(), hotVideoList.get(position).getVid(), hotVideoList.get(position).getLiving(), hotVideoList.get(position).getMode());
+                    PlayerActivity.start(getContext(), hotVideoList.get(position).getVid(), hotVideoList.get(position).getLiving(), hotVideoList.get(position).getMode(),hotVideoList.get(position).getPermission());
                 }
             });
         }

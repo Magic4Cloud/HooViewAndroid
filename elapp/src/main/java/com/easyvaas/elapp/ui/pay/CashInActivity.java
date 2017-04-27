@@ -484,17 +484,17 @@ public class CashInActivity extends BaseActivity {
         }
         Logger.e(TAG, "wechat " + mCashInOptionWeixinList.size() + "   alipay" + mCashInOptionAlipayList.size());
         // 微信列表
-        if (mCashInOptionWeixinList.size() > 0) {
-            mWeixinOptionRb.setVisibility(View.VISIBLE);
-//            mCashInOptionList.addAll(mCashInOptionWeixinList);
-            mWeixinOptionRb.setChecked(true);
-            mCashInOptionList = mCashInOptionWeixinList;
-            mCashInAmountAdapter.notifyDataSetChanged();
-            showCashInOptionList();
-        } else {
-            mWeixinOptionRb.setVisibility(View.GONE);
-            mWeixinOptionRb.setChecked(false);
-        }
+//        if (mCashInOptionWeixinList.size() > 0) {
+//            mWeixinOptionRb.setVisibility(View.VISIBLE);
+////            mCashInOptionList.addAll(mCashInOptionWeixinList);
+//            mWeixinOptionRb.setChecked(true);
+//            mCashInOptionList = mCashInOptionWeixinList;
+//            mCashInAmountAdapter.notifyDataSetChanged();
+//            showCashInOptionList();
+//        } else {
+//            mWeixinOptionRb.setVisibility(View.GONE);
+//            mWeixinOptionRb.setChecked(false);
+//        }
         // 支付宝列表
         if (mCashInOptionAlipayList.size() > 0) {
             mAlipayOptionRb.setVisibility(View.VISIBLE);

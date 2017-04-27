@@ -337,7 +337,12 @@ public interface ApiService {
                                          @Query("credentials") String credentials,
                                          @Query("introduce") String introduce);
 
-
+    /**
+     * 搜索文章列表
+     */
+    @GET("api/v2/search/news")
+    Observable<NetResponse<NormalNewsModel>> searchNews(@Query(AppConstants.TITLE) String title,
+                                                        @Query(AppConstants.START) int start);
 
     /*-------------------------------------------直播----------------------------------------*/
 

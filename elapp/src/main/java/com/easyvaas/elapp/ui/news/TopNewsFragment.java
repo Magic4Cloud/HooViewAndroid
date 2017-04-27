@@ -3,6 +3,7 @@ package com.easyvaas.elapp.ui.news;
 import com.easyvaas.elapp.adapter.news.TopRatedNewsMyAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
+import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
@@ -45,7 +46,10 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
                         if (topRatedModel != null)
                         {
                             if (!isLoadMore)
+                            {
                                 mAdapter.setTopRatedModel(topRatedModel);
+                                topRatedModel.getHomeNews().add(0,new HomeNewsBean());
+                            }
                             mAdapter.dealLoadData(TopNewsFragment.this,isLoadMore,topRatedModel.getHomeNews());
                         }
                     }

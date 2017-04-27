@@ -40,8 +40,7 @@ public class VipUserArticleFragment extends MyBaseListFragment<NormalNewsAdapter
     }
 
     @Override
-    protected void initViewAndData() {
-        super.initViewAndData();
+    protected void initSomeData() {
         userId = getArguments().getString(AppConstants.USER_ID);
     }
 

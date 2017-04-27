@@ -44,7 +44,8 @@ public class UserPageInfo {
     private int video_count;
     private String credentials;
     private String introduce;
-    private List<String> tags;
+    private List<TagBean> tags;
+
 
     public String getName() {
         return name;
@@ -166,11 +167,33 @@ public class UserPageInfo {
         this.introduce = introduce;
     }
 
-    public List<String> getTags() {
+    public List<TagBean> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(List<TagBean> tags) {
         this.tags = tags;
+    }
+
+    public static class TagBean
+    {
+        private int id;
+        private String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

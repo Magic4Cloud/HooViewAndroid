@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.easyvaas.common.feedback.FeedbackHelper;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.UpdateInfoEntity;
-import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
@@ -207,8 +206,7 @@ public class SettingActivity extends BaseTitleActivity implements View.OnClickLi
             }
         });
         Preferences.getInstance(EVApplication.getApp()).logout(true);
-        User user = EVApplication.getUser();
-        user = null;
+        EVApplication.setUserNull();
 //        sendBroadcast(new Intent(Constants.ACTION_GO_LOGIN_OUT));
         finish();
     }

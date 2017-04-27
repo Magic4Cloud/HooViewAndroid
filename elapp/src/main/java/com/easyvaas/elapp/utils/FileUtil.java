@@ -6,6 +6,10 @@
 
 package com.easyvaas.elapp.utils;
 
+import android.content.Context;
+import android.os.Environment;
+import android.text.TextUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,14 +20,10 @@ import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.UUID;
 
-import android.content.Context;
-import android.os.Environment;
-import android.text.TextUtils;
-
 public class FileUtil {
     private static final String TAG = FileUtil.class.getSimpleName();
     
-    public static final String LOGO_FILE_NAME = "app_logo.png";
+    public static final String LOGO_FILE_NAME = "hooview_logo.png";
     public static final String WATERMARK_FILE_NAME = "watermark.png";
     
     public static final String CACHE_DIR_OLD = Environment

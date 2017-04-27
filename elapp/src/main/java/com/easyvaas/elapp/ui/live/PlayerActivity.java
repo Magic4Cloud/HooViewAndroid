@@ -35,6 +35,7 @@ import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
+import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.Constants;
@@ -84,6 +85,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     private boolean isLandscape = false;
     private boolean mIsPlayLive;
     private int payCounts;// 付费的金额
+    private boolean isNeedPayVideo; // 是否是付费视频
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable runnableHideMediaController = new Runnable() {
         @Override
@@ -100,6 +102,15 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         context.startActivity(starter);
     }
 
+    public static void start(Context context, String videoId, int liveType, int mode,int permisson) {
+        Intent starter = new Intent(context, PlayerActivity.class);
+        starter.putExtra(Constants.EXTRA_KEY_VIDEO_ID, videoId);
+        starter.putExtra(Constants.EXTRA_KEY_VIDEO_IS_LIVE, liveType == VideoEntity.IS_LIVING);
+        starter.putExtra(Constants.EXTRA_KEY_VIDEO_GOOD_VIDEO, mode == VideoEntity.MODE_GOOD_VIDEO);
+        starter.putExtra(AppConstants.PARAMS,permisson == 7); //是否付费
+        context.startActivity(starter);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +119,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mVideoId = getIntent().getStringExtra(Constants.EXTRA_KEY_VIDEO_ID);
         mIsPlayLive = getIntent().getBooleanExtra(Constants.EXTRA_KEY_VIDEO_IS_LIVE, false);
         mIsGoodVideo = getIntent().getBooleanExtra(Constants.EXTRA_KEY_VIDEO_GOOD_VIDEO, false);
+        isNeedPayVideo = getIntent().getBooleanExtra(AppConstants.PARAMS,false);
         if (TextUtils.isEmpty(mVideoId)) {
             finish();
             return;
@@ -250,9 +262,14 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
 
             @Override
             public void goBuy() {
-                PlayerPayDialogFragment.newInstance(payCounts).show(getSupportFragmentManager(),"");
+                if (EVApplication.isLogin())
+                    PlayerPayDialogFragment.newInstance(payCounts).show(getSupportFragmentManager(),"");
+                else
+                    LoginActivity.start(PlayerActivity.this);
             }
         });
+        if (isNeedPayVideo)
+            mPlayerNeedPayView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -309,20 +326,24 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     public void onSuccess(VideoEntity result) {
                         if (result != null) {
                             mCurrentVideo = result;
-                            updateVideoInfo(result);
-//                            chatServerInit(true);
-                            insertHistoryRecord();
-                            initFollowStatus();
                             if (result.getPermission() == 7 && result.getPrice() >0)
                             {
                                 mPlayerNeedPayView.setVisibility(View.VISIBLE); // 显示 付费蒙层
                                 mPlayerNeedPayView.setPlayerPayCounts(result.getPrice());
                                 payCounts = result.getPrice();
+                                mIv_all_screen.setEnabled(false);
                             }else
                             {
+                                mIv_all_screen.setEnabled(true);
                                 mPlayerNeedPayView.setVisibility(View.GONE);
                                 startWatchLive();
                             }
+                            if (result.getPermission() == 7)
+                                isNeedPayVideo = true;
+                            updateVideoInfo(result);
+                            //                            chatServerInit(true);
+                            insertHistoryRecord();
+                            initFollowStatus();
                         }
                     }
 
@@ -368,6 +389,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                 Utils.toUserPager(PlayerActivity.this,result.getName(),result.getVip());
             }
         });
+        if (isNeedPayVideo)  // 付费视频暂时隐藏分享
+            ivShare.setVisibility(View.GONE);
     }
 
     private void startWatchLive() {
@@ -620,6 +643,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             ivShare.setVisibility(View.INVISIBLE);
             ivBack.setVisibility(View.INVISIBLE);
         }
+        if (isNeedPayVideo)
+            ivShare.setVisibility(View.GONE);
     }
 
     private boolean getMediaControllerIsShow(){

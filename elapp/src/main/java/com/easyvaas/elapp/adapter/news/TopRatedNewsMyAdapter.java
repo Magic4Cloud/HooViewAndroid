@@ -89,7 +89,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
             }
         } else {
             if (mData != null && mData.size() > 0) {
-                HomeNewsBean mNewsBean = mData.get(position - 1);
+                HomeNewsBean mNewsBean = mData.get(position);
                 HomeNewsBean mNewsBeanNext = null;
                 if (mData.size() > position)   // 取下一条数据的数据类型 来判断是否需要隐藏下划线
                     mNewsBeanNext = mData.get(position);
@@ -116,14 +116,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
     }
 
 
-    @Override
-    public int getItemCount() {
-        int count = 1;
-        if (mData != null) {
-            count = count + mData.size();
-        }
-        return count;
-    }
+
 
 
     /**
@@ -155,7 +148,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         if (position == 0)
             return TYPE_HEADER;
         if (mTopRatedModel.getHomeNews() != null && mTopRatedModel.getHomeNews().size() > 0) {
-            HomeNewsBean data = mTopRatedModel.getHomeNews().get(position -1);
+            HomeNewsBean data = mTopRatedModel.getHomeNews().get(position);
             switch (data.getType()) {
                 case 0:
                     int coverSize = data.getCover().size(); //根据图片个数来判断加载布局类型
@@ -370,11 +363,11 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
                 switch (view.getId())
                 {
                     case R.id.item_news_layout:
-                        Utils.showNewsDetail(mContext,mData.get(position-1).getTitle() ,mData.get(position-1).getId());
+                        Utils.showNewsDetail(mContext,mData.get(position).getTitle() ,mData.get(position).getId());
                         break;
                     case R.id.item_topic_layout:
                         Intent intent = new Intent(mContext,TopicActivity.class);
-                        intent.putExtra("id",mData.get(position-1).getId());
+                        intent.putExtra("id",mData.get(position).getId());
                         mContext.startActivity(intent);
                         break;
                 }

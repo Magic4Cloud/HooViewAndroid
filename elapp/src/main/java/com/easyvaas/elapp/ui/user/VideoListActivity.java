@@ -29,8 +29,6 @@ import com.easyvaas.common.adapter.CommonRcvAdapter;
 import com.easyvaas.common.bottomsheet.BottomSheet;
 import com.easyvaas.common.sharelogin.model.ShareContent;
 import com.easyvaas.common.sharelogin.model.ShareContentWebpage;
-import com.easyvaas.elapp.ui.live.LivePrepareActivity;
-import com.hooview.app.R;
 import com.easyvaas.elapp.adapter.oldItem.VideoMineAdapterItem;
 import com.easyvaas.elapp.adapter.oldRecycler.VideoSmallRcvAdapter;
 import com.easyvaas.elapp.app.EVApplication;
@@ -142,7 +140,7 @@ public class VideoListActivity extends BaseRvcActivity {
                 mVideos.get(position)
                         .setName(Preferences.getInstance(getApplicationContext()).getUserNumber());
 //                Utils.watchVideo(VideoListActivity.this, mVideos.get(position));
-                PlayerActivity.start(VideoListActivity.this, mVideos.get(position).getVid(), mVideos.get(position).getLiving(), mVideos.get(position).getMode());
+                PlayerActivity.start(VideoListActivity.this, mVideos.get(position).getVid(), mVideos.get(position).getLiving(), mVideos.get(position).getMode(),mVideos.get(position).getPermission());
             }
         });
 

@@ -18,14 +18,14 @@ public class UserPageCommentModel extends BaseListBean{
      * posts : [{"id":"7","time":"2017-03-15 00:17:01","heats":"0","content":"good","topic":{"id":"4352","type":0,"title":"火眼看盘|反弹只是耍流氓？重要支撑位上就看放不放量"},"user":{"id":"15985580","nickname":"李传","avatar":"http://dev.yizhibo.tv/output/easyvaas/resource/user/2f/0e/5f5a9c950632c136faee3706d0172e76.jpeg"}},{"id":"199","time":"2017-04-20 16:44:47","heats":0,"content":"开机","topic":{"id":"5pkvLb8kHp6F1oKD","type":"1","title":"测试测试环境上传"},"user":{"id":"18271157","nickname":"旋转の八音盒","avatar":"http://wx.qlogo.cn/mmopen/Q3auHgzwzM4ZTMZwGJqaXXIwQwiblVfdSPC59arBDpFXRGUrictRXCLA7tbmQ5L2LO1GuIibTFvTiahKibFyJ0ydsYw/0"}},{"id":"372","time":"2017-03-07 18:46:32","heats":0,"content":"健健康康","topic":{"id":"SH000001","type":"2","title":"上证指数（SH000001）"},"user":{"id":"16616325","nickname":"火眼财经6864","avatar":"http://dev.yizhibo.tv/output/easyvaas/resource//user/8b/4c/9619d02f9f73324ebed0d290fafc17f3.jpeg"}}]
      */
 
-    private List<PostsBean> posts;
+    private List<PostsBean> total;
 
     public List<PostsBean> getPosts() {
-        return posts;
+        return total;
     }
 
-    public void setPosts(List<PostsBean> posts) {
-        this.posts = posts;
+    public void setPosts(List<PostsBean> total) {
+        this.total = total;
     }
 
     public static class PostsBean {

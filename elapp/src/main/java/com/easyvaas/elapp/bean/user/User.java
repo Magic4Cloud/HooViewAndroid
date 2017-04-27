@@ -51,7 +51,6 @@ public class User extends BaseUserEntity implements Serializable {
         this.living = living;
     }
 
-    // Aya : 2017/4/26 等后台改完后 恢复到原来状态
     public String getSessionid() {
         return sessionid;
     }

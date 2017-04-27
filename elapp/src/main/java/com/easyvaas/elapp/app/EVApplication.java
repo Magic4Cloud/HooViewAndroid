@@ -132,6 +132,11 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         return app;
     }
 
+    public static void setUserNull()
+    {
+        mUser = null;
+    }
+
     public static User getUser() {
         if (mUser == null) {
             //TODO work around method, we muss to insure user is not null

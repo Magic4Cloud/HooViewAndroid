@@ -162,7 +162,12 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
                 .subscribe(new NetSubscribe<UserPageInfo>() {
                     @Override
                     public void OnSuccess(UserPageInfo userPageInfo) {
-                        mUserSwipeRefreshLayout.setRefreshing(false);
+                        mUserSwipeRefreshLayout.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mUserSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        });
                         if (userPageInfo != null) {
                             setHeaderData(userPageInfo);
                         }

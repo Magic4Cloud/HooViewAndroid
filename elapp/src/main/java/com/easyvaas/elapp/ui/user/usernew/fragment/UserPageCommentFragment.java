@@ -51,7 +51,7 @@ public class UserPageCommentFragment extends MyBaseListFragment<UserPageCommentA
     protected void changeEmptyView() {
         mEmptyView.setEmptyTxt(getString(R.string.empty_no_user_comment));
         if (EVApplication.isLogin())
-            if (userId.equals(EVApplication.getUser().getName()))
+            if (personId.equals(EVApplication.getUser().getName()))
                 mEmptyView.setEmptyTxt(getString(R.string.empty_user_comment));
         mEmptyView.getEmptyLayout().setGravity(Gravity.CENTER_HORIZONTAL);
         mEmptyView.getEmptyLayout().setPadding(0, (int) ViewUtil.dp2Px(mContext,85),0,0);
@@ -76,6 +76,7 @@ public class UserPageCommentFragment extends MyBaseListFragment<UserPageCommentA
                         mAdapter.dealLoadError(UserPageCommentFragment.this,isLoadMore);
                     }
                 });
+        addSubscribe(subscription);
     }
 
     public static UserPageCommentFragment newInstance(String userId,String personid) {

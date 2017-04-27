@@ -183,7 +183,7 @@ public class Preferences {
         if (userId == null)
             userId = user.getUserid();
         putString(KEY_USER_NUMBER, userId);
-        putString(KEY_SESSION_ID, user.getSessionid()); // Aya : 2017/4/26 暂时这样 测试
+        putString(KEY_SESSION_ID, user.getSessionid());
         putString(KEY_USER_NICKNAME, user.getNickname());
         putBoolean(KEY_IS_LOGOUT, false);
     }
@@ -198,6 +198,8 @@ public class Preferences {
             remove(KEY_USER_NUMBER);
             remove(KEY_SESSION_ID);
             putBoolean(KEY_IS_LOGOUT, true);
+            remove(KEY_CACHED_CAROUSEL_INFO_JSON);
+            remove(KEY_CACHED_USER_INFO_JSON);
         }
         LiveHxHelper.getInstance().logout();
         MobclickAgent.onProfileSignOff();

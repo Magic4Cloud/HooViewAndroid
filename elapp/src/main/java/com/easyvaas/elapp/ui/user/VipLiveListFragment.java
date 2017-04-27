@@ -261,7 +261,7 @@ public class VipLiveListFragment extends BaseListRcvFragment {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PlayerActivity.start(getActivity(), videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode());
+                        PlayerActivity.start(getActivity(), videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode(),videoEntity.getPermission());
                     }
                 });
             }

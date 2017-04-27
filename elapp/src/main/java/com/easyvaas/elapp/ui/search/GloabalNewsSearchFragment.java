@@ -46,14 +46,14 @@ public class GloabalNewsSearchFragment extends MyBaseListFragment<NormalNewsAdap
     protected void getListData(final Boolean isLoadMore) {
 
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserReadHistoryTest("http://demo2821846.mockable.io/search/news")
+                .searchNews(mKeyWord,start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<NormalNewsModel>() {
                     @Override
                     public void OnSuccess(NormalNewsModel normalNewsModel) {
                         if (normalNewsModel != null)
-                            mAdapter.dealLoadData(GloabalNewsSearchFragment.this,isLoadMore,null);
+                            mAdapter.dealLoadData(GloabalNewsSearchFragment.this,isLoadMore,normalNewsModel.getNews());
                     }
 
                     @Override

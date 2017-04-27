@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.user.usernew.activity;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -9,7 +10,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
+import com.easyvaas.elapp.bean.user.UserPageInfo.TagBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
@@ -31,6 +32,8 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Subscription;
@@ -42,8 +45,7 @@ import rx.schedulers.Schedulers;
  * Editor  Misuzu
  * 大V主页
  */
-// Aya : 2017/4/26 未登录情况下 后台404  而且后台存在并发请求 无法访问的问题
-public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.vip_avator)
     ImageView mVipAvator;
@@ -127,7 +129,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
                 VipUserLivingFragment.newInstance(personId),
                 VipUserCheatsFragment.newInstance(personId),
                 VipUserArticleFragment.newInstance(personId),
-                VipUserFansFragment.newInstance(personId,sessionId),
+                VipUserFansFragment.newInstance(personId, sessionId),
         };
         mUserSwipeRefreshLayout.setOnRefreshListener(this);
         mUserSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.base_purplish));
@@ -163,16 +165,20 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
     /**
      * 获取大V用户信息
      */
-    private void getVipUserInfo()
-    {
+    private void getVipUserInfo() {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserPageInfo(userId,sessionId,personId)
+                .getUserPageInfo(userId, sessionId, personId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<UserPageInfo>() {
                     @Override
                     public void OnSuccess(UserPageInfo userPageInfo) {
-                        mUserSwipeRefreshLayout.setRefreshing(false);
+                        mUserSwipeRefreshLayout.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mUserSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        });
                         if (userPageInfo != null) {
                             setHeaderData(userPageInfo);
                         }
@@ -183,7 +189,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
                     @Override
                     public void OnFailue(String msg) {
                         mUserSwipeRefreshLayout.setRefreshing(false);
-                        SingleToast.show(UserVipPageActivity.this,R.string.network_error);
+                        SingleToast.show(UserVipPageActivity.this, R.string.network_error);
                     }
                 });
         addSubscribe(subscription);
@@ -199,7 +205,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
         mVipName.setText(data.getNickname());
         mVipInfo.setText(data.getSignature());
         mVipNumber.setText(data.getCredentials());
-        mVipTags.setText(TextUtils.join(",",data.getTags()));
+        mVipTags.setText(getJoinString(data.getTags()));
         mVipIntroduce.setText(data.getIntroduce());
         mVipFansCounts.setText(String.valueOf(data.getFans_count()));
         Picasso.with(this).load(data.getLogourl()).placeholder(R.drawable.account_bitmap_list).into(mVipAvator);
@@ -207,8 +213,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
         {
             mVipFocusButton.setSelected(true);
             mVipFocusButton.setText(R.string.user_followed);
-        }else
-        {
+        } else {
             mVipFocusButton.setSelected(false);
             mVipFocusButton.setText(R.string.user_follow);
         }
@@ -224,8 +229,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
      * 关注 取消关注 点击
      */
     @OnClick(R.id.vip_focus_button)
-    public void onViewClicked()
-    {
+    public void onViewClicked() {
         if (EVApplication.isLogin()) {
             final int action = mVipFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
             Subscription subscription = RetrofitHelper.getInstance().getService()
@@ -253,8 +257,22 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
                         }
                     });
             addSubscribe(subscription);
-        }else
+        } else
             LoginActivity.start(mContext);
+    }
+
+
+    @OnClick({R.id.vip_fans_counts, R.id.vip_fans_text})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.vip_fans_counts:
+            case R.id.vip_fans_text:
+                Intent fansIntent = new Intent(this, UserFansActivity.class);
+                fansIntent.putExtra(AppConstants.USER_ID,personId);
+                fansIntent.putExtra(AppConstants.SESSION_ID,sessionId);
+                startActivity(fansIntent);
+                break;
+        }
     }
 
 
@@ -280,4 +298,20 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
         }
     }
 
+    /**
+     * 格式化标签
+     */
+    private  String getJoinString(List<TagBean> datas)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < datas.size(); i++) {
+            if (i == 0)
+                stringBuilder.append(datas.get(i).getName());
+            else
+            {
+                stringBuilder.append(",").append(datas.get(i).getName());
+            }
+        }
+        return stringBuilder.toString();
+    }
 }

@@ -75,6 +75,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.easyvaas.elapp.net.ApiConstant.VALUE_LIVE_PERMISSION_PAY;
+
 public class LivePrepareActivity extends BaseActivity {
     private static final String TAG = LivePrepareActivity.class.getSimpleName();
     private static final int MSG_TAKE_PICTURE_FINISH = 10;
@@ -264,7 +266,7 @@ public class LivePrepareActivity extends BaseActivity {
         mPayEditText = (EditText) findViewById(R.id.live_pay_input);
         mPaySwitchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) { //切换付费选项
                 if (isChecked)
                 {
                     mPayEditText.setVisibility(View.VISIBLE);
@@ -293,6 +295,13 @@ public class LivePrepareActivity extends BaseActivity {
         //            mLiveStartBtn.setEnabled(true);
         //            return;
         //        }
+        String price = mPayEditText.getText().toString().trim();
+        if (isNeedToPay && !TextUtils.isEmpty(price))
+        {
+            mLiveConfig.setVideoPrice(Integer.parseInt(price));
+            mLiveConfig.setVideoLimitType(ApiConstant.VALUE_LIVE_PERMISSION_PAY);
+        }
+
         if (mCameraManager != null) {
             mCameraManager.releaseCamera();
             mCameraManager = null;
@@ -314,7 +323,7 @@ public class LivePrepareActivity extends BaseActivity {
                         mLiveConfig.setLiveShareUrl(result.getShare_url());
                         setLiveTitle(result.getVid());
                         setTopic(result.getVid());
-                        //                        uploadThumb(result.getVid());
+                        uploadThumb(result.getVid());
                         startToRecord();
                         dismissLoadingDialog();
                     }
@@ -631,7 +640,7 @@ public class LivePrepareActivity extends BaseActivity {
                     EditText amountEt = (EditText) mSetVideoPrice.findViewById(R.id.pay_amount_et);
                     if (amountEt != null && !TextUtils.isEmpty(amountEt.getText())) {
                         mLiveConfig.setVideoPrice(Integer.parseInt(amountEt.getText().toString()));
-                        mLiveConfig.setVideoLimitType(ApiConstant.VALUE_LIVE_PERMISSION_PAY);
+                        mLiveConfig.setVideoLimitType(VALUE_LIVE_PERMISSION_PAY);
                         limitCb.setChecked(true);
                     }
                     dialog.dismiss();
