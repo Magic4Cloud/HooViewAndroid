@@ -45,7 +45,7 @@ public class LiveVideoListFragment extends MyBaseListFragment<LiveVideoListAdapt
                             public void OnSuccess(RecommendVideoListModel result) {
                                 if (result != null) {
                                     if (!isLoadMore) {
-                                        mAdapter.setHotList(result.getHotrecommend());
+                                        mAdapter.setHotList(getActivity(), result.getHotrecommend());
                                     }
                                     mAdapter.dealLoadData(LiveVideoListFragment.this, isLoadMore, result.getRecommend());
                                 }

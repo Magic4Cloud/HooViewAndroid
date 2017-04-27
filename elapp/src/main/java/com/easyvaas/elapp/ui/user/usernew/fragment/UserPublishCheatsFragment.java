@@ -2,17 +2,9 @@ package com.easyvaas.elapp.ui.user.usernew.fragment;
 
 import com.easyvaas.elapp.adapter.usernew.UserCheatsAdapter;
 import com.easyvaas.elapp.bean.user.CheatsListModel;
-import com.easyvaas.elapp.net.ApiConstant;
-import com.easyvaas.elapp.net.mynet.NetSubscribe;
-import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
-import com.hooview.app.R;
 
 import java.util.ArrayList;
-
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Date    2017/4/20
@@ -32,8 +24,8 @@ public class UserPublishCheatsFragment extends MyBaseListFragment<UserCheatsAdap
 
     @Override
     protected void changeEmptyView() {
-        super.changeEmptyView();
-        mEmptyView.setEmptyTxt(getString(R.string.empty_no_cheats));
+        mEmptyView.setEmptyTxt("秘籍暂未开通！");
+        showEmpty();
     }
 
     /**
@@ -43,8 +35,10 @@ public class UserPublishCheatsFragment extends MyBaseListFragment<UserCheatsAdap
      */
     @Override
     protected void getListData(final Boolean isLoadMore) {
-        Subscription subscription =
-                RetrofitHelper.getInstance().getService().getUserPublishCheatsTest(ApiConstant.MOCK_HOST + "/user/works?type=1")
+        /*Subscription subscription =
+                RetrofitHelper.getInstance().getService()
+                        .getUserPublishCheats(Preferences.getInstance(EVApplication.getApp()).getUserNumber(),
+                                Preferences.getInstance(EVApplication.getApp()).getSessionId(), start)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<CheatsListModel>() {
@@ -60,7 +54,7 @@ public class UserPublishCheatsFragment extends MyBaseListFragment<UserCheatsAdap
                                 mAdapter.dealLoadError(UserPublishCheatsFragment.this, isLoadMore);
                             }
                         });
-        addSubscribe(subscription);
+        addSubscribe(subscription);*/
     }
 
     @Override

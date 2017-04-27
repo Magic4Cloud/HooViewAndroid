@@ -1,15 +1,17 @@
 package com.easyvaas.elapp.ui.user.usernew.fragment;
 
-import com.easyvaas.elapp.adapter.usernew.UserVLivingAdapter;
+import com.easyvaas.elapp.adapter.usernew.UserVLivingNewAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
-import com.easyvaas.elapp.net.ApiConstant;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
 import com.hooview.app.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -21,15 +23,14 @@ import rx.schedulers.Schedulers;
  * 个人中心---我的发布---直播
  */
 
-public class UserPublishLivingFragment extends MyBaseListFragment<UserVLivingAdapter> {
+public class UserPublishLivingFragment extends MyBaseListFragment<UserVLivingNewAdapter> {
 
     /**
      * 初始化Adapter
      */
     @Override
-    protected UserVLivingAdapter initAdapter() {
-        UserVLivingAdapter adapter = new UserVLivingAdapter(new ArrayList<VideoEntity>());
-        adapter.showHeader(true);
+    protected UserVLivingNewAdapter initAdapter() {
+        UserVLivingNewAdapter adapter = new UserVLivingNewAdapter(new ArrayList<VideoEntity>());
         return adapter;
     }
 
@@ -47,15 +48,23 @@ public class UserPublishLivingFragment extends MyBaseListFragment<UserVLivingAda
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getUserPublishLivingTest(ApiConstant.MOCK_HOST + "/user/works?type=0")
+                RetrofitHelper.getInstance().getService()
+                        .getUserPublishLiving(Preferences.getInstance(EVApplication.getApp()).getUserNumber(),
+                                Preferences.getInstance(EVApplication.getApp()).getSessionId(), start)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<UserPublishVideoModel>() {
                             @Override
                             public void OnSuccess(UserPublishVideoModel result) {
                                 if (result != null) {
-                                    mAdapter.setHeaderModel(result.getTextlive());
-                                    mAdapter.dealLoadData(UserPublishLivingFragment.this, isLoadMore, result.getVideolive());
+                                    if (!isLoadMore) {
+                                        mAdapter.setHeaderModel(result.getTextlive());
+                                    }
+                                    List<VideoEntity> list = result.getVideolive();
+                                    if (list != null && list.size() > 0) {
+                                        list.add(list.get(list.size() - 1));
+                                    }
+                                    mAdapter.dealLoadData(UserPublishLivingFragment.this, isLoadMore, list);
                                 }
                             }
 

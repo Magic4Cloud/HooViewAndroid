@@ -199,9 +199,9 @@ public interface ApiService {
     /**
      * 我的购买---视频直播
      */
-    @GET("api/v2/user/purchase?type=0")
-    Observable<NetResponse<UserPublishVideoModel>> getUserBuyLiving(@Query(AppConstants.USER_ID) String id,
-                                                                        @Query(AppConstants.SESSION_ID) String sessionid,
+    @GET("api/v2/user/purchases?type=0")
+    Observable<NetResponse<UserPublishVideoModel>> getUserBuyLiving(@Query(AppConstants.USER_ID) String userId,
+                                                                        @Query(AppConstants.SESSION_ID) String sessionId,
                                                                         @Query(AppConstants.START) int start);
 
     /**
@@ -213,9 +213,9 @@ public interface ApiService {
     /**
      * 我的购买---精品视频
      */
-    @GET("api/v2/user/purchase?type=1")
-    Observable<NetResponse<UserPublishVideoModel>> getUserBuyVideo(@Query(AppConstants.USER_ID) String id,
-                                                                    @Query(AppConstants.SESSION_ID) String sessionid,
+    @GET("api/v2/user/purchases?type=1")
+    Observable<NetResponse<UserPublishVideoModel>> getUserBuyVideo(@Query(AppConstants.USER_ID) String userId,
+                                                                    @Query(AppConstants.SESSION_ID) String sessionId,
                                                                     @Query(AppConstants.START) int start);
 
     /**
@@ -227,9 +227,9 @@ public interface ApiService {
     /**
      * 我的购买---已买秘籍
      */
-    @GET("api/v2/user/purchase?type=1")
-    Observable<NetResponse<CheatsListModel>> getUserBuyCheats(@Query(AppConstants.USER_ID) String id,
-                                                                   @Query(AppConstants.SESSION_ID) String sessionid,
+    @GET("api/v2/user/purchases?type=2")
+    Observable<NetResponse<CheatsListModel>> getUserBuyCheats(@Query(AppConstants.USER_ID) String userId,
+                                                                   @Query(AppConstants.SESSION_ID) String sessionId,
                                                                    @Query(AppConstants.START) int start);
 
     /**

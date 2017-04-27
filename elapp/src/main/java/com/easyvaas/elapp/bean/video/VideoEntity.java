@@ -417,4 +417,54 @@ public class VideoEntity {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "VideoEntity{" +
+                "vid='" + vid + '\'' +
+                ", title='" + title + '\'' +
+                ", thumb='" + thumb + '\'' +
+                ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", logourl='" + logourl + '\'' +
+                ", living=" + living +
+                ", location='" + location + '\'' +
+                ", watch_count=" + watch_count +
+                ", comment_count=" + comment_count +
+                ", watching_count=" + watching_count +
+                ", like_count=" + like_count +
+                ", time_span=" + time_span +
+                ", duration=" + duration +
+                ", share_url='" + share_url + '\'' +
+                ", share_thumb_url='" + share_thumb_url + '\'' +
+                ", play_url='" + play_url + '\'' +
+                ", followed=" + followed +
+                ", live_start_time='" + live_start_time + '\'' +
+                ", live_stop_time='" + live_stop_time + '\'' +
+                ", live_stop_time_span=" + live_stop_time_span +
+                ", live_start_time_span=" + live_start_time_span +
+                ", living_device='" + living_device + '\'' +
+                ", network_type='" + network_type + '\'' +
+                ", uri='" + uri + '\'' +
+                ", permission=" + permission +
+                ", gps_latitude=" + gps_latitude +
+                ", gps_longitude=" + gps_longitude +
+                ", watchid=" + watchid +
+                ", gps=" + gps +
+                ", living_status=" + living_status +
+                ", status=" + status +
+                ", pinned=" + pinned +
+                ", vip=" + vip +
+                ", imuser='" + imuser + '\'' +
+                ", horizontal=" + horizontal +
+                ", mode=" + mode +
+                ", password='" + password + '\'' +
+                ", price=" + price +
+                ", recommend=" + recommend +
+                ", extra='" + extra + '\'' +
+                ", sentTimeLength=" + sentTimeLength +
+                ", signature='" + signature + '\'' +
+                ", level=" + level +
+                '}';
+    }
 }

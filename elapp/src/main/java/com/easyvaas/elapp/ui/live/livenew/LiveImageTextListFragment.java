@@ -87,7 +87,7 @@ public class LiveImageTextListFragment extends MyBaseListFragment<LiveImageTextL
                         }
                     }
                     if (!isLoadMore) {
-                        mAdapter.setHotList(textLiveListModel.getHotstreams());
+                        mAdapter.setHotList(getActivity(), textLiveListModel.getHotstreams());
                     }
                     mAdapter.dealLoadData(LiveImageTextListFragment.this, isLoadMore, textLiveListModel.getStreams());
                 }

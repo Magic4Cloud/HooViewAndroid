@@ -6,6 +6,7 @@
 
 package com.easyvaas.elapp.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -67,26 +68,30 @@ public class DateTimeUtil {
         return sFormatter.format(durationformat, timeArgs).toString();
     }
 
-    public static String getDurationTimeCn(Context context, long duration) {
-        long sec = duration / 1000;
-        String durationformat = context.getString(
-                sec < 3600 ? R.string.duration_format_short_cn : R.string.duration_format_long_cn);
+    /**
+     * 视频时长
+     *
+     * @param context  Context
+     * @param duration long 秒
+     * @return
+     */
+    public static String getTimeDurationCn(Context context, long duration) {
+        String format = context.getString(duration < 3600 ? R.string.duration_format_short_cn : R.string.duration_format_long_cn);
 
         /* Provide multiple arguments so the format can be changed easily
          * by modifying the xml.
          */
         sFormatBuilder.setLength(0);
-
         final Object[] timeArgs = sTimeArgs;
-        timeArgs[0] = sec / 3600;
-        timeArgs[1] = sec / 60;
-        timeArgs[2] = (sec / 60) % 60;
-        timeArgs[3] = sec;
-        timeArgs[4] = sec % 60;
-
-        return sFormatter.format(durationformat, timeArgs).toString();
+        timeArgs[0] = duration / 3600;
+        timeArgs[1] = duration / 60;
+        timeArgs[2] = (duration / 60) % 60;
+        timeArgs[3] = duration;
+        timeArgs[4] = duration % 60;
+        return sFormatter.format(format, timeArgs).toString();
     }
 
+    @SuppressLint("StringFormatMatches")
     public static String getSimpleTime(Context context, long startTimeSpan) {
         String result = "";
         startTimeSpan = startTimeSpan / 1000;
@@ -178,6 +183,45 @@ public class DateTimeUtil {
         return result;
     }
 
+    /**
+     * 06/06 12:30，未考虑年份
+     */
+    public static String getTimeVideo(String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date dateOri = format.parse(time.trim(), new ParsePosition(0));
+        if (dateOri == null) {
+            return "";
+        }
+        String result = "";
+        SimpleDateFormat formatNear = new SimpleDateFormat(" HH:mm", Locale.getDefault());
+        SimpleDateFormat formatFar = new SimpleDateFormat("MM/dd HH:mm", Locale.getDefault());
+        // 48小时之内
+        if (System.currentTimeMillis() - dateOri.getTime() < 2 * 24 * 3600 * 1000) {
+            // 目标时间
+            Calendar calendarOri = Calendar.getInstance();
+            calendarOri.setTime(dateOri);
+            int dayOri = calendarOri.get(Calendar.DAY_OF_MONTH);
+            Logger.d("xmzd", "day original: " + dayOri);
+            // 当前时间
+            Calendar calendarNow = Calendar.getInstance();
+            calendarNow.setTime(new Date());
+            int dayNow = calendarNow.get(Calendar.DAY_OF_MONTH);
+            Logger.d("xmzd", "day now: " + dayNow);
+            if (dayNow == dayOri) {
+                result = "今天" + formatNear.format(dateOri);
+            } else if ((dayNow == dayOri + 1) || (dayNow == 1 && (dayOri == 28 || dayOri == 29 || dayOri == 30 || dayOri == 31))) {
+                result = "昨天" + formatNear.format(dateOri);
+            } else {
+                result = formatFar.format(dateOri);
+            }
+        } else {
+            result = formatFar.format(dateOri);
+        }
+        return result;
+    }
 
     // 2015-06-15 10:36:05
     public static String getSimpleTime(Context context, String time) {

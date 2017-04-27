@@ -112,11 +112,11 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
                 // nickname
                 mNicknameTv.setText(videoEntity.getNickname());
                 // time
-                mTimeTv.setText(DateTimeUtil.getNewsTime(mContext, videoEntity.getLive_start_time()));
+                mTimeTv.setText(DateTimeUtil.getTimeVideo(videoEntity.getLive_start_time()));
                 // thumb
                 Utils.showNewsImage(videoEntity.getThumb(), mThumbIv);
                 // duration
-                mDurationTv.setText(DateTimeUtil.getDurationTimeCn(mContext, videoEntity.getDuration()));
+                mDurationTv.setText(DateTimeUtil.getTimeDurationCn(mContext, videoEntity.getDuration()));
                 // watch_count
                 mWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
                 // hot // TODO: 2017/4/20

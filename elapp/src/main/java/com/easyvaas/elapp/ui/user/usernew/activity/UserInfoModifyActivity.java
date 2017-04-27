@@ -47,7 +47,6 @@ import com.easyvaas.elapp.ui.pop.UserInfoEditPopupWindow;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.UserAddLabelActivity;
 import com.easyvaas.elapp.utils.Constants;
-import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.UserUtil;
 import com.easyvaas.elapp.utils.Utils;
@@ -565,9 +564,7 @@ public class UserInfoModifyActivity extends MyBaseActivity{
         final String signature = mSignatureEt.getText().toString().trim();
         final String gender = getString(R.string.male).equals(mSexTv.getText().toString().trim()) ? "male" : "female";
         final String credentials = mCertificateEt != null ? mCertificateEt.getText().toString().trim() : "";
-        Logger.e(TAG, credentials);
         final String introduce = mIntroduceTv != null ? mIntroduceTv.getText().toString().trim() : "";
-        Logger.e(TAG, introduce);
         // 判断
         if (TextUtils.isEmpty(nickname) || getString(R.string.nickname).equals(nickname)) {
             SingleToast.show(this, R.string.msg_nickname_empty);
@@ -576,7 +573,7 @@ public class UserInfoModifyActivity extends MyBaseActivity{
         // 未编辑，直接退出
         if (nickname.equals(user.getNickname()) && location.equals(user.getLocation())
                 && signature.equals(user.getSignature()) && gender.equals(user.getGender())
-                && credentials.equals(user.getCredentials())) {
+                && credentials.equals(user.getCredentials()) && introduce.equals(user.getIntroduce())) {
             finish();
             return;
         }

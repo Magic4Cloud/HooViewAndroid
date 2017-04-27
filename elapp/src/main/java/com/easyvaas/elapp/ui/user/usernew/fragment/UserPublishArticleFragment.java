@@ -1,9 +1,10 @@
 package com.easyvaas.elapp.ui.user.usernew.fragment;
 
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
-import com.easyvaas.elapp.net.ApiConstant;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
@@ -36,23 +37,25 @@ public class UserPublishArticleFragment extends MyBaseListFragment<NormalNewsAda
 
     @Override
     protected void getListData(final Boolean isLoadMore) {
-        Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserPublishArticleTest(ApiConstant.MOCK_HOST + "/user/works?type=2")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<NormalNewsModel>() {
-                    @Override
-                    public void OnSuccess(NormalNewsModel normalNewsModel) {
-                        if (normalNewsModel != null) {
-                            mAdapter.dealLoadData(UserPublishArticleFragment.this, isLoadMore, normalNewsModel.getNews());
-                        }
-                    }
+        Subscription subscription =
+                RetrofitHelper.getInstance().getService()
+                        .getUserPublishArticle(Preferences.getInstance(EVApplication.getApp()).getUserNumber(),
+                                Preferences.getInstance(EVApplication.getApp()).getSessionId(), start)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new NetSubscribe<NormalNewsModel>() {
+                            @Override
+                            public void OnSuccess(NormalNewsModel normalNewsModel) {
+                                if (normalNewsModel != null) {
+                                    mAdapter.dealLoadData(UserPublishArticleFragment.this, isLoadMore, normalNewsModel.getNews());
+                                }
+                            }
 
-                    @Override
-                    public void OnFailue(String msg) {
-                        mAdapter.dealLoadError(UserPublishArticleFragment.this, isLoadMore);
-                    }
-                });
+                            @Override
+                            public void OnFailue(String msg) {
+                                mAdapter.dealLoadError(UserPublishArticleFragment.this, isLoadMore);
+                            }
+                        });
         addSubscribe(subscription);
     }
 

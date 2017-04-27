@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.net.mynet;
 
 import com.easyvaas.elapp.net.HooviewApiConstant;
+import com.easyvaas.elapp.utils.Logger;
 import com.hooview.app.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
@@ -44,7 +45,12 @@ public class RetrofitHelper{
         OkHttpClient.Builder mBuilder = new OkHttpClient.Builder();
         //设置打印
         if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                @Override
+                public void log(String message) {
+                    Logger.e("xmzdOkHttp", message);
+                }
+            });
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
             mBuilder.addInterceptor(loggingInterceptor);
         }

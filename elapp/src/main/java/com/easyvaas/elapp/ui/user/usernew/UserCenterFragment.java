@@ -33,7 +33,6 @@ import com.easyvaas.elapp.ui.user.usernew.activity.UserHistoryNewActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserInfoModifyActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserPublishActivity;
 import com.easyvaas.elapp.utils.Constants;
-import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
@@ -121,7 +120,7 @@ public class UserCenterFragment extends MyBaseFragment {
             return;
         }
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserInfoNew(userId,sessionId)
+                .getUserInfoNew(userId, sessionId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<User>() {
@@ -144,10 +143,8 @@ public class UserCenterFragment extends MyBaseFragment {
     /**
      * 更新UI
      */
-    private void updateUI()
-    {
-        if (mPreferences.isLogin() && EVApplication.isLogin())
-        {
+    private void updateUI() {
+        if (mPreferences.isLogin() && EVApplication.isLogin()) {
             User user = EVApplication.getUser();
             mUserCenterName.setText(user.getNickname());
             mUserCenterFanscounts.setText(String.valueOf(user.getFans_count()));
@@ -162,13 +159,12 @@ public class UserCenterFragment extends MyBaseFragment {
             {
                 mUserCenterAvator.setIsVip(1);
                 mUserCenterPublish.setVisibility(View.VISIBLE);
-            }else
-            {
+            } else {
                 mUserCenterAvator.setIsVip(0);
                 mUserCenterPublish.setVisibility(View.GONE);
             }
             mUserCenterSex.setVisibility(View.VISIBLE);
-        }else  // 未登录情况
+        } else  // 未登录情况
         {
             mUserCenterName.setText(R.string.user_login_text);
             mUserCenterIntroduce.setText(R.string.user_login_info);
@@ -224,7 +220,7 @@ public class UserCenterFragment extends MyBaseFragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.user_settting, R.id.user_center_focuscounts, R.id.user_center_focustxt, R.id.user_center_fanscounts, R.id.user_center_fanstxt, R.id.user_center_message, R.id.user_center_balance, R.id.user_center_publish, R.id.user_center_buy, R.id.user_center_collect, R.id.user_center_history,R.id.user_edit_layout})
+    @OnClick({R.id.user_settting, R.id.user_center_focuscounts, R.id.user_center_focustxt, R.id.user_center_fanscounts, R.id.user_center_fanstxt, R.id.user_center_message, R.id.user_center_balance, R.id.user_center_publish, R.id.user_center_buy, R.id.user_center_collect, R.id.user_center_history, R.id.user_edit_layout})
     public void onViewClicked(View view) {
         if (!mPreferences.isLogin() || !EVApplication.isLogin()) {
             LoginActivity.start(getActivity());
@@ -232,8 +228,8 @@ public class UserCenterFragment extends MyBaseFragment {
         }
         switch (view.getId()) {
             case R.id.user_edit_layout:  // 编辑资料
-//                UserInfoActivity.start(getActivity(),bundle);
-                Utils.toUserPager(mContext,EVApplication.getUser().getName(),EVApplication.getUser().getVip());
+                UserInfoModifyActivity.start(getActivity(), bundle);
+//                Utils.toUserPager(mContext,EVApplication.getUser().getName(),EVApplication.getUser().getVip());
                 break;
             case R.id.user_settting: // 设置界面
                 SettingActivity.start(getActivity());
@@ -241,15 +237,15 @@ public class UserCenterFragment extends MyBaseFragment {
             case R.id.user_center_focuscounts:
             case R.id.user_center_focustxt: //关注列表
                 Intent focusIntent = new Intent(getActivity(), UserFocusActivity.class);
-                focusIntent.putExtra(AppConstants.USER_ID,EVApplication.getUser().getName());
-                focusIntent.putExtra(AppConstants.SESSION_ID,EVApplication.getUser().getSessionid());
+                focusIntent.putExtra(AppConstants.USER_ID, EVApplication.getUser().getName());
+                focusIntent.putExtra(AppConstants.SESSION_ID, EVApplication.getUser().getSessionid());
                 startActivity(focusIntent);
                 break;
             case R.id.user_center_fanscounts:
             case R.id.user_center_fanstxt: // 粉丝列表
                 Intent fansIntent = new Intent(getActivity(), UserFansActivity.class);
-                fansIntent.putExtra(AppConstants.USER_ID,EVApplication.getUser().getName());
-                fansIntent.putExtra(AppConstants.SESSION_ID,EVApplication.getUser().getSessionid());
+                fansIntent.putExtra(AppConstants.USER_ID, EVApplication.getUser().getName());
+                fansIntent.putExtra(AppConstants.SESSION_ID, EVApplication.getUser().getSessionid());
                 startActivity(fansIntent);
                 break;
             case R.id.user_center_message: // 消息列表

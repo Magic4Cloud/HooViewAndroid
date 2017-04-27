@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.adapter.live;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -34,10 +35,8 @@ import static com.tencent.open.utils.Global.getContext;
 
 public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.StreamsEntity> {
 
-    private static final int TYPE_HOT = 1;
-    private static final int TYPE_IMAGE_TEXT = 2;
-    private List<TextLiveListModel.StreamsEntity> mHotList;
     private boolean mHasHot = false;
+    private HotViewHolder mHeaderHolder;
 
     public LiveImageTextListAdapter(List<TextLiveListModel.StreamsEntity> data) {
         super(data);
@@ -45,22 +44,12 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
 
     @Override
     protected int getItemViewByType(int position) {
-        if (position == 0 && mHasHot) {
-            return TYPE_HOT;
-        }
-        return TYPE_IMAGE_TEXT;
+        return 0;
     }
 
     @Override
     protected BaseViewHolder OnCreateViewByHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        switch (viewType) {
-            case TYPE_HOT:
-                return new HotViewHolder(inflater.inflate(R.layout.item_live_image_text_hot, null));
-            case TYPE_IMAGE_TEXT:
-                return new ImageTextViewHolder(inflater.inflate(R.layout.item_live_image_text, null));
-        }
-        return null;
+        return new ImageTextViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_live_image_text, parent, false));
     }
 
     @Override
@@ -76,40 +65,8 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
      */
     @Override
     protected void convert(BaseViewHolder helper, TextLiveListModel.StreamsEntity item) {
-        int position = helper.getLayoutPosition();
-        if (position == 0 && mHasHot && helper instanceof HotViewHolder) {
-            ((HotViewHolder) helper).setHotList(mHotList);
-        } else if (helper instanceof ImageTextViewHolder) {
-            if (mHasHot) {
-                item = mData.get(position - 1 < 0 ? 0 : position - 1);
-            }
+        if (helper instanceof ImageTextViewHolder) {
             ((ImageTextViewHolder) helper).setModel(item);
-        }
-    }
-
-    public void setHotList(List<TextLiveListModel.StreamsEntity> list) {
-        if (list != null && list.size() > 0) {
-            mHasHot = true;
-            mHotList = list;
-            notifyItemChanged(0);
-        }
-    }
-
-    class HotViewHolder extends BaseViewHolder {
-
-        @BindView(R.id.image_text_hot)
-        RecyclerView mHotRecyclerView;
-        HotImageTextAdapter mHotAdapter;
-
-        public HotViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-
-        void setHotList(List<TextLiveListModel.StreamsEntity> list) {
-            mHotAdapter = new HotImageTextAdapter(list);
-            mHotRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, OrientationHelper.HORIZONTAL, false));
-            mHotRecyclerView.setAdapter(mHotAdapter);
         }
     }
 
@@ -157,6 +114,41 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                     }
                 });
             }
+        }
+    }
+
+    /**
+     * 设置头部
+     *
+     * @param context
+     * @param list
+     */
+    public void setHotList(Context context, List<TextLiveListModel.StreamsEntity> list) {
+        if (list != null && list.size() > 0) {
+            if (mHeaderHolder == null && !mHasHot) {
+                View view = LayoutInflater.from(context).inflate(R.layout.item_live_image_text_hot, null);
+                mHeaderHolder = new HotViewHolder(view);
+                addHeaderView(view);
+                mHasHot = true;
+            }
+            mHeaderHolder.setHotList(list);
+        }
+    }
+
+    class HotViewHolder {
+
+        @BindView(R.id.image_text_hot)
+        RecyclerView mHotRecyclerView;
+        HotImageTextAdapter mHotAdapter;
+
+        public HotViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+
+        void setHotList(List<TextLiveListModel.StreamsEntity> list) {
+            mHotAdapter = new HotImageTextAdapter(list);
+            mHotRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, OrientationHelper.HORIZONTAL, false));
+            mHotRecyclerView.setAdapter(mHotAdapter);
         }
     }
 
@@ -219,7 +211,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                     // name
                     mHotNameTv.setText(model.getName());
                     // hot // TODO: 2017/4/26
-                    mHotHotIv.setVisibility(View.GONE);
+                    mHotHotIv.setVisibility(View.VISIBLE);
                     // watch count
                     mHotWatchCountTv.setText(String.format(mContext.getString(R.string.image_text_watch_count), NumberUtil.format(model.getViewcount())));
                     // click

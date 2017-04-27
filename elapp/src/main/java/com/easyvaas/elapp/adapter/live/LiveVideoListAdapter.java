@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.adapter.live;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -24,8 +25,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.attr.mode;
-
 /**
  * Date    2017/4/25
  * Author  xiaomao
@@ -34,10 +33,8 @@ import static android.R.attr.mode;
 
 public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
 
-    private static final int TYPE_HOT = 1;
-    private static final int TYPE_VIDEO = 2;
-    private List<VideoEntity> mHotList;
     private boolean mHasHot = false;
+    private HotViewHolder mHeaderHolder;
 
     public LiveVideoListAdapter(List data) {
         super(data);
@@ -45,22 +42,12 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
 
     @Override
     protected int getItemViewByType(int position) {
-        if (position == 0 && mHasHot) {
-            return TYPE_HOT;
-        }
-        return TYPE_VIDEO;
+        return 0;
     }
 
     @Override
     protected BaseViewHolder OnCreateViewByHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        switch (viewType) {
-            case TYPE_HOT:
-                return new HotViewHolder(inflater.inflate(R.layout.item_live_video_hot, null));
-            case TYPE_VIDEO:
-                return new VideoViewHolder(inflater.inflate(R.layout.item_video_living, null));
-        }
-        return null;
+        return new VideoViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_video_living, null));
     }
 
     @Override
@@ -76,42 +63,9 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
      */
     @Override
     protected void convert(BaseViewHolder helper, VideoEntity item) {
-        int position = helper.getLayoutPosition();
-        if (position == 0 && mHasHot && helper instanceof HotViewHolder) {
-            ((HotViewHolder)helper).setHot(mHotList);
-        } else if (helper instanceof VideoViewHolder) {
-            if (mHasHot) {
-                item = mData.get(position - 1 < 0 ? 0 : position - 1);
-            }
-            ((VideoViewHolder)helper).setModel(item);
+        if (helper instanceof VideoViewHolder) {
+            ((VideoViewHolder) helper).setModel(item);
         }
-    }
-
-    public void setHotList(List<VideoEntity> list) {
-        if (list != null && list.size() > 0) {
-            mHasHot = true;
-            mHotList = list;
-            notifyItemChanged(0);
-        }
-    }
-
-    class HotViewHolder extends BaseViewHolder {
-
-        @BindView(R.id.video_hot)
-        RecyclerView mHotRecyclerView;
-        HotVideoAdapter mHotAdapter;
-
-        public HotViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-
-        void setHot(List<VideoEntity> list) {
-            mHotAdapter = new HotVideoAdapter(list);
-            mHotRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, OrientationHelper.HORIZONTAL, false));
-            mHotRecyclerView.setAdapter(mHotAdapter);
-        }
-
     }
 
     class VideoViewHolder extends BaseViewHolder {
@@ -155,27 +109,27 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
                 // name
                 mNameTv.setText(videoEntity.getNickname());
                 // operator 视频类型（0，回放；1，直播中；2，精品）
+                int mode = videoEntity.getMode();
+                // 0，回放；1，直播
+                int living = videoEntity.getLiving();
                 // time
-                if (mode == 1) {
+                if (living == 1) {
                     mTimeTv.setVisibility(View.GONE);
                 } else {
                     mTimeTv.setVisibility(View.VISIBLE);
-                    mTimeTv.setText(DateTimeUtil.getNewsTime(mContext, videoEntity.getLive_start_time()));
+                    mTimeTv.setText(DateTimeUtil.getTimeVideo(videoEntity.getLive_start_time()));
                 }
-                final int mode = videoEntity.getMode();
-                switch (mode) {
-                    case 0:
+                if (mode == 2) {
+                    mOperatorTv.setText("精品");
+                    mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_good));
+                } else {
+                    if (living == 0) {
                         mOperatorTv.setText("回放");
                         mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_playback));
-                        break;
-                    case 1:
+                    } else if (living == 1) {
                         mOperatorTv.setText("直播中");
                         mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_living));
-                        break;
-                    case 2:
-                        mOperatorTv.setText("精品");
-                        mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_good));
-                        break;
+                    }
                 }
                 // pay 权限（0，Published;1，Shared;2，Personal;3，AllFriends;4，AllowList;5，ForbidList;6，Password;7，PayLive
                 int permission = videoEntity.getPermission();
@@ -195,6 +149,36 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
         }
     }
 
+    public void setHotList(Context context, List<VideoEntity> list) {
+        if (list != null && list.size() > 0) {
+            if (mHeaderHolder == null && !mHasHot) {
+                View view = LayoutInflater.from(context).inflate(R.layout.item_live_video_hot, null);
+                mHeaderHolder = new HotViewHolder(view);
+                addHeaderView(view);
+                mHasHot = true;
+            }
+            mHeaderHolder.setHot(list);
+        }
+    }
+
+    class HotViewHolder {
+
+        @BindView(R.id.video_hot)
+        RecyclerView mHotRecyclerView;
+        HotVideoAdapter mHotAdapter;
+
+        public HotViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+
+        void setHot(List<VideoEntity> list) {
+            mHotAdapter = new HotVideoAdapter(list);
+            mHotRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, OrientationHelper.HORIZONTAL, false));
+            mHotRecyclerView.setAdapter(mHotAdapter);
+        }
+
+    }
+
     /**
      * 热门推荐
      */
@@ -212,7 +196,7 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
         @Override
         protected void convert(BaseViewHolder helper, VideoEntity item) {
             if (helper instanceof HotVideoViewHolder) {
-                ((HotVideoViewHolder)helper).setHotItem(item);
+                ((HotVideoViewHolder) helper).setHotItem(item);
             }
         }
 
@@ -254,7 +238,7 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
                     // cover
                     Utils.showNewsImage(videoEntity.getThumb(), mHotCoverIv);
                     // hot // TODO: 2017/4/25
-                    mHotHotIv.setVisibility(View.GONE);
+                    mHotHotIv.setVisibility(View.VISIBLE);
                     // watch count
                     mHotWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
                     // title

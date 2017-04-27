@@ -11,7 +11,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
 import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveRoomModel;
-import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.user.UserInfoModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
@@ -21,7 +20,6 @@ import com.easyvaas.elapp.ui.live.ImageTextLiveActivity;
 import com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity;
 import com.easyvaas.elapp.ui.live.PlayerActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
-import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
@@ -32,30 +30,27 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.attr.mode;
+
 /**
  * Date    2017/4/20
  * Author  xiaomao
  * adapter: 我的发布---直播
  */
 
-public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
+public class UserVLivingNewAdapter extends MyBaseAdapter<VideoEntity> {
 
     private static final int TYPE_IMAGE_TEXT = 1;
     private static final int TYPE_VIDEO = 2;
-    private boolean mHasHeader = false;
     private ImageTextLiveRoomModel mImageTextModel;
 
-    public UserVLivingAdapter(List<VideoEntity> data) {
+    public UserVLivingNewAdapter(List<VideoEntity> data) {
         super(data);
-    }
-
-    public void showHeader(boolean showHeader) {
-        mHasHeader = showHeader;
     }
 
     @Override
     protected int getItemViewByType(int position) {
-        if (mHasHeader && position == 0) {
+        if (position == 0) {
             return TYPE_IMAGE_TEXT;
         } else {
             return TYPE_VIDEO;
@@ -64,11 +59,10 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
 
     @Override
     public int getItemCount() {
-        int count = mHasHeader ? 1 : 0;
+        int count = 1;
         if (mData != null) {
             count = count + mData.size();
         }
-        Logger.e("xmzd", "count: " + count);
         return count;
     }
 
@@ -97,16 +91,13 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
     @Override
     protected void convert(BaseViewHolder helper, VideoEntity item) {
         int position = helper.getLayoutPosition();
-        Logger.e("xmzd", "position: " + position);
-        if (position == 0 && mHasHeader && helper instanceof ImageTextViewHolder) {
+        if (position == 0 && helper instanceof ImageTextViewHolder) {
             ((ImageTextViewHolder) helper).setModel(mImageTextModel);
-            Logger.e("xmzd", "item header: " + position);
         } else if (helper instanceof VideoViewHolder) {
-            if (mHasHeader) {
-                item = mData.get(position - 1 < 0 ? 0 : position - 1);
-                Logger.e("xmzd", "item item: " + position);
+            if (mData != null && mData.size() > 0) {
+                item = mData.get(position - 1);
+                ((VideoViewHolder) helper).setModel(item);
             }
-            ((VideoViewHolder) helper).setModel(item);
         }
     }
 
@@ -114,10 +105,8 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
      * 设置图文直播数据
      */
     public void setHeaderModel(ImageTextLiveRoomModel imageTextModel) {
-        if (mHasHeader) {
-            mImageTextModel = imageTextModel;
-            notifyItemChanged(0);
-        }
+        mImageTextModel = imageTextModel;
+        notifyItemChanged(0);
     }
 
     class ImageTextViewHolder extends BaseViewHolder {
@@ -176,15 +165,7 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                             streamsEntity.setViewcount(model.getViewcount());
                             streamsEntity.setOwnerid(model.getOwnerid());
                             streamsEntity.setId(model.getId());
-                            User user = EVApplication.getUser();
-                            UserInfoModel userInfoModel = new UserInfoModel();
-                            if (user != null) {
-                                userInfoModel.setTags(user.getTags());
-                                userInfoModel.setNickname(user.getNickname());
-                                userInfoModel.setLogourl(user.getLogourl());
-                                userInfoModel.setName(user.getName());
-                            }
-                            streamsEntity.setUserEntity(userInfoModel);
+                            streamsEntity.setUserEntity(null);// TODO: 2017/4/20
                             ImageTextLiveActivity.start(mContext, streamsEntity);
                         }
                     }
@@ -234,27 +215,27 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 // name
                 mNameTv.setText(videoEntity.getNickname());
                 // operator 视频类型（0，回放；1，直播中；2，精品）
-                int mode = videoEntity.getMode();
-                // 0，回放；1，直播
-                int living = videoEntity.getLiving();
                 // time
-                if (living == 1) {
+                if (mode == 1) {
                     mTimeTv.setVisibility(View.GONE);
                 } else {
                     mTimeTv.setVisibility(View.VISIBLE);
                     mTimeTv.setText(DateTimeUtil.getTimeVideo(videoEntity.getLive_start_time()));
                 }
-                if (mode == 2) {
-                    mOperatorTv.setText("精品");
-                    mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_good));
-                } else {
-                    if (living == 0) {
+                final int mode = videoEntity.getMode();
+                switch (mode) {
+                    case 0:
                         mOperatorTv.setText("回放");
                         mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_playback));
-                    } else if (living == 1) {
+                        break;
+                    case 1:
                         mOperatorTv.setText("直播中");
                         mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_living));
-                    }
+                        break;
+                    case 2:
+                        mOperatorTv.setText("精品");
+                        mOperatorTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_good));
+                        break;
                 }
                 // pay 权限（0，Published;1，Shared;2，Personal;3，AllFriends;4，AllowList;5，ForbidList;6，Password;7，PayLive
                 int permission = videoEntity.getPermission();

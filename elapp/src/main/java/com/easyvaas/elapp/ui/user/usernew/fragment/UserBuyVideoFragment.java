@@ -1,9 +1,10 @@
 package com.easyvaas.elapp.ui.user.usernew.fragment;
 
 import com.easyvaas.elapp.adapter.usernew.UserVideoAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
-import com.easyvaas.elapp.net.ApiConstant;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
@@ -39,7 +40,9 @@ public class UserBuyVideoFragment extends MyBaseListFragment<UserVideoAdapter> {
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getUserBuyVideoTest(ApiConstant.MOCK_HOST + "/user/purchases?type=1")
+                RetrofitHelper.getInstance().getService()
+                        .getUserBuyVideo(Preferences.getInstance(EVApplication.getApp()).getUserNumber(),
+                                Preferences.getInstance(EVApplication.getApp()).getSessionId(), start)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<UserPublishVideoModel>() {
