@@ -33,6 +33,7 @@ import com.easyvaas.elapp.ui.user.usernew.activity.UserHistoryNewActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserInfoModifyActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserPublishActivity;
 import com.easyvaas.elapp.utils.Constants;
+import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 

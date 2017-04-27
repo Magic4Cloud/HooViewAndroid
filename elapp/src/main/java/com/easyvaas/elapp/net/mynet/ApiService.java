@@ -249,14 +249,14 @@ public interface ApiService {
      * 大V秘籍列表
      */
     @GET("api/v2/user/cheats")
-    Observable<NetResponse<CheatsListModel>> getVUserBuyCheats(@Query(AppConstants.USER_ID) String id,
+    Observable<NetResponse<CheatsListModel>> getVipUserBuyCheats(@Query(AppConstants.USER_ID) String id,
                                                                @Query(AppConstants.START) int start);
 
     /**
      * 大V文章列表
      */
     @GET("api/v2/user/news")
-    Observable<NetResponse<NormalNewsModel>> getVUserPublishArticle(@Query(AppConstants.USER_ID) String id,
+    Observable<NetResponse<NormalNewsModel>> getVipUserPublishArticle(@Query(AppConstants.USER_ID) String id,
                                                                     @Query(AppConstants.START) int start);
 
     /**

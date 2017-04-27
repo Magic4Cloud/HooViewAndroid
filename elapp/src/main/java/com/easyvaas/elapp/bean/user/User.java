@@ -6,9 +6,6 @@
 
 package com.easyvaas.elapp.bean.user;
 
-import com.easyvaas.elapp.app.EVApplication;
-import com.easyvaas.elapp.db.Preferences;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -56,7 +53,7 @@ public class User extends BaseUserEntity implements Serializable {
 
     // Aya : 2017/4/26 等后台改完后 恢复到原来状态
     public String getSessionid() {
-        return Preferences.getInstance(EVApplication.getApp()).getSessionId();
+        return sessionid;
     }
 
     public void setSessionid(String sessionid) {
