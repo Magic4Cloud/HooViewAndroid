@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.adapter.usernew;
 
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,8 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
         ImageView mHotIv;
         @BindView(R.id.video_title)
         TextView mTitleTv;
+        @BindView(R.id.cv_pay)
+        CardView mPayCv;
 
         public VideoViewHolder(View view) {
             super(view);
@@ -127,6 +130,13 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
                 }
                 // title
                 mTitleTv.setText(videoEntity.getTitle());
+                // pay 权限（0，Published;1，Shared;2，Personal;3，AllFriends;4，AllowList;5，ForbidList;6，Password;7，PayLive
+                int permission = videoEntity.getPermission();
+                if (permission == 7) {
+                    mPayCv.setVisibility(View.VISIBLE);
+                } else {
+                    mPayCv.setVisibility(View.GONE);
+                }
                 // click
                 mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
