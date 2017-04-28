@@ -151,7 +151,8 @@ public class DateTimeUtil {
     }
 
     public static String getNewsTime(Context context, String time) {
-        if (TextUtils.isEmpty(time)) {
+        return getTimeVideo(time);
+        /*if (TextUtils.isEmpty(time)) {
             return "";
         }
 
@@ -180,7 +181,7 @@ public class DateTimeUtil {
             SimpleDateFormat formatter = new SimpleDateFormat("MM/dd HH:mm", Locale.getDefault());
             result = formatter.format(cTime);
         }
-        return result;
+        return result;*/
     }
 
     /**
@@ -199,21 +200,17 @@ public class DateTimeUtil {
         SimpleDateFormat formatNear = new SimpleDateFormat(" HH:mm", Locale.getDefault());
         SimpleDateFormat formatFar = new SimpleDateFormat("MM/dd HH:mm", Locale.getDefault());
         // 48小时之内
-        if (System.currentTimeMillis() - dateOri.getTime() < 2 * 24 * 3600 * 1000) {
+        if (System.currentTimeMillis() - dateOri.getTime() < 24 * 3600 * 1000) {
             // 目标时间
             Calendar calendarOri = Calendar.getInstance();
             calendarOri.setTime(dateOri);
             int dayOri = calendarOri.get(Calendar.DAY_OF_MONTH);
-            Logger.d("xmzd", "day original: " + dayOri);
             // 当前时间
             Calendar calendarNow = Calendar.getInstance();
             calendarNow.setTime(new Date());
             int dayNow = calendarNow.get(Calendar.DAY_OF_MONTH);
-            Logger.d("xmzd", "day now: " + dayNow);
             if (dayNow == dayOri) {
                 result = "今天" + formatNear.format(dateOri);
-            } else if ((dayNow == dayOri + 1) || (dayNow == 1 && (dayOri == 28 || dayOri == 29 || dayOri == 30 || dayOri == 31))) {
-                result = "昨天" + formatNear.format(dateOri);
             } else {
                 result = formatFar.format(dateOri);
             }

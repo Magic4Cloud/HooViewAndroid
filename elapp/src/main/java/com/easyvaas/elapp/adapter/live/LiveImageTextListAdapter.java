@@ -98,8 +98,12 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                 mTitleTv.setText(model.getName());
                 // introduce
                 mIntroduceTv.setText(model.getUserEntity().getSignature());
-                // hot // TODO: 2017/4/26
-                mHotIv.setVisibility(View.GONE);
+                // hot
+                if (model.getViewcount() > 10000) {
+                    mHotIv.setVisibility(View.VISIBLE);
+                } else {
+                    mHotIv.setVisibility(View.GONE);
+                }
                 // follow count
                 mFollowCountTv.setText(String.format(mContext.getString(R.string.image_text_watch_count), NumberUtil.format(model.getViewcount())));
                 // click
@@ -210,8 +214,12 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                     Utils.showNewsImage(model.getUserEntity().getLogourl(), mHotThumbRiv);
                     // name
                     mHotNameTv.setText(model.getName());
-                    // hot // TODO: 2017/4/26
-                    mHotHotIv.setVisibility(View.VISIBLE);
+                    // hot
+                    if (model.getViewcount() > 10000) {
+                        mHotHotIv.setVisibility(View.VISIBLE);
+                    } else {
+                        mHotHotIv.setVisibility(View.GONE);
+                    }
                     // watch count
                     mHotWatchCountTv.setText(String.format(mContext.getString(R.string.image_text_watch_count), NumberUtil.format(model.getViewcount())));
                     // click

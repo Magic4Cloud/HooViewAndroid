@@ -3,11 +3,14 @@ package com.easyvaas.elapp.ui.pop;
 import android.app.Activity;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.hooview.app.R;
 
@@ -30,7 +33,10 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
     CardView mPopConfirm;
     @BindView(R.id.cv_cancel)
     CardView mPopCancel;
+    @BindView(R.id.pop_confirm_tv)
+    TextView mPopConfirmTv;
     private Handler mHandler;
+    private String mInputText;
 
     public UserInfoEditPopupWindow(Activity activity) {
         super(activity);
@@ -51,7 +57,7 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
     @Override
     protected void setLayoutParams() {
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     /**
@@ -67,14 +73,42 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
      */
     @Override
     protected void initViews() {
+        mPopInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = editable.toString();
+                if (s != null && !s.equals(mInputText)) {
+                    mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.tab_text_color_selected));
+                    mPopConfirm.setEnabled(true);
+                } else {
+                    mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.base_gray));
+                    mPopConfirm.setEnabled(false);
+                }
+            }
+        });
+        mPopConfirm.setEnabled(false);
     }
 
     /**
      * 初始化
      */
     public void init(String text) {
+        mInputText = text;
         mPopInput.setText(text);
+    }
+
+    public void setHint(String hint) {
+        mPopInput.setHint(hint);
     }
 
     /**
@@ -97,6 +131,8 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
         if (mListener != null) {
             mListener.onConfirm(text);
         }
+        mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.base_gray));
+        mPopConfirm.setEnabled(false);
         close();
     }
 

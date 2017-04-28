@@ -119,8 +119,12 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
                 mDurationTv.setText(DateTimeUtil.getTimeDurationCn(mContext, videoEntity.getDuration()));
                 // watch_count
                 mWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
-                // hot // TODO: 2017/4/20
-                mHotIv.setVisibility(View.GONE);
+                // hot
+                if (videoEntity.getWatch_count() > 10000) {
+                    mHotIv.setVisibility(View.VISIBLE);
+                } else {
+                    mHotIv.setVisibility(View.GONE);
+                }
                 // title
                 mTitleTv.setText(videoEntity.getTitle());
                 // click

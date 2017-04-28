@@ -32,7 +32,6 @@ public class VipUserLivingFragment extends MyBaseListFragment<UserVLivingAdapter
     @Override
     protected UserVLivingAdapter initAdapter() {
         UserVLivingAdapter adapter = new UserVLivingAdapter(new ArrayList<VideoEntity>());
-        adapter.showHeader(true);
         return adapter;
     }
 
@@ -66,7 +65,7 @@ public class VipUserLivingFragment extends MyBaseListFragment<UserVLivingAdapter
                         if (result != null)
                         {
                             if (!isLoadMore)
-                                 mAdapter.setHeaderModel(result.getTextlive());
+                                 mAdapter.setHeaderModel(getActivity(), result.getTextlive());
                             mAdapter.dealLoadData(VipUserLivingFragment.this, isLoadMore, result.getVideolive());
                         }
                     }

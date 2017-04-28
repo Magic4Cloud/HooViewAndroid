@@ -91,7 +91,11 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setRefreshing(true);
         }
-        HooviewApiHelper.getInstance().getUserStockList(EVApplication.getUser().getName(), new MyRequestCallBack<StockListModel>() {
+        String userId = "";
+        if (EVApplication.getUser() != null) {
+            userId = EVApplication.getUser().getName();
+        }
+        HooviewApiHelper.getInstance().getUserStockList(userId, new MyRequestCallBack<StockListModel>() {
             @Override
             public void onSuccess(StockListModel result) {
                 mStockListModel = result;

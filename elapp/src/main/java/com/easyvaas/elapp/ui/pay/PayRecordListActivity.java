@@ -29,6 +29,7 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.JsonParserUtil;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
+import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.hooview.app.R;
 
@@ -219,7 +220,7 @@ public class PayRecordListActivity extends BaseRvcActivity {
     private void updateECoin(){
         if (mHootViewValueTv != null) {
             long eCoinBalance = Preferences.getInstance(this).getLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, 0);
-            mHootViewValueTv.setText(eCoinBalance + getString(R.string.hooview_coin));
+            mHootViewValueTv.setText(NumberUtil.format(eCoinBalance) + getString(R.string.hooview_coin));
         }
     }
 
@@ -236,7 +237,7 @@ public class PayRecordListActivity extends BaseRvcActivity {
             public void onSuccess(MyAssetEntity result) {
                 if (result != null){
                     tvFireEyeballs.setText(result.getRiceroll() + "");
-                    mHootViewValueTv.setText(result.getEcoin() + getString(R.string.hooview_coin));
+                    mHootViewValueTv.setText(NumberUtil.format(result.getEcoin()) + getString(R.string.hooview_coin));
                     Preferences.getInstance(PayRecordListActivity.this).putLong(Preferences.KEY_PARAM_ASSET_E_COIN_ACCOUNT, result.getEcoin());
                     GiftManager.setECoinCount(PayRecordListActivity.this, result.getEcoin());
                 }

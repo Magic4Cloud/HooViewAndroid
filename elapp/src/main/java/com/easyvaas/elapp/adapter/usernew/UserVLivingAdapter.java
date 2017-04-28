@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.adapter.usernew;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +12,25 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
 import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveRoomModel;
-import com.easyvaas.elapp.bean.user.User;
+import com.easyvaas.elapp.bean.user.UserInfoArrayModel;
 import com.easyvaas.elapp.bean.user.UserInfoModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.net.ApiHelper;
+import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.ui.live.ImageTextLiveActivity;
 import com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity;
 import com.easyvaas.elapp.ui.live.PlayerActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
-import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.NumberUtil;
+import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,47 +44,22 @@ import butterknife.ButterKnife;
 
 public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
 
-    private static final int TYPE_IMAGE_TEXT = 1;
-    private static final int TYPE_VIDEO = 2;
     private boolean mHasHeader = false;
     private ImageTextLiveRoomModel mImageTextModel;
+    private ImageTextViewHolder mHeaderHolder;
 
     public UserVLivingAdapter(List<VideoEntity> data) {
         super(data);
     }
 
-    public void showHeader(boolean showHeader) {
-        mHasHeader = showHeader;
-    }
-
     @Override
     protected int getItemViewByType(int position) {
-        if (mHasHeader && position == 0) {
-            return TYPE_IMAGE_TEXT;
-        } else {
-            return TYPE_VIDEO;
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        int count = mHasHeader ? 1 : 0;
-        if (mData != null) {
-            count = count + mData.size();
-        }
-        Logger.e("xmzd", "count: " + count);
-        return count;
+        return 0;
     }
 
     @Override
     protected BaseViewHolder OnCreateViewByHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        if (TYPE_IMAGE_TEXT == viewType) {
-            return new ImageTextViewHolder(inflater.inflate(R.layout.item_image_text_header, null));
-        } else if (TYPE_VIDEO == viewType) {
-            return new VideoViewHolder(inflater.inflate(R.layout.item_video_living, null));
-        }
-        return null;
+        return new VideoViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_video_living, null));
     }
 
     @Override
@@ -96,16 +75,7 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
      */
     @Override
     protected void convert(BaseViewHolder helper, VideoEntity item) {
-        int position = helper.getLayoutPosition();
-        Logger.e("xmzd", "position: " + position);
-        if (position == 0 && mHasHeader && helper instanceof ImageTextViewHolder) {
-            ((ImageTextViewHolder) helper).setModel(mImageTextModel);
-            Logger.e("xmzd", "item header: " + position);
-        } else if (helper instanceof VideoViewHolder) {
-            if (mHasHeader) {
-                item = mData.get(position - 1 < 0 ? 0 : position - 1);
-                Logger.e("xmzd", "item item: " + position);
-            }
+        if (helper instanceof VideoViewHolder) {
             ((VideoViewHolder) helper).setModel(item);
         }
     }
@@ -113,15 +83,25 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
     /**
      * 设置图文直播数据
      */
-    public void setHeaderModel(ImageTextLiveRoomModel imageTextModel) {
-        if (mHasHeader) {
+    public void setHeaderModel(Context context, ImageTextLiveRoomModel imageTextModel) {
+        if (imageTextModel != null) {
             mImageTextModel = imageTextModel;
-            notifyItemChanged(0);
+            if (mHeaderHolder == null && !mHasHeader) {
+                View view = LayoutInflater.from(context).inflate(R.layout.item_image_text_header, null);
+                mHeaderHolder = new ImageTextViewHolder(context, view);
+                addHeaderView(view);
+                mHasHeader = true;
+            }
+            mHeaderHolder.setModel(imageTextModel);
         }
     }
 
-    class ImageTextViewHolder extends BaseViewHolder {
+    /**
+     * 图文直播头
+     */
+    class ImageTextViewHolder {
 
+        private Context mContext;
         @BindView(R.id.item_image_text)
         View mRootView;
         @BindView(R.id.image_text_follow)
@@ -132,9 +112,10 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
         TextView mTagTv;
         @BindView(R.id.image_text_old)
         TextView mOldTv;
+        private UserInfoModel mUserInfoModel;
 
-        public ImageTextViewHolder(View view) {
-            super(view);
+        public ImageTextViewHolder(Context context, View view) {
+            mContext = context;
             ButterKnife.bind(this, view);
         }
 
@@ -144,7 +125,7 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 checkImageTextLiveModel.setData(model);
                 // follow
                 DecimalFormat df2 = new DecimalFormat("###,###");
-                mFollowTv.setText(mContext.getString(R.string.user_text_follow_count, df2.format(model.getViewcount())));
+                mFollowTv.setText(this.mContext.getString(R.string.user_text_follow_count, df2.format(model.getViewcount())));
                 // name
                 mNameTv.setText(model.getName());
                 // tag
@@ -168,28 +149,66 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (Preferences.getInstance(mContext).isLogin() && EVApplication.isLogin() && EVApplication.getUser() != null && model.getOwnerid().equals(EVApplication.getUser().getName()))
+                        if (Preferences.getInstance(mContext).isLogin() && EVApplication.isLogin()
+                                && EVApplication.getUser() != null && model.getOwnerid().equals(EVApplication.getUser().getName()))
                             MyImageTextLiveRoomActivity.start(mContext, checkImageTextLiveModel);
                         else {
-                            TextLiveListModel.StreamsEntity streamsEntity = new TextLiveListModel.StreamsEntity();
-                            streamsEntity.setName(model.getName());
-                            streamsEntity.setViewcount(model.getViewcount());
-                            streamsEntity.setOwnerid(model.getOwnerid());
-                            streamsEntity.setId(model.getId());
-                            User user = EVApplication.getUser();
-                            UserInfoModel userInfoModel = new UserInfoModel();
-                            if (user != null) {
-                                userInfoModel.setTags(user.getTags());
-                                userInfoModel.setNickname(user.getNickname());
-                                userInfoModel.setLogourl(user.getLogourl());
-                                userInfoModel.setName(user.getName());
+                            if (mUserInfoModel == null) {
+                                requestUserInfoModel(model);
+                            } else {
+                                openImageTextRoom(model);
                             }
-                            streamsEntity.setUserEntity(userInfoModel);
-                            ImageTextLiveActivity.start(mContext, streamsEntity);
                         }
                     }
                 });
             }
+        }
+
+        /**
+         * 请求用户信息
+         */
+        private void requestUserInfoModel(final ImageTextLiveRoomModel model) {
+            List<String> ids = new ArrayList<String>();
+            ids.add(model.getOwnerid());
+            ApiHelper.getInstance().getUserInfosNew(ids, new MyRequestCallBack<UserInfoArrayModel>() {
+                @Override
+                public void onSuccess(UserInfoArrayModel result) {
+                    if (result != null && result.getUsers() != null && result.getUsers().size() == 1) {
+                        UserInfoModel infoModel = result.getUsers().get(0);
+                        if (infoModel != null) {
+                            mUserInfoModel = infoModel;
+                            openImageTextRoom(model);
+                        } else {
+                            SingleToast.show(mContext, "用户信息获取失败");
+                        }
+                    } else {
+                        SingleToast.show(mContext, "用户信息获取失败");
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    SingleToast.show(mContext, "用户信息获取失败");
+                }
+
+                @Override
+                public void onError(String errorInfo) {
+                    SingleToast.show(mContext, "用户信息获取失败");
+                }
+            });
+        }
+
+        /**
+         * 跳转到图文直播间
+         */
+        private void openImageTextRoom(ImageTextLiveRoomModel model) {
+            TextLiveListModel.StreamsEntity streamsEntity = new TextLiveListModel.StreamsEntity();
+            streamsEntity.setName(model.getName());
+            streamsEntity.setViewcount(model.getViewcount());
+            streamsEntity.setOwnerid(model.getOwnerid());
+            streamsEntity.setId(model.getId());
+            streamsEntity.setUserEntity(mUserInfoModel);
+            ImageTextLiveActivity.start(mContext, streamsEntity);
         }
     }
 
@@ -225,8 +244,12 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
             if (videoEntity != null) {
                 // cover
                 Utils.showNewsImage(videoEntity.getThumb(), mCoverIv);
-                // hot // TODO: 2017/4/20
-                mHotIv.setVisibility(View.GONE);
+                // hot
+                if (videoEntity.getWatch_count() > 10000) {
+                    mHotIv.setVisibility(View.VISIBLE);
+                } else {
+                    mHotIv.setVisibility(View.GONE);
+                }
                 // watch_count
                 mWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
                 // title
@@ -267,7 +290,7 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode(),videoEntity.getPermission());
+                        PlayerActivity.start(mContext, videoEntity.getVid(), videoEntity.getLiving(), videoEntity.getMode(), videoEntity.getPermission());
                     }
                 });
             }

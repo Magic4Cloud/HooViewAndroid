@@ -100,8 +100,12 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
             if (videoEntity != null) {
                 // cover
                 Utils.showNewsImage(videoEntity.getThumb(), mCoverIv);
-                // hot // TODO: 2017/4/20
-                mHotIv.setVisibility(View.GONE);
+                // hot
+                if (videoEntity.getWatch_count() > 10000) {
+                    mHotIv.setVisibility(View.VISIBLE);
+                } else {
+                    mHotIv.setVisibility(View.GONE);
+                }
                 // watch_count
                 mWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
                 // title
@@ -237,8 +241,12 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
                 if (videoEntity != null) {
                     // cover
                     Utils.showNewsImage(videoEntity.getThumb(), mHotCoverIv);
-                    // hot // TODO: 2017/4/25
-                    mHotHotIv.setVisibility(View.VISIBLE);
+                    // hot
+                    if (videoEntity.getWatch_count() > 10000) {
+                        mHotHotIv.setVisibility(View.VISIBLE);
+                    } else {
+                        mHotHotIv.setVisibility(View.GONE);
+                    }
                     // watch count
                     mHotWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
                     // title

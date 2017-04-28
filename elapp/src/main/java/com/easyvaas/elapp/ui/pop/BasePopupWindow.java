@@ -26,6 +26,8 @@ public abstract class BasePopupWindow extends PopupWindow {
         this.setAnimationStyle(getAnimation());
         // 设置宽高
         setLayoutParams();
+        // 防止被底部虚拟按键挡住
+        this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         this.setFocusable(true);
         this.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         // 消失事件

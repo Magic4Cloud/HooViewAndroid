@@ -108,6 +108,7 @@
 
     <string name="user_info_set">个人设置</string>
     <string name="nickname">昵称</string>
+    <string name="nickname_hit">请输入您的昵称</string>
     <string name="yb_id">易播号</string>
     <string name="sex">性别</string>
     <string name="birthday">生日</string>
@@ -799,7 +800,7 @@
     <string name="market_global">全球</string>
     <string name="focus">人关注</string>
 
-    <string name="live_live_video">视频</string>
+    <string name="live_live_video">直播</string>
     <string name="live_image_text">图文</string>
     <string name="live_good_video">精品</string>
 
