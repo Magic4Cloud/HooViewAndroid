@@ -344,6 +344,15 @@ public interface ApiService {
     Observable<NetResponse<NormalNewsModel>> searchNews(@Query(AppConstants.TITLE) String title,
                                                         @Query(AppConstants.START) int start);
 
+    /**
+     * 清空历史记录
+     * 类型（0，直播记录；1，文章记录）
+     */
+    @GET("api/v2/user/clean")
+    Observable<NetResponse<NoResponeBackModel>> cleanHistoryList(@Query(AppConstants.USER_ID) String userId,
+                                                                 @Query(AppConstants.SESSION_ID) String sessionid,
+                                                                 @Query(AppConstants.TYPE) int type);
+
     /*-------------------------------------------直播----------------------------------------*/
 
     /**

@@ -8,6 +8,7 @@ import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -64,6 +65,11 @@ public class UserBuyLivingFragment extends MyBaseListFragment<UserVLivingAdapter
     @Override
     protected void changeRecyclerView() {
         setPaddingTop(4);
+    }
+
+    @Override
+    protected void changeEmptyView() {
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_buy_living));
     }
 
     public static UserBuyLivingFragment newInstance() {

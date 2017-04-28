@@ -41,6 +41,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
     private ImageView mIvShare;
     private TextView mTvFollow;
     private boolean isGiftShown;
+    private TextView tv_info;
 
     public static void start(Context context, TextLiveListModel.StreamsEntity streamsEntity) {
         Intent starter = new Intent(context, ImageTextLiveActivity.class);
@@ -69,6 +70,8 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
         mIvShare.setOnClickListener(this);
         mTvTitle = (TextView) findViewById(R.id.tv_title);
         mTvTitle.setVisibility(View.GONE);
+        tv_info = (TextView) findViewById(R.id.tv_signature);
+        tv_info.setText(mStreamsEntity.getUserEntity().getSignature());
         LinearLayout tagsViewContainer = (LinearLayout) findViewById(R.id.ll_tag_container);
         if (mStreamsEntity.getUserEntity().getTags() != null) {
             for (int i = 0; i < mStreamsEntity.getUserEntity().getTags().size(); i++) {

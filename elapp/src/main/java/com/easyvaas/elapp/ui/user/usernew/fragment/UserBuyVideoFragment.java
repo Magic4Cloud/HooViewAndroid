@@ -8,6 +8,7 @@ import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -60,7 +61,10 @@ public class UserBuyVideoFragment extends MyBaseListFragment<UserVideoAdapter> {
                         });
         addSubscribe(subscription);
     }
-
+    @Override
+    protected void changeEmptyView() {
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_buy_good_video));
+    }
     public static UserBuyVideoFragment newInstance() {
         return new UserBuyVideoFragment();
     }

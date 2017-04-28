@@ -25,7 +25,7 @@ import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.usernew.fragment.VipUserArticleFragment;
 import com.easyvaas.elapp.ui.user.usernew.fragment.VipUserCheatsFragment;
-import com.easyvaas.elapp.ui.user.usernew.fragment.VipUserFansFragment;
+import com.easyvaas.elapp.ui.user.usernew.fragment.VipUserCommentFragment;
 import com.easyvaas.elapp.ui.user.usernew.fragment.VipUserLivingFragment;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -98,7 +98,6 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
     @Override
     protected void initToolBar() {
         super.initToolBar();
-        mToobarTitleView.getRightImage().setPadding(0, 0, 0, 0);
         mToobarTitleView.setTitleRightImg(R.drawable.btn_report_n, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,12 +123,12 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
                 getString(R.string.user_living),
                 getString(R.string.user_secret),
                 getString(R.string.user_article),
-                getString(R.string.user_fans)};
+                getString(R.string.comment)};
         mFragments = new Fragment[]{
                 VipUserLivingFragment.newInstance(personId),
                 VipUserCheatsFragment.newInstance(personId),
                 VipUserArticleFragment.newInstance(personId),
-                VipUserFansFragment.newInstance(personId, sessionId),
+                VipUserCommentFragment.newInstance(userId,personId),
         };
         mUserSwipeRefreshLayout.setOnRefreshListener(this);
         mUserSwipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(this, R.color.base_purplish));

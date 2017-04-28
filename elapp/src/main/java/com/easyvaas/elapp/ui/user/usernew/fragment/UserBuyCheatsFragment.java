@@ -3,6 +3,7 @@ package com.easyvaas.elapp.ui.user.usernew.fragment;
 import com.easyvaas.elapp.adapter.usernew.UserCheatsAdapter;
 import com.easyvaas.elapp.bean.user.CheatsListModel;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.hooview.app.R;
 
 import java.util.ArrayList;
 
@@ -59,7 +60,7 @@ public class UserBuyCheatsFragment extends MyBaseListFragment<UserCheatsAdapter>
 
     @Override
     protected void changeEmptyView() {
-        mEmptyView.setEmptyTxt("秘籍暂未开通！");
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_cheats_now));
         showEmpty();
     }
 

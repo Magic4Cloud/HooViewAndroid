@@ -26,6 +26,7 @@ import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.user.Record;
+import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.db.RealmHelper;
@@ -58,8 +59,10 @@ import com.hooview.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 
@@ -86,6 +89,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     private boolean mIsPlayLive;
     private int payCounts;// 付费的金额
     private boolean isNeedPayVideo; // 是否是付费视频
+    private CompositeSubscription mCompositeSubscription;
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable runnableHideMediaController = new Runnable() {
         @Override
@@ -172,6 +176,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     }
 
     private void initView() {
+        mCompositeSubscription = new CompositeSubscription();
         mTvEndTime = (TextView) findViewById(R.id.tv_end_time);
         mTvCurTime = (TextView) findViewById(R.id.tv_cur_time);
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
@@ -341,9 +346,10 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                             if (result.getPermission() == 7)
                                 isNeedPayVideo = true;
                             updateVideoInfo(result);
-                            //                            chatServerInit(true);
+                            // chatServerInit(true);
                             insertHistoryRecord();
-                            initFollowStatus();
+                            mCurrentVideo.setVip(1); // 暂时默认都是大V直播
+                            getUserInfo(result.getName()); // 获取用户信息
                         }
                     }
 
@@ -361,13 +367,36 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                 });
     }
 
-    private void initFollowStatus() {
-        if (Preferences.getInstance(this).getBoolean(mCurrentVideo.getName(), false)) {
-            mFollowTv.setSelected(true);
-        } else {
-            mFollowTv.setSelected(false);
-        }
 
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo(String personid) {
+        if (EVApplication.isLogin())
+        {
+         Subscription subscription = RetrofitHelper.getInstance().getService()
+                .getUserPageInfo(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),personid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<UserPageInfo>() {
+                    @Override
+                    public void OnSuccess(UserPageInfo userPageInfo) {
+                        if (userPageInfo.getFollowed() == 1)
+                            mFollowTv.setSelected(true);
+                        else
+                            mFollowTv.setSelected(false);
+                        if (userPageInfo.getVip() == 1)
+                            mCurrentVideo.setVip(1);
+                        else
+                            mCurrentVideo.setVip(0);
+                    }
+
+                    @Override
+                    public void OnFailue(String msg) {
+                    }
+                });
+        mCompositeSubscription.add(subscription);
+        }
     }
 
     //TODO 更新头像，用户名等

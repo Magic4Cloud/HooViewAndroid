@@ -4,10 +4,14 @@ import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
+import com.easyvaas.elapp.event.UserHistoryCleanEvent;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
 import com.hooview.app.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -31,6 +35,11 @@ public class UserHistoryReadNewFragment extends MyBaseListFragment<NormalNewsAda
     @Override
     protected void changeRecyclerView() {
         setPaddingTop(4);
+    }
+
+    @Override
+    protected void initSomeData() {
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -62,5 +71,21 @@ public class UserHistoryReadNewFragment extends MyBaseListFragment<NormalNewsAda
 
     public static UserHistoryReadNewFragment newInstance() {
         return new UserHistoryReadNewFragment();
+    }
+
+    /**
+     * 清空事件
+     */
+    @Subscribe
+    public void cleanHistory(UserHistoryCleanEvent historyCleanEvent)
+    {
+        if (historyCleanEvent.getType() == 1)
+            onRefresh();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

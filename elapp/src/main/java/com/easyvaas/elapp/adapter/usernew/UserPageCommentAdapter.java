@@ -159,13 +159,20 @@ public class UserPageCommentAdapter extends MyBaseAdapter<PostsBean> {
                         .subscribe(new NetSubscribe<NoResponeBackModel>() {
                             @Override
                             public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+                                PostsBean data = mData.get(getLayoutPosition());
+                                int counts = Integer.parseInt(data.getHeats());
                                 if (action == 0) {
+                                    data.setLike(0);
+                                    data.setHeats(String.valueOf(counts - 1));
                                     mUserCommentPraiseIcon.setSelected(false);
                                     SingleToast.show(mContext, R.string.user_praise_cancel);
                                 } else {
+                                    data.setLike(1);
+                                    data.setHeats(String.valueOf(counts + 1));
                                     mUserCommentPraiseIcon.setSelected(true);
                                     SingleToast.show(mContext, R.string.user_praise_success);
                                 }
+                                mUserCommentPraiseCounts.setText(data.getHeats());
                             }
 
                             @Override

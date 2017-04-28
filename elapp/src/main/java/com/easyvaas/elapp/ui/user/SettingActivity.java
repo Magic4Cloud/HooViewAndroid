@@ -1,11 +1,13 @@
 package com.easyvaas.elapp.ui.user;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
@@ -148,7 +150,18 @@ public class SettingActivity extends BaseTitleActivity implements View.OnClickLi
                 }.start();
                 break;
             case R.id.btn_logout:
-                logout();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingActivity.this);
+                builder.setMessage(R.string.user_logout_sure)
+                        .setNegativeButton(getString(R.string.user_cancel), null)
+                        .setPositiveButton(getString(R.string.user_sure), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                logout();
+
+                            }
+                        });
+                builder.show();
                 break;
             case R.id.rl_feedback:
                 FeedbackHelper.getInstance(this).showFeedbackUI();
