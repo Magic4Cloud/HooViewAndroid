@@ -37,7 +37,6 @@ import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
-import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.ShareHelper;
 import com.easyvaas.elapp.utils.SingleToast;
@@ -444,7 +443,7 @@ public class WebDetailActivity extends BaseActivity {
             @Override
             public void handler(String data, CallBackFunction function) {
                 String name = JsonParserUtil.getString(data, "name");
-                VIPUserInfoDetailActivity.start(WebDetailActivity.this, name);
+                Utils.toUserPager(WebDetailActivity.this,name,1);
             }
         });
         mWebView.registerHandler("showStockAnnouncementDetail", new BridgeHandler() {

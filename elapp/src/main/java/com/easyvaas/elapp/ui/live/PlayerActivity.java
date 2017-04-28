@@ -519,6 +519,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         if (null != mEVPlayer) {
             mEVPlayer.onDestroy();
         }
+        mCompositeSubscription.unsubscribe();
     }
 
     @Override

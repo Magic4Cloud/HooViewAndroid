@@ -45,7 +45,12 @@ public class LiveCommentAdapterItem implements AdapterItem<LiveCommentModel.Post
             mTvComment.setText(model.getContent());
                 mTvName.setText(model.getUser_name());
                 Utils.showImage(model.getUser_avatar(), R.drawable.account_bitmap_user, mRivHeader);
-
+                mRivHeader.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Utils.toUserPager(mContext,model.getUser_id(),0); // Aya : 2017/4/28 不知道是不是VIP
+                    }
+                });
         }
 
     }
