@@ -26,8 +26,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.tencent.open.utils.Global.getContext;
-
 /**
  * Date    2017/4/26
  * Author  xiaomao
@@ -113,7 +111,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                         if (EVApplication.isLogin()) {
                             ImageTextLiveActivity.start(mContext, model);
                         } else {
-                            LoginActivity.start(getContext());
+                            LoginActivity.start(mContext);
                         }
                     }
                 });
@@ -229,7 +227,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                             if (EVApplication.isLogin()) {
                                 ImageTextLiveActivity.start(mContext, model);
                             } else {
-                                LoginActivity.start(getContext());
+                                LoginActivity.start(mContext);
                             }
                         }
                     });

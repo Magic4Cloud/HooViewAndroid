@@ -159,11 +159,15 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
         EVApplication.mUser = user;
 
         if (ApiConstant.isUserReleaseServer()) {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
-                    Constants.EV_SECRET_ID, mUser.getName());
+            if (mUser != null) {
+                EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID, Constants.EV_ACCESS_ID,
+                        Constants.EV_SECRET_ID, mUser.getName());
+            }
         } else {
-            EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
-                    Constants.EV_SECRET_ID_DEV, mUser.getName());
+            if (mUser != null) {
+                EVSdk.init(app.getApplicationContext(), Constants.EV_APP_ID_DEV, Constants.EV_ACCESS_ID_DEV,
+                        Constants.EV_SECRET_ID_DEV, mUser.getName());
+            }
         }
 
         if (user.getAuth() != null) {

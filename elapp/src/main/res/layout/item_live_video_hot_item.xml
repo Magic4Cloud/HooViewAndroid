@@ -6,8 +6,8 @@
 
     <RelativeLayout
         android:id="@+id/item_hot_video"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="242dp"
+        android:layout_height="178dp"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
         android:paddingLeft="12dp"
@@ -58,7 +58,7 @@
 
         <TextView
             android:id="@+id/hot_title"
-            android:layout_width="match_parent"
+            android:layout_width="220dp"
             android:layout_height="22dp"
             android:text="安邦举牌格力的可能性分析分"
             android:textSize="@dimen/text_size_16"

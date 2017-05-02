@@ -72,7 +72,11 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
 
     @OnClick(R.id.tv_add_select)
     public void onAddOptionalStock() {
-        SearchStockActivity.start(getContext());
+        if (!Preferences.getInstance(getContext().getApplicationContext()).isLogin() || !EVApplication.isLogin()) {
+            LoginActivity.start(getContext());
+        } else {
+            SearchStockActivity.start(getContext());
+        }
     }
 
     @Override

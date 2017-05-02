@@ -179,7 +179,6 @@ public class UserInfoModifyActivity extends MyBaseActivity {
         }
         // 大V身份
         boolean isVip = bundles.getBoolean(Constants.EXTRA_KEY_IS_VIP, false);
-        isVip = true;
         if (isVip) {
             mItemCertificate.setVisibility(View.VISIBLE);
             mCertificate = bundles.getString(EXTRA_KEY_USER_CERTIFICATE);
