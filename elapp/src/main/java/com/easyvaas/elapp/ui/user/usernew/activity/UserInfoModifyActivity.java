@@ -274,7 +274,7 @@ public class UserInfoModifyActivity extends MyBaseActivity {
     public void onSelfClick() {
         if (mPopupWindowEditSelf == null) {
             mPopupWindowEditSelf = new UserInfoEditPopupWindow(this);
-            mPopupWindowEditSelf.setHint(getResources().getString(R.string.hint_signature));
+            mPopupWindowEditSelf.setHint(getResources().getString(R.string.hint_signature)).setMaxLength(14);
             mPopupWindowEditSelf.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
                 @Override
                 public void onConfirm(String text) {
@@ -298,13 +298,13 @@ public class UserInfoModifyActivity extends MyBaseActivity {
     public void onNicknameClick() {
         if (mPopupWindowEditNickname == null) {
             mPopupWindowEditNickname = new UserInfoEditPopupWindow(this);
-            mPopupWindowEditNickname.setHint(getResources().getString(R.string.nickname_hit));
+            mPopupWindowEditNickname.setHint(getResources().getString(R.string.nickname_hit)).setMaxLength(20);
             mPopupWindowEditNickname.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
                 @Override
                 public void onConfirm(String text) {
                     if (text != null) {
-                        if (text.length() > 15) {
-                            text = text.substring(0, 15);
+                        if (text.length() > 20) {
+                            text = text.substring(0, 20);
                         }
                         mNicknameTv.setText(text);
                     }
@@ -322,13 +322,13 @@ public class UserInfoModifyActivity extends MyBaseActivity {
     public void onCertificateClick() {
         if (mPopupWindowEditCertificate == null) {
             mPopupWindowEditCertificate = new UserInfoEditPopupWindow(this);
-            mPopupWindowEditCertificate.setHint(getResources().getString(R.string.certificate_hint));
+            mPopupWindowEditCertificate.setHint(getResources().getString(R.string.certificate_hint)).setMaxLength(14);
             mPopupWindowEditCertificate.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
                 @Override
                 public void onConfirm(String text) {
                     if (text != null) {
-                        if (text.length() > 15) {
-                            text = text.substring(0, 15);
+                        if (text.length() > 14) {
+                            text = text.substring(0, 14);
                         }
                         mCertificateTv.setText(text);
                     }
@@ -354,11 +354,16 @@ public class UserInfoModifyActivity extends MyBaseActivity {
     public void onIntroduceClick() {
         if (mPopupWindowEditIntroduce == null) {
             mPopupWindowEditIntroduce = new UserInfoEditPopupWindow(this);
-            mPopupWindowEditIntroduce.setHint(getResources().getString(R.string.introduce_hint));
+            mPopupWindowEditIntroduce.setHint(getResources().getString(R.string.introduce_hint)).setMaxLength(100);
             mPopupWindowEditIntroduce.setOnConfirmListener(new UserInfoEditPopupWindow.OnConfirmListener() {
                 @Override
                 public void onConfirm(String text) {
-                    mIntroduceTv.setText(text);
+                    if (text != null) {
+                        if (text.length() > 100) {
+                            text = text.substring(0, 100);
+                        }
+                        mIntroduceTv.setText(text);
+                    }
                 }
             });
         }

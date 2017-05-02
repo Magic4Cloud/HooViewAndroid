@@ -55,8 +55,8 @@
                     android:layout_alignRight="@id/user_info_portrait_iv"
                     android:layout_marginBottom="3dp"
                     android:layout_marginRight="3dp"
-                    android:visibility="gone"
-                    android:src="@drawable/login_personal_setting_icon_photo"/>
+                    android:src="@drawable/login_personal_setting_icon_photo"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/arrow_iv"
@@ -101,7 +101,6 @@
                     android:layout_toRightOf="@id/nickname_tv"
                     android:gravity="center_vertical|left"
                     android:hint="@string/nickname_hit"
-                    android:maxLength="15"
                     android:maxLines="1"
                     android:textColor="@color/text_user_info_edit"
                     android:textColorHint="@color/text_user_info_hint"
@@ -244,7 +243,7 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical|left"
                     android:hint="@string/hint_signature"
-                    android:maxLines="2"
+                    android:maxLines="1"
                     android:textColor="@color/text_user_info_edit"
                     android:textColorHint="@color/text_user_info_hint"
                     android:textSize="@dimen/text_size_16"/>
@@ -336,12 +335,12 @@
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="14dp"
-                    android:textSize="@dimen/text_size_16"
-                    android:textColor="#4281ad"
                     android:layout_toLeftOf="@+id/certificate_iv7"
                     android:layout_toRightOf="@+id/user_label_tv_tips"
                     android:gravity="left|center_vertical"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:textColor="#4281ad"
+                    android:textSize="@dimen/text_size_16"/>
 
                 <ImageView
                     android:id="@+id/certificate_iv7"

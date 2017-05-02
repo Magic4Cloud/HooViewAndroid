@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,12 +89,12 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
             @Override
             public void afterTextChanged(Editable editable) {
                 String s = editable.toString();
-                if (s != null && !s.equals(mInputText)) {
-                    mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.tab_text_color_selected));
-                    mPopConfirm.setEnabled(true);
-                } else {
+                if (TextUtils.isEmpty(s) || s.equals(mPopInput.getHint().toString().trim())) {
                     mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.base_gray));
                     mPopConfirm.setEnabled(false);
+                } else {
+                    mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.tab_text_color_selected));
+                    mPopConfirm.setEnabled(true);
                 }
             }
         });
@@ -102,13 +104,29 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
     /**
      * 初始化
      */
-    public void init(String text) {
+    public UserInfoEditPopupWindow init(String text) {
         mInputText = text;
         mPopInput.setText(text);
+        return this;
     }
 
-    public void setHint(String hint) {
+    /**
+     * 设置输入最大长度
+     *
+     * @param length int > 0
+     */
+    public UserInfoEditPopupWindow setMaxLength(int length) {
+        if (mPopInput != null && length > 0) {
+            InputFilter[] filters = new InputFilter[1];
+            filters[0] = new InputFilter.LengthFilter(length);
+            mPopInput.setFilters(filters);
+        }
+        return this;
+    }
+
+    public UserInfoEditPopupWindow setHint(String hint) {
         mPopInput.setHint(hint);
+        return this;
     }
 
     /**
