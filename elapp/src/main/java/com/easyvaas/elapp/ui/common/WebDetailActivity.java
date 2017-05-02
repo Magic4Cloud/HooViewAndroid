@@ -90,6 +90,7 @@ public class WebDetailActivity extends BaseActivity {
     private ImageView mTvStockAdd;
     private ImageView mTvStockRefresh;
     private ImageView mTvStockShare;
+    private ImageView mNewsBackImageView;
     private String code;
     private int isCollected; // 0 未添加 1 已添加
     private  int detailType;
@@ -253,7 +254,13 @@ public class WebDetailActivity extends BaseActivity {
 
             }
         });
-
+        mNewsBackImageView = (ImageView) findViewById(R.id.iv_news_back);
+        mNewsBackImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //init web view
         mWebView = new BridgeWebView(this);
         /*mWebView.getSettings().setJavaScriptEnabled(true);
@@ -323,6 +330,12 @@ public class WebDetailActivity extends BaseActivity {
     public void finish() {
         super.finish();
         hideInputMethod();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mWebView.reload();  //H5数据会没 如果不重新刷新
     }
 
     @Override

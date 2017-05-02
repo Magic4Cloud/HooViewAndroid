@@ -92,7 +92,6 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
     @Override
     protected void initToolBar() {
         super.initToolBar();
-        mToobarTitleView.getRightImage().setPadding(0, 0, 0, 0);
         mToobarTitleView.setTitleRightImg(R.drawable.btn_report_n, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
