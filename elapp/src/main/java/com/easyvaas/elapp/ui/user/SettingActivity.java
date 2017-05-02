@@ -19,16 +19,29 @@ import com.easyvaas.common.feedback.FeedbackHelper;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.UpdateInfoEntity;
 import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.ui.base.BaseTitleActivity;
 import com.easyvaas.elapp.utils.FileUtil;
 import com.easyvaas.elapp.utils.SingleToast;
+import com.easyvaas.elapp.utils.StringUtil;
+import com.easyvaas.elapp.utils.ToastHelper;
 import com.easyvaas.elapp.utils.UpdateManager;
 import com.hooview.app.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import static com.tencent.open.utils.Global.getContext;
 
 public class SettingActivity extends BaseTitleActivity implements View.OnClickListener {
     private final int REQUEST_CODE_LIVE_PUSH_STATE = 1;
@@ -66,6 +79,7 @@ public class SettingActivity extends BaseTitleActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_new);
         mTvTitle.setText(R.string.setting);
+        initFeedback();
         assignViews();
     }
 
@@ -136,7 +150,11 @@ public class SettingActivity extends BaseTitleActivity implements View.OnClickLi
             case R.id.rl_clear_memory:
                 ((TextView) findViewById(R.id.cached_size_tv))
                         .setText("0 KB");
-                SingleToast.show(getApplicationContext(), R.string.clear_cache_memory_finish);
+//                SingleToast.show(getApplicationContext(), R.string.clear_cache_memory_finish);
+                ToastHelper.getInstance(SettingActivity.this)
+                        .setToastIcon(R.drawable.icon_right)
+                        .setToastText(getResources().getString(R.string.clear_cache_memory_finish))
+                        .show();
                 new Thread() {
                     @Override
                     public void run() {
@@ -223,4 +241,63 @@ public class SettingActivity extends BaseTitleActivity implements View.OnClickLi
 //        sendBroadcast(new Intent(Constants.ACTION_GO_LOGIN_OUT));
         finish();
     }
+
+    private void initFeedback() {
+        if (Preferences.getInstance(this).isLogin() && EVApplication.isLogin()) {
+            JSONObject jsonObject = new JSONObject();
+            String phoneNumber = Preferences.getInstance(getContext())
+                    .getString(Preferences.KEY_LOGIN_PHONE_NUMBER, "");
+            if (phoneNumber.startsWith(ApiConstant.VALUE_COUNTRY_CODE_CHINA)) {
+                String[] numbers = StringUtil.parseFullPhoneNumber(Preferences.getInstance(getContext())
+                        .getString(Preferences.KEY_LOGIN_PHONE_NUMBER, ""));
+                if (numbers.length == 2) {
+                    phoneNumber = numbers[1];
+                }
+            }
+            /// TODO: 8/9/16 This need to replace with dynamic url
+            String toAvatar = "http://aliimg.yizhibo.tv/test/message/07/fd/Secretary.png";
+            if (EVApplication.getUser() != null) {
+                FeedbackHelper.getInstance(getContext()).customUI(getString(R.string.feedback), phoneNumber,
+                        EVApplication.getUser().getLogourl(), toAvatar);
+            } else {
+                FeedbackHelper.getInstance(getContext()).customUI(getString(R.string.feedback), phoneNumber,
+                        "", toAvatar);
+            }
+
+            String qqNumber = Preferences.getInstance(getContext()).getString(Preferences.KEY_LOGIN_QQ_NUMBER, "");
+            // Calculate user age .
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            int currentYear = calendar.get(Calendar.YEAR);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            ParsePosition pos = new ParsePosition(0);
+            String birthDay = EVApplication.getUser().getBirthday();
+            int ageInt = 0;
+            if (!TextUtils.isEmpty(birthDay)) {
+                Date birthdayDate = formatter.parse(birthDay, pos);
+                if (birthdayDate != null) {
+                    calendar.setTimeInMillis(birthdayDate.getTime());
+                    ageInt = currentYear - calendar.get(Calendar.YEAR);
+                }
+            }
+            try {
+                if (!TextUtils.isEmpty(phoneNumber)) {
+                    jsonObject.put("phone", phoneNumber);
+                }
+                if (!TextUtils.isEmpty(qqNumber)) {
+                    jsonObject.put("qq", qqNumber);
+                }
+                if (ageInt > 0) {
+                    jsonObject.put("age", ageInt);
+                }
+                jsonObject.put("name", Preferences.getInstance(getContext()).getUserNumber());
+                jsonObject.put("nickname", Preferences.getInstance(getContext()).getUserNickname());
+                jsonObject.put("gender", EVApplication.getUser().getGender());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            FeedbackHelper.getInstance(getContext()).setAppExtInfo(jsonObject);
+        }
+    }
+
 }

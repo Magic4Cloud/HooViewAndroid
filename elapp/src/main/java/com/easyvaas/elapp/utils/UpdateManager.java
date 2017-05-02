@@ -6,14 +6,6 @@
 
 package com.easyvaas.elapp.utils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.ref.SoftReference;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,12 +21,22 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.hooview.app.R;
 import com.easyvaas.elapp.bean.UpdateInfoEntity;
 import com.easyvaas.elapp.db.Preferences;
-import com.easyvaas.elapp.net.ApiHelper;
-import com.easyvaas.elapp.net.MyRequestCallBack;
-import com.easyvaas.elapp.net.RequestUtil;
+import com.easyvaas.elapp.net.mynet.NetSubscribe;
+import com.easyvaas.elapp.net.mynet.RetrofitHelper;
+import com.hooview.app.R;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.SoftReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class UpdateManager {
     private static final String TAG = "UpdateManager";
@@ -97,39 +99,37 @@ public class UpdateManager {
         return mInstance;
     }
 
-    public void checkUpdateInfo(final UpdateListener updateListener,
-            final UpdateDialogListener dialogListener) {
+    public void checkUpdateInfo(UpdateListener updateListener, UpdateDialogListener dialogListener) {
         if (mIsCheckingUpdateInfo || ChannelUtil.isGoogleChannel(mContext)) {
+            Logger.e("xmzd", "mIsCheckingUpdateInfo(true): " + mIsCheckingUpdateInfo);
             return;
         }
+        Logger.e("xmzd", "mIsCheckingUpdateInfo(false): " + mIsCheckingUpdateInfo);
         mIsCheckingUpdateInfo = true;
-        ApiHelper.getInstance().checkUpdate(new MyRequestCallBack<UpdateInfoEntity>() {
+        mUpdateListener = updateListener;
+        mUpdateDialogListener = dialogListener;
+        RetrofitHelper.getInstance().getService().versionCheck()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<UpdateInfoEntity>() {
                     @Override
-                    public void onSuccess(UpdateInfoEntity result) {
+                    public void OnSuccess(UpdateInfoEntity result) {
                         if (result == null) {
                             return;
                         }
                         mUpdateInfo = result;
-                        mUpdateListener = updateListener;
-                        mUpdateDialogListener = dialogListener;
-                        mPref.putBoolean(Preferences.KEY_IS_FORCE_UPDATE,
-                                result.getForce() == UpdateInfoEntity.IS_FORCE_UPDATE);
+                        mPref.putBoolean(Preferences.KEY_IS_FORCE_UPDATE, result.getForce() == UpdateInfoEntity.IS_FORCE_UPDATE);
                         if (UpdateInfoEntity.IS_UPDATE == result.getUpdate()) {
-                            updateListener.onUpdateReturned(result);
-                            showUpdateDialog(dialogListener);
-                            mIsCheckingUpdateInfo = false;
+                            mUpdateListener.onUpdateReturned(result);
+                            showUpdateDialog(mUpdateDialogListener);
                             mPref.putBoolean(Preferences.KEY_IS_HAVE_UPDATE, true);
                         }
+                        mIsCheckingUpdateInfo = false;
                     }
 
                     @Override
-                    public void onError(String errorInfo) {
-                        super.onError(errorInfo);
-                    }
-
-                    @Override
-                    public void onFailure(String msg) {
-                        RequestUtil.handleRequestFailed(msg);
+                    public void OnFailue(String msg) {
+                        mIsCheckingUpdateInfo = false;
                     }
                 });
     }

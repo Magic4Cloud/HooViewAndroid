@@ -2,6 +2,7 @@ package com.easyvaas.elapp.net.mynet;
 
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.NoResponeBackModel;
+import com.easyvaas.elapp.bean.UpdateInfoEntity;
 import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.NewsCollectStatus;
@@ -21,6 +22,7 @@ import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
+import com.hooview.app.BuildConfig;
 
 import java.util.List;
 
@@ -352,6 +354,12 @@ public interface ApiService {
     Observable<NetResponse<NoResponeBackModel>> cleanHistoryList(@Query(AppConstants.USER_ID) String userId,
                                                                  @Query(AppConstants.SESSION_ID) String sessionid,
                                                                  @Query(AppConstants.TYPE) int type);
+
+    /**
+     * 检查版本更新
+     */
+    @GET(ApiConstant.DEBUG_HOST + "sys/appupdate?device=android&version=" + BuildConfig.VERSION_NAME + "&versioncode=" + BuildConfig.VERSION_CODE)
+    Observable<NetResponse<UpdateInfoEntity>> versionCheck();
 
     /*-------------------------------------------直播----------------------------------------*/
 
