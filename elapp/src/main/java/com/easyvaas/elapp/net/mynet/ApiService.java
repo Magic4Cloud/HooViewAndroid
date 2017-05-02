@@ -367,7 +367,8 @@ public interface ApiService {
      * 直播---视频直播列表
      */
     @GET(ApiConstant.DEBUG_HOST + "video/recommendlist")
-    Observable<NetResponse<RecommendVideoListModel>> getLiveVideo(@Query(AppConstants.START) int start);
+    Observable<NetResponse<RecommendVideoListModel>> getLiveVideo(@Query(AppConstants.START) int start,
+                                                                  @Query(AppConstants.COUNT) int count);
 
     /**
      *  直播付费

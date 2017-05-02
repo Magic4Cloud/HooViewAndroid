@@ -37,7 +37,7 @@ public class LiveVideoListFragment extends MyBaseListFragment<LiveVideoListAdapt
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getLiveVideo(start)
+                RetrofitHelper.getInstance().getService().getLiveVideo(start,20)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<RecommendVideoListModel>() {

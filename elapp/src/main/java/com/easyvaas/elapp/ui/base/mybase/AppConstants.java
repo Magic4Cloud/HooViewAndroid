@@ -15,6 +15,7 @@ public class AppConstants {
     public static final String NEWS_ID = "newsid"; // news id
     public static final String POST_ID = "postid"; // post id
     public static final String VID = "vid"; //视频id
+    public static final String COUNT = "count";
 
     public static final String START = "start"; //page start
     public static final String PARAMS = "params"; // 普通参数

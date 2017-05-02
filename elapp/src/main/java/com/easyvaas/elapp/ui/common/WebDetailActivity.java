@@ -91,6 +91,7 @@ public class WebDetailActivity extends BaseActivity {
     private ImageView mTvStockRefresh;
     private ImageView mTvStockShare;
     private ImageView mNewsBackImageView;
+    private RelativeLayout mTitleLayout;
     private String code;
     private int isCollected; // 0 未添加 1 已添加
     private  int detailType;
@@ -148,6 +149,7 @@ public class WebDetailActivity extends BaseActivity {
         mFlContainer = (FrameLayout) findViewById(R.id.fl_container);
         mEtComment = (EditText) findViewById(R.id.et_comment);
         mInputCommentBar = findViewById(R.id.rl_input_text);
+        mTitleLayout = (RelativeLayout) findViewById(R.id.title);
 
         mRlBottomStock = (RelativeLayout) findViewById(R.id.rl_bottom_stock);
         mTvStockAdd = (ImageView) findViewById(R.id.tv_stock_add);
@@ -182,6 +184,7 @@ public class WebDetailActivity extends BaseActivity {
         if (detailType == TYPE_STOCK || detailType == TYPE_EXPONENT) {
             tvTitle.setText(name);
             tvSubhead.setText(code);
+            mTitleLayout.setVisibility(View.VISIBLE);
             mRlBottomNews.setVisibility(View.GONE);
             mRlBottomStock.setVisibility(View.VISIBLE);
             if (EVApplication.getUser() != null)

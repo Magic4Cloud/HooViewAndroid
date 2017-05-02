@@ -232,7 +232,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
         if (EVApplication.isLogin()) {
             final int action = mVipFocusButton.isSelected() ? 0 : 1; // 0 取消关注 1 关注
             Subscription subscription = RetrofitHelper.getInstance().getService()
-                    .followSomeOne("id", EVApplication.getUser().getSessionid(), action)
+                    .followSomeOne(personId, EVApplication.getUser().getSessionid(), action)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new NetSubscribe<NoResponeBackModel>() {
