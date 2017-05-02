@@ -107,6 +107,10 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
     public UserInfoEditPopupWindow init(String text) {
         mInputText = text;
         mPopInput.setText(text);
+        if (!TextUtils.isEmpty(text)) {
+            mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.tab_text_color_selected));
+            mPopConfirm.setEnabled(true);
+        }
         return this;
     }
 
