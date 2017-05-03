@@ -42,13 +42,7 @@
             android:textColor="@color/text_gray"/>
         <TextView
             android:id="@+id/user_follow_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/white"
-            android:gravity="center"
             android:text="@string/user_follow"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/user_follow_list_selector"/>
+            style="@style/user_focus_button_style"/>
     </RelativeLayout>
 </LinearLayout>

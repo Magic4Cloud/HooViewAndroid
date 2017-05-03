@@ -8,7 +8,6 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,11 +25,9 @@ import android.widget.TextView;
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.NoResponeBackModel;
-import com.easyvaas.elapp.bean.user.Record;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.Preferences;
-import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.MyRequestCallBack;
@@ -37,12 +35,15 @@ import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
+import com.easyvaas.elapp.ui.live.livenew.LiveVideoListFragment;
+import com.easyvaas.elapp.ui.live.livenew.fragment.VideoCommentFragment;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.SingleToast;
+import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.PlayerStateView;
@@ -54,11 +55,12 @@ import com.easyvaas.sdk.player.PlayerConstants;
 import com.easyvaas.sdk.player.base.EVPlayerBase;
 import com.easyvaas.sdk.player.base.EVPlayerParameter;
 import com.easyvaas.sdk.player.base.EVVideoView;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -66,19 +68,36 @@ import rx.subscriptions.CompositeSubscription;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 
-public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener,PayOrRechargeListener {
+public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener, PayOrRechargeListener {
     private static final String TAG = "PlayerActivity";
-    private RoundImageView mRivHeader;
-    private TextView mTvName;
-    private TextView mTvGroup;
+
+    @BindView(R.id.player_video_title)
+    TextView mPlayerVideoTitle;
+    @BindView(R.id.player_user_header)
+    RoundImageView mPlayerUserHeader;
+    @BindView(R.id.player_user_name)
+    TextView mPlayerUserName;
+    @BindView(R.id.player_watch_counts)
+    TextView mPlayerWatchCounts;
+    @BindView(R.id.player_user_follow_button)
+    TextView mPlayerUserFollowButton;
+    @BindView(R.id.player_user)
+    RelativeLayout mPlayerUser;
+    @BindView(R.id.player_tablayout)
+    SlidingTabLayout mPlayerTablayout;
+    @BindView(R.id.player_black_view)
+    View mPlayerBlackView;
+    @BindView(R.id.player_viewpager)
+    ViewPager mPlayerViewpager;
+    private String[] mTitles;
+    private Fragment[] mFragments;
+
     private TextView mTvEndTime;
     private TextView mTvCurTime;
-    private TextView mFollowTv;
     private ImageView mIvPlayState;
     private ImageView mIv_all_screen;
     private SeekBar mSeekBar;
-    private RelativeLayout mFlPlayer;
-    private ViewPager mViewPager;
+    private FrameLayout mFlPlayer;
     private PlayerStateView mPlayerStateView;
     private EVPlayer mEVPlayer;
     private EVVideoView mVideoView;
@@ -90,6 +109,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     private int payCounts;// 付费的金额
     private boolean isNeedPayVideo; // 是否是付费视频
     private CompositeSubscription mCompositeSubscription;
+    private Unbinder mUnbinder;
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Runnable runnableHideMediaController = new Runnable() {
         @Override
@@ -106,12 +126,12 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         context.startActivity(starter);
     }
 
-    public static void start(Context context, String videoId, int liveType, int mode,int permisson) {
+    public static void start(Context context, String videoId, int liveType, int mode, int permisson) {
         Intent starter = new Intent(context, PlayerActivity.class);
         starter.putExtra(Constants.EXTRA_KEY_VIDEO_ID, videoId);
         starter.putExtra(Constants.EXTRA_KEY_VIDEO_IS_LIVE, liveType == VideoEntity.IS_LIVING);
         starter.putExtra(Constants.EXTRA_KEY_VIDEO_GOOD_VIDEO, mode == VideoEntity.MODE_GOOD_VIDEO);
-        starter.putExtra(AppConstants.PARAMS,permisson == 7); //是否付费
+        starter.putExtra(AppConstants.PARAMS, permisson == 7); //是否付费
         context.startActivity(starter);
     }
 
@@ -120,10 +140,11 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+        mUnbinder = ButterKnife.bind(this);
         mVideoId = getIntent().getStringExtra(Constants.EXTRA_KEY_VIDEO_ID);
         mIsPlayLive = getIntent().getBooleanExtra(Constants.EXTRA_KEY_VIDEO_IS_LIVE, false);
         mIsGoodVideo = getIntent().getBooleanExtra(Constants.EXTRA_KEY_VIDEO_GOOD_VIDEO, false);
-        isNeedPayVideo = getIntent().getBooleanExtra(AppConstants.PARAMS,false);
+        isNeedPayVideo = getIntent().getBooleanExtra(AppConstants.PARAMS, false);
         if (TextUtils.isEmpty(mVideoId)) {
             finish();
             return;
@@ -134,45 +155,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         initPlayer();
         loadVideoInfo();
         addVideoToHistory();
-    }
-
-
-    /**
-     * 添加观看记录
-     */
-    private void addVideoToHistory()
-    {
-        if (EVApplication.isLogin())
-        {
-            RetrofitHelper.getInstance().getService()
-                    .addWatchVideoInfo(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),mVideoId)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new NetSubscribe<NoResponeBackModel>() {
-                        @Override
-                        public void OnSuccess(NoResponeBackModel noResponeBackModel) {
-
-                        }
-
-                        @Override
-                        public void OnFailue(String msg) {
-
-                        }
-                    });
-        }
-    }
-
-    private void insertHistoryRecord() {
-        if (!TextUtils.isEmpty(mVideoId) && !RealmHelper.getInstance().queryRecordId(mVideoId)) {
-            Record bean = new Record();
-            bean.setLiving(mCurrentVideo.getLiving());
-            bean.setId(String.valueOf(mVideoId));
-            bean.setMode(mCurrentVideo.getMode());
-            bean.setPic(mCurrentVideo.getLogourl());
-            bean.setTitle(mCurrentVideo.getTitle());
-            bean.setTime(DateTimeUtil.getSimpleTime(PlayerActivity.this, mCurrentVideo.getLive_start_time_span()));
-            RealmHelper.getInstance().insertRecord(bean, 30);
-        }
     }
 
     private void initView() {
@@ -207,13 +189,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mIv_all_screen = (ImageView) findViewById(R.id.iv_all_screen);
         mIv_all_screen.setOnClickListener(this);
         findViewById(R.id.iv_share).setOnClickListener(this);
-        mFollowTv = (TextView) findViewById(R.id.tv_follow);
-        mFollowTv.setOnClickListener(this);
-        mRivHeader = (RoundImageView) findViewById(R.id.riv_header);
-        mTvName = (TextView) findViewById(R.id.tv_name);
-        mTvGroup = (TextView) findViewById(R.id.tv_group);
         mVideoView = (EVVideoView) findViewById(R.id.video_view);
-        mFlPlayer = (RelativeLayout) findViewById(R.id.fl_player);
+        mFlPlayer = (FrameLayout) findViewById(R.id.fl_player);
         mFlPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,30 +205,10 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             }
         });
         //init viewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout.setupWithViewPager(mViewPager);
         if (mIsPlayLive) {
             showMediaController(false);
         } else {
             showMediaController(true);
-        }
-        if (mIsGoodVideo) {
-            List<Fragment> list = new ArrayList<>();
-            list.add(LiveCommentFragment.newInstance(mVideoId));
-            list.add(DataFragment.newInstance());
-            list.add(BookPlayFragment.newInstance());
-            mViewPager.setOffscreenPageLimit(2);
-            mViewPager.setPageMargin((int) ViewUtil.dp2Px(getApplicationContext(), 10));
-            mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager(), list, getResources().getStringArray(R.array.play_tab_good_video)));
-        } else {
-            List<Fragment> list = new ArrayList<>();
-            list.add(LiveChatFragment.newInstance());
-            list.add(DataFragment.newInstance());
-            list.add(BookPlayFragment.newInstance());
-            mViewPager.setOffscreenPageLimit(2);
-            mViewPager.setPageMargin((int) ViewUtil.dp2Px(getApplicationContext(), 10));
-            mViewPager.setAdapter(new MyAdapter(getSupportFragmentManager(), list, getResources().getStringArray(R.array.play_tab)));
         }
         mPlayerNeedPayView = (PlayerNeedPayView) findViewById(R.id.player_pay_mask);
         mPlayerNeedPayView.setPayMaskOnclickListener(new PlayerNeedPayView.PayMaskOnclickListener() {
@@ -268,48 +225,45 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             @Override
             public void goBuy() {
                 if (EVApplication.isLogin())
-                    PlayerPayDialogFragment.newInstance(payCounts).show(getSupportFragmentManager(),"");
+                    PlayerPayDialogFragment.newInstance(payCounts).show(getSupportFragmentManager(), "");
                 else
                     LoginActivity.start(PlayerActivity.this);
             }
         });
         if (isNeedPayVideo)
             mPlayerNeedPayView.setVisibility(View.VISIBLE);
+
+        initTabAndPager(mIsGoodVideo);
     }
 
     /**
-     * 余额足够 直接购买
+     * 初始化Tab 根据是否是精品类型
      */
-    @Override
-    public void payForVideo() {
-
-        RetrofitHelper.getInstance().getService()
-                .payForVideo(Preferences.getInstance(this).getSessionId(),mVideoId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<NoResponeBackModel>() {
-                    @Override
-                    public void OnSuccess(NoResponeBackModel noResponeBackModel) {
-                        ApiUtil.getAssetInfo(PlayerActivity.this);
-                        SingleToast.show(PlayerActivity.this,R.string.video_pay_success);
-                        startWatchLive();
-                        mPlayerNeedPayView.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void OnFailue(String msg) {
-                        SingleToast.show(PlayerActivity.this,R.string.hooview_coin_not_enough);
-                    }
-                });
+    private void initTabAndPager(boolean isGoodVideo)
+    {
+        if (isGoodVideo)
+        {
+            mTitles = getResources().getStringArray(R.array.play_tab_good_video);
+            mFragments = new Fragment[]{
+                    LiveVideoListFragment.newInstance(),
+                    VideoCommentFragment.newInstance(mVideoId),
+                    DataFragment.newInstance(),
+                    BookPlayFragment.newInstance()
+            };
+        }else
+        {
+            mTitles = getResources().getStringArray(R.array.play_tab);
+            mFragments = new Fragment[]{
+                    LiveChatFragment.newInstance(),
+                    DataFragment.newInstance(),
+                    BookPlayFragment.newInstance()
+            };
+            mPlayerBlackView.setVisibility(View.VISIBLE);
+        }
+        mPlayerViewpager.setAdapter(new PlayerPageAdapter(getSupportFragmentManager()));
+        mPlayerTablayout.setViewPager(mPlayerViewpager);
     }
 
-    /**
-     * 余额不足 需要跳转充值
-     */
-    @Override
-    public void skipToReCharge() {
-        CashInActivity.start(this);
-    }
 
     private void initPlayer() {
         mEVPlayer = new EVPlayer(this);
@@ -324,6 +278,69 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mEVPlayer.onCreate();
     }
 
+
+    /**
+     * 添加观看记录
+     */
+    private void addVideoToHistory() {
+        if (EVApplication.isLogin()) {
+            RetrofitHelper.getInstance().getService()
+                    .addWatchVideoInfo(EVApplication.getUser().getName(), EVApplication.getUser().getSessionid(), mVideoId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                        @Override
+                        public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+
+                        }
+
+                        @Override
+                        public void OnFailue(String msg) {
+
+                        }
+                    });
+        }
+    }
+
+
+    /**
+     * 余额足够 直接购买
+     */
+    @Override
+    public void payForVideo() {
+
+        RetrofitHelper.getInstance().getService()
+                .payForVideo(Preferences.getInstance(this).getSessionId(), mVideoId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                    @Override
+                    public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+                        ApiUtil.getAssetInfo(PlayerActivity.this);
+                        SingleToast.show(PlayerActivity.this, R.string.video_pay_success);
+                        startWatchLive();
+                        mPlayerNeedPayView.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void OnFailue(String msg) {
+                        SingleToast.show(PlayerActivity.this, R.string.hooview_coin_not_enough);
+                    }
+                });
+    }
+
+    /**
+     * 余额不足 需要跳转充值
+     */
+    @Override
+    public void skipToReCharge() {
+        CashInActivity.start(this);
+    }
+
+
+    /**
+     * 获取视频信息
+     */
     private void loadVideoInfo() {
         ApiHelper.getInstance().getWatchVideo(mVideoId, "",
                 new MyRequestCallBack<VideoEntity>() {
@@ -331,14 +348,12 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     public void onSuccess(VideoEntity result) {
                         if (result != null) {
                             mCurrentVideo = result;
-                            if (result.getPermission() == 7 && result.getPrice() >0)
-                            {
+                            if (result.getPermission() == 7 && result.getPrice() > 0) {
                                 mPlayerNeedPayView.setVisibility(View.VISIBLE); // 显示 付费蒙层
                                 mPlayerNeedPayView.setPlayerPayCounts(result.getPrice());
                                 payCounts = result.getPrice();
                                 mIv_all_screen.setEnabled(false);
-                            }else
-                            {
+                            } else {
                                 mIv_all_screen.setEnabled(true);
                                 mPlayerNeedPayView.setVisibility(View.GONE);
                                 startWatchLive();
@@ -347,7 +362,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                                 isNeedPayVideo = true;
                             updateVideoInfo(result);
                             // chatServerInit(true);
-                            insertHistoryRecord();
                             mCurrentVideo.setVip(1); // 暂时默认都是大V直播
                             getUserInfo(result.getName()); // 获取用户信息
                         }
@@ -356,13 +370,13 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     @Override
                     public void onError(String errorInfo) {
                         super.onError(errorInfo);
-//                        loadVideoInfoError(errorInfo);
+                        //                        loadVideoInfoError(errorInfo);
                     }
 
                     @Override
                     public void onFailure(String msg) {
                         RequestUtil.handleRequestFailed(msg);
-//                        loadVideoInfoError(msg);
+                        //                        loadVideoInfoError(msg);
                     }
                 });
     }
@@ -372,30 +386,33 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
      * 获取用户信息
      */
     private void getUserInfo(String personid) {
-        if (EVApplication.isLogin())
-        {
-         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserPageInfo(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),personid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<UserPageInfo>() {
-                    @Override
-                    public void OnSuccess(UserPageInfo userPageInfo) {
-                        if (userPageInfo.getFollowed() == 1)
-                            mFollowTv.setSelected(true);
-                        else
-                            mFollowTv.setSelected(false);
-                        if (userPageInfo.getVip() == 1)
-                            mCurrentVideo.setVip(1);
-                        else
-                            mCurrentVideo.setVip(0);
-                    }
+        if (EVApplication.isLogin()) {
+            Subscription subscription = RetrofitHelper.getInstance().getService()
+                    .getUserPageInfo(EVApplication.getUser().getName(), EVApplication.getUser().getSessionid(), personid)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new NetSubscribe<UserPageInfo>() {
+                        @Override
+                        public void OnSuccess(UserPageInfo userPageInfo) {
+                            if (userPageInfo.getFollowed() == 1)
+                            {
+                                mPlayerUserFollowButton.setText(R.string.user_followed);
+                                mPlayerUserFollowButton.setSelected(true);
+                            }else {
+                                mPlayerUserFollowButton.setText(R.string.user_follow);
+                                mPlayerUserFollowButton.setSelected(false);
+                            }
+                            if (userPageInfo.getVip() == 1)
+                                mCurrentVideo.setVip(1);
+                            else
+                                mCurrentVideo.setVip(0);
+                        }
 
-                    @Override
-                    public void OnFailue(String msg) {
-                    }
-                });
-        mCompositeSubscription.add(subscription);
+                        @Override
+                        public void OnFailue(String msg) {
+                        }
+                    });
+            mCompositeSubscription.add(subscription);
         }
     }
 
@@ -409,19 +426,28 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         } else {
             showMediaController(true);
         }
-        Utils.showImage(result.getLogourl(), R.drawable.account_bitmap_user, mRivHeader);
-        mTvName.setText(result.getNickname());
-        mTvGroup.setText(result.getSignature());
-        mRivHeader.setOnClickListener(new View.OnClickListener() {
+        Utils.showImage(result.getLogourl(), R.drawable.account_bitmap_user, mPlayerUserHeader);
+        mPlayerUserName.setText(result.getNickname());
+        mPlayerUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.toUserPager(PlayerActivity.this,result.getName(),result.getVip());
+                Utils.toUserPager(PlayerActivity.this, result.getName(), result.getVip());
             }
         });
+        mPlayerVideoTitle.setText(result.getTitle());
         if (isNeedPayVideo)  // 付费视频暂时隐藏分享
             ivShare.setVisibility(View.GONE);
+        if (result.getWatch_count() >= 10000) {
+            mPlayerWatchCounts.setText(String.format(getString(R.string.video_watch_count2), StringUtil.formatTenThousand(result.getWatch_count())));
+        } else {
+            mPlayerWatchCounts.setText(String.format(getString(R.string.video_watch_count), result.getWatch_count() + ""));
+        }
+        mPlayerUserFollowButton.setOnClickListener(this);
     }
 
+    /**
+     * 开始播放
+     */
     private void startWatchLive() {
         if (TextUtils.isEmpty(mVideoId)) {
             SingleToast.show(this, R.string.msg_video_url_null);
@@ -520,22 +546,23 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mEVPlayer.onDestroy();
         }
         mCompositeSubscription.unsubscribe();
+        mUnbinder.unbind();
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-//        // TODO Not work, need to improve.
-//        String vid = intent.getStringExtra(Constants.EXTRA_KEY_VIDEO_ID);
-//        if (mVideoId.equals(vid)) {
-//        } else if (!TextUtils.isEmpty(vid)) {
-////            resetChatData();
-//            startWatchLive();
-//        }
+        //        // TODO Not work, need to improve.
+        //        String vid = intent.getStringExtra(Constants.EXTRA_KEY_VIDEO_ID);
+        //        if (mVideoId.equals(vid)) {
+        //        } else if (!TextUtils.isEmpty(vid)) {
+        ////            resetChatData();
+        //            startWatchLive();
+        //        }
     }
 
     private void stopPlayerAndShowEndView() {
-//        mVideoView.stopPlayback();
+        //        mVideoView.stopPlayback();
         mIvPlayState.setSelected(true);
         if (mIsPlayLive) {
             mPlayerStateView.showEndView(getString(R.string.play_live_end_prompt));
@@ -588,13 +615,15 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             case R.id.iv_all_screen:
                 changeScreenOrientation();
                 break;
-            case R.id.tv_follow:
+            case R.id.player_user_follow_button:  //关注与取消关注
                 if (Preferences.getInstance(this).isLogin() && EVApplication.isLogin()) {
                     if (v.isSelected()) {
                         v.setSelected(false);
+                        mPlayerUserFollowButton.setText(R.string.user_follow);
                         SingleToast.show(getApplicationContext(), getString(R.string.cancel_follow_sccuess));
                     } else {
                         v.setSelected(true);
+                        mPlayerUserFollowButton.setText(R.string.user_followed);
                         SingleToast.show(getApplicationContext(), getString(R.string.follow_sccuess));
                     }
                     ApiUtil.userFollow(PlayerActivity.this, mCurrentVideo.getName(), v.isSelected(), v);
@@ -627,6 +656,9 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * 横竖屏切换动态改变大小
+     */
     private void changeVideoSize(Configuration newConfig) {
         if (newConfig.screenHeightDp < newConfig.screenWidthDp) {
             Logger.d(TAG, "changeVideoSize:screenHeightDp " + newConfig.screenHeightDp);
@@ -649,6 +681,9 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * 显示视频控制器的状态
+     */
     public void showMediaController(boolean isShow) {
         if (isShow) {
             long curPosition = mVideoView.getCurrentPosition();
@@ -677,7 +712,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             ivShare.setVisibility(View.GONE);
     }
 
-    private boolean getMediaControllerIsShow(){
+    private boolean getMediaControllerIsShow() {
         if (ivBack.getVisibility() == View.VISIBLE) return true;
         else return false;
     }
@@ -688,30 +723,25 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     }
 
 
-    public class MyAdapter extends FragmentPagerAdapter {
-        private String[] mTabsTitle;
-        List<Fragment> fragments;
+    private class PlayerPageAdapter extends FragmentPagerAdapter {
 
-        public MyAdapter(FragmentManager fm, List<Fragment> list, String[] tabTitles) {
+        private PlayerPageAdapter(FragmentManager fm) {
             super(fm);
-//            mTabsTitle = getResources().getStringArray(R.array.play_tab);
-            this.mTabsTitle = tabTitles;
-            this.fragments = list;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return fragments.get(position);
+            return mFragments[position];
         }
 
         @Override
         public int getCount() {
-            return mTabsTitle.length;
+            return mTitles.length;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mTabsTitle[position];
+            return mTitles[position];
         }
     }
 

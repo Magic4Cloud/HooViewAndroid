@@ -198,7 +198,7 @@ public class SliderLayout extends RelativeLayout{
 
         mViewPager = (InfiniteViewPager)findViewById(R.id.daimajia_slider_viewpager);
         mViewPager.setAdapter(wrappedAdapter);
-        mViewPager.setPadding(dp2px(25),0,dp2px(25),0);
+        mViewPager.setPadding(dp2px(20),0,dp2px(20),0);
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setClipToPadding(false);
         mViewPager.setOnTouchListener(new OnTouchListener() {
@@ -233,7 +233,7 @@ public class SliderLayout extends RelativeLayout{
         @Override
         public void transformPage(View page, float position) {
             if (position < -1 || position > 1) {
-//                page.setAlpha(MIN_ALPHA);
+                page.setAlpha(MIN_ALPHA);
                 page.setScaleX(MIN_SCALE + 0.05f);
                 page.setScaleY(MIN_SCALE);
             } else if (position <= 1) { // [-1,1]
@@ -245,11 +245,13 @@ public class SliderLayout extends RelativeLayout{
                         scaleX = scaleFactor;
                     page.setScaleX(scaleX+0.05f);
                     page.setScaleY(scaleX);
+                    page.setAlpha(scaleX);
                 } else {
 
                     float scaleX = 1 - 0.12f * position;
                     page.setScaleX(scaleX+0.05f);
                     page.setScaleY(scaleX);
+                    page.setAlpha(scaleX);
                 }
 //                page.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
         }

@@ -49,10 +49,11 @@ public class UserFocusFragment extends MyBaseListFragment<UserFollowAdapter> {
     @Override
     protected void changeEmptyView() {
 
-        mEmptyView.setEmptyTxt(getString(R.string.empty_no_focus));
+        mEmptyView.setEmptyTxt(getString(R.string.empty_no_userfocus));
         if (EVApplication.isLogin()) {
-            if (userId.equals(EVApplication.getUser().getName()))
-                mEmptyView.setEmptyTxt(getString(R.string.empty_no_userfocus));
+            if (userId.equals(EVApplication.getUser().getName())) {
+                mEmptyView.setEmptyTxt(getString(R.string.empty_no_focus));
+            }
         }
 
     }

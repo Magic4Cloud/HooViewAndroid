@@ -91,8 +91,8 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
             if (mData != null && mData.size() > 0) {
                 HomeNewsBean mNewsBean = mData.get(position);
                 HomeNewsBean mNewsBeanNext = null;
-                if (mData.size() > position)   // 取下一条数据的数据类型 来判断是否需要隐藏下划线
-                    mNewsBeanNext = mData.get(position);
+                if (mData.size() > position + 1)   // 取下一条数据的数据类型 来判断是否需要隐藏下划线
+                    mNewsBeanNext = mData.get(position + 1);
                 switch (mNewsBean.getType()) {
                     case 0:
                         int coverSize = mNewsBean.getCover().size(); //根据图片个数来判断加载布局类型

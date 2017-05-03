@@ -20,10 +20,12 @@ import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.bean.video.GoodsVideoListModel;
 import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
+import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.hooview.app.BuildConfig;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.http.GET;
@@ -389,4 +391,19 @@ public interface ApiService {
     @GET(ApiConstant.DEBUG_HOST + "video/vodlist")
     Observable<NetResponse<GoodsVideoListModel>> getLiveGoodVideo(@Query(AppConstants.START) int start);
 
+    /**
+     * 评论列表
+     * @param type 0 新闻 1视频 2股票
+     */
+    @GET("api/v2/posts/video")
+    Observable<NetResponse<UserPageCommentModel>> getVideoCommentList(@Query(AppConstants.TOPIC_ID) String topicid,
+                                                           @Query(AppConstants.USER_ID) String userid,
+                                                           @Query(AppConstants.TYPE) int type,
+                                                           @Query(AppConstants.START) int start);
+    /**
+     * 视频推荐列表
+     */
+    @GET("api/v2/recommend/videos")
+    Observable<NetResponse<ArrayList<VideoEntity>>> getVideoRecommendList(@Query(AppConstants.VIDEO_ID) String vid,
+                                                                          @Query(AppConstants.START) int start);
 }

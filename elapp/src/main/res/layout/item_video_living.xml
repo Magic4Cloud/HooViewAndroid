@@ -107,6 +107,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
                 android:elevation="0dp"
+                app:cardPreventCornerOverlap="false"
                 app:cardCornerRadius="4dp">
 
                 <TextView
@@ -131,6 +132,7 @@
                 android:layout_marginLeft="6dp"
                 android:layout_toRightOf="@+id/cv_operator"
                 android:elevation="0dp"
+                app:cardPreventCornerOverlap="false"
                 app:cardCornerRadius="4dp">
 
                 <TextView

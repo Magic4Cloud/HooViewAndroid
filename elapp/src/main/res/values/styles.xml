@@ -598,4 +598,16 @@
         <item name="tl_tab_space_equal">true</item>
         <item name="tl_textsize">16sp</item>
     </style>
+
+    //用户关注按钮
+    <style name="user_focus_button_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:background">@drawable/user_follow_list_selector
+        </item>
+    </style>
 </resources>

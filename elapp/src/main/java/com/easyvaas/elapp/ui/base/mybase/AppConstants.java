@@ -24,5 +24,6 @@ public class AppConstants {
     public static final String NAME = "name"; //旧版API name = userid
     public static final String CODE = "code"; //旧版API 新闻id
     public static final String TITLE = "title"; // 新闻标题
+    public static final String TOPIC_ID = "topicid"; //评论id
 
 }
