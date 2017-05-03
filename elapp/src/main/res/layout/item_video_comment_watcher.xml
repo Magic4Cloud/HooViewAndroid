@@ -71,7 +71,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/ll_user"
-            android:background="@drawable/bg_chat_myself"
+            android:background="@drawable/bg_chat_myself_vip"
             android:paddingBottom="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

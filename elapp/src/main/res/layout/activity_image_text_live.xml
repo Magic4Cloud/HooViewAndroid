@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
@@ -12,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="206dp"
         android:fitsSystemWindows="true"
-        app:elevation="0dp"
-        >
+        app:elevation="0dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/CollapsingToolbarLayout"
@@ -38,7 +38,7 @@
                     <ImageView
                         android:id="@+id/iv_header_bg"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"/>
 
                 </RelativeLayout>
 
@@ -58,7 +58,7 @@
                         android:layout_marginTop="20dp"
                         android:textColor="#303030"
                         android:textSize="18sp"
-                        tools:text="杜斯基" />
+                        tools:text="杜斯基"/>
 
                     <LinearLayout
                         android:id="@+id/ll_user_info"
@@ -72,7 +72,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#303030"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -93,7 +93,7 @@
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="70dp"
-                    android:src="@drawable/somebody" />
+                    android:src="@drawable/somebody"/>
 
             </RelativeLayout>
 
@@ -111,10 +111,10 @@
                         android:id="@+id/iv_back"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="12dp"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
                         android:scaleType="center"
-                        android:src="@drawable/live_icon_more_back" />
+                        android:src="@drawable/live_icon_more_back"/>
 
                     <TextView
                         android:id="@+id/tv_title"
@@ -123,7 +123,7 @@
                         android:layout_centerInParent="true"
                         android:textColor="#999999"
                         android:textSize="18sp"
-                        tools:text="我是标题" />
+                        tools:text="我是标题"/>
 
                     <ImageView
                         android:id="@+id/iv_share"
@@ -133,10 +133,14 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="12dp"
                         android:scaleType="center"
-                        android:src="@drawable/btn_share_w_n" />
+                        android:src="@drawable/btn_share_w_n"/>
+
                 </RelativeLayout>
+
             </android.support.v7.widget.Toolbar>
+
         </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
@@ -160,7 +164,7 @@
                 android:layout_height="44dp"
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/tv_follow"
-                app:tabTextColor="@color/title_text_color" />
+                app:tabTextColor="@color/title_text_color"/>
 
             <TextView
                 android:id="@+id/tv_follow"
@@ -176,14 +180,16 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="关注"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
+
         </RelativeLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rl_tab_container" />
+            android:layout_below="@+id/rl_tab_container"/>
+
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

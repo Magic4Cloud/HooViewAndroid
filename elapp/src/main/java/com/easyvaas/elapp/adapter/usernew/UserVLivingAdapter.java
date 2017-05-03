@@ -23,6 +23,7 @@ import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.ui.live.ImageTextLiveActivity;
 import com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity;
 import com.easyvaas.elapp.ui.live.PlayerActivity;
+import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.SingleToast;
@@ -149,15 +150,18 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (Preferences.getInstance(mContext).isLogin() && EVApplication.isLogin()
-                                && EVApplication.getUser() != null && model.getOwnerid().equals(EVApplication.getUser().getName()))
-                            MyImageTextLiveRoomActivity.start(mContext, checkImageTextLiveModel);
-                        else {
-                            if (mUserInfoModel == null) {
-                                requestUserInfoModel(model);
+                        if (Preferences.getInstance(mContext).isLogin() && EVApplication.isLogin()) {
+                            if (EVApplication.getUser() != null && model.getOwnerid() != null && model.getOwnerid().equals(EVApplication.getUser().getName())) {
+                                MyImageTextLiveRoomActivity.start(mContext, checkImageTextLiveModel);
                             } else {
-                                openImageTextRoom(model);
+                                if (mUserInfoModel == null) {
+                                    requestUserInfoModel(model);
+                                } else {
+                                    openImageTextRoom(model);
+                                }
                             }
+                        } else {
+                            LoginActivity.start(mContext);
                         }
                     }
                 });

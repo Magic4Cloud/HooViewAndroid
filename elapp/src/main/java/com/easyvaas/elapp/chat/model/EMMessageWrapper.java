@@ -21,6 +21,9 @@ public class EMMessageWrapper {
     public static final String EXTRA_MSG_NICKNAME = "nk";
     public static final String EXTRA_MSG_REPLY_NICKNAME = "rnk";
     public static final String EXTRA_MSG_REPLY_CONTENT = "rct";
+    public static final String EXTRA_MSG_AVATAR = "avatar";
+    public static final String EXTRA_MSG_USER_ID = "userid";
+    public static final String EXTRA_MSG_VIP = "vip";
     public String type;
     public String nickname;
     public String replyNickname;
@@ -31,6 +34,8 @@ public class EMMessageWrapper {
     public String imageUrl;
     public boolean isAnchor;
     public boolean isSelf;
+    public String avatar;
+    public String userId;
 
     public EMMessageWrapper(EMMessage emaMessage) {
         this.emaMessage = emaMessage;
@@ -47,6 +52,14 @@ public class EMMessageWrapper {
             imageUrl = ((EMImageMessageBody) emaMessage.getBody()).getRemoteUrl();
         } else {
             content = ((EMTextMessageBody) emaMessage.getBody()).getMessage();
+        }
+        avatar = emaMessage.getStringAttribute(EXTRA_MSG_AVATAR, "");
+        userId = emaMessage.getStringAttribute(EXTRA_MSG_USER_ID, "");
+        String vip = emaMessage.getStringAttribute(EXTRA_MSG_VIP, "0");
+        if ("1".equals(vip)) {
+            isAnchor = true;
+        } else {
+            isAnchor = false;
         }
     }
 

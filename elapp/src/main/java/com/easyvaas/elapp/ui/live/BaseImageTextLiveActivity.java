@@ -11,11 +11,11 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.event.ImageTextLiveMessageEvent;
 import com.easyvaas.elapp.event.JoinRoomSuccessEvent;
 import com.easyvaas.elapp.ui.base.BaseActivity;
+import com.easyvaas.elapp.ui.live.livenew.ChatMessageFragment;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -69,10 +69,10 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout.setupWithViewPager(mViewPager);
         list = new ArrayList<>();
-//        list.add(ImageTextLiveFragment.newInstance(streamEntity()));
-                list.add(isAnchor ? ImageTextLiveFragment.newInstance(mRoomId, isAnchor, watchCount()) : ImageTextLiveFragment.newInstance(streamEntity()));
+        list.add(isAnchor ? ImageTextLiveFragment.newInstance(mRoomId, isAnchor, watchCount()) : ImageTextLiveFragment.newInstance(streamEntity()));
         list.add(ImageTextLiveDataFragment.newInstance(isAnchor));
-        list.add(ImageTextLiveChatFragment.newInstance(isAnchor, mRoomId));
+//        list.add(ImageTextLiveChatFragment.newInstance(isAnchor, mRoomId));
+        list.add(ChatMessageFragment.newInstance(isAnchor, mRoomId));
         list.add(BookPlayFragment.newInstance());
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setPageMargin((int) ViewUtil.dp2Px(getApplicationContext(), 10));
@@ -97,7 +97,7 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
             @Override
             public void onSuccess(final EMChatRoom value) {
 //                if (value != null && !mRoomId.equals(value.getId())) {
-                    EventBus.getDefault().post(new JoinRoomSuccessEvent());
+                EventBus.getDefault().post(new JoinRoomSuccessEvent());
 //                }
             }
 

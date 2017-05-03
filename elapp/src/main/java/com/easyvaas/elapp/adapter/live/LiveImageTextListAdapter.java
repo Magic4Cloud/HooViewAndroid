@@ -13,9 +13,13 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
+import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveRoomModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
+import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.ui.live.ImageTextLiveActivity;
+import com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.Utils;
@@ -93,7 +97,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                 // cover
                 Utils.showNewsImage(model.getUserEntity().getLogourl(), mCoverRiv);
                 // title
-                mTitleTv.setText(model.getName());
+                mTitleTv.setText(model.getUserEntity().getNickname() + mContext.getResources().getString(R.string.image_text_room_postfix));
                 // introduce
                 mIntroduceTv.setText(model.getUserEntity().getSignature());
                 // hot
@@ -108,14 +112,34 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                 mRootView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (EVApplication.isLogin()) {
-                            ImageTextLiveActivity.start(mContext, model);
-                        } else {
-                            LoginActivity.start(mContext);
-                        }
+                        onItemClick(model);
                     }
                 });
             }
+        }
+    }
+
+    /**
+     * 点击事件
+     */
+    private void onItemClick(TextLiveListModel.StreamsEntity model) {
+        if (Preferences.getInstance(mContext).isLogin() && EVApplication.isLogin()) {
+            if (EVApplication.getUser() != null && model != null && model.getOwnerid() != null
+                    && model.getOwnerid().equals(EVApplication.getUser().getName())) {
+                CheckImageTextLiveModel checkImageTextLiveModel = new CheckImageTextLiveModel();
+                ImageTextLiveRoomModel roomModel = new ImageTextLiveRoomModel();
+                roomModel.setId(model.getId());
+                roomModel.setName(model.getName());
+                roomModel.setOwnerid(model.getOwnerid());
+                roomModel.setViewcount(model.getViewcount());
+                roomModel.setUserInfo(model.getUserEntity());
+                checkImageTextLiveModel.setData(roomModel);
+                MyImageTextLiveRoomActivity.start(mContext, checkImageTextLiveModel);
+            } else {
+                ImageTextLiveActivity.start(mContext, model);
+            }
+        } else {
+            LoginActivity.start(mContext);
         }
     }
 
@@ -211,7 +235,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                     // thumb
                     Utils.showNewsImage(model.getUserEntity().getLogourl(), mHotThumbRiv);
                     // name
-                    mHotNameTv.setText(model.getName());
+                    mHotNameTv.setText(model.getUserEntity().getNickname() + mContext.getResources().getString(R.string.image_text_room_postfix));
                     // hot
                     if (model.getViewcount() > 10000) {
                         mHotHotIv.setVisibility(View.VISIBLE);
@@ -224,11 +248,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                     mHotRootView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (EVApplication.isLogin()) {
-                                ImageTextLiveActivity.start(mContext, model);
-                            } else {
-                                LoginActivity.start(mContext);
-                            }
+                            onItemClick(model);
                         }
                     });
                 }

@@ -170,7 +170,7 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
             }
         }
 
-        if (user.getAuth() != null) {
+        if (user != null && user.getAuth() != null) {
             for (int i = 0, n = user.getAuth().size(); i < n; i++) {
                 User.AuthEntity authEntity = user.getAuth().get(i);
                 if (User.AUTH_TYPE_SINA.equals(authEntity.getType())) {
@@ -194,7 +194,9 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
 //        ChatManager.getInstance().setUserInfo(user.getName(), user.getNickname(), user.getLogourl(),
 //                user.getSessionid());
         EventBus.getDefault().post(new UserInfoUpdateEvent());
-        MobclickAgent.onProfileSignIn(user.getAuthtype(), user.getName());
+        if (user != null) {
+            MobclickAgent.onProfileSignIn(user.getAuthtype(), user.getName());
+        }
     }
 
     public static void updateUserInfo() {

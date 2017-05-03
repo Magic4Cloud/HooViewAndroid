@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/chat_view_input_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="49dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="4dp">
+
+        <EditText
+            android:id="@+id/chat_view_input_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="12dp"
+            android:layout_toLeftOf="@+id/chat_view_gift_iv"
+            android:background="@drawable/shape_chat_input"
+            android:hint="加入聊天吧"
+            android:maxLength="1000"
+            android:maxLines="5"
+            android:minHeight="40dp"
+            android:paddingBottom="9dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="9dp"
+            android:textColor="@color/title_text_color"
+            android:textColorHint="@color/text_gray"
+            android:textSize="@dimen/text_size_16"/>
+
+        <ImageView
+            android:id="@+id/chat_view_gift_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/chat_view_input_et"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/bg_gift_n"
+            android:padding="10dp"
+            android:src="@drawable/btn_gift_n"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chat_view_anchor_panel"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="#f8f8f8"
+        android:visibility="visible">
+
+        <RadioGroup
+            android:id="@+id/rgMsgType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/tvNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:button="@null"
+                android:checked="true"
+                android:text="普通"
+                android:textColor="@color/selector_msg_type_btn"/>
+
+            <RadioButton
+                android:id="@+id/tvImportant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="21dp"
+                android:button="@null"
+                android:text="高亮"
+                android:textColor="@color/selector_msg_type_btn"/>
+
+            <RadioButton
+                android:id="@+id/tvStick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="21dp"
+                android:button="@null"
+                android:text="置顶"
+                android:textColor="@color/selector_msg_type_btn"/>
+
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="9dp"
+            android:padding="7dp"
+            android:src="@drawable/btn_add_picture_n"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

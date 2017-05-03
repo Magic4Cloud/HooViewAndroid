@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/item_chat_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingTop="15dp"
+        android:visibility="gone">
+
+        <com.easyvaas.elapp.view.CircleImageView
+            android:id="@+id/chat_other_avatar_civ"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/account_bitmap_list"/>
+
+        <TextView
+            android:id="@+id/chat_other_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/chat_other_avatar_civ"
+            android:lines="1"
+            android:text="小米粥多"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"/>
+
+        <ImageView
+            android:id="@+id/chat_other_v_iv"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_toRightOf="@+id/chat_other_name_tv"
+            android:src="@drawable/ic_v"/>
+
+        <TextView
+            android:id="@+id/chat_other_message_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chat_other_name_tv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="50dp"
+            android:layout_toRightOf="@+id/chat_other_avatar_civ"
+            android:background="@drawable/bg_chat_others"
+            android:paddingBottom="4dp"
+            android:paddingLeft="9dp"
+            android:paddingRight="6dp"
+            android:paddingTop="4dp"
+            android:text="主播说的不错啊，学习一下"
+            android:textColor="@color/title_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_chat_mine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="12dp"
+        android:paddingTop="15dp"
+        android:visibility="gone">
+
+        <com.easyvaas.elapp.view.CircleImageView
+            android:id="@+id/chat_mine_avatar_civ"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/account_bitmap_list"/>
+
+        <TextView
+            android:id="@+id/chat_mine_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="14dp"
+            android:layout_toLeftOf="@+id/chat_mine_avatar_civ"
+            android:lines="1"
+            android:text="我"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/chat_mine_message_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chat_mine_name_tv"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/chat_mine_avatar_civ"
+            android:background="@drawable/bg_chat_myself_vip"
+            android:paddingBottom="4dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="9dp"
+            android:paddingTop="4dp"
+            android:text="确实如此没错哈哈"
+            android:textColor="@color/title_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

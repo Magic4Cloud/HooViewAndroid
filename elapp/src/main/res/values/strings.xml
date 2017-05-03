@@ -742,6 +742,7 @@
     <string name="image_text_follow_count">%s人关注</string>
     <string name="image_live_room_fans">%s人气</string>
     <string name="my_image_text_room">我的直播间</string>
+    <string name="image_text_room_postfix">"的直播间"</string>
     <string name="stick">顶</string>
     <string name="me">我</string>
     <string name="reply_content">回复%1$s:%2$s</string>
