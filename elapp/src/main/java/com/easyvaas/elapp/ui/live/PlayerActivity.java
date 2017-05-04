@@ -28,6 +28,8 @@ import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.event.LiveCommentEvent;
+import com.easyvaas.elapp.event.LiveSearchStockEvent;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.net.MyRequestCallBack;
@@ -35,8 +37,8 @@ import com.easyvaas.elapp.net.RequestUtil;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
-import com.easyvaas.elapp.ui.live.livenew.LiveVideoListFragment;
 import com.easyvaas.elapp.ui.live.livenew.fragment.VideoCommentFragment;
+import com.easyvaas.elapp.ui.live.livenew.fragment.VideoRecommendFragment;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.Constants;
@@ -47,6 +49,7 @@ import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.PlayerStateView;
+import com.easyvaas.elapp.view.base.BottomSendView;
 import com.easyvaas.elapp.view.live.PlayerNeedPayView;
 import com.easyvaas.elapp.view.live.PlayerPayDialogFragment;
 import com.easyvaas.elapp.view.live.PlayerPayDialogFragment.PayOrRechargeListener;
@@ -58,6 +61,8 @@ import com.easyvaas.sdk.player.base.EVVideoView;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -68,7 +73,7 @@ import rx.subscriptions.CompositeSubscription;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 
-public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener, PayOrRechargeListener {
+public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener, PayOrRechargeListener,BottomSendView.OnBottomInputListener {
     private static final String TAG = "PlayerActivity";
 
     @BindView(R.id.player_video_title)
@@ -89,6 +94,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     View mPlayerBlackView;
     @BindView(R.id.player_viewpager)
     ViewPager mPlayerViewpager;
+    @BindView(R.id.player_bottom_send)
+    BottomSendView mPlayerBottomSend;
     private String[] mTitles;
     private Fragment[] mFragments;
 
@@ -234,24 +241,23 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mPlayerNeedPayView.setVisibility(View.VISIBLE);
 
         initTabAndPager(mIsGoodVideo);
+        mPlayerBottomSend.setOnBottomInputListener(this);
     }
 
     /**
      * 初始化Tab 根据是否是精品类型
      */
-    private void initTabAndPager(boolean isGoodVideo)
-    {
-        if (isGoodVideo)
-        {
+    private void initTabAndPager(boolean isGoodVideo) {
+        if (isGoodVideo) {
             mTitles = getResources().getStringArray(R.array.play_tab_good_video);
             mFragments = new Fragment[]{
-                    LiveVideoListFragment.newInstance(),
+                    VideoRecommendFragment.newInstance("1"),
                     VideoCommentFragment.newInstance(mVideoId),
                     DataFragment.newInstance(),
                     BookPlayFragment.newInstance()
             };
-        }else
-        {
+            mPlayerBottomSend.setType(BottomSendView.TYPE_NONE);
+        } else {
             mTitles = getResources().getStringArray(R.array.play_tab);
             mFragments = new Fragment[]{
                     LiveChatFragment.newInstance(),
@@ -259,9 +265,12 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     BookPlayFragment.newInstance()
             };
             mPlayerBlackView.setVisibility(View.VISIBLE);
+            mPlayerBottomSend.setType(BottomSendView.TYPE_CHAT);
+
         }
         mPlayerViewpager.setAdapter(new PlayerPageAdapter(getSupportFragmentManager()));
         mPlayerTablayout.setViewPager(mPlayerViewpager);
+        mPlayerViewpager.addOnPageChangeListener(mOnPageChangeListener);
     }
 
 
@@ -394,11 +403,10 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     .subscribe(new NetSubscribe<UserPageInfo>() {
                         @Override
                         public void OnSuccess(UserPageInfo userPageInfo) {
-                            if (userPageInfo.getFollowed() == 1)
-                            {
+                            if (userPageInfo.getFollowed() == 1) {
                                 mPlayerUserFollowButton.setText(R.string.user_followed);
                                 mPlayerUserFollowButton.setSelected(true);
-                            }else {
+                            } else {
                                 mPlayerUserFollowButton.setText(R.string.user_follow);
                                 mPlayerUserFollowButton.setSelected(false);
                             }
@@ -670,6 +678,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mFlPlayer.setLayoutParams(layoutParams);
             isLandscape = true;
             mIv_all_screen.setImageResource(R.drawable.btn_half_screen_n);
+            mPlayerBottomSend.setVisibility(View.GONE);
         } else {
             this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mFlPlayer.getLayoutParams();
@@ -678,6 +687,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mFlPlayer.setLayoutParams(layoutParams);
             mIv_all_screen.setImageResource(R.drawable.btn_full_screen_n);
             isLandscape = false;
+            mPlayerBottomSend.setVisibility(View.VISIBLE);
         }
     }
 
@@ -723,6 +733,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     }
 
 
+
     private class PlayerPageAdapter extends FragmentPagerAdapter {
 
         private PlayerPageAdapter(FragmentManager fm) {
@@ -759,4 +770,62 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         }
         stopPlayerAndShowEndView();
     }
+    // fragment 切换 改变底部输入框
+
+    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            if (mIsGoodVideo)
+            {
+                if (position == 1) {
+                    mPlayerBottomSend.setType(BottomSendView.TYPE_COMMENT);
+                }else if (position == 2){
+                    mPlayerBottomSend.setType(BottomSendView.TYPE_SEARCH);
+                }else
+                    mPlayerBottomSend.setType(BottomSendView.TYPE_NONE);
+
+            }else
+            {
+                if (position == 0) {
+                    mPlayerBottomSend.setType(BottomSendView.TYPE_CHAT);
+                }else if (position == 1){
+                    mPlayerBottomSend.setType(BottomSendView.TYPE_SEARCH);
+                }else
+                    mPlayerBottomSend.setType(BottomSendView.TYPE_NONE);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+    // Aya : 2017/5/4 根据不同的输入 调接口上传内容
+    @Override
+    public void sendText(String inputString, int type) {
+        switch (type)
+        {
+            case BottomSendView.TYPE_CHAT:
+                break;
+            case BottomSendView.TYPE_COMMENT:
+                EventBus.getDefault().post(new LiveCommentEvent(inputString));
+                break;
+            case BottomSendView.TYPE_SEARCH:
+                EventBus.getDefault().post(new LiveSearchStockEvent(inputString));
+                break;
+        }
+    }
+
+    @Override
+    public void openGiftWindow() {
+        showGiftToolsBar();
+    }
+
+
 }

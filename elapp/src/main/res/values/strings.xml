@@ -685,6 +685,7 @@
     <string name="news">新闻</string>
     <string name="stock">股票</string>
     <string name="live">直播</string>
+    <string name="stock_market">股市</string>
     <string name="search_news_empty_prompt">搜索您想了解的新闻资讯</string>
     <string name="search_news_empty_live_prompt">搜索您想了解的直播</string>
     <string name="search_news_empty_stock_prompt">搜索您想了解的股票</string>
@@ -881,5 +882,8 @@
     <string name="video_introduce_text">简介</string>
     <string name="video_watch_count">%s人观看</string>
     <string name="video_watch_count2">%s万人观看</string>
+    <string name="video_input_comment">加入评论吧</string>
+    <string name="video_input_chat">加入聊天吧</string>
+    <string name="video_relative">相关视频</string>
 
 </resources>

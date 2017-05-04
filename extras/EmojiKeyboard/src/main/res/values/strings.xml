@@ -12,4 +12,5 @@
     <string name="barrage_hint_fee">开启评论置顶</string>
     <string name="text_length_prompt">%d/140字</string>
     <string name="search_prompt">请输入股票代码或简称</string>
+    <string name="video_input_comment">加入评论吧</string>
 </resources>

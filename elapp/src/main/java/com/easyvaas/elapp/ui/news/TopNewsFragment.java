@@ -33,6 +33,12 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
             getNewsData(isLoadMore);
     }
 
+
+    @Override
+    protected void changeRecyclerView() {
+        setPaddingTop(4);
+    }
+
     /**
      * 获取新闻列表
      */

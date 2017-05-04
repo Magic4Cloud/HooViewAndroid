@@ -469,7 +469,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            />
         <activity
             android:name="com.easyvaas.elapp.ui.market.GlobalContentEditActivity"
             android:configChanges="orientation"

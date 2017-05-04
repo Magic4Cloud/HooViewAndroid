@@ -238,20 +238,26 @@ public class SliderLayout extends RelativeLayout{
                 page.setScaleY(MIN_SCALE);
             } else if (position <= 1) { // [-1,1]
                 float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
+                float alphaFactor = Math.max(MIN_ALPHA, 1 - Math.abs(position));
                 if (position < 0) {
                     float scaleX = 1 + 0.12f * position;
+                    float alpha = 1 + 0.5f * position;
                     float roundX = Math.round(scaleX*100)/100.0f;
-                    if (roundX >= 0.88 )
+                    float roundA = Math.round(alpha*100)/100.0f;
+                    if (roundX >= MIN_SCALE )
                         scaleX = scaleFactor;
+                    if (roundA >= MIN_ALPHA)
+                        alpha = alphaFactor;
                     page.setScaleX(scaleX+0.05f);
                     page.setScaleY(scaleX);
-                    page.setAlpha(scaleX);
+                    page.setAlpha(alpha);
                 } else {
 
                     float scaleX = 1 - 0.12f * position;
+                    float alpha  = 1 - 0.5f * position;
                     page.setScaleX(scaleX+0.05f);
                     page.setScaleY(scaleX);
-                    page.setAlpha(scaleX);
+                    page.setAlpha(alpha);
                 }
 //                page.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
         }

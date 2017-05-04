@@ -8,6 +8,7 @@ import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.NewsCollectStatus;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
+import com.easyvaas.elapp.bean.news.StockMarketNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopicModel;
 import com.easyvaas.elapp.bean.user.CheatsListModel;
@@ -78,6 +79,13 @@ public interface ApiService {
      */
     @GET("/api/stock/market")
     Observable<NetResponse<MarketExponentModel>> getMarketExponent();
+
+    /**
+     * 股市资讯列表
+     */
+    @GET("api/v2/news/news")
+    Observable<NetResponse<StockMarketNewsModel>> getStockMarketNewsList(@Query(AppConstants.CHANNEL_ID) String channelId,
+                                                                         @Query(AppConstants.START) int start);
 
     /*-------------------------------------------用户中心----------------------------------------*/
 

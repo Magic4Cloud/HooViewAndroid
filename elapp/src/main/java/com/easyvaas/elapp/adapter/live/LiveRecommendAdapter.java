@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.adapter.live;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,19 @@ public class LiveRecommendAdapter extends MyBaseAdapter<VideoEntity> {
         }
     }
 
+    /**
+     * 加载简介信息
+     */
+    public void setHeaderData(Context context, String data)
+    {
+        if (!mHasHeader)
+        {
+            View headerView = LayoutInflater.from(context).inflate(R.layout.item_video_recommend_header,null);
+            TextView textView = (TextView) headerView.findViewById(R.id.video_recommend_introduce);
+            addHeaderView(headerView);
+            mHasHeader =true;
+        }
+    }
 
     class VideoViewHolder extends BaseViewHolder {
 

@@ -3,6 +3,7 @@ package com.easyvaas.elapp.ui.live.livenew.fragment;
 import android.os.Bundle;
 
 import com.easyvaas.elapp.adapter.live.LiveRecommendAdapter;
+import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
@@ -43,13 +44,15 @@ public class VideoRecommendFragment extends MyBaseListFragment<LiveRecommendAdap
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getVideoRecommendList(vid,start)
+                .getLiveVideo(start,20)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<ArrayList<VideoEntity>>() {
+                .subscribe(new NetSubscribe<RecommendVideoListModel>() {
                     @Override
-                    public void OnSuccess(ArrayList<VideoEntity> result) {
-                        mAdapter.dealLoadData(VideoRecommendFragment.this, isLoadMore, result);
+                    public void OnSuccess(RecommendVideoListModel result) {
+                        if (!isLoadMore)
+                            mAdapter.setHeaderData(getContext(),"");
+                        mAdapter.dealLoadData(VideoRecommendFragment.this, isLoadMore, result.getRecommend());
                     }
 
                     @Override

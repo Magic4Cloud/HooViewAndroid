@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,9 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.emoji.bean.EmoticonBean;
@@ -32,6 +30,8 @@ import com.easyvaas.common.emoji.view.EmoticonsToolBarView;
 import com.easyvaas.common.emoji.view.I.IEmoticonsKeyboard;
 import com.easyvaas.common.emoji.view.I.IView;
 
+import static com.easyvaas.common.emoji.R.id.btn_send;
+
 
 public class XhsEmoticonsKeyBoardBar extends AutoHeightLayout
         implements IEmoticonsKeyboard, View.OnClickListener, EmoticonsToolBarView.OnToolBarItemClickListener {
@@ -45,11 +45,8 @@ public class XhsEmoticonsKeyBoardBar extends AutoHeightLayout
     private EmoticonsIndicatorView mEmoticonsIndicatorView;
 
     private EmoticonsEditText et_chat;
-    private RelativeLayout rl_input;
     private LinearLayout ly_foot_func;
-    private ImageView btn_send;
     private int editTextLength;
-    private TextView mTvLength;
 
     public void setFirst2(boolean first2) {
         isFirst2 = first2;
@@ -82,17 +79,26 @@ public class XhsEmoticonsKeyBoardBar extends AutoHeightLayout
         getViewTreeObserver().addOnGlobalLayoutListener(new KeyboardOnGlobalChangeListener());
         mEmoticonsPageView = (EmoticonsPageView) findViewById(R.id.view_epv);
         mEmoticonsIndicatorView = (EmoticonsIndicatorView) findViewById(R.id.view_eiv);
-        mTvLength = (TextView) findViewById(R.id.tv_text_length);
-        rl_input = (RelativeLayout) findViewById(R.id.rl_input);
         ly_foot_func = (LinearLayout) findViewById(R.id.ly_foot_func);
-        btn_send = (ImageView) findViewById(R.id.btn_send);
-        et_chat = (EmoticonsEditText) findViewById(R.id.et_chat);
+        et_chat = (EmoticonsEditText) findViewById(R.id.bottom_edittext);
         et_chat.setFocusable(true);
         et_chat.setFocusableInTouchMode(true);
         et_chat.requestFocus();
-        mTvLength.setText(getResources().getString(R.string.text_length_prompt, editTextLength));
         setAutoHeightLayoutView(ly_foot_func);
-        btn_send.setOnClickListener(this);
+
+        et_chat.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_SEARCH)
+                {
+                if (mKeyBoardBarViewListener != null) {
+                    mKeyBoardBarViewListener
+                            .OnSendBtnClick(et_chat.getText().toString().trim(), isSearch);
+                    et_chat.setText("");
+                }}
+                return false;
+            }
+        });
 
         mEmoticonsPageView.setOnIndicatorListener(new EmoticonsPageView.OnEmoticonsPageViewListener() {
             @Override
@@ -189,41 +195,7 @@ public class XhsEmoticonsKeyBoardBar extends AutoHeightLayout
                 });
             }
         });
-        et_chat.setOnTextChangedInterface(new EmoticonsEditText.OnTextChangedInterface() {
-            @Override
-            public void onTextChanged(CharSequence arg0) {
-                String str = arg0.toString();
-                if (!isFirst) {
-                    isFirst = false;
-                    if (editTextLength - 1 >= str.length()) {
-                        isFirst = true;
-                        clearText();
-                    }
-                }
-                if (isFirst2) {
-                    isFirst = false;
-                    isFirst2 = false;
-                    editTextLength = str.length();
-                }
-                if (!isSearch) {
-                    if (TextUtils.isEmpty(str)) {
-                        if (mIsMultimediaVisibility) {
-                            btn_send.setVisibility(GONE);
-                        } else {
-                            btn_send.setImageResource(R.drawable.btn_send_n);
-                        }
-                    } else {
-                        if (mIsMultimediaVisibility) {
-                            btn_send.setVisibility(VISIBLE);
-                            btn_send.setImageResource(R.drawable.btn_send_s);
-                        } else {
-                            btn_send.setImageResource(R.drawable.btn_send_s);
-                        }
-                    }
-                }
-                mTvLength.setText(getResources().getString(R.string.text_length_prompt, arg0.length()));
-            }
-        });
+
     }
 
     private void setEditableState(boolean b) {
@@ -273,7 +245,7 @@ public class XhsEmoticonsKeyBoardBar extends AutoHeightLayout
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.btn_send) {
+        if (id == btn_send) {
             if (mKeyBoardBarViewListener != null) {
                 mKeyBoardBarViewListener
                         .OnSendBtnClick(et_chat.getText().toString().trim(), isSearch);
@@ -321,12 +293,10 @@ public class XhsEmoticonsKeyBoardBar extends AutoHeightLayout
     public void showInput(boolean isSearch) {
         this.isSearch = isSearch;
         if (isSearch) {
-            mTvLength.setVisibility(GONE);
-            btn_send.setImageResource(R.drawable.btn_market_search_n);
+            et_chat.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
             et_chat.setHint(R.string.search_prompt);
         } else {
-            mTvLength.setVisibility(VISIBLE);
-            btn_send.setImageResource(R.drawable.btn_send_n);
+            et_chat.setImeOptions(EditorInfo.IME_ACTION_SEND);
             et_chat.setHint(R.string.barrage_hint_input);
 
         }
