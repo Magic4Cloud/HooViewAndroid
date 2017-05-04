@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="15dp">
+
+    <com.easyvaas.elapp.view.CircleImageView
+        android:id="@+id/chat_gift_avatar_civ"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/account_bitmap_list"/>
+
+    <TextView
+        android:id="@+id/chat_gift_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/chat_gift_avatar_civ"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxWidth="140dp"
+        android:text="biubiubiu"
+        android:textColor="#ff8b65"
+        android:textSize="@dimen/text_size_14"/>
+
+    <TextView
+        android:id="@+id/chat_gift_send_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/chat_gift_name_tv"
+        android:text="赠送给主播"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_size_14"/>
+
+    <TextView
+        android:id="@+id/chat_gift_gift_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/chat_gift_send_tv"
+        android:text="鲜花*1"
+        android:textColor="#ff8b65"
+        android:textSize="@dimen/text_size_14"/>
+
+</RelativeLayout>

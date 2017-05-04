@@ -3,60 +3,55 @@ package com.easyvaas.elapp.view;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.chat.model.EMMessageWrapper;
 import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.ui.user.LoginActivity;
-import com.easyvaas.elapp.utils.Logger;
 import com.hooview.app.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
+ * Date    2017/5/3
+ * Author  xiaomao
  * 聊天输入框
  */
-public class ChatInputView extends RelativeLayout implements View.OnClickListener {
-    private static final String TAG = ChatInputView.class.getSimpleName();
-    public static final String MSG_TYPE_IMPORTANT = "hl";
-    public static final String MSG_TYPE_STICK = "st";
-    public static final String MSG_TYPE_NORMAL = "nor";
+public class ChatInputView extends RelativeLayout {
 
+    private static final String TAG = ChatInputView.class.getSimpleName();
     @BindView(R.id.chat_view_input_panel)
     RelativeLayout mPanelInput;
     @BindView(R.id.chat_view_input_et)
     EditText mInputEt;
     @BindView(R.id.chat_view_gift_iv)
     ImageView mGiftIv;
-    @BindView(R.id.chat_view_anchor_panel)
-    RelativeLayout mPanelAnchor;
-    private RadioGroup mRgMsgType;
-    private ImageView mIvImage;
-    private String mMsgType = MSG_TYPE_NORMAL;
     private InputMethodManager mInputMethodManager;
     private boolean mIsKeyboardActive;
     private Activity mActivity;
-    private RelativeLayout mRlOption;
-    private InputViewListener mInputViewListener;
-    private KeyboardOnGlobalChangeListener mKeyboardOnGlobalChangeListener;
-    private boolean hasOptionBar = true;
+    private OnInputListener mOnInputListener;
     private String mReplyTips;
     private ReplyModel mReplyModel;
+    private static String MSG_TYPE = EMMessageWrapper.MSG_TYPE_NORMAL;
 
 
     public ChatInputView(Context context) {
@@ -71,51 +66,22 @@ public class ChatInputView extends RelativeLayout implements View.OnClickListene
     private void init(Context context) {
         mActivity = (Activity) context;
         mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        LayoutInflater.from(getContext()).inflate(R.layout.view_chat_input, this, true);
-        mInputEt = (EditText) findViewById(R.id.editText);
-        mGiftIv = (ImageView) findViewById(R.id.iv_send);
-        mRgMsgType = (RadioGroup) findViewById(R.id.rgMsgType);
-        mIvImage = (ImageView) findViewById(R.id.iv_image);
-        mRlOption = (RelativeLayout) findViewById(R.id.rl_option);
-        mGiftIv.setEnabled(false);
-//        mEditText.setOnClickListener(this);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_chat_input, this, true);
+        ButterKnife.bind(this, view);
+        mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        getViewTreeObserver().addOnGlobalLayoutListener(new KeyboardOnGlobalChangeListener());
+        // input
         mInputEt.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin()) {
+                    if (Preferences.getInstance(mActivity).isLogin() && EVApplication.isLogin()) {
                         mInputMethodManager.showSoftInput(mInputEt, InputMethodManager.SHOW_FORCED);
                     } else {
-                        LoginActivity.start(getContext());
+                        LoginActivity.start(mActivity);
                     }
                 }
                 return false;
-            }
-        });
-        mIvImage.setOnClickListener(this);
-        mGiftIv.setOnClickListener(this);
-        findViewById(R.id.rl_option).setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-        findViewById(R.id.rl_input).setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-        mRgMsgType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.tvImportant) {
-                    mMsgType = MSG_TYPE_IMPORTANT;
-                } else if (checkedId == R.id.tvNormal) {
-                    mMsgType = MSG_TYPE_NORMAL;
-                } else if (checkedId == R.id.tvStick) {
-                    mMsgType = MSG_TYPE_STICK;
-                }
             }
         });
         mInputEt.addTextChangedListener(new TextWatcher() {
@@ -132,22 +98,63 @@ public class ChatInputView extends RelativeLayout implements View.OnClickListene
                     mInputEt.setText("");
                     return;
                 }
-                if (s.length() == 0) {
-                    mGiftIv.setEnabled(false);
-                    mGiftIv.setImageResource(R.drawable.btn_send_n);
-                } else {
-                    mGiftIv.setEnabled(true);
-                    mGiftIv.setImageResource(R.drawable.btn_send_s);
-                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+
             }
         });
-        mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        getViewTreeObserver().addOnGlobalLayoutListener(mKeyboardOnGlobalChangeListener = new KeyboardOnGlobalChangeListener());
+        mInputEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEND) {
+                    if (mOnInputListener != null) {
+                        String message = mInputEt.getText().toString().trim();
+                        if (!TextUtils.isEmpty(message)) {
+                            if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
+                                mOnInputListener.onReplyMessage(message.replace(mReplyTips, ""), mReplyModel);
+                            } else {
+                                mOnInputListener.onSendMessage(MSG_TYPE, message);
+                            }
+                            mInputEt.setText("");
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+        // input panel
+        mPanelInput.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
+    }
+
+    /**
+     * 输入框
+     */
+    @OnClick(R.id.chat_view_input_et)
+    protected void onInputClick() {
+        if (Preferences.getInstance(mActivity).isLogin() && EVApplication.isLogin()) {
+            mInputMethodManager.showSoftInput(mInputEt, InputMethodManager.SHOW_FORCED);
+        } else {
+            LoginActivity.start(mActivity);
+        }
+    }
+
+    /**
+     * 送礼
+     */
+    @OnClick(R.id.chat_view_gift_iv)
+    protected void onGiftClick() {
+        if (mOnInputListener != null) {
+            hideKeyboard();
+            mOnInputListener.onSendGift();
+        }
     }
 
     @Override
@@ -160,131 +167,111 @@ public class ChatInputView extends RelativeLayout implements View.OnClickListene
         return super.onTouchEvent(event);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.editText:
-                if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin()) {
-                    mInputMethodManager.showSoftInput(mInputEt, InputMethodManager.SHOW_FORCED);
-                } else {
-                    LoginActivity.start(getContext());
-                }
-
-                break;
-            case R.id.iv_image:
-                if (mInputViewListener != null) {
-                    hideKeyboard();
-                    mInputViewListener.onImageButtonClick();
-                }
-                break;
-            case R.id.iv_send:
-                if (mInputViewListener != null) {
-                    String content = mInputEt.getText().toString().trim();
-                    if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
-                        mInputViewListener.onReply(content.replace(mReplyTips, ""), mReplyModel);
-                    } else {
-                        mInputViewListener.sendMessage(mMsgType, mInputEt.getText().toString().trim());
-                    }
-                    hideKeyboard();
-                    mInputEt.setText("");
-                }
-                break;
-        }
-    }
-
+    /**
+     * 显示输入
+     */
     public void showInput() {
         if (mInputEt.isFocused()) {
             mInputMethodManager.showSoftInput(mInputEt, InputMethodManager.SHOW_FORCED);
         } else {
-            InputMethodManager mInputManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (mInputManager != null) {
-                mInputManager.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+            InputMethodManager inputManager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputManager != null) {
+                inputManager.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
             }
         }
     }
 
+    /**
+     * 隐藏软键盘
+     */
     public void hideKeyboard() {
         if (mActivity.getCurrentFocus() != null && mInputMethodManager.isActive()) {
             mInputMethodManager.hideSoftInputFromWindow(mActivity.getCurrentFocus().getWindowToken(), 0);
-            Log.d(TAG, "hideKeyboard: ");
-
         }
     }
 
     private class KeyboardOnGlobalChangeListener implements ViewTreeObserver.OnGlobalLayoutListener {
-        int mScreenHeight = 0;
-        Rect mRect = new Rect();
+        int screenHeight = 0;
+        Rect rect = new Rect();
 
+        /**
+         * 获取屏幕高度
+         *
+         * @return
+         */
         private int getScreenHeight() {
-            if (mScreenHeight > 0) {
-                return mScreenHeight;
+            if (screenHeight > 0) {
+                return screenHeight;
             }
-            mScreenHeight = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE))
+            screenHeight = ((WindowManager) mActivity.getSystemService(Context.WINDOW_SERVICE))
                     .getDefaultDisplay().getHeight();
-            return mScreenHeight;
+            return screenHeight;
         }
 
         @Override
         public void onGlobalLayout() {
-//            // 获取当前页面窗口的显示范围
-            getWindowVisibleDisplayFrame(mRect);
+            // 获取当前页面窗口的显示范围
+            getWindowVisibleDisplayFrame(rect);
             int screenHeight = getScreenHeight();
-            int keyboardHeight = screenHeight - mRect.bottom; // 输入法的高度
+            // 软键盘高度
+            int keyboardHeight = screenHeight - rect.bottom;
             boolean isActive = false;
-            if (Math.abs(keyboardHeight) > screenHeight / 5) {
-                isActive = true; // 超过屏幕五分之一则表示弹出了输入法
+            // 超过屏幕四分之一则表示弹出了输入法
+            if (Math.abs(keyboardHeight) > screenHeight / 4) {
+                isActive = true;
             }
             mIsKeyboardActive = isActive;
-            if (isActive) {
-                if (hasOptionBar) {
-                    mRlOption.setVisibility(VISIBLE);
-                } else {
-                    mRlOption.setVisibility(GONE);
-                }
-                setBackground(new ColorDrawable(getResources().getColor(R.color.input_bg)));
-            } else {
-                mRlOption.setVisibility(GONE);
-                setBackground(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
-            }
         }
     }
 
-    public void setInputViewListener(InputViewListener inputViewListener) {
-        this.mInputViewListener = inputViewListener;
+    public void setAnchor(boolean isAnchor) {
+        if (isAnchor) {
+            mGiftIv.setVisibility(GONE);
+            mInputEt.setHint("大师，加入聊天吧～");
+        } else {
+            mGiftIv.setVisibility(VISIBLE);
+            mInputEt.setHint("加入聊天吧");
+        }
     }
 
-    public void hideOptionBar() {
-        this.hasOptionBar = false;
-        mRlOption.setVisibility(GONE);
+    /**
+     * 设置监听
+     */
+    public void setOnInputListener(OnInputListener listener) {
+        mOnInputListener = listener;
     }
 
-    public void replySomebody(String nickname, String content) {
-        Logger.d(TAG, "replySomebody: nickname=" + nickname + "   content=" + content);
-        if (TextUtils.isEmpty(nickname) || TextUtils.isEmpty(content)) {
+    /**
+     * 回复某人
+     */
+    public void replySomebody(String nickname, String message) {
+        if (TextUtils.isEmpty(nickname) || TextUtils.isEmpty(message)) {
             return;
         }
-        mReplyModel = new ReplyModel(nickname, content);
+        mReplyModel = new ReplyModel(nickname, message);
         mReplyTips = getResources().getString(R.string.reply_somebody, nickname);
         mInputEt.setText(mReplyTips);
         mInputEt.setSelection(mReplyTips.length());
+        mInputEt.requestFocus();
         showInput();
     }
 
-    public interface InputViewListener {
-        public void sendMessage(String msgType, String content);
+    public interface OnInputListener {
 
-        public void onImageButtonClick();
+        void onSendMessage(String type, String message);
 
-        public void onReply(String content, ReplyModel replyModel);
+        void onSendGift();
+
+        void onReplyMessage(String message, ReplyModel replyModel);
     }
 
     public class ReplyModel {
-        public String replyNickName;
-        public String replyContent;
+        public String nickname;
+        public String message;
 
-        public ReplyModel(String replyNickName, String replyContent) {
-            this.replyNickName = replyNickName;
-            this.replyContent = replyContent;
+        public ReplyModel(String nickname, String message) {
+            this.nickname = nickname;
+            this.message = message;
         }
     }
 

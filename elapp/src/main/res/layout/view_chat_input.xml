@@ -24,8 +24,10 @@
             android:layout_toLeftOf="@+id/chat_view_gift_iv"
             android:background="@drawable/shape_chat_input"
             android:hint="加入聊天吧"
+            android:imeOptions="actionSend"
             android:maxLength="1000"
             android:maxLines="5"
+            android:inputType="text"
             android:minHeight="40dp"
             android:paddingBottom="9dp"
             android:paddingLeft="12dp"
@@ -45,62 +47,6 @@
             android:background="@drawable/bg_gift_n"
             android:padding="10dp"
             android:src="@drawable/btn_gift_n"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/chat_view_anchor_panel"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:background="#f8f8f8"
-        android:visibility="visible">
-
-        <RadioGroup
-            android:id="@+id/rgMsgType"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/tvNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:button="@null"
-                android:checked="true"
-                android:text="普通"
-                android:textColor="@color/selector_msg_type_btn"/>
-
-            <RadioButton
-                android:id="@+id/tvImportant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="21dp"
-                android:button="@null"
-                android:text="高亮"
-                android:textColor="@color/selector_msg_type_btn"/>
-
-            <RadioButton
-                android:id="@+id/tvStick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="21dp"
-                android:button="@null"
-                android:text="置顶"
-                android:textColor="@color/selector_msg_type_btn"/>
-
-        </RadioGroup>
-
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="29dp"
-            android:layout_height="29dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="9dp"
-            android:padding="7dp"
-            android:src="@drawable/btn_add_picture_n"/>
 
     </RelativeLayout>
 

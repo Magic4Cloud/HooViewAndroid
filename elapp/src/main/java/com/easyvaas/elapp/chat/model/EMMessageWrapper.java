@@ -13,6 +13,8 @@ public class EMMessageWrapper {
     public static final String MSG_TYPE_NORMAL = "nor";
     public static final String MSG_TYPE_REPLY = "rp";
     public static final String MSG_TYPE_IMAGE = "image";
+    public static final String MSG_TYPE_JOIN = "join";
+    public static final String MSG_TYPE_GIFT = "gift";
 
     public static final String EXTRA_MSG_TYPE = "tp";
     public static final String EXTRA_MSG_STICK = "st";

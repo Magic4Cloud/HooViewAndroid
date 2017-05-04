@@ -747,7 +747,7 @@
     <string name="me">我</string>
     <string name="reply_content">回复%1$s:%2$s</string>
     <string name="cant_find_pictures">找不到图片</string>
-    <string name="reply_somebody">回复%1$s:</string>
+    <string name="reply_somebody">回复%1$s：</string>
     <string name="app_url">http://www.easylive.com</string>
     <string name="image_date_pattern">MM月dd日</string>
     <string name="who_room">的直播间</string>

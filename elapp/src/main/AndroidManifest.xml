@@ -557,7 +557,7 @@
             android:name="com.easyvaas.elapp.ui.live.ImageTextLiveActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity
             android:name="com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity"
             android:launchMode="singleTask"

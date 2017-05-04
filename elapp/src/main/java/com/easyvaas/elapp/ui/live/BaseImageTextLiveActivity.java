@@ -72,7 +72,7 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
         list.add(isAnchor ? ImageTextLiveFragment.newInstance(mRoomId, isAnchor, watchCount()) : ImageTextLiveFragment.newInstance(streamEntity()));
         list.add(ImageTextLiveDataFragment.newInstance(isAnchor));
 //        list.add(ImageTextLiveChatFragment.newInstance(isAnchor, mRoomId));
-        list.add(ChatMessageFragment.newInstance(isAnchor, mRoomId));
+        list.add(ChatMessageFragment.newInstance(isAnchor, mRoomId, streamEntity()));
         list.add(BookPlayFragment.newInstance());
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setPageMargin((int) ViewUtil.dp2Px(getApplicationContext(), 10));

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="45dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="15dp">
+
+    <TextView
+        android:id="@+id/chat_join_welcome_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentBottom="true"
+        android:text="欢迎"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_size_14"/>
+
+    <com.easyvaas.elapp.view.CircleImageView
+        android:id="@+id/chat_join_avatar_civ"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/chat_join_welcome_tv"
+        android:src="@drawable/account_bitmap_list"/>
+
+    <TextView
+        android:id="@+id/chat_join_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/chat_join_avatar_civ"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxWidth="140dp"
+        android:text="小王黑"
+        android:textColor="#ff8b65"
+        android:textSize="@dimen/text_size_14"/>
+
+    <TextView
+        android:id="@+id/chat_join_into_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/chat_join_name_tv"
+        android:text="来到本直播间"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_size_14"/>
+
+</RelativeLayout>
