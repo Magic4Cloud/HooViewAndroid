@@ -466,7 +466,6 @@
         <activity
             android:name="com.easyvaas.elapp.ui.live.PlayerActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden"

@@ -22,6 +22,7 @@ import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.ui.news.TopicActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
+import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.easyvaas.elapp.view.ImportNewsListHeaderView;
@@ -209,7 +210,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsReadcounts.setText( NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             Utils.showNewsImage(data.getCover().get(0), mItemNewsPic1);
             Utils.showNewsImage(data.getCover().get(1), mItemNewsPic2);
@@ -248,7 +249,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsReadcounts.setText( NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             Utils.showNewsImage(data.getCover().get(0), mItemNewsPic);
             if (nextData != null) {
@@ -283,7 +284,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsReadcounts.setText(NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             if (nextData != null) {
                 if (nextData.getType() == 1 || nextData.getType() == 2)
@@ -314,7 +315,7 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
 
         private void initData(HomeNewsBean data) {
             mItemTopicTitle.setText(data.getTitle());
-            mItemTopicReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemTopicReadcounts.setText(NumberUtil.format(data.getViewCount()));
             Utils.showNewsImage(data.getCover().get(0), mItemTopicImg);
         }
     }

@@ -103,18 +103,19 @@ public class GlobalSearchActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_operation:
-                if (!mTvOperation.isSelected()&&mTvOperation.getText().equals(getString(R.string.cancel))) {
-                    finish();
-                } else {
-                    mKeyWord = mEtSearch.getText().toString().trim();
-                    if (TextUtils.isEmpty(mKeyWord)) {
-                        SingleToast.show(getApplicationContext(), getString(R.string.search_empty_prompt));
-                    } else {
-                        mTvOperation.setSelected(true);
-                        EventBus.getDefault().post(new SearchEvent(mKeyWord, mViewPager.getCurrentItem()));
-                    }
-
-                }
+//                if (!mTvOperation.isSelected()&&mTvOperation.getText().equals(getString(R.string.cancel))) {
+//                    finish();
+//                } else {
+//                    mKeyWord = mEtSearch.getText().toString().trim();
+//                    if (TextUtils.isEmpty(mKeyWord)) {
+//                        SingleToast.show(getApplicationContext(), getString(R.string.search_empty_prompt));
+//                    } else {
+//                        mTvOperation.setSelected(true);
+//                        EventBus.getDefault().post(new SearchEvent(mKeyWord, mViewPager.getCurrentItem()));
+//                    }
+//
+//                }
+                finish();
                 break;
         }
     }

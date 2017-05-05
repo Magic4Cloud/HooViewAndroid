@@ -2,6 +2,7 @@ package com.easyvaas.elapp.adapter.live;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,9 @@ public class LiveRecommendAdapter extends MyBaseAdapter<VideoEntity> {
         {
             View headerView = LayoutInflater.from(context).inflate(R.layout.item_video_recommend_header,null);
             TextView textView = (TextView) headerView.findViewById(R.id.video_recommend_introduce);
+            if (TextUtils.isEmpty(data))
+                textView.setVisibility(View.GONE);
+            textView.setText(data);
             addHeaderView(headerView);
             mHasHeader =true;
         }
@@ -111,7 +115,7 @@ public class LiveRecommendAdapter extends MyBaseAdapter<VideoEntity> {
                     mHotIv.setVisibility(View.GONE);
                 }
                 // watch_count
-                mWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
+                mWatchCountTv.setText(NumberUtil.formatLive(videoEntity.getWatch_count()));
                 // title
                 mTitleTv.setText(videoEntity.getTitle());
                 // name

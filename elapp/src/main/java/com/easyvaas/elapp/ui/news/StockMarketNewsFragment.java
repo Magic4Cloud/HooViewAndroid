@@ -1,8 +1,7 @@
 package com.easyvaas.elapp.ui.news;
 
 import com.easyvaas.elapp.adapter.news.NormalNewsAdapter;
-import com.easyvaas.elapp.app.EVApplication;
-import com.easyvaas.elapp.bean.news.NormalNewsModel;
+import com.easyvaas.elapp.bean.news.StockMarketNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
@@ -36,14 +35,14 @@ public class StockMarketNewsFragment extends MyBaseListFragment<NormalNewsAdapte
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription = RetrofitHelper.getInstance().getService()
-                .getUserReadHistory(EVApplication.getUser().getName(),EVApplication.getUser().getSessionid(),start)
+                .getStockMarketNewsList("2",start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<NormalNewsModel>() {
+                .subscribe(new NetSubscribe<StockMarketNewsModel>() {
                     @Override
-                    public void OnSuccess(NormalNewsModel normalNewsModel) {
-                        if (normalNewsModel != null)
-                        mAdapter.dealLoadData(StockMarketNewsFragment.this,isLoadMore,normalNewsModel.getNews());
+                    public void OnSuccess(StockMarketNewsModel marketNewsModel) {
+                        if (marketNewsModel != null)
+                        mAdapter.dealLoadData(StockMarketNewsFragment.this,isLoadMore,marketNewsModel.getNews());
                     }
 
                     @Override

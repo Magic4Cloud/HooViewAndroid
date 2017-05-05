@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui.live;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -112,6 +113,14 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private DecimalFormat df2;
     private boolean hasStick; // 是否已有置顶消息
     private EMChatRoomChangeListener mEMChatRoomChangeListener;
+    private ImageTextLiveActivity mImageTextLiveActivity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ImageTextLiveActivity)
+             mImageTextLiveActivity = (ImageTextLiveActivity) context;
+    }
 
     public static ImageTextLiveFragment newInstance(String roomId, boolean isAnchor, int watcherCount) {
         Bundle args = new Bundle();
@@ -403,7 +412,9 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                 .subscribe(new Action1<Integer>() {
                     @Override
                     public void call(Integer integer) {
-                        mWatchCount = mWatchCount * 100;  //在线人数*100
+                        if (mImageTextLiveActivity != null)
+                        mImageTextLiveActivity.setOnLineCounts(mWatchCount);
+//                        mWatchCount = mWatchCount * 100;  //在线人数*100
                         mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
                     }
                 });
@@ -415,11 +426,13 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
 
             @Override
             public void onMemberJoined(String s, String s1) {
-                mWatchCount = mWatchCount + 10;
+                mWatchCount = mWatchCount + 1;
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
+                        if (mImageTextLiveActivity != null)
+                            mImageTextLiveActivity.onLineCountsChange(false);
 
                     }
                 });
@@ -427,11 +440,13 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
 
             @Override
             public void onMemberExited(String s, String s1, String s2) {
-                mWatchCount = mWatchCount - 10;
+                mWatchCount = mWatchCount - 1;
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
+                        if (mImageTextLiveActivity != null)
+                            mImageTextLiveActivity.onLineCountsChange(true);
 
                     }
                 });

@@ -141,7 +141,7 @@ public class LiveMainFragment extends MyBaseFragment {
                     .withStartAction(new Runnable() {
                         @Override
                         public void run() {
-                            mLiveStartIv.setImageResource(R.drawable.btn_video_cancel_n);
+                            mLiveStartIv.setImageResource(R.drawable.btn_cancel_n);
                             mLiveStartIv.setEnabled(false);
                         }
                     })

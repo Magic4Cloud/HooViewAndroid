@@ -16,11 +16,9 @@ import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.imageTextLive.CheckImageTextLiveModel;
 import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveRoomModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
-import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.ui.live.ImageTextLiveActivity;
 import com.easyvaas.elapp.ui.live.MyImageTextLiveRoomActivity;
-import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
@@ -123,23 +121,19 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
      * 点击事件
      */
     private void onItemClick(TextLiveListModel.StreamsEntity model) {
-        if (Preferences.getInstance(mContext).isLogin() && EVApplication.isLogin()) {
-            if (EVApplication.getUser() != null && model != null && model.getOwnerid() != null
-                    && model.getOwnerid().equals(EVApplication.getUser().getName())) {
-                CheckImageTextLiveModel checkImageTextLiveModel = new CheckImageTextLiveModel();
-                ImageTextLiveRoomModel roomModel = new ImageTextLiveRoomModel();
-                roomModel.setId(model.getId());
-                roomModel.setName(model.getName());
-                roomModel.setOwnerid(model.getOwnerid());
-                roomModel.setViewcount(model.getViewcount());
-                roomModel.setUserInfo(model.getUserEntity());
-                checkImageTextLiveModel.setData(roomModel);
-                MyImageTextLiveRoomActivity.start(mContext, checkImageTextLiveModel);
-            } else {
-                ImageTextLiveActivity.start(mContext, model);
-            }
+        if (EVApplication.getUser() != null && model != null && model.getOwnerid() != null
+                && model.getOwnerid().equals(EVApplication.getUser().getName())) {
+            CheckImageTextLiveModel checkImageTextLiveModel = new CheckImageTextLiveModel();
+            ImageTextLiveRoomModel roomModel = new ImageTextLiveRoomModel();
+            roomModel.setId(model.getId());
+            roomModel.setName(model.getName());
+            roomModel.setOwnerid(model.getOwnerid());
+            roomModel.setViewcount(model.getViewcount());
+            roomModel.setUserInfo(model.getUserEntity());
+            checkImageTextLiveModel.setData(roomModel);
+            MyImageTextLiveRoomActivity.start(mContext, checkImageTextLiveModel);
         } else {
-            LoginActivity.start(mContext);
+            ImageTextLiveActivity.start(mContext, model);
         }
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 public class StockMarketNewsModel extends BaseListBean {
 
     private List<HomeNewsBean> news;
-    private List<ChannelEntity> channel;
+    private ChannelEntity channel;
 
     public List<HomeNewsBean> getNews() {
         return news;
@@ -25,11 +25,11 @@ public class StockMarketNewsModel extends BaseListBean {
         this.news = news;
     }
 
-    public List<ChannelEntity> getChannel() {
+    public ChannelEntity getChannel() {
         return channel;
     }
 
-    public void setChannel(List<ChannelEntity> channel) {
+    public void setChannel(ChannelEntity channel) {
         this.channel = channel;
     }
 }

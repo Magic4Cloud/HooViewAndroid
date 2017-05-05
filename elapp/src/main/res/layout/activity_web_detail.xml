@@ -177,7 +177,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:scaleType="center"
-            android:src="@drawable/icon_back"/>
+            android:src="@drawable/btn_news_return_n"/>
         <TextView
             android:id="@+id/tv_news_comment_hint"
             android:layout_width="0dp"

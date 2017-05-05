@@ -4,10 +4,14 @@ import android.os.Bundle;
 
 import com.easyvaas.elapp.adapter.live.LiveRecommendAdapter;
 import com.easyvaas.elapp.bean.video.VideoEntity;
+import com.easyvaas.elapp.event.HeaderDescriptionEvent;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -38,6 +42,7 @@ public class VideoRecommendFragment extends MyBaseListFragment<LiveRecommendAdap
     @Override
     protected void initSomeData() {
         vid = getArguments().getString(AppConstants.VIDEO_ID);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -49,8 +54,6 @@ public class VideoRecommendFragment extends MyBaseListFragment<LiveRecommendAdap
                 .subscribe(new NetSubscribe<ArrayList<VideoEntity>>() {
                     @Override
                     public void OnSuccess(ArrayList<VideoEntity> result) {
-                        if (!isLoadMore)
-                            mAdapter.setHeaderData(getContext(),"");
                         mAdapter.dealLoadData(VideoRecommendFragment.this, isLoadMore, result);
                     }
 
@@ -62,6 +65,13 @@ public class VideoRecommendFragment extends MyBaseListFragment<LiveRecommendAdap
         addSubscribe(subscription);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+
     public static VideoRecommendFragment newInstance(String vid) {
 
         Bundle args = new Bundle();
@@ -69,6 +79,15 @@ public class VideoRecommendFragment extends MyBaseListFragment<LiveRecommendAdap
         VideoRecommendFragment fragment = new VideoRecommendFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    /**
+     * 接收从视频界面传来的简介信息
+     */
+    @Subscribe(sticky = true)
+    public void setHeaderData(HeaderDescriptionEvent event)
+    {
+        mAdapter.setHeaderData(getContext(),event.getDescription());
     }
 
 }

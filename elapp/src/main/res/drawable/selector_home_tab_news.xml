@@ -5,6 +5,6 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/home_tab_news_normal" android:state_checked="false" />
-    <item android:drawable="@drawable/home_tab_news_checked" android:state_checked="true" />
+    <item android:drawable="@drawable/btn_news_n" android:state_checked="false" />
+    <item android:drawable="@drawable/btn_news_s" android:state_checked="true" />
 </selector>

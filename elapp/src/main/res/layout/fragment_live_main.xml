@@ -71,7 +71,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|right"
-            android:src="@drawable/btn_image_text"
+            android:src="@drawable/btn_word_n"
             android:visibility="invisible"/>
 
         <ImageView
@@ -79,7 +79,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom|right"
-            android:src="@drawable/btn_video_live"
+            android:src="@drawable/btn_video_n"
             android:visibility="invisible"/>
 
         <ImageView

@@ -147,7 +147,7 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
                 mUserView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Utils.toUserPager(mContext, videoEntity.getName(), videoEntity.getVip());
+                        Utils.toUserPager(mContext, videoEntity.getName(),1);
                     }
                 });
             }

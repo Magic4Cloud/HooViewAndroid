@@ -26,9 +26,11 @@ import android.widget.TextView;
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.NoResponeBackModel;
+import com.easyvaas.elapp.bean.chat.ChatComment;
 import com.easyvaas.elapp.bean.user.UserPageInfo;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.event.HeaderDescriptionEvent;
 import com.easyvaas.elapp.event.LiveCommentEvent;
 import com.easyvaas.elapp.event.LiveSearchStockEvent;
 import com.easyvaas.elapp.net.ApiHelper;
@@ -245,6 +247,9 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
 
         initTabAndPager(mIsGoodVideo);
         mPlayerBottomSend.setOnBottomInputListener(this);
+        if (null != mEVPlayer) {
+            mEVPlayer.onStart();
+        }
     }
 
     /**
@@ -271,6 +276,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mPlayerBottomSend.setType(BottomSendView.TYPE_CHAT);
 
         }
+        mPlayerViewpager.setOffscreenPageLimit(4);
         mPlayerViewpager.setAdapter(new PlayerPageAdapter(getSupportFragmentManager()));
         mPlayerTablayout.setViewPager(mPlayerViewpager);
         mPlayerViewpager.addOnPageChangeListener(mOnPageChangeListener);
@@ -332,6 +338,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                         SingleToast.show(PlayerActivity.this, R.string.video_pay_success);
                         startWatchLive();
                         mPlayerNeedPayView.setVisibility(View.GONE);
+                        mIv_all_screen.setEnabled(true);
                     }
 
                     @Override
@@ -454,6 +461,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mPlayerWatchCounts.setText(String.format(getString(R.string.video_watch_count), result.getWatch_count() + ""));
         }
         mPlayerUserFollowButton.setOnClickListener(this);
+        if (mIsGoodVideo)
+            EventBus.getDefault().post(new HeaderDescriptionEvent(result.getDescription())); //发送简介信息
     }
 
     /**
@@ -467,6 +476,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mPlayerStateView.showLoadingView();
         mEVPlayer.watchStart(mCurrentVideo.getUri());
     }
+
 
     private EVPlayerBase.OnPreparedListener mOnPreparedListener = new EVPlayerBase.OnPreparedListener() {
         @Override
@@ -529,9 +539,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     @Override
     protected void onStart() {
         super.onStart();
-        if (null != mEVPlayer) {
-            mEVPlayer.onStart();
-        }
     }
 
     @Override
@@ -543,19 +550,35 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != mEVPlayer) {
+            mVideoView.pause();
+            mIvPlayState.setSelected(true);
+        }
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         if (null != mEVPlayer) {
             mEVPlayer.onStop();
+            mVideoView.pause();
+            mIvPlayState.setSelected(true);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (null != mEVPlayer) {
-            mEVPlayer.onDestroy();
-        }
+        try {
+            if (null != mEVPlayer) {
+                mEVPlayer.onDestroy();
+            }
+        }catch (Exception e)
+        {
+
+        };
         mCompositeSubscription.unsubscribe();
         mUnbinder.unbind();
     }
@@ -646,7 +669,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             case R.id.iv_play_state:
                 if (mIvPlayState.isSelected()) {
                     mIvPlayState.setSelected(false);
-                    mVideoView.start();
+                    mVideoView.resume();
+                    mVideoView.seekTo((mVideoView.getDuration()));
                 } else {
                     mIvPlayState.setSelected(true);
                     mVideoView.pause();
@@ -814,6 +838,20 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         switch (type)
         {
             case BottomSendView.TYPE_CHAT:
+                if (!TextUtils.isEmpty(inputString)) {
+                    ChatComment comment = new ChatComment();
+                    comment.setVid(mVideoId);
+                    comment.setId(-1);
+                    comment.setReply_name("");
+                    comment.setReply_nickname("");
+                    comment.setContent(inputString);
+                    if (EVApplication.getUser() != null) {
+                        comment.setName(EVApplication.getUser().getName());
+                        comment.setNickname(EVApplication.getUser().getNickname());
+                        comment.setLogourl(EVApplication.getUser().getLogourl());
+                    }
+                    mChatHelper.chatSendComment(comment);
+                }
                 break;
             case BottomSendView.TYPE_COMMENT:
                 EventBus.getDefault().post(new LiveCommentEvent(inputString));

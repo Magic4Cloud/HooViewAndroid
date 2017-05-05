@@ -73,6 +73,8 @@
     </LinearLayout>
     <View
         style="@style/divider_view_style"
-        android:background="@color/list_divider_bg"
-        android:layout_height="4dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        />
 </LinearLayout>

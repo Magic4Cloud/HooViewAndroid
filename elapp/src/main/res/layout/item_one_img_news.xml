@@ -52,8 +52,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
                     android:src="@drawable/ic_news_time"/>
 
                 <TextView
@@ -62,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/text_color_gray"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     tools:text="今天 14:20"/>
 
                 <ImageView
@@ -77,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/text_color_gray"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     tools:text="183123"/>
 
             </LinearLayout>

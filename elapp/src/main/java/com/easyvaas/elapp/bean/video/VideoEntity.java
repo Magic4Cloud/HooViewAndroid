@@ -47,6 +47,8 @@ public class VideoEntity {
     private String network_type;
     private String uri;
 
+    private String description;
+
     private int permission;
     private float gps_latitude;
     private float gps_longitude;
@@ -69,6 +71,14 @@ public class VideoEntity {
     private String signature;
 
     private int level;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public int getLevel() {
         return level;

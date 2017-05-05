@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingLeft="12dp">
+            android:paddingLeft="22dp">
 
             <TextView
                 android:id="@+id/tv_exponent_name1"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingLeft="12dp">
+            android:paddingLeft="22dp">
 
             <TextView
                 android:id="@+id/tv_exponent_name2"
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingLeft="12dp">
+            android:paddingLeft="22dp">
 
             <TextView
                 android:id="@+id/tv_exponent_name3"

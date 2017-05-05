@@ -5,6 +5,6 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/home_tab_market_normal" android:state_checked="false" />
-    <item android:drawable="@drawable/home_tab_market_checked" android:state_checked="true" />
+    <item android:drawable="@drawable/tab_market_no" android:state_checked="false" />
+    <item android:drawable="@drawable/tab_market_c" android:state_checked="true" />
 </selector>

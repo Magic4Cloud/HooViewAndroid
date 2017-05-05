@@ -26,5 +26,5 @@ public class AppConstants {
     public static final String TITLE = "title"; // 新闻标题
     public static final String TOPIC_ID = "topicid"; //评论id
 
-    public static final String CHANNEL_ID = "channel_id";
+    public static final String CHANNEL_ID = "channelid";
 }

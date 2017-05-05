@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
-import com.easyvaas.elapp.ui.live.livenew.LiveGoodVideoListFragment;
 import com.easyvaas.elapp.ui.search.GlobalSearchActivity;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
@@ -52,7 +51,7 @@ public class NewsMainFragment extends MyBaseFragment {
         mFragments = new Fragment[]{
                 TopNewsFragment.newInstance(),
                 LastestNewsListFragment.newInstance(),
-                LiveGoodVideoListFragment.newInstance(),
+                StockMarketNewsFragment.newInstance(),
                 NewsColumnFragment.newInstance(),
         };
         mNewsTabViewpager.setAdapter(new MainPageAdapter(getChildFragmentManager()));

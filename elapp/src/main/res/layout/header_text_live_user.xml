@@ -37,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nickname"
+                android:maxLines="1"
                 android:textColor="@color/title_text_color"
                 android:textSize="16sp"/>
 
@@ -65,7 +66,7 @@
             android:id="@+id/text_live_user_follow_counts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_alignParentRight="true"
             android:layout_below="@id/text_live_user_follow_button"
             android:layout_alignLeft="@id/text_live_user_follow_button"
@@ -81,7 +82,7 @@
             android:layout_marginTop="5dp"
             android:layout_below="@id/text_live_user_header"
             tools:text="大盘解说，股票解析，个股分析"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="25dp"
             android:textColor="#4281ad"
             android:textSize="14sp"/>
 

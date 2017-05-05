@@ -64,6 +64,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity {
     ViewPager mTextLiveViewpager;
     private TextLiveListModel.StreamsEntity mStreamsEntity;
     private boolean isGiftShown;
+    private int onLineCounts;
 
     public static void start(Context context, TextLiveListModel.StreamsEntity streamsEntity) {
         Intent starter = new Intent(context, ImageTextLiveActivity.class);
@@ -107,6 +108,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity {
         }
         mTextLiveToolbar.setTitleText(NumberUtil.format(mStreamsEntity.getViewcount())+" 人参与");
         mTextLiveToolbar.getCenterTextView().setTextColor(Color.argb(255,254,79,80));
+        mTextLiveToolbar.getCenterTextView().setTextSize(14);
     }
 
 
@@ -190,4 +192,27 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity {
         }
         return stringBuilder.toString();
     }
+
+    /**
+     * 设置在线人数
+     */
+    public void setOnLineCounts(int counts)
+    {
+        onLineCounts = counts;
+        mTextLiveToolbar.setTitleText(NumberUtil.format(onLineCounts)+" 人参与");
+    }
+
+    /**
+     * 有用户离开或者加入
+     */
+    public void onLineCountsChange(boolean isLeave)
+    {
+        if (isLeave)
+            onLineCounts = onLineCounts - 1;
+        else
+            onLineCounts = onLineCounts + 1;
+
+        mTextLiveToolbar.setTitleText(NumberUtil.format(onLineCounts)+" 人参与");
+    }
+
 }

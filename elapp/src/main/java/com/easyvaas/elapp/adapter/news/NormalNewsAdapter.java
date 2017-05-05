@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseAdapter;
 import com.easyvaas.elapp.utils.DateTimeUtil;
+import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 
@@ -126,7 +127,7 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
         private void initData(HomeNewsBean data) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsReadcounts.setText(NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             Utils.showNewsImage(data.getCover().get(0), mItemNewsPic1);
             Utils.showNewsImage(data.getCover().get(1), mItemNewsPic2);
@@ -168,7 +169,7 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
         private void initData(HomeNewsBean data) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsReadcounts.setText(NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
             Utils.showNewsImage(data.getCover().get(0), mItemNewsPic);
         }
@@ -204,7 +205,7 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
         private void initData(HomeNewsBean data) {
             this.data = data;
             mItemNewsTitle.setText(data.getTitle());
-            mItemNewsReadcounts.setText(String.valueOf(data.getViewCount()));
+            mItemNewsReadcounts.setText(NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
         }
     }
