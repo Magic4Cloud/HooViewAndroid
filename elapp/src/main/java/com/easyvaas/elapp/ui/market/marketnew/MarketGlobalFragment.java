@@ -126,7 +126,7 @@ public class MarketGlobalFragment extends BaseListLazyFragment {
                             if (mAdapter != null) {
                                 mAdapter.setData(datas);
                             }
-                            showOperationView(R.drawable.market_refresh_xm);
+                            showOperationView(R.drawable.market_refresh_new);
                         } else {
                             showWithoutData();
                         }

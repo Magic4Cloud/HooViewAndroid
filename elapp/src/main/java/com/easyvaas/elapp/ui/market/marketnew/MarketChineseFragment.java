@@ -184,7 +184,7 @@ public class MarketChineseFragment extends BaseListLazyFragment {
 
     private void hideWithData() {
         hideEmptyView();
-        showOperationView(R.drawable.market_refresh_xm);
+        showOperationView(R.drawable.market_refresh_new);
     }
 
     @Override

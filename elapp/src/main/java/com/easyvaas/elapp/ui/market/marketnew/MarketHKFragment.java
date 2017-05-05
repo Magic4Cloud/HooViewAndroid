@@ -196,7 +196,7 @@ public class MarketHKFragment extends BaseListLazyFragment {
 
     private void hideWithData() {
         hideEmptyView();
-        showOperationView(R.drawable.market_refresh_xm);
+        showOperationView(R.drawable.market_refresh_new);
     }
 
     public static MarketHKFragment newInstance() {
