@@ -160,4 +160,12 @@
 
     </RelativeLayout>
 
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="#f8f8f8"/>
+
 </LinearLayout>

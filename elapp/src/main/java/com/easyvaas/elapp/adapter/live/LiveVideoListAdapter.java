@@ -64,7 +64,7 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
     @Override
     protected void convert(BaseViewHolder helper, VideoEntity item) {
         if (helper instanceof VideoViewHolder) {
-            ((VideoViewHolder) helper).setModel(item);
+            ((VideoViewHolder) helper).setModel(item, helper.getLayoutPosition());
         }
     }
 
@@ -92,13 +92,15 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
         CardView mPayCv;
         @BindView(R.id.tv_pay)
         TextView mPayTv;
+        @BindView(R.id.view_divider)
+        View mDivider;
 
         public VideoViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
 
-        void setModel(final VideoEntity videoEntity) {
+        void setModel(final VideoEntity videoEntity, int position) {
             if (videoEntity != null) {
                 // cover
                 Utils.showNewsImage(videoEntity.getThumb(), mCoverIv);
@@ -146,6 +148,16 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
                 } else {
                     mPayCv.setVisibility(View.GONE);
                     // TODO: 2017/5/5  
+                }
+                // divider
+                int size = mData.size();
+                if (!mHasHot) {
+                    size -= 1;
+                }
+                if (position == size) {
+                    mDivider.setVisibility(View.GONE);
+                } else {
+                    mDivider.setVisibility(View.VISIBLE);
                 }
                 // click
                 mRootView.setOnClickListener(new View.OnClickListener() {

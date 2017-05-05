@@ -1,7 +1,11 @@
 package com.easyvaas.elapp.adapter;
 
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +73,7 @@ public class ImageTextLiveMsgListAdapter extends RecyclerView.Adapter {
         MsgsBean data = mEMMessageList.get(position);
         String msgType = data.getPayload().getBodies().get(0).getType(); // 判断 是文字还是图片消息
         String textMsgType = data.getPayload().getExt().getTp(); //判断 文字消息的 几种类型
-        if (msgType.equals(EMMessageWrapper.EXTRA_MSG_TYPE)) {
+        if (msgType.equals(EMMessageWrapper.MSG_TYPE_IMAGE)) {
             return VIEW_TYPE_IMAGE;
         }
         if (textMsgType.equals(EMMessageWrapper.MSG_TYPE_IMPORTANT)) {
@@ -80,8 +84,9 @@ public class ImageTextLiveMsgListAdapter extends RecyclerView.Adapter {
             return VIEW_TYPE_STICK;
         } else if (textMsgType.equals(EMMessageWrapper.MSG_TYPE_REPLY)) {
             return VIEW_TYPE_REPLY;
+        } else {
+            return VIEW_TYPE_NORMAL;
         }
-        return VIEW_TYPE_NORMAL;
     }
 
     @Override
@@ -162,9 +167,12 @@ public class ImageTextLiveMsgListAdapter extends RecyclerView.Adapter {
 
         public void setEMMessageWrapper(MsgsBean msg) {
             tvContent.setText(msg.getPayload().getBodies().get(0).getMsg());
-            mTvReplyContent.setText(msg.getPayload().getExt().getRct());
             mTvreplyName.setText(msg.getPayload().getExt().getRnk());
             mTvTime.setText(formatTime(msg.getTimestamp()));
+            String content = "回复" + msg.getPayload().getExt().getRnk() + "：" + msg.getPayload().getExt().getRct();
+            SpannableStringBuilder builder = new SpannableStringBuilder(content);
+            builder.setSpan(new ForegroundColorSpan(Color.parseColor("#999999")), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvReplyContent.setText(builder);
         }
     }
 

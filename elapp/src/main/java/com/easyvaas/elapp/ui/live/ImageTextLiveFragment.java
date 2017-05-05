@@ -513,7 +513,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
             return;
         }
         EMMessage message = EMMessage.createImageSendMessage(filePath, false, mRoomId);
-        message.setChatType(EMMessage.ChatType.GroupChat);
+        message.setChatType(EMMessage.ChatType.ChatRoom);
         EMClient.getInstance().chatManager().sendMessage(message);
         List<EMMessage> list = new ArrayList<>();
         list.add(message);

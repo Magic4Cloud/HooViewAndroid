@@ -168,6 +168,8 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
         return super.onTouchEvent(event);
     }
 
+    private boolean mOpenImage = false;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -180,22 +182,24 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
 
                 break;
             case R.id.iv_image:
-                hideKeyboard();
                 if (View.VISIBLE == mPictureLl.getVisibility()) {
+                    mOpenImage = false;
                     mPictureLl.setVisibility(View.GONE);
                 } else {
+                    mOpenImage = true;
                     mPictureLl.setVisibility(View.VISIBLE);
+                    hideKeyboard();
                 }
-                mRlOption.setVisibility(VISIBLE);
-                setBackground(new ColorDrawable(getResources().getColor(R.color.input_bg)));
                 break;
             case R.id.ll_camera:
+                mOpenImage = false;
                 mPictureLl.setVisibility(GONE);
                 if (mInputViewListener != null) {
                     mInputViewListener.openCamera();
                 }
                 break;
             case R.id.ll_album:
+                mOpenImage = false;
                 mPictureLl.setVisibility(GONE);
                 if (mInputViewListener != null) {
                     mInputViewListener.openAlbum();
@@ -256,8 +260,13 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
                 }
                 setBackground(new ColorDrawable(getResources().getColor(R.color.input_bg)));
             } else {
-                mRlOption.setVisibility(GONE);
-                setBackground(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+                if (mOpenImage) {
+                    mRlOption.setVisibility(VISIBLE);
+                    setBackground(new ColorDrawable(getResources().getColor(R.color.input_bg)));
+                } else {
+                    mRlOption.setVisibility(GONE);
+                    setBackground(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+                }
             }
         }
     }

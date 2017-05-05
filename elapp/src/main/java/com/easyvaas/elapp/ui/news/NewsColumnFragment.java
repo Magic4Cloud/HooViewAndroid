@@ -1,7 +1,10 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.AttributeSet;
 import android.util.Log;
 
 import com.easyvaas.elapp.adapter.news.NewsColumnAdapter;
@@ -9,6 +12,7 @@ import com.easyvaas.elapp.bean.news.NewsColumnModel;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+import com.easyvaas.elapp.utils.Logger;
 import com.hooview.app.R;
 
 import rx.Subscription;
@@ -43,7 +47,7 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
     @Override
     protected void changeRecyclerView() {
         mRecyclerview.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        MyStaggerLayoutManager manager = new MyStaggerLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(manager);
     }
 
@@ -75,5 +79,25 @@ public class NewsColumnFragment extends MyBaseListFragment<NewsColumnAdapter> {
 
     public static NewsColumnFragment newInstance() {
         return new NewsColumnFragment();
+    }
+
+    public class MyStaggerLayoutManager extends StaggeredGridLayoutManager {
+
+        public MyStaggerLayoutManager(int spanCount, int orientation) {
+            super(spanCount, orientation);
+        }
+
+        public MyStaggerLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+            super(context, attrs, defStyleAttr, defStyleRes);
+        }
+
+        @Override
+        public void collectAdjacentPrefetchPositions(int dx, int dy, RecyclerView.State state, LayoutPrefetchRegistry layoutPrefetchRegistry) {
+            try {
+                super.collectAdjacentPrefetchPositions(dx, dy, state, layoutPrefetchRegistry);
+            } catch (IllegalArgumentException e) {
+                Logger.e("xmzd", "RecyclerView Bug--- catch IllegalArgumentException");
+            }
+        }
     }
 }

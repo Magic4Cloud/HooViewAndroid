@@ -27,7 +27,7 @@
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="#672f87"/>
+            android:background="#622d80"/>
     </LinearLayout>
 
     <TextView
@@ -40,6 +40,6 @@
         android:layout_toRightOf="@+id/ll_line"
         android:paddingBottom="5dp"
         android:text="掌趣科技中青宝万达信息能涨停中小创将继续补涨掌趣科技中青宝万达信息能涨停中小创将继续补涨"
-        android:textColor="#672f87"
+        android:textColor="#622d80"
         android:textSize="16sp"/>
 </RelativeLayout>

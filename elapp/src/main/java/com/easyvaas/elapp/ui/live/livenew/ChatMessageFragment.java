@@ -313,6 +313,9 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
         List<EMMessage> list = new ArrayList<>();
         list.add(message);
         EventBus.getDefault().post(new ImageTextLiveMessageEvent(list));
+        if (isAnchor) {
+            uploadChatMsg(new EMMessageWrapper(message));
+        }
     }
 
     private void sendGiftMsg(String nk, String gnm, int count) {

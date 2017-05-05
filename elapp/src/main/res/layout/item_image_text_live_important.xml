@@ -55,6 +55,6 @@
         android:paddingRight="12dp"
         android:paddingTop="8dp"
         android:text="掌趣科技中青宝万达信息能涨停中小创将继续补涨"
-        android:textColor="#ff772d"
+        android:textColor="#ff6c67"
         android:textSize="16sp"/>
 </RelativeLayout>

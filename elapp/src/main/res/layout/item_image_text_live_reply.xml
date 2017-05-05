@@ -48,6 +48,8 @@
         android:layout_below="@+id/tv_time"
         android:layout_marginLeft="9dp"
         android:layout_marginRight="21dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:layout_marginTop="14dp"
         android:layout_toRightOf="@+id/ll_line"
         android:background="#fff"
@@ -57,10 +59,8 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="14dp"
             android:background="@color/text_color_white"
             android:text="掌趣科技中青宝万达信息能涨停中小创将继续补涨"
             android:textColor="#303030"
@@ -69,19 +69,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
             android:background="#f7f7f7"
             android:orientation="vertical"
-            android:paddingBottom="5dp">
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="5dp">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_reply_name"
@@ -100,17 +100,20 @@
                     android:text="11:28"
                     android:textColor="#999999"
                     android:textSize="16sp"/>
+
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_reply_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="6dp"
                 android:text="老师2号加仓不"
-                android:textColor="#999999"
+                android:paddingLeft="4dp"
+                android:textColor="#ff8b65"
                 android:textSize="16sp"/>
+
         </LinearLayout>
+
     </LinearLayout>
+
 </RelativeLayout>
