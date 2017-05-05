@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="98dp"
+    android:orientation="vertical"
     android:background="@color/white">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="#f8f8f8"/>
 
     <LinearLayout
         android:id="@+id/item_image_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="94dp"
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
+        android:paddingBottom="14dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="10dp">
+        android:paddingTop="12dp">
 
         <com.easyvaas.common.widget.RoundImageView
             android:id="@+id/image_text_cover"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/logo"/>
 
         <LinearLayout
@@ -43,7 +49,7 @@
                 android:id="@+id/image_text_introduce"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="火眼财经资深投顾"
@@ -53,7 +59,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -78,4 +84,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

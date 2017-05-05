@@ -44,9 +44,7 @@
             android:layout_alignBottom="@+id/chat_view_input_et"
             android:layout_alignParentRight="true"
             android:layout_marginRight="12dp"
-            android:background="@drawable/bg_gift_n"
-            android:padding="10dp"
-            android:src="@drawable/btn_gift_n"/>
+            android:src="@drawable/btn_gift_new"/>
 
     </RelativeLayout>
 

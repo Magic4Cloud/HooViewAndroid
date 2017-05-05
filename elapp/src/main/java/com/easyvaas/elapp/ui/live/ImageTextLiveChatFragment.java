@@ -95,13 +95,18 @@ public class ImageTextLiveChatFragment extends BaseImageTextLiveFragment {
             }
 
             @Override
-            public void onImageButtonClick() {
+            public void onReply(String content, ImageTextLiveInputView.ReplyModel replyModel) {
+                reply(content, replyModel);
+            }
+
+            @Override
+            public void openCamera() {
 
             }
 
             @Override
-            public void onReply(String content, ImageTextLiveInputView.ReplyModel replyModel) {
-                reply(content, replyModel);
+            public void openAlbum() {
+
             }
         });
         if (isAnchor) {

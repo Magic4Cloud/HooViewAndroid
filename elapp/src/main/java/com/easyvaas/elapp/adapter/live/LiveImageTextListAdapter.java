@@ -150,7 +150,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
      * @param list
      */
     public void setHotList(Context context, List<TextLiveListModel.StreamsEntity> list) {
-        if (list != null && list.size() > 0) {
+        /*if (list != null && list.size() > 0) {
             if (mHeaderHolder == null && !mHasHot) {
                 View view = LayoutInflater.from(context).inflate(R.layout.item_live_image_text_hot, null);
                 mHeaderHolder = new HotViewHolder(view);
@@ -158,7 +158,7 @@ public class LiveImageTextListAdapter extends MyBaseAdapter<TextLiveListModel.St
                 mHasHot = true;
             }
             mHeaderHolder.setHotList(list);
-        }
+        }*/
     }
 
     class HotViewHolder {

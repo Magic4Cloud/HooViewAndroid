@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="242dp"
-              android:layout_height="178dp"
-    android:background="@color/white">
+                android:layout_width="242dp"
+                android:layout_height="178dp"
+                android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/item_hot_video"
         android:layout_width="242dp"
         android:layout_height="178dp"
-        android:paddingTop="14dp"
+        android:background="?attr/selectableItemBackground"
         android:paddingBottom="14dp"
         android:paddingLeft="12dp"
         android:paddingRight="10dp"
-        android:background="?attr/selectableItemBackground">
+        android:paddingTop="14dp">
 
         <RelativeLayout
             android:id="@+id/hot_view"
@@ -23,36 +23,37 @@
                 android:id="@+id/hot_cover"
                 android:layout_width="220dp"
                 android:layout_height="124dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/account_bitmap_list"/>
+                android:background="@drawable/account_bitmap_list"
+                android:scaleType="centerCrop"/>
 
-            <View
-                android:layout_width="220dp"
-                android:layout_height="124dp"
-                android:background="#7f000000"/>
-
-            <ImageView
-                android:id="@+id/hot_hot"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="22dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_hot"/>
+                android:background="#7f000000"
+                android:paddingLeft="4dp">
 
-            <TextView
-                android:id="@+id/hot_watch_count"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@+id/hot_hot"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:text="17,184人观看"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
+                <ImageView
+                    android:id="@+id/hot_hot"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/ic_hot"/>
+
+                <TextView
+                    android:id="@+id/hot_watch_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="17,184人观看"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -60,14 +61,14 @@
             android:id="@+id/hot_title"
             android:layout_width="220dp"
             android:layout_height="22dp"
-            android:text="安邦举牌格力的可能性分析分"
-            android:textSize="@dimen/text_size_16"
-            android:textColor="@color/title_text_color"
             android:layout_below="@+id/hot_view"
-            android:maxLines="1"
+            android:layout_marginTop="4dp"
             android:ellipsize="end"
-            android:layout_marginTop="4dp"/>
-        
+            android:maxLines="1"
+            android:text="安邦举牌格力的可能性分析分"
+            android:textColor="@color/title_text_color"
+            android:textSize="@dimen/text_size_16"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

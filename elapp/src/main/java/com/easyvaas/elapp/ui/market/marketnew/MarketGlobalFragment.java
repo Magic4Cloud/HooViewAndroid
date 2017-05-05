@@ -1,4 +1,4 @@
-package com.easyvaas.elapp.ui.market;
+package com.easyvaas.elapp.ui.market.marketnew;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -145,6 +145,11 @@ public class MarketGlobalFragment extends BaseListLazyFragment {
                     }
                 });
         addSubscribe(subscription);
+    }
+
+    @Override
+    protected void changeRecyclerView() {
+        setPaddingTop(4);
     }
 
     public static MarketGlobalFragment newInstance() {

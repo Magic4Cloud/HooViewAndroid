@@ -59,6 +59,11 @@ public class LiveVideoListFragment extends MyBaseListFragment<LiveVideoListAdapt
         addSubscribe(subscription);
     }
 
+    @Override
+    protected void changeRecyclerView() {
+        setPaddingTop(4);
+    }
+
     public static LiveVideoListFragment newInstance() {
         return new LiveVideoListFragment();
     }

@@ -1,4 +1,4 @@
-package com.easyvaas.elapp.ui.market;
+package com.easyvaas.elapp.ui.market.marketnew;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -187,6 +187,11 @@ public class MarketHKFragment extends BaseListLazyFragment {
     @Override
     public void onOperation() {
         loadData();
+    }
+
+    @Override
+    protected void changeRecyclerView() {
+        setPaddingTop(4);
     }
 
     private void hideWithData() {

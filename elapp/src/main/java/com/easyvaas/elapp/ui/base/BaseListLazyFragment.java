@@ -68,12 +68,17 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         initAdapter();
+        changeRecyclerView();
     }
 
     /**
      * 初始化adapter
      */
     protected abstract void initAdapter();
+
+    protected void changeRecyclerView() {
+
+    }
 
     public void showEmptyView() {
         if (mLLEmpty != null) {
@@ -136,6 +141,13 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
     @OnClick(R.id.iv_operation)
     public void onOperation() {
 
+    }
+
+    protected void setPaddingTop(int dp) {
+        if (mRecyclerView != null) {
+            mRecyclerView.setClipToPadding(false);
+            mRecyclerView.setPadding(0, (int) ViewUtil.dp2Px(getContext(), dp), 0, 0);
+        }
     }
 
     @Override

@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.easyvaas.common.bottomsheet.BottomSheet;
 import com.easyvaas.common.gift.bean.GiftEntity;
 import com.easyvaas.common.gift.view.GiftPagerView;
 import com.easyvaas.elapp.adapter.ImageTextLiveMsgAdapter;
@@ -75,7 +74,7 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
-public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements View.OnClickListener,LoadMoreListener {
+public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements View.OnClickListener, LoadMoreListener {
     private static final String TAG = "ImageTextLiveFragment";
     private static final int REQUEST_CODE_IMAGE = 0;
     private static final int REQUEST_CODE_CAMERA = 1;
@@ -97,7 +96,6 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private User mUser;
     private LinkedList<EMMessageWrapper> mEMMessageList;
     private Handler mHandler = new Handler(Looper.getMainLooper());
-    private BottomSheet mSetThumbPanel;
     private GiftViewContainer mGiftViewContainer;
     private boolean isAnchor;
     private RelativeLayout mRlOpertation;
@@ -120,7 +118,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         args.putString(EXTRA_CHAT_ROOM_ID, roomId);
         args.putBoolean(EXTRA_IS_ANCHOR, isAnchor);
         args.putInt(EXTRA_WATCH_COUNT, watcherCount);
-        args.putString(EXTRA_OWENERID,EVApplication.getUser().getName());
+        args.putString(EXTRA_OWENERID, EVApplication.getUser().getName());
         ImageTextLiveFragment fragment = new ImageTextLiveFragment();
         fragment.setArguments(args);
         return fragment;
@@ -135,7 +133,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         args.putBoolean(EXTRA_IS_ANCHOR, false);
         args.putInt(EXTRA_WATCH_COUNT, streamsEntity.getViewcount());
         args.putSerializable(EXTRA_STREEM, streamsEntity);
-        args.putString(EXTRA_OWENERID,streamsEntity.getOwnerid());
+        args.putString(EXTRA_OWENERID, streamsEntity.getOwnerid());
         ImageTextLiveFragment fragment = new ImageTextLiveFragment();
         fragment.setArguments(args);
         return fragment;
@@ -150,8 +148,6 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         ownerId = getArguments().getString(EXTRA_OWENERID);
         mStreamsEntity = (TextLiveListModel.StreamsEntity) getArguments().getSerializable(EXTRA_STREEM);
         mUser = EVApplication.getUser();
-        mSetThumbPanel = Utils.getSetThumbBottomPanel(getActivity(), IMAGE_FILE_NAME,
-                REQUEST_CODE_CAMERA, REQUEST_CODE_IMAGE);
         mPref = Preferences.getInstance(getContext());
         EventBus.getDefault().register(this);
     }
@@ -203,13 +199,18 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
             }
 
             @Override
-            public void onImageButtonClick() {
-                mSetThumbPanel.show();
+            public void onReply(String content, ImageTextLiveInputView.ReplyModel replyModel) {
+
             }
 
             @Override
-            public void onReply(String content, ImageTextLiveInputView.ReplyModel replyModel) {
+            public void openCamera() {
+                Utils.openCamera(getActivity(), IMAGE_FILE_NAME, REQUEST_CODE_CAMERA);
+            }
 
+            @Override
+            public void openAlbum() {
+                Utils.openPhotoAlbum(getActivity(), REQUEST_CODE_IMAGE);
             }
         });
         TextView tvTime = (TextView) view.findViewById(R.id.tv_time);
@@ -253,21 +254,20 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
      * 从服务器拉取直播数据
      */
     private void onMessageListInit(final boolean isLoadMore) {
-        if (!isLoadMore)
-        {
+        if (!isLoadMore) {
             start = 0;
             hasStick = false;
         }
-        HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId,start,count+"", System.currentTimeMillis()/1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
+        HooviewApiHelper.getInstance().getImageTextLiveHistory(mRoomId, start, count + "", System.currentTimeMillis() / 1000, new MyRequestCallBack<ImageTextLiveHistoryModel>() {
             @Override
             public void onSuccess(ImageTextLiveHistoryModel result) {
 
-                if (result != null && result.getMsgs().size() >0) {
+                if (result != null && result.getMsgs().size() > 0) {
 
                     LinkedList<MsgsBean> tempDatas = new LinkedList<MsgsBean>();
                     tempDatas.addAll(result.getMsgs());
                     Iterator<MsgsBean> it = tempDatas.iterator();
-                    while(it.hasNext()){
+                    while (it.hasNext()) {
                         MsgsBean msg = it.next();
                         if (!msg.getFrom().equals(ownerId))  //去掉不是主播的消息
                         {
@@ -275,28 +275,24 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                         }
 
                     }
-                    for (int i = 0; i <tempDatas.size(); i++) {   // 筛选置顶消息
+                    for (int i = 0; i < tempDatas.size(); i++) {   // 筛选置顶消息
                         MsgsBean msgsBean = tempDatas.get(i);
-                            if (msgsBean.getPayload().getExt().getTp().equals("st"))
-                            {
-                                if (!hasStick && !isLoadMore)
-                                {
-                                    tempDatas.add(0,msgsBean);
-                                    tempDatas.remove(i+1);
-                                    hasStick = true;
-                                }else
-                                {
-                                    msgsBean.getPayload().getExt().setTp("nor");
-                                }
+                        if (msgsBean.getPayload().getExt().getTp().equals("st")) {
+                            if (!hasStick && !isLoadMore) {
+                                tempDatas.add(0, msgsBean);
+                                tempDatas.remove(i + 1);
+                                hasStick = true;
+                            } else {
+                                msgsBean.getPayload().getExt().setTp("nor");
                             }
+                        }
                     }
 
                     if (isLoadMore) {
                         mDatas.addAll(tempDatas);
                         start = result.getNext();
 
-                    } else
-                    {
+                    } else {
                         mDatas.clear();
                         mDatas.addAll(tempDatas);
                         start = result.getNext();
@@ -305,16 +301,15 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                     mAutoLoadRecyclerView.setLoadingMore(false);
                     mLlEmpty.setVisibility(View.GONE);
                     mImageTextLiveMsgListAdapter.notifyDataSetChanged();
-                }else
-                {
+                } else {
                     if (mDatas.size() <= 0)
-                    mLlEmpty.setVisibility(View.VISIBLE);
+                        mLlEmpty.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(String msg) {
-                Log.d("Misuzu","fail ---"+msg);
+                Log.d("Misuzu", "fail ---" + msg);
             }
         });
     }
@@ -369,7 +364,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                         public void run() {
                             onMessageListInit(false); // 跳出循环 如果是主播的消息 更新界面
                         }
-                    },1000);
+                    }, 1000);
                     break;
                 }
             }
@@ -392,8 +387,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     /**
      * 注册聊天室在线人数监听 且显示当前在线人数
      */
-    public void addOnlineCountListener()
-    {
+    public void addOnlineCountListener() {
         Observable.create(new Observable.OnSubscribe<Integer>() {
             @Override
             public void call(Subscriber<? super Integer> subscriber) {
@@ -457,7 +451,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         EMClient.getInstance().chatroomManager().removeChatRoomListener(mEMChatRoomChangeListener);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onMessageEvent(JoinRoomSuccessEvent event) {
         initConversation();
         onMessageListInit(false);
@@ -489,9 +483,6 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        if (mSetThumbPanel != null && mSetThumbPanel.isShowing()) {
-            mSetThumbPanel.dismiss();
-        }
     }
 
     @Override
@@ -626,6 +617,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         }
         mCommonPromptDialog.show();
     }
+
     protected void hideGiftToolsBar() {
         mFlGiftContainer.setVisibility(View.GONE);
         mExpressionGiftLayout.setVisibility(View.INVISIBLE);

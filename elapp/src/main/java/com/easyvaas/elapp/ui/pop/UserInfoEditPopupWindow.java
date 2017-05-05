@@ -89,7 +89,7 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
             @Override
             public void afterTextChanged(Editable editable) {
                 String s = editable.toString();
-                if (TextUtils.isEmpty(s) || s.equals(mPopInput.getHint().toString().trim())) {
+                if (TextUtils.isEmpty(s) || s.equals(mPopInput.getHint().toString().trim()) || (s != null && s.equals(mInputText))) {
                     mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.base_gray));
                     mPopConfirm.setEnabled(false);
                 } else {
@@ -108,8 +108,8 @@ public class UserInfoEditPopupWindow extends BasePopupWindow {
         mInputText = text;
         mPopInput.setText(text);
         if (!TextUtils.isEmpty(text)) {
-            mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.tab_text_color_selected));
-            mPopConfirm.setEnabled(true);
+            mPopConfirmTv.setBackgroundColor(mActivity.getResources().getColor(R.color.base_gray));
+            mPopConfirm.setEnabled(false);
         }
         return this;
     }

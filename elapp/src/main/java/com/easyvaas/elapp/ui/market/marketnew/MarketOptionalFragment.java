@@ -1,4 +1,4 @@
-package com.easyvaas.elapp.ui.market;
+package com.easyvaas.elapp.ui.market.marketnew;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +10,7 @@ import com.easyvaas.elapp.db.Preferences;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.BaseListLazyFragment;
+import com.easyvaas.elapp.ui.market.EditMySelectedStockActivity;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.hooview.app.R;

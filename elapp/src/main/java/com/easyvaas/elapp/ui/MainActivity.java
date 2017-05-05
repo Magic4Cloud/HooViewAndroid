@@ -22,7 +22,7 @@ import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.HomeLiveFragment;
 import com.easyvaas.elapp.ui.live.livenew.LiveMainFragment;
 import com.easyvaas.elapp.ui.market.HomeMarketFragment;
-import com.easyvaas.elapp.ui.market.MarketFragment;
+import com.easyvaas.elapp.ui.market.marketnew.MarketFragment;
 import com.easyvaas.elapp.ui.news.HomeNewsFragment;
 import com.easyvaas.elapp.ui.news.NewsMainFragment;
 import com.easyvaas.elapp.ui.user.UserProfileFragment;

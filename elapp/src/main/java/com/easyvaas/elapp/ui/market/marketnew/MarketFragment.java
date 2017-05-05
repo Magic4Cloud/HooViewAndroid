@@ -1,4 +1,4 @@
-package com.easyvaas.elapp.ui.market;
+package com.easyvaas.elapp.ui.market.marketnew;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

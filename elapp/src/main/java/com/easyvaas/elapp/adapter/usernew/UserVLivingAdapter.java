@@ -238,6 +238,8 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
         TextView mOperatorTv;
         @BindView(R.id.cv_pay)
         CardView mPayCv;
+        @BindView(R.id.tv_pay)
+        TextView mPayTv;
 
         public VideoViewHolder(View view) {
             super(view);
@@ -255,7 +257,7 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                     mHotIv.setVisibility(View.GONE);
                 }
                 // watch_count
-                mWatchCountTv.setText(mContext.getString(R.string.watch_count, NumberUtil.format(videoEntity.getWatch_count())));
+                mWatchCountTv.setText(NumberUtil.formatLive(videoEntity.getWatch_count()));
                 // title
                 mTitleTv.setText(videoEntity.getTitle());
                 // name
@@ -287,8 +289,11 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 int permission = videoEntity.getPermission();
                 if (permission == 7) {
                     mPayCv.setVisibility(View.VISIBLE);
+                    mPayTv.setText("付费");
+                    mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_pay));
                 } else {
                     mPayCv.setVisibility(View.GONE);
+                    // TODO: 2017/5/5
                 }
                 // click
                 mRootView.setOnClickListener(new View.OnClickListener() {
