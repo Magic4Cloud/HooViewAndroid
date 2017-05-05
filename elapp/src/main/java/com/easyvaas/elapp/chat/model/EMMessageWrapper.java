@@ -3,6 +3,7 @@ package com.easyvaas.elapp.chat.model;
 
 import android.text.TextUtils;
 
+import com.easyvaas.elapp.db.RealmHelper;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
@@ -62,6 +63,18 @@ public class EMMessageWrapper {
             isAnchor = true;
         } else {
             isAnchor = false;
+        }
+        // 同步
+        ChatRecord bean = RealmHelper.getInstance().queryChatRecord(userId);
+        if (bean == null) {
+            RealmHelper.getInstance().insertChatRecord(new ChatRecord(avatar, nickname, userId));
+        } else if (bean != null && userId.equals(bean.getId())) {
+            if (!nickname.equals(bean.getNickname())) {
+                nickname = bean.getNickname();
+            }
+            if (!avatar.equals(bean.getAvatar())) {
+                avatar = bean.getAvatar();
+            }
         }
     }
 

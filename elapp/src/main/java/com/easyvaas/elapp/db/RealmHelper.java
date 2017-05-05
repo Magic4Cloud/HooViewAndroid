@@ -5,6 +5,7 @@ import com.easyvaas.elapp.bean.market.ExponentModel;
 import com.easyvaas.elapp.bean.user.Collection;
 import com.easyvaas.elapp.bean.user.ReadRecord;
 import com.easyvaas.elapp.bean.user.Record;
+import com.easyvaas.elapp.chat.model.ChatRecord;
 
 import java.util.List;
 
@@ -284,6 +285,45 @@ public class RealmHelper {
     public void deleteGlobalAllRecord() {
         getRealm().beginTransaction();
         getRealm().delete(ExponentModel.class);
+        getRealm().commitTransaction();
+    }
+
+    /**
+     * 增加聊天记录
+     *
+     * @param bean
+     */
+    public void insertChatRecord(ChatRecord bean) {
+        getRealm().beginTransaction();
+        getRealm().copyToRealm(bean);
+        getRealm().commitTransaction();
+    }
+
+    /**
+     * 查询聊天记录
+     *
+     * @param id
+     * @return
+     */
+    public ChatRecord queryChatRecord(String id) {
+        RealmResults<ChatRecord> results = getRealm().where(ChatRecord.class).findAll();
+        for (ChatRecord item : results) {
+            if (item != null) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 删除聊天记录
+     *
+     * @param id
+     */
+    public void deleteChatRecord(String id) {
+        ChatRecord data = getRealm().where(ChatRecord.class).equalTo("id", id).findFirst();
+        getRealm().beginTransaction();
+        data.deleteFromRealm();
         getRealm().commitTransaction();
     }
 

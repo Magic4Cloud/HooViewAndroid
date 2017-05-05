@@ -21,7 +21,9 @@ import com.easyvaas.elapp.adapter.live.ChatMessageAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
+import com.easyvaas.elapp.chat.model.ChatRecord;
 import com.easyvaas.elapp.chat.model.EMMessageWrapper;
+import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.dialog.CommonPromptDialog;
 import com.easyvaas.elapp.event.AppBarLayoutOffsetChangeEvent;
 import com.easyvaas.elapp.event.ImageTextLiveMessageEvent;
@@ -292,6 +294,8 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
             }
         });
         EMClient.getInstance().chatManager().sendMessage(message);
+        // 同步
+        synRealm(mUser == null ? "" : mUser.getName(), mUser == null ? "" : mUser.getNickname(), mUser == null ? "" : mUser.getLogourl());
         List<EMMessage> list = new ArrayList<>();
         list.add(message);
         EventBus.getDefault().post(new ImageTextLiveMessageEvent(list));
@@ -310,6 +314,8 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
         message.setAttribute(EMMessageWrapper.EXTRA_MSG_USER_ID, mUser == null ? "" : mUser.getName());
         message.setAttribute(EMMessageWrapper.EXTRA_MSG_VIP, String.valueOf(mUser == null ? "0" : mUser.getVip()));
         EMClient.getInstance().chatManager().sendMessage(message);
+        // 同步
+        synRealm(mUser == null ? "" : mUser.getName(), mUser == null ? "" : mUser.getNickname(), mUser == null ? "" : mUser.getLogourl());
         List<EMMessage> list = new ArrayList<>();
         list.add(message);
         EventBus.getDefault().post(new ImageTextLiveMessageEvent(list));
@@ -326,9 +332,27 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
         message.setAttribute(EMMessageWrapper.EXTRA_MSG_AVATAR, mUser == null ? "" : mUser.getLogourl());
         message.setAttribute(EMMessageWrapper.EXTRA_MSG_USER_ID, mUser == null ? "" : mUser.getName());
         EMClient.getInstance().chatManager().sendMessage(message);
+        // 同步
+        synRealm(mUser == null ? "" : mUser.getName(), nk, mUser == null ? "" : mUser.getLogourl());
         List<EMMessage> list = new ArrayList<>();
         list.add(message);
         EventBus.getDefault().post(new ImageTextLiveMessageEvent(list));
+    }
+
+    private void synRealm(String userId, String nickname, String avatr) {
+        if (TextUtils.isEmpty(userId)) {
+            return;
+        }
+        ChatRecord record = new ChatRecord(avatr, nickname, userId);
+        ChatRecord bean = RealmHelper.getInstance().queryChatRecord(userId);
+        if (bean == null) {
+            RealmHelper.getInstance().insertChatRecord(record);
+        } else if (userId.equals(bean.getId())){
+            if ((nickname != null && !nickname.equals(bean.getNickname())) || (avatr != null && !avatr.equals(bean.getAvatar()))) {
+                RealmHelper.getInstance().deleteChatRecord(userId);
+                RealmHelper.getInstance().insertChatRecord(record);
+            }
+        }
     }
 
     private void onMessageListInit() {
