@@ -38,9 +38,14 @@ import rx.schedulers.Schedulers;
 
 public class NormalCommentAdapter extends MyBaseAdapter<PostsBean> {
 
+    public static final int NEWS_TYPE = 0;
+    public static final int VIDEO_TYPE = 1;
+    public static final int STOCK_TYPE = 2;
+    int type;
 
-    public NormalCommentAdapter(List<PostsBean> data) {
+    public NormalCommentAdapter(List<PostsBean> data, int type) {
         super(data);
+        this.type = type;
     }
 
     @Override
@@ -115,7 +120,7 @@ public class NormalCommentAdapter extends MyBaseAdapter<PostsBean> {
                 RetrofitHelper.getInstance().getService()
                         .praiseClick(EVApplication.getUser().getName(),
                                 EVApplication.getUser().getSessionid(),
-                                postsBean.getId(), postsBean.getTopic().getType(), action)
+                                postsBean.getId(), type, action)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<NoResponeBackModel>() {

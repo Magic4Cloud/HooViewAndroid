@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -96,6 +97,8 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     ViewPager mPlayerViewpager;
     @BindView(R.id.player_bottom_send)
     BottomSendView mPlayerBottomSend;
+    @BindView(R.id.player_appbar_layout)
+    AppBarLayout mAppBarLayout;
     private String[] mTitles;
     private Fragment[] mFragments;
 
@@ -251,7 +254,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         if (isGoodVideo) {
             mTitles = getResources().getStringArray(R.array.play_tab_good_video);
             mFragments = new Fragment[]{
-                    VideoRecommendFragment.newInstance("1"),
+                    VideoRecommendFragment.newInstance(mVideoId),
                     VideoCommentFragment.newInstance(mVideoId),
                     DataFragment.newInstance(),
                     BookPlayFragment.newInstance()
@@ -788,7 +791,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     mPlayerBottomSend.setType(BottomSendView.TYPE_SEARCH);
                 }else
                     mPlayerBottomSend.setType(BottomSendView.TYPE_NONE);
-
             }else
             {
                 if (position == 0) {
@@ -822,10 +824,12 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * 打开礼物选择窗口
+     */
     @Override
     public void openGiftWindow() {
         showGiftToolsBar();
     }
-
 
 }

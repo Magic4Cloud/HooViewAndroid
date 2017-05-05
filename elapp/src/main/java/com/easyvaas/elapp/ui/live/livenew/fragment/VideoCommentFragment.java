@@ -6,8 +6,8 @@ import android.view.Gravity;
 import com.easyvaas.elapp.adapter.usernew.NormalCommentAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.user.User;
-import com.easyvaas.elapp.bean.user.UserPageCommentModel;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel.PostsBean;
+import com.easyvaas.elapp.bean.video.VideoCommentModel;
 import com.easyvaas.elapp.event.LiveCommentEvent;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
@@ -42,7 +42,7 @@ public class VideoCommentFragment extends MyBaseListFragment<NormalCommentAdapte
 
     @Override
     protected NormalCommentAdapter initAdapter() {
-        return new NormalCommentAdapter(new ArrayList<PostsBean>());
+        return new NormalCommentAdapter(new ArrayList<PostsBean>(),NormalCommentAdapter.VIDEO_TYPE);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class VideoCommentFragment extends MyBaseListFragment<NormalCommentAdapte
     protected void changeEmptyView() {
         mEmptyView.setEmptyTxt(getString(R.string.empty_video_no_comment));
         mEmptyView.getEmptyLayout().setGravity(Gravity.CENTER_HORIZONTAL);
-        mEmptyView.getEmptyLayout().setPadding(0, (int) ViewUtil.dp2Px(mContext,65),0,0);
+        mEmptyView.getEmptyLayout().setPadding(0, (int) ViewUtil.dp2Px(mContext,80),0,0);
         mEmptyView.hideImage();
     }
 
@@ -73,9 +73,9 @@ public class VideoCommentFragment extends MyBaseListFragment<NormalCommentAdapte
                .getVideoCommentList(vid,userId,1,start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new NetSubscribe<UserPageCommentModel>() {
+                .subscribe(new NetSubscribe<VideoCommentModel>() {
                     @Override
-                    public void OnSuccess(UserPageCommentModel userPageCommentModel) {
+                    public void OnSuccess(VideoCommentModel userPageCommentModel) {
                         if (userPageCommentModel != null)
                             mAdapter.dealLoadData(VideoCommentFragment.this,isLoadMore,userPageCommentModel.getPosts());
                     }

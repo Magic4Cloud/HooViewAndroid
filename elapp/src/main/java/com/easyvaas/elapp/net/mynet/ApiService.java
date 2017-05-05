@@ -21,6 +21,7 @@ import com.easyvaas.elapp.bean.user.UserPublishVideoModel;
 import com.easyvaas.elapp.bean.video.GoodsVideoListModel;
 import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
+import com.easyvaas.elapp.bean.video.VideoCommentModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
@@ -403,11 +404,11 @@ public interface ApiService {
      * 评论列表
      * @param type 0 新闻 1视频 2股票
      */
-    @GET("api/v2/posts/video")
-    Observable<NetResponse<UserPageCommentModel>> getVideoCommentList(@Query(AppConstants.TOPIC_ID) String topicid,
-                                                           @Query(AppConstants.USER_ID) String userid,
-                                                           @Query(AppConstants.TYPE) int type,
-                                                           @Query(AppConstants.START) int start);
+    @GET("api/v2/posts/posts")
+    Observable<NetResponse<VideoCommentModel>> getVideoCommentList(@Query(AppConstants.TOPIC_ID) String topicid,
+                                                                   @Query(AppConstants.USER_ID) String userid,
+                                                                   @Query(AppConstants.TYPE) int type,
+                                                                   @Query(AppConstants.START) int start);
     /**
      * 视频推荐列表
      */

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f8f8f8"
+    android:background="@color/white"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/ll_title"
-        layout="@layout/layout_my_image_live_room_title"/>
-
-    <FrameLayout
+    <com.easyvaas.elapp.view.base.ToolBarTitleView
+        android:id="@+id/text_live_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:layout_height="wrap_content"/>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabLayout"
-            style="@style/CommonTabLayoutStyle"
-            android:layout_height="44dp"
-            app:tabTextColor="@color/title_text_color"/>
 
-    </FrameLayout>
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/text_live_tablayout"
+        style="@style/slider_layout_user_style"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        />
+
+    <View
+        style="@style/divider_view_style"/>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/text_live_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        />
 </LinearLayout>

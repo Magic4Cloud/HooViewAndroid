@@ -1,180 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar
         android:id="@+id/kv_bar"
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
     </com.easyvaas.common.emoji.XhsEmoticonsKeyBoardBar>
-        <LinearLayout
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fl_player"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            android:orientation="vertical">
+            android:layout_height="200dp">
 
-            <FrameLayout
-                android:id="@+id/fl_player"
+            <com.easyvaas.sdk.player.base.EVVideoView
+                android:id="@+id/video_view"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="match_parent"/>
 
-                <com.easyvaas.sdk.player.base.EVVideoView
-                    android:id="@+id/video_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+            <com.easyvaas.elapp.view.PlayerStateView
+                android:id="@+id/playerStateView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-                <com.easyvaas.elapp.view.PlayerStateView
-                    android:id="@+id/playerStateView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+            <include layout="@layout/layout_player_operate_btn_container"/>
 
-                <include layout="@layout/layout_player_operate_btn_container"/>
-
-                <com.easyvaas.elapp.view.live.PlayerNeedPayView
-                    android:id="@+id/player_pay_mask"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"/>
-            </FrameLayout>
-
-            <android.support.design.widget.CoordinatorLayout
+            <com.easyvaas.elapp.view.live.PlayerNeedPayView
+                android:id="@+id/player_pay_mask"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:visibility="gone"/>
+        </FrameLayout>
 
-                <android.support.design.widget.AppBarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/player_appbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:elevation="0dp">
+
+                <TextView
+                    android:id="@+id/player_video_title"
+                    style="@style/title_text_style"
                     android:background="@color/white"
-                    app:elevation="0dp">
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="10dp"/>
+
+                <RelativeLayout
+                    android:id="@+id/player_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="?attr/selectableItemBackground">
 
                     <TextView
-                        android:id="@+id/player_video_title"
-                        style="@style/title_text_style"
-                        android:background="@color/white"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp"
-                        android:paddingTop="10dp"/>
+                        android:id="@+id/player_user_follow_button"
+                        style="@style/user_focus_button_style"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="12dp"
+                        android:text="@string/user_follow"
+                        />
 
-                    <RelativeLayout
-                        android:id="@+id/player_user"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="?attr/selectableItemBackground">
-
-                        <com.easyvaas.common.widget.RoundImageView
-                            android:id="@+id/player_user_header"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="16dp"
-                            android:src="@drawable/account_bitmap_user"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="16dp"
-                            android:layout_toRightOf="@+id/player_user_header"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/player_user_name"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/nickname"
-                                android:textColor="@color/text_color_gray"
-                                android:textSize="16sp"/>
-
-                            <TextView
-                                android:id="@+id/player_watch_counts"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="1dp"
-                                android:textColor="@color/text_color_gray"
-                                android:textSize="12sp"/>
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/player_user_follow_button"
-                            style="@style/user_focus_button_style"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="12dp"
-                            android:text="@string/user_follow"
-                            />
-
-                        <View
-                            style="@style/divider_view_style"
-                            android:layout_alignParentBottom="true"/>
-                    </RelativeLayout>
+                    <com.easyvaas.common.widget.RoundImageView
+                        android:id="@+id/player_user_header"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/account_bitmap_user"/>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toLeftOf="@id/player_user_follow_button"
+                        android:layout_toRightOf="@+id/player_user_header"
+                        android:orientation="vertical">
 
-                        <com.flyco.tablayout.SlidingTabLayout
-                            android:id="@+id/player_tablayout"
-                            style="@style/slider_layout_user_style"
-                            android:layout_width="0dp"
-                            android:layout_height="44dp"
-                            android:layout_weight="1.5"
-                            />
+                        <TextView
+                            android:id="@+id/player_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/nickname"
+                            android:textColor="@color/text_color_gray"
+                            android:textSize="16sp"/>
 
-                        <View
-                            android:id="@+id/player_black_view"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:src="@drawable/market_search"
-                            android:visibility="gone"/>
+                        <TextView
+                            android:id="@+id/player_watch_counts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:textColor="@color/text_color_gray"
+                            android:textSize="12sp"/>
+
                     </LinearLayout>
 
                     <View
-                        style="@style/divider_view_style"/>
-                </android.support.design.widget.AppBarLayout>
+                        style="@style/divider_view_style"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/player_viewpager"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    />
-            </android.support.design.widget.CoordinatorLayout>
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <com.flyco.tablayout.SlidingTabLayout
+                        android:id="@+id/player_tablayout"
+                        style="@style/slider_layout_user_style"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1.5"
+                        />
+
+                    <View
+                        android:id="@+id/player_black_view"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/market_search"
+                        android:visibility="gone"/>
+                </LinearLayout>
+
+                <View
+                    style="@style/divider_view_style"/>
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/player_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                />
+        </android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>
+
     <com.easyvaas.elapp.view.base.BottomSendView
         android:id="@+id/player_bottom_send"
-        android:layout_gravity="bottom"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-        <FrameLayout
-            android:id="@+id/fl_gift_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#B3303030"
-            android:visibility="gone">
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone"/>
 
-            <com.easyvaas.common.gift.view.GiftPagerView
-                android:id="@+id/expression_gift_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:visibility="visible"/>
-        </FrameLayout>
+    <FrameLayout
+        android:id="@+id/fl_gift_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B3303030"
+        android:visibility="gone">
 
-        <View
-            android:id="@+id/bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#B3303030"
-            android:visibility="gone"/>
-
+        <com.easyvaas.common.gift.view.GiftPagerView
+            android:id="@+id/expression_gift_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:visibility="visible"/>
     </FrameLayout>
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B3303030"
+        android:visibility="gone"/>
+
+</FrameLayout>

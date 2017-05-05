@@ -2,46 +2,68 @@ package com.easyvaas.elapp.ui.live;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.bean.user.BaseUserEntity;
 import com.easyvaas.elapp.bean.user.UserInfoModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
 import com.easyvaas.elapp.db.Preferences;
-import com.easyvaas.elapp.event.AppBarLayoutOffsetChangeEvent;
 import com.easyvaas.elapp.event.HideGiftViewEvent;
 import com.easyvaas.elapp.net.ApiUtil;
 import com.easyvaas.elapp.ui.user.LoginActivity;
-import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Logger;
+import com.easyvaas.elapp.utils.NumberUtil;
 import com.easyvaas.elapp.utils.SingleToast;
+import com.easyvaas.elapp.utils.StringUtil;
 import com.easyvaas.elapp.utils.Utils;
-import com.easyvaas.elapp.utils.ViewUtil;
+import com.easyvaas.elapp.view.base.ToolBarTitleView;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
 
-public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements View.OnClickListener {
+import butterknife.BindView;
+import butterknife.OnClick;
+
+
+/**
+ * 图文聊天界面
+ */
+public class ImageTextLiveActivity extends BaseImageTextLiveActivity {
+
     private static final String TAG = "ImageTextLiveActivity";
     public static final String EXTRA_TEXT_LIVE_MODEL = "extra_streams_model";
+    @BindView(R.id.text_live_toolbar)
+    ToolBarTitleView mTextLiveToolbar;
+    @BindView(R.id.text_live_user_header)
+    RoundImageView mTextLiveUserHeader;
+    @BindView(R.id.text_live_user_name)
+    TextView mTextLiveUserName;
+    @BindView(R.id.text_live_user_info)
+    TextView mTextLiveUserInfo;
+    @BindView(R.id.text_live_user_follow_button)
+    TextView mTextLiveUserFollowButton;
+    @BindView(R.id.text_live_user_follow_counts)
+    TextView mTextLiveUserFollowCounts;
+    @BindView(R.id.text_live_user_tags)
+    TextView mTextLiveUserTags;
+    @BindView(R.id.text_live_user)
+    RelativeLayout mTextLiveUser;
+    @BindView(R.id.text_live_tablayout)
+    SlidingTabLayout mTextLiveTablayout;
+    @BindView(R.id.text_live_viewpager)
+    ViewPager mTextLiveViewpager;
     private TextLiveListModel.StreamsEntity mStreamsEntity;
-    private AppBarLayout mAppBarLayout;
-    private TextView mTvTitle;
-    private ImageView mIvBack;
-    private ImageView mIvShare;
-    private TextView mTvFollow;
     private boolean isGiftShown;
-    private TextView tv_info;
 
     public static void start(Context context, TextLiveListModel.StreamsEntity streamsEntity) {
         Intent starter = new Intent(context, ImageTextLiveActivity.class);
@@ -59,76 +81,34 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
             return;
         }
         setContentView(R.layout.activity_image_text_live);
-        setupView();
+        setupView(mStreamsEntity.getUserEntity());
     }
 
-    private void setupView() {
-        initCollapsingToolbarLayout();
-        mIvBack = (ImageView) findViewById(R.id.iv_back);
-        mIvBack.setOnClickListener(this);
-        mIvShare = (ImageView) findViewById(R.id.iv_share);
-        mIvShare.setOnClickListener(this);
-        mTvTitle = (TextView) findViewById(R.id.tv_title);
-        mTvTitle.setVisibility(View.GONE);
-        tv_info = (TextView) findViewById(R.id.tv_signature);
-        tv_info.setText(mStreamsEntity.getUserEntity().getSignature());
-        LinearLayout tagsViewContainer = (LinearLayout) findViewById(R.id.ll_tag_container);
-        if (mStreamsEntity.getUserEntity().getTags() != null) {
-            for (int i = 0; i < mStreamsEntity.getUserEntity().getTags().size(); i++) {
-                UserInfoModel.TagsEntity tagsEntity = mStreamsEntity.getUserEntity().getTags().get(i);
-                TextView textView = (TextView) LayoutInflater.from(this).inflate(R.layout.layout_use_tag, null);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                layoutParams.rightMargin = (int) ViewUtil.dp2Px(this, 10);
-                tagsViewContainer.addView(textView, layoutParams);
-                textView.setText(tagsEntity.getName());
-            }
+    /**
+     * 初始化头部数据
+     */
+    private void setupView(UserInfoModel data) {
+        mTextLiveUserName.setText(data.getNickname());
+        mTextLiveUserInfo.setText(data.getSignature());
+        mTextLiveUserTags.setText(getJoinString(data.getTags()));
+        Utils.showImage(data.getLogourl(), R.drawable.account_bitmap_user, mTextLiveUserHeader);
+        if (data.getFans_count() >= 10000) {
+            mTextLiveUserFollowCounts.setText(StringUtil.formatTenThousand(data.getFans_count())+"万");
+        } else {
+            mTextLiveUserFollowCounts.setText(String.valueOf(data.getFans_count()));
         }
-        TextView tvName = (TextView) findViewById(R.id.tv_name);
-        tvName.setText(mStreamsEntity.getUserEntity().getNickname());
-        mTvTitle.setText(mStreamsEntity.getUserEntity().getNickname());
-        ImageView headerBg = (ImageView) findViewById(R.id.iv_header_bg);
-        ImageView avater = (RoundImageView) findViewById(R.id.riv_avater);
-        Utils.showImage(mStreamsEntity.getUserEntity().getLogourl(), R.drawable.account_bitmap_user, avater);
-        Utils.showImageBlur(this, mStreamsEntity.getUserEntity().getLogourl(), R.drawable.account_bitmap_user, headerBg);
-        mTvFollow = (TextView) findViewById(R.id.tv_follow);
-        mTvFollow.setOnClickListener(this);
-        avater.setOnClickListener(this);
-        initFollowStatus();
+
+        if (data.getFollowed() == 1) {
+            mTextLiveUserFollowButton.setText(R.string.user_followed);
+            mTextLiveUserFollowButton.setSelected(true);
+        } else {
+            mTextLiveUserFollowButton.setText(R.string.user_follow);
+            mTextLiveUserFollowButton.setSelected(false);
+        }
+        mTextLiveToolbar.setTitleText(NumberUtil.format(mStreamsEntity.getViewcount())+" 人参与");
+        mTextLiveToolbar.getCenterTextView().setTextColor(Color.argb(255,254,79,80));
     }
 
-//    public void hideInput() {
-//        InputMethodManager inputMethodManager =
-//                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//        if (list != null && ((ImageTextLiveDataFragment) list.get(1)).mEtSearch != null) {
-//            inputMethodManager.hideSoftInputFromWindow(((ImageTextLiveDataFragment) list.get(1)).mEtSearch.getWindowToken(), 0);
-//        }
-//
-//        SystemClock.sleep(2000);
-//    }
-
-    private void initCollapsingToolbarLayout() {
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.AppBarLayout);
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            int start = (int) ViewUtil.dp2Px(getApplicationContext(), 50);
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Log.d(TAG, "onOffsetChanged: verticalOffset==" + verticalOffset);
-                EventBus.getDefault().post(new AppBarLayoutOffsetChangeEvent(verticalOffset));
-                if (verticalOffset < -start) {
-                    mTvTitle.setVisibility(View.VISIBLE);
-                    mIvBack.setImageResource(R.drawable.icon_back);
-                    mIvShare.setImageResource(R.drawable.btn_share_n);
-                } else {
-                    mIvBack.setImageResource(R.drawable.live_icon_more_back);
-                    mIvShare.setImageResource(R.drawable.btn_share_w_n);
-                    mTvTitle.setVisibility(View.GONE);
-
-                }
-            }
-        });
-    }
 
     @Override
     public void onBackPressed() {
@@ -163,43 +143,51 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity implements 
         return mStreamsEntity;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_back:
-                finish();
+
+    @OnClick({R.id.text_live_user, R.id.text_live_user_follow_button})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.text_live_user: // 跳转大V主页
+                Utils.toUserPager(this,mStreamsEntity.getOwnerid(),1);
                 break;
-            case R.id.iv_share:
-                share();
-                break;
-            case R.id.tv_follow:
+            case R.id.text_live_user_follow_button: // 关注
                 if (Preferences.getInstance(this).isLogin() && EVApplication.isLogin()) {
-                    if (v.isSelected()) {
-                        v.setSelected(false);
+                    int count = mStreamsEntity.getUserEntity().getFans_count();
+                    if (view.isSelected()) {
+                        view.setSelected(false);
+                        mTextLiveUserFollowButton.setText(R.string.user_follow);
+                        mStreamsEntity.getUserEntity().setFans_count(count - 1);
+                        mTextLiveUserFollowCounts.setText(String.valueOf(count - 1));
                         SingleToast.show(getApplicationContext(), getString(R.string.cancel_follow_sccuess));
                     } else {
-                        v.setSelected(true);
+                        view.setSelected(true);
+                        mTextLiveUserFollowButton.setText(R.string.user_followed);
+                        mStreamsEntity.getUserEntity().setFans_count(count + 1);
+                        mTextLiveUserFollowCounts.setText(String.valueOf(count + 1));
                         SingleToast.show(getApplicationContext(), getString(R.string.follow_sccuess));
                     }
-                    ApiUtil.userFollow(ImageTextLiveActivity.this, mStreamsEntity.getUserEntity().getName(), v.isSelected(), v);
+                    ApiUtil.userFollow(ImageTextLiveActivity.this, mStreamsEntity.getOwnerid(), view.isSelected(), view);
                 } else {
                     LoginActivity.start(this);
                 }
                 break;
-            case R.id.riv_avater:
-                if (!TextUtils.isEmpty(mStreamsEntity.getUserEntity().getNickname()))
-                    VIPUserInfoDetailActivity.start(this, mStreamsEntity.getUserEntity().getName());
-                break;
         }
     }
 
-
-    private void initFollowStatus() {
-        if (Preferences.getInstance(this).getBoolean(mStreamsEntity.getUserEntity().getName(), false)) {
-            mTvFollow.setSelected(true);
-        } else {
-            mTvFollow.setSelected(false);
+    /**
+     * 格式化标签
+     */
+    public static  String getJoinString(List<BaseUserEntity.TagsEntity> datas)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < datas.size(); i++) {
+            if (i == 0)
+                stringBuilder.append(datas.get(i).getName());
+            else
+            {
+                stringBuilder.append(",").append(datas.get(i).getName());
+            }
         }
-
+        return stringBuilder.toString();
     }
 }

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class ToolBarTitleView extends LinearLayout {
     TextView mTitleText;
     @BindView(R.id.title_toolbar)
     Toolbar mTitleToolbar;
+    @BindView(R.id.toolbar_line)
+    View mToolbarLine;
 
     public ToolBarTitleView(Context context) {
         super(context);
@@ -102,16 +105,21 @@ public class ToolBarTitleView extends LinearLayout {
     /**
      * 返回右边图片 方便调整
      */
-    public ImageView getRightImage()
-    {
+    public ImageView getRightImage() {
         return mTitleRightImg;
     }
 
     /**
      * 返回中间TextView 方便调整
      */
-    public TextView getCenterTextView()
-    {
+    public TextView getCenterTextView() {
         return mTitleText;
+    }
+
+    /**
+     * 返回下划线 方便调整
+     */
+    public View getToolbarLine() {
+        return mToolbarLine;
     }
 }

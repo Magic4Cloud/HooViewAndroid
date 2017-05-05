@@ -157,7 +157,6 @@ public class ImageTextLiveDataFragment extends BaseFragment implements View.OnCl
         mLLInput = (LinearLayout) view.findViewById(R.id.ll_input_area);
         if (!isAnchor) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLLInput.getLayoutParams();
-            layoutParams.bottomMargin = (int) ViewUtil.dp2Px(getContext(), 156);
             mLLInput.setLayoutParams(layoutParams);
         }
         view.findViewById(R.id.et_search).setOnClickListener(this);

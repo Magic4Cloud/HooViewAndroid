@@ -2,194 +2,40 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f8f8f8">
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/AppBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="206dp"
-        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
         app:elevation="0dp">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/CollapsingToolbarLayout"
+        <com.easyvaas.elapp.view.base.ToolBarTitleView
+            android:id="@+id/text_live_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="206dp"
-            app:contentScrim="#fff"
-            app:expandedTitleMarginStart="50dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7">
+        <include layout="@layout/header_text_live_user"/>
 
-                <RelativeLayout
-                    android:id="@+id/rl_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp">
 
-                    <ImageView
-                        android:id="@+id/iv_header_bg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/text_live_tablayout"
+            style="@style/slider_layout_user_style"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            />
 
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="116dp"
-                    android:layout_below="@+id/rl_header"
-                    android:background="#fff"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"
-                        android:textColor="#303030"
-                        android:textSize="18sp"
-                        tools:text="杜斯基"/>
-
-                    <LinearLayout
-                        android:id="@+id/ll_user_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_signature"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#303030"
-                            android:textSize="14sp"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_tag_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <com.easyvaas.common.widget.RoundImageView
-                    android:id="@+id/riv_avater"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="70dp"
-                    android:src="@drawable/somebody"/>
-
-            </RelativeLayout>
-
-            <android.support.v7.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/iv_back"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="12dp"
-                        android:scaleType="center"
-                        android:src="@drawable/live_icon_more_back"/>
-
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:textColor="#999999"
-                        android:textSize="18sp"
-                        tools:text="我是标题"/>
-
-                    <ImageView
-                        android:id="@+id/iv_share"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="12dp"
-                        android:scaleType="center"
-                        android:src="@drawable/btn_share_w_n"/>
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.Toolbar>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
+        <View
+            style="@style/divider_view_style"/>
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/text_live_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <RelativeLayout
-            android:id="@+id/rl_tab_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_user"
-            android:layout_gravity="bottom"
-            android:background="#fff"
-            app:layout_collapseMode="pin">
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
-                style="@style/CommonTabLayoutStyle"
-                android:layout_height="44dp"
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/tv_follow"
-                app:tabTextColor="@color/title_text_color"/>
-
-            <TextView
-                android:id="@+id/tv_follow"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/shape_player_follow_btn_bg"
-                android:drawableLeft="@drawable/selector_follow_btn"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="关注"
-                android:textSize="16sp"/>
-
-        </RelativeLayout>
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/rl_tab_container"/>
-
-    </LinearLayout>
-
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 </android.support.design.widget.CoordinatorLayout>

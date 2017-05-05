@@ -3,7 +3,6 @@ package com.easyvaas.elapp.ui.live;
 
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,7 +17,8 @@ import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.livenew.ChatMessageFragment;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.Utils;
-import com.easyvaas.elapp.utils.ViewUtil;
+import com.easyvaas.elapp.view.base.ToolBarTitleView;
+import com.flyco.tablayout.SlidingTabLayout;
 import com.hooview.app.R;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
@@ -28,10 +28,12 @@ import com.hyphenate.chat.EMMessage;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -41,15 +43,23 @@ import rx.subscriptions.CompositeSubscription;
 
 public abstract class BaseImageTextLiveActivity extends BaseActivity implements EMMessageListener {
     private static final String TAG = "BaseImageTextLiveActivity";
-    protected MyAdapter mMyAdapter;
-    protected ViewPager mViewPager;
+
+    @BindView(R.id.text_live_toolbar)
+    ToolBarTitleView mTextLiveToolbar;
+    @BindView(R.id.text_live_tablayout)
+    SlidingTabLayout mTextLiveTablayout;
+    @BindView(R.id.text_live_viewpager)
+    ViewPager mTextLiveViewpager;
+    TextLivePageAdapter mTextLivePageAdapter;
+    Unbinder mUnbinder;
+    private String[] mTitles;
+    private Fragment[] mFragments;
+
     protected String mRoomId;
     private boolean isAnchor;
     protected View mRoot;
     private CompositeSubscription compositeSubscription;
     private boolean forbiddenCmdMessage = true; // 禁止礼物消息的处理
-    protected TabLayout tabLayout;
-    protected List<Fragment> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,29 +69,55 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        mUnbinder = ButterKnife.bind(this);
         initView();
     }
 
     private void initView() {
         mRoomId = setRoomId();
         isAnchor = isAnchor();
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout.setupWithViewPager(mViewPager);
-        list = new ArrayList<>();
-        list.add(isAnchor ? ImageTextLiveFragment.newInstance(mRoomId, isAnchor, watchCount()) : ImageTextLiveFragment.newInstance(streamEntity()));
-        list.add(ImageTextLiveDataFragment.newInstance(isAnchor));
-//        list.add(ImageTextLiveChatFragment.newInstance(isAnchor, mRoomId));
-        list.add(ChatMessageFragment.newInstance(isAnchor, mRoomId, streamEntity()));
-        list.add(BookPlayFragment.newInstance());
-        mViewPager.setOffscreenPageLimit(2);
-        mViewPager.setPageMargin((int) ViewUtil.dp2Px(getApplicationContext(), 10));
-        mMyAdapter = new MyAdapter(getSupportFragmentManager(), list, getResources().getStringArray(R.array.image_text_live));
-        mViewPager.setAdapter(mMyAdapter);
+        initTabAndPager(isAnchor);
         mRoot = findViewById(R.id.root);
         joinChatRoom();
-        mViewPager.setOffscreenPageLimit(3);
+        mTextLiveViewpager.setOffscreenPageLimit(3);
     }
+
+    private void initTabAndPager(boolean isAnchor) {
+        mTitles = getResources().getStringArray(R.array.image_text_live);
+        if (isAnchor) {
+            mFragments = new Fragment[]{
+                    ImageTextLiveFragment.newInstance(mRoomId, true, watchCount()),
+                    ImageTextLiveDataFragment.newInstance(true),
+                    ChatMessageFragment.newInstance(true, mRoomId, streamEntity()),
+                    BookPlayFragment.newInstance()
+            };
+        } else {
+            mFragments = new Fragment[]{
+                    ImageTextLiveFragment.newInstance(streamEntity()),
+                    ImageTextLiveDataFragment.newInstance(false),
+                    ChatMessageFragment.newInstance(false, mRoomId, streamEntity()),
+                    BookPlayFragment.newInstance()
+            };
+
+        }
+        mTextLiveViewpager.setAdapter(mTextLivePageAdapter = new TextLivePageAdapter(getSupportFragmentManager()));
+        mTextLiveTablayout.setViewPager(mTextLiveViewpager);
+        mTextLiveToolbar.getToolbarLine().setVisibility(View.GONE);
+        mTextLiveToolbar.setTitleBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mTextLiveToolbar.setTitleRightImg(R.drawable.btn_share_n, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share();
+            }
+        });
+
+    }
+
 
     public abstract String setRoomId();
 
@@ -126,10 +162,11 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
         super.onDestroy();
         if (compositeSubscription != null) compositeSubscription.unsubscribe();
         EMClient.getInstance().chatroomManager().leaveChatRoom(mRoomId);
+        mUnbinder.unbind();
     }
 
     public void goToChat() {
-        mViewPager.setCurrentItem(2);
+        mTextLiveViewpager.setCurrentItem(2);
     }
 
     public void share() {
@@ -199,29 +236,26 @@ public abstract class BaseImageTextLiveActivity extends BaseActivity implements 
         compositeSubscription.add(subscription);
     }
 
-    public class MyAdapter extends FragmentPagerAdapter {
-        private String[] mTabsTitle;
-        List<Fragment> fragments;
+    public class TextLivePageAdapter extends FragmentPagerAdapter {
 
-        public MyAdapter(FragmentManager fm, List<Fragment> list, String[] tabTitles) {
+        private TextLivePageAdapter(FragmentManager fm) {
             super(fm);
-            this.mTabsTitle = tabTitles;
-            this.fragments = list;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return fragments.get(position);
+            return mFragments[position];
         }
 
         @Override
         public int getCount() {
-            return mTabsTitle.length;
+            return mTitles.length;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mTabsTitle[position];
+            return mTitles[position];
         }
     }
+
 }

@@ -73,5 +73,6 @@
     </LinearLayout>
     <View
         style="@style/divider_view_style"
+        android:background="@color/list_divider_bg"
         android:layout_height="4dp"/>
 </LinearLayout>

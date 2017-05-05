@@ -300,7 +300,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
     /**
      * 格式化标签
      */
-    private  String getJoinString(List<TagBean> datas)
+    public static  String getJoinString(List<TagBean> datas)
     {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < datas.size(); i++) {

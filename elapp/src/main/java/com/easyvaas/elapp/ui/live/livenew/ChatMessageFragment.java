@@ -118,11 +118,9 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
 
         if (!isAnchor) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mChatInputView.getLayoutParams();
-            layoutParams.bottomMargin = (int) ViewUtil.dp2Px(getContext(), 156);
             mChatInputView.setLayoutParams(layoutParams);
             // gift
             RelativeLayout.LayoutParams giftParams = (RelativeLayout.LayoutParams) mGiftContainer.getLayoutParams();
-            giftParams.bottomMargin = (int) ViewUtil.dp2Px(getContext(), 156);
             mGiftContainer.setLayoutParams(layoutParams);
         }
         mChatInputView.setAnchor(isAnchor);

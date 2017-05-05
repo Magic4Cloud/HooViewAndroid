@@ -183,7 +183,6 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
             liveEmptyTv.setText(getString(R.string.image_text_live_has_not_started_my));
         } else {
             RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) mRlOpertation.getLayoutParams();
-            layoutParams1.bottomMargin = (int) ViewUtil.dp2Px(getContext(), 156);
             view.findViewById(R.id.ll_option).setVisibility(View.VISIBLE);
             view.findViewById(R.id.iv_shot).setOnClickListener(this);
             view.findViewById(R.id.iv_gift).setOnClickListener(this);
