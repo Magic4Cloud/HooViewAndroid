@@ -47,6 +47,7 @@ public class ChatInputView extends RelativeLayout {
     ImageView mGiftIv;
     private InputMethodManager mInputMethodManager;
     private boolean mIsKeyboardActive;
+    private boolean mIsAnchor;
     private Activity mActivity;
     private OnInputListener mOnInputListener;
     private String mReplyTips;
@@ -221,10 +222,18 @@ public class ChatInputView extends RelativeLayout {
                 isActive = true;
             }
             mIsKeyboardActive = isActive;
+            if (!mIsAnchor) {
+                if (isActive) {
+                    mGiftIv.setVisibility(GONE);
+                } else {
+                    mGiftIv.setVisibility(VISIBLE);
+                }
+            }
         }
     }
 
     public void setAnchor(boolean isAnchor) {
+        mIsAnchor = isAnchor;
         if (isAnchor) {
             mGiftIv.setVisibility(GONE);
             mInputEt.setHint("大师，加入聊天吧～");

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -24,9 +25,9 @@
             android:background="@drawable/shape_chat_input"
             android:hint="加入聊天吧"
             android:imeOptions="actionSend"
+            android:inputType="text"
             android:maxLength="1000"
             android:maxLines="5"
-            android:inputType="text"
             android:minHeight="40dp"
             android:paddingBottom="9dp"
             android:paddingLeft="12dp"

@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +25,7 @@ import com.easyvaas.elapp.chat.model.EMMessageWrapper;
 import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.dialog.CommonPromptDialog;
 import com.easyvaas.elapp.event.AppBarLayoutOffsetChangeEvent;
+import com.easyvaas.elapp.event.HideGiftViewEvent;
 import com.easyvaas.elapp.event.ImageTextLiveMessageEvent;
 import com.easyvaas.elapp.event.JoinRoomSuccessEvent;
 import com.easyvaas.elapp.net.ApiHelper;
@@ -168,22 +168,6 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
         if (EVApplication.getUser() != null) {
             mGiftPagerVIew.setSelf(EVApplication.getUser().getNickname(), EVApplication.getUser().getLogourl());
         }
-        /*if (isAnchor) {
-            mMsgAdapter.setOnItemLongClickListener(new CommonRcvAdapter.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(View view, int position) {
-                    EMMessageWrapper messageWrapper = mEMMessageList.get(position);
-                    Logger.d(TAG, "onItemLongClick: messageWrapper=" + messageWrapper.toString() + "    mUser nickName=" + mUser.getNickname());
-                    if (!TextUtils.isEmpty(messageWrapper.replyNickname) || !TextUtils.isEmpty(messageWrapper.replyContent)) {
-                        return true;
-                    }
-                    if (!messageWrapper.nickname.equals(mUser.getNickname())) {
-                        mImageTextLiveInputView.replySomebody(messageWrapper.nickname, messageWrapper.content);
-                    }
-                    return true;
-                }
-            });
-        }*/
     }
 
     private GiftPagerView.OnGiftSendCallBack mOnGiftSendCallBack = new GiftPagerView.OnGiftSendCallBack() {
@@ -279,17 +263,17 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
         message.setMessageStatusCallback(new EMCallBack() {
             @Override
             public void onSuccess() {
-                Log.e("xmzd", "send message-----onSuccess");
+                Logger.e("xmzd", "send message-----onSuccess");
             }
 
             @Override
             public void onError(int i, String s) {
-                Log.e("xmzd", "send message-----onError" + s);
+                Logger.e("xmzd", "send message-----onError" + s);
             }
 
             @Override
             public void onProgress(int i, String s) {
-                Log.e("xmzd", "send message-----onProgress---" + s);
+                Logger.e("xmzd", "send message-----onProgress---" + s);
 
             }
         });
@@ -424,6 +408,11 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
         RelativeLayout.LayoutParams giftParams = (RelativeLayout.LayoutParams) mGiftContainer.getLayoutParams();
         giftParams.bottomMargin = (int) ViewUtil.dp2Px(getContext(), 156) + event.offset;
         mGiftContainer.setLayoutParams(layoutParams);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onHideGiftViewEvent(HideGiftViewEvent event) {
+        hideGiftToolsBar();
     }
 
     private void handleCmdMsg() {
