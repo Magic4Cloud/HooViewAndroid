@@ -10,7 +10,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.easyvaas.common.gift.bean.GiftEntity;
 import com.easyvaas.elapp.bean.chat.ChatBarrage;
@@ -43,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ChatHelper implements IChatHelper {
-    private static final String TAG = "ChatHelper";
+    private static final String TAG = "xmzd-ChatHelper";
     private static final int MSG_SEND_LIKE_COUNT = 100;
     private static final int INTERVAL_SEND_LIKE_COUNT = 3000;
 
@@ -79,14 +78,13 @@ public class ChatHelper implements IChatHelper {
         final MessageCallback messageCallback = new MessageCallback() {
             @Override
             public void onConnected() {
-                Logger.d(TAG, "onConnected");
+                Logger.e(TAG, "onConnected");
                 mEVMessage.joinTopic(mVid);
             }
 
             @Override
             public void onJoinOK(final List<String> users, String topicId) {
-                Logger.d(TAG, "onJoinOk content: " + (users != null ? users.toString() : "")
-                        + " topic: " + topicId);
+                Logger.e(TAG, "onJoinOk content: " + (users != null ? users.toString() : "") + " topic: " + topicId);
                 mTopicId = topicId;
                 mHandler.post(new Runnable() {
                     @Override
@@ -104,15 +102,14 @@ public class ChatHelper implements IChatHelper {
                 });
                 if (users != null) {
                     usersChanged(users, true);
-                    Logger.d(TAG, "onJoinOk ... size: " + users.size());
+                    Logger.e(TAG, "onJoinOk ... size: " + users.size());
                 }
                 mHandler.sendEmptyMessageDelayed(MSG_SEND_LIKE_COUNT, INTERVAL_SEND_LIKE_COUNT);
             }
 
             @Override
             public void onNewMessage(String message, String userdata, final String userId, String topicId) {
-                Logger.d(TAG, "onNewMessage message:" + message + "content: " + userdata
-                        + " userid: " + userId + " topic: " + topicId);
+                Logger.e(TAG, "onNewMessage message:" + message + "content: " + userdata + " userid: " + userId + " topic: " + topicId);
                 String liveJson = "";
                 String liveStatusJson = "";
                 if (userdata != null && userdata.contains("msg=")) {
@@ -190,14 +187,14 @@ public class ChatHelper implements IChatHelper {
 
             @Override
             public void onUserJoin(List<String> list) {
+                Logger.e(TAG, "onUserJoin ... size: " + list.size());
                 usersChanged(list, true);
-                Logger.d(TAG, "onUserJoin ... size: " + list.size());
             }
 
             @Override
             public void onUserLeave(List<String> list) {
+                Logger.e(TAG, "onUserLeave ... size: " + list.size());
                 usersChanged(list, false);
-                Logger.d(TAG, "onUserLeave ... size: " + list.size());
             }
 
             @Override
@@ -258,8 +255,8 @@ public class ChatHelper implements IChatHelper {
 
             @Override
             public void onError(int i) {
+                Logger.e(TAG, "onError " + i);
                 mCallback.onConnectError("i");
-                Logger.d(TAG, "onError " + i);
             }
 
             @Override
@@ -279,7 +276,7 @@ public class ChatHelper implements IChatHelper {
 
             @Override
             public void onClose() {
-                Logger.d(TAG, "onClose");
+                Logger.e(TAG, "onClose");
                 mTopicId = "";
                 mHandler.removeMessages(MSG_SEND_LIKE_COUNT);
             }
@@ -301,7 +298,7 @@ public class ChatHelper implements IChatHelper {
         commentEntity.setRnm(comment.getReply_name());
         statusEntity.setExct(commentEntity);
         String json = new Gson().toJson(statusEntity);
-        Logger.d(TAG, "chatSendComment json: " + json);
+        Logger.e(TAG, "chatSendComment json: " + json);
         mEVMessage.send(mVid, comment.getContent(), json);
     }
 
@@ -313,7 +310,7 @@ public class ChatHelper implements IChatHelper {
         barrageEntity.setLg(comment.getLogourl());
         statusEntity.setExbr(barrageEntity);
         String json = new Gson().toJson(statusEntity);
-        Logger.d(TAG, "chatSendBarrage json: " + json);
+        Logger.e(TAG, "chatSendBarrage json: " + json);
         mEVMessage.send(mVid, comment.getContent(), json);
     }
 
@@ -330,7 +327,7 @@ public class ChatHelper implements IChatHelper {
 //        chatGift.setGid(gift.getGiftId());
         statusEntity.setExgf(chatGift);
         String json = new Gson().toJson(statusEntity);
-        Log.e("test", "ChatGiftEntity");
+        Logger.e("test", "ChatGiftEntity");
         mEVMessage.send(mVid, "", json);
     }
 

@@ -88,7 +88,7 @@ public class LiveChatFragment extends BaseFragment implements View.OnClickListen
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(NewCommentEvent event) {
-        Logger.d(TAG, "NewGiftEvent: " + event.chatComment.getContent());
+        Logger.d(TAG, "NewCommentEvent: " + event.chatComment.getContent());
         mCommentList.add(0, event.chatComment);
         LinearLayoutManager layoutManager = (LinearLayoutManager) mCommentListView.getLayoutManager();
         if (mCommentList.size() < 7) {

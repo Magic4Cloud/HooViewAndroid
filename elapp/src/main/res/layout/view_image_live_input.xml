@@ -7,42 +7,68 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color"/>
+
+    <LinearLayout
         android:id="@+id/rl_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp">
+        android:minHeight="49dp"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="64dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
             android:background="@drawable/shape_chat_input"
             android:hint="大师，快来直播吧"
-            android:imeOptions="actionSend"
-            android:inputType="text"
             android:maxLength="1000"
             android:maxLines="5"
-            android:minHeight="40dp"
-            android:paddingBottom="8dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="18dp"
-            android:paddingTop="8dp"
-            android:textSize="16dp"/>
+            android:minHeight="36dp"
+            android:paddingBottom="7dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="7dp"
+            android:textColor="@color/title_text_color"
+            android:textColorHint="@color/text_gray"
+            android:textSize="@dimen/text_size_16"/>
 
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="12dp"
-            android:src="@drawable/btn_add_picture_xm"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="49dp">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/btn_add_picture_xm"/>
+
+            <TextView
+                android:id="@+id/tv_send"
+                android:layout_width="50dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:background="@drawable/shape_chat_view_send"
+                android:gravity="center"
+                android:text="发送"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_size_16"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl_option"

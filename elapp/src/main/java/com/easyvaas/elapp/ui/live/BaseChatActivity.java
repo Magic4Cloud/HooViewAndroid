@@ -158,88 +158,89 @@ public class BaseChatActivity extends BaseActivity implements IChatHelper.ChatCa
 
     @Override
     public void onConnectError(String errorInfo) {
-        Logger.d(TAG, "onConnectError: ");
+        Logger.e("xmzd", "Chat---onConnectError: " + errorInfo);
     }
 
     @Override
     public void onJoinOK() {
-        Logger.d(TAG, "onJoinOK: ");
+        Logger.e("xmzd", "onJoinOK: ");
 
     }
 
     @Override
     public void onNewComment(ChatComment chatComment) {
-        Logger.d(TAG, "onNewComment: ");
+        Logger.e("xmzd", "onNewComment: " + chatComment.toString());
 
     }
 
     @Override
     public void onNewGift(GiftEntity giftEntity) {
-        Logger.d(TAG, "onNewGift: ");
+        Logger.e("xmzd", "onNewGift: " + giftEntity.toString());
 
     }
 
     @Override
     public void onNewRedPack(Map<String, ChatRedPackInfo> redPackEntityMap) {
-        Logger.d(TAG, "onNewRedPack: ");
+        Logger.e("xmzd", "onNewRedPack: ");
 
     }
 
     @Override
     public void onBarrage(ChatBarrage chatBarrage) {
-        Logger.d(TAG, "onBarrage: ");
+        Logger.e("xmzd", "onBarrage: ");
 
     }
 
     @Override
     public void onInfoUpdate(ChatVideoInfo chatVideoInfo) {
-        Logger.d(TAG, "onInfoUpdate: ");
+        Logger.e("xmzd", "onInfoUpdate: ");
 
     }
 
     @Override
     public void onStatusUpdate(int status) {
-        Logger.d(TAG, "onStatusUpdate: ");
+        Logger.e("xmzd", "onStatusUpdate: ");
 
     }
 
     @Override
     public void onLike(int likeCount) {
-
+        Logger.e("xmzd", "onLike: " + likeCount);
     }
 
     @Override
     public int getLikeCount() {
+        Logger.e("xmzd", "getLikeCount");
         return 0;
     }
 
     @Override
     public void onUserJoinList(List<ChatUser> watchingUsers) {
-
+        Logger.e("xmzd", "onUserJoinList");
     }
 
     @Override
     public void onUserLeaveList(List<ChatUser> watchingUsers) {
-
+        Logger.e("xmzd", "onUserLeaveList");
     }
 
     @Override
     public void onCallRequest(String name, String nickname, String logoUrl) {
-
+        Logger.e("xmzd", "onCallRequest");
     }
 
     @Override
     public void onCallAccept(String callId) {
-
+        Logger.e("xmzd", "onCallAccept");
     }
 
     @Override
     public void onCallCancel(String name) {
-
+        Logger.e("xmzd", "onCallCancel");
     }
 
     @Override
     public void onCallEnd(String name) {
-
+        Logger.e("xmzd", "onCallEnd");
     }
 }

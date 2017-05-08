@@ -48,7 +48,7 @@ public class RetrofitHelper{
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
-                    Logger.e("xmzdOkHttp", message);
+                    Logger.d("xmzdOkHttp", message);
                 }
             });
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);

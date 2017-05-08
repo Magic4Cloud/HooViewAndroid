@@ -47,8 +47,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
         changeRecyclerView(); // 重写改变列表设置
         changeEmptyView();// 重写改变empty显示
         mAdapter = initAdapter();
-        if (mAdapter != null)
-        {
+        if (mAdapter != null) {
             setLoadMoreCallBack(mAdapter);
             mRecyclerview.setAdapter(mAdapter);
             mSwiprefreshlayout.post(new Runnable() {
@@ -90,8 +89,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     /**
      * 初始化某些数据
      */
-    protected void initSomeData()
-    {
+    protected void initSomeData() {
 
     }
 
@@ -114,7 +112,9 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      */
     @Override
     public void showEmpty() {
-        mEmptyView.showEmptyOnNoData();
+        if (mEmptyView != null) {
+            mEmptyView.showEmptyOnNoData();
+        }
     }
 
     /**
@@ -122,14 +122,16 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      */
     @Override
     public void showError() {
-        mEmptyView.showErrorOnNetError(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideEmpty();
-                setLoading(true);
-                onRefresh();
-            }
-        });
+        if (mEmptyView != null) {
+            mEmptyView.showErrorOnNetError(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    hideEmpty();
+                    setLoading(true);
+                    onRefresh();
+                }
+            });
+        }
     }
 
     /**
@@ -137,7 +139,9 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      */
     @Override
     public void hideEmpty() {
-        mEmptyView.hideEmptyView();
+        if (mEmptyView != null) {
+            mEmptyView.hideEmptyView();
+        }
     }
 
     /**
@@ -145,16 +149,19 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      */
     @Override
     public void setLoading(boolean isLoading) {
-        mSwiprefreshlayout.setRefreshing(isLoading);
+        if (mSwiprefreshlayout != null) {
+            mSwiprefreshlayout.setRefreshing(isLoading);
+        }
     }
 
     /**
      * 设置padding Top
      */
-    protected void setPaddingTop(int dp)
-    {
-        mRecyclerview.setClipToPadding(false);
-        mRecyclerview.setPadding(0, (int) ViewUtil.dp2Px(getContext(),dp),0,0);
+    protected void setPaddingTop(int dp) {
+        if (mRecyclerview != null) {
+            mRecyclerview.setClipToPadding(false);
+            mRecyclerview.setPadding(0, (int) ViewUtil.dp2Px(getContext(), dp), 0, 0);
+        }
     }
 
     /**

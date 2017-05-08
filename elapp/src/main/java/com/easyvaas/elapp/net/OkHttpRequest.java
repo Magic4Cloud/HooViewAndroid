@@ -131,7 +131,7 @@ class OkHttpRequest implements IRequestHelper {
             Logger.d(TAG, "Request body: " + requestBuilder.toString());
             requestBuilder.get();
         }
-        Logger.e(TAG, "Request url: " + RequestUtil.assembleUrlWithAllParams(url, params));
+        Logger.d(TAG, "Request url: " + RequestUtil.assembleUrlWithAllParams(url, params));
         mClient.newCall(requestBuilder.build()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

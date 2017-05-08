@@ -69,8 +69,21 @@ public class VideoEntity {
     private String extra;
     private long sentTimeLength;
     private String signature;
+    private int paid;
 
     private int level;
+
+    public int getFollowed() {
+        return followed;
+    }
+
+    public int getPaid() {
+        return paid;
+    }
+
+    public void setPaid(int paid) {
+        this.paid = paid;
+    }
 
     public String getDescription() {
         return description;

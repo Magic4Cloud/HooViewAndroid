@@ -26,7 +26,7 @@ public abstract class MyRequestCallBack<T> {
     }
 
     protected void parseGson(String json, Class<T> clazz) {
-        Logger.e(TAG, clazz + ":: " + json);
+        Logger.d(TAG, clazz + ":: " + json);
         if (clazz == String.class) {
             onSuccess((T) json);
         } else {

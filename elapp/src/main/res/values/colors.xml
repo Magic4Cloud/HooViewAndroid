@@ -206,7 +206,7 @@
     <color name="video_living_good">#659ae0</color>
     <color name="video_living_playback">#999999</color>
     <color name="video_living_pay">#e36060</color>
-    <color name="video_living_payed">#382f2f</color>
+    <color name="video_living_paid">#382f2f</color>
 
     <color name="user_comment_blue">#8ec1eb</color>
     <color name="user_comment_orange">#ebbc8e</color>

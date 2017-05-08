@@ -11,13 +11,11 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +51,7 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
     private View mPictureLl;
     private View mCameraLl;
     private View mAlbumLl;
+    private TextView mSendTv;
 
 
     public ImageTextLiveInputView(Context context) {
@@ -72,6 +71,8 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
         mRgMsgType = (RadioGroup) findViewById(R.id.rgMsgType);
         mIvImage = (ImageView) findViewById(R.id.iv_image);
         mRlOption = (RelativeLayout) findViewById(R.id.rl_option);
+        mSendTv = (TextView) findViewById(R.id.tv_send);
+        mSendTv.setOnClickListener(this);
         mPictureLl = findViewById(R.id.ll_picture);
         mCameraLl = findViewById(R.id.ll_camera);
         mCameraLl.setOnClickListener(this);
@@ -80,7 +81,7 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
         mEditText.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin()) {
                         mInputMethodManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
                     } else {
@@ -135,24 +136,6 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
             public void afterTextChanged(Editable s) {
             }
         });
-        mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEND) {
-                    if (mInputViewListener != null) {
-                        String content = mEditText.getText().toString().trim();
-                        if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
-                            mInputViewListener.onReply(content.replace(mReplyTips, ""), mReplyModel);
-                        } else {
-                            mInputViewListener.sendMessage(mMsgType, mEditText.getText().toString().trim());
-                        }
-                        mEditText.setText("");
-                        hideKeyboard();
-                    }
-                }
-                return false;
-            }
-        });
         mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         getViewTreeObserver().addOnGlobalLayoutListener(mKeyboardOnGlobalChangeListener = new KeyboardOnGlobalChangeListener());
 
@@ -204,6 +187,18 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
                 if (mInputViewListener != null) {
                     mInputViewListener.openAlbum();
                 }
+                break;
+            case R.id.tv_send:
+                if (mInputViewListener != null) {
+                    String content = mEditText.getText().toString().trim();
+                    if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
+                        mInputViewListener.onReply(content.replace(mReplyTips, ""), mReplyModel);
+                    } else {
+                        mInputViewListener.sendMessage(mMsgType, mEditText.getText().toString().trim());
+                    }
+                    mEditText.setText("");
+                }
+                hideKeyboard();
                 break;
         }
     }
@@ -259,6 +254,8 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
                     mRlOption.setVisibility(GONE);
                 }
                 setBackground(new ColorDrawable(getResources().getColor(R.color.input_bg)));
+                mIvImage.setVisibility(GONE);
+                mSendTv.setVisibility(VISIBLE);
             } else {
                 if (mOpenImage) {
                     mRlOption.setVisibility(VISIBLE);
@@ -266,6 +263,14 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
                 } else {
                     mRlOption.setVisibility(GONE);
                     setBackground(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+                }
+                String text = mEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(text)) {
+                    mIvImage.setVisibility(VISIBLE);
+                    mSendTv.setVisibility(GONE);
+                } else {
+                    mIvImage.setVisibility(GONE);
+                    mSendTv.setVisibility(VISIBLE);
                 }
             }
         }

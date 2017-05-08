@@ -97,6 +97,8 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
         TextView mTitleTv;
         @BindView(R.id.cv_pay)
         CardView mPayCv;
+        @BindView(R.id.tv_pay)
+        TextView mPayTv;
 
         public VideoViewHolder(View view) {
             super(view);
@@ -132,8 +134,14 @@ public class UserVideoAdapter extends MyBaseAdapter<VideoEntity> {
                 mTitleTv.setText(videoEntity.getTitle());
                 // pay 权限（0，Published;1，Shared;2，Personal;3，AllFriends;4，AllowList;5，ForbidList;6，Password;7，PayLive
                 int permission = videoEntity.getPermission();
-                if (permission == 7) {
+                if (permission == 7 && 0 == videoEntity.getPaid()) {
                     mPayCv.setVisibility(View.VISIBLE);
+                    mPayTv.setText("付费");
+                    mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_pay));
+                } else if (1 == videoEntity.getPaid()) {
+                    mPayCv.setVisibility(View.VISIBLE);
+                    mPayTv.setText("已购买");
+                    mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_paid));
                 } else {
                     mPayCv.setVisibility(View.GONE);
                 }

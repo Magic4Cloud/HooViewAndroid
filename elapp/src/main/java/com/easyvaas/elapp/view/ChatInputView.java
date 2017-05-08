@@ -8,16 +8,15 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -40,11 +39,13 @@ public class ChatInputView extends RelativeLayout {
 
     private static final String TAG = ChatInputView.class.getSimpleName();
     @BindView(R.id.chat_view_input_panel)
-    RelativeLayout mPanelInput;
+    LinearLayout mPanelInput;
     @BindView(R.id.chat_view_input_et)
     EditText mInputEt;
     @BindView(R.id.chat_view_gift_iv)
     ImageView mGiftIv;
+    @BindView(R.id.chat_view_send_tv)
+    TextView mSendTv;
     private InputMethodManager mInputMethodManager;
     private boolean mIsKeyboardActive;
     private boolean mIsAnchor;
@@ -106,25 +107,6 @@ public class ChatInputView extends RelativeLayout {
 
             }
         });
-        mInputEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEND) {
-                    if (mOnInputListener != null) {
-                        String message = mInputEt.getText().toString().trim();
-                        if (!TextUtils.isEmpty(message)) {
-                            if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
-                                mOnInputListener.onReplyMessage(message.replace(mReplyTips, ""), mReplyModel);
-                            } else {
-                                mOnInputListener.onSendMessage(MSG_TYPE, message);
-                            }
-                            mInputEt.setText("");
-                        }
-                    }
-                }
-                return false;
-            }
-        });
         // input panel
         mPanelInput.setOnTouchListener(new OnTouchListener() {
             @Override
@@ -156,6 +138,25 @@ public class ChatInputView extends RelativeLayout {
             hideKeyboard();
             mOnInputListener.onSendGift();
         }
+    }
+
+    /**
+     * 发送消息
+     */
+    @OnClick(R.id.chat_view_send_tv)
+    protected void onSendClick() {
+        if (mOnInputListener != null) {
+            String message = mInputEt.getText().toString().trim();
+            if (!TextUtils.isEmpty(message)) {
+                if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
+                    mOnInputListener.onReplyMessage(message.replace(mReplyTips, ""), mReplyModel);
+                } else {
+                    mOnInputListener.onSendMessage(MSG_TYPE, message);
+                }
+                mInputEt.setText("");
+            }
+        }
+        hideKeyboard();
     }
 
     @Override
@@ -222,11 +223,22 @@ public class ChatInputView extends RelativeLayout {
                 isActive = true;
             }
             mIsKeyboardActive = isActive;
-            if (!mIsAnchor) {
-                if (isActive) {
-                    mGiftIv.setVisibility(GONE);
+            // 发送按钮、礼物按钮
+            if (isActive) {
+                mGiftIv.setVisibility(GONE);
+                mSendTv.setVisibility(VISIBLE);
+            } else {
+                String text = mInputEt.getText().toString().trim();
+                if (TextUtils.isEmpty(text)) {
+                    mSendTv.setVisibility(GONE);
+                    if (!mIsAnchor) {
+                        mGiftIv.setVisibility(VISIBLE);
+                    } else {
+                        mGiftIv.setVisibility(GONE);
+                    }
                 } else {
-                    mGiftIv.setVisibility(VISIBLE);
+                    mGiftIv.setVisibility(GONE);
+                    mSendTv.setVisibility(VISIBLE);
                 }
             }
         }

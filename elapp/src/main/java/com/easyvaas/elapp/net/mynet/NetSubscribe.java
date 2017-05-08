@@ -20,8 +20,8 @@ public abstract class NetSubscribe<T> extends Subscriber<NetResponse<T>> {
     @Override
     public void onError(Throwable e) {
         OnFailue(e.toString());
-        Log.e("Misuzu","error --->"+e.toString());
-        Log.e("xmzd","onError --->"+e.toString());
+        Log.d("Misuzu","error --->"+e.toString());
+        Log.d("xmzd","onError --->"+e.toString());
 //        Toast.makeText(EVApplication.getApp(),EVApplication.getApp().getString(R.string.network_error),Toast.LENGTH_SHORT).show();
     }
 
