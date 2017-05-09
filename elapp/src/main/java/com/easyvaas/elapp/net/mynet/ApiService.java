@@ -7,6 +7,7 @@ import com.easyvaas.elapp.bean.market.MarketExponentModel;
 import com.easyvaas.elapp.bean.market.MarketGlobalModel;
 import com.easyvaas.elapp.bean.news.NewsCollectStatus;
 import com.easyvaas.elapp.bean.news.NewsColumnModel;
+import com.easyvaas.elapp.bean.news.NewsDetailModel;
 import com.easyvaas.elapp.bean.news.NormalNewsModel;
 import com.easyvaas.elapp.bean.news.StockMarketNewsModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
@@ -43,6 +44,7 @@ import rx.Observable;
 
 public interface ApiService {
 
+
     /*-------------------------------------------资讯----------------------------------------*/
 
     /**
@@ -66,6 +68,12 @@ public interface ApiService {
      */
     @GET("api/v2/news/column")
     Observable<NetResponse<NewsColumnModel>> getNewsColumn(@Query(AppConstants.START) int start);
+
+    /**
+     * 获取新闻详情内容
+     */
+    @GET("api/news/getnews")
+    Observable<NetResponse<NewsDetailModel>> getNewsDetail(@Query(AppConstants.NEWS_ID) String newsId);
 
     /*-------------------------------------------市场----------------------------------------*/
 

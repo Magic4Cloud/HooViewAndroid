@@ -621,6 +621,10 @@
             android:name="com.easyvaas.elapp.ui.user.usernew.activity.UserPageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.easyvaas.elapp.ui.common.NewsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
