@@ -172,6 +172,23 @@ public class BasePlayerActivity extends BaseChatActivity {
 //            findViewById(R.id.player_bottom_share_btn).setVbility(View.VISIBLE);
 //            if (mChatHelper != null) mChatHelper.chatSendGift(data);
             EventBus.getDefault().post(new ChatLiveInputEvent(ChatLiveInputEvent.ACTION_SHOW_INPUT));
+            // 发送礼物
+            if (data != null) {
+                ChatComment comment = new ChatComment();
+                comment.setVid(mVideoId);
+                comment.setId(-1);
+                comment.setReply_name("");
+                comment.setReply_nickname("");
+                comment.setContent(data.getGiftName() + "*" + data.getGiftCount());
+                comment.setMsgType(ChatComment.MSG_TYPE_GIFT);
+                if (EVApplication.getUser() != null) {
+                    comment.setName(EVApplication.getUser().getName());
+                    comment.setNickname(EVApplication.getUser().getNickname());
+                    comment.setLogourl(EVApplication.getUser().getLogourl());
+                    comment.setVip(EVApplication.getUser().getVip());
+                }
+                mChatHelper.chatSendComment(comment);
+            }
             ApiHelper.getInstance().sendGiftString(mVideoId, data.getGiftId(), data.getGiftCount(),
                     false, mCurrentVideo.getName(), new MyRequestCallBack<String>() {
                         @Override

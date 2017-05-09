@@ -16,6 +16,7 @@ public class EMMessageWrapper {
     public static final String MSG_TYPE_IMAGE = "image";
     public static final String MSG_TYPE_JOIN = "join";
     public static final String MSG_TYPE_GIFT = "gift";
+    public static final String MSG_TYPE_TIPS = "tips";
 
     public static final String EXTRA_MSG_TYPE = "tp";
     public static final String EXTRA_MSG_STICK = "st";
@@ -65,17 +66,11 @@ public class EMMessageWrapper {
             isAnchor = false;
         }
         // 同步
-        ChatRecord bean = RealmHelper.getInstance().queryChatRecord(userId);
-        if (bean == null) {
-            RealmHelper.getInstance().insertChatRecord(new ChatRecord(avatar, nickname, userId));
-        } else if (bean != null && userId.equals(bean.getId())) {
-            if (!nickname.equals(bean.getNickname())) {
-                nickname = bean.getNickname();
-            }
-            if (!avatar.equals(bean.getAvatar())) {
-                avatar = bean.getAvatar();
-            }
-        }
+        RealmHelper.getInstance().insertChatRecordSingle(new ChatRecord(avatar, nickname, userId));
+    }
+
+    public EMMessageWrapper(String type) {
+        this.type = type;
     }
 
     @Override

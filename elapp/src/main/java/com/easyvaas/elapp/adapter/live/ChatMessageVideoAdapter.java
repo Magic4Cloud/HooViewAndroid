@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easyvaas.elapp.bean.chat.ChatComment;
 import com.easyvaas.elapp.chat.model.EMMessageWrapper;
 import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.utils.Utils;
@@ -23,21 +24,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Date    2017/5/3
+ * Date    2017/5/9
  * Author  xiaomao
- * 聊天adapter
+ * 视频直播聊天adapter
  */
-public class ChatMessageAdapter extends RecyclerView.Adapter {
+public class ChatMessageVideoAdapter extends RecyclerView.Adapter {
 
     private static final int TYPE_TIPS = 1;
     private static final int TYPE_JOIN = 2;
     private static final int TYPE_MESSAGE = 3;
     private static final int TYPE_GIFT = 4;
     private Context mContext;
-    private List<EMMessageWrapper> mData;
+    private List<ChatComment> mData;
     private OnReplyListener mOnReplyListener;
 
-    public ChatMessageAdapter(Context context, List<EMMessageWrapper> list) {
+    public ChatMessageVideoAdapter(Context context, List<ChatComment> list) {
         mContext = context;
         mData = list;
     }
@@ -61,13 +62,13 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (mData != null && mData.size() > 0) {
-            EMMessageWrapper wrapper = mData.get(position % mData.size());
+            ChatComment comment = mData.get(position % mData.size());
             if (holder instanceof MessageViewHolder) {
-                ((MessageViewHolder) holder).setMessage(wrapper);
+                ((MessageViewHolder) holder).setMessage(comment);
             } else if (holder instanceof JoinViewHolder) {
-                ((JoinViewHolder) holder).setModel(wrapper);
+                ((JoinViewHolder) holder).setModel(comment);
             } else if (holder instanceof GiftViewHolder) {
-                ((GiftViewHolder) holder).setModel(wrapper);
+                ((GiftViewHolder) holder).setModel(comment);
             }
         }
     }
@@ -80,13 +81,13 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         if (mData != null && mData.size() > 0) {
-            EMMessageWrapper wrapper = mData.get(position);
-            if (wrapper != null) {
-                if (EMMessageWrapper.MSG_TYPE_TIPS.equals(wrapper.type)) {
+            ChatComment comment = mData.get(position);
+            if (comment != null) {
+                if (ChatComment.MSG_TYPE_TIPS.equals(comment.getMsgType())) {
                     return TYPE_TIPS;
-                } else if (EMMessageWrapper.MSG_TYPE_JOIN.equals(wrapper.type)) {
+                } else if (ChatComment.MSG_TYPE_JOIN.equals(comment.getMsgType())) {
                     return TYPE_JOIN;
-                } else if (EMMessageWrapper.MSG_TYPE_GIFT.equals(wrapper.type)) {
+                } else if (EMMessageWrapper.MSG_TYPE_GIFT.equals(comment.getMsgType())) {
                     return TYPE_GIFT;
                 } else {
                     return TYPE_MESSAGE;
@@ -100,7 +101,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
     }
 
     /**
-     * 聊天提示
+     * 提示信息
      */
     class TipsViewHolder extends RecyclerView.ViewHolder {
         public TipsViewHolder(View itemView) {
@@ -149,15 +150,15 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, itemView);
         }
 
-        void setMessage(final EMMessageWrapper wrapper) {
-            if (wrapper != null) {
-                if (wrapper.isSelf) {
+        void setMessage(final ChatComment comment) {
+            if (comment != null) {
+                if (comment.isSelf()) {
                     mItemOtherRll.setVisibility(View.GONE);
                     mItemMineRll.setVisibility(View.VISIBLE);
                     // avatar
-                    Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(wrapper.userId), mAvatarMineCiv);
+                    Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(comment.getName()), mAvatarMineCiv);
                     // name
-                    if (wrapper.isAnchor) {
+                    if (1 == comment.getVip()) {
                         // 主播
                         mBgMineFl.setBackgroundResource(R.drawable.bg_chat_myself_vip);
                     } else {
@@ -166,11 +167,11 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
                     }
                     mNameMineTv.setText(R.string.me);
                     // message
-                    mMessageMineTv.setText(wrapper.content);
+                    mMessageMineTv.setText(comment.getContent());
                     // reply
-                    if (EMMessageWrapper.MSG_TYPE_REPLY.equals(wrapper.type)) {
+                    if (ChatComment.MSG_TYPE_REPLY.equals(comment.getMsgType())) {
                         mReplyMineTv.setVisibility(View.VISIBLE);
-                        mReplyMineTv.setText(mContext.getResources().getString(R.string.reply_content, wrapper.replyNickname, wrapper.replyContent));
+                        mReplyMineTv.setText(mContext.getResources().getString(R.string.reply_content, comment.getReply_nickname(), comment.getReply_content()));
                     } else {
                         mReplyMineTv.setVisibility(View.GONE);
                     }
@@ -185,7 +186,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
                         @Override
                         public boolean onLongClick(View view) {
                             if (mOnReplyListener != null) {
-                                mOnReplyListener.onReply(wrapper);
+                                mOnReplyListener.onReply(comment);
                             }
                             return false;
                         }
@@ -194,29 +195,27 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
                     mItemMineRll.setVisibility(View.GONE);
                     mItemOtherRll.setVisibility(View.VISIBLE);
                     // avatar
-                    Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(wrapper.userId), mAvatarOtherCiv);
+                    Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(comment.getName()), mAvatarOtherCiv);
                     // name
-                    if (wrapper.isAnchor) {
+                    if (1 == comment.getVip()) {
                         // 主播
-//                        mNameOtherTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                         mNameOtherTv.setTextColor(mContext.getResources().getColor(R.color.title_text_color));
                         mVOtherIv.setVisibility(View.VISIBLE);
                         mBgOtherFl.setBackgroundResource(R.drawable.bg_chat_others_vip);
                     } else {
                         // 水友
-//                        mNameOtherTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
                         mNameOtherTv.setTextColor(mContext.getResources().getColor(R.color.text_gray));
                         mVOtherIv.setVisibility(View.GONE);
                         mBgOtherFl.setBackgroundResource(R.drawable.bg_chat_others);
                     }
-                    mNameOtherTv.setText(wrapper.nickname);
+                    mNameOtherTv.setText(comment.getNickname());
                     // message
-                    mMessageOtherTv.setText(wrapper.content);
+                    mMessageOtherTv.setText(comment.getContent());
                     // reply
                     // reply
-                    if (EMMessageWrapper.MSG_TYPE_REPLY.equals(wrapper.type)) {
+                    if (ChatComment.MSG_TYPE_REPLY.equals(comment.getMsgType())) {
                         mReplyOtherTv.setVisibility(View.VISIBLE);
-                        mReplyOtherTv.setText(mContext.getResources().getString(R.string.reply_content, wrapper.replyNickname, wrapper.replyContent));
+                        mReplyOtherTv.setText(mContext.getResources().getString(R.string.reply_content, comment.getReply_nickname(), comment.getReply_content()));
                     } else {
                         mReplyOtherTv.setVisibility(View.GONE);
                     }
@@ -231,7 +230,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
                         @Override
                         public boolean onLongClick(View view) {
                             if (mOnReplyListener != null) {
-                                mOnReplyListener.onReply(wrapper);
+                                mOnReplyListener.onReply(comment);
                             }
                             return false;
                         }
@@ -256,10 +255,10 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, itemView);
         }
 
-        void setModel(EMMessageWrapper wrapper) {
-            if (wrapper != null) {
-                Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(wrapper.userId), mAvatarCiv);
-                mNameTv.setText(wrapper.nickname);
+        void setModel(ChatComment comment) {
+            if (comment != null) {
+                Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(comment.getName()), mAvatarCiv);
+                mNameTv.setText(comment.getNickname());
             }
         }
     }
@@ -281,17 +280,17 @@ public class ChatMessageAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, itemView);
         }
 
-        void setModel(EMMessageWrapper wrapper) {
-            if (wrapper != null) {
-                Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(wrapper.userId), mAvatarCiv);
-                mNameTv.setText(wrapper.nickname);
-                mGiftTv.setText(wrapper.content);
+        void setModel(ChatComment comment) {
+            if (comment != null) {
+                Utils.showNewsImage(RealmHelper.getInstance().getChatRecordAvatar(comment.getName()), mAvatarCiv);
+                mNameTv.setText(comment.getNickname());
+                mGiftTv.setText(comment.getContent());
             }
         }
     }
 
     public interface OnReplyListener {
-        void onReply(EMMessageWrapper wrapper);
+        void onReply(ChatComment comment);
     }
 
     public void setOnReplyListener(OnReplyListener l) {

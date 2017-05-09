@@ -114,6 +114,7 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
 
     private void initView() {
         mEMMessageList = new LinkedList<>();
+        mEMMessageList.add(0, new EMMessageWrapper(EMMessageWrapper.MSG_TYPE_TIPS));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter = new ChatMessageAdapter(getActivity(), mEMMessageList));
@@ -328,15 +329,7 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
             return;
         }
         ChatRecord record = new ChatRecord(avatr, nickname, userId);
-        ChatRecord bean = RealmHelper.getInstance().queryChatRecord(userId);
-        if (bean == null) {
-            RealmHelper.getInstance().insertChatRecord(record);
-        } else if (userId.equals(bean.getId())){
-            if ((nickname != null && !nickname.equals(bean.getNickname())) || (avatr != null && !avatr.equals(bean.getAvatar()))) {
-                RealmHelper.getInstance().deleteChatRecord(userId);
-                RealmHelper.getInstance().insertChatRecord(record);
-            }
-        }
+        RealmHelper.getInstance().insertChatRecordSingle(record);
     }
 
     private void onMessageListInit() {

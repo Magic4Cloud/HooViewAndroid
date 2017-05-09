@@ -61,6 +61,10 @@ public class ChatStatusEntity {
             comment.setContent(content);
             comment.setReply_name(exct.getRnm());
             comment.setReply_nickname(exct.getRnk());
+            comment.setLogourl(exct.getAvatar());
+            comment.setVip(exct.getVip());
+            comment.setName(exct.getUserId());
+            comment.setMsgType(exct.getType());
             return comment;
         }
         return null;

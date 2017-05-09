@@ -845,10 +845,12 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     comment.setReply_name("");
                     comment.setReply_nickname("");
                     comment.setContent(inputString);
+                    comment.setMsgType(ChatComment.MSG_TYPE_NORMAL);
                     if (EVApplication.getUser() != null) {
                         comment.setName(EVApplication.getUser().getName());
                         comment.setNickname(EVApplication.getUser().getNickname());
                         comment.setLogourl(EVApplication.getUser().getLogourl());
+                        comment.setVip(EVApplication.getUser().getVip());
                     }
                     mChatHelper.chatSendComment(comment);
                 }
@@ -860,6 +862,30 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                 EventBus.getDefault().post(new LiveSearchStockEvent(inputString));
                 break;
         }
+    }
+
+    /**
+     * 加入聊天室
+     */
+    @Override
+    public void onJoinOK() {
+        if (isFinishing()) {
+            return;
+        }
+        ChatComment comment = new ChatComment();
+        comment.setVid(mVideoId);
+        comment.setId(-1);
+        comment.setReply_name("");
+        comment.setReply_nickname("");
+        comment.setContent("join...");
+        comment.setMsgType(ChatComment.MSG_TYPE_JOIN);
+        if (EVApplication.getUser() != null) {
+            comment.setName(EVApplication.getUser().getName());
+            comment.setNickname(EVApplication.getUser().getNickname());
+            comment.setLogourl(EVApplication.getUser().getLogourl());
+            comment.setVip(EVApplication.getUser().getVip());
+        }
+        mChatHelper.chatSendComment(comment);
     }
 
     /**

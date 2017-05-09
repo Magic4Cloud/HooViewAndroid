@@ -16,6 +16,13 @@ public class ChatComment {
     public static final String NAME_SYSTEM_SECRETARY = "0";
     public static final String NAME_SYSTEM_FOLLOW = "1";
 
+    public static final String MSG_TYPE_NORMAL = "nor";
+    public static final String MSG_TYPE_REPLY = "rp";
+    public static final String MSG_TYPE_IMAGE = "image";
+    public static final String MSG_TYPE_JOIN = "join";
+    public static final String MSG_TYPE_GIFT = "gift";
+    public static final String MSG_TYPE_TIPS = "tips";
+
     private long id;
     private String vid;
     private String logourl;
@@ -23,12 +30,57 @@ public class ChatComment {
     private String nickname;
     private String reply_name;
     private String reply_nickname;
+    private String reply_content;
     private String content;
     private String create_time;
     private int create_time_span;
     private int is_guest;
     private int type;
     private int countDown;
+    private int vip;
+    private boolean isSelf;
+    private String msgType;
+    private boolean isAnchor;
+
+    public String getReply_content() {
+        return reply_content;
+    }
+
+    public void setReply_content(String reply_content) {
+        this.reply_content = reply_content;
+    }
+
+    public boolean isAnchor() {
+        return isAnchor;
+    }
+
+    public void setAnchor(boolean anchor) {
+        isAnchor = anchor;
+    }
+
+    public String getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
+    }
+
+    public boolean isSelf() {
+        return isSelf;
+    }
+
+    public void setSelf(boolean self) {
+        isSelf = self;
+    }
+
+    public int getVip() {
+        return vip;
+    }
+
+    public void setVip(int vip) {
+        this.vip = vip;
+    }
 
     public ChatComment() {
     }
@@ -43,6 +95,10 @@ public class ChatComment {
     public ChatComment(int type, String content) {
         this.type = type;
         this.content = content;
+    }
+
+    public ChatComment(String msgType) {
+        this.msgType = msgType;
     }
 
     public int getType() {

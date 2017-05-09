@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.easyvaas.elapp.adapter.live.ChatMessageVideoAdapter;
+import com.easyvaas.elapp.chat.model.ChatRecord;
+import com.easyvaas.elapp.db.RealmHelper;
 import com.hooview.app.R;
 import com.easyvaas.elapp.adapter.recycler.WatcherCommentRcvAdapter;
 import com.easyvaas.elapp.app.EVApplication;
@@ -37,6 +40,7 @@ public class LiveChatFragment extends BaseFragment implements View.OnClickListen
     private static final String TAG = "LiveChatFragment";
     private RecyclerView mCommentListView;
     private WatcherCommentRcvAdapter mAnchorCommentRcvAdapter;
+    private ChatMessageVideoAdapter mAdapter;
     private List<ChatComment> mCommentList;
     private RelativeLayout mRlInput;
     private ImageView mIvGift;
@@ -54,7 +58,7 @@ public class LiveChatFragment extends BaseFragment implements View.OnClickListen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCommentList = new ArrayList<>();
-        mCommentList.add(new ChatComment(ChatComment.TYPE_INTO_TIPS, ""));
+        mCommentList.add(new ChatComment(ChatComment.MSG_TYPE_TIPS));
         EventBus.getDefault().register(this);
     }
 
@@ -74,7 +78,8 @@ public class LiveChatFragment extends BaseFragment implements View.OnClickListen
         mCommentListView.setItemAnimator(new DefaultItemAnimator());
         mCommentListView.setHasFixedSize(true);
         mCommentListView.setLayoutManager(linearLayoutManager);
-        mCommentListView.setAdapter(mAnchorCommentRcvAdapter = new WatcherCommentRcvAdapter(getContext(), mCommentList));
+//        mCommentListView.setAdapter(mAnchorCommentRcvAdapter = new WatcherCommentRcvAdapter(getContext(), mCommentList));
+        mCommentListView.setAdapter(mAdapter = new ChatMessageVideoAdapter(getActivity(), mCommentList));
         mLlInputArea = (LinearLayout) view.findViewById(R.id.ll_input_area);
         mGiftViewContainer = (GiftViewContainer) view.findViewById(R.id.GiftViewContainer);
         return view;
@@ -88,7 +93,13 @@ public class LiveChatFragment extends BaseFragment implements View.OnClickListen
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(NewCommentEvent event) {
+        if (event == null || event.chatComment == null) {
+            return;
+        }
         Logger.d(TAG, "NewCommentEvent: " + event.chatComment.getContent());
+        RealmHelper.getInstance()
+                .insertChatRecordSingle(
+                        new ChatRecord(event.chatComment.getLogourl(), event.chatComment.getNickname(), event.chatComment.getName()));
         mCommentList.add(0, event.chatComment);
         LinearLayoutManager layoutManager = (LinearLayoutManager) mCommentListView.getLayoutManager();
         if (mCommentList.size() < 7) {
@@ -96,7 +107,8 @@ public class LiveChatFragment extends BaseFragment implements View.OnClickListen
         } else {
             layoutManager.setStackFromEnd(false);
         }
-        mAnchorCommentRcvAdapter.notifyDataSetChanged();
+//        mAnchorCommentRcvAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
         mCommentListView.scrollToPosition(0);
     }
 

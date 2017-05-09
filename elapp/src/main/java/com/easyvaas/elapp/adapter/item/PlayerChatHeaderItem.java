@@ -12,7 +12,7 @@ import com.hooview.app.R;
 public class PlayerChatHeaderItem implements AdapterItem {
     @Override
     public int getLayoutResId() {
-        return R.layout.item_player_header_prompt;
+        return R.layout.item_chat_message_tips;
     }
 
     @Override

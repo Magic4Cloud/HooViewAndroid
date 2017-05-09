@@ -12,6 +12,7 @@ import android.os.Message;
 import android.text.TextUtils;
 
 import com.easyvaas.common.gift.bean.GiftEntity;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.chat.ChatBarrage;
 import com.easyvaas.elapp.bean.chat.ChatBarrageEntity;
 import com.easyvaas.elapp.bean.chat.ChatComment;
@@ -143,6 +144,12 @@ public class ChatHelper implements IChatHelper {
                         return;
                     }
                     final ChatComment comment = entity.getComment(userId, message);
+                    if (EVApplication.getUser() != null && EVApplication.getUser().getName() != null
+                            && EVApplication.getUser().getName().equals(comment.getName())) {
+                        comment.setSelf(true);
+                    } else {
+                        comment.setSelf(false);
+                    }
                     final ChatBarrage barrage = entity.getBarrage(userId, message);
                     final GiftEntity gift = entity.getGiftEntity(userId);
                     final ChatRedPackInfo redPackInfo = entity.getRedPack(userdata);
@@ -296,6 +303,10 @@ public class ChatHelper implements IChatHelper {
         commentEntity.setNk(comment.getNickname());
         commentEntity.setRnk(comment.getReply_nickname());
         commentEntity.setRnm(comment.getReply_name());
+        commentEntity.setAvatar(comment.getLogourl());
+        commentEntity.setVip(comment.getVip());
+        commentEntity.setUserId(comment.getName());
+        commentEntity.setType(comment.getMsgType());
         statusEntity.setExct(commentEntity);
         String json = new Gson().toJson(statusEntity);
         Logger.e(TAG, "chatSendComment json: " + json);

@@ -1,6 +1,8 @@
 package com.easyvaas.elapp.db;
 
 
+import android.text.TextUtils;
+
 import com.easyvaas.elapp.bean.market.ExponentModel;
 import com.easyvaas.elapp.bean.user.Collection;
 import com.easyvaas.elapp.bean.user.ReadRecord;
@@ -325,6 +327,32 @@ public class RealmHelper {
         getRealm().beginTransaction();
         data.deleteFromRealm();
         getRealm().commitTransaction();
+    }
+
+    public void insertChatRecordSingle(ChatRecord bean) {
+        if (bean == null || TextUtils.isEmpty(bean.getId())) {
+            return;
+        }
+        ChatRecord record = queryChatRecord(bean.getId());
+        if (record == null) {
+            insertChatRecord(bean);
+        } else {
+            if ((bean.getAvatar() != null && !bean.getAvatar().equals(record.getAvatar()))
+            || (bean.getNickname() != null && !bean.getNickname().equals(record.getNickname()))) {
+                deleteChatRecord(bean.getId());
+                insertChatRecord(bean);
+            }
+        }
+    }
+
+    public String getChatRecordAvatar(String id) {
+        RealmResults<ChatRecord> results = getRealm().where(ChatRecord.class).findAll();
+        for (ChatRecord item : results) {
+            if (item != null) {
+                return item.getAvatar();
+            }
+        }
+        return "";
     }
 
 }
