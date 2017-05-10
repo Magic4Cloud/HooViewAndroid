@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.easyvaas.elapp.event.MainRefreshEvent;
 import com.easyvaas.elapp.ui.base.BaseActivity;
 import com.easyvaas.elapp.ui.live.HomeLiveFragment;
 import com.easyvaas.elapp.ui.live.livenew.LiveMainFragment;
@@ -31,7 +32,9 @@ import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
 
-public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+import org.greenrobot.eventbus.EventBus;
+
+public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
     public static final String TAB_NEWS = "news";
     public static final String TAB_LIVE = "live";
     public static final String TAB_MARKET = "market";
@@ -55,6 +58,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private Fragment mCurrentFragment;
     public SharedPreferences mSp;
     private RelativeLayout rl_mask;
+    private int mPosition = 0;
 
 
     public static void start(Context context) {
@@ -84,9 +88,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mSp = getSharedPreferences("config", MODE_PRIVATE);
         mRgNavigation = (RadioGroup) findViewById(R.id.rg_navigation);
         mRbNews = (RadioButton) findViewById(R.id.rb_news);
+        mRbNews.setOnClickListener(this);
         mRbLive = (RadioButton) findViewById(R.id.rb_live);
+        mRbLive.setOnClickListener(this);
         mRbMarket = (RadioButton) findViewById(R.id.rb_market);
+        mRbMarket.setOnClickListener(this);
         mRbUser = (RadioButton) findViewById(R.id.rb_user);
+        mRbUser.setOnClickListener(this);
         rl_mask = (RelativeLayout) findViewById(R.id.rl_mask);
         mRgNavigation.setOnCheckedChangeListener(this);
         mFragmentManager = getSupportFragmentManager();
@@ -103,6 +111,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         mUserCenterFragment = UserCenterFragment.newInstance();
         mCurrentFragment = mHomeNewsFragment;
         mRbNews.setChecked(true);
+        mPosition = 0;
     }
 
     private void selectTab(Intent intent) {
@@ -153,7 +162,36 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_user:
                 switchFragment(mUserCenterFragment);
                 break;
+        }
+    }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rb_news:
+                if (mRbNews.isChecked() && 0 == mPosition) {
+                    EventBus.getDefault().post(new MainRefreshEvent(MainRefreshEvent.TYPE_NEWS));
+                }
+                mPosition = 0;
+                break;
+            case R.id.rb_live:
+                if (mRbLive.isChecked() && 1 == mPosition) {
+                    EventBus.getDefault().post(new MainRefreshEvent(MainRefreshEvent.TYPE_LIVE));
+                }
+                mPosition = 1;
+                break;
+            case R.id.rb_market:
+                if (mRbMarket.isChecked() && 2 == mPosition) {
+                    EventBus.getDefault().post(new MainRefreshEvent(MainRefreshEvent.TYPE_MARKET));
+                }
+                mPosition = 2;
+                break;
+            case R.id.rb_user:
+                if (mRbUser.isChecked() && 3 == mPosition) {
+
+                }
+                mPosition = 3;
+                break;
         }
     }
 
@@ -316,4 +354,5 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

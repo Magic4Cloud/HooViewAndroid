@@ -1,13 +1,21 @@
 package com.easyvaas.elapp.ui.live.livenew;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import com.easyvaas.elapp.adapter.live.LiveImageTextListAdapter;
 import com.easyvaas.elapp.bean.user.UserInfoArrayModel;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
+import com.easyvaas.elapp.event.MainRefreshEvent;
 import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,5 +115,24 @@ public class LiveImageTextListFragment extends MyBaseListFragment<LiveImageTextL
 
     public static LiveImageTextListFragment newInstance() {
         return new LiveImageTextListFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainRefreshEvent(MainRefreshEvent event) {
+        if (event != null && MainRefreshEvent.TYPE_LIVE.equals(event.type)) {
+            autoRefresh();
+        }
     }
 }

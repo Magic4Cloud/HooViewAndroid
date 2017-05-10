@@ -70,6 +70,21 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
     }
 
     /**
+     * 自动刷新
+     */
+    protected void autoRefresh() {
+        if (mSwiprefreshlayout != null && mAdapter != null) {
+            mSwiprefreshlayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    setLoading(true);
+                }
+            });
+            onRefresh();
+        }
+    }
+
+    /**
      * 加载更多回调
      */
     protected void setLoadMoreCallBack(T mAdapter) {

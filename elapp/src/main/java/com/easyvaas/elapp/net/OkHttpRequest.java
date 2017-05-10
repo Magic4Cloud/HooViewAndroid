@@ -131,7 +131,7 @@ class OkHttpRequest implements IRequestHelper {
             Logger.d(TAG, "Request body: " + requestBuilder.toString());
             requestBuilder.get();
         }
-        Logger.d(TAG, "Request url: " + RequestUtil.assembleUrlWithAllParams(url, params));
+        Logger.e(TAG, "Request url: " + RequestUtil.assembleUrlWithAllParams(url, params));
         mClient.newCall(requestBuilder.build()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -148,7 +148,7 @@ class OkHttpRequest implements IRequestHelper {
     @Override
     public void postAsString(String url, Map<String, String> params, JSONObject jsonObject,
                              final MyRequestCallBack<String> callBack) {
-        Logger.d(TAG, "Request post url: " + url);
+        Logger.e(TAG, "Request post url: " + url);
         RequestBody body = RequestBody
                 .create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString());
         Request request = new Request.Builder()

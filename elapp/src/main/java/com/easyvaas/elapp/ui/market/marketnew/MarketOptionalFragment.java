@@ -1,5 +1,7 @@
 package com.easyvaas.elapp.ui.market.marketnew;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -7,6 +9,7 @@ import com.easyvaas.elapp.adapter.market.MarketOptionalListAdapter;
 import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.market.StockListModel;
 import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.event.MainRefreshEvent;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.base.BaseListLazyFragment;
@@ -14,6 +17,10 @@ import com.easyvaas.elapp.ui.market.EditMySelectedStockActivity;
 import com.easyvaas.elapp.ui.search.SearchStockActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.hooview.app.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -162,6 +169,33 @@ public class MarketOptionalFragment extends BaseListLazyFragment {
 
     public static MarketOptionalFragment newInstance() {
         return new MarketOptionalFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainRefreshEvent(MainRefreshEvent event) {
+        if (event != null && MainRefreshEvent.TYPE_MARKET.equals(event.type)) {
+            if (mSwipeRefreshLayout != null && mAdapter != null) {
+                mSwipeRefreshLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipeRefreshLayout.setRefreshing(true);
+                    }
+                });
+                onRefresh();
+            }
+        }
     }
 
 }

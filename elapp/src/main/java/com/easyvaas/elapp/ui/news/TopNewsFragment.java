@@ -1,12 +1,20 @@
 package com.easyvaas.elapp.ui.news;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import com.easyvaas.elapp.adapter.news.TopRatedNewsMyAdapter;
 import com.easyvaas.elapp.bean.BannerModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
+import com.easyvaas.elapp.event.MainRefreshEvent;
 import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseListFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -94,4 +102,22 @@ public class TopNewsFragment extends MyBaseListFragment<TopRatedNewsMyAdapter> {
         return new TopNewsFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainRefreshEvent(MainRefreshEvent event) {
+        if (event != null && MainRefreshEvent.TYPE_NEWS.equals(event.type)) {
+            autoRefresh();
+        }
+    }
 }
