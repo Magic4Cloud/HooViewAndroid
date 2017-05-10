@@ -75,6 +75,16 @@ public interface ApiService {
     @GET("api/news/getnews")
     Observable<NetResponse<NewsDetailModel>> getNewsDetail(@Query(AppConstants.NEWS_ID) String newsId);
 
+    /**
+     * 发布评论
+     * @param type 话题类型（0，新闻；1，视频；2，股票）
+     */
+    @GET("api/v2/posts/post")
+    Observable<NetResponse<NoResponeBackModel>> sendCommentByType(@Query(AppConstants.TOPIC_ID) String topicid,
+                                                                  @Query(AppConstants.USER_ID) String userid,
+                                                                  @Query(AppConstants.CONTENT) String content,
+                                                                  @Query(AppConstants.TYPE) int type);
+
     /*-------------------------------------------市场----------------------------------------*/
 
     /**

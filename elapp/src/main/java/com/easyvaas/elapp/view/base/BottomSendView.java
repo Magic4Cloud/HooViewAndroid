@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -45,6 +49,9 @@ public class BottomSendView extends LinearLayout {
     @BindView(R.id.bottom_gift)
     ImageView mBottomGift;
 
+    @BindView(R.id.bottom_send_button)
+    TextView mSendBotton;
+
     OnBottomInputListener mOnBottomInputListener;
 
     private int type;
@@ -78,6 +85,40 @@ public class BottomSendView extends LinearLayout {
                 return false;
             }
         });
+        mSendBotton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnBottomInputListener != null) {
+                    if (EVApplication.isLogin())
+                    {
+                        mOnBottomInputListener.sendText(mBottomEdittext.getText().toString(), type); // 根据不同type 发送输入内容
+                        if (type != TYPE_SEARCH)
+                            mBottomEdittext.setText("");
+                    } else
+                        LoginActivity.start(getContext());
+                    toggleKeyBoard();
+                }
+            }
+        });
+        mBottomEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(s))
+                    mSendBotton.setEnabled(false);
+                else
+                    mSendBotton.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         mBottomGift.setOnClickListener(new OnClickListener() {
             @Override
@@ -100,6 +141,15 @@ public class BottomSendView extends LinearLayout {
         FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
         View view = content.getChildAt(0);
         view.getViewTreeObserver().addOnGlobalLayoutListener(new KeyboardOnGlobalChangeListener());
+    }
+
+    /**
+     * 显示或者隐藏输入法
+     */
+    public void toggleKeyBoard()
+    {
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /**
@@ -173,6 +223,11 @@ public class BottomSendView extends LinearLayout {
                else
                    mBottomGift.setVisibility(VISIBLE);
            }
+
+           if (isActive)
+                 mSendBotton.setVisibility(VISIBLE);
+            else
+                mSendBotton.setVisibility(GONE);
         }
     }
 

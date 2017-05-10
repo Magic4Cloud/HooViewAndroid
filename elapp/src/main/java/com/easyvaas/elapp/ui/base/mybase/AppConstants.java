@@ -27,4 +27,5 @@ public class AppConstants {
     public static final String TOPIC_ID = "topicid"; //评论id
 
     public static final String CHANNEL_ID = "channelid";
+    public static final String CONTENT = "content";
 }

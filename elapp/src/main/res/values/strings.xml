@@ -890,5 +890,6 @@
     <string name="news_unlike">不喜欢</string>
     <string name="hot_comment">热门评论</string>
     <string name="news_all_comment">全部评论（%1$d）</string>
+    <string name="relative_news">相关新闻</string>
 
 </resources>

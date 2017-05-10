@@ -23,6 +23,7 @@ public class NewsDetailModel {
     private String digest;
     private String source;
     private int like;
+    private int favorite;
     private String cover;
     private int likeCount;
     private int viewCount;
@@ -178,6 +179,14 @@ public class NewsDetailModel {
         this.posts = posts;
     }
 
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
+
     public static class AuthorBean {
         /**
          * id : 作者ID
@@ -230,6 +239,7 @@ public class NewsDetailModel {
         public void setBind(int bind) {
             this.bind = bind;
         }
+
     }
 
 

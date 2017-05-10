@@ -2,47 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="50dp"
-              android:background="@color/white"
               android:animateLayoutChanges="true"
+              android:background="@color/white"
               android:orientation="vertical">
 
     <View
         style="@style/divider_view_style"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-    <EditText
-        android:id="@+id/bottom_edittext"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/shape_chat_input_bg"
-        android:focusable="true"
-        android:gravity="center_vertical|left"
-        android:hint="@string/video_input_comment"
-        android:imeOptions="actionSend"
-        android:maxLength="140"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:paddingLeft="12dp"
-        android:textColorHint="@color/text_color_gray"/>
-    <ImageView
-        android:id="@+id/bottom_gift"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/shape_btn_gift_bg"
-        android:padding="7dp"
-        android:visibility="gone"
-        android:scaleType="fitXY"
-        android:src="@drawable/btn_gift_n" />
+
+        <EditText
+            android:id="@+id/bottom_edittext"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_chat_input_bg"
+            android:focusable="true"
+            android:gravity="center_vertical|left"
+            android:hint="@string/video_input_comment"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:maxLength="140"
+            android:paddingLeft="12dp"
+            android:textColorHint="@color/text_color_gray"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/bottom_gift"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_btn_gift_bg"
+            android:padding="7dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btn_gift_n"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/bottom_send_button"
+            style="@style/user_focus_button_style"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/bottom_send_selector"
+            android:enabled="false"
+            android:text="@string/send"
+            android:visibility="gone"/>
     </LinearLayout>
+
     <View
         style="@style/divider_view_style"/>
 </LinearLayout>

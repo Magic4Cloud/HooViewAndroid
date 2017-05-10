@@ -155,7 +155,7 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
             mDetailPraiseCountsAnime.setText("+1");
         }
         PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat(View.ALPHA,0,1,0);
-        PropertyValuesHolder translationY = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y,0, -ViewUtil.dp2Px(getContext(),45));
+        PropertyValuesHolder translationY = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y,0, -ViewUtil.dp2Px(getContext(),40));
         PropertyValuesHolder translationX = PropertyValuesHolder.ofFloat(View.TRANSLATION_X,0,5,0,5,0);
 
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(mDetailPraiseCountsAnime,alpha,translationY,translationX);

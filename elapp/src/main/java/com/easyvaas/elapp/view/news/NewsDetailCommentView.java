@@ -51,10 +51,12 @@ public class NewsDetailCommentView extends LinearLayout {
 
     public NewsDetailCommentView(Context context) {
         super(context);
+        initView();
     }
 
     public NewsDetailCommentView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        initView();
     }
 
     private void initView()
