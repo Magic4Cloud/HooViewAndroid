@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.bean.news.NewsDetailModel;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel.PostsBean;
-import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.UserUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -28,8 +27,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static com.alibaba.sdk.android.feedback.impl.FeedbackAPI.mContext;
 
 /**
  * Date   2017/5/9
@@ -135,13 +132,11 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
             data.setLike(0);
             data.setLikeCount(counts - 1);
             mDetailPraiseCounts.setSelected(false);
-            SingleToast.show(mContext, R.string.user_praise_cancel);
             startPraiseAnime(0);
         } else {
             data.setLike(1);
             data.setLikeCount(counts + 1);
             mDetailPraiseCounts.setSelected(true);
-            SingleToast.show(mContext, R.string.user_praise_success);
             startPraiseAnime(1);
         }
         mDetailPraiseCounts.setText(String.valueOf(data.getLikeCount()));
@@ -169,7 +164,6 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
         animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mDetailPraiseCountsAnime.setVisibility(GONE);
                     }
 
                     @Override
