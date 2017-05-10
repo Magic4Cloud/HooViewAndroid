@@ -76,7 +76,7 @@ import rx.subscriptions.CompositeSubscription;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 
-public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener, PayOrRechargeListener,BottomSendView.OnBottomInputListener {
+public class PlayerActivity extends BasePlayerActivity implements View.OnClickListener, PayOrRechargeListener, BottomSendView.OnBottomInputListener {
     private static final String TAG = "PlayerActivity";
 
     @BindView(R.id.player_video_title)
@@ -484,11 +484,11 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    long curPosition = mVideoView.getCurrentPosition();
                     long duration = mVideoView.getDuration();
                     mTvCurTime.setText(DateTimeUtil.getDurationTime(getApplicationContext(), curPosition));
                     mTvEndTime.setText(DateTimeUtil.getDurationTime(getApplicationContext(), duration));
                     mSeekBar.setProgress((int) (1000 * ((float) curPosition / (float) duration)));
+                    mVideoView.seekTo((long) (mVideoView.getDuration() * ((float) mSeekBar.getProgress() / (float) 1000)));
                     mPlayerStateView.hideLoadingView();
                 }
             });
@@ -549,12 +549,15 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         }
     }
 
+    long curPosition;  // Aya : 2017/5/8 暂时这样写
+
     @Override
     protected void onPause() {
         super.onPause();
         if (null != mEVPlayer) {
             mVideoView.pause();
             mIvPlayState.setSelected(true);
+            curPosition = mVideoView.getCurrentPosition();
         }
     }
 
@@ -575,10 +578,10 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             if (null != mEVPlayer) {
                 mEVPlayer.onDestroy();
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
 
-        };
+        }
+        ;
         mCompositeSubscription.unsubscribe();
         mUnbinder.unbind();
     }
@@ -670,10 +673,10 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                 if (mIvPlayState.isSelected()) {
                     mIvPlayState.setSelected(false);
                     mVideoView.resume();
-                    mVideoView.seekTo((mVideoView.getDuration()));
                 } else {
                     mIvPlayState.setSelected(true);
                     mVideoView.pause();
+                    curPosition = mVideoView.getCurrentPosition();
                 }
                 break;
             case R.id.iv_share:
@@ -696,6 +699,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
      */
     private void changeVideoSize(Configuration newConfig) {
         if (newConfig.screenHeightDp < newConfig.screenWidthDp) {
+            mPlayerBottomSend.setVisibility(View.GONE);
             Logger.d(TAG, "changeVideoSize:screenHeightDp " + newConfig.screenHeightDp);
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -705,7 +709,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mFlPlayer.setLayoutParams(layoutParams);
             isLandscape = true;
             mIv_all_screen.setImageResource(R.drawable.btn_half_screen_n);
-            mPlayerBottomSend.setVisibility(View.GONE);
         } else {
             this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mFlPlayer.getLayoutParams();
@@ -714,7 +717,11 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
             mFlPlayer.setLayoutParams(layoutParams);
             mIv_all_screen.setImageResource(R.drawable.btn_full_screen_n);
             isLandscape = false;
-            mPlayerBottomSend.setVisibility(View.VISIBLE);
+            if (mIsGoodVideo) {  // 精品视频 如果是第一个简介 不显示评论
+                if (mPlayerViewpager.getCurrentItem() == 0)
+                    mPlayerBottomSend.setVisibility(View.GONE);
+            } else
+                mPlayerBottomSend.setVisibility(View.VISIBLE);
         }
     }
 
@@ -758,7 +765,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         mHandler.removeCallbacks(runnableHideMediaController);
         mHandler.postDelayed(runnableHideMediaController, 5000);
     }
-
 
 
     private class PlayerPageAdapter extends FragmentPagerAdapter {
@@ -807,21 +813,19 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
 
         @Override
         public void onPageSelected(int position) {
-            if (mIsGoodVideo)
-            {
+            if (mIsGoodVideo) {
                 if (position == 1) {
                     mPlayerBottomSend.setType(BottomSendView.TYPE_COMMENT);
-                }else if (position == 2){
+                } else if (position == 2) {
                     mPlayerBottomSend.setType(BottomSendView.TYPE_SEARCH);
-                }else
+                } else
                     mPlayerBottomSend.setType(BottomSendView.TYPE_NONE);
-            }else
-            {
+            } else {
                 if (position == 0) {
                     mPlayerBottomSend.setType(BottomSendView.TYPE_CHAT);
-                }else if (position == 1){
+                } else if (position == 1) {
                     mPlayerBottomSend.setType(BottomSendView.TYPE_SEARCH);
-                }else
+                } else
                     mPlayerBottomSend.setType(BottomSendView.TYPE_NONE);
             }
         }
@@ -835,8 +839,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
     // Aya : 2017/5/4 根据不同的输入 调接口上传内容
     @Override
     public void sendText(String inputString, int type) {
-        switch (type)
-        {
+        switch (type) {
             case BottomSendView.TYPE_CHAT:
                 if (!TextUtils.isEmpty(inputString)) {
                     ChatComment comment = new ChatComment();

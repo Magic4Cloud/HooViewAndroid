@@ -212,5 +212,7 @@
     <color name="user_comment_orange">#ebbc8e</color>
     <color name="user_comment_purple">#b3a2e9</color>
     <color name="pay_text_yellow">#ffb60b</color>
+    <color name="selected_orange">#ff8b65</color>
+    <color name="news_detail_user_bg">#fafafa</color>
 
 </resources>
