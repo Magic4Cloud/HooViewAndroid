@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -28,8 +29,10 @@ import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveHistoryModel;
 import com.easyvaas.elapp.bean.imageTextLive.ImageTextLiveHistoryModel.MsgsBean;
 import com.easyvaas.elapp.bean.user.User;
 import com.easyvaas.elapp.bean.video.TextLiveListModel;
+import com.easyvaas.elapp.chat.model.ChatRecord;
 import com.easyvaas.elapp.chat.model.EMMessageWrapper;
 import com.easyvaas.elapp.db.Preferences;
+import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.dialog.CommonPromptDialog;
 import com.easyvaas.elapp.event.AppBarLayoutOffsetChangeEvent;
 import com.easyvaas.elapp.event.HideGiftViewEvent;
@@ -119,7 +122,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof ImageTextLiveActivity)
-             mImageTextLiveActivity = (ImageTextLiveActivity) context;
+            mImageTextLiveActivity = (ImageTextLiveActivity) context;
     }
 
     public static ImageTextLiveFragment newInstance(String roomId, boolean isAnchor, int watcherCount) {
@@ -246,16 +249,30 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private void sendMsg(String content, String msgType) {
         EMMessage message = EMMessage.createTxtSendMessage(content, mRoomId);
         message.setChatType(EMMessage.ChatType.ChatRoom);
-        message.setAttribute("tp", msgType);
-        message.setAttribute("nk", mUser.getNickname());
-        message.setAttribute("rnk", "");
-        message.setAttribute("rct", "");
+        message.setAttribute(EMMessageWrapper.EXTRA_MSG_TYPE, msgType);
+        message.setAttribute(EMMessageWrapper.EXTRA_MSG_NICKNAME, mUser == null ? "" : mUser.getNickname());
+        message.setAttribute(EMMessageWrapper.EXTRA_MSG_REPLY_NICKNAME, "");
+        message.setAttribute(EMMessageWrapper.EXTRA_MSG_REPLY_CONTENT, "");
+        message.setAttribute(EMMessageWrapper.EXTRA_MSG_AVATAR, mUser == null ? "" : mUser.getLogourl());
+        message.setAttribute(EMMessageWrapper.EXTRA_MSG_USER_ID, mUser == null ? "" : mUser.getName());
+        message.setAttribute(EMMessageWrapper.EXTRA_MSG_VIP, String.valueOf(mUser == null ? "0" : mUser.getVip()));
         EMClient.getInstance().chatManager().sendMessage(message);
+        // 同步
+        synRealm(mUser == null ? "" : mUser.getName(), mUser == null ? "" : mUser.getNickname(), mUser == null ? "" : mUser.getLogourl());
         List<EMMessage> list = new ArrayList<>();
         list.add(message);
         EventBus.getDefault().post(new ImageTextLiveMessageEvent(list));
-        EMMessageWrapper messageWrapper = new EMMessageWrapper(message);
-        uploadChatMsg(messageWrapper);
+        if (isAnchor && !EMMessageWrapper.MSG_TYPE_JOIN.equals(msgType)) {
+            uploadChatMsg(new EMMessageWrapper(message));
+        }
+    }
+
+    private void synRealm(String userId, String nickname, String avatar) {
+        if (TextUtils.isEmpty(userId)) {
+            return;
+        }
+        ChatRecord record = new ChatRecord(avatar, nickname, userId);
+        RealmHelper.getInstance().insertChatRecordSingle(record);
     }
 
     /**
@@ -413,7 +430,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
                     @Override
                     public void call(Integer integer) {
                         if (mImageTextLiveActivity != null)
-                        mImageTextLiveActivity.setOnLineCounts(mWatchCount);
+                            mImageTextLiveActivity.setOnLineCounts(mWatchCount);
 //                        mWatchCount = mWatchCount * 100;  //在线人数*100
                         mTvWatchCount.setText(getString(R.string.image_live_room_fans, df2.format(mWatchCount)));
                     }

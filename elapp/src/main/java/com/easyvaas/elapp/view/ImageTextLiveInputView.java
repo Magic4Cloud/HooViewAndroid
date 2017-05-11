@@ -134,11 +134,17 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable s) {
+                String text = s.toString().trim();
+                if (TextUtils.isEmpty(text)) {
+                    mSendTv.setEnabled(false);
+                } else {
+                    mSendTv.setEnabled(true);
+                }
             }
         });
         mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         getViewTreeObserver().addOnGlobalLayoutListener(mKeyboardOnGlobalChangeListener = new KeyboardOnGlobalChangeListener());
-
+        mSendTv.setEnabled(false);
     }
 
     @Override

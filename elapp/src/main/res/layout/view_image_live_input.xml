@@ -59,7 +59,7 @@
                 android:layout_height="36dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
-                android:background="@drawable/shape_chat_view_send"
+                android:background="@drawable/selector_chat_view_send"
                 android:gravity="center"
                 android:text="发送"
                 android:textColor="@color/text_white"

@@ -104,7 +104,12 @@ public class ChatInputView extends RelativeLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                String text = s.toString().trim();
+                if (TextUtils.isEmpty(text)) {
+                    mSendTv.setEnabled(false);
+                } else {
+                    mSendTv.setEnabled(true);
+                }
             }
         });
         // input panel
@@ -253,6 +258,7 @@ public class ChatInputView extends RelativeLayout {
             mGiftIv.setVisibility(VISIBLE);
             mInputEt.setHint("加入聊天吧");
         }
+        mSendTv.setEnabled(false);
     }
 
     /**

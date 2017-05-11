@@ -324,11 +324,11 @@ public class ChatMessageFragment extends BaseImageTextLiveFragment {
         EventBus.getDefault().post(new ImageTextLiveMessageEvent(list));
     }
 
-    private void synRealm(String userId, String nickname, String avatr) {
+    private void synRealm(String userId, String nickname, String avatar) {
         if (TextUtils.isEmpty(userId)) {
             return;
         }
-        ChatRecord record = new ChatRecord(avatr, nickname, userId);
+        ChatRecord record = new ChatRecord(avatar, nickname, userId);
         RealmHelper.getInstance().insertChatRecordSingle(record);
     }
 
