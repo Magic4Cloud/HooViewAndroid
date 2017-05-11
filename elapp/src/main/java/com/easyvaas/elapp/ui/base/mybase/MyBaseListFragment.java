@@ -31,6 +31,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
 
     protected T mAdapter;
     protected int start;
+    private boolean mAutoRefreshing = false;
 
 
     @Override
@@ -74,7 +75,8 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      * 自动刷新
      */
     protected void autoRefresh() {
-        if (mSwiprefreshlayout != null && mAdapter != null) {
+        if (!mAutoRefreshing && mSwiprefreshlayout != null && mAdapter != null) {
+            mAutoRefreshing = true;
             mSwiprefreshlayout.post(new Runnable() {
                 @Override
                 public void run() {
@@ -85,6 +87,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
                 @Override
                 public void run() {
                     onRefresh();
+                    mAutoRefreshing = false;
                 }
             }, 800);
         }

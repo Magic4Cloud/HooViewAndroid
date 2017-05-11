@@ -36,6 +36,7 @@ public abstract class BaseListLazyFragment extends BaseLazyFragment {
     protected ImageView mImageViewOperation;
     protected LinearLayoutManager mLayoutManager;
     protected Unbinder mUnbinder;
+    protected boolean mAutoRefreshing = false;
     protected CompositeSubscription mCompositeSubscription;
     protected int start = 0;
     protected int count = 20;

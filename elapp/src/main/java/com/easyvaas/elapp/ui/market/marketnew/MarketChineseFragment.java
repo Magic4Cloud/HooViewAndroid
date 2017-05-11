@@ -229,7 +229,8 @@ public class MarketChineseFragment extends BaseListLazyFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMainRefreshEvent(MainRefreshEvent event) {
         if (event != null && MainRefreshEvent.TYPE_MARKET.equals(event.type)) {
-            if (mSwipeRefreshLayout != null && mAdapter != null) {
+            if (!mAutoRefreshing && mSwipeRefreshLayout != null && mAdapter != null) {
+                mAutoRefreshing = true;
                 mSwipeRefreshLayout.post(new Runnable() {
                     @Override
                     public void run() {
@@ -240,6 +241,7 @@ public class MarketChineseFragment extends BaseListLazyFragment {
                     @Override
                     public void run() {
                         onRefresh();
+                        mAutoRefreshing = false;
                     }
                 }, 800);
             }

@@ -101,15 +101,19 @@ public class LastestNewsListFragment extends BaseListRcvFragment {
         EventBus.getDefault().unregister(this);
     }
 
+    private boolean mAutoRefreshing = false;
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMainRefreshEvent(MainRefreshEvent event) {
         if (event != null && MainRefreshEvent.TYPE_NEWS.equals(event.type)) {
-            if (mPullToLoadRcvView != null && mAdapter != null) {
+            if (!mAutoRefreshing && mPullToLoadRcvView != null && mAdapter != null) {
+                mAutoRefreshing = true;
                 mPullToLoadRcvView.showRefreshingLoadingIcon();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         onRefresh();
+                        mAutoRefreshing = false;
                     }
                 }, 800);
             }
