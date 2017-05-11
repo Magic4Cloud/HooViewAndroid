@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui.market.marketnew;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
@@ -232,7 +233,12 @@ public class MarketHKFragment extends BaseListLazyFragment {
                         mSwipeRefreshLayout.setRefreshing(true);
                     }
                 });
-                onRefresh();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        onRefresh();
+                    }
+                }, 800);
             }
         }
     }

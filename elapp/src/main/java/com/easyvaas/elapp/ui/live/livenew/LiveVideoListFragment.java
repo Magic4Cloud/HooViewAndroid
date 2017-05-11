@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.easyvaas.elapp.adapter.live.LiveVideoListAdapter;
+import com.easyvaas.elapp.app.EVApplication;
 import com.easyvaas.elapp.bean.video.RecommendVideoListModel;
 import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.event.MainRefreshEvent;
@@ -45,7 +46,8 @@ public class LiveVideoListFragment extends MyBaseListFragment<LiveVideoListAdapt
     @Override
     protected void getListData(final Boolean isLoadMore) {
         Subscription subscription =
-                RetrofitHelper.getInstance().getService().getLiveVideo(start,20)
+                RetrofitHelper.getInstance().getService()
+                        .getLiveVideo(start, 20, EVApplication.getUser() == null ? "" : EVApplication.getUser().getName())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new NetSubscribe<RecommendVideoListModel>() {

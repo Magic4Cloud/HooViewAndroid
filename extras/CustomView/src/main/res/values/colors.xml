@@ -17,4 +17,5 @@
     <color name="text_common">@color/base_brown</color>
     <color name="btn_color_main">#9AC9FF</color>
     <color name="border_color_default">@color/btn_color_main</color>
+    <color name="base_purplish">#672f87</color>
 </resources>

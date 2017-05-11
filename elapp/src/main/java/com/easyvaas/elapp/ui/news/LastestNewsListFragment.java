@@ -1,6 +1,7 @@
 package com.easyvaas.elapp.ui.news;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 
@@ -103,14 +104,14 @@ public class LastestNewsListFragment extends BaseListRcvFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMainRefreshEvent(MainRefreshEvent event) {
         if (event != null && MainRefreshEvent.TYPE_NEWS.equals(event.type)) {
-            if (mSwipeRefreshLayout != null && mAdapter != null) {
-                mSwipeRefreshLayout.post(new Runnable() {
+            if (mPullToLoadRcvView != null && mAdapter != null) {
+                mPullToLoadRcvView.showRefreshingLoadingIcon();
+                new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mSwipeRefreshLayout.setRefreshing(true);
+                        onRefresh();
                     }
-                });
-                onRefresh();
+                }, 800);
             }
         }
     }

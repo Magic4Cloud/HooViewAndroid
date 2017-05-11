@@ -10,8 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.EmptyView;
-import com.easyvaas.common.widget.SwipRefreshLayout.SwipeRefreshLayoutEx;
 import com.easyvaas.common.widget.R;
+import com.easyvaas.common.widget.SwipRefreshLayout.SwipeRefreshLayoutEx;
 
 /**
  * @author bian.xd
@@ -61,8 +61,7 @@ public class PullToLoadView extends FrameLayout {
     }
 
     private void init() {
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.base_red, R.color.base_yellow,
-                R.color.base_purple);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.base_purplish);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayoutEx.OnRefreshListener() {
             @Override
             public void onRefresh() {

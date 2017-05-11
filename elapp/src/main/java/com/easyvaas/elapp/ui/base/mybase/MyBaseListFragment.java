@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.base.mybase;
 
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -80,7 +81,12 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
                     setLoading(true);
                 }
             });
-            onRefresh();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onRefresh();
+                }
+            }, 800);
         }
     }
 
