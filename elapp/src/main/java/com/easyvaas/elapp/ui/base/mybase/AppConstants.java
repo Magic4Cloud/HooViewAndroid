@@ -28,4 +28,8 @@ public class AppConstants {
 
     public static final String CHANNEL_ID = "channelid";
     public static final String CONTENT = "content";
+    public static final String ORDER_BY = "orderby"; // 排序类型
+    public static final String DATELINE = "dateline";//时间线
+    public static final String HEATS = "heats"; //热度
+
 }

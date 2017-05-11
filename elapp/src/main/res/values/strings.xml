@@ -891,5 +891,8 @@
     <string name="hot_comment">热门评论</string>
     <string name="news_all_comment">全部评论（%1$d）</string>
     <string name="relative_news">相关新闻</string>
+    <string name="comment_order">排序方式 : </string>
+    <string name="order_by_hot">按热度</string>
+    <string name="order_by_date">按时间</string>
 
 </resources>

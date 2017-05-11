@@ -1,5 +1,6 @@
 package com.easyvaas.elapp.ui.common;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -16,6 +17,7 @@ import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseActivity;
+import com.easyvaas.elapp.ui.news.NewsDetailCommentActivity;
 import com.easyvaas.elapp.utils.ShareHelper;
 import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.view.news.NewsDetailHeaderView;
@@ -27,8 +29,11 @@ import com.google.gson.Gson;
 import com.hooview.app.R;
 
 import butterknife.BindView;
+import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -66,6 +71,7 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
 
     @Override
     protected void initViewAndData() {
+        mNewsDetailModel = new NewsDetailModel();
         newsId = getIntent().getStringExtra(AppConstants.NEWS_ID);
         mNewsDetailInputLayout.setNewsDetailBottomListener(this);
         initWebView();
@@ -91,7 +97,7 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
      */
     private void getNewsInfo()
     {
-        String tempData = " {\n" +
+        final String tempData = " {\n" +
                 "          \"id\": 4369,\n" +
                 "          \"author\": {\n" +
                 "            \"id\": 0,\n" +
@@ -195,8 +201,22 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
                 "            }\n" +
                 "          ]\n" +
                 "        }";
-        NewsDetailModel data = new Gson().fromJson(tempData,NewsDetailModel.class);
-        fillContent(data);
+        Observable.just(tempData)
+                .map(new Func1<String, NewsDetailModel>() {
+                    @Override
+                    public NewsDetailModel call(String s) {
+                        return new Gson().fromJson(s,NewsDetailModel.class);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<NewsDetailModel>() {
+                    @Override
+                    public void call(NewsDetailModel s) {
+                        fillContent(s);
+                    }
+                });
+
 //        Subscription subscription = RetrofitHelper.getInstance().getService()
 //                .getNewsDetail(newsId)
 //                .subscribeOn(Schedulers.io())
@@ -225,7 +245,7 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
         mNewsDetailCommentLayout.setData(data);
         mNewsDetailInputLayout.initCollectStatus(data);
         String webContent = data.getContent();
-        webContent = webContent.replace("<img", "<img style='max-width:90%;height:auto;'");
+        webContent = webContent.replace("<img", "<img style='max-width:100%;height:auto;'");
         mWebView.loadDataWithBaseURL(null, webContent, "text/html", "utf-8", null);
     }
 
@@ -234,7 +254,9 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
      */
     @Override
     public void showComment() {
-
+        Intent intent = new Intent(this,NewsDetailCommentActivity.class);
+        intent.putExtra(AppConstants.NEWS_ID,newsId);
+        startActivity(intent);
     }
 
     /**
@@ -289,7 +311,22 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
      */
     @Override
     public void sendComment(String msg) {
+        Subscription subscription = RetrofitHelper.getInstance().getService()
+                .sendCommentByType(mNewsDetailModel.getId(),EVApplication.getUser().getName(),msg,0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                    @Override
+                    public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+                        SingleToast.show(NewsDetailActivity.this,getString(R.string.msg_comment_success));
+                    }
 
+                    @Override
+                    public void OnFailue(String msg) {
+                        SingleToast.show(NewsDetailActivity.this,getString(R.string.opreat_fail));
+                    }
+                });
+        addSubscribe(subscription);
     }
 
     @Override

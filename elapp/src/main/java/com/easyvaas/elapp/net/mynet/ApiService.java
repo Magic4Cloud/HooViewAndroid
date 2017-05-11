@@ -424,10 +424,11 @@ public interface ApiService {
      * @param type 0 新闻 1视频 2股票
      */
     @GET("api/v2/posts/posts")
-    Observable<NetResponse<VideoCommentModel>> getVideoCommentList(@Query(AppConstants.TOPIC_ID) String topicid,
+    Observable<NetResponse<VideoCommentModel>> getCommentListByType(@Query(AppConstants.TOPIC_ID) String topicid,
                                                                    @Query(AppConstants.USER_ID) String userid,
                                                                    @Query(AppConstants.TYPE) int type,
-                                                                   @Query(AppConstants.START) int start);
+                                                                   @Query(AppConstants.START) int start,
+                                                                   @Query(AppConstants.ORDER_BY) String orderBy);
     /**
      * 视频推荐列表
      */

@@ -263,6 +263,7 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
     private void initRealm() {
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .directory(getCacheDir())
                 .name(RealmHelper.DB_NAME)
                 .schemaVersion(1)
                 .rxFactory(new RealmObservableFactory())

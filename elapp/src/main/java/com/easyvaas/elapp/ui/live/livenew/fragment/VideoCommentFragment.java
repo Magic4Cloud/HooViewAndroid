@@ -70,7 +70,7 @@ public class VideoCommentFragment extends MyBaseListFragment<NormalCommentAdapte
     protected void getListData(final Boolean isLoadMore) {
 
         Subscription subscription = RetrofitHelper.getInstance().getService()
-               .getVideoCommentList(vid,userId,1,start)
+               .getCommentListByType(vid,userId,1,start,AppConstants.DATELINE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new NetSubscribe<VideoCommentModel>() {

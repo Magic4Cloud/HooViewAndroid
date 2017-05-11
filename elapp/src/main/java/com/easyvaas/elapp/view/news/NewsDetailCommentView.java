@@ -16,6 +16,7 @@ import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.SingleToast;
+import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 import com.squareup.picasso.Picasso;
 
@@ -25,7 +26,7 @@ import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.alibaba.sdk.android.feedback.impl.FeedbackAPI.mContext;
+
 
 /**
  * Date   2017/5/9
@@ -69,9 +70,9 @@ public class NewsDetailCommentView extends LinearLayout {
         this.data = data;
         mUserCommentName.setText(data.getUser().getNickname());
         mUserCommentContent.setText(data.getContent());
-        mUserCommentTime.setText(DateTimeUtil.getShortTime(mContext, data.getTime()));
+        mUserCommentTime.setText(DateTimeUtil.getShortTime(getContext(), data.getTime()));
         mUserCommentPraiseCounts.setText(String.valueOf(data.getHeats()));
-        Picasso.with(mContext).load(data.getUser().getAvatar()).placeholder(R.drawable.user_avtor).into(mUserCommentAvator);
+        Picasso.with(getContext()).load(data.getUser().getAvatar()).placeholder(R.drawable.user_avtor).into(mUserCommentAvator);
 
         if (data.getLike() == 1) // 是否点赞
             mUserCommentPraiseIcon.setSelected(true);
@@ -100,22 +101,32 @@ public class NewsDetailCommentView extends LinearLayout {
                                 data.setLike(0);
                                 data.setHeats(String.valueOf(counts - 1));
                                 mUserCommentPraiseIcon.setSelected(false);
-                                SingleToast.show(mContext, R.string.user_praise_cancel);
+                                SingleToast.show(getContext(), R.string.user_praise_cancel);
                             } else {
                                 data.setLike(1);
                                 data.setHeats(String.valueOf(counts + 1));
                                 mUserCommentPraiseIcon.setSelected(true);
-                                SingleToast.show(mContext, R.string.user_praise_success);
+                                SingleToast.show(getContext(), R.string.user_praise_success);
                             }
                             mUserCommentPraiseCounts.setText(data.getHeats());
                         }
 
                         @Override
                         public void OnFailue(String msg) {
-                            SingleToast.show(mContext, R.string.opreat_fail);
+                            SingleToast.show(getContext(), R.string.opreat_fail);
                         }
                     });
         } else
             LoginActivity.start(getContext());
+    }
+
+    /**
+     * 跳转个人主页
+     */
+    @OnClick(R.id.user_comment_layout)
+    public void layoutClick()
+    {
+        Utils.toUserPager(getContext(),data.getUser().getId(),data.getUser().getVip());
+
     }
 }

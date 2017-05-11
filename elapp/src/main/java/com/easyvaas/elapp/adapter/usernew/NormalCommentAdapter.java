@@ -64,7 +64,7 @@ public class NormalCommentAdapter extends MyBaseAdapter<PostsBean> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 PostsBean data = mData.get(position);
-                Utils.toUserPager(mContext,data.getUser().getId(),0); // Aya : 2017/5/3 待判断Vip字段
+                Utils.toUserPager(mContext,data.getUser().getId(),data.getUser().getVip());
 
             }
         });

@@ -209,6 +209,10 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
 
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
+            if (RealmHelper.getInstance().queryReadRecordId(data.getId())) //已读状态判断
+                mItemNewsTitle.setSelected(true);
+            else
+                mItemNewsTitle.setSelected(false);
             mItemNewsTitle.setText(data.getTitle());
             mItemNewsReadcounts.setText( NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
@@ -248,6 +252,10 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
 
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
+            if (RealmHelper.getInstance().queryReadRecordId(data.getId())) //已读状态判断
+                mItemNewsTitle.setSelected(true);
+            else
+                mItemNewsTitle.setSelected(false);
             mItemNewsTitle.setText(data.getTitle());
             mItemNewsReadcounts.setText( NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
@@ -283,6 +291,10 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
 
         private void initData(HomeNewsBean data, HomeNewsBean nextData) {
             this.data = data;
+            if (RealmHelper.getInstance().queryReadRecordId(data.getId())) //已读状态判断
+                mItemNewsTitle.setSelected(true);
+            else
+                mItemNewsTitle.setSelected(false);
             mItemNewsTitle.setText(data.getTitle());
             mItemNewsReadcounts.setText(NumberUtil.format(data.getViewCount()));
             mItemNewsTime.setText(DateTimeUtil.getNewsTime(mContext, data.getTime()));
@@ -365,6 +377,8 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
                 {
                     case R.id.item_news_layout:
                         Utils.showNewsDetail(mContext,mData.get(position).getTitle() ,mData.get(position).getId());
+                        insertHistoryRecord(mData.get(position));
+                        notifyItemChanged(position);
                         break;
                     case R.id.item_topic_layout:
                         Intent intent = new Intent(mContext,TopicActivity.class);
@@ -384,10 +398,8 @@ public class TopRatedNewsMyAdapter extends MyBaseAdapter<TopRatedModel.HomeNewsB
         if (!TextUtils.isEmpty(mVideoId) && !RealmHelper.getInstance().queryReadRecordId(mVideoId)) {
             ReadRecord bean = new ReadRecord();
             bean.setId(String.valueOf(mVideoId));
-            bean.setPic(newsModel.getCover().size() > 0 ? newsModel.getCover().get(0) : "");
             bean.setTitle(newsModel.getTitle());
             bean.setTime(DateTimeUtil.getSimpleTime(mContext, newsModel.getTime()));
-            bean.setCount(newsModel.getViewCount());
             RealmHelper.getInstance().insertReadRecord(bean, 30);
         }
     }

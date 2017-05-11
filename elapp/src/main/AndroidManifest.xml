@@ -626,6 +626,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.easyvaas.elapp.ui.news.NewsDetailCommentActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

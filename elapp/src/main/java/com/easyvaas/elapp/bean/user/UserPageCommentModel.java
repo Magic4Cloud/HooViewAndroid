@@ -149,6 +149,15 @@ public class UserPageCommentModel extends BaseListBean{
             private String id;
             private String nickname;
             private String avatar;
+            private int vip;
+
+            public int getVip() {
+                return vip;
+            }
+
+            public void setVip(int vip) {
+                this.vip = vip;
+            }
 
             public String getId() {
                 return id;

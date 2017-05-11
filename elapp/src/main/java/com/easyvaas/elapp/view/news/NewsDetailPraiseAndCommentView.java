@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.bean.news.NewsDetailModel;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel.PostsBean;
+import com.easyvaas.elapp.ui.base.mybase.AppConstants;
+import com.easyvaas.elapp.ui.news.NewsDetailCommentActivity;
 import com.easyvaas.elapp.utils.UserUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -116,6 +119,9 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
                 Utils.toUserPager(getContext(),data.getRecommendPerson().getId(),1);
                 break;
             case R.id.detail_all_comment_counts: //跳转全部评论
+                Intent intent = new Intent(getContext(),NewsDetailCommentActivity.class);
+                intent.putExtra(AppConstants.NEWS_ID,data.getId());
+                getContext().startActivity(intent);
                 break;
         }
     }
@@ -124,7 +130,7 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
     /**
      * 文章点赞
      */
-    private void praiseClick()
+    private void praiseClick()  // Aya : 2017/5/11 待调试接口
     {
         final int action = mDetailPraiseCounts.isSelected() ? 0 : 1;
         int counts = data.getLikeCount();

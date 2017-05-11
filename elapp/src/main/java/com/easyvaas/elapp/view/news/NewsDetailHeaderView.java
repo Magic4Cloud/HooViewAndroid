@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.easyvaas.common.widget.RoundImageView;
 import com.easyvaas.elapp.bean.news.NewsDetailModel;
+import com.easyvaas.elapp.bean.news.NewsDetailModel.StockBean;
 import com.easyvaas.elapp.bean.user.UserPageInfo.TagBean;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.UserUtil;
@@ -73,21 +74,19 @@ public class NewsDetailHeaderView extends LinearLayout {
     /**
      * 填充数据
      */
-    public void setData(NewsDetailModel data)
-    {
+    public void setData(NewsDetailModel data) {
         mNewsDetailBean = data;
         mDetailHeaderTitle.setText(data.getTitle());
-        mDetailHeaderDate.setText(DateTimeUtil.getNewsTime(getContext(),data.getTime()));
+        mDetailHeaderDate.setText(DateTimeUtil.getNewsTime(getContext(), data.getTime()));
         if (data.getAuthor().getBind() == 0) //没有绑定用户 显示普通布局
         {
             mDetailHeaderUserLayout.setVisibility(GONE);
             mDetailHeaderCrawlerAuther.setVisibility(VISIBLE);
             mDetailHeaderCrawlerAuther.setText(data.getAuthor().getName());
-        }else
-        {
+        } else {
             mDetailHeaderUserLayout.setVisibility(VISIBLE);
             mDetailHeaderCrawlerAuther.setVisibility(GONE);
-            UserUtil.showUserPhoto(getContext(),data.getAuthor().getAvatar(),mDetailHeaderUserHeader);
+            UserUtil.showUserPhoto(getContext(), data.getAuthor().getAvatar(), mDetailHeaderUserHeader);
             mDetailHeaderUserInfo.setText(data.getAuthor().getDescription());
         }
 
@@ -97,10 +96,45 @@ public class NewsDetailHeaderView extends LinearLayout {
             for (TagBean tag : data.getTag()) {
                 mDetailHeaderNewsTagsLayout.addView(getTextView(tag.getName()));
             }
-        }else {
+        } else {
             mDetailHeaderNewsTagsLayout.setVisibility(GONE);
         }
-        // Aya : 2017/5/9 股票数据待确定
+
+        if (data.getStock().size() == 1)  //设置股票
+        {
+            mDetailHeaderStockTagOne.setVisibility(VISIBLE);
+            mDetailHeaderStockTagTwo.setVisibility(GONE);
+            fillStockContent(mDetailHeaderStockTagOne,data.getStock().get(0));
+        }else if (data.getStock().size() >= 2)
+        {
+            mDetailHeaderStockTagOne.setVisibility(VISIBLE);
+            mDetailHeaderStockTagTwo.setVisibility(VISIBLE);
+            fillStockContent(mDetailHeaderStockTagOne,data.getStock().get(0));
+            fillStockContent(mDetailHeaderStockTagOne,data.getStock().get(2));
+        }else
+        {
+            mDetailHeaderStockTagOne.setVisibility(GONE);
+            mDetailHeaderStockTagTwo.setVisibility(GONE);
+        }
+
+    }
+
+    /**
+     * 填充股票数据
+     */
+    private void fillStockContent(TextView stockView, final StockBean stockBean) {
+
+        if (stockBean.getPersent().startsWith("+"))
+            stockView.setSelected(true);
+        else
+            stockView.setSelected(false);
+        stockView.setText(stockBean.getName() + " " + stockBean.getPersent());
+        stockView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.showStockDetail(v.getContext(), stockBean.getName(), stockBean.getCode(), true);
+            }
+        });
     }
 
 
@@ -108,7 +142,7 @@ public class NewsDetailHeaderView extends LinearLayout {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.detail_header_user_layout:  //跳转作者主页
-                Utils.toUserPager(getContext(),String.valueOf(mNewsDetailBean.getAuthor().getId()),1);
+                Utils.toUserPager(getContext(), String.valueOf(mNewsDetailBean.getAuthor().getId()), 1);
                 break;
             case R.id.detail_header_stock_tag_one: // 跳转股票详情
                 break;
@@ -124,7 +158,7 @@ public class NewsDetailHeaderView extends LinearLayout {
         TextView textView = new TextView(getContext());
         textView.setText(text);
         textView.setBackgroundResource(R.drawable.news_detail_tags_bg);
-        textView.setTextColor(ContextCompat.getColor(getContext(),R.color.title_text_color));
+        textView.setTextColor(ContextCompat.getColor(getContext(), R.color.title_text_color));
         return textView;
     }
 

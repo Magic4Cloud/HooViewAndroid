@@ -205,7 +205,7 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
         for (int i = 0, n = list.size(); i < n; i++) {
             TextSliderView textSliderView = new TextSliderView(mContext);
             textSliderView
-                    .description("")
+                    .description(list.get(i).getTitle())
                     .image(list.get(i).getImg())
                     .empty(R.drawable.account_bitmap_list)
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)

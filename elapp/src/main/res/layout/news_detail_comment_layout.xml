@@ -5,6 +5,7 @@
               android:layout_height="wrap_content"
               android:background="@color/news_detail_user_bg">
     <LinearLayout
+        android:id="@+id/user_comment_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"

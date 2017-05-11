@@ -70,6 +70,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="horizontal"
         android:background="#bc612c80">
         <TextView
