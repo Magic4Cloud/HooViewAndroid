@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.easyvaas.elapp.bean.news.NewsDetailModel;
 import com.easyvaas.elapp.bean.news.TopRatedModel.HomeNewsBean;
+import com.easyvaas.elapp.utils.Utils;
 import com.hooview.app.R;
 
 import java.util.Collections;
@@ -65,7 +66,7 @@ public class NewsDetailRecommendNewsView extends LinearLayout {
     /**
      * 获取新闻View
      */
-    private View getNewsView(HomeNewsBean mHomeNewsBean,boolean isLast)
+    private View getNewsView(final HomeNewsBean mHomeNewsBean, boolean isLast)
     {
         View newsView = LayoutInflater.from(getContext()).inflate(R.layout.recommend_news_no_img_item,null);
         TextView textView = (TextView) newsView.findViewById(R.id.recommend_news_no_img_title);
@@ -74,7 +75,7 @@ public class NewsDetailRecommendNewsView extends LinearLayout {
         textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aya : 2017/5/10 跳转新闻详情
+                Utils.toNewsDetail(getContext(),mHomeNewsBean.getId());
             }
         });
         if (isLast) // 最后一个不显示分割线

@@ -109,7 +109,7 @@ public class NewsColumnAdapter extends MyBaseAdapter<NewsColumnModel.ColumnModel
                 mViewArticle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Utils.showNewsDetail(mContext, model.getTitle(), model.getId());
+                        Utils.toNewsDetail(mContext, model.getId());
                     }
                 });
             }

@@ -15,10 +15,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyvaas.common.widget.RoundImageView;
+import com.easyvaas.elapp.app.EVApplication;
+import com.easyvaas.elapp.bean.NoResponeBackModel;
 import com.easyvaas.elapp.bean.news.NewsDetailModel;
 import com.easyvaas.elapp.bean.user.UserPageCommentModel.PostsBean;
+import com.easyvaas.elapp.net.mynet.NetSubscribe;
+import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.news.NewsDetailCommentActivity;
+import com.easyvaas.elapp.ui.user.LoginActivity;
+import com.easyvaas.elapp.utils.SingleToast;
 import com.easyvaas.elapp.utils.UserUtil;
 import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
@@ -30,6 +36,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Date   2017/5/9
@@ -96,9 +104,12 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
         {
             List<PostsBean> mPostsBeanList = data.getPosts();
             Collections.reverse(mPostsBeanList);
-            for (PostsBean postBean :mPostsBeanList) {
+            for (int i = 0; i < mPostsBeanList.size(); i++) {
+                if (i >=3)
+                    break;
+                PostsBean postsBean = mPostsBeanList.get(i);
                 NewsDetailCommentView mCommentView = new NewsDetailCommentView(getContext());
-                mCommentView.setData(postBean);
+                mCommentView.setData(postsBean);
                 mDetailCommentContainer.addView(mCommentView,1);
             }
             mDetailCommentDividerLine.setVisibility(VISIBLE);
@@ -111,9 +122,13 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.detail_praise_counts: //点赞
-                praiseClick();
+                if (EVApplication.isLogin())
+                     praiseClick();
+                else
+                    LoginActivity.start(getContext());
                 break;
             case R.id.detail_unlike: // 不喜欢
+                SingleToast.show(getContext(),R.string.feature_no_open_prompt);
                 break;
             case R.id.detail_header_user_layout: // 跳转大V主页
                 Utils.toUserPager(getContext(),data.getRecommendPerson().getId(),1);
@@ -130,22 +145,35 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
     /**
      * 文章点赞
      */
-    private void praiseClick()  // Aya : 2017/5/11 待调试接口
+    private void praiseClick()
     {
         final int action = mDetailPraiseCounts.isSelected() ? 0 : 1;
-        int counts = data.getLikeCount();
-        if (action == 0) {
-            data.setLike(0);
-            data.setLikeCount(counts - 1);
-            mDetailPraiseCounts.setSelected(false);
-            startPraiseAnime(0);
-        } else {
-            data.setLike(1);
-            data.setLikeCount(counts + 1);
-            mDetailPraiseCounts.setSelected(true);
-            startPraiseAnime(1);
-        }
-        mDetailPraiseCounts.setText(String.valueOf(data.getLikeCount()));
+        RetrofitHelper.getInstance().getService().newsPraiseClick(data.getId(), EVApplication.getUser().getUserid(),action)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new NetSubscribe<NoResponeBackModel>() {
+                    @Override
+                    public void OnSuccess(NoResponeBackModel noResponeBackModel) {
+                        int counts = data.getLikeCount();
+                        if (action == 0) {
+                            data.setLike(0);
+                            data.setLikeCount(counts - 1);
+                            mDetailPraiseCounts.setSelected(false);
+                            startPraiseAnime(0);
+                        } else {
+                            data.setLike(1);
+                            data.setLikeCount(counts + 1);
+                            mDetailPraiseCounts.setSelected(true);
+                            startPraiseAnime(1);
+                        }
+                        mDetailPraiseCounts.setText(String.valueOf(data.getLikeCount()));
+                    }
+
+                    @Override
+                    public void OnFailue(String msg) {
+                        SingleToast.show(getContext(),R.string.opreat_fail);
+                    }
+                });
     }
 
     /**

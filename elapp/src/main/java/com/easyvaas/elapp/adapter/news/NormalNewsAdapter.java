@@ -61,7 +61,7 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
         setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Utils.showNewsDetail(mContext,mData.get(position).getTitle() ,mData.get(position).getId());
+                Utils.toNewsDetail(mContext,mData.get(position).getId());
                 insertHistoryRecord(mData.get(position));
                 notifyItemChanged(position);
             }
@@ -238,7 +238,7 @@ public class NormalNewsAdapter extends MyBaseAdapter<HomeNewsBean> {
             bean.setId(String.valueOf(mVideoId));
             bean.setTitle(newsModel.getTitle());
             bean.setTime(DateTimeUtil.getSimpleTime(mContext, newsModel.getTime()));
-            RealmHelper.getInstance().insertReadRecord(bean, 30);
+            RealmHelper.getInstance().insertReadRecord(bean, 100);
         }
     }
 

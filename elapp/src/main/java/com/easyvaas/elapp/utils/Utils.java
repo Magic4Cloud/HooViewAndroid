@@ -44,6 +44,7 @@ import com.easyvaas.elapp.live.activity.SetPasswordActivity;
 import com.easyvaas.elapp.net.ApiConstant;
 import com.easyvaas.elapp.net.RequestHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
+import com.easyvaas.elapp.ui.common.NewsDetailActivity;
 import com.easyvaas.elapp.ui.common.WebDetailActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserPageActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserVipPageActivity;
@@ -825,6 +826,16 @@ public class Utils {
             intent.setClass(context, UserVipPageActivity.class);
         else
             intent.setClass(context, UserPageActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 跳转新闻详情
+     */
+    public static void toNewsDetail(Context context,String newsId)
+    {
+        Intent intent = new Intent(context, NewsDetailActivity.class);
+        intent.putExtra(AppConstants.NEWS_ID,newsId);
         context.startActivity(intent);
     }
 }

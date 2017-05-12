@@ -21,10 +21,10 @@ import com.easyvaas.elapp.net.mynet.NetSubscribe;
 import com.easyvaas.elapp.net.mynet.RetrofitHelper;
 import com.easyvaas.elapp.ui.base.mybase.AppConstants;
 import com.easyvaas.elapp.ui.base.mybase.MyBaseFragment;
-import com.easyvaas.elapp.ui.common.NewsDetailActivity;
 import com.easyvaas.elapp.ui.pay.PayRecordListActivity;
 import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.ui.user.MessageUnReadListActivity;
+import com.easyvaas.elapp.ui.user.SettingActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserBuyActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserCollectionNewActivity;
 import com.easyvaas.elapp.ui.user.usernew.activity.UserFansActivity;
@@ -232,8 +232,7 @@ public class UserCenterFragment extends MyBaseFragment {
 //                Utils.toUserPager(mContext,EVApplication.getUser().getName(),EVApplication.getUser().getVip());
                 break;
             case R.id.user_settting: // 设置界面
-//                SettingActivity.start(getActivity());
-                startActivity(new Intent(getActivity(), NewsDetailActivity.class));
+                SettingActivity.start(getActivity());
                 break;
             case R.id.user_center_focuscounts:
             case R.id.user_center_focustxt: //关注列表

@@ -199,7 +199,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity {
     public void setOnLineCounts(int counts)
     {
         onLineCounts = counts;
-        mTextLiveToolbar.setTitleText(NumberUtil.format(onLineCounts)+" 人参与");
+//        mTextLiveToolbar.setTitleText(NumberUtil.format(onLineCounts)+" 人参与");
     }
 
     /**
@@ -212,7 +212,7 @@ public class ImageTextLiveActivity extends BaseImageTextLiveActivity {
         else
             onLineCounts = onLineCounts + 1;
 
-        mTextLiveToolbar.setTitleText(NumberUtil.format(onLineCounts)+" 人参与");
+//        mTextLiveToolbar.setTitleText(NumberUtil.format(onLineCounts)+" 人参与");
     }
 
 }

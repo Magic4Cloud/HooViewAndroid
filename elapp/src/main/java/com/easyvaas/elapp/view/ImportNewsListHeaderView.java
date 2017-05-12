@@ -29,7 +29,6 @@ import com.easyvaas.elapp.bean.video.VideoEntity;
 import com.easyvaas.elapp.db.RealmHelper;
 import com.easyvaas.elapp.ui.live.PlayerActivity;
 import com.easyvaas.elapp.ui.news.HooviewEyesNewsActivity;
-import com.easyvaas.elapp.ui.user.VIPUserInfoDetailActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Utils;
@@ -91,11 +90,13 @@ public class ImportNewsListHeaderView extends LinearLayout implements View.OnCli
                 Toast.makeText(getContext(), "image text live", Toast.LENGTH_SHORT).show();
 //                ImageTextLiveActivity.start();
             } else if (type == BannerModel.DataEntity.TYPE_VIP_INFO) {
-                VIPUserInfoDetailActivity.start(getContext(), keyValue);
+                Utils.toUserPager(getContext(),keyValue,1);
+//                VIPUserInfoDetailActivity.start(getContext(), keyValue);
             } else if (type == BannerModel.DataEntity.TYPE_VIDEO_LIVE) {
                 PlayerActivity.start(getContext(), keyValue, VideoEntity.IS_LIVING, VideoEntity.MODE_VIDEO);
             } else if (type == BannerModel.DataEntity.TYPE_NEWS) {
-                Utils.showNewsDetail(getContext(), bundle.getString(Constants.EXTRA_KEY_TITLE), keyValue);
+//                Utils.showNewsDetail(getContext(), bundle.getString(Constants.EXTRA_KEY_TITLE), keyValue);
+                Utils.toNewsDetail(getContext(),keyValue);
             }
             if (intent != null) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

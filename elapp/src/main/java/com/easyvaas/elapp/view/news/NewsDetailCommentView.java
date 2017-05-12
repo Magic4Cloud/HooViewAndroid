@@ -2,6 +2,7 @@ package com.easyvaas.elapp.view.news;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,6 +73,7 @@ public class NewsDetailCommentView extends LinearLayout {
         mUserCommentContent.setText(data.getContent());
         mUserCommentTime.setText(DateTimeUtil.getShortTime(getContext(), data.getTime()));
         mUserCommentPraiseCounts.setText(String.valueOf(data.getHeats()));
+        if (!TextUtils.isEmpty(data.getUser().getAvatar()))
         Picasso.with(getContext()).load(data.getUser().getAvatar()).placeholder(R.drawable.user_avtor).into(mUserCommentAvator);
 
         if (data.getLike() == 1) // 是否点赞

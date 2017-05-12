@@ -72,8 +72,9 @@ public interface ApiService {
     /**
      * 获取新闻详情内容
      */
-    @GET("api/news/getnews")
-    Observable<NetResponse<NewsDetailModel>> getNewsDetail(@Query(AppConstants.NEWS_ID) String newsId);
+    @GET("api/v2/news/content")
+    Observable<NetResponse<NewsDetailModel>> getNewsDetail(@Query(AppConstants.NEWS_ID) String newsId,
+                                                           @Query(AppConstants.USER_ID) String userId);
 
     /**
      * 发布评论
@@ -84,6 +85,14 @@ public interface ApiService {
                                                                   @Query(AppConstants.USER_ID) String userid,
                                                                   @Query(AppConstants.CONTENT) String content,
                                                                   @Query(AppConstants.TYPE) int type);
+
+    /**
+     * 文章点赞
+     */
+    @GET("api/news/like")
+    Observable<NetResponse<NoResponeBackModel>> newsPraiseClick(@Query(AppConstants.NEWS_ID) String newsId,
+                                                                @Query(AppConstants.USER_ID) String userId,
+                                                                @Query(AppConstants.ACTION) int action);
 
     /*-------------------------------------------市场----------------------------------------*/
 

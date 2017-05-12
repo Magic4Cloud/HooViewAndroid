@@ -367,7 +367,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
                     public void onSuccess(VideoEntity result) {
                         if (result != null) {
                             mCurrentVideo = result;
-                            if (result.getPermission() == 7 && result.getPrice() > 0) {
+                            if (result.getPermission() == 7 && result.getPaid() == 0) {
                                 mPlayerNeedPayView.setVisibility(View.VISIBLE); // 显示 付费蒙层
                                 mPlayerNeedPayView.setPlayerPayCounts(result.getPrice());
                                 payCounts = result.getPrice();
@@ -836,7 +836,6 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         }
     };
 
-    // Aya : 2017/5/4 根据不同的输入 调接口上传内容
     @Override
     public void sendText(String inputString, int type) {
         switch (type) {

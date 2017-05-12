@@ -113,6 +113,7 @@ public class NewsDetailHeaderView extends LinearLayout {
             fillStockContent(mDetailHeaderStockTagOne,data.getStock().get(2));
         }else
         {
+            mDetailHeaderStockTagsLayout.setVisibility(GONE);
             mDetailHeaderStockTagOne.setVisibility(GONE);
             mDetailHeaderStockTagTwo.setVisibility(GONE);
         }

@@ -90,6 +90,14 @@ public class NewsDetailInputView extends FrameLayout {
     }
 
     /**
+     * 评论+1
+     */
+    public void setCommentAdd()
+    {
+        mTvNewsCommentCount.setText(String.valueOf(Integer.parseInt(mTvNewsCommentCount.getText().toString())+1));
+    }
+
+    /**
      * 设置操作监听
      */
     public void setNewsDetailBottomListener(NewsDetailBottomListener newsDetailBottomListener) {
@@ -123,13 +131,18 @@ public class NewsDetailInputView extends FrameLayout {
                         break;
                     case R.id.tv_news_comment_hint:  //显示评论框
                         mNewsDetailCommentLayout.setVisibility(VISIBLE);
-                        mBottomEdittext.requestFocus();
-                        toggleKeyBoard();
+                        mBottomEdittext.postDelayed(new Runnable() {//给他个延迟时间
+                            @Override
+                            public void run() {
+                                mBottomEdittext.requestFocus();
+                                toggleKeyBoard();
+                            }
+                        }, 100);
                         break;
                     case R.id.bottom_send_button:
                         mNewsDetailBottomListener.sendComment(mBottomEdittext.getText().toString()); // 发送评论
                         mBottomEdittext.setText("");
-                        mBottomEdittext.requestFocus();
+                        toggleKeyBoard();
                         break;
                 }
             }else

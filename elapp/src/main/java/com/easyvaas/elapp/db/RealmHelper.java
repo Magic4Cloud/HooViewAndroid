@@ -181,7 +181,7 @@ public class RealmHelper {
             RealmResults<ReadRecord> results = getRealm().where(ReadRecord.class).findAllSorted("time", Sort.DESCENDING);
             if (results.size() >= maxSize) {
                 for (int i = maxSize - 1; i < results.size(); i++) {
-                    deleteRecord(results.get(i).getId());
+                    deleteReadRecord(results.get(i).getId());
                 }
             }
         }
