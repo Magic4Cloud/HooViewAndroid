@@ -30,6 +30,7 @@ public class UserPublishLivingFragment extends MyBaseListFragment<UserVLivingAda
     @Override
     protected UserVLivingAdapter initAdapter() {
         UserVLivingAdapter adapter = new UserVLivingAdapter(new ArrayList<VideoEntity>());
+        adapter.setPublish(true);
         return adapter;
     }
 

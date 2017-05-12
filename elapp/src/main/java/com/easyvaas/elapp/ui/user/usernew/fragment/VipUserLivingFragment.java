@@ -32,6 +32,7 @@ public class VipUserLivingFragment extends MyBaseListFragment<UserVLivingAdapter
     @Override
     protected UserVLivingAdapter initAdapter() {
         UserVLivingAdapter adapter = new UserVLivingAdapter(new ArrayList<VideoEntity>());
+        adapter.setPublish(true);
         return adapter;
     }
 
