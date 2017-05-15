@@ -871,7 +871,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
      */
     @Override
     public void onJoinOK() {
-        if (isFinishing()) {
+        if (isFinishing() || !EVApplication.isLogin() || !Preferences.getInstance(this).isLogin()) {
             return;
         }
         ChatComment comment = new ChatComment();
