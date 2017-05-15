@@ -126,7 +126,10 @@ public class MarketChineseListAdapter extends BaseAdapter implements StickyRecyc
      */
     @Override
     public void onBindHeaderViewHolder(TitleViewHolder holder, int position) {
-        holder.setTitle((((StockModel)getItem(position)).isUp()));
+        Object object = getItem(position);
+        if (object != null && object instanceof StockModel) {
+            holder.setTitle((((StockModel)object).isUp()));
+        }
     }
 
     private class ExponentViewHolder extends RecyclerView.ViewHolder {

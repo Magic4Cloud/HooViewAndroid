@@ -75,7 +75,8 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
      * 自动刷新
      */
     public void autoRefresh() {
-        if (mSwiprefreshlayout != null && mAdapter != null) {
+        if (!mAutoRefreshing && mSwiprefreshlayout != null && mAdapter != null && mRecyclerview != null) {
+            mAutoRefreshing = true;
             mSwiprefreshlayout.post(new Runnable() {
                 @Override
                 public void run() {
@@ -85,6 +86,7 @@ public abstract class MyBaseListFragment<T extends MyBaseAdapter> extends MyBase
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mRecyclerview.smoothScrollToPosition(0);
                     onRefresh();
                     mAutoRefreshing = false;
                 }

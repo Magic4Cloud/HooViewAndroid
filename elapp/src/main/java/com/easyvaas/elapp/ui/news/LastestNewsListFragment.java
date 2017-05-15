@@ -112,6 +112,7 @@ public class LastestNewsListFragment extends BaseListRcvFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        mPullToLoadRcvView.getRecyclerView().smoothScrollToPosition(0);
                         onRefresh();
                         mAutoRefreshing = false;
                     }

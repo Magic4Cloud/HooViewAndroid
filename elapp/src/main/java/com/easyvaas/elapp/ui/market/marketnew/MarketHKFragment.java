@@ -226,7 +226,7 @@ public class MarketHKFragment extends BaseListLazyFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMainRefreshEvent(MainRefreshEvent event) {
         if (event != null && MainRefreshEvent.TYPE_MARKET.equals(event.type)) {
-            if (!mAutoRefreshing && mSwipeRefreshLayout != null && mAdapter != null) {
+            if (!mAutoRefreshing && mSwipeRefreshLayout != null && mAdapter != null && mRecyclerView != null) {
                 mAutoRefreshing = true;
                 mSwipeRefreshLayout.post(new Runnable() {
                     @Override
@@ -237,6 +237,7 @@ public class MarketHKFragment extends BaseListLazyFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        mRecyclerView.smoothScrollToPosition(0);
                         onRefresh();
                         mAutoRefreshing = false;
                     }

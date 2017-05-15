@@ -81,7 +81,7 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
         Object object = getItem(position);
         if (position == 0 && object instanceof MarketExponentModel) {
             return ITEM_TYPE_EXPONENT;
-        } else if (object instanceof StockModel){
+        } else if (object instanceof StockModel) {
             return ITEM_TYPE_STOCK;
         }
         return 0;
@@ -100,8 +100,8 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
         Object object = getItem(position);
         if (position == 0 && object instanceof MarketExponentModel) {
             return -1;
-        } else if (object instanceof StockModel){
-            return ((StockModel)object).getHeaderId();
+        } else if (object instanceof StockModel) {
+            return ((StockModel) object).getHeaderId();
         }
         return 0;
     }
@@ -127,7 +127,10 @@ public class MarketHKListAdapter extends BaseAdapter implements StickyRecyclerHe
      */
     @Override
     public void onBindHeaderViewHolder(TitleViewHolder holder, int position) {
-        holder.setTitle((((StockModel)getItem(position)).isUp()));
+        Object object = getItem(position);
+        if (object != null && object instanceof StockModel) {
+            holder.setTitle((((StockModel) object).isUp()));
+        }
     }
 
     private class ExponentViewHolder extends RecyclerView.ViewHolder {
