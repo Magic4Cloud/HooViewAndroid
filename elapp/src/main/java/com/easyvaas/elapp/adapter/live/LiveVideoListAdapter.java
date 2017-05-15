@@ -142,13 +142,17 @@ public class LiveVideoListAdapter extends MyBaseAdapter<VideoEntity> {
                 // pay 权限（0，Published;1，Shared;2，Personal;3，AllFriends;4，AllowList;5，ForbidList;6，Password;7，PayLive
                 int permission = videoEntity.getPermission();
                 if (permission == 7) {
-                    mPayCv.setVisibility(View.VISIBLE);
-                    if (0 == videoEntity.getPaid()) {
+                    // paid 0，付费  1，已购买  2，自己发布的
+                    if (0 == videoEntity.getPaid() || 2 == videoEntity.getPaid()) {
+                        mPayCv.setVisibility(View.VISIBLE);
                         mPayTv.setText("付费");
                         mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_pay));
                     } else if (1 == videoEntity.getPaid()) {
+                        mPayCv.setVisibility(View.VISIBLE);
                         mPayTv.setText("已购买");
                         mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_paid));
+                    } else {
+                        mPayCv.setVisibility(View.GONE);
                     }
                 }else {
                     mPayCv.setVisibility(View.GONE);

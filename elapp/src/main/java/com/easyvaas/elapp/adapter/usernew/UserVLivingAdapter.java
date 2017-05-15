@@ -48,7 +48,6 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
     private boolean mHasHeader = false;
     private ImageTextLiveRoomModel mImageTextModel;
     private ImageTextViewHolder mHeaderHolder;
-    private boolean mPublish = false;
 
     public UserVLivingAdapter(List<VideoEntity> data) {
         super(data);
@@ -67,10 +66,6 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
     @Override
     protected void initOnItemClickListener() {
 
-    }
-
-    public void setPublish(boolean publish) {
-        mPublish = publish;
     }
 
     /**
@@ -294,29 +289,22 @@ public class UserVLivingAdapter extends MyBaseAdapter<VideoEntity> {
                 }
                 // pay 权限（0，Published;1，Shared;2，Personal;3，AllFriends;4，AllowList;5，ForbidList;6，Password;7，PayLive
                 int permission = videoEntity.getPermission();
-                if (mPublish) {
-                    // 大V发布的视频，显示付费
-                    if (permission == 7) {
+                // 普通人，显示付费、已购买
+                if (permission == 7) {
+                    // paid 0，付费  1，已购买  2，自己发布的
+                    if (0 == videoEntity.getPaid() || 2 == videoEntity.getPaid()) {
                         mPayCv.setVisibility(View.VISIBLE);
                         mPayTv.setText("付费");
                         mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_pay));
+                    } else if (1 == videoEntity.getPaid()) {
+                        mPayCv.setVisibility(View.VISIBLE);
+                        mPayTv.setText("已购买");
+                        mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_paid));
                     } else {
                         mPayCv.setVisibility(View.GONE);
                     }
                 } else {
-                    // 普通人，显示付费、已购买
-                    if (permission == 7) {
-                        mPayCv.setVisibility(View.VISIBLE);
-                        if (0 == videoEntity.getPaid()) {
-                            mPayTv.setText("付费");
-                            mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_pay));
-                        } else if (1 == videoEntity.getPaid()) {
-                            mPayTv.setText("已购买");
-                            mPayTv.setBackgroundColor(mContext.getResources().getColor(R.color.video_living_paid));
-                        }
-                    }else {
-                        mPayCv.setVisibility(View.GONE);
-                    }
+                    mPayCv.setVisibility(View.GONE);
                 }
                 // divider
                 int size = mData.size();
