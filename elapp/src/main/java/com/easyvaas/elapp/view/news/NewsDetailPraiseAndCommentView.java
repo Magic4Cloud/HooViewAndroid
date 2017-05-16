@@ -100,8 +100,12 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
         UserUtil.showUserPhoto(getContext(),data.getRecommendPerson().getAvatar(),mDetailHeaderUserHeader);
 
         //加载热门评论数据
-        if (data.getPosts().size() > 0)
-        {
+        if (data.getPosts().size() > 0) {
+            int childSize = mDetailCommentContainer.getChildCount();
+            if (childSize > 3)  // 此处是为了刷新 评论数据 必须先移除之前的数据
+            {
+                mDetailCommentContainer.removeViews(1,childSize - 3);
+            }
             List<PostsBean> mPostsBeanList = data.getPosts();
             Collections.reverse(mPostsBeanList);
             for (int i = 0; i < mPostsBeanList.size(); i++) {

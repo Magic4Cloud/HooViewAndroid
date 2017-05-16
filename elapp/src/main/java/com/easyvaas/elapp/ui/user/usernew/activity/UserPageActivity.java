@@ -152,7 +152,7 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
     /**
      * 获取用户信息
      */
-    private void getVipUserInfo() {
+    private void getUserInfo() {
 
         Subscription subscription = RetrofitHelper.getInstance().getService()
                 .getUserPageInfo(userId,sessionId,personId)
@@ -210,7 +210,7 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
     @Override
     public void onRefresh() {
 
-        getVipUserInfo();
+        getUserInfo();
 
     }
 
@@ -239,6 +239,7 @@ public class UserPageActivity extends MyBaseActivity implements SwipeRefreshLayo
                                 mUserPageFocusButton.setText(R.string.user_follow);
                                 SingleToast.show(EVApplication.getApp(), R.string.follow_cancel);
                             }
+                            getUserInfo();
                         }
 
                         @Override

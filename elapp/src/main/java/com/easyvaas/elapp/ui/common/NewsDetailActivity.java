@@ -82,7 +82,7 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
         mNewsDetailInputLayout.setNewsDetailBottomListener(this);
         startLoading();
         initWebView();
-        getNewsInfo();
+        getNewsInfo(false);
         addNewsToHistory();
     }
 
@@ -103,7 +103,7 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
     /**
      * 获取新闻资讯
      */
-    private void getNewsInfo()
+    private void getNewsInfo(final boolean isComment)
     {
 
         Subscription subscription = RetrofitHelper.getInstance().getService()
@@ -113,7 +113,10 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
                 .subscribe(new NetSubscribe<NewsDetailModel>() {
                     @Override
                     public void OnSuccess(NewsDetailModel newsDetailModel) {
-                        fillContent(newsDetailModel);
+                        if (isComment) // 单独刷新评论列表
+                            mNewsDetailCommentLayout.setData(newsDetailModel);
+                        else  // 加载所有
+                            fillContent(newsDetailModel);
                     }
 
                     @Override
@@ -211,6 +214,7 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
                     public void OnSuccess(NoResponeBackModel noResponeBackModel) {
                         SingleToast.show(NewsDetailActivity.this,getString(R.string.msg_comment_success));
                         mNewsDetailInputLayout.setCommentAdd();
+                        getNewsInfo(false);
                     }
 
                     @Override

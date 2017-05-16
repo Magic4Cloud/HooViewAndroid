@@ -65,7 +65,7 @@ public class UserPageCommentAdapter extends MyBaseAdapter<PostsBean> {
                 switch (data.getTopic().getType()) //话题类型（0，新闻；1，视频；2，股票）
                 {
                     case 0:
-                        Utils.showNewsDetail(mContext, data.getTopic().getTitle(), data.getTopic().getId());
+                        Utils.toNewsDetail(mContext,data.getTopic().getId());
                         break;
                     case 1:
                         PlayerActivity.start(mContext, data.getTopic().getId(), VideoEntity.IS_VIDEO, VideoEntity.IS_GOOD_VIDEO);

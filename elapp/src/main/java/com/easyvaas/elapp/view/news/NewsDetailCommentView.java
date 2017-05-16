@@ -74,7 +74,7 @@ public class NewsDetailCommentView extends LinearLayout {
         mUserCommentTime.setText(DateTimeUtil.getShortTime(getContext(), data.getTime()));
         mUserCommentPraiseCounts.setText(String.valueOf(data.getHeats()));
         if (!TextUtils.isEmpty(data.getUser().getAvatar()))
-        Picasso.with(getContext()).load(data.getUser().getAvatar()).placeholder(R.drawable.user_avtor).into(mUserCommentAvator);
+            Picasso.with(getContext()).load(data.getUser().getAvatar()).placeholder(R.drawable.user_avtor).into(mUserCommentAvator);
 
         if (data.getLike() == 1) // 是否点赞
             mUserCommentPraiseIcon.setSelected(true);

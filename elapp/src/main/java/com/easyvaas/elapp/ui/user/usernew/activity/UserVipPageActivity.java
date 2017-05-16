@@ -248,6 +248,7 @@ public class UserVipPageActivity extends MyBaseActivity implements SwipeRefreshL
                                 mVipFocusButton.setText(R.string.user_follow);
                                 SingleToast.show(EVApplication.getApp(), R.string.follow_cancel);
                             }
+                            getVipUserInfo();
                         }
 
                         @Override

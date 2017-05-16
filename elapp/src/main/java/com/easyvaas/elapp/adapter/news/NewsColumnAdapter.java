@@ -99,7 +99,7 @@ public class NewsColumnAdapter extends MyBaseAdapter<NewsColumnModel.ColumnModel
                         public void onClick(View view) {
                             // // TODO: 2017/4/26 vip
 //                            Utils.toUserPager(mContext, author.getId(), 1);
-                            Utils.showNewsDetail(mContext, model.getTitle(), model.getId());
+                            Utils.toNewsDetail(mContext, model.getId());
                         }
                     });
                 }

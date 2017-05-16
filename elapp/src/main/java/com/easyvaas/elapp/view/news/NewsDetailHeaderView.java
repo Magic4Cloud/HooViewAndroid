@@ -88,6 +88,7 @@ public class NewsDetailHeaderView extends LinearLayout {
             mDetailHeaderCrawlerAuther.setVisibility(GONE);
             UserUtil.showUserPhoto(getContext(), data.getAuthor().getAvatar(), mDetailHeaderUserHeader);
             mDetailHeaderUserInfo.setText(data.getAuthor().getDescription());
+            mDetailHeaderUserName.setText(data.getAuthor().getName());
         }
 
         if (data.getTag().size() > 0) // 设置标签

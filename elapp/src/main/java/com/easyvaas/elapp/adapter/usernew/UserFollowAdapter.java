@@ -104,6 +104,8 @@ public class UserFollowAdapter extends MyBaseAdapter<UserFollow> {
             if (EVApplication.isLogin()) // 如果是自己 就不显示关注按钮
                 if (data.getName().equals(EVApplication.getUser().getName()))
                     mUserFollowButton.setVisibility(View.GONE);
+            else
+                    mUserFollowButton.setVisibility(View.VISIBLE);
         }
 
         @OnClick(R.id.user_follow_button)
