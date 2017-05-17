@@ -139,9 +139,13 @@ public class ChatInputView extends RelativeLayout {
      */
     @OnClick(R.id.chat_view_gift_iv)
     protected void onGiftClick() {
-        if (mOnInputListener != null) {
-            hideKeyboard();
-            mOnInputListener.onSendGift();
+        if (Preferences.getInstance(mActivity).isLogin() && EVApplication.isLogin()) {
+            if (mOnInputListener != null) {
+                hideKeyboard();
+                mOnInputListener.onSendGift();
+            }
+        } else {
+            LoginActivity.start(mActivity);
         }
     }
 
@@ -150,18 +154,22 @@ public class ChatInputView extends RelativeLayout {
      */
     @OnClick(R.id.chat_view_send_tv)
     protected void onSendClick() {
-        if (mOnInputListener != null) {
-            String message = mInputEt.getText().toString().trim();
-            if (!TextUtils.isEmpty(message)) {
-                if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
-                    mOnInputListener.onReplyMessage(message.replace(mReplyTips, ""), mReplyModel);
-                } else {
-                    mOnInputListener.onSendMessage(MSG_TYPE, message);
+        if (Preferences.getInstance(mActivity).isLogin() && EVApplication.isLogin()) {
+            if (mOnInputListener != null) {
+                String message = mInputEt.getText().toString().trim();
+                if (!TextUtils.isEmpty(message)) {
+                    if (!TextUtils.isEmpty(mReplyTips) && mReplyModel != null) {
+                        mOnInputListener.onReplyMessage(message.replace(mReplyTips, ""), mReplyModel);
+                    } else {
+                        mOnInputListener.onSendMessage(MSG_TYPE, message);
+                    }
+                    mInputEt.setText("");
                 }
-                mInputEt.setText("");
             }
+            hideKeyboard();
+        } else {
+            LoginActivity.start(mActivity);
         }
-        hideKeyboard();
     }
 
     @Override

@@ -168,16 +168,19 @@ public class ImageTextLiveInputView extends RelativeLayout implements View.OnCli
                 } else {
                     LoginActivity.start(getContext());
                 }
-
                 break;
             case R.id.iv_image:
-                if (View.VISIBLE == mPictureLl.getVisibility()) {
-                    mOpenImage = false;
-                    mPictureLl.setVisibility(View.GONE);
+                if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin()) {
+                    if (View.VISIBLE == mPictureLl.getVisibility()) {
+                        mOpenImage = false;
+                        mPictureLl.setVisibility(View.GONE);
+                    } else {
+                        mOpenImage = true;
+                        mPictureLl.setVisibility(View.VISIBLE);
+                        hideKeyboard();
+                    }
                 } else {
-                    mOpenImage = true;
-                    mPictureLl.setVisibility(View.VISIBLE);
-                    hideKeyboard();
+                    LoginActivity.start(getContext());
                 }
                 break;
             case R.id.ll_camera:

@@ -876,7 +876,7 @@ public class PlayerActivity extends BasePlayerActivity implements View.OnClickLi
         }
         ChatComment comment = new ChatComment();
         comment.setVid(mVideoId);
-        comment.setId(-1);
+        comment.setId(-1); 
         comment.setReply_name("");
         comment.setReply_nickname("");
         comment.setContent("join...");

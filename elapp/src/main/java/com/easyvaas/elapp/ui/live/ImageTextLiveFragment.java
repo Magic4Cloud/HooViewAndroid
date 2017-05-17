@@ -42,6 +42,7 @@ import com.easyvaas.elapp.net.ApiHelper;
 import com.easyvaas.elapp.net.HooviewApiHelper;
 import com.easyvaas.elapp.net.MyRequestCallBack;
 import com.easyvaas.elapp.ui.pay.CashInActivity;
+import com.easyvaas.elapp.ui.user.LoginActivity;
 import com.easyvaas.elapp.utils.Constants;
 import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.Logger;
@@ -575,7 +576,7 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
     private GiftPagerView.OnGiftSendCallBack mOnGiftSendCallBack = new GiftPagerView.OnGiftSendCallBack() {
         @Override
         public void sendGift(final GiftEntity data) {
-            if (mStreamsEntity == null) return;
+            if (mStreamsEntity == null || mUser == null) return;
             sendGiftMsg(mUser.getNickname(), data.getGiftName(), data.getGiftCount());
             ApiHelper.getInstance().sendGiftString(mRoomId, data.getGiftId(), data.getGiftCount(),
                     false, mStreamsEntity.getUserEntity().getName(), new MyRequestCallBack<String>() {
@@ -671,7 +672,11 @@ public class ImageTextLiveFragment extends BaseImageTextLiveFragment implements 
         BaseImageTextLiveActivity activity = (BaseImageTextLiveActivity) getActivity();
         switch (v.getId()) {
             case R.id.iv_gift:
-                showGiftToolsBar();
+                if (Preferences.getInstance(v.getContext()).isLogin() && EVApplication.isLogin()) {
+                    showGiftToolsBar();
+                } else {
+                    LoginActivity.start(getContext());
+                }
                 break;
             case R.id.iv_chat:
                 activity.goToChat();
