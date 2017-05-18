@@ -24,16 +24,7 @@
                 android:layout_marginTop="13dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
-            <TextView
-                android:id="@+id/user_comment_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/title_text_color"
-                android:textSize="14sp"
-                android:layout_toRightOf="@id/user_comment_avator"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:text="浅海野"/>
+
             <TextView
                 android:id="@+id/user_comment_praise_counts"
                 android:layout_width="wrap_content"
@@ -49,6 +40,18 @@
                 android:src="@drawable/selector_praise_btn"
                 android:layout_marginTop="9dp"
                 android:layout_toLeftOf="@id/user_comment_praise_counts"/>
+            <TextView
+                android:id="@+id/user_comment_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/title_text_color"
+                android:textSize="14sp"
+                android:layout_toRightOf="@id/user_comment_avator"
+                android:layout_toLeftOf="@id/user_comment_praise_icon"
+                android:maxLines="1"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:text="浅海野"/>
             <TextView
                 android:id="@+id/user_comment_content"
                 android:layout_width="wrap_content"

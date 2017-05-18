@@ -661,7 +661,7 @@ public class WebDetailActivity extends BaseActivity {
     protected void shareUrl() {
         String content = "";
         ShareContent shareContent = new ShareContentWebpage(getIntent().getStringExtra(EXTRA_TITLE), content,
-                mWebView.getUrl(), ""); // Aya : 2017/4/27 分享图片 待定
+                mWebView.getUrl(), "");
         ShareHelper.getInstance(this).showShareBottomPanel(shareContent);
     }
 

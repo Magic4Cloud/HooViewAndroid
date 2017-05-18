@@ -30,7 +30,6 @@ import com.easyvaas.elapp.utils.Utils;
 import com.easyvaas.elapp.utils.ViewUtil;
 import com.hooview.app.R;
 
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -107,14 +106,13 @@ public class NewsDetailPraiseAndCommentView extends LinearLayout {
                 mDetailCommentContainer.removeViews(1,childSize - 3);
             }
             List<PostsBean> mPostsBeanList = data.getPosts();
-            Collections.reverse(mPostsBeanList);
             for (int i = 0; i < mPostsBeanList.size(); i++) {
-                if (i >=3)
+                if (i >= 3)
                     break;
                 PostsBean postsBean = mPostsBeanList.get(i);
                 NewsDetailCommentView mCommentView = new NewsDetailCommentView(getContext());
                 mCommentView.setData(postsBean);
-                mDetailCommentContainer.addView(mCommentView,1);
+                mDetailCommentContainer.addView(mCommentView,1+i);
             }
             mDetailCommentDividerLine.setVisibility(VISIBLE);
         }else

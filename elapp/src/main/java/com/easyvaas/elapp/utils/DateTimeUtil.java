@@ -135,7 +135,10 @@ public class DateTimeUtil {
 
         if (duration < MILLIS_ONE_HOUR) {
             long MILLIS_ONE_MINUTE = 60 * 1000;
-            result = context.getString(R.string.before_minute, duration / MILLIS_ONE_MINUTE);
+            if (duration  / MILLIS_ONE_MINUTE == 0)
+                result = context.getString(R.string.just_now);
+            else
+                result = context.getString(R.string.before_minute, duration / MILLIS_ONE_MINUTE);
         } else if (duration < MILLIS_ONE_DAY) {
             result = context.getString(R.string.before_hour, duration / MILLIS_ONE_HOUR);
         } else if (duration < MILLIS_ONE_WEEK) {

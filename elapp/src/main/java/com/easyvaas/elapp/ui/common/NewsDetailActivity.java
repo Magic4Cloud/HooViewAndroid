@@ -159,7 +159,7 @@ public class NewsDetailActivity extends MyBaseActivity implements NewsDetailInpu
     public void showShare() {
         String url = HooviewApiConstant.HOST_WEB_APP+"/?page=news&title=" + mNewsDetailModel.getTitle() + "&newsid=" + newsId;
         ShareContent shareContent = new ShareContentWebpage(mNewsDetailModel.getTitle(), "",
-                url, ""); // Aya : 2017/4/27 分享url 待定
+                url, "");
         ShareHelper.getInstance(this).showShareBottomPanel(shareContent);
     }
 
