@@ -129,7 +129,7 @@ public class UserFollowAdapter extends MyBaseAdapter<UserFollow> {
                                 } else {
                                     mUserFollowButton.setSelected(false);
                                     mUserFollowButton.setText(R.string.user_follow);
-                                    SingleToast.show(EVApplication.getApp(), R.string.follow_cancel);
+                                    SingleToast.show(EVApplication.getApp(), R.string.msg_unfollow_success);
                                 }
                             }
 

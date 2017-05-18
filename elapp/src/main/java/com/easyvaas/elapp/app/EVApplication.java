@@ -25,7 +25,6 @@ import com.easyvaas.elapp.push.PushHelper;
 import com.easyvaas.elapp.utils.CarNetCrashHandler;
 import com.easyvaas.elapp.utils.ChannelUtil;
 import com.easyvaas.elapp.utils.Constants;
-import com.easyvaas.elapp.utils.DateTimeUtil;
 import com.easyvaas.elapp.utils.FileUtil;
 import com.easyvaas.elapp.utils.Logger;
 import com.easyvaas.elapp.utils.NetworkUtil;
@@ -175,8 +174,7 @@ public class EVApplication extends android.support.multidex.MultiDexApplication 
                 if (User.AUTH_TYPE_SINA.equals(authEntity.getType())) {
                     AccessTokenKeeper
                             .writeAccessToken(getApp(), Constants.WEIBO_APP_ID, authEntity.getToken(),
-                                    DateTimeUtil.formatServerDate(authEntity.getExpire_time()) - System
-                                            .currentTimeMillis());
+                                    0);
                 } else if (User.AUTH_TYPE_PHONE.equals(authEntity.getType())) {
                     Preferences.getInstance(app)
                             .putString(Preferences.KEY_LOGIN_PHONE_NUMBER, authEntity.getToken());

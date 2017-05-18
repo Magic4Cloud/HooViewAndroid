@@ -48,7 +48,7 @@ public class LiveCommentAdapterItem implements AdapterItem<LiveCommentModel.Post
                 mRivHeader.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Utils.toUserPager(mContext,model.getUser_id(),0); // Aya : 2017/4/28 不知道是不是VIP
+                        Utils.toUserPager(mContext,model.getUser_id(),0);
                     }
                 });
         }
