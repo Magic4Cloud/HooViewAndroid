@@ -99,7 +99,7 @@
             </intent-filter>
             <!-- GrowingIO 启动圈选接口 -->
             <intent-filter>
-                <data android:scheme="growing.dd4ec50c87debcfb"/>
+                <data android:scheme="growing.5cefc44e8b0fa742"/>
                 <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
